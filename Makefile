@@ -58,7 +58,7 @@ OBJ_NAME = $(SRC_NAME:.c=.o) $(SRC_LEX:.c=.o) $(SRC_WORDEXP:.c=.o)
 
 LIB = ./lib/libft.a
 
-FLAGS = -ggdb -Wall -Wextra -Werror
+FLAGS = -ggdb -Wall -Wextra -Werror -DDEBUG
 
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 

@@ -144,6 +144,7 @@ t_token	*dup_token(t_token *token);
 t_token	*new_token(int type);
 void	free_token(t_token *token);
 void	free_token_lst(t_token *token);
+void	free_redir_lst(t_redir *redir);
 t_token	*ft_tokenizer(char *line);
 //int	next_token(char **line, t_token *token);
 int	next_token(char *line, t_token **head);

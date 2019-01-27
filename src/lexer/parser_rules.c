@@ -11,17 +11,20 @@
 /* ************************************************************************** */
 
 #include "../../ft_lexer.h"
+
+
 /*ft_printf("function: %s\n", "");
 ft_printf("tok: %s| type %d\n==============\n", parser->current->data.str, parser->current->type);
 */
+/*
 int	next_sym(t_parser *parser)
 {
 	if (!(parser->current->next))
 		next_token(NULL, &(parser->current));	
-	parser->current = parser->current->next; /* to add malloc fail checks */
+	parser->current = parser->current->next;  //to add malloc fail checks 
 	return (0);
 }
-
+*/
 int	expect_linebreak(t_parser *parser)
 {
 	(void)parser;
@@ -143,7 +146,7 @@ int	expect_io_redir(t_parser *parser)
 		add_redir_lst(redir, &(parser->cmd->redir_lst));
 		return (1);
 	}
-	free(redir);
+	free_redir_lst(redir);
 	parser->current_redir = NULL;
 	parser->current = backtrack;
 	return (0);

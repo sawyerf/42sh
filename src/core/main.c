@@ -137,34 +137,20 @@ void	expansion_tester(t_token *start)
 int				main(int ac, char **av, char **env)
 {
 	char		*line;
-	t_command	**command_lst;
 	t_token		*tok;
 	int			ret;
 
 	silence_ac_av(ac, av);
-	command_lst = ft_memalloc(sizeof(t_command*));
-	if ((command_lst == NULL) || (init_g_env(env) != 0))
+	if ((init_g_env(env) != 0))
 		return (MEMERR);
 	show_prompt();
 	while (get_next_line(0, &line) > 0)
 	{
-/*		if ((ret = parser(line, command_lst)) != 0)
-			dispatch_parse_err(ret);
-		else if ((ret == MEMERR)
-				|| (ret = exec_loop(*command_lst) == MEMERR))
-			break ;
-		free_cmdlst(*command_lst);*/
-	/*	if (ft_tokenizer(line, &tok) == 0)
-		{*/
 		ft_printf("**********************\n");
 		ft_printf("cmdline: '%s'", line);
 		ft_printf("**********************\n");
 		tok = ft_tokenizer(line);
-		if (!tok)
-		{
-			ft_printf("../sh_core: lexer error\n");
-		}
-		else
+		if (tok)
 		{
 	//		ft_test_lexer(line);
 			test_sh_parser(tok);
@@ -175,12 +161,10 @@ int				main(int ac, char **av, char **env)
 			free_token_lst(tok);
 		}
 		free(line);
-		*command_lst = NULL;
 		show_prompt();
 	}
 	ret = 1;
 	free(line);
-	free(command_lst);
 	write(1, "\n", 1);
 	return (ret);
 }

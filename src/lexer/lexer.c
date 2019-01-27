@@ -49,9 +49,11 @@ t_token	*dup_token(t_token *token)
 {
 	t_token *new;
 
-	if (!(new = new_token(0)))
+	if (!(new = ft_memalloc(sizeof(t_token))))
 		return (NULL);
 	ft_memcpy(new, token, sizeof(t_token));
+	if (!(new->data.str = ft_strdup(token->data.str)))
+		return (NULL);
 	new->next = NULL;
 	return (new);
 }
@@ -293,6 +295,7 @@ t_token	*ft_tokenizer(char *line)
 			ret = table[1](&line, tmp);
 		if (ret)
 		{
+			ft_printf("21sh: lexer error: %d\n", ret);
 			return (NULL);
 		}
 		add_token(&head, tmp);

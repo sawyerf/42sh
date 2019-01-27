@@ -42,33 +42,50 @@ int		parser_is_assign(t_token const *token)
 	}
 	return (1);
 }
-/*
-t_token	next_sym(t_token *parser)
-{
 
-	t_token *tmp;
-	
-	tmp = parser;
-	while (tmp->next)
-		tmp = tmp->next;
-	next_token(NULL, &tmp);
-	return (tmp->next);
+
+void	free_redir_lst(t_redir *redir)
+{
+	t_redir *tmp;
+
+	while (redir)
+	{
+		tmp = redir->next;
+		if (redir->left)
+			free_token(redir->left);
+		if (redir->right)
+			free_token(redir->right);
+		if (redir->op)
+			free_token(redir->op);
+		free(redir);
+		redir = tmp;
+	}
 }
 
-int	sh_parser(char *line)
+void	free_simple_cmd(t_simple_cmd *cmd)
 {
-	t_parser	parser;
-	t_token		*current;
-	char		*iter;
-	int			ret;
-
-	iter = line;
-	next_token(line, &(parser.head));
-	parser.current = parser.head;
-	ret = expect_complete_cmd(&parser);
-	ft_printf("ret = %d token %s type %d\n", ret, parser.current->data.str, parser.current->type);
+	if (cmd->cmd_name)
+		free_token_lst(cmd->cmd_name);
+	if (cmd->args_lst)
+		free_token_lst(cmd->args_lst);
+	if (cmd->assign_lst)
+		free_token_lst(cmd->assign_lst);
+	if (cmd->redir_lst)
+		free_redir_lst(cmd->redir_lst);
 }
-*/
+
+void	free_pipeline(t_simple_cmd *pipeline)
+{
+	t_simple_cmd *tmp;
+
+	while (pipeline)
+	{
+		tmp = pipeline->next;
+		free_simple_cmd(pipeline);
+		free(pipeline);
+		pipeline = tmp;
+	}
+}
 int	test_sh_parser(t_token *start)
 {
 	t_parser parser;
@@ -87,5 +104,6 @@ int	test_sh_parser(t_token *start)
 	t_simple_cmd *tmp;
 
 	tmp = parser.pipeline;
+	free_pipeline(tmp);
 	return (ret);
 }

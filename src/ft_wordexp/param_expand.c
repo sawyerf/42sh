@@ -105,6 +105,7 @@ int	handle_exp_param(t_token *word)
 				return (MEMERR);
 			if (expand_param(&(word->data), &index, value) == MEMERR)
 				return (MEMERR);
+			free(value);
 			continue;
 		}
 		else if ((word->data.str[index] == '\'') && (inside_dquote == 1))
