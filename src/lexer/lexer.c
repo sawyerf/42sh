@@ -293,12 +293,13 @@ t_token	*ft_tokenizer(char *line)
 			ret = table[(int)*line](&line, tmp);
 		else
 			ret = table[1](&line, tmp);
+		add_token(&head, tmp);
 		if (ret)
 		{
 			ft_printf("21sh: lexer error: %d\n", ret);
+			free_token_lst(head);
 			return (NULL);
 		}
-		add_token(&head, tmp);
 		while (ft_is_ifs(*line))
 			line++;
 	}

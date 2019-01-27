@@ -96,6 +96,7 @@ void	replace_token(t_token *word, t_token *new_fields)
 	while (word->next)
 		word = word->next;
 	word->next = save;
+	free(new_fields);
 }
 
 int	handle_ifs(t_token *word, char *ifs)
