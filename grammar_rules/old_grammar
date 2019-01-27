@@ -1,0 +1,59 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
+/*   Updated: 2018/10/12 23:14:47 by ktlili           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
+/*
+	VOID
+	%token WORD
+	%token NEWLINE
+	%token IO_NUM
+	%token ASSIGNEMENT_WORD 
+-------------------------------
+literal tokens
+	%token AND_IF:'&&' OR_IF:'||' LESSAND:'<&' GREATAND:'>&' DGREAT:'>>' 
+	%token LESS: '<' GREAT: '>'	AMPERS: '&' SEMICOL: ';' PIPE: '|'
+
+	complete_cmd	: list separator | list 
+
+	list			: list separator_op and_or | and_or
+
+	and_or			: pipeline | and_or AND_IF linebreak pipeline
+					| and_or OR_IF linebreak pipeline
+
+	pipeline		: simple_cmd | pipeline PIPE linebreak simple_cmd
+
+	simple_cmd		: cmd_pre cmd_word cmd_suffix | cm_pre cmd_word
+					| cmd_pre
+
+	cmd_word		: WORD | ASSIGNEMENT_WORD
+
+	cmd_pre			: io_redir | cmd_pre io_redir | ASSIGNEMENT_WORD
+					| cmd_pre ASSIGNEMENT_WORD
+
+	cmd_suf			: io_redir | cmd_suf io_redir | WORD | cmd_suf WORD
+	
+	io_redir		: io_file | IO_NUM io_file
+	
+	io_file			: LESS filename | LESSAND filename | GREAT filename
+					| GREATAND filename | DGREAT filename
+
+	filename		: WORD #see posix rule2
+
+	separator_op	: AMPERS | SEMICOL
+
+	separator		: separator_op linebreak | newline_lst
+
+	line_break		: newline_lst | VOID
+
+	newline_lst		: NEWLINE | newline_lst NEWLINE
+	
+*/
