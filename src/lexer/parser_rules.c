@@ -13,18 +13,6 @@
 #include "../../ft_lexer.h"
 
 
-/*ft_printf("function: %s\n", "");
-ft_printf("tok: %s| type %d\n==============\n", parser->current->data.str, parser->current->type);
-*/
-/*
-int	next_sym(t_parser *parser)
-{
-	if (!(parser->current->next))
-		next_token(NULL, &(parser->current));	
-	parser->current = parser->current->next;  //to add malloc fail checks 
-	return (0);
-}
-*/
 int	expect_linebreak(t_parser *parser)
 {
 	(void)parser;
@@ -73,7 +61,7 @@ int	expect_filename(t_parser *parser)
 	if (parser->current->type == WORD)
 	{
 		parser->current->type = FILENAME;
-		if (build_redir(parser->current, parser->current_redir) == MEMERR)
+		if (build_redir(parser->current, &(parser->current_redir)) == MEMERR)
 			return (MEMERR);
 		parser->current = parser->current->next;
 		#ifdef DEBUG
@@ -96,7 +84,7 @@ int	expect_io_file(t_parser *parser)
 	if ((parser->current->type >= LESSAND)
 		&& (parser->current->type <= GREAT))
 	{
-		if (build_redir(parser->current, parser->current_redir) == MEMERR)
+		if (build_redir(parser->current, &(parser->current_redir)) == MEMERR)
 			return (MEMERR);
 		parser->current = parser->current->next;
 		if (expect_filename(parser))
@@ -114,19 +102,16 @@ int	expect_io_file(t_parser *parser)
 int	expect_io_redir(t_parser *parser)
 {
 	t_token *backtrack;
-	t_redir	*redir;
 
 #ifdef DEBUG
 	ft_printf("function: %s\n", "io_redir");
 	ft_printf("tok: %s| type %d\n==============\n", parser->current->data.str, parser->current->type);
 	#endif
-	if (!(redir = ft_memalloc(sizeof(t_redir))))
-		return (MEMERR);
-	parser->current_redir = redir;
+	ft_bzero(&(parser->current_redir), sizeof(t_redir));
 	backtrack = parser->current;
 	if (parser->current->type == IO_NUM)
 	{
-		if (build_redir(parser->current, parser->current_redir) == MEMERR)
+		if (build_redir(parser->current, &(parser->current_redir)) == MEMERR)
 			return (MEMERR);
 		parser->current = parser->current->next;
 		if (expect_io_file(parser))
@@ -134,7 +119,7 @@ int	expect_io_redir(t_parser *parser)
 			#ifdef DEBUG
 			ft_printf("validated io_redir\n");
 			#endif
-			add_redir_lst(redir, &(parser->cmd->redir_lst));
+			add_redir_lst(&(parser->current_redir), &(parser->cmd.redir_lst));
 			return (1);
 		}
 	}
@@ -143,11 +128,11 @@ int	expect_io_redir(t_parser *parser)
 		#ifdef DEBUG
 		ft_printf("validated io_redir\n");
 		#endif
-		add_redir_lst(redir, &(parser->cmd->redir_lst));
+		add_redir_lst(&(parser->current_redir), &(parser->cmd.redir_lst));
 		return (1);
 	}
-	free_redir_lst(redir);
-	parser->current_redir = NULL;
+	/*we still need to free redir if we fail*/
+	free_redir(&(parser->current_redir));
 	parser->current = backtrack;
 	return (0);
 
@@ -162,7 +147,7 @@ int	expect_assign(t_parser *parser)
 	if (parser_is_assign(parser->current))
 	{
 		parser->current->type = ASSIGN;
-		if (build_cmd(parser->current, ((t_simple_cmd*)(parser->cmd))) == MEMERR)
+		if (build_cmd(parser->current, &(parser->cmd)) == MEMERR)
 			return (MEMERR);
 		parser->current = parser->current->next;
 		#ifdef DEBUG
@@ -219,7 +204,7 @@ int	expect_word(t_parser *parser)
 	#endif
 	if (parser->current->type == WORD)
 	{
-		if (build_cmd(parser->current, ((t_simple_cmd*)(parser->cmd))) == MEMERR)
+		if (build_cmd(parser->current, &(parser->cmd)) == MEMERR)
 			return (MEMERR);
 		parser->current = parser->current->next;
 		#ifdef DEBUG
@@ -240,7 +225,7 @@ int	expect_cmd_name(t_parser *parser)
 			&& (!parser_is_assign(parser->current)))
 	{   
 		//we never get here is current tok is assign so check is redundant ?
-		if (build_cmd(parser->current, ((t_simple_cmd*)(parser->cmd))) == MEMERR)
+		if (build_cmd(parser->current, &(parser->cmd)) == MEMERR)
 			return (MEMERR);
 		parser->current = parser->current->next;
 		#ifdef DEBUG
@@ -258,10 +243,8 @@ int	expect_simple_cmd(t_parser *parser)
 	ft_printf("tok: %s| type %d\n==============\n", parser->current->data.str, parser->current->type);
 	#endif
 	t_token 		*backtrack;
-	t_simple_cmd 	simple_cmd;
 
-	ft_bzero(&simple_cmd, sizeof(t_simple_cmd));
-	parser->cmd = &simple_cmd;
+	ft_bzero(&(parser->cmd), sizeof(t_simple_cmd));
 	backtrack = parser->current;
 	if (expect_cmd_pre(parser))
 	{

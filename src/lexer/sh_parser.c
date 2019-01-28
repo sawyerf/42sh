@@ -43,6 +43,16 @@ int		parser_is_assign(t_token const *token)
 	return (1);
 }
 
+void	free_redir(t_redir *redir)
+{
+		if (redir->left)
+			free_token(redir->left);
+		if (redir->right)
+			free_token(redir->right);
+		if (redir->op)
+			free_token(redir->op);
+	
+}
 
 void	free_redir_lst(t_redir *redir)
 {
@@ -51,12 +61,7 @@ void	free_redir_lst(t_redir *redir)
 	while (redir)
 	{
 		tmp = redir->next;
-		if (redir->left)
-			free_token(redir->left);
-		if (redir->right)
-			free_token(redir->right);
-		if (redir->op)
-			free_token(redir->op);
+		free_redir(redir);
 		free(redir);
 		redir = tmp;
 	}
@@ -64,10 +69,8 @@ void	free_redir_lst(t_redir *redir)
 
 void	free_simple_cmd(t_simple_cmd *cmd)
 {
-	if (cmd->cmd_name)
-		free_token_lst(cmd->cmd_name);
-	if (cmd->args_lst)
-		free_token_lst(cmd->args_lst);
+	if (cmd->word_lst)
+		free_token_lst(cmd->word_lst);
 	if (cmd->assign_lst)
 		free_token_lst(cmd->assign_lst);
 	if (cmd->redir_lst)
@@ -104,6 +107,7 @@ int	test_sh_parser(t_token *start)
 	t_simple_cmd *tmp;
 
 	tmp = parser.pipeline;
-	free_pipeline(tmp);
+	test_pipeline(&parser);
+free_pipeline(tmp);
 	return (ret);
 }

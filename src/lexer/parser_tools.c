@@ -28,19 +28,24 @@ static	void	add_to_lst(t_token *to_add, t_token **head)
 	}
 }
 
-void	add_redir_lst(t_redir *to_add, t_redir **head)
+int	add_redir_lst(t_redir *to_add, t_redir **head)
 {
 	t_redir *tmp;
+	t_redir	*iter;
 
+	if (!(tmp = ft_memalloc(sizeof(t_redir))))
+		return (MEMERR);
+	ft_memcpy(tmp, to_add, sizeof(t_redir));
 	if (*head == NULL)
-		*head = to_add;
+		*head = tmp;
 	else
 	{
-		tmp = *head;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = to_add;
+		iter = *head;
+		while (iter->next)
+			iter = iter->next;
+		iter->next = tmp;
 	}
+	return (0);
 }
 
 int		build_cmd(t_token *to_add, t_simple_cmd *cmd)
@@ -50,12 +55,7 @@ int		build_cmd(t_token *to_add, t_simple_cmd *cmd)
 	if (!(tmp = dup_token(to_add)))
 		return (MEMERR);
 	if (to_add->type == WORD)
-	{
-		if (!cmd->cmd_name)
-			cmd->cmd_name = tmp;
-		else
-			add_to_lst(tmp, &(cmd->args_lst));
-	}
+		add_to_lst(tmp, &(cmd->word_lst));
 	else if (to_add->type == ASSIGN)
 		add_to_lst(tmp, &(cmd->assign_lst));
 	return (0);
@@ -84,7 +84,7 @@ int	add_to_pipeline(t_parser *parser)
 
 	if (!(tmp = ft_memalloc(sizeof(t_simple_cmd))))
 		return (MEMERR);
-	ft_memcpy(tmp, parser->cmd, sizeof(t_simple_cmd));
+	ft_memcpy(tmp, &(parser->cmd), sizeof(t_simple_cmd));
 	if (parser->pipeline == NULL)
 		parser->pipeline = tmp;
 	else
@@ -115,11 +115,8 @@ void	print_redir_lst(t_redir *start)
 void	test_simplecmd(t_simple_cmd *cmd)
 {
 	ft_printf(">>>>>>SIMPLE COMMAND============\n");
-	ft_printf("cmd_name:");
-	print_token(cmd->cmd_name);
-	ft_printf("***************************\n");
 	ft_printf("args_lst:\n");
-	print_tokens(cmd->args_lst);
+	print_tokens(cmd->word_lst);
 	ft_printf("***************************\n");
 	ft_printf("assign_lst:\n");
 	print_tokens(cmd->assign_lst);

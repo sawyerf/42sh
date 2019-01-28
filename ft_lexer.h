@@ -51,11 +51,36 @@ typedef	enum	e_token_type
 	GREAT,
 }				t_token_type;
 
+
+typedef struct			s_redir
+{
+	struct s_token 		*left;
+	struct s_token		*right;
+	struct s_token		*op;
+	struct s_redir		*next;
+}						t_redir;
+/*
+intermediary datastruct before expansions
+*/
+typedef struct			s_simple_cmd
+{
+	struct s_token		*word_lst;
+	struct s_token		*assign_lst;
+	struct s_redir		*redir_lst;
+	struct s_simple_cmd	*next;
+}						t_simple_cmd;
+typedef enum	e_tree_node
+{
+	pipeline = 5,
+	and_if = 8,
+	or_if = 9,
+}				t_tree_node;
+
 typedef	struct	s_token
 {
-	t_token_type	type;
-	t_str			data;
-	struct s_token	*next;	
+	t_token_type		type;
+	t_str				data;
+	struct s_token		*next;	
 }				t_token;
 
 typedef struct	s_parser
@@ -63,12 +88,21 @@ typedef struct	s_parser
 	struct s_token		*current;
 	struct s_token 		*head;
 	
-	struct s_simple_cmd	*cmd;
-	struct s_redir		*current_redir;	
+	t_simple_cmd		cmd;
+	t_redir				current_redir;	
 	
-	struct	s_simple_cmd *pipeline;
-//	t_ast	**head;
-}				t_parser;
+	t_simple_cmd 		*pipeline;
+	struct s_ast		*list;
+}						t_parser;
+
+typedef struct	s_ast
+{
+	t_tree_node 		type;
+	struct s_simple_cmd	*pipeline;
+	int					async;
+	struct s_ast		*left;
+	struct s_ast		*right;
+}				t_ast;
 
 /*
 Lexer jump table
@@ -100,7 +134,7 @@ void	test_pipeline(t_parser *parser);
 int	add_to_pipeline(t_parser *parser);
 int	build_redir(t_token *to_add, t_redir *redir);
 int	build_cmd(t_token *to_add, t_simple_cmd *cmd);
-void	add_redir_lst(t_redir *to_add, t_redir **head);
+int	add_redir_lst(t_redir *to_add, t_redir **head);
 /*
 recursive decent functions 
 */
@@ -145,6 +179,8 @@ t_token	*new_token(int type);
 void	free_token(t_token *token);
 void	free_token_lst(t_token *token);
 void	free_redir_lst(t_redir *redir);
+void	free_redir(t_redir *redir);
+void	free_pipeline(t_simple_cmd *pipeline);
 t_token	*ft_tokenizer(char *line);
 //int	next_token(char **line, t_token *token);
 int	next_token(char *line, t_token **head);

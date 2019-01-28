@@ -41,7 +41,8 @@ SRC_LEX =	lexer.c \
 			ft_realloc.c \
 			sh_parser.c \
 			parser_rules.c \
-			parser_tools.c
+			parser_tools.c \
+			memerror.c \
 
 WORDEXP_PATH = src/ft_wordexp
 
@@ -58,7 +59,9 @@ OBJ_NAME = $(SRC_NAME:.c=.o) $(SRC_LEX:.c=.o) $(SRC_WORDEXP:.c=.o)
 
 LIB = ./lib/libft.a
 
-FLAGS = -ggdb -Wall -Wextra -Werror -DDEBUG
+FLAGS = -Wall -g -Wextra -Werror
+
+LFLAGS =  
 
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 
@@ -70,7 +73,7 @@ all:	$(NAME)
 
 $(NAME): $(OBJ)
 	$(MAKE) -C ./lib/
-	$(CC) $(OBJ) $(LIB) -o $@
+	$(CC) $(LFLAGS) $(OBJ) $(LIB) -o $@
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	mkdir -p $(OBJ_PATH)
