@@ -243,8 +243,8 @@ int	expect_and_or_suffix(t_parser *parser)
 		if (((op == AND_IF) && (!parser->exit_status))
 			|| ((op == OR_IF) && (parser->exit_status)))
 		{
-			if (parser_exec_pipe(parser->pipeline) == MEMERR)
-				mem_err_exit(parser);
+			//if (parser_exec_pipe(parser->pipeline) == MEMERR)
+			//	mem_err_exit(parser);
 		}
 		expect_and_or_suffix(parser);
 		return (1);
@@ -260,8 +260,8 @@ int	expect_and_or(t_parser *parser)
 	backtrack = parser->current;
 	if (expect_pipeline(parser))
 	{
-		if (parser_exec_pipe(parser->pipeline) == MEMERR)
-			mem_err_exit(parser);
+//		if (parser_exec_pipe(parser->pipeline) == MEMERR)
+	//		mem_err_exit(parser);
 		expect_and_or_suffix(parser);
 		return (1);
 	}

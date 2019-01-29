@@ -6,7 +6,7 @@
 #    By: ktlili <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/10 23:32:37 by ktlili            #+#    #+#              #
-#    Updated: 2019/01/29 12:44:38 by ktlili           ###   ########.fr        #
+#    Updated: 2018/10/13 01:14:09 by ktlili           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,7 @@ LEX_PATH = src/lexer
 
 SRC_LEX =	lexer.c \
 			lex_jump_table.c \
+			lexer_tools.c \
 			ft_realloc.c \
 			memerror.c \
 
