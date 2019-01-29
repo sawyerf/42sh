@@ -189,7 +189,11 @@ void	free_token_lst(t_token *token);
 void	free_redir_lst(t_redir *redir);
 void	free_redir(t_redir *redir);
 void	free_pipeline(t_simple_cmd *pipeline);
+void	mem_err_exit(t_parser *parser);
+/* lexer */
 t_token	*ft_tokenizer(char *line);
 //int	next_token(char **line, t_token *token);
 int	next_token(char *line, t_token **head);
+
+
 #endif
