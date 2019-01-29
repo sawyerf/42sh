@@ -15,6 +15,7 @@
 
 # include "lib/libft.h"
 # include "ft_lexer.h"
+# include "ft_wordexp.h"
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <sys/wait.h>
@@ -111,14 +112,5 @@ void					cd_dispatch_err(char *arg, char *curpath);
 void					update_env_pwd(char *pwd, char *curpath);
 int						cd_error(int errnum, char *str);
 char					*getoldpwd(void);
-/* wordexp */
-typedef struct s_str t_str;
-typedef	struct	s_token t_token;
-int	ft_wordexp(t_token *word);
-int	handle_tilde(t_token *word);
-int	handle_exp_param(t_token *word);
-int	handle_field_split(t_token *word);
-int	quote_removal(t_token *word);
-int	insert_str(t_str *word, int *index, char *to_insert);
 
 #endif

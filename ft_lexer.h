@@ -179,7 +179,7 @@ int	ft_str_realloc(t_str *str_st, size_t newsz);
 
 
 /*random util functions*/
-int	ft_is_ifs(char c);
+int	ft_is_whitespace(char c);
 
 void	add_token(t_token **head, t_token *to_add);
 t_token	*dup_token(t_token *token);
