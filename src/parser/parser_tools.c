@@ -13,7 +13,7 @@
 #include "../../ft_lexer.h"
 
 
-static	void	add_to_lst(t_token *to_add, t_token **head)
+void	add_to_lst(t_token *to_add, t_token **head)
 {
 	t_token *tmp;
 
@@ -96,61 +96,3 @@ int	add_to_pipeline(t_parser *parser)
 	}
 	return (0);
 }
-
-void	print_redir_lst(t_redir *start)
-{
-	while (start)
-	{
-		ft_printf("left:");
-		print_token(start->left);
-		ft_printf("op:\n");
-		print_tokens(start->op);
-		ft_printf("right\n");
-		print_tokens(start->right);
-		ft_printf("==========================================\n");
-		start = start->next;
-	}
-}
-
-void	test_simplecmd(t_simple_cmd *cmd)
-{
-	ft_printf(">>>>>>SIMPLE COMMAND============\n");
-	ft_printf("args_lst:\n");
-	print_tokens(cmd->word_lst);
-	ft_printf("***************************\n");
-	ft_printf("assign_lst:\n");
-	print_tokens(cmd->assign_lst);
-	ft_printf("***************************\n");
-	ft_printf("redir_lst:\n");
-	print_redir_lst(cmd->redir_lst);
-	ft_printf(">>>>>>END OF SIMPLE COMMAND======\n");
-}
-void	test_pipeline(t_parser *parser)
-{
-	t_simple_cmd *start;
-
-	start = parser->pipeline;
-	while (start)
-	{
-		test_simplecmd(start);
-		start=  start->next;
-
-	}
-}
-/*
-void	build_cmd(t_token *to_add, t_simple_cmd *cmd)
-{
-	if (to_add->type == WORD)
-	{
-		if (!cmd->cmd_name)
-			cmd->cmd_name = to_add;
-		else
-			add_to_lst(to_add, &(cmd->args_lst))
-		to_add->next = NULL;	
-	}
-	else if (to_add->type == ASSIGN)
-	{
-		add_to_lst(to_add, &(cmd->assign_lst));
-		to_add = NULL;
-	}
-}*/

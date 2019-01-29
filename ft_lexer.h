@@ -60,7 +60,7 @@ typedef struct			s_redir
 	struct s_redir		*next;
 }						t_redir;
 /*
-intermediary datastruct before expansions
+intermediate datastruct before expansions
 */
 typedef struct			s_simple_cmd
 {
@@ -69,6 +69,14 @@ typedef struct			s_simple_cmd
 	struct s_redir		*redir_lst;
 	struct s_simple_cmd	*next;
 }						t_simple_cmd;
+
+typedef struct			s_exec_cmd
+{
+	char 	*full_path;
+	char 	**av;
+	char	**exec_env;
+}						t_exec_cmd;
+
 typedef enum	e_tree_node
 {
 	pipeline = 5,
