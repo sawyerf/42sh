@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2018/10/12 23:14:47 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/01/29 11:59:15 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	handle_digit(char **input, t_token *token)
 
 	while (**input)
 	{
-		if ((ft_is_ifs(**input)) || (ft_strchr(ops, **input))
+		if ((ft_is_whitespace(**input)) || (ft_strchr(ops, **input))
 				|| (!ft_isdigit(**input)))
 		{
 			if (ft_strchr("><", **input))
@@ -113,7 +113,7 @@ int	handle_common(char **input, t_token *token)
 	err_ret = 0;
 	while (**input)
 	{
-		if ((ft_is_ifs(**input)) || (ft_strchr(ops, **input)))
+		if ((ft_is_whitespace(**input)) || (ft_strchr(ops, **input)))
 			break;
 		if (**input == '"')
 			err_ret = handle_dquote(input, token);

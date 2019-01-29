@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2018/10/12 20:21:49 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/01/29 12:17:34 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,7 @@ int	insert_str(t_str *word, int *index, char *to_insert)
 	free(save);
 	return (0);
 }
-/*  0 1 2 3 4 5 6
-	a b c $ d e f
-*/
+
 int	expand_tilde(t_str *word, int *index)
 {
 	char *home;

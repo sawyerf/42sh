@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2018/10/12 23:14:47 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/01/29 15:59:21 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,15 +175,11 @@ int	expect_simple_cmd(t_parser *parser)
 	{
 		if (expect_cmd_name(parser))
 			expect_cmd_suffix(parser);
-		if (add_to_pipeline(parser) == MEMERR)
-			mem_err_exit(parser);
 		return (1);
 	}
 	else if (expect_cmd_name(parser))
 	{
 		expect_cmd_suffix(parser);
-		if (add_to_pipeline(parser) == MEMERR)
-			mem_err_exit(parser);
 		return (1);
 	}
 	parser->current = backtrack;	
@@ -204,6 +200,8 @@ int	expect_pipeline_suffix(t_parser *parser)
 			parser->current = backtrack;	
 			return (0);
 		}
+		if (add_to_pipeline(parser) == MEMERR)
+			mem_err_exit(parser);
 		expect_pipeline_suffix(parser);
 	}
 	return (1);
@@ -216,11 +214,9 @@ int	expect_pipeline(t_parser *parser)
 	backtrack = parser->current;
 	if (expect_simple_cmd(parser))
 	{
+		if (add_to_pipeline(parser) == MEMERR)
+			mem_err_exit(parser);
 		expect_pipeline_suffix(parser);
-		#ifdef DEBUG
-		ft_printf("validated pipeline\n");
-		#endif
-	//	test_pipeline(parser);
 		return (1);
 	}
 	parser->current = backtrack;
@@ -229,12 +225,14 @@ int	expect_pipeline(t_parser *parser)
 
 int	expect_and_or_suffix(t_parser *parser)
 {
-	t_token *backtrack;
-
+	t_token 		*backtrack;
+	t_token_type	op;
 	backtrack = parser->current;
+
 	if ((parser->current->type == AND_IF)
 		|| (parser->current->type == OR_IF))
 	{
+		op = parser->current->type;
 		parser->current = parser->current->next;
 		expect_linebreak(parser);
 		if (!expect_pipeline(parser))
@@ -242,10 +240,13 @@ int	expect_and_or_suffix(t_parser *parser)
 			parser->current = backtrack;
 			return (0);
 		}
+		if (((op == AND_IF) && (!parser->exit_status))
+			|| ((op == OR_IF) && (parser->exit_status)))
+		{
+			if (parser_exec_pipe(parser->pipeline) == MEMERR)
+				mem_err_exit(parser);
+		}
 		expect_and_or_suffix(parser);
-		#ifdef DEBUG
-		ft_printf("validated and_or_suffix\n");
-		#endif
 		return (1);
 	}
 	return (0);
@@ -259,10 +260,9 @@ int	expect_and_or(t_parser *parser)
 	backtrack = parser->current;
 	if (expect_pipeline(parser))
 	{
+		if (parser_exec_pipe(parser->pipeline) == MEMERR)
+			mem_err_exit(parser);
 		expect_and_or_suffix(parser);
-#ifdef DEBUG
-		ft_printf("validated and_or\n");
-		#endif
 		return (1);
 	}
 	parser->current = backtrack;
@@ -283,9 +283,6 @@ int	expect_list_suffix(t_parser *parser)
 		}
 		expect_list_suffix(parser);
 	}
-	#ifdef DEBUG
-	ft_printf("validated list_suffix\n");
-	#endif
 	return (1);
 }
 
@@ -297,9 +294,6 @@ int	expect_list(t_parser *parser)
 	if (expect_and_or(parser))
 	{
  		expect_list_suffix(parser);
-		#ifdef DEBUG
-		ft_printf("validated list\n");
-		#endif
 		return (1);
 	}
 	parser->current = backtrack;

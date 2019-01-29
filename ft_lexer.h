@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2018/10/12 23:14:47 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/01/29 15:43:22 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ typedef	enum	e_token_type
 {
 	WORD,
 	NEWLINE,
-	IO_NUM,
+	IO_NUM, 
 	FILENAME,
 	ASSIGN,
 	PIPE,
@@ -69,7 +69,7 @@ typedef struct			s_simple_cmd
 	struct s_redir		*redir_lst;
 	struct s_simple_cmd	*next;
 }						t_simple_cmd;
-
+/*
 typedef struct			s_exec_cmd
 {
 	char 	*full_path;
@@ -83,7 +83,7 @@ typedef enum	e_tree_node
 	and_if = 8,
 	or_if = 9,
 }				t_tree_node;
-
+*/
 typedef	struct	s_token
 {
 	t_token_type		type;
@@ -98,20 +98,21 @@ typedef struct	s_parser
 	
 	t_simple_cmd		cmd;
 	t_redir				current_redir;	
-	
+	int					exit_status;	
 	t_simple_cmd 		*pipeline;
 	struct s_ast		*list;
 }						t_parser;
-
+/*
 typedef struct	s_ast
 {
 	t_tree_node 		type;
 	struct s_simple_cmd	*pipeline;
+	int					exit_status;
 	int					async;
 	struct s_ast		*left;
 	struct s_ast		*right;
 }				t_ast;
-
+*/
 /*
 Lexer jump table
 */

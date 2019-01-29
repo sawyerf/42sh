@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2018/10/12 23:14:47 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/01/29 12:00:11 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int	str_putchar(char c, t_str *data)
 /*
 this has to be change to is_whitespace
 */
-int	ft_is_ifs(char c)
+int	ft_is_whitespace(char c)
 {
 	static char *ifs = "\n\t ";
 
@@ -182,7 +182,7 @@ int	ft_tokenizer(char *line, t_token **head)
 		if ((ret = table[(int)*line](&line, tmp)) != 0)
 			return (ret);	
 		add_token(head, tmp);
-		while (ft_is_ifs(*line))
+		while (ft_is_whitespace(*line))
 			line++;
 	}
 	return (0);
@@ -199,7 +199,7 @@ int next_token(char **line, t_token *token)
 		init_jump_table(table);
 	if ((*line) || (!iter))
 		iter = *line;	
-	while (ft_is_ifs(*iter))
+	while (ft_is_whitespace(*iter))
 			iter++;
 	if (*iter)
 	{
@@ -226,7 +226,7 @@ int next_token(char **line, t_token **head)
 		iter = *line;	
 	if (!(token = new_token(0)))
 		return (MEMERR);
-	while (ft_is_ifs(*iter))
+	while (ft_is_whitespace(*iter))
 			iter++;
 	if (*iter)
 	{
@@ -256,7 +256,7 @@ int next_token(char *line, t_token **head)
 		iter = line;	
 	if (!(token = new_token(0)))
 		return (MEMERR);
-	while (ft_is_ifs(*iter))
+	while (ft_is_whitespace(*iter))
 			iter++;
 	if (*iter)
 	{
@@ -282,7 +282,7 @@ t_token	*ft_tokenizer(char *line)
 		init_jump_table(table);
 	flag = 1;
 	head = NULL;
-	while (ft_is_ifs(*line))
+	while (ft_is_whitespace(*line))
 		line++;
 	while (*line)
 	{
@@ -300,7 +300,7 @@ t_token	*ft_tokenizer(char *line)
 			free_token_lst(head);
 			return (NULL);
 		}
-		while (ft_is_ifs(*line))
+		while (ft_is_whitespace(*line))
 			line++;
 	}
 	add_token(&head, new_token(1));
