@@ -50,6 +50,7 @@ int	tree_add_pipeline(t_parser *parser)
 
 void	add_to_tree(t_ast_node **head, t_ast_node *to_add)
 {
+
 	if (*head == NULL)
 	{
 		*head = to_add;
@@ -57,7 +58,12 @@ void	add_to_tree(t_ast_node **head, t_ast_node *to_add)
 	}
 	if (to_add->type == PIPE)
 	{
-		(*head)->right = to_add;
+		if ((*head)->right == NULL)
+			(*head)->right = to_add;
+		else
+		{
+			(*head)->right->right = to_add;
+		}
 	}
 	else if (to_add->type == SEMI_COL)
 	{
@@ -66,10 +72,10 @@ void	add_to_tree(t_ast_node **head, t_ast_node *to_add)
 	}
 	else if ((to_add->type == OR_IF) || (to_add->type == AND_IF))
 	{
-		if ((*head)->type == semi_col)
+		if ((*head)->type == SEMI_COL)
 		{
 			to_add->left = (*head)->right;
-			(*head)->right = to_add->left;
+			(*head)->right = to_add;
 		}
 		else
 		{
