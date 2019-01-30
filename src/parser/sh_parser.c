@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2018/10/12 23:14:47 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/01/30 12:20:47 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,10 @@ int	test_sh_parser(t_token *start)
 	if (parser.current->type != NEWLINE)
 		ret = 0;
 	ft_printf("ret = %d token %s |type %s\n", ret, parser.current->data.str, types[parser.current->type]);
-
+	if (ret == 0)
+		free_tree(parser.tree);
+	else
+		eval_tree(parser.tree);
 	print_tree(parser.tree);
-//	test_pipeline(&parser);
-//free_pipeline(tmp);
 	return (ret);
 }

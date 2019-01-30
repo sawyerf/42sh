@@ -6,7 +6,7 @@
 #    By: ktlili <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/10 23:32:37 by ktlili            #+#    #+#              #
-#    Updated: 2019/01/29 11:05:48 by ktlili           ###   ########.fr        #
+#    Updated: 2019/01/30 11:41:53 by ktlili           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,6 +100,8 @@ SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 
+CC = clang
+
 all:	$(NAME)
 
 $(NAME): $(OBJ)
@@ -108,7 +110,7 @@ $(NAME): $(OBJ)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
 	mkdir -p $(OBJ_PATH)
-	gcc -I. $(FLAGS) -o $@ -c $<
+	$(CC) -I. $(FLAGS) -o $@ -c $<
 
 clean:
 	/bin/rm -f $(OBJ)

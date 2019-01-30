@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/01/29 15:43:22 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/01/30 17:46:24 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,27 @@
 # define FT_EVAL_H
 
 #include "ft_lexer.h"
+#define PIPEFAIL 20
 
-typedef struct s_parser t_parser;
+typedef struct			s_tree
+{
+	void				*tree;
+	size_t				size;
+	struct s_tree		*left;
+	struct s_tree 		*right;
+}						t_tree;
 
+/*  simple_cmd after expansions, order is inverted to handle pipes
+ */
 typedef struct			s_cmd_tab
 {
-	char 	*full_path;
-	char 	**av;
-	char	**exec_env;
+	char	 			*full_path;
+	char 				**av;
+	char				**exec_env;
+	int					exit_status;
+	struct s_cmd_exec *next;
 }						t_cmd_tab;
 
-typedef enum	e_tree_node
-{
-	pipeline = 5,
-	semi_col = 6,
-	ampers = 7,
-	and_if = 8,
-	or_if = 9,
-}				t_tree_node;
 
 typedef struct s_ast_node t_ast_node;
 
