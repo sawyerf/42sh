@@ -104,10 +104,9 @@ int	test_sh_parser(t_token *start)
 	if (parser.current->type != NEWLINE)
 		ret = 0;
 	ft_printf("ret = %d token %s |type %s\n", ret, parser.current->data.str, types[parser.current->type]);
-	t_simple_cmd *tmp;
 
-	tmp = parser.pipeline;
-	test_pipeline(&parser);
-free_pipeline(tmp);
+	print_tree(parser.tree);
+//	test_pipeline(&parser);
+//free_pipeline(tmp);
 	return (ret);
 }

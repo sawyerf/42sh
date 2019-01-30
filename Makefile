@@ -44,7 +44,7 @@ SRC_LEX =	lexer.c \
 
 PARSER_PATH = src/parser
 
-SRC_PARSER = parser_rules.c sh_parser.c parser_tools.c parser_test.c
+SRC_PARSER = parser_rules.c sh_parser.c parser_tools.c parser_test.c parser_ast.c
 
 WORDEXP_PATH = src/ft_wordexp
 

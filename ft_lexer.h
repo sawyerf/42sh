@@ -14,7 +14,7 @@
 # define FT_LEXER_H
 
 #include "sh_core.h"
-
+#include "ft_eval.h"
 
 #define DQUOTE_ERR 10
 #define SQUOTE_ERR 11
@@ -69,21 +69,7 @@ typedef struct			s_simple_cmd
 	struct s_redir		*redir_lst;
 	struct s_simple_cmd	*next;
 }						t_simple_cmd;
-/*
-typedef struct			s_exec_cmd
-{
-	char 	*full_path;
-	char 	**av;
-	char	**exec_env;
-}						t_exec_cmd;
 
-typedef enum	e_tree_node
-{
-	pipeline = 5,
-	and_if = 8,
-	or_if = 9,
-}				t_tree_node;
-*/
 typedef	struct	s_token
 {
 	t_token_type		type;
@@ -98,21 +84,20 @@ typedef struct	s_parser
 	
 	t_simple_cmd		cmd;
 	t_redir				current_redir;	
-	int					exit_status;	
 	t_simple_cmd 		*pipeline;
-	struct s_ast		*list;
+	struct s_ast_node	*tree;
 }						t_parser;
-/*
-typedef struct	s_ast
+
+typedef struct	s_ast_node
 {
-	t_tree_node 		type;
+	t_token_type 	type;
 	struct s_simple_cmd	*pipeline;
-	int					exit_status;
 	int					async;
-	struct s_ast		*left;
-	struct s_ast		*right;
-}				t_ast;
-*/
+	int					exit_status;
+	struct s_ast_node	*left;
+	struct s_ast_node	*right;
+}				t_ast_node;
+
 /*
 Lexer jump table
 */
@@ -138,7 +123,8 @@ typedef struct s_simple_cmd t_simple_cmd;
 void	print_token(t_token *t);
 void	print_tokens(t_token *start);
 void	test_simplecmd(t_simple_cmd *cmd);
-void	test_pipeline(t_parser *parser);
+void	test_pipeline(t_simple_cmd *start);
+void	print_tree(t_ast_node *tree);
 //
 int	add_to_pipeline(t_parser *parser);
 int	build_redir(t_token *to_add, t_redir *redir);

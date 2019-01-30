@@ -146,18 +146,18 @@ int				main(int ac, char **av, char **env)
 	show_prompt();
 	while (get_next_line(0, &line) > 0)
 	{
-		ft_printf("**********************\n");
-		ft_printf("cmdline: '%s'", line);
-		ft_printf("**********************\n");
+	//	ft_printf("**********************\n");
+	//	ft_printf("cmdline: '%s'", line);
+	//	ft_printf("**********************\n");
 		tok = ft_tokenizer(line);
 		if (tok)
 		{
 	//		ft_test_lexer(line);
 			test_sh_parser(tok);
 	//		print_tokens(tok);
-			ft_printf("==========================================\n");
-			expansion_tester(tok);
-			print_tokens(tok);
+	//		ft_printf("==========================================\n");
+	//		expansion_tester(tok);
+	//		print_tokens(tok);
 			free_token_lst(tok);
 		}
 		free(line);

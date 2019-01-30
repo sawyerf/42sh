@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../ft_lexer.h"
-
+#include "../../ft_eval.h"
 
 int	expect_linebreak(t_parser *parser)
 {
@@ -24,6 +24,7 @@ int	expect_separator_op(t_parser *parser)
 	if ((parser->current->type == AMPERS)
 		|| (parser->current->type == SEMI_COL))
 	{
+		tree_add_sep(parser);
 		parser->current = parser->current->next;
 		return (1);
 	}
@@ -217,6 +218,8 @@ int	expect_pipeline(t_parser *parser)
 		if (add_to_pipeline(parser) == MEMERR)
 			mem_err_exit(parser);
 		expect_pipeline_suffix(parser);
+		if (tree_add_pipeline(parser) == MEMERR)
+			mem_err_exit(parser);
 		return (1);
 	}
 	parser->current = backtrack;
@@ -226,25 +229,19 @@ int	expect_pipeline(t_parser *parser)
 int	expect_and_or_suffix(t_parser *parser)
 {
 	t_token 		*backtrack;
-	t_token_type	op;
 	backtrack = parser->current;
 
 	if ((parser->current->type == AND_IF)
 		|| (parser->current->type == OR_IF))
 	{
-		op = parser->current->type;
+		if (tree_add_and_or(parser) == MEMERR)
+			mem_err_exit(parser);
 		parser->current = parser->current->next;
 		expect_linebreak(parser);
 		if (!expect_pipeline(parser))
 		{
 			parser->current = backtrack;
 			return (0);
-		}
-		if (((op == AND_IF) && (!parser->exit_status))
-			|| ((op == OR_IF) && (parser->exit_status)))
-		{
-			//if (parser_exec_pipe(parser->pipeline) == MEMERR)
-			//	mem_err_exit(parser);
 		}
 		expect_and_or_suffix(parser);
 		return (1);
@@ -260,8 +257,6 @@ int	expect_and_or(t_parser *parser)
 	backtrack = parser->current;
 	if (expect_pipeline(parser))
 	{
-//		if (parser_exec_pipe(parser->pipeline) == MEMERR)
-	//		mem_err_exit(parser);
 		expect_and_or_suffix(parser);
 		return (1);
 	}

@@ -10,10 +10,71 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../ft_lexer.h"
+#include "../../ft_eval.h"
 
-int	parser_exec_pipe(t_parser *parser)
+
+int	tree_add_sep(t_parser *parser)
 {
-	
-	free_pipeline(parser->pipeline);
+	t_ast_node *node;
+
+	if (!(node = ft_memalloc(sizeof(t_ast_node))))
+		return (MEMERR);
+	node->type = parser->current->type;
+	add_to_tree(&(parser->tree), node);
+	return (0);
+}
+
+int	tree_add_and_or(t_parser *parser)
+{
+	t_ast_node *node;
+
+	if (!(node = ft_memalloc(sizeof(t_ast_node))))
+		return (MEMERR);
+	node->type = parser->current->type;
+	add_to_tree(&(parser->tree), node);
+	return (0);
+}
+
+int	tree_add_pipeline(t_parser *parser)
+{
+	t_ast_node *node;
+
+	if (!(node = ft_memalloc(sizeof(t_ast_node))))
+		return (MEMERR);
+	node->pipeline = parser->pipeline;
+	node->type = PIPE;
+	add_to_tree(&(parser->tree), node);
+	parser->pipeline = NULL;
+	return (0);	
+}
+
+void	add_to_tree(t_ast_node **head, t_ast_node *to_add)
+{
+	if (*head == NULL)
+	{
+		*head = to_add;
+		return;
+	}
+	if (to_add->type == PIPE)
+	{
+		(*head)->right = to_add;
+	}
+	else if (to_add->type == SEMI_COL)
+	{
+		to_add->left = *head;
+		*head = to_add;
+	}
+	else if ((to_add->type == OR_IF) || (to_add->type == AND_IF))
+	{
+		if ((*head)->type == semi_col)
+		{
+			to_add->left = (*head)->right;
+			(*head)->right = to_add->left;
+		}
+		else
+		{
+			to_add->left = *head;
+			*head = to_add;
+		}
+	}
 }
