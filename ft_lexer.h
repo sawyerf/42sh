@@ -14,7 +14,6 @@
 # define FT_LEXER_H
 
 #include "sh_core.h"
-#include "ft_eval.h"
 
 #define DQUOTE_ERR 10
 #define SQUOTE_ERR 11
@@ -97,6 +96,30 @@ typedef struct	s_ast_node
 	struct s_ast_node	*left;
 	struct s_ast_node	*right;
 }				t_ast_node;
+
+typedef struct			s_tree
+{
+	void				*tree;
+	size_t				size;
+	struct s_tree		*left;
+	struct s_tree 		*right;
+}						t_tree;
+
+/*  simple_cmd after expansions, order is inverted to handle pipes
+ */
+typedef struct			s_cmd_tab
+{
+	char	 			*full_path;
+	char 				**av;
+	char				**process_env;
+	t_redir				*redir_lst;
+	int					exit_status;
+	struct s_cmd_tab	*next;
+}						t_cmd_tab;
+
+int		execute_cmd(t_cmd_tab *cmd);
+int		spawn_bin(t_cmd_tab *cmd);
+int		eval_tree(t_ast_node *tree);
 
 /*
 Lexer jump table

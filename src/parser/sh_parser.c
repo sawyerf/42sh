@@ -104,10 +104,10 @@ int	test_sh_parser(t_token *start)
 	if (parser.current->type != NEWLINE)
 		ret = 0;
 	ft_printf("ret = %d token %s |type %s\n", ret, parser.current->data.str, types[parser.current->type]);
-	if (ret == 0)
-		free_tree(parser.tree);
+	if (ret == 0){return(ret);}
+//		free_tree(parser.tree);
 	else
 		eval_tree(parser.tree);
-	print_tree(parser.tree);
+//	print_tree(parser.tree);
 	return (ret);
 }

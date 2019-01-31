@@ -55,8 +55,9 @@ t_token	*dup_token(t_token *token)
 	if (!(new = ft_memalloc(sizeof(t_token))))
 		return (NULL);
 	ft_memcpy(new, token, sizeof(t_token));
-	if (!(new->data.str = ft_strdup(token->data.str)))
+	if (!(new->data.str = ft_memalloc(token->data.size)))
 		return (NULL);
+	ft_strcpy(new->data.str, token->data.str);
 	new->next = NULL;
 	return (new);
 }

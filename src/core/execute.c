@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../sh_core.h"
-
+/*
 static int	setenv_wrapper(t_command *cmd)
 {
 	int i;
@@ -106,7 +106,27 @@ static int	ft_exit(t_command *cmd)
 	}
 	exit(exit_val);
 }
+*/
+int			execute_cmd(t_cmd_tab *cmd)
+{
+/*	static t_builtin	array[7] = {ft_echo, change_dir, setenv_wrapper,
+							ft_unsetenv, ft_env, ft_exit};
+	static	char		*builtins[] = {"echo", "cd", "setenv", "unsetenv",
+							"env", "exit", NULL};
+	int					i;*/
 
+	if (cmd->av[0] == NULL)
+		return (0);
+//	cmd->process_env = lst_to_tab(*g_environ, 0);
+//	if (cmd->process_env == NULL)
+//		return (MEMERR);
+//	if ((i = ft_cmptab(builtins, cmd->av[0])) != -1)
+//		return (array[i](cmd));
+//	else
+		return (spawn_bin(cmd));
+//	return (0);
+}
+/*
 int			execute_cmd(t_command *cmd)
 {
 	static t_builtin	array[7] = {ft_echo, change_dir, setenv_wrapper,
@@ -128,4 +148,4 @@ int			execute_cmd(t_command *cmd)
 	else
 		return (spawn_bin(cmd));
 	return (0);
-}
+}*/

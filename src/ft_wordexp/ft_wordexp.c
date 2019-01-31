@@ -23,8 +23,8 @@ int	ft_wordexp(t_token *word)
 //	ft_printf("=============================================\n");
 	if (handle_exp_param(word) == MEMERR)
 		return (MEMERR);
-	if (handle_field_split(word) == MEMERR)
-		return (MEMERR);
+//	if (handle_field_split(word) == MEMERR)
+//		return (MEMERR);
 	if (quote_removal(word) == MEMERR)
 		return (MEMERR);
 return (0);

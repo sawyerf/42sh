@@ -27,14 +27,6 @@
 # define ACCERR 5
 
 /*
-typedef	struct			s_simple_cmd
-{
-	struct s_token		*cmd_name;
-	struct s_token		*args_lst;
-	struct s_token		*assign_lst;
-	struct s_redir		*redir_lst;
-	struct s_simple_cmd	*next;
-}						t_simple_cmd;
 
 	minishell cmd to remove
 */
@@ -93,8 +85,6 @@ int						parser(char *line, t_command **cmd_lst);
 int						expand_tokens(char **arg);
 char					*expand_dollar(char *line);
 void					dispatch_parse_err(int error);
-int						execute_cmd(t_command *cmd);
-int						spawn_bin(t_command *cmd);
 char					*searchbin(char *binname, char *path);
 int						bin_perm(char *path);
 void					exec_error(int errnum, char *str);

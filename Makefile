@@ -55,15 +55,19 @@ SRC_WORDEXP =	ft_wordexp.c \
 				quote_removal.c \
 				expansion_util.c
 
+EVAL_PATH = src/eval
+
+SRC_EVAL = eval.c
+
 OBJ_PATH = obj
 
-OBJ_NAME = $(SRC_NAME:.c=.o) $(SRC_LEX:.c=.o) $(SRC_WORDEXP:.c=.o) $(SRC_PARSER:.c=.o)
+OBJ_NAME = $(SRC_NAME:.c=.o) $(SRC_LEX:.c=.o) $(SRC_WORDEXP:.c=.o) $(SRC_PARSER:.c=.o) $(SRC_EVAL:.c=.o)
 
 LIB = ./lib/libft.a
 
 FLAGS = -Wall -g -Wextra -Werror
 
-LFLAGS =  
+LFLAGS = 
 
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 
@@ -90,6 +94,10 @@ $(OBJ_PATH)/%.o: $(WORDEXP_PATH)/%.c
 	$(CC) -I. $(FLAGS) -o $@ -c $<
 
 $(OBJ_PATH)/%.o: $(PARSER_PATH)/%.c
+	mkdir -p $(OBJ_PATH)
+	$(CC) -I. $(FLAGS) -o $@ -c $<
+
+$(OBJ_PATH)/%.o: $(EVAL_PATH)/%.c
 	mkdir -p $(OBJ_PATH)
 	$(CC) -I. $(FLAGS) -o $@ -c $<
 

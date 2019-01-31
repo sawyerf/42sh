@@ -43,7 +43,7 @@ int	insert_str(t_str *word, int *index, char *to_insert)
 	}
 	if (!(save = ft_strdup(&(word->str[*index]))))
 		return (MEMERR);
-	ft_strcpy(&(word->str[*index]), to_insert);
+	ft_memcpy(&(word->str[*index]), to_insert, ft_strlen(to_insert));
 	*index = ft_strlen(to_insert) + *index;
 	ft_strcpy(&(word->str[*index]), save);
 	word->len = ft_strlen(word->str);

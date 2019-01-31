@@ -31,13 +31,13 @@ static char		**construct_env(t_command *cmd, char opt, int count)
 static int		spawn_new_env(char **args, char **new_env)
 {
 	t_command	*new_cmd;
-	int			ret;
+	int			ret = 5;
 
 	new_cmd = new_cmd_node(args);
 	if (new_cmd == NULL)
 		return (MEMERR);
 	new_cmd->process_env = new_env;
-	ret = spawn_bin(new_cmd);
+//	ret = spawn_bin(new_cmd);
 	free_cmdlst(new_cmd);
 	return (ret);
 }

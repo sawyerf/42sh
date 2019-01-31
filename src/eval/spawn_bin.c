@@ -62,18 +62,15 @@ static int	spawner(t_cmd_tab *cmd, char *binpath)
 	return (0);
 }
 
-int			handle_fullpath(t_cmd_tab *cmd, char **full_path)
+int			handle_fullpath(char *cmd_name, char **full_path)
 {
 	int ret;
 
-	if ((ret = bin_perm(cmd->av[0])) != 0)
+	if ((ret = bin_perm(cmd_name)) != 0)
 	{
-		exec_error(ret, cmd->av[0]);
+		exec_error(ret, cmd_name);
 		return (ACCERR);
 	}
-	*full_path = ft_strdup(cmd->av[0]);
-	if (*full_path == NULL)
-		return (MEMERR);
 	return (0);
 }
 
@@ -99,4 +96,28 @@ int			spawn_bin(t_cmd_tab *cmd)
 	ret = spawner(cmd, full_path);
 	free(full_path);
 	return (ret);
+}
+
+char *handle_full_path(char *cmd_name)
+{
+	char	*full_path;
+	char	*bin_path;
+	int		ret;
+
+	full_path = NULL;
+	if (ft_ispath(cmd_name))
+	{
+		if (full_path = ft_strdup(cmd_name) == NULL)
+			return (NULL);
+	}
+	else 
+	{
+		bin_path = tab_get_value("PATH", cmd->process_env);
+		if (bin_path == NULL)
+			bin_path = get_env_value("PATH");
+		full_path = searchbin(cmd_name, bin_path);
+		if (full_path == NULL)
+			return (NULL);
+	}
+	return (full_path);
 }

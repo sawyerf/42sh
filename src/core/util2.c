@@ -16,11 +16,11 @@ void	dispatch_parse_err(int error)
 {
 	if (error == 1)
 	{
-		ft_printf("minishell: malloc error\n");
+		ft_printf("21sh: malloc error\n");
 		exit(1);
 	}
 	else if (error == 2)
-		ft_printf("minishell: syntax error\n");
+		ft_printf("21sh: syntax error\n");
 }
 
 void	putstr_stderr(char *str)
