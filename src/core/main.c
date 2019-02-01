@@ -6,15 +6,16 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/01 14:08:40 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/01 16:53:28 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_core.h"
+#include "readline.h"
 
 t_environ **g_environ = NULL;
 
-static void		show_prompt(void)
+/*static void		show_prompt(void)
 {
 	char *pwd;
 
@@ -25,7 +26,7 @@ static void		show_prompt(void)
 		free(pwd);
 	}
 	write(1, "$> ", 3);
-}
+}*/
 
 static int		init_g_env(char **env)
 {
@@ -136,19 +137,23 @@ void	expansion_tester(t_token *start)
 
 int				main(int ac, char **av, char **env)
 {
-	char		*line;
-	t_token		*tok;
-	int			ret;
+	struct termios	save;
+	char			*line;
+	t_token			*tok;
+	int				ret;
 
 	silence_ac_av(ac, av);
 	if ((init_g_env(env) != 0))
 		return (MEMERR);
-	show_prompt();
-	while (get_next_line(0, &line) > 0)
+	if (!terminit(&save))
+		return (1);
+	//show_prompt();
+	while (42)
 	{
 	//	ft_printf("**********************\n");
 	//	ft_printf("cmdline: '%s'", line);
 	//	ft_printf("**********************\n");
+		line = readline("$> ");
 		tok = ft_tokenizer(line);
 		if (tok)
 		{
@@ -161,7 +166,7 @@ int				main(int ac, char **av, char **env)
 			free_token_lst(tok);
 		}
 		free(line);
-		show_prompt();
+		//show_prompt();
 	}
 	ret = 1;
 	free(line);
