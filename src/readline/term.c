@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:49:43 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/01 17:10:15 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/01 19:02:57 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,20 @@
 {
 	tcsetattr(0, TCSADRAIN, &(save));
 }*/
+
+int		tputchar(int c)
+{
+	return (write(1, &c, 1));
+}
+
+void	tgpstr(char *s)
+{
+	char	*str;
+
+	if (!(str = tgetstr(s, NULL)))
+		return ;
+	tputs(str, 0, tputchar);
+}
 
 int		terminit(struct termios *save)
 {

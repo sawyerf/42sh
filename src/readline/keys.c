@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:47:43 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/01 18:47:17 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/01 19:00:17 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,30 +17,41 @@ t_key	g_key[] = {
 	{K_BSPC, &del_cara},
 	{K_RGHT, &move_curs},
 	{K_LEFT, &move_curs},
+	{K_ENTR, &enter},
 	{NULL, &special_key}
 };
 
-void	begin(t_rdl *rdl, char *buf)
+int		enter(t_rdl *rdl, char *buf)
+{
+	(void)rdl;
+	(void)buf;
+	return (1);
+}
+
+int		begin(t_rdl *rdl, char *buf)
 {
 	(void)buf;
 	rdl->curs = 0;
+	return (0);
 }
 
-void	move_curs(t_rdl *rdl, char *buf)
+int		move_curs(t_rdl *rdl, char *buf)
 {
 	if (!ft_strcmp(K_RGHT, buf) && rdl->size > rdl->curs)
 		rdl->curs++;
 	if (!ft_strcmp(K_LEFT, buf) && rdl->curs > 0)
 		rdl->curs--;
+	return (0);
 }
 
-void	del_cara(t_rdl *rdl, char *buf)
+int		del_cara(t_rdl *rdl, char *buf)
 {
 	(void)buf;
 	rdldel(rdl, rdl->curs - 1);
+	return (0);
 }
 
-void	special_key(t_rdl *rdl, char *buf)
+int		special_key(t_rdl *rdl, char *buf)
 {
 	int count;
 
@@ -48,15 +59,13 @@ void	special_key(t_rdl *rdl, char *buf)
 	while (g_key[count].key)
 	{
 		if (!ft_strcmp(g_key[count].key, buf))
-		{
-			g_key[count].f(rdl, buf);
-			return ;
-		}
+			return (g_key[count].f(rdl, buf));
 		count++;
 	}
+	return (0);
 }
 
-void	normal_key(t_rdl *rdl, char *buf)
+int		normal_key(t_rdl *rdl, char *buf)
 {
 	int count;
 
@@ -66,12 +75,13 @@ void	normal_key(t_rdl *rdl, char *buf)
 		rdladd(rdl, buf[count]);
 		count++;
 	}
+	return (0);
 }
 
-void	key_router(t_rdl *rdl, char *buf)
+int		key_router(t_rdl *rdl, char *buf)
 {
 	if (is_special(buf))
-		special_key(rdl, buf);
+		return (special_key(rdl, buf));
 	else
-		normal_key(rdl, buf);
+		return (normal_key(rdl, buf));
 }

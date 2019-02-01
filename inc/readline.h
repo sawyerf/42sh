@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/01 18:47:18 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/01 19:06:22 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct		s_rdl
 typedef struct		s_key
 {
 	char			*key;
-	void			(*f)(t_rdl *rdl, char *key);
+	int				(*f)(t_rdl *rdl, char *key);
 }					t_key;
 
 //main
@@ -52,13 +52,15 @@ char				*readline(char	*PROMPT);
 
 //termcaps
 int		terminit(struct termios *save);
+void	tgpstr(char *s);
 
 //keys
-void    key_router(t_rdl *rdl, char *buf);
-void	del_cara(t_rdl *rdl, char *buf);
-void	special_key(t_rdl *rdl, char *buf);
-void	begin(t_rdl *rdl, char *buf);
-void	move_curs(t_rdl *rdl, char *buf);
+int	    key_router(t_rdl *rdl, char *buf);
+int		del_cara(t_rdl *rdl, char *buf);
+int		special_key(t_rdl *rdl, char *buf);
+int		begin(t_rdl *rdl, char *buf);
+int		move_curs(t_rdl *rdl, char *buf);
+int		enter(t_rdl *rdl, char *buf);
 
 //tools
 int		is_special(char *buf);
