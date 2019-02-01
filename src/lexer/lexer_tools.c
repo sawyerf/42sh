@@ -1,4 +1,4 @@
-#include "../../ft_lexer.h"
+#include "ft_lexer.h"
 
 void	add_token(t_token **head, t_token *to_add)
 {

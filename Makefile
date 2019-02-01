@@ -3,111 +3,110 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ktlili <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/07/10 23:32:37 by ktlili            #+#    #+#              #
-#    Updated: 2018/10/13 01:14:09 by ktlili           ###   ########.fr        #
+#    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
+#    Updated: 2019/02/01 14:36:25 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = 21sh 
 
-SRC_PATH = src/core
+CC = gcc
 
-SRC_NAME =	main.c \
-			util.c \
-			util2.c \
-			clean_path.c \
-			execute.c \
-			changedir.c \
-			spawn_bin.c \
-			env_handler.c \
-			env_lst_util2.c \
-			ft_env.c \
-			ft_env_tools.c \
-			expand_tokens.c \
-			cd_l_p.c \
-			cd_tools.c \
-			expand_dollar.c \
-			env_lst_util.c \
-			path_tools.c \
-			bin_path.c \
-			dynamic_buff.c
+CFLAGS = -I inc/ -I lib/ -Wall -Werror -Wextra 
 
-LEX_PATH = src/lexer
+DEBUG= #-g3 -fsanitize=address
 
-SRC_LEX =	lexer.c \
-			lex_jump_table.c \
-			lexer_tools.c \
-			ft_realloc.c \
-			memerror.c \
+INC_DIR = inc
 
-PARSER_PATH = src/parser
+INC_FILE =	ft_eval.h \
+			ft_lexer.h \
+			ft_readline.h \
+			ft_wordexp.h \
+			sh_core.h
 
-SRC_PARSER = parser_rules.c sh_parser.c parser_tools.c parser_test.c parser_ast.c
+SRC_DIR = src
 
-WORDEXP_PATH = src/ft_wordexp
+SRC_FILE =	core/bin_path.c \
+			core/cd_l_p.c \
+			core/cd_tools.c \
+			core/changedir.c \
+			core/clean_path.c \
+			core/dynamic_buff.c \
+			core/env_handler.c \
+			core/env_lst_util.c \
+			core/env_lst_util2.c \
+			core/execute.c \
+			core/expand_dollar.c \
+			core/expand_tokens.c \
+			core/ft_env.c \
+			core/ft_env_tools.c \
+			core/main.c \
+			core/path_tools.c \
+			core/util.c \
+			core/util2.c \
+			eval/eval.c \
+			eval/spawn_bin.c \
+			eval/var_assign.c \
+			ft_wordexp/expansion_util.c \
+			ft_wordexp/field_split.c \
+			ft_wordexp/ft_wordexp.c \
+			ft_wordexp/param_expand.c \
+			ft_wordexp/quote_removal.c \
+			ft_wordexp/tilde_expand.c \
+			lexer/ft_realloc.c \
+			lexer/lex_jump_table.c \
+			lexer/lexer.c \
+			lexer/lexer_tools.c \
+			lexer/memerror.c \
+			parser/parser_ast.c \
+			parser/parser_rules.c \
+			parser/parser_test.c \
+			parser/parser_tools.c \
+			parser/sh_parser.c
 
-SRC_WORDEXP =	ft_wordexp.c \
-				tilde_expand.c \
-				field_split.c \
-				param_expand.c \
-				quote_removal.c \
-				expansion_util.c
+OBJ_DIR = .obj
+OBJ_FILE = $(SRC_FILE:.c=.o)
 
-EVAL_PATH = src/eval
+CRT_DIR = core \
+		  ft_wordexp \
+		  lexer \
+		  eval \
+		  parser
 
-SRC_EVAL = eval.c
+SRC = $(addprefix $(SRC_DIR)/,$(SRC_FILE))
+INC = $(addprefix $(INC_DIR)/,$(INC_FILE))
+OBJ = $(addprefix $(OBJ_DIR)/,$(OBJ_FILE))
+CRT = $(addprefix $(OBJ_DIR)/,$(CRT_DIR))
 
-OBJ_PATH = obj
+all: $(NAME)
 
-OBJ_NAME = $(SRC_NAME:.c=.o) $(SRC_LEX:.c=.o) $(SRC_WORDEXP:.c=.o) $(SRC_PARSER:.c=.o) $(SRC_EVAL:.c=.o)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC) Makefile
+	@printf "\033[0;32m[21sh] Compilation [o.]\033[0;0m\r"
+	@mkdir -p $(CRT) 2> /dev/null || true
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@printf "\033[0;32m[21sh] Compilation [.o]\033[0;0m\r"
 
-LIB = ./lib/libft.a
-
-FLAGS = -Wall -g -Wextra -Werror
-
-LFLAGS = 
-
-SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
-
-OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
-
-CC = clang
-
-all:	$(NAME)
+norm:
+	@norminette $(SRC)
+	@norminette $(INC)
 
 $(NAME): $(OBJ)
-	$(MAKE) -C ./lib/
-	$(CC) $(LFLAGS) $(OBJ) $(LIB) -o $@
-
-$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
-	mkdir -p $(OBJ_PATH)
-	$(CC) -I. $(FLAGS) -o $@ -c $<
-
-$(OBJ_PATH)/%.o: $(LEX_PATH)/%.c
-	mkdir -p $(OBJ_PATH)
-	$(CC) -I. $(FLAGS) -o $@ -c $<
-
-$(OBJ_PATH)/%.o: $(WORDEXP_PATH)/%.c
-	mkdir -p $(OBJ_PATH)
-	$(CC) -I. $(FLAGS) -o $@ -c $<
-
-$(OBJ_PATH)/%.o: $(PARSER_PATH)/%.c
-	mkdir -p $(OBJ_PATH)
-	$(CC) -I. $(FLAGS) -o $@ -c $<
-
-$(OBJ_PATH)/%.o: $(EVAL_PATH)/%.c
-	mkdir -p $(OBJ_PATH)
-	$(CC) -I. $(FLAGS) -o $@ -c $<
+	@printf "\033[0;32m[21sh] Compilation [OK]\033[0;0m\n"
+	@make -C lib/
+	@gcc $(CFLAGS) $(DEBUG) $(OBJ) lib/libft.a -o $(NAME)
 
 clean:
-	$(MAKE) -C ./lib/ clean
-	/bin/rm -f $(OBJ)
-	/bin/rm -rf $(OBJ_PATH)
+	@make clean -C lib/
+	@/bin/rm -f $(OBJ)
+	@/bin/rm -rf $(OBJ_DIR)
+	@printf "\033[0;31m[21sh] Deleted *.o\033[0;0m\n"
 
 fclean: clean
-	$(MAKE) -C ./lib/ fclean
-	/bin/rm -f $(NAME)
+	@/bin/rm -f $(NAME)
+	@printf "\033[0;31D[21sh] Deleted minishell\033[0;0m\n"
 
 re: fclean all
+
+.PHONY: all clean fclean re

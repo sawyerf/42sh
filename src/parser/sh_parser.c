@@ -6,11 +6,11 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/01/30 12:20:47 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/01 14:11:02 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../ft_lexer.h"
+#include "ft_lexer.h"
 
 int	parser_is_name_c(char c)
 {

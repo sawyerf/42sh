@@ -1,5 +1,5 @@
-#include "../../ft_lexer.h"
-#include "../../ft_eval.h"
+#include "ft_lexer.h"
+#include "ft_eval.h"
 
 void	print_tree(t_ast_node *tree)
 {

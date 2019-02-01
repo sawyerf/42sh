@@ -1,4 +1,4 @@
-#include "../../ft_lexer.h"
+#include "ft_lexer.h"
 
 /* lexer mem error exit */
 

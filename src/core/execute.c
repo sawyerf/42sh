@@ -6,11 +6,11 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/11 23:36:07 by ktlili            #+#    #+#             */
-/*   Updated: 2018/10/13 01:53:12 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/01 14:08:09 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../sh_core.h"
+#include "sh_core.h"
 /*
 static int	setenv_wrapper(t_command *cmd)
 {

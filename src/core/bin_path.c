@@ -6,11 +6,11 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 22:27:00 by ktlili            #+#    #+#             */
-/*   Updated: 2018/10/12 22:35:17 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/01 14:06:58 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../sh_core.h"
+#include "sh_core.h"
 
 static char	*test_access(char *path, char *binname, int *ret)
 {

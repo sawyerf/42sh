@@ -6,14 +6,14 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2018/10/13 01:04:05 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/01 14:12:19 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SH_CORE_H
 # define SH_CORE_H
 
-# include "lib/libft.h"
+# include "libft.h"
 # include "ft_lexer.h"
 # include "ft_wordexp.h"
 # include <sys/stat.h>

@@ -1,4 +1,4 @@
-#include "../../ft_lexer.h"
+#include "ft_lexer.h"
 
 int		ft_str_realloc(t_str *str_st, size_t newsz)
 {

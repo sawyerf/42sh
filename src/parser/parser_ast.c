@@ -6,11 +6,11 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 14:30:55 by ktlili            #+#    #+#             */
-/*   Updated: 2019/01/30 11:48:00 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/01 14:10:30 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../ft_eval.h"
+#include "ft_eval.h"
 
 
 int	tree_add_sep(t_parser *parser)

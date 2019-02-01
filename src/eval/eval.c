@@ -6,11 +6,11 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/01/30 17:53:57 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/01 14:09:11 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../ft_eval.h"
+#include "ft_eval.h"
 
 int		pipe_callback(t_cmd_tab *to, t_cmd_tab *from)
 {

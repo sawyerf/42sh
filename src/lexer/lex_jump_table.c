@@ -6,11 +6,11 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2018/10/12 23:14:47 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/01 14:10:04 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../ft_lexer.h"
+#include "ft_lexer.h"
 /*
 add mem error exit for str_putchar done
 add lex error for backslash followed by EOI

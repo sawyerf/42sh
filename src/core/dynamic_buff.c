@@ -6,11 +6,11 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 23:05:01 by ktlili            #+#    #+#             */
-/*   Updated: 2018/10/12 23:10:59 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/01 14:07:39 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../sh_core.h"
+#include "sh_core.h"
 
 int	write_dbuff(t_list *buffer, char c, int *index)
 {

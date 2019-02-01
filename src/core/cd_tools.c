@@ -6,11 +6,11 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:08:33 by ktlili            #+#    #+#             */
-/*   Updated: 2018/10/13 01:08:31 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/01 14:07:15 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../sh_core.h"
+#include "sh_core.h"
 
 int		cd_error(int errnum, char *str)
 {

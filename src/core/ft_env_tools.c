@@ -6,11 +6,11 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 22:48:33 by ktlili            #+#    #+#             */
-/*   Updated: 2018/10/12 23:17:05 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/01 14:08:34 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../sh_core.h"
+#include "sh_core.h"
 
 static int		merge_env(char **new_env, char *to_add)
 {

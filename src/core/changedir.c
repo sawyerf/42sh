@@ -6,11 +6,11 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 00:00:01 by ktlili            #+#    #+#             */
-/*   Updated: 2018/10/13 01:00:49 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/01 14:07:21 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../sh_core.h"
+#include "sh_core.h"
 
 static int	check_cdpath(char **curpath, char *cd_path)
 {

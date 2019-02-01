@@ -6,11 +6,11 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 22:16:00 by ktlili            #+#    #+#             */
-/*   Updated: 2018/10/12 22:16:02 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/01 14:08:01 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../sh_core.h"
+#include "sh_core.h"
 
 char	*get_value(char *env_var)
 {

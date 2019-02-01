@@ -1,0 +1,7 @@
+*.o
+*.dsYM
+lol*
+*.a
+*.swp
+*.swo
+21sh

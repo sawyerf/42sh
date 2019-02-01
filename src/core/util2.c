@@ -6,11 +6,11 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 09:26:43 by ktlili            #+#    #+#             */
-/*   Updated: 2018/10/12 23:14:58 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/01 14:09:05 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../sh_core.h"
+#include "sh_core.h"
 
 void	dispatch_parse_err(int error)
 {

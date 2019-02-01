@@ -6,11 +6,11 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 22:17:22 by ktlili            #+#    #+#             */
-/*   Updated: 2018/10/12 22:17:36 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/01 14:07:45 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../sh_core.h"
+#include "sh_core.h"
 
 int		valid_env_char(char c)
 {

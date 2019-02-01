@@ -6,11 +6,11 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2018/10/12 20:21:49 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/01 14:09:34 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../ft_wordexp.h"
+#include "ft_wordexp.h"
 
 int	is_ifs(char c, char *ifs)
 {

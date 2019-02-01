@@ -6,11 +6,11 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 16:10:23 by ktlili            #+#    #+#             */
-/*   Updated: 2018/10/12 22:21:15 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/01 14:09:00 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../sh_core.h"
+#include "sh_core.h"
 
 int			add_slash(char **path)
 {

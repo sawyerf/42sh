@@ -6,11 +6,11 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/05 18:14:11 by ktlili            #+#    #+#             */
-/*   Updated: 2018/10/12 20:25:29 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/01 14:08:21 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../sh_core.h"
+#include "sh_core.h"
 
 
 void			init_iterator(int *read, int *write)

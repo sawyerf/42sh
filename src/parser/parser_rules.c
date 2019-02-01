@@ -6,12 +6,12 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/01/30 11:47:15 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/01 14:10:38 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../ft_lexer.h"
-#include "../../ft_eval.h"
+#include "ft_lexer.h"
+#include "ft_eval.h"
 
 int	expect_linebreak(t_parser *parser)
 {
