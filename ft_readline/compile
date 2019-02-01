@@ -1,1 +1,0 @@
-gcc -ggdb ft_realloc.c ft_readline.c termcap_switch.c key_mapper.c libft.a -ltermcap ../ft_readline.h
