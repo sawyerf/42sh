@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/01 14:12:19 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/01 15:58:08 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 # define SH_CORE_H
 
 # include "libft.h"
+# include "ft_lexer_typedef.h"
 # include "ft_lexer.h"
+# include "ft_parser_typedef.h"
+# include "ft_parser.h"
 # include "ft_wordexp.h"
 # include <sys/stat.h>
 # include <sys/types.h>
@@ -27,7 +30,6 @@
 # define ACCERR 5
 
 /*
-
 	minishell cmd to remove
 */
 typedef	struct			s_command

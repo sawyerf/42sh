@@ -1,30 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_wordexp.h                                        :+:      :+:    :+:   */
+/*   ft_lexer_types.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/01 15:08:51 by ktlili           ###   ########.fr       */
+/*   Created: 2019/02/01 15:48:12 by ktlili            #+#    #+#             */
+/*   Updated: 2019/02/01 15:48:15 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_WORDEXP_H
-# define FT_WORDEXP_H
+#ifndef FT_LEXER_TYPEDEF_H
+# define FT_LEXER_TYPEDEF_H
 
-#include "sh_core.h"
-/* wordexp */
+typedef	struct	s_str
+{
+	char	*str;
+	size_t	size;
+	size_t	len;
+}				t_str;
 
-typedef struct s_str t_str;
-typedef	struct	s_token t_token;
+typedef	enum	e_token_type
+{
+	WORD,
+	NEWLINE,
+	IO_NUM, 
+	FILENAME,
+	ASSIGN,
+	PIPE,
+	SEMI_COL,
+	AMPERS,
+	AND_IF,
+	OR_IF,
+	LESSAND,
+	GREATAND,
+	DGREAT,
+	LESS,
+	GREAT,
+}				t_token_type;
 
 
-int	ft_wordexp(t_token *word);
-int	handle_tilde(t_token *word);
-int	handle_exp_param(t_token *word);
-int	handle_field_split(t_token *word);
-int	quote_removal(t_token *word);
-int	insert_str(t_str *word, int *index, char *to_insert);
+typedef	struct	s_token
+{
+	t_token_type		type;
+	t_str				data;
+	struct s_token		*next;	
+}				t_token;
 
 #endif
