@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/01 19:08:59 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/02 15:23:31 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include "ft_parser.h"
 # include "ft_wordexp.h"
 # include "ft_eval.h"
+# include "ft_light_parser_typedef.h"
+# include "ft_light_parser.h"
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <sys/wait.h>

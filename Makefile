@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/02/01 18:50:13 by ktlili           ###   ########.fr        #
+#    Updated: 2019/02/02 18:04:34 by ktlili           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = 21sh
 
 CC = gcc
 
-CFLAGS = -I inc/ -I lib/ -Wall -Werror -Wextra 
+CFLAGS = -I inc/ -I lib/ -ggdb -Wall -Werror -Wextra 
 
 DEBUG= #-g3 -fsanitize=address
 
@@ -64,7 +64,8 @@ SRC_FILE =	core/builtins.c \
 			parser/parser_rules.c \
 			parser/parser_test.c \
 			parser/parser_tools.c \
-			parser/sh_parser.c
+			parser/sh_parser.c \
+			light_parser/light_parser.c \
 
 OBJ_DIR = .obj
 OBJ_FILE = $(SRC_FILE:.c=.o)
@@ -73,7 +74,8 @@ CRT_DIR = core \
 		  ft_wordexp \
 		  lexer \
 		  eval \
-		  parser
+		  parser \
+		  light_parser \
 
 SRC = $(addprefix $(SRC_DIR)/,$(SRC_FILE))
 INC = $(addprefix $(INC_DIR)/,$(INC_FILE))

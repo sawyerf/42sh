@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/01 14:10:09 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/02 17:42:47 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int next_token(char *line, t_token **head)
 	add_token(head, token);
 	return (ENDOFINPUT);
 }
-
+/*
 t_token	*ft_tokenizer(char *line)
 {
 	static	t_func	table[TABLESZ];
@@ -101,6 +101,42 @@ t_token	*ft_tokenizer(char *line)
 	}
 	add_token(&head, new_token(1));
 	return (head);
+}
+*/
+
+int		ft_tokenizer_2(char *line, t_token **head)
+{
+	static	t_func	table[TABLESZ];
+	static	int		flag = 0;
+	t_token			*tmp;
+	int				ret;
+
+	if (!flag)
+		init_jump_table(table);
+	flag = 1;
+	*head = NULL;
+	while (ft_is_whitespace(*line))
+		line++;
+	while (*line)
+	{
+		tmp = new_token(0);
+		if (!tmp)
+			return (MEMERR);
+		if ((*line) > 0 )
+			ret = table[(int)*line](&line, tmp);
+		else
+			ret = table[1](&line, tmp);
+		add_token(head, tmp);
+		if (ret)
+		{
+			/* we still parse even when lexer dosent validate line*/
+			return (ret);
+		}
+		while (ft_is_whitespace(*line))
+			line++;
+	}
+	add_token(head, new_token(1));
+	return (0);
 }
 
 void	ft_test_lexer(char *line)

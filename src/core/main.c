@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/01 16:16:01 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/02 17:19:03 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,29 +137,17 @@ void	expansion_tester(t_token *start)
 int				main(int ac, char **av, char **env)
 {
 	char		*line;
-	t_token		*tok;
 	int			ret;
-
+	t_autocomplete autocomplete;
+	char 		*debug[] = {"cmd_name", "arg", "param"} ;
 	silence_ac_av(ac, av);
 	if ((init_g_env(env) != 0))
 		return (MEMERR);
 	show_prompt();
 	while (get_next_line(0, &line) > 0)
 	{
-	//	ft_printf("**********************\n");
-	//	ft_printf("cmdline: '%s'", line);
-	//	ft_printf("**********************\n");
-		tok = ft_tokenizer(line);
-		if (tok)
-		{
-	//		ft_test_lexer(line);
-			test_sh_parser(tok);
-	//		print_tokens(tok);
-	//		ft_printf("==========================================\n");
-	//		expansion_tester(tok);
-	//		print_tokens(tok);
-			free_token_lst(tok);
-		}
+		ft_light_parser(line, &autocomplete);
+		ft_printf("str: '%s'\nautocomplete %s\n", autocomplete.str, debug[autocomplete.type] );
 		free(line);
 		show_prompt();
 	}
