@@ -14,7 +14,7 @@ NAME = 21sh
 
 CC = gcc
 
-CFLAGS = -I inc/ -I lib/ -Wall -Werror -Wextra 
+CFLAGS = -I inc/ -I lib/ -Wall -Werror -Wextra
 
 DEBUG= #-g3 -fsanitize=address
 
