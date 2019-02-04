@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/01 19:06:22 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/04 15:14:43 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ typedef struct		s_rdl
 	int				size;
 	int				allo;
 
+	char			*prompt;
 	int				curs;
+	int				col;
+	int				lpro;
 }					t_rdl;
 
 typedef struct		s_key
@@ -52,6 +55,7 @@ char				*readline(char	*PROMPT);
 
 //termcaps
 int		terminit(struct termios *save);
+int		getcolumn(void);
 void	tgpstr(char *s);
 
 //keys
@@ -69,4 +73,8 @@ int		is_special(char *buf);
 void				rdlinit(t_rdl *rdl);
 void	rdladd(t_rdl *rdl, char c);
 void	rdldel(t_rdl *rdl, int curs);
+
+//signal
+void	setsig(void);
+
 #endif

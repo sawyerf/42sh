@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:47:43 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/01 19:00:17 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/04 14:53:54 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int		enter(t_rdl *rdl, char *buf)
 {
 	(void)rdl;
 	(void)buf;
+	write(1, "\n", 1);
 	return (1);
 }
 
@@ -38,9 +39,15 @@ int		begin(t_rdl *rdl, char *buf)
 int		move_curs(t_rdl *rdl, char *buf)
 {
 	if (!ft_strcmp(K_RGHT, buf) && rdl->size > rdl->curs)
+	{
+		write(1, &rdl->str[rdl->curs], 1);
 		rdl->curs++;
+	}
 	if (!ft_strcmp(K_LEFT, buf) && rdl->curs > 0)
+	{
 		rdl->curs--;
+		write(1, K_LEFT, 3);
+	}
 	return (0);
 }
 

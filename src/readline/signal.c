@@ -1,38 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   readline.c                                         :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/01 14:48:42 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/04 15:34:52 by apeyret          ###   ########.fr       */
+/*   Created: 2019/02/04 14:37:16 by apeyret           #+#    #+#             */
+/*   Updated: 2019/02/04 14:52:01 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline.h"
 
-t_rdl	g_rdl;
+extern t_rdl g_rdl;
 
-char	*readline(char	*PROMPT)
+void	resize(int sig)
 {
-	char	buf[11];
-	int		ret;
-	int		curs;
-
-	rdlinit(&g_rdl);
-	curs = 0;
-	g_rdl.lpro = ft_printf("%s", PROMPT);
-	g_rdl.prompt = PROMPT;
+	(void)sig;
 	g_rdl.col = getcolumn();
-	setsig();
-	while (42)
-	{
-		if ((ret = read(0, buf, 10)) < 0)
-			break ;
-		buf[ret] = 0;
-		if (key_router(&g_rdl, buf))
-			break ;
-	}
-	return (g_rdl.str);
+}
+
+void	setsig(void)
+{
+	signal(SIGWINCH, &resize);
 }

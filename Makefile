@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/02/01 18:29:15 by apeyret          ###   ########.fr        #
+#    Updated: 2019/02/04 15:15:29 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = gcc
 
 CFLAGS = -I inc/ -I lib/ -Wall -Werror -Wextra 
 
-DEBUG= #-g3 -fsanitize=address
+DEBUG= -g3 -fsanitize=address
 
 INC_DIR = inc
 
@@ -69,6 +69,7 @@ SRC_FILE =	core/bin_path.c \
 			readline/struct_rdl.c \
 			readline/term.c \
 			readline/tools.c \
+			readline/signal.c \
 			readline/keys.c
 
 OBJ_DIR = .obj

@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:49:43 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/01 19:02:57 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/04 14:52:35 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,15 @@
 int		tputchar(int c)
 {
 	return (write(1, &c, 1));
+}
+
+int		getcolumn(void)
+{
+	struct winsize	w;
+
+	ioctl(0, TIOCGWINSZ, &w);
+	return (w.ws_col);
+
 }
 
 void	tgpstr(char *s)
