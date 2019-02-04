@@ -97,15 +97,6 @@ static int		execve_wrap(t_cmd_tab *cmd)
 
 int		execute_command(t_cmd_tab *cmd)
 {
-/*	* 1- assign variables.
-	 * 2- craft env
-	 * 3- if builtin call builtin, job is done
-	 * 3- proceed to execve wrap
-	 *
-	*
-	 * setenv and unsetenv are broken because we fork
-	 * */
-
 	if (cmd->av[0] == NULL)
 		return (0);
 	if (is_builtin(cmd) == TRUE)

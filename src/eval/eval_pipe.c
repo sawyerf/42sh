@@ -114,8 +114,6 @@ int	exec_pipeline(t_ast_node *tree)
 
 	if (!(cmd_tab = expand_pipeline(tree->pipeline)))
 		return (MEMERR);
-	//if (cmd_tab->next)
-	
 	if (cmd_tab->next)
 		ret = eval_pipe(cmd_tab);
 	else 

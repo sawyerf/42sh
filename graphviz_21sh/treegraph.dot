@@ -1,0 +1,14 @@
+digraph AST{
+PIPE1 [label="|"];
+ PIPE1 -> AND_OR1;
+CMD1 [label="pwd - ls - "];
+ CMD1 -> PIPE1;
+CMD2 [label="toto - fifi - "];
+ CMD2 -> PIPE1;
+AND_OR1 [label="AND"];
+AND_OR1 -> PIPE1;
+PIPE3 [label="|"];
+ PIPE3 -> AND_OR1;
+CMD1 [label="caca - "];
+ CMD1 -> PIPE3;
+}
