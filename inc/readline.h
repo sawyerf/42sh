@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/04 15:14:43 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/04 19:42:29 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 # define K_ESC	"\33"
 # define K_CTRA	"\1"
 # define K_CTRD	"\4"
+# define K_SLFT "\33[1;2D"
+# define K_SRGT "\33[1;2C"
 
 typedef struct		s_rdl
 {
@@ -60,14 +62,19 @@ void	tgpstr(char *s);
 
 //keys
 int	    key_router(t_rdl *rdl, char *buf);
+int		next_word(t_rdl *rdl, char *buf);
+int		prev_word(t_rdl *rdl, char *buf);
 int		del_cara(t_rdl *rdl, char *buf);
 int		special_key(t_rdl *rdl, char *buf);
 int		begin(t_rdl *rdl, char *buf);
 int		move_curs(t_rdl *rdl, char *buf);
 int		enter(t_rdl *rdl, char *buf);
+int		ctrld(t_rdl *rdl, char *buf);
 
 //tools
 int		is_special(char *buf);
+void	left(int i);
+void	right(int i);
 
 //struct rdl
 void				rdlinit(t_rdl *rdl);

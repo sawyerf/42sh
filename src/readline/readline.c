@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:48:42 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/04 15:34:52 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/04 17:49:24 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ char	*readline(char	*PROMPT)
 		if (key_router(&g_rdl, buf))
 			break ;
 	}
+	ft_putchar('\n');
 	return (g_rdl.str);
 }

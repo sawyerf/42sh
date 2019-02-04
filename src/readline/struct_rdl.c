@@ -6,20 +6,11 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 15:15:46 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/04 15:34:50 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/04 15:36:40 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline.h"
-
-void	left(int i)
-{
-	while (i)
-	{
-		write(1, K_LEFT, 3);
-		i--;
-	}
-}
 
 void	rdlinit(t_rdl *rdl)
 {

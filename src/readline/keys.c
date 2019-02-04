@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:47:43 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/04 14:53:54 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/04 19:42:29 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,78 @@
 
 t_key	g_key[] = {
 	{K_CTRA, &begin},
+	{K_CTRD, &ctrld},
 	{K_BSPC, &del_cara},
 	{K_RGHT, &move_curs},
 	{K_LEFT, &move_curs},
+	{K_SLFT, &prev_word},
+	{K_SRGT, &next_word},
 	{K_ENTR, &enter},
 	{NULL, &special_key}
 };
 
+int		np_word(t_rdl *rdl, int i)
+{
+	int count;
+	
+	count = 0;
+	if (i < 0 && rdl->curs)
+		count++;
+	if (i > 0 && rdl->str[rdl->curs])
+		count++;
+//	ft_printf("%d/", count);
+	while (rdl->curs +  i * count < 0 && rdl->str[rdl->curs +  i * count] && (rdl->str[rdl->curs +  i * count] == ' ' || rdl->str[rdl->curs +  i * count] == '\n'))
+		count++;
+//	ft_printf("%d/", count);
+	while (rdl->str[rdl->curs +  i * count] && rdl->str[rdl->curs +  i * count] != ' ' && rdl->str[rdl->curs +  i * count] != '\n')
+		count++;
+	if (count)
+		count--;
+//	ft_printf("%d/", count);
+	//ft_printf("%d", count);
+	return (count);
+}
+
+int		next_word(t_rdl *rdl, char *buf)
+{
+	int count;
+
+	(void)buf;
+	count = np_word(rdl, 1);
+	right(count);
+	rdl->curs += count;
+	return (0);
+}
+
+int		prev_word(t_rdl *rdl, char *buf)
+{
+	int count;
+	
+	(void)buf;
+	count = np_word(rdl, -1);
+	left(count);
+	rdl->curs -= count;
+	return (0);
+}
 int		enter(t_rdl *rdl, char *buf)
 {
 	(void)rdl;
 	(void)buf;
-	write(1, "\n", 1);
 	return (1);
+}
+
+int		ctrld(t_rdl *rdl, char *buf)
+{
+	(void)buf;
+	if (!rdl->str[0])
+		return (1);
+	return (0);
 }
 
 int		begin(t_rdl *rdl, char *buf)
 {
 	(void)buf;
+	left(rdl->curs);
 	rdl->curs = 0;
 	return (0);
 }
