@@ -14,10 +14,17 @@
 
 int	eval_tree(t_ast_node *tree)
 {
+	if (tree == NULL)
+	{
+	ft_printf("fatal error in eval_tree: unknown node type\n");
+
+	}
 	if (tree->type == SEMI_COL)
 	{
+		
 		eval_tree(tree->left);
-		eval_tree(tree->right);
+		if (tree->right)
+			eval_tree(tree->right);
 		return (0);
 	}
 	else if (tree->type == AND_IF)
@@ -47,6 +54,5 @@ int	eval_tree(t_ast_node *tree)
 		exec_pipeline(tree);
 		return (0);
 	}
-	ft_printf("fatal error in eval_tree: unknown node type\n");
 	exit(1);
 }

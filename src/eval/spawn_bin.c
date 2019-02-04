@@ -100,7 +100,10 @@ int		execute_command(t_cmd_tab *cmd)
 	if (cmd->av[0] == NULL)
 		return (0);
 	if (is_builtin(cmd) == TRUE)
+	{
+		free_cmd_tab(cmd);
 		return (0);
+	}
 	else
 		return (execve_wrap(cmd));
 }
