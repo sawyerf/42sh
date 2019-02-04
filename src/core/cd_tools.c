@@ -30,7 +30,7 @@ int		cd_error(int errnum, char *str)
 	return (0);
 }
 
-void	cd_dispatch_err(char *arg, char *curpath)
+int	cd_dispatch_err(char *arg, char *curpath)
 {
 	int ret;
 
@@ -38,7 +38,9 @@ void	cd_dispatch_err(char *arg, char *curpath)
 		arg = curpath;
 	if ((ret = path_access(curpath)) != 0)
 		cd_error(ret, arg);
+	return (ret);
 }
+
 
 void	update_env_pwd(char *pwd, char *curpath)
 {

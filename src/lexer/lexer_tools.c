@@ -64,10 +64,6 @@ t_token	*dup_token(t_token *token)
 
 int	str_putnstr(char *str, t_str *data, size_t n)
 {
-	char *ptr;
-
-	ptr = str;
-
 	while ((*str) && (n))
 	{
 		n--;

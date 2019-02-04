@@ -59,73 +59,117 @@ int			handle_full_path(char *cmd_name)
 	}
 	return (0);
 }
-
-
+void	exit_wrap(int code, t_cmd_tab *cmd)
+{
+	
+	free_cmd_tab(cmd);
+	exit(code);
+}
+/* execve_wrap is always inside a fork*/
 static int		execve_wrap(t_cmd_tab *cmd)
 {	
 	char	*path;
 	int		ret;
 
+	cmd->process_env = lst_to_tab(*g_environ, 0);
+	if (cmd->process_env == NULL)
+		exit(MEMERR);
 	if (ft_ispath(cmd->av[0]))
 	{
 		if (handle_full_path(cmd->av[0]) != 0)
-			return (0);
+			exit_wrap (ACCERR, cmd);
 		if ((cmd->full_path = ft_strdup(cmd->av[0])) == NULL)
-			return (MEMERR);
+			exit_wrap(MEMERR, cmd);
 	}
 	else 
 	{
 		path = get_env_value("PATH");
 		if (bin_pathfinder(cmd, path) == MEMERR)
-			return (MEMERR);
+			exit_wrap(MEMERR, cmd);
 		if (cmd->full_path == NULL) /* case bin not found or no perm*/
-			return (0);	/* maybe exit ?*/
+			exit_wrap (127, cmd);	/* maybe exit ?*/
 	}
 	ret = execve(cmd->full_path, cmd->av, cmd->process_env); 
 	putstr_stderr("21sh: bad file format\n");
-	return (ret);
+	exit_wrap(ret, cmd);
+	return (0);
 }
 
 int		execute_command(t_cmd_tab *cmd)
 {
-	/* 1- assign variables.
+/*	* 1- assign variables.
 	 * 2- craft env
 	 * 3- if builtin call builtin, job is done
 	 * 3- proceed to execve wrap
-	 */
-	/*
+	 *
+	*
 	 * setenv and unsetenv are broken because we fork
 	 * */
+
+	if (cmd->av[0] == NULL)
+		return (0);
+	if (is_builtin(cmd) == TRUE)
+		return (0);
+	else
+		return (execve_wrap(cmd));
+}
+
+void	wait_wrapper(t_cmd_tab *cmd, pid_t pid)
+{
+	int		wstatus;
+
+	waitpid(pid, &wstatus, 0);	
+	cmd->exit_signal = -1;
+	cmd->exit_status = -1;
+	if (WIFEXITED(wstatus))
+	{
+		cmd->exit_status = (int)WEXITSTATUS(wstatus);
+	}
+	else if (WIFSIGNALED(wstatus))
+	{
+		cmd->exit_signal = WTERMSIG(wstatus);
+	}
+	ft_printf("%s exiting with status %d\n", cmd->av[0], cmd->exit_status);
+}
+
+
+t_bool		is_builtin(t_cmd_tab *cmd)
+{
 	static t_builtin	array[7] = {ft_echo, change_dir, setenv_wrapper,
 							ft_unsetenv, ft_env, ft_exit};
 	static	char		*builtins[] = {"echo", "cd", "setenv", "unsetenv",
 							"env", "exit", NULL};
 	int					i;
 
-	if (cmd->av[0] == NULL)
-		return (0);
-	cmd->process_env = lst_to_tab(*g_environ, 0);
-	if (cmd->process_env == NULL)
-		return (MEMERR);
 	if ((i = ft_cmptab(builtins, cmd->av[0])) != -1)
-		return (array[i](cmd)); /* exit status should be handeled in cmd_tab struct*/
-	else
-		return (execve_wrap(cmd));
+	{
+		cmd->process_env = lst_to_tab(*g_environ, 0);
+		if (cmd->process_env == NULL)
+			return (MEMERR);
+		cmd->exit_status = array[i](cmd);
+		ft_printf("BUILTIN:%s exited with status %d\n", cmd->av[0], cmd->exit_status);
+		return (TRUE);
+	}
+	return (FALSE);
 }
 
 int		spawn_command(t_cmd_tab *cmd)
 {
 	pid_t pid;
 
+	if (cmd->av[0] == NULL) // we apply assignements to our shell env before ret
+		return (0);
+	if (is_builtin(cmd) == TRUE)
+		return (0);
 	pid = fork();
 	if (pid == -1)
 		return (MEMERR);
 	if (pid == 0)
 	{
-		execute_command(cmd);
-		exit(1); /* handle errors here*/
+		execve_wrap(cmd);
+		exit_wrap(1, cmd); /* handle errors here*/
 	}
-	wait(NULL);
+	wait_wrapper(cmd, pid);
 	return (0);
 
 }

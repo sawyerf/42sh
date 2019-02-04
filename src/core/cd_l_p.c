@@ -51,6 +51,7 @@ int				cd_l(char *curpath, char *arg)
 {
 	char	*pwd;
 	char	*tmp;
+	int		ret;
 
 	pwd = handle_pwd_l();
 	if ((curpath[0] != '/') && (pwd != NULL))
@@ -67,12 +68,13 @@ int				cd_l(char *curpath, char *arg)
 		}
 	}
 	canon_form(curpath);
+	ret = 0;
 	if (chdir(curpath) != 0)
-		cd_dispatch_err(arg, curpath);
+		ret = cd_dispatch_err(arg, curpath);
 	else
 		update_env_pwd(pwd, curpath);
 	free_buffers(pwd, curpath);
-	return (0);
+	return (ret);
 }
 
 int				cd_p(char *curpath, char *arg)

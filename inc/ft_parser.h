@@ -40,6 +40,7 @@ void	free_token_lst(t_token *token);
 void	free_redir_lst(t_redir *redir);
 void	free_redir(t_redir *redir);
 void	free_pipeline(t_simple_cmd *pipeline);
+void	free_tree(t_ast_node *tree);
 void	mem_err_exit(t_parser *parser);
 
 /*

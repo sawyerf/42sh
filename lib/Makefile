@@ -100,7 +100,7 @@ SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 
 OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 
-CC = clang
+CC = gcc 
 
 all:	$(NAME)
 

@@ -68,6 +68,7 @@ int	bin_pathfinder(t_cmd_tab *cmd, char *path)
 			cmd->full_path = cmd->av[0];
 		else
 			exec_error(ret, cmd->av[0]);
+		free_tab(path_tab);
 		return (ret);
 	}
 	else
@@ -75,5 +76,6 @@ int	bin_pathfinder(t_cmd_tab *cmd, char *path)
 		if (iter_paths(path_tab, cmd) == MEMERR)
 			return (MEMERR);
 	}
+	free_tab(path_tab);
 	return (0);
 }

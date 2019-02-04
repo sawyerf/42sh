@@ -89,25 +89,35 @@ void	free_pipeline(t_simple_cmd *pipeline)
 		pipeline = tmp;
 	}
 }
+
+void	free_tree(t_ast_node *tree)
+{
+	if (tree == NULL)
+		return;
+	free_tree(tree->left);
+	free_tree(tree->right);
+	if (tree->pipeline)
+		free_pipeline(tree->pipeline);
+	free(tree);
+}
 int	test_sh_parser(t_token *start)
 {
 	t_parser parser;
 	int		ret;
-	char types[100][100] = {"WORD","NEWLINE","IO_NUM","FILENAME", "ASSIGN", "PIPE", "SEMI_COL",
+/*	char types[100][100] = {"WORD","NEWLINE","IO_NUM","FILENAME", "ASSIGN", "PIPE", "SEMI_COL",
 				"AMPERS","ANDIF", "ORIF", "LESSAND", "GREATAND", "DGREAT", "LESS",
 				"GREAT"};
-
+*/
 	ft_bzero(&parser, sizeof(t_parser));
 	parser.current = start;
 	parser.head = start;
 	ret = expect_complete_cmd(&parser);
 	if (parser.current->type != NEWLINE)
 		ret = 0;
-	ft_printf("ret = %d token %s |type %s\n", ret, parser.current->data.str, types[parser.current->type]);
-	if (ret == 0){return(ret);}
-//		free_tree(parser.tree);
-	else
+//	ft_printf("ret = %d token %s |type %s\n", ret, parser.current->data.str, types[parser.current->type]);
+	if (ret) 
 		eval_tree(parser.tree);
+	free_tree(parser.tree);
 //	print_tree(parser.tree);
 	return (ret);
 }

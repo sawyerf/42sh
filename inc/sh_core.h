@@ -30,6 +30,8 @@
 # define ENVERR 4
 # define ACCERR 5
 
+
+
 /*
 	minishell cmd to remove
 */
@@ -108,7 +110,7 @@ int						valid_env_var(char *str);
 int						append_tab(char **new_env, char **to_add, int count);
 int						cd_l(char *curpath, char *arg);
 int						cd_p(char *curpath, char *arg);
-void					cd_dispatch_err(char *arg, char *curpath);
+int						cd_dispatch_err(char *arg, char *curpath);
 void					update_env_pwd(char *pwd, char *curpath);
 int						cd_error(int errnum, char *str);
 char					*getoldpwd(void);
