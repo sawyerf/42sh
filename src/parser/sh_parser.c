@@ -117,6 +117,8 @@ int	test_sh_parser(t_token *start)
 //	ft_printf("ret = %d token %s |type %s\n", ret, parser.current->data.str, types[parser.current->type]);
 	if (ret) 
 		eval_tree(parser.tree);
+	else
+		ft_printf("21sh: syntax error near : '%s'\n", parser.current->data.str);
 	free_tree(parser.tree);
 //	print_tree(parser.tree);
 	return (ret);
