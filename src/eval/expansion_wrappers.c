@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/01 18:48:23 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/04 15:33:59 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	token_to_array(t_token *word, char **array)
 	while (word)
 	{
 		array[i] = word->data.str;
+		word->data.str = NULL; /* to avoid double free */
 		word = word->next;
 		i++;
 	}
@@ -61,11 +62,11 @@ t_cmd_tab	*expand_simple_cmd(t_simple_cmd *before)
 
 	if (!(after = ft_memalloc(sizeof(t_cmd_tab))))
 			return (NULL);	
-	if ((after->av = expand_word_lst(before->word_lst))== NULL)
+	if ((after->av = expand_word_lst(before->word_lst)) == NULL)
 		return (NULL);
-/* all assignements are done in subshell
-	if ((after->process_env = lst_to_tab(*g_environ, 0) ) == NULL) 
-		return (NULL);*/
+	if ((after->assign_lst = expand_word_lst(before->assign_lst)) == NULL)
+		return (NULL);
+	/* all assignements are done in subshell*/
 	after->redir_lst = before->redir_lst;
 	return (after);
 }
@@ -82,6 +83,7 @@ void	add_cmd_tab(t_cmd_tab **head, t_cmd_tab *to_add)
 		tmp = *head;
 		while (tmp->next)
 			tmp = tmp->next;
+		to_add->previous = tmp;
 		tmp->next = to_add;
 	}
 }

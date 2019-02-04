@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/01 18:48:23 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/04 15:41:26 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,15 @@ int	pipe_recursion(t_cmd_tab *to, t_cmd_tab *from)
 int	eval_pipe(t_cmd_tab *cmd)
 {
 	pid_t pid;
+	int ret;
 
 	pid = fork();
 	if (pid == -1)
 		return (-1);
 	if (pid == 0)
 	{
-		exit(pipe_recursion(cmd->next, cmd));
+		ret = pipe_recursion(cmd->next, cmd);
+		exit(ret);
 	}
 	wait_wrapper(cmd, pid);
 	ft_printf("pipe exiting with status %d\n", cmd->exit_status);
@@ -91,9 +93,13 @@ void	free_cmd_tab(t_cmd_tab *cmd)
 	if (cmd->full_path)
 		free(cmd->full_path);
 	if (cmd->av)
-		free(cmd->av);
-	if (cmd->process_env)
-		free_tab(cmd->process_env);
+	{
+		free_tab(cmd->av);
+	}
+//	if (cmd->process_env)
+//		free_tab(cmd->process_env);
+	if (cmd->assign_lst)
+		free_tab(cmd->assign_lst);
 	free(cmd);
 }
 void	free_cmd_tab_lst(t_cmd_tab *start)

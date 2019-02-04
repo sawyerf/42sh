@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/01 19:08:59 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/04 12:27:44 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_cmd_tab t_cmd_tab;
 typedef	int				(*t_builtin)(t_cmd_tab*);
 
 extern	t_environ		**g_environ;
-
+t_ast_node				*get_tree(t_ast_node *tree);
 int						change_dir(t_cmd_tab *cmd);
 int						ft_exit(t_cmd_tab *cmd);
 int						ft_env(t_cmd_tab *cmd);

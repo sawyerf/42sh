@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/02/01 18:50:13 by ktlili           ###   ########.fr        #
+#    Updated: 2019/02/04 14:50:26 by ktlili           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = 21sh
 
 CC = gcc
 
-CFLAGS = -I inc/ -I lib/ -Wall -Werror -Wextra -ggdb 
+CFLAGS = -I inc/ -I lib/ -Wall -Werror -Wextra -g 
 
 DEBUG= #-g3 -fsanitize=address
 
@@ -50,7 +50,7 @@ SRC_FILE =	core/builtins.c \
 			eval/bin_path.c \
 			eval/eval.c \
 			eval/spawn_bin.c \
-			eval/var_assign.c \
+			eval/craft_env.c \
 			ft_wordexp/expansion_util.c \
 			ft_wordexp/field_split.c \
 			ft_wordexp/ft_wordexp.c \

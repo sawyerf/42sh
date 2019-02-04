@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/01 14:54:53 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/04 12:38:27 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void	free_pipeline(t_simple_cmd *pipeline)
 	{
 		tmp = pipeline->next;
 		free_simple_cmd(pipeline);
+	
 		free(pipeline);
 		pipeline = tmp;
 	}
@@ -99,6 +100,15 @@ void	free_tree(t_ast_node *tree)
 	if (tree->pipeline)
 		free_pipeline(tree->pipeline);
 	free(tree);
+}
+
+t_ast_node *get_tree(t_ast_node *tree)
+{
+	static t_ast_node *static_tree = NULL;
+
+	if (tree)
+		static_tree = tree;
+	return (static_tree);
 }
 int	test_sh_parser(t_token *start)
 {
@@ -116,7 +126,10 @@ int	test_sh_parser(t_token *start)
 		ret = 0;
 //	ft_printf("ret = %d token %s |type %s\n", ret, parser.current->data.str, types[parser.current->type]);
 	if (ret) 
+	{
+		get_tree(parser.tree);
 		eval_tree(parser.tree);
+	}
 	else
 		ft_printf("21sh: syntax error near : '%s'\n", parser.current->data.str);
 	free_tree(parser.tree);

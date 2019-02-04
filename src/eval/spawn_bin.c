@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/01 19:08:58 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/04 15:29:26 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ int			handle_full_path(char *cmd_name)
 	return (0);
 }
 void	exit_wrap(int code, t_cmd_tab *cmd)
-{
-	
-	free_cmd_tab(cmd);
+{	
+//	free_cmd_tab(cmd);
+	(void)cmd;
 	exit(code);
 }
 /* execve_wrap is always inside a fork*/
@@ -71,9 +71,9 @@ static int		execve_wrap(t_cmd_tab *cmd)
 	char	*path;
 	int		ret;
 
-	cmd->process_env = lst_to_tab(*g_environ, 0);
+	cmd->process_env = craft_env(lst_to_tab(*g_environ, 0), cmd->assign_lst);
 	if (cmd->process_env == NULL)
-		exit(MEMERR);
+		return (MEMERR);
 	if (ft_ispath(cmd->av[0]))
 	{
 		if (handle_full_path(cmd->av[0]) != 0)
@@ -83,7 +83,7 @@ static int		execve_wrap(t_cmd_tab *cmd)
 	}
 	else 
 	{
-		path = get_env_value("PATH");
+		path = get_process_env("PATH", cmd->process_env);
 		if (bin_pathfinder(cmd, path) == MEMERR)
 			exit_wrap(MEMERR, cmd);
 		if (cmd->full_path == NULL) /* case bin not found or no perm*/
@@ -134,7 +134,10 @@ t_bool		is_builtin(t_cmd_tab *cmd)
 
 	if ((i = ft_cmptab(builtins, cmd->av[0])) != -1)
 	{
-		cmd->process_env = lst_to_tab(*g_environ, 0);
+	/*	cmd->process_env = lst_to_tab(*g_environ, 0);
+		if (cmd->process_env == NULL)
+			return (MEMERR);*/
+		cmd->process_env = craft_env(lst_to_tab(*g_environ, 0), cmd->assign_lst);
 		if (cmd->process_env == NULL)
 			return (MEMERR);
 		cmd->exit_status = array[i](cmd);
