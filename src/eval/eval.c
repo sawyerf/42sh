@@ -19,7 +19,7 @@ int	eval_tree(t_ast_node *tree)
 	ft_printf("fatal error in eval_tree: unknown node type\n");
 
 	}
-	if (tree->type == SEMI_COL)
+	if ((tree->type == SEMI_COL) || (tree->type == AMPERS))
 	{
 		
 		eval_tree(tree->left);
