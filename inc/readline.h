@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/04 19:42:29 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/05 19:01:38 by alarm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <term.h>
 # include <stdlib.h>
 # include <sys/ioctl.h>
+# include <sys/signal.h>
 # include <fcntl.h>
 
 # define K_UP	"\33[A"
@@ -30,6 +31,7 @@
 # define K_DEL	"\33[3~"
 # define K_ESC	"\33"
 # define K_CTRA	"\1"
+# define K_CTRC	"\3"
 # define K_CTRD	"\4"
 # define K_SLFT "\33[1;2D"
 # define K_SRGT "\33[1;2C"
@@ -41,6 +43,7 @@ typedef struct		s_rdl
 	int				allo;
 
 	char			*prompt;
+	struct termios		save;
 	int				curs;
 	int				col;
 	int				lpro;
@@ -58,7 +61,8 @@ char				*readline(char	*PROMPT);
 //termcaps
 int		terminit(struct termios *save);
 int		getcolumn(void);
-void	tgpstr(char *s);
+int		termreset(struct termios *save);
+void		tgpstr(char *s);
 
 //keys
 int	    key_router(t_rdl *rdl, char *buf);
@@ -70,6 +74,7 @@ int		begin(t_rdl *rdl, char *buf);
 int		move_curs(t_rdl *rdl, char *buf);
 int		enter(t_rdl *rdl, char *buf);
 int		ctrld(t_rdl *rdl, char *buf);
+int		ctrlc(t_rdl *rdl, char *buf);
 
 //tools
 int		is_special(char *buf);
@@ -77,7 +82,7 @@ void	left(int i);
 void	right(int i);
 
 //struct rdl
-void				rdlinit(t_rdl *rdl);
+void				rdlinit(t_rdl *rdl, char *PROMPT);
 void	rdladd(t_rdl *rdl, char c);
 void	rdldel(t_rdl *rdl, int curs);
 

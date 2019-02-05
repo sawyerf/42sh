@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/01 16:53:28 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/05 18:32:46 by alarm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,6 @@ void	expansion_tester(t_token *start)
 
 int				main(int ac, char **av, char **env)
 {
-	struct termios	save;
 	char			*line;
 	t_token			*tok;
 	int				ret;
@@ -145,9 +144,6 @@ int				main(int ac, char **av, char **env)
 	silence_ac_av(ac, av);
 	if ((init_g_env(env) != 0))
 		return (MEMERR);
-	if (!terminit(&save))
-		return (1);
-	//show_prompt();
 	while (42)
 	{
 	//	ft_printf("**********************\n");
@@ -166,7 +162,6 @@ int				main(int ac, char **av, char **env)
 			free_token_lst(tok);
 		}
 		free(line);
-		//show_prompt();
 	}
 	ret = 1;
 	free(line);

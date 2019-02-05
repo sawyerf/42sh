@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:37:16 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/04 14:52:01 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/05 18:39:36 by alarm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,14 @@ void	resize(int sig)
 	g_rdl.col = getcolumn();
 }
 
+void	nothing(int sig)
+{
+	(void)sig;
+	write(1, "\n", 1);
+}
+
 void	setsig(void)
 {
 	signal(SIGWINCH, &resize);
+	signal(SIGINT, &nothing);
 }

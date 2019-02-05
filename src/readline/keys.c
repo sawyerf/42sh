@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:47:43 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/04 19:42:29 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/05 19:03:15 by alarm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 t_key	g_key[] = {
 	{K_CTRA, &begin},
+	{K_CTRC, &ctrlc},
 	{K_CTRD, &ctrld},
 	{K_BSPC, &del_cara},
 	{K_RGHT, &move_curs},
@@ -24,25 +25,32 @@ t_key	g_key[] = {
 	{NULL, &special_key}
 };
 
+int		ctrlc(t_rdl *rdl, char *buf)
+{
+	(void)buf;
+	rdl->str[0] = 0;
+	return (1);
+}
+
 int		np_word(t_rdl *rdl, int i)
 {
 	int count;
 	
 	count = 0;
-	if (i < 0 && rdl->curs)
+	if ((i < 0 && rdl->curs) || (i > 0 && rdl->str[rdl->curs]))
 		count++;
-	if (i > 0 && rdl->str[rdl->curs])
+	while (rdl->curs +  i * count >= 0 && rdl->str[rdl->curs +  i * count]
+		&& (rdl->str[rdl->curs +  i * count] == ' '
+			|| rdl->str[rdl->curs +  i * count] == '\n'))
 		count++;
-//	ft_printf("%d/", count);
-	while (rdl->curs +  i * count < 0 && rdl->str[rdl->curs +  i * count] && (rdl->str[rdl->curs +  i * count] == ' ' || rdl->str[rdl->curs +  i * count] == '\n'))
+	while (rdl->curs +  i * count >= 0 && rdl->str[rdl->curs +  i * count]
+		&& rdl->str[rdl->curs +  i * count] != ' '
+			&& rdl->str[rdl->curs +  i * count] != '\n')
 		count++;
-//	ft_printf("%d/", count);
-	while (rdl->str[rdl->curs +  i * count] && rdl->str[rdl->curs +  i * count] != ' ' && rdl->str[rdl->curs +  i * count] != '\n')
-		count++;
+	if (rdl->curs + i * count < 0)
+		count = rdl->curs + 1;
 	if (count)
 		count--;
-//	ft_printf("%d/", count);
-	//ft_printf("%d", count);
 	return (count);
 }
 
@@ -78,7 +86,12 @@ int		ctrld(t_rdl *rdl, char *buf)
 {
 	(void)buf;
 	if (!rdl->str[0])
-		return (1);
+	{
+		ft_strdel(&rdl->str);
+		write(1, "\n", 1);
+		termreset(&rdl->save);
+		exit(1);
+	}
 	return (0);
 }
 

@@ -6,19 +6,22 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 15:15:46 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/04 15:36:40 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/05 18:57:02 by alarm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline.h"
 
-void	rdlinit(t_rdl *rdl)
+void	rdlinit(t_rdl *rdl, char *PROMPT)
 {
 	if (!(rdl->str = ft_strnew(129)))
 		return ;
 	rdl->size = 0;
 	rdl->curs = 0;
 	rdl->allo = 128;
+	rdl->lpro = ft_printf("%s", PROMPT);
+	rdl->prompt = PROMPT;
+	rdl->col = getcolumn();
 }
 
 void	rdldel(t_rdl *rdl, int curs)
@@ -30,7 +33,7 @@ void	rdldel(t_rdl *rdl, int curs)
 	ft_strcpy(rdl->str + curs, rdl->str + curs + 1);
 	tgpstr("dl");
 	left(rdl->curs + rdl->lpro);
-	adv = ft_printf("%s%s", rdl->prompt, rdl->str);
+	adv = ft_printf("%s%s ", rdl->prompt, rdl->str);
 	left(adv - rdl->lpro - rdl->curs + 1);
 	rdl->size--;
 	rdl->curs--;

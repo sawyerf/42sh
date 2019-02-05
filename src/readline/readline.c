@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:48:42 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/04 17:49:24 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/05 19:09:17 by alarm            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,24 @@ char	*readline(char	*PROMPT)
 {
 	char	buf[11];
 	int		ret;
-	int		curs;
+	int		stat;
 
-	rdlinit(&g_rdl);
-	curs = 0;
-	g_rdl.lpro = ft_printf("%s", PROMPT);
-	g_rdl.prompt = PROMPT;
-	g_rdl.col = getcolumn();
 	setsig();
+	rdlinit(&g_rdl, PROMPT);
+	if (!terminit(&(g_rdl.save)))
+		return (NULL);
+	stat = 0;
 	while (42)
 	{
 		if ((ret = read(0, buf, 10)) < 0)
 			break ;
 		buf[ret] = 0;
-		if (key_router(&g_rdl, buf))
+		if ((stat = key_router(&g_rdl, buf)))
 			break ;
 	}
 	ft_putchar('\n');
+	termreset(&(g_rdl.save));
+	if (stat == 2)
+		exit(1);
 	return (g_rdl.str);
 }
