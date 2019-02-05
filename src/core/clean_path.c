@@ -12,6 +12,12 @@
 
 #include "sh_core.h"
 
+void			init_iterator(int *read, int *write)
+{
+	*read = 0;
+	*write = 0;
+}
+
 static char	*next_dir(char *path)
 {
 	int i;

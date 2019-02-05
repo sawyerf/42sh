@@ -1,0 +1,11 @@
+false || true && echo fafa ; false || true && echo mimi ; false || true && echo fafa ; false || true && echo mimi ;false || true && echo fafa ; false || true && echo mimi;false || true && echo fafa ; false || true && echo mimi; ls -lRF ~ | cat -e | rev | rev | rev | rev | rev | rev  | rev | rev | rev ;
+---------------------
+
+
+this leaks:
+ls ; whoami ; inex ; toto ; ls -lF | rev | rev | cat -e && false && false ; true || echo "THOU SHALL NOT" & echo "THOU SHALT" ; ls -lR ~ | cat -e | rev | rev | rev | rev | rev | rev | rev | rev ; cat whatever ; echo DONE !
+
+
+-------------------
+
+false && false || echo 'THOU SHALT' && \l\s '/''dev'$NONE

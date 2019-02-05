@@ -63,7 +63,7 @@ typedef struct			s_cmd_tab
 int		eval_tree(t_ast_node *tree);
 void	add_to_tree(t_ast_node **head, t_ast_node *to_add);
 int		bin_pathfinder(t_cmd_tab *cmd, char *path);
-int		execute_command(t_cmd_tab *cmd); /* exec without fork, for piping*/
+int		spawn_in_pipe(t_cmd_tab *cmd); /* exec without fork, for piping*/
 int		spawn_command(t_cmd_tab *cmd); /* fork before exec*/
 t_cmd_tab *expand_pipeline(t_simple_cmd *cmd_lst);
 int		exec_pipeline(t_ast_node *tree);

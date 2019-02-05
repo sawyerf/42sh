@@ -29,7 +29,7 @@ int	pipe_recursion(t_cmd_tab *to, t_cmd_tab *from)
 			dup2(pipes[1], STDOUT_FILENO);
 			close(pipes[0]);
 		}
-		execute_command(from);
+		spawn_in_pipe(from);
 		exit(0);
 	}
 	if (to)

@@ -95,18 +95,6 @@ static int		execve_wrap(t_cmd_tab *cmd)
 	return (0);
 }
 
-int		execute_command(t_cmd_tab *cmd)
-{
-	if (cmd->av[0] == NULL)
-		return (0);
-	if (is_builtin(cmd) == TRUE)
-	{
-		free_cmd_tab(cmd);
-		return (0);
-	}
-	else
-		return (execve_wrap(cmd));
-}
 
 void	wait_wrapper(t_cmd_tab *cmd, pid_t pid)
 {
@@ -148,6 +136,19 @@ t_bool		is_builtin(t_cmd_tab *cmd)
 		return (TRUE);
 	}
 	return (FALSE);
+}
+
+int		spawn_in_pipe(t_cmd_tab *cmd)
+{
+	if (cmd->av[0] == NULL)
+		return (0);
+	if (is_builtin(cmd) == TRUE)
+	{
+		free_cmd_tab(cmd);
+		return (0);
+	}
+	else
+		return (execve_wrap(cmd));
 }
 
 int		spawn_command(t_cmd_tab *cmd)

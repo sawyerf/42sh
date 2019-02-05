@@ -54,5 +54,6 @@ int	eval_tree(t_ast_node *tree)
 		exec_pipeline(tree);
 		return (0);
 	}
+	ft_printf("fatal error in eval_tree: unknown node type\n");
 	exit(1);
 }

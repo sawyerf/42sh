@@ -14,7 +14,7 @@ NAME = 21sh
 
 CC = gcc
 
-CFLAGS = -I inc/ -I lib/ -Wall -Werror -Wextra -g 
+CFLAGS = -I inc/ -I lib/ -Wall -Werror -Wextra -g
 
 DEBUG= #-g3 -fsanitize=address
 
@@ -37,8 +37,6 @@ SRC_FILE =	core/builtins.c \
 			core/env_handler.c \
 			core/env_lst_util.c \
 			core/env_lst_util2.c \
-			core/expand_dollar.c \
-			core/expand_tokens.c \
 			core/ft_env.c \
 			core/ft_env_tools.c \
 			core/main.c \
