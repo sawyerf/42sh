@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/02/01 14:36:25 by apeyret          ###   ########.fr        #
+#    Updated: 2019/02/05 19:06:03 by alarm            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = gcc
 
 CFLAGS = -I inc/ -I lib/ -Wall -Werror -Wextra
 
-DEBUG= #-g3 -fsanitize=address
+DEBUG= -g3 -fsanitize=address
 
 INC_DIR = inc
 
@@ -64,7 +64,13 @@ SRC_FILE =	core/bin_path.c \
 			parser/parser_rules.c \
 			parser/parser_test.c \
 			parser/parser_tools.c \
-			parser/sh_parser.c
+			parser/sh_parser.c \
+			readline/readline.c \
+			readline/struct_rdl.c \
+			readline/term.c \
+			readline/tools.c \
+			readline/signal.c \
+			readline/keys.c
 
 OBJ_DIR = .obj
 OBJ_FILE = $(SRC_FILE:.c=.o)
@@ -73,6 +79,7 @@ CRT_DIR = core \
 		  ft_wordexp \
 		  lexer \
 		  eval \
+		  readline \
 		  parser
 
 SRC = $(addprefix $(SRC_DIR)/,$(SRC_FILE))
@@ -95,7 +102,7 @@ norm:
 $(NAME): $(OBJ)
 	@printf "\033[0;32m[21sh] Compilation [OK]\033[0;0m\n"
 	@make -C lib/
-	@gcc $(CFLAGS) $(DEBUG) $(OBJ) lib/libft.a -o $(NAME)
+	@gcc $(CFLAGS) -ltermcap $(DEBUG) $(OBJ) lib/libft.a -o $(NAME)
 
 clean:
 	@make clean -C lib/
