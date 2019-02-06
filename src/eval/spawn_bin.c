@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/04 15:29:26 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/06 16:04:30 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,8 +155,9 @@ static	int assign_to_shell(t_cmd_tab *cmd)
 	i = 0;
 	while (cmd->assign_lst[i])
 	{
-		if ((!(tmp = env_to_lst(cmd->assign_lst[i])))
-			|| (set_shell_env(tmp->name, tmp->value) == MEMERR))
+		if (!(tmp = env_to_lst(cmd->assign_lst[i])))
+			return (MEMERR);
+		if (set_shell_env(tmp->name, tmp->value, 0) == MEMERR)
 			return (MEMERR);
 		free(tmp->name);
 		free(tmp->value);

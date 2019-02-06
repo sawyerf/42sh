@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 22:16:00 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/04 15:11:52 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/06 15:32:48 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,16 @@ char	**lst_to_tab(t_environ *const env_lst, int size)
 	tmp = env_lst;
 	while (tmp != NULL)
 	{
-		tab[len] = construct_env_var(tmp->name, tmp->value);
-		if (tab[len] == NULL)
+		if (tmp->to_export)
 		{
-			free_tab(tab);
-			return (NULL);
-		}
+			tab[len] = construct_env_var(tmp->name, tmp->value);
+			if (tab[len] == NULL)
+			{
+				free_tab(tab);
+				return (NULL);
+			}
 		len++;
+		}
 		tmp = tmp->next;
 	}
 	tab[len] = NULL;

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:24:29 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/01 18:56:25 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/06 16:03:01 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,13 @@ int				cd_p(char *curpath, char *arg)
 	}
 	old_pwd = getcwd(NULL, 0);
 	if (tmp_pwd != NULL)
-		set_shell_env("OLDPWD", tmp_pwd);
+		set_shell_env("OLDPWD", tmp_pwd, 1);
 	else
-		set_shell_env("OLDPWD", old_pwd);
+		set_shell_env("OLDPWD", old_pwd, 1);
 	if (old_pwd != NULL)
 		free(old_pwd);
 	tmp_pwd = getcwd(NULL, 0);
-	set_shell_env("PWD", tmp_pwd);
+	set_shell_env("PWD", tmp_pwd, 1);
 	if (tmp_pwd != NULL)
 		free(tmp_pwd);
 	free(curpath);

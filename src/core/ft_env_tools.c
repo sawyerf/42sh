@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 22:48:33 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/01 14:08:34 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/06 15:54:21 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int				valid_env_var(char *str)
 	return (0);
 }
 
-void			print_tab(char **tab)
+void			print_env_tab(char **tab)
 {
 	int i;
 

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/04 12:27:44 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/06 16:05:39 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef	struct			s_environ
 {
 	char				*name;
 	char				*value;
+	int					to_export;
 	struct s_environ	*next;
 	struct s_environ	*previous;
 }						t_environ;
@@ -66,7 +67,7 @@ int						ft_unsetenv(t_cmd_tab *cmd);
 int						setenv_wrapper(t_cmd_tab *cmd);
 int						ft_echo(t_cmd_tab *cmd);
 
-void					print_tab(char **tab);
+void					print_env_tab(char **tab);
 void					print_cmd(t_command command);
 void					print_cmd_lst(t_command *command);
 void					print_env_lst(t_environ *lst);
@@ -84,13 +85,13 @@ int						path_access(char *path);
 int						ft_ispath(char *str);
 char					*handle_pwd_l(void);
 void					init_iterator(int *read, int *write);
-int						tab_to_lst(char **env, t_environ **env_lst);
+int						env_tab_to_lst(char **env, t_environ **env_lst);
 char					**lst_to_tab(t_environ *env_lst, int size);
 t_environ				*new_env_node(char *name, char *value);
 t_environ				*env_to_lst(char *env_var);
 void					add_node(t_environ **head, t_environ *to_add);
 char					*get_env_value(char *name);
-int						set_shell_env(char *name, char *value);
+int						set_shell_env(char *name, char *value, int to_export);
 int						valid_env_name(char *str);
 int						valid_env_char(char c);
 t_environ				*get_env_node(char *name);
