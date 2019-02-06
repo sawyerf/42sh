@@ -14,6 +14,7 @@
 # define SH_CORE_H
 
 # include "libft.h"
+# include "generic_typedef.h"
 # include "ft_lexer_typedef.h"
 # include "ft_lexer.h"
 # include "ft_parser_typedef.h"
@@ -86,6 +87,7 @@ void					init_iterator(int *read, int *write);
 int						tab_to_lst(char **env, t_environ **env_lst);
 char					**lst_to_tab(t_environ *env_lst, int size);
 t_environ				*new_env_node(char *name, char *value);
+t_environ				*env_to_lst(char *env_var);
 void					add_node(t_environ **head, t_environ *to_add);
 char					*get_env_value(char *name);
 int						set_shell_env(char *name, char *value);

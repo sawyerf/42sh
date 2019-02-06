@@ -1,44 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lexer_types.h                                   :+:      :+:    :+:   */
+/*   generic_typedef.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/01 15:48:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/01 15:48:15 by ktlili           ###   ########.fr       */
+/*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
+/*   Updated: 2019/02/04 15:31:10 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LEXER_TYPEDEF_H
-# define FT_LEXER_TYPEDEF_H
+#ifndef GENERIC_TYPEDEF_H
+# define GENERIC_TYPEDEF_H
 
-
-typedef	enum	e_token_type
+typedef	struct	s_str
 {
-	WORD,
-	NEWLINE,
-	IO_NUM, 
-	FILENAME,
-	ASSIGN,
-	PIPE,
-	SEMI_COL,
-	AMPERS,
-	AND_IF,
-	OR_IF,
-	LESSAND,
-	GREATAND,
-	DGREAT,
-	LESS,
-	GREAT,
-}				t_token_type;
-
-
-typedef	struct	s_token
+	char	*str;
+	size_t	size;
+	size_t	len;
+}				t_str;
+;
+typedef enum e_bool
 {
-	t_token_type		type;
-	t_str				data;
-	struct s_token		*next;	
-}				t_token;
+	FALSE = 0,
+	TRUE = 1,
+}			t_bool;
 
 #endif

@@ -128,7 +128,7 @@ void	expansion_tester(t_token *start)
 {
 	while (start)
 	{
-		if (ft_wordexp(start) == MEMERR)
+		if (ft_wordexp(start, FALSE) == MEMERR)
 		{ft_printf("wordexp memerr\n");exit(1);}		
 		start = start->next;
 	}

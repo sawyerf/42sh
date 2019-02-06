@@ -125,9 +125,6 @@ t_bool		is_builtin(t_cmd_tab *cmd)
 
 	if ((i = ft_cmptab(builtins, cmd->av[0])) != -1)
 	{
-	/*	cmd->process_env = lst_to_tab(*g_environ, 0);
-		if (cmd->process_env == NULL)
-			return (MEMERR);*/
 		cmd->process_env = craft_env(lst_to_tab(*g_environ, 0), cmd->assign_lst);
 		if (cmd->process_env == NULL)
 			return (MEMERR);
@@ -151,12 +148,33 @@ int		spawn_in_pipe(t_cmd_tab *cmd)
 		return (execve_wrap(cmd));
 }
 
+static	int assign_to_shell(t_cmd_tab *cmd)
+{
+	int i;
+	t_environ *tmp;
+	i = 0;
+	while (cmd->assign_lst[i])
+	{
+		if ((!(tmp = env_to_lst(cmd->assign_lst[i])))
+			|| (set_shell_env(tmp->name, tmp->value) == MEMERR))
+			return (MEMERR);
+		free(tmp->name);
+		free(tmp->value);
+		free(tmp);
+		i++;
+	}
+	return (0);
+}
+
 int		spawn_command(t_cmd_tab *cmd)
 {
 	pid_t pid;
 
-	if (cmd->av[0] == NULL) // we apply assignements to our shell env before ret
-		return (0);
+	// we apply assignements to our shell env before ret
+	if (cmd->av[0] == NULL)
+	{
+		return (assign_to_shell(cmd));
+	}
 	if (is_builtin(cmd) == TRUE)
 		return (0);
 	pid = fork();
@@ -164,6 +182,7 @@ int		spawn_command(t_cmd_tab *cmd)
 		return (MEMERR);
 	if (pid == 0)
 	{
+		handle_redir(cmd->redir_lst);
 		execve_wrap(cmd);
 		exit_wrap(1, cmd); /* handle errors here*/
 	}

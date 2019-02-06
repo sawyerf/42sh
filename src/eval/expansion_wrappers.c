@@ -39,7 +39,7 @@ char **expand_word_lst(t_token *word)
 	while (iter)
 	{
 		save = iter->next;
-		if (ft_wordexp(iter) == MEMERR)
+		if (ft_wordexp(iter, FALSE) == MEMERR)
 			return (NULL);
 		iter = save;
 	}

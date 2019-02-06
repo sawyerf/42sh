@@ -90,6 +90,7 @@ char **craft_env(char **base_env, char **to_add)
 		}
 		else
 			fresh[ft_ptr_arr_len(fresh)] = to_add[i];
+		to_add[i] = NULL; /* to avoid double free*/
 		i++;	
 	}
 	free(base_env);

@@ -26,13 +26,6 @@
 
 typedef struct s_redir t_redir;
 
-typedef enum e_bool
-{
-	FALSE = 0,
-	TRUE = 1,
-}			t_bool;
-
-
 typedef struct	s_ast_node
 {
 	t_token_type 	type;
@@ -73,4 +66,7 @@ void	free_cmd_tab(t_cmd_tab *cmd);
 void	free_cmd_tab_lst(t_cmd_tab *cmd);
 char	**craft_env(char **base_env, char **to_add);
 char	*get_process_env(char *key, char **env);
+char	**expand_word_lst(t_token *word);
+int		handle_redir(t_redir *redir_lst);
+
 #endif

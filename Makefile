@@ -49,6 +49,7 @@ SRC_FILE =	core/builtins.c \
 			eval/eval.c \
 			eval/spawn_bin.c \
 			eval/craft_env.c \
+			eval/handle_redir.c \
 			ft_wordexp/expansion_util.c \
 			ft_wordexp/field_split.c \
 			ft_wordexp/ft_wordexp.c \

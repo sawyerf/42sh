@@ -12,18 +12,15 @@
 
 #include "ft_wordexp.h"
 
+// this should be one function
 
-int	ft_wordexp(t_token *word)
+int	ft_wordexp(t_token *word, t_bool is_redir)
 {
 	if (handle_tilde(word) == MEMERR)
 		return (MEMERR);
-
-//	ft_printf("=========\nbefore exp\n==============\n");
-//	print_token(word);
-//	ft_printf("=============================================\n");
 	if (handle_exp_param(word) == MEMERR)
 		return (MEMERR);
-	if (handle_field_split(word) == MEMERR)
+	if ((is_redir == FALSE) && (handle_field_split(word) == MEMERR)) 
 		return (MEMERR);
 	if (quote_removal(word) == MEMERR)
 		return (MEMERR);
