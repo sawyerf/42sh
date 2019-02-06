@@ -6,11 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-<<<<<<< HEAD
 #    Updated: 2019/02/06 16:58:15 by apeyret          ###   ########.fr        #
-=======
-#    Updated: 2019/02/06 15:21:31 by ktlili           ###   ########.fr        #
->>>>>>> ktlili
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,11 +14,7 @@ NAME = 21sh
 
 CC = gcc
 
-<<<<<<< HEAD
 CFLAGS = -I inc/ -I lib/ -ggdb -Wall -Werror -Wextra 
-=======
-CFLAGS = -I inc/ -I lib/ -Wall -Werror -Wextra -g
->>>>>>> ktlili
 
 DEBUG= -g3 -fsanitize=address
 

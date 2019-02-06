@@ -6,11 +6,7 @@
 #    By: ktlili <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/10 23:32:37 by ktlili            #+#    #+#              #
-<<<<<<< HEAD
 #    Updated: 2019/02/06 16:07:28 by apeyret          ###   ########.fr        #
-=======
-#    Updated: 2019/02/06 15:22:19 by ktlili           ###   ########.fr        #
->>>>>>> ktlili
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,11 +94,7 @@ OBJ_NAME = $(SRC_NAME:.c=.o)
 
 INC = ft_printf.h get_next_line.h libft.h
 
-<<<<<<< HEAD
 FLAGS = -Wall -Wextra -Werror 
-=======
-FLAGS = -Wall -Wextra -Werror -g
->>>>>>> ktlili
 
 SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 
