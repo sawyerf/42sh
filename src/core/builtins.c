@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 18:34:05 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/01 19:09:07 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/06 16:06:04 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ int	setenv_wrapper(t_cmd_tab *cmd)
 	if (cmd->av[1] == NULL)
 	{
 		ft_printf("usage: setenv [NAME] [VALUE]\n");
-		return (0);
+		return (-1);
 	}
 	i = 0;
 	if (!valid_env_name(cmd->av[1]))
 	{
 		putstr_stderr("setenv: variable name is invalid\n");
-		return (0);
+		return (-1);
 	}
 	while (cmd->av[i] != NULL)
 	{
@@ -36,10 +36,10 @@ int	setenv_wrapper(t_cmd_tab *cmd)
 		if (i > 3)
 		{
 			putstr_stderr("setenv: Too many arguments\n");
-			return (0);
+			return (-1);
 		}
 	}
-	return (set_shell_env(cmd->av[1], cmd->av[2]));
+	return (set_shell_env(cmd->av[1], cmd->av[2], 1));
 }
 
 int	ft_unsetenv(t_cmd_tab *cmd)
@@ -48,7 +48,10 @@ int	ft_unsetenv(t_cmd_tab *cmd)
 	t_environ	*env;
 
 	if (cmd->av[1] == NULL)
+	{
 		putstr_stderr("usage: unsetenv [NAME] ..\n");
+		return (-1);
+	}
 	else
 	{
 		i = 0;

@@ -1,0 +1,8 @@
+
+digraph AST {
+	PIPE1;
+	cmd1 [shape=box label="data"];
+	cmd1 ->PIPE1;
+	cmd2 [shape=box label="data"];
+	cmd2 -> PIPE1;
+	AND_OR

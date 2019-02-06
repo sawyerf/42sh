@@ -65,13 +65,14 @@ int	handle_digit(char **input, t_token *token)
 
 	while (**input)
 	{
-		if ((ft_is_whitespace(**input)) || (ft_strchr(ops, **input))
-				|| (!ft_isdigit(**input)))
+		if ((ft_is_whitespace(**input)) || (ft_strchr(ops, **input)))
 		{
 			if (ft_strchr("><", **input))
 				token->type = IO_NUM;
 			break;
 		}
+		else if (!ft_isdigit(**input))
+			return(handle_common(input, token));
 		if (str_putchar(input, &(token->data)) == MEMERR)
 			return (MEMERR);
 	}

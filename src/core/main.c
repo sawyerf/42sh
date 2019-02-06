@@ -6,7 +6,11 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/02/06 17:07:02 by apeyret          ###   ########.fr       */
+=======
+/*   Updated: 2019/02/06 16:04:18 by ktlili           ###   ########.fr       */
+>>>>>>> ktlili
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +39,20 @@ static int		init_g_env(char **env)
 	int			lvl;
 
 	if (((g_environ = ft_memalloc(sizeof(t_environ*))) == NULL)
-			|| (tab_to_lst(env, g_environ) != 0))
+			|| (env_tab_to_lst(env, g_environ) != 0))
 	{
 		dispatch_parse_err(MEMERR);
 		return (MEMERR);
 	}
 	if ((shlvl = get_env_node("SHLVL")) == NULL)
-		return (set_shell_env("SHLVL", "1"));
+		return (set_shell_env("SHLVL", "1", 1));
 	lvl = ft_atoi(shlvl->value);
 	if ((lvl < 0) || ((lvl + 1) < 0))
 		lvl = 0;
 	newlvl = ft_itoa(lvl + 1);
 	if (newlvl == NULL)
 		return (MEMERR);
-	if (set_shell_env("SHLVL", newlvl) != 0)
+	if (set_shell_env("SHLVL", newlvl, 1) != 0)
 	{
 		free(newlvl);
 		return (MEMERR);
@@ -129,7 +133,7 @@ void	expansion_tester(t_token *start)
 {
 	while (start)
 	{
-		if (ft_wordexp(start) == MEMERR)
+		if (ft_wordexp(start, FALSE) == MEMERR)
 		{ft_printf("wordexp memerr\n");exit(1);}		
 		start = start->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 13:58:14 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/01 19:03:21 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/06 15:54:02 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int				ft_env(t_cmd_tab *cmd)
 		return (MEMERR);
 	if (cmd->av[count] == NULL)
 	{
-		print_tab(new_env);
+		print_env_tab(new_env);
 		free_tab(new_env);
 	}
 	else

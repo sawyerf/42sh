@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:08:33 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/01 14:07:15 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/06 16:03:36 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		cd_error(int errnum, char *str)
 	return (0);
 }
 
-void	cd_dispatch_err(char *arg, char *curpath)
+int	cd_dispatch_err(char *arg, char *curpath)
 {
 	int ret;
 
@@ -38,21 +38,23 @@ void	cd_dispatch_err(char *arg, char *curpath)
 		arg = curpath;
 	if ((ret = path_access(curpath)) != 0)
 		cd_error(ret, arg);
+	return (ret);
 }
+
 
 void	update_env_pwd(char *pwd, char *curpath)
 {
 	if (pwd != NULL)
 	{
-		set_shell_env("OLDPWD", pwd);
-		set_shell_env("PWD", curpath);
+		set_shell_env("OLDPWD", pwd, 1);
+		set_shell_env("PWD", curpath, 1);
 	}
 	else
 	{
 		pwd = getcwd(NULL, 0);
 		if (pwd != NULL)
 		{
-			set_shell_env("PWD", pwd);
+			set_shell_env("PWD", pwd, 1);
 			free(pwd);
 		}
 	}

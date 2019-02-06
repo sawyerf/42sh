@@ -40,30 +40,31 @@ void	free_token_lst(t_token *token);
 void	free_redir_lst(t_redir *redir);
 void	free_redir(t_redir *redir);
 void	free_pipeline(t_simple_cmd *pipeline);
+void	free_tree(t_ast_node *tree);
 void	mem_err_exit(t_parser *parser);
 
 /*
 recursive decent functions 
 */
-int	expect_linebreak(t_parser *parser);
-int	expect_separator_op(t_parser *parser);
-int	expect_separator(t_parser *parser);
-int	expect_filename(t_parser *parser);
-int	expect_io_file(t_parser *parser);
-int	expect_io_redir(t_parser *parser);
-int	expect_assign(t_parser *parser);
-int	expect_cmd_pre(t_parser *parser);
-int	expect_word(t_parser *parser);
-int	expect_cmd_suffix(t_parser *parser);
-int	expect_cmd_name(t_parser *parser);
-int	expect_simeple_cmd(t_parser *parser);
-int	expect_pipeline_suffix(t_parser *parser);
-int	expect_pipeline(t_parser *parser);
-int	expect_and_or_suffix(t_parser *parser);
-int	expect_and_or(t_parser *parser);
-int	expect_list_suffix(t_parser *parser);
-int	expect_list(t_parser *parser);
-int	expect_complete_cmd(t_parser *parser);
+t_bool	expect_linebreak(t_parser *parser);
+t_bool	expect_separator_op(t_parser *parser);
+t_bool	expect_separator(t_parser *parser);
+t_bool	expect_filename(t_parser *parser);
+t_bool	expect_io_file(t_parser *parser);
+t_bool	expect_io_redir(t_parser *parser);
+t_bool	expect_assign(t_parser *parser);
+t_bool	expect_cmd_pre(t_parser *parser);
+t_bool	expect_word(t_parser *parser);
+t_bool	expect_cmd_suffix(t_parser *parser);
+t_bool	expect_cmd_name(t_parser *parser);
+t_bool	expect_simeple_cmd(t_parser *parser);
+t_bool	expect_pipeline_suffix(t_parser *parser);
+t_bool	expect_pipeline(t_parser *parser);
+t_bool	expect_and_or_suffix(t_parser *parser);
+t_bool	expect_and_or(t_parser *parser);
+t_bool	expect_list_suffix(t_parser *parser);
+t_bool	expect_list(t_parser *parser);
+t_bool	expect_complete_cmd(t_parser *parser);
 
 /*parser util functions */
 int	parser_is_assign(t_token const *token);

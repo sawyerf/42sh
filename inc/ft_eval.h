@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/01 18:58:28 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/04 15:31:10 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct	s_ast_node
 	struct s_simple_cmd	*pipeline;
 	int					async;
 	int					exit_status;
+	struct s_ast_node	*head;
 	struct s_ast_node	*left;
 	struct s_ast_node	*right;
 }				t_ast_node;
@@ -44,14 +45,28 @@ typedef struct			s_cmd_tab
 	char	 			*full_path;
 	char 				**av;
 	char				**process_env;
+	char				**assign_lst;
 	t_redir				*redir_lst;
 	int					exit_status;
+	int					exit_signal; /* -1 if exit normally */
 	struct s_cmd_tab	*next;
+	struct s_cmd_tab	*previous;
 }						t_cmd_tab;
 
-int		bin_pathfinder(t_cmd_tab *cmd, char *path);
-int		execute_command(t_cmd_tab *cmd); /* exec without fork, for piping*/
-int		spawn_command(t_cmd_tab *cmd); /* fork before exec*/
 int		eval_tree(t_ast_node *tree);
 void	add_to_tree(t_ast_node **head, t_ast_node *to_add);
+int		bin_pathfinder(t_cmd_tab *cmd, char *path);
+int		spawn_in_pipe(t_cmd_tab *cmd); /* exec without fork, for piping*/
+int		spawn_command(t_cmd_tab *cmd); /* fork before exec*/
+t_cmd_tab *expand_pipeline(t_simple_cmd *cmd_lst);
+int		exec_pipeline(t_ast_node *tree);
+void	wait_wrapper(t_cmd_tab *cmd, pid_t pid);
+t_bool	is_builtin(t_cmd_tab *cmd);
+void	free_cmd_tab(t_cmd_tab *cmd);
+void	free_cmd_tab_lst(t_cmd_tab *cmd);
+char	**craft_env(char **base_env, char **to_add);
+char	*get_process_env(char *key, char **env);
+char	**expand_word_lst(t_token *word);
+int		handle_redir(t_redir *redir_lst);
+
 #endif

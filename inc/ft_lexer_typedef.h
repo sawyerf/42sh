@@ -13,12 +13,6 @@
 #ifndef FT_LEXER_TYPEDEF_H
 # define FT_LEXER_TYPEDEF_H
 
-typedef	struct	s_str
-{
-	char	*str;
-	size_t	size;
-	size_t	len;
-}				t_str;
 
 typedef	enum	e_token_type
 {

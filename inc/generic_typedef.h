@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_wordexp.c                                       :+:      :+:    :+:   */
+/*   generic_typedef.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/01 14:09:40 by apeyret          ###   ########.fr       */
+/*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
+/*   Updated: 2019/02/04 15:31:10 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_wordexp.h"
+#ifndef GENERIC_TYPEDEF_H
+# define GENERIC_TYPEDEF_H
 
-// this should be one function
-
-int	ft_wordexp(t_token *word, t_bool is_redir)
+typedef	struct	s_str
 {
-	if (handle_tilde(word) == MEMERR)
-		return (MEMERR);
-	if (handle_exp_param(word) == MEMERR)
-		return (MEMERR);
-	if ((is_redir == FALSE) && (handle_field_split(word) == MEMERR)) 
-		return (MEMERR);
-	if (quote_removal(word) == MEMERR)
-		return (MEMERR);
-return (0);
-}
+	char	*str;
+	size_t	size;
+	size_t	len;
+}				t_str;
+;
+typedef enum e_bool
+{
+	FALSE = 0,
+	TRUE = 1,
+}			t_bool;
+
+#endif

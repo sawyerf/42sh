@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 21:55:47 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/01 14:07:54 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/06 15:53:39 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_environ	*new_env_node(char *name, char *value)
 		return (NULL);
 	new->name = name;
 	new->value = value;
+	new->to_export = 1;
 	return (new);
 }
 
@@ -85,7 +86,8 @@ void		add_node(t_environ **head, t_environ *to_add)
 	}
 }
 
-int			tab_to_lst(char **env, t_environ **env_lst)
+
+int			env_tab_to_lst(char **env, t_environ **env_lst)
 {
 	int			i;
 	t_environ	*tmp;
@@ -96,6 +98,7 @@ int			tab_to_lst(char **env, t_environ **env_lst)
 		tmp = env_to_lst(env[i]);
 		if (tmp == NULL)
 			return (MEMERR);
+		tmp->to_export = 1;
 		add_node(env_lst, tmp);
 		i++;
 	}

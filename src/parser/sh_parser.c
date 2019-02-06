@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/01 14:54:53 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/04 12:38:27 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,29 +85,54 @@ void	free_pipeline(t_simple_cmd *pipeline)
 	{
 		tmp = pipeline->next;
 		free_simple_cmd(pipeline);
+	
 		free(pipeline);
 		pipeline = tmp;
 	}
+}
+
+void	free_tree(t_ast_node *tree)
+{
+	if (tree == NULL)
+		return;
+	free_tree(tree->left);
+	free_tree(tree->right);
+	if (tree->pipeline)
+		free_pipeline(tree->pipeline);
+	free(tree);
+}
+
+t_ast_node *get_tree(t_ast_node *tree)
+{
+	static t_ast_node *static_tree = NULL;
+
+	if (tree)
+		static_tree = tree;
+	return (static_tree);
 }
 int	test_sh_parser(t_token *start)
 {
 	t_parser parser;
 	int		ret;
-	char types[100][100] = {"WORD","NEWLINE","IO_NUM","FILENAME", "ASSIGN", "PIPE", "SEMI_COL",
+/*	char types[100][100] = {"WORD","NEWLINE","IO_NUM","FILENAME", "ASSIGN", "PIPE", "SEMI_COL",
 				"AMPERS","ANDIF", "ORIF", "LESSAND", "GREATAND", "DGREAT", "LESS",
 				"GREAT"};
-
+*/
 	ft_bzero(&parser, sizeof(t_parser));
 	parser.current = start;
 	parser.head = start;
 	ret = expect_complete_cmd(&parser);
 	if (parser.current->type != NEWLINE)
 		ret = 0;
-	ft_printf("ret = %d token %s |type %s\n", ret, parser.current->data.str, types[parser.current->type]);
-	if (ret == 0){return(ret);}
-//		free_tree(parser.tree);
-	else
+//	ft_printf("ret = %d token %s |type %s\n", ret, parser.current->data.str, types[parser.current->type]);
+	if (ret) 
+	{
+		get_tree(parser.tree);
 		eval_tree(parser.tree);
+	}
+	else
+		ft_printf("21sh: syntax error near : '%s'\n", parser.current->data.str);
+	free_tree(parser.tree);
 //	print_tree(parser.tree);
 	return (ret);
 }

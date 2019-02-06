@@ -6,7 +6,11 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/02/02 18:45:44 by ktlili           ###   ########.fr       */
+=======
+/*   Updated: 2019/02/04 13:50:36 by ktlili           ###   ########.fr       */
+>>>>>>> ktlili
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +26,7 @@
 #define ENDOFINPUT 14 
 
 
-#define INPUTSZ 1024
+#define INPUTSZ 24
 
 /*
 Lexer jump table

@@ -65,7 +65,7 @@ void	add_to_tree(t_ast_node **head, t_ast_node *to_add)
 			(*head)->right->right = to_add;
 		}
 	}
-	else if (to_add->type == SEMI_COL)
+	else if ((to_add->type == SEMI_COL) || (to_add->type == AMPERS))
 	{
 		to_add->left = *head;
 		*head = to_add;

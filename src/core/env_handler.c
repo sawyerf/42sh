@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 22:17:22 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/01 14:07:45 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/06 16:07:09 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	*get_env_value(char *name)
 	return (NULL);
 }
 
-int		set_shell_env(char *name, char *newvalue)
+int		set_shell_env(char *name, char *newvalue, int to_export)
 {
 	t_environ *tmp;
 
@@ -98,6 +98,7 @@ int		set_shell_env(char *name, char *newvalue)
 			add_node(g_environ, tmp);
 		else
 			return (MEMERR);
+		tmp->to_export = to_export;
 	}
 	else
 	{
@@ -106,6 +107,8 @@ int		set_shell_env(char *name, char *newvalue)
 		tmp->value = ft_strdup(newvalue);
 		if (tmp->value == NULL)
 			return (MEMERR);
+		tmp->to_export = to_export;
 	}
 	return (0);
 }
+

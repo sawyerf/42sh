@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/01 19:08:58 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/06 16:04:30 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,73 +59,135 @@ int			handle_full_path(char *cmd_name)
 	}
 	return (0);
 }
-
-
+void	exit_wrap(int code, t_cmd_tab *cmd)
+{	
+//	free_cmd_tab(cmd);
+	(void)cmd;
+	exit(code);
+}
+/* execve_wrap is always inside a fork*/
 static int		execve_wrap(t_cmd_tab *cmd)
 {	
 	char	*path;
 	int		ret;
 
+	cmd->process_env = craft_env(lst_to_tab(*g_environ, 0), cmd->assign_lst);
+	if (cmd->process_env == NULL)
+		return (MEMERR);
 	if (ft_ispath(cmd->av[0]))
 	{
 		if (handle_full_path(cmd->av[0]) != 0)
-			return (0);
+			exit_wrap (ACCERR, cmd);
 		if ((cmd->full_path = ft_strdup(cmd->av[0])) == NULL)
-			return (MEMERR);
+			exit_wrap(MEMERR, cmd);
 	}
 	else 
 	{
-		path = get_env_value("PATH");
+		path = get_process_env("PATH", cmd->process_env);
 		if (bin_pathfinder(cmd, path) == MEMERR)
-			return (MEMERR);
+			exit_wrap(MEMERR, cmd);
 		if (cmd->full_path == NULL) /* case bin not found or no perm*/
-			return (0);	/* maybe exit ?*/
+			exit_wrap (127, cmd);	/* maybe exit ?*/
 	}
 	ret = execve(cmd->full_path, cmd->av, cmd->process_env); 
 	putstr_stderr("21sh: bad file format\n");
-	return (ret);
+	exit_wrap(ret, cmd);
+	return (0);
 }
 
-int		execute_command(t_cmd_tab *cmd)
+
+void	wait_wrapper(t_cmd_tab *cmd, pid_t pid)
 {
-	/* 1- assign variables.
-	 * 2- craft env
-	 * 3- if builtin call builtin, job is done
-	 * 3- proceed to execve wrap
-	 */
-	/*
-	 * setenv and unsetenv are broken because we fork
-	 * */
+	int		wstatus;
+
+	waitpid(pid, &wstatus, 0);	
+	cmd->exit_signal = -1;
+	cmd->exit_status = -1;
+	if (WIFEXITED(wstatus))
+	{
+		cmd->exit_status = (int)WEXITSTATUS(wstatus);
+	}
+	else if (WIFSIGNALED(wstatus))
+	{
+		cmd->exit_signal = WTERMSIG(wstatus);
+	}
+	ft_printf("%s exiting with status %d\n", cmd->av[0], cmd->exit_status);
+}
+
+
+t_bool		is_builtin(t_cmd_tab *cmd)
+{
 	static t_builtin	array[7] = {ft_echo, change_dir, setenv_wrapper,
 							ft_unsetenv, ft_env, ft_exit};
 	static	char		*builtins[] = {"echo", "cd", "setenv", "unsetenv",
 							"env", "exit", NULL};
 	int					i;
 
+	if ((i = ft_cmptab(builtins, cmd->av[0])) != -1)
+	{
+		cmd->process_env = craft_env(lst_to_tab(*g_environ, 0), cmd->assign_lst);
+		if (cmd->process_env == NULL)
+			return (MEMERR);
+		cmd->exit_status = array[i](cmd);
+		ft_printf("BUILTIN:%s exited with status %d\n", cmd->av[0], cmd->exit_status);
+		return (TRUE);
+	}
+	return (FALSE);
+}
+
+int		spawn_in_pipe(t_cmd_tab *cmd)
+{
 	if (cmd->av[0] == NULL)
 		return (0);
-	cmd->process_env = lst_to_tab(*g_environ, 0);
-	if (cmd->process_env == NULL)
-		return (MEMERR);
-	if ((i = ft_cmptab(builtins, cmd->av[0])) != -1)
-		return (array[i](cmd)); /* exit status should be handeled in cmd_tab struct*/
+	if (is_builtin(cmd) == TRUE)
+	{
+		free_cmd_tab(cmd);
+		return (0);
+	}
 	else
 		return (execve_wrap(cmd));
+}
+
+static	int assign_to_shell(t_cmd_tab *cmd)
+{
+	int i;
+	t_environ *tmp;
+	i = 0;
+	while (cmd->assign_lst[i])
+	{
+		if (!(tmp = env_to_lst(cmd->assign_lst[i])))
+			return (MEMERR);
+		if (set_shell_env(tmp->name, tmp->value, 0) == MEMERR)
+			return (MEMERR);
+		free(tmp->name);
+		free(tmp->value);
+		free(tmp);
+		i++;
+	}
+	return (0);
 }
 
 int		spawn_command(t_cmd_tab *cmd)
 {
 	pid_t pid;
 
+	// we apply assignements to our shell env before ret
+	if (cmd->av[0] == NULL)
+	{
+		return (assign_to_shell(cmd));
+	}
+	if (is_builtin(cmd) == TRUE)
+		return (0);
 	pid = fork();
 	if (pid == -1)
 		return (MEMERR);
 	if (pid == 0)
 	{
-		execute_command(cmd);
-		exit(1); /* handle errors here*/
+		handle_redir(cmd->redir_lst);
+		execve_wrap(cmd);
+		exit_wrap(1, cmd); /* handle errors here*/
 	}
-	wait(NULL);
+	wait_wrapper(cmd, pid);
 	return (0);
 
 }
