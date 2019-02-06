@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:47:43 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/05 19:03:15 by alarm            ###   ########.fr       */
+/*   Updated: 2019/02/06 16:00:52 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,19 @@ t_key	g_key[] = {
 	{K_LEFT, &move_curs},
 	{K_SLFT, &prev_word},
 	{K_SRGT, &next_word},
+	{K_TAB,  &autocompl},
 	{K_ENTR, &enter},
 	{NULL, &special_key}
 };
+
+int		autocompl(t_rdl *rdl, char *buf)
+{
+	char	*c;
+
+	c = rdl->str[rdl->curs];
+	rdl->str[rdl->curs] = 0;
+	rdl->str[rdl->curs] = c;
+}
 
 int		ctrlc(t_rdl *rdl, char *buf)
 {

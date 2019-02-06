@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:49:43 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/05 18:34:17 by alarm            ###   ########.fr       */
+/*   Updated: 2019/02/06 14:43:52 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,10 @@ int		getcolumn(void)
 void	tgpstr(char *s)
 {
 	char	*str;
-	char	*buf;
 
-	buf = ft_strnew(100000);
-	if (!(str = tgetstr(s, &buf)))
+	if (!(str = tgetstr(s, NULL)))
 		return ;
 	tputs(str, 0, tputchar);
-	ft_strdel(&buf);
 }
 
 int		termreset(struct termios *save)
