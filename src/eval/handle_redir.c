@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 14:16:02 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/06 15:38:49 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/06 19:24:07 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 int expand_redir(t_redir *redir)
 {
-	if ((redir->left) && (ft_wordexp(redir->left, TRUE) == MEMERR))
+	if ((redir->left) && (ft_wordexp(redir->left, FT_TRUE) == MEMERR))
 		return (MEMERR);
-	if ((redir->right) && (ft_wordexp(redir->right, TRUE) == MEMERR))
+	if ((redir->right) && (ft_wordexp(redir->right, FT_TRUE) == MEMERR))
 		return (MEMERR);
 	return (0);
 }

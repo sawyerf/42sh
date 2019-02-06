@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/01 14:09:40 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/06 19:24:35 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	ft_wordexp(t_token *word, t_bool is_redir)
 		return (MEMERR);
 	if (handle_exp_param(word) == MEMERR)
 		return (MEMERR);
-	if ((is_redir == FALSE) && (handle_field_split(word) == MEMERR)) 
+	if ((is_redir == FT_FALSE) && (handle_field_split(word) == MEMERR)) 
 		return (MEMERR);
 	if (quote_removal(word) == MEMERR)
 		return (MEMERR);

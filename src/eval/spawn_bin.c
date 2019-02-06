@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/06 16:04:30 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/06 19:37:16 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,16 +130,16 @@ t_bool		is_builtin(t_cmd_tab *cmd)
 			return (MEMERR);
 		cmd->exit_status = array[i](cmd);
 		ft_printf("BUILTIN:%s exited with status %d\n", cmd->av[0], cmd->exit_status);
-		return (TRUE);
+		return (FT_TRUE);
 	}
-	return (FALSE);
+	return (FT_FALSE);
 }
 
 int		spawn_in_pipe(t_cmd_tab *cmd)
 {
 	if (cmd->av[0] == NULL)
 		return (0);
-	if (is_builtin(cmd) == TRUE)
+	if (is_builtin(cmd) == FT_TRUE)
 	{
 		free_cmd_tab(cmd);
 		return (0);
@@ -176,7 +176,7 @@ int		spawn_command(t_cmd_tab *cmd)
 	{
 		return (assign_to_shell(cmd));
 	}
-	if (is_builtin(cmd) == TRUE)
+	if (is_builtin(cmd) == FT_TRUE)
 		return (0);
 	pid = fork();
 	if (pid == -1)

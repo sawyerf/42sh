@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/04 15:31:10 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/06 19:20:19 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ typedef	struct	s_str
 ;
 typedef enum e_bool
 {
-	FALSE = 0,
-	TRUE = 1,
+	FT_FALSE = 0,
+	FT_TRUE = 1,
 }			t_bool;
 
 #endif

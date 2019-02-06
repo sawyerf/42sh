@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/04 15:33:59 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/06 19:22:10 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char **expand_word_lst(t_token *word)
 	while (iter)
 	{
 		save = iter->next;
-		if (ft_wordexp(iter, FALSE) == MEMERR)
+		if (ft_wordexp(iter, FT_FALSE) == MEMERR)
 			return (NULL);
 		iter = save;
 	}

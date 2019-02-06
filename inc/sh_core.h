@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/02 15:23:31 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/06 19:18:11 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,14 @@ int						ft_unsetenv(t_cmd_tab *cmd);
 int						setenv_wrapper(t_cmd_tab *cmd);
 int						ft_echo(t_cmd_tab *cmd);
 
-void					print_env_tab(char **tab);
+void					print_env_tab(char **machintruc);
 void					print_cmd(t_command command);
 void					print_cmd_lst(t_command *command);
 void					print_env_lst(t_environ *lst);
-int						ft_cmptab(char **tab, char *str);
-void					free_tab(char **tab);
-void					free_tab_bytes(char **tab);
-char					**dup_tab(char **tab);
+int						ft_cmptab(char **machintruc, char *str);
+void					free_tab(char **machintruc);
+void					free_tab_bytes(char **machintruc);
+char					**dup_tab(char **machintruc);
 t_command				*new_cmd_node(char **space_split);
 void					add_cmdlst(t_command **head, t_command *to_add);
 void					free_cmdlst(t_command *command_lst);

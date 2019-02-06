@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 22:16:00 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/06 15:32:48 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/06 19:27:21 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,11 @@ char	**lst_to_tab(t_environ *const env_lst, int size)
 {
 	int			len;
 	t_environ	*tmp;
-	char		**tab;
+	char		**machintruc;
 
 	len = lst_len(env_lst);
-	tab = ft_memalloc((len + size + 1) * sizeof(char*));
-	if (tab == NULL)
+	machintruc = ft_memalloc((len + size + 1) * sizeof(char*));
+	if (machintruc == NULL)
 		return (NULL);
 	len = 0;
 	tmp = env_lst;
@@ -86,16 +86,16 @@ char	**lst_to_tab(t_environ *const env_lst, int size)
 	{
 		if (tmp->to_export)
 		{
-			tab[len] = construct_env_var(tmp->name, tmp->value);
-			if (tab[len] == NULL)
+			machintruc[len] = construct_env_var(tmp->name, tmp->value);
+			if (machintruc[len] == NULL)
 			{
-				free_tab(tab);
+				free_tab(machintruc);
 				return (NULL);
 			}
 		len++;
 		}
 		tmp = tmp->next;
 	}
-	tab[len] = NULL;
-	return (tab);
+	machintruc[len] = NULL;
+	return (machintruc);
 }
