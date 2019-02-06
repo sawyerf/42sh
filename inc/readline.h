@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/05 19:01:38 by alarm            ###   ########.fr       */
+/*   Updated: 2019/02/06 16:59:41 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define K_CTRD	"\4"
 # define K_SLFT "\33[1;2D"
 # define K_SRGT "\33[1;2C"
+# define K_TAB	"\t"
 
 typedef struct		s_rdl
 {
@@ -75,6 +76,7 @@ int		move_curs(t_rdl *rdl, char *buf);
 int		enter(t_rdl *rdl, char *buf);
 int		ctrld(t_rdl *rdl, char *buf);
 int		ctrlc(t_rdl *rdl, char *buf);
+int		autocompl(t_rdl *rdl, char *buf);
 
 //tools
 int		is_special(char *buf);

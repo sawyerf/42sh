@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/01 15:58:08 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/02 15:23:31 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # include "ft_parser_typedef.h"
 # include "ft_parser.h"
 # include "ft_wordexp.h"
+# include "ft_eval.h"
+# include "ft_light_parser_typedef.h"
+# include "ft_light_parser.h"
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <sys/wait.h>
@@ -49,9 +52,18 @@ typedef	struct			s_environ
 	struct s_environ	*previous;
 }						t_environ;
 
-typedef	int				(*t_builtin)(t_command*);
+typedef struct s_cmd_tab t_cmd_tab;
+
+typedef	int				(*t_builtin)(t_cmd_tab*);
 
 extern	t_environ		**g_environ;
+
+int						change_dir(t_cmd_tab *cmd);
+int						ft_exit(t_cmd_tab *cmd);
+int						ft_env(t_cmd_tab *cmd);
+int						ft_unsetenv(t_cmd_tab *cmd);
+int						setenv_wrapper(t_cmd_tab *cmd);
+int						ft_echo(t_cmd_tab *cmd);
 
 void					print_tab(char **tab);
 void					print_cmd(t_command command);
@@ -94,8 +106,6 @@ int						dir_access(char *cd_path, char **curpath);
 void					cleanpath(char *str);
 int						add_slash(char **path);
 void					cleandotdot(char *path);
-int						change_dir(t_command *cmd);
-int						ft_env(t_command *cmd);
 int						valid_env_var(char *str);
 int						append_tab(char **new_env, char **to_add, int count);
 int						cd_l(char *curpath, char *arg);

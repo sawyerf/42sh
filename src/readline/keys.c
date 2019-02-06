@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:47:43 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/06 16:00:52 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/06 17:00:05 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,13 @@ t_key	g_key[] = {
 
 int		autocompl(t_rdl *rdl, char *buf)
 {
-	char	*c;
+	char	c;
 
+	(void)buf;
 	c = rdl->str[rdl->curs];
 	rdl->str[rdl->curs] = 0;
 	rdl->str[rdl->curs] = c;
+	return (0);
 }
 
 int		ctrlc(t_rdl *rdl, char *buf)

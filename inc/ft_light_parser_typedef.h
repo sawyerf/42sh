@@ -1,50 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lexer_types.h                                   :+:      :+:    :+:   */
+/*   ft_light_parser_typedef.h                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/01 15:48:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/02 18:46:29 by ktlili           ###   ########.fr       */
+/*   Created: 2019/02/02 15:02:34 by ktlili            #+#    #+#             */
+/*   Updated: 2019/02/02 18:34:10 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LEXER_TYPEDEF_H
-# define FT_LEXER_TYPEDEF_H
+#ifndef FT_LIGHT_PARSER_TYPEDEF_H
+#define  FT_LIGHT_PARSER_TYPEDEF_H
 
-typedef	struct	s_str
+#define VALID 1 
+#define INVALID	0
+
+typedef enum e_expecting
 {
-	char	*str;
-	size_t	size;
-	size_t	len;
-}				t_str;
+	cmd_name, 
+	arg, // arg = filename for autocompletion
+	param,
+}			t_expecting;
 
-typedef	enum	e_token_type
+typedef struct 	s_autocomplete
 {
-	WORD,
-	NEWLINE,
-	IO_NUM, 
-	FILENAME,
-	ASSIGN,
-	PIPE,
-	SEMI_COL,
-	AMPERS,
-	AND_IF,
-	OR_IF,
-	LESSAND,
-	GREATAND,
-	DGREAT,
-	LESS,
-	GREAT,
-}				t_token_type;
-
-
-typedef	struct	s_token
-{
-	t_token_type		type;
-	t_str				data;
-	struct s_token		*next;	
-}				t_token;
+	char 		*str;
+	t_expecting type;
+}				t_autocomplete;
 
 #endif

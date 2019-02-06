@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/05 18:32:46 by alarm            ###   ########.fr       */
+/*   Updated: 2019/02/06 17:07:02 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,28 +137,20 @@ void	expansion_tester(t_token *start)
 
 int				main(int ac, char **av, char **env)
 {
-	char			*line;
-	t_token			*tok;
-	int				ret;
+	char	*line;
+	int		ret;
+	t_token	*tok;
 
 	silence_ac_av(ac, av);
 	if ((init_g_env(env) != 0))
 		return (MEMERR);
 	while (42)
 	{
-	//	ft_printf("**********************\n");
-	//	ft_printf("cmdline: '%s'", line);
-	//	ft_printf("**********************\n");
 		line = readline("$> ");
 		tok = ft_tokenizer(line);
 		if (tok)
 		{
-	//		ft_test_lexer(line);
 			test_sh_parser(tok);
-	//		print_tokens(tok);
-	//		ft_printf("==========================================\n");
-	//		expansion_tester(tok);
-	//		print_tokens(tok);
 			free_token_lst(tok);
 		}
 		free(line);

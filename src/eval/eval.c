@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/01 14:09:11 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/01 18:48:23 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ int		pipe_callback(t_cmd_tab *to, t_cmd_tab *from)
 		close(pipes[0]);
 		if (from->next != NULL)
 			pipe_callback(from, from->next);
-		execute_cmd(from);
+		execute_command(from);
 		exit(0);
 	}
 	dup2(pipes[0], STDIN_FILENO);
 	close(pipes[1]);
 	wait (NULL);
-	execute_cmd(to);
+	execute_command(to);
 	exit(0);
 	return (0);
 }
@@ -106,8 +106,9 @@ t_cmd_tab	*expand_simple_cmd(t_simple_cmd *before)
 			return (NULL);	
 	if ((after->av = expand_word_lst(before->word_lst))== NULL)
 		return (NULL);
-	if ((after->process_env = lst_to_tab(*g_environ, 0) ) == NULL)
-		return (NULL);
+/* all assignements are done in subshell
+	if ((after->process_env = lst_to_tab(*g_environ, 0) ) == NULL) 
+		return (NULL);*/
 	after->redir_lst = before->redir_lst;
 	return (after);
 }
@@ -144,7 +145,7 @@ int	exec_pipeline(t_ast_node *tree)
 	if (cmd_tab->next)
 		ret = eval_pipe(cmd_tab);
 	else /*spawn bin here*/
-		ret = execute_cmd(cmd_tab);
+		ret = spawn_command(cmd_tab);
 	if (ret)
 		return (ret);
 	tree->exit_status = cmd_tab->exit_status;

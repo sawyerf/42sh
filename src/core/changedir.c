@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 00:00:01 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/01 14:07:21 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/01 18:56:56 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,31 +77,31 @@ char		cd_parseopt(char **args)
 	return (opt);
 }
 
-int			change_dir(t_command *cmd)
+int			change_dir(t_cmd_tab *cmd)
 {
 	char	*curpath;
 	char	opt;
 
-	if ((opt = cd_parseopt(cmd->args)) == '?')
+	if ((opt = cd_parseopt(cmd->av)) == '?')
 		return (0);
-	if ((cmd->args[g_optind] == NULL) || (cmd->args[g_optind][0] == 0))
+	if ((cmd->av[g_optind] == NULL) || (cmd->av[g_optind][0] == 0))
 	{
 		curpath = get_env_value("HOME");
 		if ((curpath == NULL) || (*curpath == 0))
 			return (cd_error(4, NULL));
 		curpath = ft_strdup(curpath);
 	}
-	else if (!ft_strncmp(cmd->args[g_optind], "-", 2))
+	else if (!ft_strncmp(cmd->av[g_optind], "-", 2))
 		curpath = ft_strdup(getoldpwd());
 	else
-		curpath = ft_strdup(cmd->args[g_optind]);
+		curpath = ft_strdup(cmd->av[g_optind]);
 	if ((curpath == NULL) || (handle_cdpath(&curpath) == MEMERR))
 		return (MEMERR);
 	if (ft_strlen(curpath) > PATH_MAX)
 		return (cd_error(1, NULL));
 	if (opt == 'P')
-		return (cd_p(curpath, cmd->args[g_optind]));
+		return (cd_p(curpath, cmd->av[g_optind]));
 	else if (opt == 'L')
-		return (cd_l(curpath, cmd->args[g_optind]));
+		return (cd_l(curpath, cmd->av[g_optind]));
 	return (0);
 }

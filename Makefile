@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/02/05 19:06:03 by alarm            ###   ########.fr        #
+#    Updated: 2019/02/06 16:58:15 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = 21sh
 
 CC = gcc
 
-CFLAGS = -I inc/ -I lib/ -Wall -Werror -Wextra
+CFLAGS = -I inc/ -I lib/ -ggdb -Wall -Werror -Wextra 
 
 DEBUG= -g3 -fsanitize=address
 
@@ -28,7 +28,7 @@ INC_FILE =	ft_eval.h \
 
 SRC_DIR = src
 
-SRC_FILE =	core/bin_path.c \
+SRC_FILE =	core/builtins.c \
 			core/cd_l_p.c \
 			core/cd_tools.c \
 			core/changedir.c \
@@ -37,7 +37,6 @@ SRC_FILE =	core/bin_path.c \
 			core/env_handler.c \
 			core/env_lst_util.c \
 			core/env_lst_util2.c \
-			core/execute.c \
 			core/expand_dollar.c \
 			core/expand_tokens.c \
 			core/ft_env.c \
@@ -46,6 +45,7 @@ SRC_FILE =	core/bin_path.c \
 			core/path_tools.c \
 			core/util.c \
 			core/util2.c \
+			eval/bin_path.c \
 			eval/eval.c \
 			eval/spawn_bin.c \
 			eval/var_assign.c \
@@ -70,7 +70,8 @@ SRC_FILE =	core/bin_path.c \
 			readline/term.c \
 			readline/tools.c \
 			readline/signal.c \
-			readline/keys.c
+			readline/keys.c \
+			light_parser/light_parser.c 
 
 OBJ_DIR = .obj
 OBJ_FILE = $(SRC_FILE:.c=.o)
@@ -80,7 +81,8 @@ CRT_DIR = core \
 		  lexer \
 		  eval \
 		  readline \
-		  parser
+		  parser \
+		  light_parser 
 
 SRC = $(addprefix $(SRC_DIR)/,$(SRC_FILE))
 INC = $(addprefix $(INC_DIR)/,$(INC_FILE))
