@@ -6,10 +6,10 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/02 17:41:12 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/07 18:00:29 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+#include "readline.h"
 #include "ft_lexer.h"
 /*
 add mem error exit for str_putchar done
@@ -40,13 +40,17 @@ int	handle_dquote(char **input, t_token *token)
 		if (str_putchar(input, &(token->data)) == MEMERR)
 			return (MEMERR);
 	}
+
 	return (DQUOTE_ERR);
 }
 
 int handle_squote(char **input, t_token *token)
 {
-	while (**input)
+	char *new_line;
+
+	while (42)
 	{
+
 		if (str_putchar(input, &(token->data)) == MEMERR)
 			return (MEMERR);
 		if (**input == '\'')
@@ -55,7 +59,17 @@ int handle_squote(char **input, t_token *token)
 				return (MEMERR);
 			return (0);
 		}
+		else if (**input ==  '\0')
+		{
+			new_line = readline("> ");
+			if (new_line == NULL)
+				return (MEMERR);
+			else if (*new_line == 0)
+				return (SQUOTE_ERR);
+			*input = new_line;
+		}
 	}
+
 	return (SQUOTE_ERR);
 }
 
