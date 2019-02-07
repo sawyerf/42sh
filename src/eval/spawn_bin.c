@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/06 19:37:16 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/07 17:47:50 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,13 +151,18 @@ int		spawn_in_pipe(t_cmd_tab *cmd)
 static	int assign_to_shell(t_cmd_tab *cmd)
 {
 	int i;
-	t_environ *tmp;
+	t_environ 	*tmp;
+	t_environ 	*is_set;
+	int			to_export;
 	i = 0;
 	while (cmd->assign_lst[i])
 	{
+		to_export = 0;
+		if ((is_set = get_env_node(cmd->assign_lst[i])))
+			to_export = is_set->to_export; 
 		if (!(tmp = env_to_lst(cmd->assign_lst[i])))
 			return (MEMERR);
-		if (set_shell_env(tmp->name, tmp->value, 0) == MEMERR)
+		if (set_shell_env(tmp->name, tmp->value, to_export) == MEMERR)
 			return (MEMERR);
 		free(tmp->name);
 		free(tmp->value);
