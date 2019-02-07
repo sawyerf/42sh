@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/06 16:59:41 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/07 20:39:09 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char				*readline(char	*PROMPT);
 int		terminit(struct termios *save);
 int		getcolumn(void);
 int		termreset(struct termios *save);
-void		tgpstr(char *s);
+void	tgpstr(char *s);
 
 //keys
 int	    key_router(t_rdl *rdl, char *buf);
@@ -80,13 +80,18 @@ int		autocompl(t_rdl *rdl, char *buf);
 
 //tools
 int		is_special(char *buf);
-void	left(int i);
-void	right(int i);
+void	left(t_rdl *rdl, int i);
+void	right(t_rdl *rdl, int i);
+
+//file
+t_list	*get_exec(char *exec, char *path);
+t_list	*get_folex(char *token);
 
 //struct rdl
 void				rdlinit(t_rdl *rdl, char *PROMPT);
 void	rdladd(t_rdl *rdl, char c);
 void	rdldel(t_rdl *rdl, int curs);
+void	rdladdstr(t_rdl *rdl, char *str);
 
 //signal
 void	setsig(void);

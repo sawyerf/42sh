@@ -1,34 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_util.c                                          :+:      :+:    :+:   */
+/*   pf_strlower.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/08 19:48:26 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/07 16:54:18 by apeyret          ###   ########.fr       */
+/*   Created: 2018/12/02 16:06:58 by apeyret           #+#    #+#             */
+/*   Updated: 2018/12/09 18:40:56 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "libft.h"
 
-int		ft_char_cmp(char chr, char *array)
+char	*ft_strlower(char *s)
 {
-	int i;
+	int count;
 
-	i = 0;
-	while (array[i])
+	count = 0;
+	while (s[count])
 	{
-		if (chr == array[i])
-			return (1);
-		i++;
+		s[count] = ft_tolower(s[count]);
+		count++;
 	}
-	return (0);
-}
-
-void	ft_swap_char(char *a, char *b)
-{
-	*a = *a ^ *b;
-	*b = *a ^ *b;
-	*a = *a ^ *b;
+	return (s);
 }

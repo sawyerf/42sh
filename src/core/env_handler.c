@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 22:17:22 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/06 16:07:09 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/07 14:25:27 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,29 +52,7 @@ char	*tab_get_value(char *name, char **env)
 	}
 	return (NULL);
 }
-/*
-	this is broken, we mix NULL memerror with NULL no var found
-char	*get_env_value(char *name)
-{
-	t_environ	*tmp;
-	char		*clean_name;
-	int			i;
 
-	i = 0;
-	while (valid_env_char(name[i]))
-		i++;
-	clean_name = ft_strnew(i);
-	if (clean_name == NULL)
-		return (NULL);
-	ft_strncpy(clean_name, name, i);
-	tmp = get_env_node(clean_name);
-	free(clean_name);
-	if (tmp != NULL)
-		return (tmp->value);
-	return (NULL);
-}
-
-*/
 char	*get_env_value(char *name)
 {
 	t_environ	*tmp;

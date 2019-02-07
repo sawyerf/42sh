@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:47:43 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/06 19:41:03 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/07 20:40:06 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,37 @@ t_key	g_key[] = {
 	{NULL, &special_key}
 };
 
+t_list	*get_choice(t_autocomplete acp)
+{
+	char			*path;
+
+	if (acp.type == cmd_name)
+	{
+		if (!(path = get_env_value("PATH")))
+			return (NULL);
+		return (get_exec(acp.str, path));
+	}
+	else if (acp.type == arg || acp.type == param)
+		return (get_folex(acp.str));
+	return (NULL);
+}
+
 int		autocompl(t_rdl *rdl, char *buf)
 {
-	char			c;
-	t_autocomplete	*acp;
+	char	c;
+	t_list	*lst;
+	t_autocomplete	acp;
 
-	acp = NULL;
 	(void)buf;
 	c = rdl->str[rdl->curs];
 	rdl->str[rdl->curs] = 0;
-	ft_light_parser(rdl->str, acp);
+	ft_light_parser(ft_strdup(rdl->str), &acp);
+	lst = get_choice(acp);
 	rdl->str[rdl->curs] = c;
+	if (!lst)
+		return (0);
+	if (!lst->next)
+		rdladdstr(rdl, lst->content);
 	return (0);
 }
 
@@ -76,7 +96,7 @@ int		next_word(t_rdl *rdl, char *buf)
 
 	(void)buf;
 	count = np_word(rdl, 1);
-	right(count);
+	right(rdl, count);
 	rdl->curs += count;
 	return (0);
 }
@@ -87,7 +107,7 @@ int		prev_word(t_rdl *rdl, char *buf)
 	
 	(void)buf;
 	count = np_word(rdl, -1);
-	left(count);
+	left(rdl, count);
 	rdl->curs -= count;
 	return (0);
 }
@@ -114,7 +134,7 @@ int		ctrld(t_rdl *rdl, char *buf)
 int		begin(t_rdl *rdl, char *buf)
 {
 	(void)buf;
-	left(rdl->curs);
+	left(rdl, rdl->curs);
 	rdl->curs = 0;
 	return (0);
 }
@@ -123,7 +143,7 @@ int		move_curs(t_rdl *rdl, char *buf)
 {
 	if (!ft_strcmp(K_RGHT, buf) && rdl->size > rdl->curs)
 	{
-		write(1, &rdl->str[rdl->curs], 1);
+		right(rdl, 1);
 		rdl->curs++;
 	}
 	if (!ft_strcmp(K_LEFT, buf) && rdl->curs > 0)

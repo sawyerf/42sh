@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_util.c                                          :+:      :+:    :+:   */
+/*   ft_cisin.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/08 19:48:26 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/07 16:54:18 by apeyret          ###   ########.fr       */
+/*   Created: 2018/12/06 18:46:55 by apeyret           #+#    #+#             */
+/*   Updated: 2018/12/09 18:42:01 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
-
-int		ft_char_cmp(char chr, char *array)
+int		ft_cisin(char *s, char c)
 {
-	int i;
+	int		count;
 
-	i = 0;
-	while (array[i])
+	count = 0;
+	while (s[count])
 	{
-		if (chr == array[i])
+		if (s[count] == c)
 			return (1);
-		i++;
+		count++;
 	}
 	return (0);
-}
-
-void	ft_swap_char(char *a, char *b)
-{
-	*a = *a ^ *b;
-	*b = *a ^ *b;
-	*a = *a ^ *b;
 }

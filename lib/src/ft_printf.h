@@ -6,7 +6,7 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 18:44:50 by glavigno          #+#    #+#             */
-/*   Updated: 2019/02/07 16:37:44 by apeyret          ###   ########.fr       */
+/*   Updated: 2018/12/10 18:33:53 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct		s_printf
 	struct s_printf	*next;
 }					t_printf;
 
-t_printf			*pf_parser(const char *str);
+t_printf			*parser(const char *str);
 t_printf			*ft_pushback(t_printf *lst, t_printf *add);
 t_printf			*pf_prnew(char *str, int needconv);
 t_opt				pf_optnew(void);

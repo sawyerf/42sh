@@ -6,25 +6,36 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 20:09:49 by ktlili            #+#    #+#             */
-/*   Updated: 2018/07/22 13:52:17 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/07 18:12:03 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 #include <string.h>
 
-char			*ft_strchr(const char *s, int c)
+char			*ft_strechr(const char *s, int c)
 {
-	char		target;
-	int			i;
 	int			len;
 
 	len = ft_strlen(s);
-	target = c;
-	i = 0;
-	while (i <= len)
+	len--;
+	while (len)
 	{
-		if (s[i] == target)
+		if (s[len] == c)
+			return ((char*)&s[len]);
+		len--;
+	}
+	return (NULL);
+}
+
+char			*ft_strchr(const char *s, int c)
+{
+	int			i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == c)
 			return ((char*)&s[i]);
 		i++;
 	}

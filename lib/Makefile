@@ -6,7 +6,7 @@
 #    By: ktlili <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/10 23:32:37 by ktlili            #+#    #+#              #
-#    Updated: 2019/02/06 16:07:28 by apeyret          ###   ########.fr        #
+#    Updated: 2019/02/07 16:53:52 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,17 +16,8 @@ SRC_PATH = src
 
 SRC_NAME =	ft_strnsplit.c \
 			ft_splitblanks.c \
-			itoa_base.c \
-			ft_printf.c \
-			ft_parser.c \
-			ft_parser_tools.c \
 			ft_util.c \
-			ft_convert_str.c \
-			ft_convert_nbr.c \
-			ft_get_nbr.c \
-			ft_sanity.c \
-			ft_wbuffer.c \
-			ft_wstr_util.c \
+			itoa_base.c \
 			ft_atoi.c \
 			ft_bzero.c \
 			ft_isdigit.c \
@@ -87,6 +78,19 @@ SRC_NAME =	ft_strnsplit.c \
 			ft_lstmap.c \
 			get_next_line.c \
 			ft_getopt.c \
+			ft_printf/ft_printf.c \
+			ft_printf/pf_base.c \
+			ft_printf/pf_ftoa.c \
+			ft_printf/pf_len.c \
+			ft_printf/pf_options.c \
+			ft_printf/pf_parsing.c \
+			ft_printf/pf_put.c \
+			ft_printf/pf_router.c \
+			ft_printf/pf_struct.c \
+			ft_printf/pf_utils.c \
+			ft_strndup.c \
+			ft_cisin.c \
+			ft_strlower.c
 
 OBJ_PATH = obj
 
@@ -109,7 +113,7 @@ $(NAME): $(OBJ)
 	ranlib $(NAME)
 
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
-	mkdir -p $(OBJ_PATH)
+	mkdir -p $(OBJ_PATH)/ft_printf
 	$(CC) -I. $(FLAGS) -o $@ -c $<
 
 clean:

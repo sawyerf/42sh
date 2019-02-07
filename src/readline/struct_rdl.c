@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 15:15:46 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/06 18:25:07 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/07 17:42:45 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void	rdldel(t_rdl *rdl, int curs)
 	if (curs > rdl->size || rdl->size < 0 || rdl->curs <= 0)
 		return ;
 	ft_strcpy(rdl->str + curs, rdl->str + curs + 1);
-	left(rdl->curs + rdl->lpro);
+	left(rdl, rdl->curs + rdl->lpro);
 	tgpstr("dl");
 	adv = ft_printf("%s%s ", rdl->prompt, rdl->str);
-	left(adv - rdl->lpro - rdl->curs + 1);
+	left(rdl, adv - rdl->lpro - rdl->curs + 1);
 	rdl->size--;
 	rdl->curs--;
 }
@@ -51,6 +51,20 @@ void	rdl_realloc(t_rdl *rdl)
 	ft_strdel(&tmp);
 }
 
+void	rdladdstr(t_rdl *rdl, char *str)
+{
+	int	count;
+
+	count = 0;
+	if (!str)
+		return ;
+	while (str[count])
+	{
+		rdladd(rdl, str[count]);
+		count++;
+	}
+}
+
 void	rdladd(t_rdl *rdl, char c)
 {
 	int adv;
@@ -62,7 +76,7 @@ void	rdladd(t_rdl *rdl, char c)
 	ft_memmove(rdl->str + rdl->curs + 1, rdl->str + rdl->curs, rdl->size - rdl->curs);
 	rdl->str[rdl->curs] = c;
 	adv = ft_printf("%s", rdl->str + rdl->curs);
-	left(adv - 1);
+	left(rdl, adv - 1);
 	rdl->size++;
 	rdl->curs++;
 }

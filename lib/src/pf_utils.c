@@ -1,53 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools.c                                            :+:      :+:    :+:   */
+/*   pf_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/01 17:49:02 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/07 14:12:22 by apeyret          ###   ########.fr       */
+/*   Created: 2019/01/16 14:09:24 by apeyret           #+#    #+#             */
+/*   Updated: 2019/01/16 14:09:27 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "readline.h"
+#include "ft_printf.h"
 
-void	left(t_rdl *rdl, int i)
+void	ft_replace(char *s, char c1, char c2, int len)
 {
-	(void)rdl;
-	while (i)
-	{
-		write(1, K_LEFT, 3);
-		i--;
-	}
-}
-
-void	right(t_rdl *rdl, int i)
-{
-	int	count;
+	int count;
 
 	count = 0;
-	while (count < i)
+	while (count < len)
 	{
-		if (!((rdl->lpro + rdl->curs + count) % (rdl->col - 1)))
-			tgpstr("do");
-		else
-			write(1, K_RGHT, 3);
+		if (s[count] == c1)
+		{
+			s[count] = c2;
+			return ;
+		}
 		count++;
 	}
 }
 
-int		is_special(char *buf)
+int		lenall(t_printf *lst)
 {
-	int		count;
-	
-	count = 0;
-	while (buf[count])
-	{
-		if (!ft_isprint(buf[count]))
-			return (1);
-		count++;
-	}
-	return (0);
-}
+	int nb;
 
+	nb = 0;
+	while (lst)
+	{
+		nb += lst->len;
+		lst = lst->next;
+	}
+	return (nb);
+}
