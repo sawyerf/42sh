@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/06 17:07:31 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/07 19:45:30 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	init_jump_table(t_func table[TABLESZ])
 
 }
 
-
+/*
 int next_token(char *line, t_token **head)
 {
 	static char 	*iter = NULL;
@@ -65,7 +65,47 @@ int next_token(char *line, t_token **head)
 	add_token(head, token);
 	return (ENDOFINPUT);
 }
+*/
+t_token	*ft_tokenizer(char *line)
+{
+	static	t_func	table[TABLESZ];
+	static	int		flag = 0;
+	t_lexer			lexer_state;
+	t_token			*head;
+	int				ret;
 
+	lexer_state.line = line;
+	lexer_state.cursor = line;
+	if (!flag)
+		init_jump_table(table);
+	flag = 1;
+	head = NULL;
+	while (ft_is_whitespace(*(lexer_state.cursor)))
+		lexer_state.cursor = lexer_state.cursor + 1;
+	while (*(lexer_state.cursor))
+	{
+		lexer_state.token = new_token(0);
+		if (!lexer_state.token)
+			return (NULL);
+		if ((*(lexer_state.cursor)) > 0 )
+			ret = table[(int)*(lexer_state.cursor)](&lexer_state);
+		else
+			ret = table[1](&lexer_state);
+		add_token(&head, lexer_state.token);
+		lexer_state.token = NULL;
+		if (ret)
+		{
+			ft_printf("21sh: lexer error: %d\n", ret);
+			free_token_lst(head);
+			return (NULL);
+		}
+		while (ft_is_whitespace(*(lexer_state.cursor)))
+			lexer_state.cursor = lexer_state.cursor + 1;
+	}
+	add_token(&head, new_token(1));
+	return (head);
+}
+/*
 t_token	*ft_tokenizer(char *line)
 {
 	static	t_func	table[TABLESZ];
@@ -102,8 +142,8 @@ t_token	*ft_tokenizer(char *line)
 	add_token(&head, new_token(1));
 	return (head);
 }
-
-
+*/
+/*
 int		ft_tokenizer_2(char *line, t_token **head)
 {
 	static	t_func	table[TABLESZ];
@@ -129,7 +169,7 @@ int		ft_tokenizer_2(char *line, t_token **head)
 		add_token(head, tmp);
 		if (ret)
 		{
-			/* we still parse even when lexer dosent validate line*/
+			// we still parse even when lexer dosent validate line
 			return (ret);
 		}
 		while (ft_is_whitespace(*line))
@@ -138,7 +178,6 @@ int		ft_tokenizer_2(char *line, t_token **head)
 	add_token(head, new_token(1));
 	return (0);
 }
-
 void	ft_test_lexer(char *line)
 {
 	t_token *head = NULL;
@@ -153,4 +192,4 @@ void	ft_test_lexer(char *line)
 		head = head->next;
 	}
 
-}
+}*/

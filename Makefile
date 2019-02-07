@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/02/06 16:58:15 by apeyret          ###   ########.fr        #
+#    Updated: 2019/02/07 15:49:33 by ktlili           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = gcc
 
 CFLAGS = -I inc/ -I lib/ -ggdb -Wall -Werror -Wextra 
 
-DEBUG= -g3 -fsanitize=address
+DEBUG= #-g3 -fsanitize=address
 
 INC_DIR = inc
 

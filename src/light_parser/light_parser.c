@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/02 18:48:00 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/07 19:14:43 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int		ft_light_parser(char *line, t_autocomplete *autocomplete)
 	tokens = NULL;
 	ft_strrev(line); /* invert line since we are interested in last tokens only*/
 	expecting = cmd_name;
-	if (ft_tokenizer_2(line, &tokens) == MEMERR)
-		return (MEMERR);
+	//if (ft_tokenizer_2(line, &tokens) == MEMERR)
+	//	return (MEMERR);
 	if  ((tokens->type >= PIPE) && (tokens->type <= GREAT))
 /* last token is an operator, expecting cmd_name*/
 	{
@@ -106,8 +106,8 @@ int		ft_light_parser(char *line, t_autocomplete *autocomplete)
 	int			first_word;
 
 	tokens = NULL;
-	if (ft_tokenizer_2(line, &tokens) == MEMERR)
-		return (MEMERR);
+//	if (ft_tokenizer_2(line, &tokens) == MEMERR)
+//		return (MEMERR);
 	last_token = tokens;
 	expecting = cmd_name;
 	first_word = 1;

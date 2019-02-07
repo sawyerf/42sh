@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:47:43 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/06 19:41:03 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/07 18:33:02 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,9 @@ int		prev_word(t_rdl *rdl, char *buf)
 }
 int		enter(t_rdl *rdl, char *buf)
 {
-	(void)rdl;
 	(void)buf;
+	right(rdl->size - rdl->curs);
+	rdladd(rdl, '\n');
 	return (1);
 }
 

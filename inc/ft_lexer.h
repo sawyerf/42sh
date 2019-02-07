@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/02 18:45:44 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/07 19:10:11 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,24 @@
 #define INPUTSZ 24
 
 /*
+ * new lex jump table
+ */
+
+typedef int (*t_func)(t_lexer*);
+
+int handle_dquote(t_lexer *lexer_state);
+int handle_digit(t_lexer *lexer_state);
+int handle_common(t_lexer *lexer_state);
+int handle_ampersand(t_lexer *lexer_state);
+int handle_squote(t_lexer *lexer_state);
+int handle_semic(t_lexer *lexer_state);
+int handle_less(t_lexer *lexer_state);
+int handle_great(t_lexer *lexer_state);
+int handle_column(t_lexer *lexer_state);
+
+/*
 Lexer jump table
-*/
+
 typedef int (*t_func)(char**, t_token*);
 
 int handle_dquote(char **input, t_token *token);
@@ -38,7 +54,7 @@ int handle_semic(char **input, t_token *token);
 int handle_less(char **input, t_token *token);
 int handle_great(char **input, t_token *token);
 int handle_column(char **input, t_token *token);
-
+ */
 /*
 	intermediate cmd functions
 */
