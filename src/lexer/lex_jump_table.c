@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/07 19:08:59 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/07 20:03:16 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "readline.h"
@@ -48,17 +48,19 @@ int handle_squote(t_lexer *lexer_state)
 {
 	char *new_line;
 
+	if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
+		return (MEMERR);
 	while (42)
 	{
 
-		if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
-			return (MEMERR);
 		if (*(lexer_state->cursor) == '\'')
 		{
 			if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
 				return (MEMERR);
 			return (0);
 		}
+		else if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
+			return (MEMERR);
 		else if (*(lexer_state->cursor) ==  '\0')
 		{
 			new_line = readline("> ");
@@ -68,7 +70,7 @@ int handle_squote(t_lexer *lexer_state)
 				return (SQUOTE_ERR);
 			free(lexer_state->line);
 			lexer_state->line = new_line;
-			(lexer_state->cursor) = new_line;
+			lexer_state->cursor = new_line;
 		}
 	}
 
@@ -138,7 +140,7 @@ int	handle_common(t_lexer *lexer_state)
 			err_ret = handle_squote(lexer_state);
 		else if (*(lexer_state->cursor) == '$')
 			err_ret = handle_param_exp(lexer_state);
-		else if ((*(lexer_state->cursor) == '\\') && (*(*&(lexer_state->cursor) + 1)))
+		else if ((*(lexer_state->cursor) == '\\') && (*((lexer_state->cursor) + 1)))
 		{
 			if ((str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
 				|| (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR))

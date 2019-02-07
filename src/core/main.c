@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/07 19:19:00 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/07 20:04:35 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,10 +153,10 @@ int				main(int ac, char **av, char **env)
 			test_sh_parser(tok);
 			free_token_lst(tok);
 		}
-		free(line);
+//		free(line);
 	}
 	ret = 1;
-	free(line);
+//	free(line);
 	write(1, "\n", 1);
 	return (ret);
 }
