@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/07 20:05:27 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/08 16:02:15 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,9 @@ t_token	*ft_tokenizer(char *line)
 			ret = table[1](&lexer_state);
 		add_token(&head, lexer_state.token);
 		lexer_state.token = NULL;
-		if (ret)
+		if (ret == ENDOFINPUT)
 		{
-			ft_printf("21sh: lexer error: %d\n", ret);
+		//	ft_printf("21sh: lexer error: %d\n", ret);
 			free_token_lst(head);
 			return (NULL);
 		}

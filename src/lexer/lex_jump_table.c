@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/07 20:03:16 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/08 16:00:38 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "readline.h"
@@ -16,15 +16,31 @@ add mem error exit for str_putchar done
 add lex error for backslash followed by EOI
 */
 
+int	request_new_line(t_lexer *lexer_state)
+{
+	char *new_line;
+
+	new_line = readline("> ");
+	if (new_line == NULL)
+		return (MEMERR);
+	else if (*new_line == 0)
+		return (SQUOTE_ERR);
+	free(lexer_state->line);
+	lexer_state->line = new_line;
+	lexer_state->cursor = new_line;
+	return (0);
+}
 
 int	handle_dquote(t_lexer *lexer_state)
 {
+	int ret;
+
 	if (*(lexer_state->cursor) == '"')
 	{
 		if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
 			return (MEMERR);
 	}
-	while (*(lexer_state->cursor))
+	while (42)
 	{
 		if (*(lexer_state->cursor) == '"')
 		{
@@ -32,21 +48,28 @@ int	handle_dquote(t_lexer *lexer_state)
 				return (MEMERR);
 			return (handle_common(lexer_state));
 		}
-		else if ((*(lexer_state->cursor) == '\\') && (*(*&(lexer_state->cursor) + 1)))
-		{
+		else if ((*(lexer_state->cursor) == '\\') && (*((lexer_state->cursor) + 1)))
+		{ /* this is ugly*/
+			if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
+				return (MEMERR);
 			if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
 				return (MEMERR);
 		}
-		if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
+		else if (*(lexer_state->cursor) ==  '\0')
+		{
+			if ((ret = request_new_line(lexer_state)))
+				return (ret);
+		}
+		else if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
 			return (MEMERR);
 	}
 
-	return (DQUOTE_ERR);
+	return (ENDOFINPUT);
 }
 
 int handle_squote(t_lexer *lexer_state)
 {
-	char *new_line;
+	int ret;
 
 	if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
 		return (MEMERR);
@@ -59,22 +82,15 @@ int handle_squote(t_lexer *lexer_state)
 				return (MEMERR);
 			return (0);
 		}
-		else if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
-			return (MEMERR);
 		else if (*(lexer_state->cursor) ==  '\0')
 		{
-			new_line = readline("> ");
-			if (new_line == NULL)
-				return (MEMERR);
-			else if (*new_line == 0)
-				return (SQUOTE_ERR);
-			free(lexer_state->line);
-			lexer_state->line = new_line;
-			lexer_state->cursor = new_line;
+			if ((ret = request_new_line(lexer_state)))
+				return (ret);
 		}
+		else if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
+			return (MEMERR);
 	}
-
-	return (SQUOTE_ERR);
+	return (ENDOFINPUT);
 }
 
 int	handle_digit(t_lexer *lexer_state)
