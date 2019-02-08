@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/07 20:39:09 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/08 18:35:53 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,4 +96,6 @@ void	rdladdstr(t_rdl *rdl, char *str);
 //signal
 void	setsig(void);
 
+//print
+void	putlst(char *mtc, t_list *lst, t_rdl *rdl);
 #endif

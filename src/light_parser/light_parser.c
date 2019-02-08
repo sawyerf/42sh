@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/02 18:48:00 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/08 15:47:51 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int		ft_light_parser(char *line, t_autocomplete *autocomplete)
 	t_expecting expecting;
 
 	tokens = NULL;
+	if (!*line)
+		return (1);
 	ft_strrev(line); /* invert line since we are interested in last tokens only*/
 	expecting = cmd_name;
 	if (ft_tokenizer_2(line, &tokens) == MEMERR)
@@ -95,53 +97,3 @@ int		ft_light_parser(char *line, t_autocomplete *autocomplete)
 	free_token_lst(tokens);
 	return (0);
 }
-
-/*
-int		ft_light_parser(char *line, t_autocomplete *autocomplete)
-{
-	t_token *tokens;
-	t_token *last_token;
-	t_token *save;
-	t_expecting expecting;
-	int			first_word;
-
-	tokens = NULL;
-	if (ft_tokenizer_2(line, &tokens) == MEMERR)
-		return (MEMERR);
-	last_token = tokens;
-	expecting = cmd_name;
-	first_word = 1;
-	while (last_token->type != NEWLINE)
-	{
-		if ((last_token->type >= PIPE) && (last_token->type <= OR_IF))
-		{
-			first_word = 1;
-			expecting = cmd_name;	
-		}
-		if (last_token->type == WORD)
-		{
-			if (((first_word)) 
-				&& (!parser_is_assign(last_token)))
-			{
-				expecting = cmd_name;
-				first_word = 0;
-			}
-			else
-				expecting = arg;
-		}
-		save = last_token;
-		last_token = last_token->next;
-	}
-	if ((save->type >= LESSAND) && (save->type <= GREAT))
-		expecting = arg;
-	autocomplete->type = expecting;
-	if (save->type == WORD)
-		autocomplete->str = ft_strdup(save->data.str);
-	else 
-		autocomplete->str = ft_strdup("");
-	if (autocomplete->str == NULL)
-		return (MEMERR);
-
-	return (0);
-}
-*/
