@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/08 16:02:15 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/11 19:01:49 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,13 @@ t_token	*ft_tokenizer(char *line)
 		lexer_state.token = new_token(0);
 		if (!lexer_state.token)
 			return (NULL);
-		if ((*(lexer_state.cursor)) > 0 )
+		if (*(lexer_state.cursor) > 0 )
 			ret = table[(int)*(lexer_state.cursor)](&lexer_state);
 		else
 			ret = table[1](&lexer_state);
 		add_token(&head, lexer_state.token);
 		lexer_state.token = NULL;
-		if (ret == ENDOFINPUT)
+		if (ret == ENDOFINPUT) /* this is useless */
 		{
 		//	ft_printf("21sh: lexer error: %d\n", ret);
 			free_token_lst(head);
@@ -106,44 +106,6 @@ t_token	*ft_tokenizer(char *line)
 	free(lexer_state.line);
 	return (head);
 }
-/*
-t_token	*ft_tokenizer(char *line)
-{
-	static	t_func	table[TABLESZ];
-	static	int		flag = 0;
-	t_token			*tmp;
-	t_token			*head;
-	int				ret;
-
-	if (!flag)
-		init_jump_table(table);
-	flag = 1;
-	head = NULL;
-	while (ft_is_whitespace(*line))
-		line++;
-	while (*line)
-	{
-		tmp = new_token(0);
-		if (!tmp)
-			return (NULL);
-		if ((*line) > 0 )
-			ret = table[(int)*line](&line, tmp);
-		else
-			ret = table[1](&line, tmp);
-		add_token(&head, tmp);
-		if (ret)
-		{
-			ft_printf("21sh: lexer error: %d\n", ret);
-			free_token_lst(head);
-			return (NULL);
-		}
-		while (ft_is_whitespace(*line))
-			line++;
-	}
-	add_token(&head, new_token(1));
-	return (head);
-}
-*/
 /*
 int		ft_tokenizer_2(char *line, t_token **head)
 {
@@ -179,6 +141,7 @@ int		ft_tokenizer_2(char *line, t_token **head)
 	add_token(head, new_token(1));
 	return (0);
 }
+
 void	ft_test_lexer(char *line)
 {
 	t_token *head = NULL;
