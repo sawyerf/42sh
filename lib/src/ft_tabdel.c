@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdel.c                                        :+:      :+:    :+:   */
+/*   ft_tabdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/03 18:40:06 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/11 19:26:38 by apeyret          ###   ########.fr       */
+/*   Created: 2019/02/11 18:50:39 by apeyret           #+#    #+#             */
+/*   Updated: 2019/02/11 18:52:43 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-void	ft_lstdel(t_list **alst)
+void	ft_tabdel(char ***tab)
 {
-	t_list	*temp;
+	int i;
 
-	if (!*alst)
-		return ;
-	while ((*alst)->next)
+	i = 0;
+	while ((*tab)[i])
 	{
-		temp = (*alst)->next;
-		free((*alst)->content);
-		(*alst)->content = 0;
-		free(*alst);
-		*alst = NULL;
-		*alst = temp;
+		ft_strdel(&(*tab)[i]);
+		i++;
 	}
-	free((*alst)->content);
-	free(*alst);
-	*alst = NULL;
+	free(*tab);
+	*tab = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 14:48:16 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/08 18:57:11 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/11 20:52:01 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int		filexist(char *file)
 			return (-2);
 		return (0);
 }
+
 int		folexaccess(char *file)
 {
 		struct stat st;
@@ -94,11 +95,26 @@ t_list	*get_folex(char *token)
 	return (lst);
 }
 
+t_list	*filterpath(char *exec, t_list *lst)
+{
+	t_list	*match;
+	int		len;
+
+	len = ft_strlen(exec);
+	match = NULL;
+	while (lst)
+	{
+		if (!ft_strncmp(exec, lst->content, len))
+			ft_lstadd(&match, ft_lstnew(lst->content + len, ft_strlen(lst->content + len)));
+		lst = lst->next;
+	}
+	return (match);
+}
+
 t_list	*get_exec(char *exec, char *path)
 {
 	char	**paths;
 	int		count;
-	DIR		*ptr;
 	t_list	*lst;
 
 	if (exec[0] == '/' || !ft_strncmp("./", exec, 2))
@@ -109,11 +125,7 @@ t_list	*get_exec(char *exec, char *path)
 	count = 0;
 	while (paths[count])
 	{
-		if ((ptr = opendir(paths[count])))
-		{
-			ft_lstadd(&lst, folderin(ptr, paths[count], exec, &exaccess));
-			closedir(ptr);
-		}
+		ft_lstadd(&lst, filterpath(exec, ht_get(paths[count])));
 		count++;
 	}
 	return (lst);

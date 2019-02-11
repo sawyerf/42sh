@@ -6,7 +6,7 @@
 #    By: ktlili <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/10 23:32:37 by ktlili            #+#    #+#              #
-#    Updated: 2019/02/07 16:53:52 by apeyret          ###   ########.fr        #
+#    Updated: 2019/02/11 18:53:10 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,6 +90,7 @@ SRC_NAME =	ft_strnsplit.c \
 			ft_printf/pf_utils.c \
 			ft_strndup.c \
 			ft_cisin.c \
+			ft_tabdel.c \
 			ft_strlower.c
 
 OBJ_PATH = obj

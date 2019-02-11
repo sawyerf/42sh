@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/03 18:48:23 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/08 14:08:36 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/11 17:26:50 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,15 @@
 
 void	ft_lstadd(t_list **alst, t_list *new)
 {
+	t_list *tmp;
+
 	if (!new)
 		return;
-	if (alst)
-		new->next = NULL;
-	new->next = *alst;
+	if (!alst)
+		return ;
+	tmp = new;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = *alst;
 	*alst = new;
 }

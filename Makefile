@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/02/08 16:49:27 by apeyret          ###   ########.fr        #
+#    Updated: 2019/02/11 15:44:27 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,6 +74,7 @@ SRC_FILE =	core/builtins.c \
 			readline/keys.c \
 			readline/files.c \
 			readline/print_choice.c \
+			readline/hashtable.c \
 			light_parser/light_parser.c 
 
 OBJ_DIR = .obj

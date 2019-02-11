@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/06 20:02:22 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/11 20:03:28 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,25 +63,6 @@ void	print_token(t_token *t)
 	ft_printf("type %s |  str '%s'\n", types[t->type], t->data.str);
 }
 
-/*
-void	print_tokens(t_token *start)
-{
-	char types[100][100] = {"WORD","NEWLINE","IO_NUM","FILENAME", "ASSIGN", "PIPE", "SEMI_COL",
-				"AMPERS","ANDIF", "ORIF", "LESSAND", "GREATAND", "DGREAT", "LESS",
-				"GREAT"};
-	t_token *save;
-	while (start)
-	{
-		
-		ft_printf("type %s |  str '%s'|", types[start->type], start->data.str);
-		if (ft_wordexp(start) == MEMERR)
-		{ft_printf("wordexp memerr\n");exit(1);}	
-		ft_printf("After str '%s'", start->data.str); 
-		ft_printf("\n");
-		start = save;
-	}
-}*/
-
 void	print_tokens(t_token *t)
 {
 	while (t)
@@ -108,8 +89,10 @@ int				main(int ac, char **av, char **env)
 	t_token	*tok;
 
 	silence_ac_av(ac, av);
+	ht_init();
 	if ((init_g_env(env) != 0))
 		return (MEMERR);
+	ht_refreshall(get_env_value("PATH"));
 	while (42)
 	{
 		line = readline("$> ");

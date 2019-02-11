@@ -6,11 +6,12 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 22:17:22 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/07 14:25:27 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/11 18:54:32 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_core.h"
+#include "readline.h"
 
 int		valid_env_char(char c)
 {
@@ -87,6 +88,8 @@ int		set_shell_env(char *name, char *newvalue, int to_export)
 			return (MEMERR);
 		tmp->to_export = to_export;
 	}
+	if (!ft_strcmp(name, "PATH"))
+		ht_refreshall(newvalue);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/08 18:35:53 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/11 20:17:27 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <sys/ioctl.h>
 # include <sys/signal.h>
 # include <fcntl.h>
+#include <dirent.h>
+#include <sys/stat.h>
 
 # define K_UP	"\33[A"
 # define K_LEFT	"\33[D"
@@ -50,6 +52,12 @@ typedef struct		s_rdl
 	int				lpro;
 }					t_rdl;
 
+typedef struct		s_hash
+{
+	char			*exec;
+	char			*path;
+}					t_hash;
+
 typedef struct		s_key
 {
 	char			*key;
@@ -58,6 +66,13 @@ typedef struct		s_key
 
 //main
 char				*readline(char	*PROMPT);
+
+//hashtable
+void	ht_init(void);
+int		ht_hash(char *path);
+t_list	*ht_get(char *path);
+t_list	*ht_getexec(char *path);
+void	ht_refreshall(char *path);
 
 //termcaps
 int		terminit(struct termios *save);
@@ -86,6 +101,7 @@ void	right(t_rdl *rdl, int i);
 //file
 t_list	*get_exec(char *exec, char *path);
 t_list	*get_folex(char *token);
+int		folexaccess(char *file);
 
 //struct rdl
 void				rdlinit(t_rdl *rdl, char *PROMPT);
