@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/02/12 18:31:00 by ktlili           ###   ########.fr        #
+#    Updated: 2019/02/12 19:03:28 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = 21sh
 
 CC = gcc
 
-CFLAGS = -I inc/ -I lib/ -ggdb -Wall -Werror -Wextra 
+CFLAGS = -I inc/ -I lib/inc/ -ggdb -Wall -Werror -Wextra 
 
 DEBUG= #-g3 -fsanitize=address
 
