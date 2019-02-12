@@ -2,24 +2,24 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   hashtable.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                    +:+ +:+         +:+     */ /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 14:40:53 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/11 20:52:01 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/12 13:59:18 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline.h"
+#include "ft_eval.h"
 
-t_list *g_thash[2048];
+t_list *g_thash[HT_SIZE];
 
 void	ht_del(void)
 {
 	int count;
 
 	count = 0;
-	while (count < 2048)
+	while (count < HT_SIZE)
 	{
 		if (g_thash[count])
 			ft_lstdel(&g_thash[count]);
@@ -32,7 +32,7 @@ void	ht_init(void)
 	int	i;
 
 	i = 0;
-	while (i < 2056)
+	while (i < HT_SIZE)
 	{
 		g_thash[i] = NULL;
 		i++;
@@ -54,7 +54,7 @@ int		ht_hash(char *path)
 		i++;
 	}
 	if (i)
-		return (hash % 2056);
+		return (hash % HT_SIZE);
 	return (-1);
 }
 
@@ -86,19 +86,61 @@ void	ht_refreshall(char *path)
 	ft_tabdel(&paths);
 }
 
-char 	*ht_getvalue(char *path, char *match)
+int		ht_getfile(char **paths, t_cmd_tab *cmd)
+{
+	int		i;
+	char	*tmp;
+	int		hash;
+
+	i = 0;
+	while (paths[i])
+	{
+		if (!(tmp = ft_zprintf("%s/%s", paths[i], cmd->av[0])))
+			return (MEMERR);
+		if (!exaccess(tmp))
+		{
+			hash = ht_hash(paths[i]);
+			ft_lstadd(&g_thash[i], ft_lstnew(cmd->av[0], 0));
+			cmd->full_path = tmp;
+			return (0);
+		}
+		ft_strdel(&tmp);
+		i++;
+	}
+	return (0);
+}
+
+int		ht_getvalue(char *path, t_cmd_tab *cmd)
 {
 	t_list	*tmp;
+	char	*file;
+	char	**paths;
+	int		i;
 
-	if (!(tmp = ht_get(path)))
-		return (NULL);
-	while (tmp)
+	i = 0;
+	if (!(paths = ft_strsplit(path, ':')))
+		return (MEMERR);
+	while (paths[i])
 	{
-		if (!ft_strcmp(match, tmp->content))
-			return (ft_strjoin(path, match));
-		tmp = tmp->next;
+		tmp = ht_get(paths[i]);
+		while (tmp)
+		{
+			if (!ft_strcmp(cmd->av[0], tmp->content))
+			{
+				if (!(file = ft_zprintf("%s/%s", paths[i], tmp->content)))
+					return (MEMERR);
+				if (!exaccess(file))
+				{
+					cmd->full_path = file;
+					return (0);
+				}
+				ft_strdel(&file);
+			}
+			tmp = tmp->next;
+		}
+		i++;
 	}
-	return (NULL);
+	return (ht_getfile(paths, cmd));
 }
 
 t_list	*ht_getexec(char *path)
@@ -113,7 +155,8 @@ t_list	*ht_getexec(char *path)
 		return (NULL);
 	while ((ret = readdir(ptr)))
 	{
-		cpath = ft_zprintf("%s/%s", path, ret->d_name);
+		if (!(cpath = ft_zprintf("%s/%s", path, ret->d_name)))
+			return (NULL);
 		if (!folexaccess(cpath))
 			ft_lstadd(&lst, ft_lstnew(ret->d_name, ft_strlen(ret->d_name)));
 		ft_strdel(&cpath);

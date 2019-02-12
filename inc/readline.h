@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/11 20:17:27 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/12 17:36:59 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # include <fcntl.h>
 #include <dirent.h>
 #include <sys/stat.h>
+#include "ft_eval.h"
+
+# define HT_SIZE 2048
 
 # define K_UP	"\33[A"
 # define K_LEFT	"\33[D"
@@ -72,6 +75,7 @@ void	ht_init(void);
 int		ht_hash(char *path);
 t_list	*ht_get(char *path);
 t_list	*ht_getexec(char *path);
+int 	ht_getvalue(char *path, t_cmd_tab *cmd);
 void	ht_refreshall(char *path);
 
 //termcaps
@@ -102,6 +106,7 @@ void	right(t_rdl *rdl, int i);
 t_list	*get_exec(char *exec, char *path);
 t_list	*get_folex(char *token);
 int		folexaccess(char *file);
+int		exaccess(char *file);
 
 //struct rdl
 void				rdlinit(t_rdl *rdl, char *PROMPT);
