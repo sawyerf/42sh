@@ -3,18 +3,30 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ktlili <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2018/07/10 23:32:37 by ktlili            #+#    #+#              #
-#    Updated: 2019/02/12 18:32:12 by ktlili           ###   ########.fr        #
+#    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
+#    Updated: 2019/02/12 19:00:34 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
-SRC_PATH = src
+CC = gcc
 
-SRC_NAME =	ft_strnsplit.c \
+CFLAGS = -I inc/ -Wall -Werror -Wextra 
+
+DEBUG= #-g3 -fsanitize=address
+
+INC_DIR = inc
+
+INC_FILE = get_next_line.h \
+		   ft_printf.h \
+		   libft.h
+
+SRC_DIR = src
+
+SRC_FILE =	ft_strnsplit.c \
 			ft_splitblanks.c \
 			ft_util.c \
 			itoa_base.c \
@@ -93,35 +105,43 @@ SRC_NAME =	ft_strnsplit.c \
 			ft_tabdel.c \
 			ft_strlower.c
 
-OBJ_PATH = obj
 
-OBJ_NAME = $(SRC_NAME:.c=.o)
+OBJ_DIR = .obj
+OBJ_FILE = $(SRC_FILE:.c=.o)
 
-INC = ft_printf.h get_next_line.h libft.h
+CRT_DIR = ft_printf
 
-FLAGS = -Wall -Wextra -Werror 
+SRC = $(addprefix $(SRC_DIR)/,$(SRC_FILE))
+INC = $(addprefix $(INC_DIR)/,$(INC_FILE))
+OBJ = $(addprefix $(OBJ_DIR)/,$(OBJ_FILE))
+CRT = $(addprefix $(OBJ_DIR)/,$(CRT_DIR))
 
-SRC = $(addprefix $(SRC_PATH)/,$(SRC_NAME))
+all: $(NAME)
 
-OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC) Makefile
+	@printf "\033[0;32m[Libft] Compilation [o.]\033[0;0m\r"
+	@mkdir -p $(CRT) 2> /dev/null || true
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@printf "\033[0;32m[Libft] Compilation [.o]\033[0;0m\r"
 
-CC = gcc 
-
-all:	$(NAME)
+norm:
+	@norminette $(SRC)
+	@norminette $(INC)
 
 $(NAME): $(OBJ)
-	ar rc $(NAME) $(OBJ) 
-	ranlib $(NAME)
-
-$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
-	mkdir -p $(OBJ_PATH)/ft_printf
-	$(CC) -I. $(FLAGS) -o $@ -c $<
+	@printf "\033[0;32m[Libft] Compilation [OK]\033[0;0m\n"
+	@ar rc $(NAME) $(OBJ) 
+	@ranlib $(NAME)
 
 clean:
-	/bin/rm -f $(OBJ)
-	/bin/rm -rf $(OBJ_PATH)
+	@/bin/rm -f $(OBJ)
+	@/bin/rm -rf $(OBJ_DIR)
+	@printf "\033[0;31m[Libft] Deleted *.o\033[0;0m\n"
 
 fclean: clean
-	/bin/rm -f $(NAME)
+	@/bin/rm -f $(NAME)
+	@printf "\033[0;31D[Libft] Deleted minishell\033[0;0m\n"
 
 re: fclean all
+
+.PHONY: all clean fclean re

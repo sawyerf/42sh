@@ -6,11 +6,11 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/07 22:24:31 by ktlili            #+#    #+#             */
-/*   Updated: 2018/09/12 00:05:56 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/12 18:58:26 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "ft_printf.h"
 
 void			ft_apply_minlen(t_flags *flags, int tocpy, char padding)
 {

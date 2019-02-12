@@ -6,11 +6,11 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/03 18:40:06 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/11 19:26:38 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/12 18:58:26 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "libft.h"
 
 void	ft_lstdel(t_list **alst)
 {

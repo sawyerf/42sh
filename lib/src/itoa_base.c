@@ -6,11 +6,11 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 17:42:32 by ktlili            #+#    #+#             */
-/*   Updated: 2018/07/22 13:47:02 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/12 18:58:26 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "ft_printf.h"
 
 void	ft_strrev(char *str)
 {

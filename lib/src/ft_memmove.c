@@ -6,11 +6,11 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/20 19:32:33 by ktlili            #+#    #+#             */
-/*   Updated: 2018/09/18 20:18:51 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/12 18:58:26 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "ft_printf.h"
 
 void			*ft_memmove(void *dst, const void *src, size_t len)
 {

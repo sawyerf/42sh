@@ -6,11 +6,11 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/19 15:43:57 by ktlili            #+#    #+#             */
-/*   Updated: 2018/07/22 13:47:13 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/12 18:58:26 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "ft_printf.h"
 #include <strings.h>
 
 void	ft_bzero(void *s, size_t n)
