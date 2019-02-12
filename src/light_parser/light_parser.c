@@ -5,143 +5,99 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/07 19:14:43 by ktlili           ###   ########.fr       */
+/*   Created: 2019/02/12 14:58:34 by ktlili            #+#    #+#             */
+/*   Updated: 2019/02/12 15:47:20 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "ft_light_parser.h"
 
-static int		is_param(char const*token)
+int fill_autocomp(t_autocomplete *autocomp, t_expecting type, char *str)
 {
 	int i;
 
-	if (token[0] != '$')
-		return (0);
-	i = 1;
-	while (token[i])
-	{
-		if (!valid_env_char(token[i]))
-				return (0);
+	i = 0;
+	autocomp->type = type;
+	while (parser_is_name_c(str[i]))
 		i++;
-	}
-	return (1);
+	if ((str[i] == '$') || (!ft_strcmp(str + i, "{$")))
+		autocomp->type = param;
+	ft_strrev(str);
+	if (!(autocomp->str = ft_strdup(str)))
+		return (MEMERR);
+	return (0);
 }
 /*
- *	- ft_light_parser takes commandline fills t_autocomplete struct with string of 
- *	last valid token for auto completion + it's type (cmd_name or arg or param).
- *	- *line should never be NULL.
- *	- Empty *line will return cmd_name.
- *	- Ignores invalid syntax cmdline
- *	
- */
-int		ft_light_parser(char *line, t_autocomplete *autocomplete)
+int do_stuff(t_token *start, t_autocomplete *autocomp)
 {
-	t_token 	*tokens;
-	t_token 	*iter;
-	t_token		*save;
-	int			first_word;
 	t_expecting expecting;
+	int			first_word;
 
-	tokens = NULL;
-	ft_strrev(line); /* invert line since we are interested in last tokens only*/
 	expecting = cmd_name;
-	//if (ft_tokenizer_2(line, &tokens) == MEMERR)
-	//	return (MEMERR);
-	if  ((tokens->type >= PIPE) && (tokens->type <= GREAT))
-/* last token is an operator, expecting cmd_name*/
-	{
-		autocomplete->type = expecting;
-		if  ((tokens->type >= LESSAND) && (tokens->type <= GREAT))
-			autocomplete->type = arg;
-		autocomplete->str = ft_strdup ("");
-		if (autocomplete->str == NULL)
-			return (MEMERR);
-		return (0);
-	}
 	first_word = 1;
-	iter = tokens->next;
-	save = tokens;
-	while (iter->type != NEWLINE)
+	while (start->type != NEWLINE)
 	{
-		if  ((iter->type >= PIPE) && (iter->type <= OR_IF))
-			break;
-		if (iter->type == WORD)
-		{
+		if (start->type == WORD)
 			first_word = 0;
-			break;
-		}
-		iter = iter->next;
+		else if ((start->type >= LESSAND) && (start->type <= GREAT))
+
+		start = start->next;
+		
 	}
-	if ((first_word) && (!ft_is_whitespace(*line))) 
-		expecting = cmd_name; /* last token is first 
-								 	word in cmdline and is not delimited by spaces*/
-	else
-		expecting = arg;
-	autocomplete->type = expecting;
-	/*  (*line) points to last char since we inverted it
-	 *  if last token has been delimited we return empty str
-	 *  else we return whatever is in the token
-	 */ 
-	if ((save->type == WORD) && (!ft_is_whitespace(*line)))
-		autocomplete->str = ft_strdup(save->data.str);
-	else 
-		autocomplete->str = ft_strdup("");
-	if (autocomplete->str == NULL)
-		return (MEMERR);
-	ft_strrev(autocomplete->str);
-	if (is_param(autocomplete->str)) /* param is beginning of shell expansion with $*/ 
-		autocomplete->type = param;
-	free_token_lst(tokens);
-	return (0);
-}
-
-/*
-int		ft_light_parser(char *line, t_autocomplete *autocomplete)
-{
-	t_token *tokens;
-	t_token *last_token;
-	t_token *save;
-	t_expecting expecting;
-	int			first_word;
-
-	tokens = NULL;
-//	if (ft_tokenizer_2(line, &tokens) == MEMERR)
-//		return (MEMERR);
-	last_token = tokens;
-	expecting = cmd_name;
-	first_word = 1;
-	while (last_token->type != NEWLINE)
-	{
-		if ((last_token->type >= PIPE) && (last_token->type <= OR_IF))
-		{
-			first_word = 1;
-			expecting = cmd_name;	
-		}
-		if (last_token->type == WORD)
-		{
-			if (((first_word)) 
-				&& (!parser_is_assign(last_token)))
-			{
-				expecting = cmd_name;
-				first_word = 0;
-			}
-			else
-				expecting = arg;
-		}
-		save = last_token;
-		last_token = last_token->next;
-	}
-	if ((save->type >= LESSAND) && (save->type <= GREAT))
-		expecting = arg;
-	autocomplete->type = expecting;
-	if (save->type == WORD)
-		autocomplete->str = ft_strdup(save->data.str);
-	else 
-		autocomplete->str = ft_strdup("");
-	if (autocomplete->str == NULL)
-		return (MEMERR);
-
-	return (0);
 }
 */
+int	is_first_word(char *line, t_token *start, t_autocomplete *autocomp)
+{
+	int first_word;
+	t_token *save;
+
+	first_word = 1;
+	save = start;
+	start = start->next;
+	while (start->type != NEWLINE)
+	{
+		if (start->type == WORD)
+		{
+			first_word = 0;
+			break;	
+		}
+		start = start->next;
+	}
+	if (save->type == WORD)
+	{
+		if  (!ft_is_whitespace(*line) && (first_word))
+			return (fill_autocomp(autocomp, cmd_name, save->data.str));
+		else if ((!ft_is_whitespace(*line)) && (!first_word))
+			return (fill_autocomp(autocomp, arg, save->data.str));
+	}
+	return (fill_autocomp(autocomp, arg, ""));
+	return (0);
+}
+
+int dispatch_types(char *line, t_token *start, t_autocomplete *autocomp)
+{
+
+	if ((start->type >= PIPE) && (start->type <= GREAT))
+	{
+		if ((start->type >= LESSAND) && (start->type <= GREAT))
+			return (fill_autocomp(autocomp, arg, ""));
+		return (fill_autocomp(autocomp, cmd_name, ""));
+	}
+	return (is_first_word(line, start, autocomp));
+}
+
+int	ft_light_parser(char *line, t_autocomplete *autocomplete)
+{
+	t_token *tokens;
+
+	
+	ft_strrev(line);
+	if (*line == '\n')
+		ft_memmove(line, line + 1, ft_strlen(line));
+	if (rev_lex(line, &tokens) == MEMERR)
+		return (MEMERR);
+	if (dispatch_types(line, tokens, autocomplete) == MEMERR)
+		return (MEMERR);
+	return (0);
+}

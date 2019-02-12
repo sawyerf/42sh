@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/07 19:10:11 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/12 14:37:38 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 
 #define INPUTSZ 24
-
+#define TABLESZ 128
 /*
  * new lex jump table
  */
@@ -77,5 +77,7 @@ t_token	*ft_tokenizer(char *line);
 int		ft_tokenizer_2(char *line, t_token **head);
 //int	next_token(char **line, t_token *token);
 int	next_token(char *line, t_token **head);
+/* for light parser*/
+int	rev_lex(char *line, t_token **head);
 
 #endif
