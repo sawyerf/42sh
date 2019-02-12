@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 22:23:00 by ktlili            #+#    #+#             */
-/*   Updated: 2018/09/12 00:14:06 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/11 19:00:45 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,25 @@ void				ft_putstr_fd(char const *s, int fd);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
 t_list				*ft_lstnew(void const *content, size_t content_size);
-void				ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
-void				ft_lstdel(t_list **alst, void (*del)(void *, size_t));
+void				ft_lstdelone(t_list **alst);
+void				ft_lstdel(t_list **alst);
 void				ft_lstadd(t_list **alst, t_list *new);
 void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 int					ft_getopt(char **argv, char *opstring);
 char				**ft_splitblanks(char const *s);
 int					ft_isblank(char c);
+char				*ft_strlower(char *s);
+char				*ft_strndup(const char *s, int len);
+void				ft_strrev(char *str);
+int					ft_utoa_base(uintmax_t nbr, int base, char *str, int rev);
+int					ft_inner_itoa(intmax_t nbr, int base, char *str);
+int					ft_itoa_base(intmax_t nbr, int base, char *str, int rev);
+void				ft_swap_char(char *a, char *b);
+int					ft_printf(const char *s, ...);
+int					ft_dprintf(int fd, const char *format, ...);
+char				*ft_zprintf(const char *format, ...);
+int					ft_cisin(char *s, char c);
+char			*ft_strechr(const char *s, int c);
+void	ft_tabdel(char ***tab);
 #endif

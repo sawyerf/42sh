@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 19:55:35 by ktlili            #+#    #+#             */
-/*   Updated: 2018/10/12 23:31:55 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/11 20:03:21 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char			**ft_strsplit(char const *s, char c)
 	char	**tab;
 
 	init_index(&i, &j);
-	if ((tab = malloc(sizeof(char*) * (ft_wordcount(s, c) + 1))) == NULL)
+	if (s && (tab = malloc(sizeof(char*) * (ft_wordcount(s, c) + 1))) == NULL)
 		return (NULL);
 	while (s[i] != '\0')
 	{

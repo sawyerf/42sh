@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/03 17:41:38 by ktlili            #+#    #+#             */
-/*   Updated: 2018/07/22 13:52:17 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/08 18:39:09 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@ t_list		*ft_lstnew(void const *content, size_t content_size)
 	}
 	else
 	{
-		newlst->content = malloc(content_size);
+		newlst->content = ft_strdup(content);
 		newlst->content_size = content_size;
-		ft_memcpy(newlst->content, content, content_size);
 	}
 	newlst->next = NULL;
 	return (newlst);

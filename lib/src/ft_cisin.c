@@ -1,50 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools.c                                            :+:      :+:    :+:   */
+/*   ft_cisin.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/01 17:49:02 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/11 18:36:49 by apeyret          ###   ########.fr       */
+/*   Created: 2018/12/06 18:46:55 by apeyret           #+#    #+#             */
+/*   Updated: 2018/12/09 18:42:01 by glavigno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "readline.h"
-
-void	left(t_rdl *rdl, int i)
-{
-	(void)rdl;
-	while (i)
-	{
-		write(1, K_LEFT, 3);
-		i--;
-	}
-}
-
-void	right(t_rdl *rdl, int i)
-{
-	int	count;
-
-	count = 0;
-	while (count < i)
-	{
-		if (!((rdl->lpro + rdl->curs + count) % (rdl->col - 1)))
-			tgpstr("do");
-		else
-			write(1, K_RGHT, 3);
-		count++;
-	}
-}
-
-int		is_special(char *buf)
+int		ft_cisin(char *s, char c)
 {
 	int		count;
-	
+
 	count = 0;
-	while (buf[count])
+	while (s[count])
 	{
-		if (!ft_isprint(buf[count]))
+		if (s[count] == c)
 			return (1);
 		count++;
 	}

@@ -1,52 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools.c                                            :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/01 17:49:02 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/11 18:36:49 by apeyret          ###   ########.fr       */
+/*   Created: 2018/11/29 14:18:09 by apeyret           #+#    #+#             */
+/*   Updated: 2018/11/30 14:30:48 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "readline.h"
+#include "libft.h"
 
-void	left(t_rdl *rdl, int i)
-{
-	(void)rdl;
-	while (i)
-	{
-		write(1, K_LEFT, 3);
-		i--;
-	}
-}
-
-void	right(t_rdl *rdl, int i)
-{
-	int	count;
-
-	count = 0;
-	while (count < i)
-	{
-		if (!((rdl->lpro + rdl->curs + count) % (rdl->col - 1)))
-			tgpstr("do");
-		else
-			write(1, K_RGHT, 3);
-		count++;
-	}
-}
-
-int		is_special(char *buf)
+char	*ft_strndup(const char *s, int size)
 {
 	int		count;
-	
+	int		len;
+	char	*str;
+
+	len = 0;
 	count = 0;
-	while (buf[count])
+	len = ft_strlen(s);
+	if (size < len)
+		str = ft_strnew(size);
+	else
+		str = ft_strnew(len);
+	while (s[count] && count < size)
 	{
-		if (!ft_isprint(buf[count]))
-			return (1);
+		str[count] = s[count];
 		count++;
 	}
-	return (0);
+	str[count] = '\0';
+	return (str);
 }

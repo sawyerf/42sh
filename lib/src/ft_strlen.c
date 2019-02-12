@@ -6,11 +6,10 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 18:30:37 by ktlili            #+#    #+#             */
-/*   Updated: 2018/09/20 10:52:57 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/07 16:41:10 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
 #include <string.h>
 
 size_t	ft_strlen(const char *s)

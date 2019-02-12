@@ -6,11 +6,12 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/07 17:47:50 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/12 18:04:00 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_eval.h"
+#include "readline.h"
 
 void		exec_error(int errnum, char *str)
 {
@@ -84,9 +85,9 @@ static int		execve_wrap(t_cmd_tab *cmd)
 	else 
 	{
 		path = get_process_env("PATH", cmd->process_env);
-		if (bin_pathfinder(cmd, path) == MEMERR)
-			exit_wrap(MEMERR, cmd);
-		if (cmd->full_path == NULL) /* case bin not found or no perm*/
+		if (ht_getvalue(path, cmd) == MEMERR)
+			return (MEMERR);
+		if (!cmd->full_path)
 			exit_wrap (127, cmd);	/* maybe exit ?*/
 	}
 	ret = execve(cmd->full_path, cmd->av, cmd->process_env); 

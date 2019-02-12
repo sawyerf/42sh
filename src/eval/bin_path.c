@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 22:27:00 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/04 15:27:54 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/12 17:30:07 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ static	int	iter_paths(char **tab, t_cmd_tab *cmd)
 
 int	bin_pathfinder(t_cmd_tab *cmd, char *path)
 {
-	char **path_tab;
-	int	ret;
+	char		**path_tab;
+	int			ret;
 	static char *empty_str = "";
 
 	if (!path)

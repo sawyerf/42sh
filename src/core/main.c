@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/06 17:07:02 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/11 20:03:28 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,6 @@
 #include "readline.h"
 
 t_environ **g_environ = NULL;
-
-/*static void		show_prompt(void)
-{
-	char *pwd;
-
-	pwd = handle_pwd_l();
-	if (pwd != NULL)
-	{
-		ft_printf("%s", pwd);
-		free(pwd);
-	}
-	write(1, "$> ", 3);
-}*/
 
 static int		init_g_env(char **env)
 {
@@ -56,34 +43,12 @@ static int		init_g_env(char **env)
 	free(newlvl);
 	return (0);
 }
-/*
-static int		exec_loop(t_command *command_lst)
-{
-	t_command	*tmp;
 
-	tmp = command_lst;
-	if ((tmp != NULL) && (tmp->args != NULL))
-	{
-		while (tmp != NULL)
-		{
-			if ((execute_cmd(tmp)) == MEMERR)
-			{
-				free_cmdlst(command_lst);
-				return (MEMERR);
-			}
-			tmp = tmp->next;
-		}
-	}
-	return (0);
-}
-*/
 static void		silence_ac_av(char ac, char **av)
 {
 	(void)ac;
 	(void)av;
 }
-
-void	ft_test_lexer(char *line);
 
 void	print_token(t_token *t)
 {
@@ -97,24 +62,6 @@ void	print_token(t_token *t)
 	}
 	ft_printf("type %s |  str '%s'\n", types[t->type], t->data.str);
 }
-/*
-void	print_tokens(t_token *start)
-{
-	char types[100][100] = {"WORD","NEWLINE","IO_NUM","FILENAME", "ASSIGN", "PIPE", "SEMI_COL",
-				"AMPERS","ANDIF", "ORIF", "LESSAND", "GREATAND", "DGREAT", "LESS",
-				"GREAT"};
-	t_token *save;
-	while (start)
-	{
-		
-		ft_printf("type %s |  str '%s'|", types[start->type], start->data.str);
-		if (ft_wordexp(start) == MEMERR)
-		{ft_printf("wordexp memerr\n");exit(1);}	
-		ft_printf("After str '%s'", start->data.str); 
-		ft_printf("\n");
-		start = save;
-	}
-}*/
 
 void	print_tokens(t_token *t)
 {
@@ -142,8 +89,10 @@ int				main(int ac, char **av, char **env)
 	t_token	*tok;
 
 	silence_ac_av(ac, av);
+	ht_init();
 	if ((init_g_env(env) != 0))
 		return (MEMERR);
+	ht_refreshall(get_env_value("PATH"));
 	while (42)
 	{
 		line = readline("$> ");

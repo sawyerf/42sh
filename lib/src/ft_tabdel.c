@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_util.c                                          :+:      :+:    :+:   */
+/*   ft_tabdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/08 19:48:26 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/07 16:54:18 by apeyret          ###   ########.fr       */
+/*   Created: 2019/02/11 18:50:39 by apeyret           #+#    #+#             */
+/*   Updated: 2019/02/11 18:52:43 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "../libft.h"
 
-int		ft_char_cmp(char chr, char *array)
+void	ft_tabdel(char ***tab)
 {
 	int i;
 
 	i = 0;
-	while (array[i])
+	while ((*tab)[i])
 	{
-		if (chr == array[i])
-			return (1);
+		ft_strdel(&(*tab)[i]);
 		i++;
 	}
-	return (0);
-}
-
-void	ft_swap_char(char *a, char *b)
-{
-	*a = *a ^ *b;
-	*b = *a ^ *b;
-	*a = *a ^ *b;
+	free(*tab);
+	*tab = NULL;
 }
