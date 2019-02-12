@@ -8,3 +8,8 @@ ls ; whoami ; inex ; toto ; ls -lF | rev | rev | cat -e && false && false ; true
 -------------------
 
 false && false || echo 'THOU SHALT' && \l\s '/''dev'$NONE
+
+---------------------
+
+CRASH !
+echo -ne 'ls\x00ls -l' | bash
