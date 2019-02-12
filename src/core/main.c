@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/11 20:03:28 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/12 18:30:27 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,16 +96,21 @@ int				main(int ac, char **av, char **env)
 	while (42)
 	{
 		line = readline("$> ");
-		tok = ft_tokenizer(line);
-		if (tok)
+		if ((*line) && (*line != '\n'))
 		{
-			test_sh_parser(tok);
-			free_token_lst(tok);
+			tok = ft_tokenizer(line);
+			if (tok) 
+			{
+				test_sh_parser(tok);
+				free_token_lst(tok);
+			}
 		}
-		free(line);
+		else if (*line != '\n')
+			write(STDOUT_FILENO, "\n", 1);
+//		free(line);
 	}
 	ret = 1;
-	free(line);
+//	free(line);
 	write(1, "\n", 1);
 	return (ret);
 }

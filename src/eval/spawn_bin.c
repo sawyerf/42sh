@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/12 18:04:00 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/12 18:29:31 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,9 +175,9 @@ static	int assign_to_shell(t_cmd_tab *cmd)
 
 int		spawn_command(t_cmd_tab *cmd)
 {
-	pid_t pid;
+	pid_t 	pid;
+	int		ret;
 
-	// we apply assignements to our shell env before ret
 	if (cmd->av[0] == NULL)
 	{
 		return (assign_to_shell(cmd));
@@ -189,7 +189,8 @@ int		spawn_command(t_cmd_tab *cmd)
 		return (MEMERR);
 	if (pid == 0)
 	{
-		handle_redir(cmd->redir_lst);
+		if ((ret = handle_redir(cmd->redir_lst)))
+			return (ret);
 		execve_wrap(cmd);
 		exit_wrap(1, cmd); /* handle errors here*/
 	}

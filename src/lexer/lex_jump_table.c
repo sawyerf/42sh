@@ -6,131 +6,165 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/02 17:41:12 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/08 16:00:38 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
+#include "readline.h"
 #include "ft_lexer.h"
 /*
 add mem error exit for str_putchar done
 add lex error for backslash followed by EOI
 */
 
-
-int	handle_dquote(char **input, t_token *token)
+int	request_new_line(t_lexer *lexer_state)
 {
-	if (**input == '"')
-	{
-		if (str_putchar(input, &(token->data)) == MEMERR)
-			return (MEMERR);
-	}
-	while (**input)
-	{
-		if (**input == '"')
-		{
-			if (str_putchar(input, &(token->data)) == MEMERR)
-				return (MEMERR);
-			return (handle_common(input, token));
-		}
-		else if ((**input == '\\') && (*(*input + 1)))
-		{
-			if (str_putchar(input, &(token->data)) == MEMERR)
-				return (MEMERR);
-		}
-		if (str_putchar(input, &(token->data)) == MEMERR)
-			return (MEMERR);
-	}
-	return (DQUOTE_ERR);
+	char *new_line;
+
+	new_line = readline("> ");
+	if (new_line == NULL)
+		return (MEMERR);
+	else if (*new_line == 0)
+		return (SQUOTE_ERR);
+	free(lexer_state->line);
+	lexer_state->line = new_line;
+	lexer_state->cursor = new_line;
+	return (0);
 }
 
-int handle_squote(char **input, t_token *token)
+int	handle_dquote(t_lexer *lexer_state)
 {
-	while (**input)
+	int ret;
+
+	if (*(lexer_state->cursor) == '"')
 	{
-		if (str_putchar(input, &(token->data)) == MEMERR)
+		if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
 			return (MEMERR);
-		if (**input == '\'')
+	}
+	while (42)
+	{
+		if (*(lexer_state->cursor) == '"')
 		{
-			if (str_putchar(input, &(token->data)) == MEMERR)
+			if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
+				return (MEMERR);
+			return (handle_common(lexer_state));
+		}
+		else if ((*(lexer_state->cursor) == '\\') && (*((lexer_state->cursor) + 1)))
+		{ /* this is ugly*/
+			if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
+				return (MEMERR);
+			if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
+				return (MEMERR);
+		}
+		else if (*(lexer_state->cursor) ==  '\0')
+		{
+			if ((ret = request_new_line(lexer_state)))
+				return (ret);
+		}
+		else if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
+			return (MEMERR);
+	}
+
+	return (ENDOFINPUT);
+}
+
+int handle_squote(t_lexer *lexer_state)
+{
+	int ret;
+
+	if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
+		return (MEMERR);
+	while (42)
+	{
+
+		if (*(lexer_state->cursor) == '\'')
+		{
+			if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
 				return (MEMERR);
 			return (0);
 		}
+		else if (*(lexer_state->cursor) ==  '\0')
+		{
+			if ((ret = request_new_line(lexer_state)))
+				return (ret);
+		}
+		else if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
+			return (MEMERR);
 	}
-	return (SQUOTE_ERR);
+	return (ENDOFINPUT);
 }
 
-int	handle_digit(char **input, t_token *token)
+int	handle_digit(t_lexer *lexer_state)
 {
 	static	char	*ops = "|&><;";
 
-	while (**input)
+	while (*(lexer_state->cursor))
 	{
-		if ((ft_is_whitespace(**input)) || (ft_strchr(ops, **input)))
+		if ((ft_is_whitespace(*(lexer_state->cursor))) || (ft_strchr(ops, *(lexer_state->cursor))))
 		{
-			if (ft_strchr("><", **input))
-				token->type = IO_NUM;
+			if (ft_strchr("><", *(lexer_state->cursor)))
+				lexer_state->token->type = IO_NUM;
 			break;
 		}
-		else if (!ft_isdigit(**input))
-			return(handle_common(input, token));
-		if (str_putchar(input, &(token->data)) == MEMERR)
+		else if (!ft_isdigit(*(lexer_state->cursor)))
+			return(handle_common(lexer_state));
+		if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
 			return (MEMERR);
 	}
 	return (0);
 }
 
-int	handle_param_exp(char **input, t_token *token)
+int	handle_param_exp(t_lexer *lexer_state)
 {
-	if (str_putchar(input, &(token->data)) == MEMERR)
+	if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
 		return (MEMERR);
-	if (**input == '{')
+	if (*(lexer_state->cursor) == '{')
 	{
-		if (str_putchar(input, &(token->data)) == MEMERR)
+		if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
 			return (MEMERR);
-		if (**input == '}')
+		if (*(lexer_state->cursor) == '}')
 			return (BAD_SUB);
-		while (**input)
+		while (*(lexer_state->cursor))
 		{
-			if (!parser_is_name_c(**input))
+			if (!parser_is_name_c(*(lexer_state->cursor)))
 				break;
-			if (str_putchar(input, &(token->data)) == MEMERR)
+			if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
 				return (MEMERR);
 		}
-		if (**input == 0)
+		if (*(lexer_state->cursor) == 0)
 			return (INCOMPLETE_SUB);
-		if (**input != '}')
+		if (*(lexer_state->cursor) != '}')
 			return (BAD_SUB);
-		if (str_putchar(input, &(token->data)) == MEMERR)
+		if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
 			return (MEMERR);
 	}
 	return (0);
 }
 
-int	handle_common(char **input, t_token *token)
+int	handle_common(t_lexer *lexer_state)
 {
 	int				err_ret;
 	static	char	*ops = "|&><;";
 
 	err_ret = 0;
-	while (**input)
+	while (*(lexer_state->cursor))
 	{
-		if ((ft_is_whitespace(**input)) || (ft_strchr(ops, **input)))
+		if ((ft_is_whitespace(*(lexer_state->cursor))) || (ft_strchr(ops, *(lexer_state->cursor))))
 			break;
-		if (**input == '"')
-			err_ret = handle_dquote(input, token);
-		else if (**input == '\'')
-			err_ret = handle_squote(input, token);
-		else if (**input == '$')
-			err_ret = handle_param_exp(input, token);
-		else if ((**input == '\\') && (*(*input + 1)))
+		if (*(lexer_state->cursor) == '"')
+			err_ret = handle_dquote(lexer_state);
+		else if (*(lexer_state->cursor) == '\'')
+			err_ret = handle_squote(lexer_state);
+		else if (*(lexer_state->cursor) == '$')
+			err_ret = handle_param_exp(lexer_state);
+		else if ((*(lexer_state->cursor) == '\\') && (*((lexer_state->cursor) + 1)))
 		{
-			if ((str_putchar(input, &(token->data)) == MEMERR)
-				|| (str_putchar(input, &(token->data)) == MEMERR))
+			if ((str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
+				|| (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR))
 				return (MEMERR);
 		}
 		else
 		{
-			if (str_putchar(input, &(token->data)) == MEMERR)
+			if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
 				return (MEMERR);
 		}
 		if (err_ret)
@@ -139,79 +173,79 @@ int	handle_common(char **input, t_token *token)
 	return (0);
 }
 
-int	handle_semic(char **input, t_token *token)
+int	handle_semic(t_lexer *lexer_state)
 {
-	token->type = SEMI_COL;
-	if (str_putchar(input, &(token->data)) == MEMERR)
+	lexer_state->token->type = SEMI_COL;
+	if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
 		return (MEMERR);
 	return (0);
 }	
 
-int	handle_column(char **input, t_token *token)
+int	handle_column(t_lexer *lexer_state)
 {
-	if (str_putchar(input, &(token->data)) == MEMERR)
+	if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
 		return (MEMERR);
-	if (**input == '|')
+	if (*(lexer_state->cursor) == '|')
 	{
-		if (str_putchar(input, &(token->data)) == MEMERR)
+		if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
 			return (MEMERR);
-		token->type = OR_IF;
+		lexer_state->token->type = OR_IF;
 	}
 	else
-		token->type = PIPE;
+		lexer_state->token->type = PIPE;
 	return (0);
 }	
 
-int	handle_ampersand(char **input, t_token *token)
+int	handle_ampersand(t_lexer *lexer_state)
 {
-	if (str_putchar(input, &(token->data)) == MEMERR)
+	if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
 		return (MEMERR);
-	if (**input == '&')
+	if (*(lexer_state->cursor) == '&')
 	{
-		if (str_putchar(input, &(token->data)) == MEMERR)
+		if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
 			return (MEMERR);
-		token->type = AND_IF;
+		lexer_state->token->type = AND_IF;
 	}
 	else
-		token->type = AMPERS;
+		lexer_state->token->type = AMPERS;
 	return (0);
 }	
 
-int	handle_great(char **input, t_token *token)
+int	handle_great(t_lexer *lexer_state)
 {
-	if (str_putchar(input, &(token->data)) == MEMERR)
+	if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
 		return (MEMERR);
-	token->type = GREAT;
-	if (**input == '>')
+	lexer_state->token->type = GREAT;
+	if (*(lexer_state->cursor) == '>')
 	{
-		if (str_putchar(input, &(token->data)) == MEMERR)
+		if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
 			return (MEMERR);
-		token->type = DGREAT;
+		lexer_state->token->type = DGREAT;
 	}
-	else if (**input == '&')
+	else if (*(lexer_state->cursor) == '&')
 	{
-		if (str_putchar(input, &(token->data)) == MEMERR)
+		if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
 			return (MEMERR);
-		token->type = GREATAND;
+		lexer_state->token->type = GREATAND;
 	}
 	return (0);
 }
 
-int handle_less(char **input, t_token *token)
+int handle_less(t_lexer *lexer_state)
 {
-	if (str_putchar(input, &(token->data)) == MEMERR)
+	if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
 		return (MEMERR);
-	token->type = LESS;
-	if (**input == '&')
+	lexer_state->token->type = LESS;
+	if (*(lexer_state->cursor) == '&')
 	{
-		if (str_putchar(input, &(token->data)) == MEMERR)
+		if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
 			return (MEMERR);
-		token->type = LESSAND;
+		lexer_state->token->type = LESSAND;
 	}
 /*	else if (iter[1] == '<')
 	{
 		iter++;
-		token->type = DLESS; //heredoc
+		lexer_state->token->type = DLESS; //heredoc
 	}*/
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 15:48:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/02 18:46:29 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/12 14:27:11 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,13 @@ typedef	enum	e_token_type
 	GREAT,
 }				t_token_type;
 
+
+typedef struct s_lexer
+{
+	char *cursor;
+	char *line;
+	struct s_token *token;
+}				t_lexer;
 
 typedef	struct	s_token
 {
