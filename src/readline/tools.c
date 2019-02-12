@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:49:02 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/11 18:36:49 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/12 22:15:38 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	right(t_rdl *rdl, int i)
 	count = 0;
 	while (count < i)
 	{
-		if (!((rdl->lpro + rdl->curs + count) % (rdl->col - 1)))
+		if (!((rdl->lpro + rdl->curs + count + 1) % (rdl->col)))
 			tgpstr("do");
 		else
 			write(1, K_RGHT, 3);

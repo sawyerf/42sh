@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 14:48:16 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/11 20:52:01 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/12 22:33:53 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,32 +19,27 @@ int		exaccess(char *file)
 		struct stat st;
 
 		if (access(file, F_OK))
-			return (-2);
+			return (2);
 		stat(file, &st);
 		if (S_ISDIR(st.st_mode))
-			return (-3);
+			return (3);
 		if (!access(file, X_OK))
 			return (0);
-		return (-1);
+		return (1);
 }
 
 int		filexist(char *file)
 {
 		if (access(file, F_OK))
-			return (-2);
+			return (2);
 		return (0);
 }
 
 int		folexaccess(char *file)
 {
-		struct stat st;
-
 		if (access(file, F_OK))
-			return (-2);
-		stat(file, &st);
-		if (S_ISDIR(st.st_mode) || !access(file, X_OK))
-			return (0);
-		return (-1);
+			return (2);
+		return (0);
 }
 
 t_list	*folderin(DIR *ptr, char *path, char *exec, int (*f)(char *file))
@@ -64,7 +59,7 @@ t_list	*folderin(DIR *ptr, char *path, char *exec, int (*f)(char *file))
 		if (!f(cpath) && !ft_strncmp(ret->d_name, exec, ft_strlen(exec)) && ft_strcmp(ret->d_name, "..") && ft_strcmp(ret->d_name, "."))
 		{
 			//ft_dprintf(2, "find: %s\n", ret->d_name);
-			ft_lstadd(&lst, ft_lstnew(ret->d_name + len, ft_strlen(ret->d_name + len)));
+			ft_lstadd(&lst, ft_lstnew(ret->d_name + len, exaccess(cpath)));
 			count++;
 		}
 		ft_strdel(&cpath);
@@ -90,7 +85,7 @@ t_list	*get_folex(char *token)
 	//ft_dprintf(2, "\nexec: %s\npath: %s\nnb: %d\n", exec, path, exec - token);
 	if (!(ptr = opendir(path)))
 		return (NULL);
-	lst = folderin(ptr, path, exec, &folexaccess);
+	lst = folderin(ptr, path, exec, &filexist);
 	closedir(ptr);
 	return (lst);
 }
@@ -105,7 +100,7 @@ t_list	*filterpath(char *exec, t_list *lst)
 	while (lst)
 	{
 		if (!ft_strncmp(exec, lst->content, len))
-			ft_lstadd(&match, ft_lstnew(lst->content + len, ft_strlen(lst->content + len)));
+			ft_lstadd(&match, ft_lstnew(lst->content + len, 0));
 		lst = lst->next;
 	}
 	return (match);

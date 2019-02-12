@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/04 15:41:26 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/12 20:10:16 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	eval_pipe(t_cmd_tab *cmd)
 		exit(ret);
 	}
 	wait_wrapper(cmd, pid);
-	ft_printf("pipe exiting with status %d\n", cmd->exit_status);
+	//ft_printf("pipe exiting with status %d\n", cmd->exit_status);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/12 18:29:31 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/12 20:10:16 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	wait_wrapper(t_cmd_tab *cmd, pid_t pid)
 	{
 		cmd->exit_signal = WTERMSIG(wstatus);
 	}
-	ft_printf("%s exiting with status %d\n", cmd->av[0], cmd->exit_status);
+	//ft_printf("%s exiting with status %d\n", cmd->av[0], cmd->exit_status);
 }
 
 

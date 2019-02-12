@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/12 18:30:27 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/12 20:40:29 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ int				main(int ac, char **av, char **env)
 	ht_refreshall(get_env_value("PATH"));
 	while (42)
 	{
-		line = readline("$> ");
+		if (!(line = readline("$> ")))
+			break;
 		if ((*line) && (*line != '\n'))
 		{
 			tok = ft_tokenizer(line);
