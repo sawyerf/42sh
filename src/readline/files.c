@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 14:48:16 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/12 22:33:53 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/13 16:40:46 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,16 @@ int		filexist(char *file)
 
 int		folexaccess(char *file)
 {
+		struct stat st;
+
 		if (access(file, F_OK))
 			return (2);
-		return (0);
+		stat(file, &st);
+		if (S_ISDIR(st.st_mode))
+			return (0);
+		if (!access(file, X_OK))
+			return (0);
+		return (1);
 }
 
 t_list	*folderin(DIR *ptr, char *path, char *exec, int (*f)(char *file))
@@ -69,7 +76,7 @@ t_list	*folderin(DIR *ptr, char *path, char *exec, int (*f)(char *file))
 	return (lst);
 }
 
-t_list	*get_folex(char *token)
+t_list	*get_folex(char *token, int (*f)(char *file))
 {
 	t_list	*lst;
 	char	*exec;
@@ -85,7 +92,7 @@ t_list	*get_folex(char *token)
 	//ft_dprintf(2, "\nexec: %s\npath: %s\nnb: %d\n", exec, path, exec - token);
 	if (!(ptr = opendir(path)))
 		return (NULL);
-	lst = folderin(ptr, path, exec, &filexist);
+	lst = folderin(ptr, path, exec, f);
 	closedir(ptr);
 	return (lst);
 }
@@ -113,7 +120,7 @@ t_list	*get_exec(char *exec, char *path)
 	t_list	*lst;
 
 	if (exec[0] == '/' || !ft_strncmp("./", exec, 2))
-		return (get_folex(exec));
+		return (get_folex(exec, &folexaccess));
 	lst = NULL;
 	if (!(paths = ft_strsplit(path, ':')))
 		return (NULL);

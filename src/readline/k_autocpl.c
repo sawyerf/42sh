@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 21:17:33 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/12 21:17:41 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/13 16:36:47 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_list	*get_choice(t_autocomplete acp)
 		return (get_exec(acp.str, path));
 	}
 	else if (acp.type == arg || acp.type == param)
-		return (get_folex(acp.str));
+		return (get_folex(acp.str, &filexist));
 	return (NULL);
 }
 
@@ -36,7 +36,7 @@ int		autocompl(t_rdl *rdl, char *buf)
 	(void)buf;
 	c = rdl->str[rdl->curs];
 	rdl->str[rdl->curs] = 0;
-	if (ft_light_parser(ft_strdup(rdl->str), &acp))
+	if (ft_light_parser(rdl->str, &acp))
 	{
 		rdl->str[rdl->curs] = c;
 		return (0);
