@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/06 19:14:45 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/14 18:59:09 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #define BIN_NO_PATH 1
 #define CMD_NOT_FOUND 2
 #define BIN_PERM_DENY 3
-#define BIN_NOT_FOUND 4
+#define BIN_NOT_FOUND 127 
 #define BIN_EXEC_ERR 5
 #define	BIN_IS_DIR 6
 

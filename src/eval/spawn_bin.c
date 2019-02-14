@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/12 20:10:16 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/14 19:01:41 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,13 @@ int			handle_full_path(char *cmd_name)
 	int ret;
 
 	if ((ret = bin_perm(cmd_name)) != 0)
-	{
-		exec_error(ret, cmd_name);
 		return (ACCERR);
-	}
 	return (0);
 }
 void	exit_wrap(int code, t_cmd_tab *cmd)
 {	
 //	free_cmd_tab(cmd);
+	exec_error(code, cmd->av[0]);	
 	(void)cmd;
 	exit(code);
 }
