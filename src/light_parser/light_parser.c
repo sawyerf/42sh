@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 14:58:34 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/13 19:26:25 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/14 18:44:50 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	is_first_word(char *line, t_token *start, t_autocomplete *autocomp)
 	}
 	if (save->type == WORD)
 	{
-		if  (ft_is_whitespace(*line) &&  first_word)
+		if  (!ft_is_whitespace(*line) &&  first_word)
 			return (fill_autocomp(autocomp, cmd_name, save->data.str));
 		else if ((!ft_is_whitespace(*line)) && (!first_word))
 			return (fill_autocomp(autocomp, arg, save->data.str));
@@ -59,7 +59,8 @@ static int	is_first_word(char *line, t_token *start, t_autocomplete *autocomp)
 static int dispatch_types(char *line, t_token *start, t_autocomplete *autocomp)
 {
 
-	if ((start->type >= PIPE) && (start->type <= GREAT))
+	if (((start->type >= PIPE) && (start->type <= GREAT))
+			|| (start->type == NEWLINE))
 	{
 		if ((start->type >= LESSAND) && (start->type <= GREAT))
 			return (fill_autocomp(autocomp, arg, ""));
