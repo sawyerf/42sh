@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/12 21:09:46 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/14 18:04:58 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,27 @@
 # define K_CTRA	"\1"
 # define K_CTRC	"\3"
 # define K_CTRD	"\4"
+# define K_CTRY	"\31"
+# define K_CTRV	"\26"
+# define K_CTRP	"\20"
 # define K_SLFT "\33[1;2D"
 # define K_SRGT "\33[1;2C"
 # define K_TAB	"\t"
 
 typedef struct		s_rdl
 {
+	struct termios	save;
+	char			*prompt;
+	int				curs;
+	int				col;
+	int				lpro;
+
 	char			*str;
 	int				size;
 	int				allo;
 
-	char			*prompt;
-	struct termios		save;
-	int				curs;
-	int				col;
-	int				lpro;
+	int				vcurs;
+	char			*paste;
 }					t_rdl;
 
 typedef struct		s_hash
@@ -85,28 +91,36 @@ int		termreset(struct termios *save);
 void	tgpstr(char *s);
 
 //keys
+int		special_key(t_rdl *rdl, char *buf, t_key *key);
 int	    key_router(t_rdl *rdl, char *buf);
 int		next_word(t_rdl *rdl, char *buf);
 int		prev_word(t_rdl *rdl, char *buf);
 int		del_cara(t_rdl *rdl, char *buf);
-int		special_key(t_rdl *rdl, char *buf);
 int		begin(t_rdl *rdl, char *buf);
 int		move_curs(t_rdl *rdl, char *buf);
 int		enter(t_rdl *rdl, char *buf);
 int		ctrld(t_rdl *rdl, char *buf);
 int		ctrlc(t_rdl *rdl, char *buf);
 int		autocompl(t_rdl *rdl, char *buf);
+int		visualmode(t_rdl *rdl, char *buf);
+int		vm_move(t_rdl *rdl, char *buf);
+int		vm_copy(t_rdl *rdl, char *buf);
+int		vm_del(t_rdl *rdl, char *buf);
+int		paste(t_rdl *rdl, char *buf);
+int		vm_finish(t_rdl *rdl, char *buf);
 
 //tools
+void	reprint(t_rdl *rdl, int curs);
 int		is_special(char *buf);
 void	left(t_rdl *rdl, int i);
 void	right(t_rdl *rdl, int i);
 
 //file
 t_list	*get_exec(char *exec, char *path);
-t_list	*get_folex(char *token);
+t_list	*get_folex(char *token, int (*f)(char *file));
 int		folexaccess(char *file);
 int		exaccess(char *file);
+int		filexist(char *file);
 
 //struct rdl
 void				rdlinit(t_rdl *rdl, char *PROMPT);

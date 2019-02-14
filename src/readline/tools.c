@@ -6,11 +6,22 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:49:02 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/12 22:15:38 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/14 18:00:15 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline.h"
+
+
+void	reprint(t_rdl *rdl, int curs)
+{
+	int adv;
+
+	left(rdl, rdl->curs + rdl->lpro);
+	tgpstr("dl");
+	adv = ft_printf("%s%s", rdl->prompt, rdl->str);
+	left(rdl, adv - rdl->lpro - curs);
+}
 
 void	left(t_rdl *rdl, int i)
 {

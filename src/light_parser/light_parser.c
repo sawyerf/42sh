@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 14:58:34 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/12 18:31:34 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/13 19:26:25 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	is_first_word(char *line, t_token *start, t_autocomplete *autocomp)
 	first_word = 1;
 	save = start;
 	start = start->next;
-	while (start->type != NEWLINE)
+	while (start && start->type != NEWLINE)
 	{
 		if (start->type == WORD)
 		{
@@ -48,13 +48,12 @@ static int	is_first_word(char *line, t_token *start, t_autocomplete *autocomp)
 	}
 	if (save->type == WORD)
 	{
-		if  (!ft_is_whitespace(*line) && (first_word))
+		if  (ft_is_whitespace(*line) &&  first_word)
 			return (fill_autocomp(autocomp, cmd_name, save->data.str));
 		else if ((!ft_is_whitespace(*line)) && (!first_word))
 			return (fill_autocomp(autocomp, arg, save->data.str));
 	}
 	return (fill_autocomp(autocomp, arg, ""));
-	return (0);
 }
 
 static int dispatch_types(char *line, t_token *start, t_autocomplete *autocomp)
@@ -70,17 +69,21 @@ static int dispatch_types(char *line, t_token *start, t_autocomplete *autocomp)
 }
 /*
  */
-int	ft_light_parser(char *line, t_autocomplete *autocomplete)
+int	ft_light_parser(char *lin, t_autocomplete *autocomplete)
 {
 	t_token *tokens;
+	char 	*line;
 
-	
+	if (!(line = ft_strdup(lin)))
+		return (MEMERR);
 	ft_strrev(line);
 	if (*line == '\n')
 		ft_memmove(line, line + 1, ft_strlen(line));
-	if (rev_lex(line, &tokens) == MEMERR)
+	if (rev_lex(line, &tokens) == MEMERR || dispatch_types(line, tokens, autocomplete) == MEMERR)
+	{
+		ft_strdel(&line);
 		return (MEMERR);
-	if (dispatch_types(line, tokens, autocomplete) == MEMERR)
-		return (MEMERR);
+	}
+	ft_strdel(&line);
 	return (0);
 }

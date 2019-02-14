@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:49:43 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/12 21:13:37 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/14 17:41:08 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		terminit(struct termios *save)
 			return (0);
 	if (tcgetattr(0, &term) == -1)
 		return (0);
-	term.c_lflag &= ~(ICANON | ISIG);
+	term.c_lflag &= ~(ICANON | ISIG | IEXTEN);
 	term.c_lflag &= ~(ECHO);
 	term.c_cc[VMIN] = 1;
 	term.c_cc[VTIME] = 0;
