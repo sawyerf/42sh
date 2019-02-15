@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/02/14 15:14:34 by apeyret          ###   ########.fr        #
+#    Updated: 2019/02/15 16:35:18 by ktlili           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = gcc
 
 CFLAGS = -I inc/ -I lib/inc/ -ggdb -Wall -Werror -Wextra 
 
-DEBUG= -g3 -fsanitize=address
+DEBUG= #-g3 -fsanitize=address
 
 INC_DIR = inc
 
@@ -79,7 +79,7 @@ SRC_FILE =	core/builtins.c \
 			readline/k_move.c \
 			readline/k_return.c \
 			readline/k_visual.c \
-			light_parser/light_parser.c 
+			light_parser/light_parser.c \
 
 OBJ_DIR = .obj
 OBJ_FILE = $(SRC_FILE:.c=.o)

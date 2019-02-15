@@ -6,13 +6,13 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/08 16:00:38 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/15 16:07:36 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "readline.h"
 #include "ft_lexer.h"
 /*
-add mem error exit for str_putchar done
+ * TODO
 add lex error for backslash followed by EOI
 */
 
@@ -25,7 +25,7 @@ int	request_new_line(t_lexer *lexer_state)
 		return (MEMERR);
 	else if (*new_line == 0)
 		return (SQUOTE_ERR);
-	free(lexer_state->line);
+	free(lexer_state->line); // this has to change
 	lexer_state->line = new_line;
 	lexer_state->cursor = new_line;
 	return (0);

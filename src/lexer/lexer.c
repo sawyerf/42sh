@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/12 15:59:05 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/15 16:36:20 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int rev_lex(char *line, t_token **head)
 		init_jump_table(table);
 	flag = 1;
 	*head = NULL;
+	while (ft_is_whitespace(*(lexer_state.cursor)))
+		lexer_state.cursor = lexer_state.cursor + 1;
 	while (*(lexer_state.cursor))
 	{
 		while (ft_is_whitespace(*(lexer_state.cursor)))
@@ -61,7 +63,7 @@ int rev_lex(char *line, t_token **head)
 		else
 			ret = table[1](&lexer_state);
 		add_token(head, lexer_state.token);
-		if (lexer_state.token->type > ASSIGN) /* break first op*/
+		if (lexer_state.token->type > ASSIGN) // break first op
 			break;
 		lexer_state.token = NULL;	
 	}

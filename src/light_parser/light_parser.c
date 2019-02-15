@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 14:58:34 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/14 18:44:50 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/15 16:48:54 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ int	ft_light_parser(char *lin, t_autocomplete *autocomplete)
 	ft_strrev(line);
 	if (*line == '\n')
 		ft_memmove(line, line + 1, ft_strlen(line));
-	if (rev_lex(line, &tokens) == MEMERR || dispatch_types(line, tokens, autocomplete) == MEMERR)
+	if (rev_lex(line, &tokens) == MEMERR 
+			|| dispatch_types(line, tokens, autocomplete) == MEMERR)
 	{
 		ft_strdel(&line);
 		return (MEMERR);
