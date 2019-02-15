@@ -18,6 +18,8 @@ char	**ft_tabdup(char **tab)
 	int		count;
 
 	count = 0;
+	if (!tab)
+		return (ft_tabnew(0));
 	if (!(dtab = ft_tabnew(ft_tablen(tab))))
 		return (NULL);
 	while (tab[count])

@@ -42,7 +42,6 @@ int rev_lex(char *line, t_token **head)
 	t_lexer 			lexer_state;
 	static t_func	 	table[TABLESZ];
 	static int			flag = 0;
-	int					ret;
 
 	lexer_state.line = line;
 	lexer_state.cursor = line;
@@ -59,9 +58,9 @@ int rev_lex(char *line, t_token **head)
 		if (!(lexer_state.token = new_token(0)))
 			return (MEMERR);
 		if (*(lexer_state.cursor) > 0)
-			ret = table[(int)*(lexer_state.cursor)](&lexer_state);
+			table[(int)*(lexer_state.cursor)](&lexer_state);
 		else
-			ret = table[1](&lexer_state);
+			table[1](&lexer_state);
 		add_token(head, lexer_state.token);
 		if (lexer_state.token->type > ASSIGN) // break first op
 			break;

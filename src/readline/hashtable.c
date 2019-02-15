@@ -90,7 +90,6 @@ int		ht_getfile(char **paths, t_cmd_tab *cmd)
 {
 	int		i;
 	char	*tmp;
-	int		hash;
 
 	i = 0;
 	while (paths[i])
@@ -99,7 +98,7 @@ int		ht_getfile(char **paths, t_cmd_tab *cmd)
 			return (MEMERR);
 		if (!exaccess(tmp))
 		{
-			hash = ht_hash(paths[i]);
+			ht_hash(paths[i]);
 			ft_lstadd(&g_thash[i], ft_lstnew(cmd->av[0], 0));
 			cmd->full_path = tmp;
 			return (0);

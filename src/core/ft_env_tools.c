@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "sh_core.h"
-
+/*
 static int		merge_env(char **new_env, char *to_add)
 {
 	int len;
@@ -59,7 +59,7 @@ int				append_tab(char **new_env, char **to_add, int count)
 	new_env[i] = NULL;
 	return (0);
 }
-
+*/
 int				valid_env_var(char *str)
 {
 	while (*str)

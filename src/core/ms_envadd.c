@@ -19,7 +19,7 @@ char	**ms_envadd(char **env, char *var)
 
 	len = ft_tablen(env) + 1;
 	if (!(cpenv = ft_tabnew(len)))
-		return (env); // should be returning NULL
+		return (NULL); // should be returning NULL
 	cpenv = ms_tabcpy(cpenv, env);
 	if (!(cpenv[len - 1] = ft_strdup(var)))
 		return (NULL);

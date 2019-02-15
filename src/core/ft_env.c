@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "sh_core.h"
-
+/*
 static char		**construct_env(t_cmd_tab *cmd, char opt, int count)
 {
 	char		**new_env;
@@ -19,11 +19,30 @@ static char		**construct_env(t_cmd_tab *cmd, char opt, int count)
 	count = count - g_optind;
 	if (opt == 'i')
 		new_env = NULL;
-	else
-		new_env = ft_tabdup(g_sh_state.export_var);
+	new_env = ft_tabrealloc(new_env, count);	
 	if ((new_env == NULL)
 			|| (append_tab(new_env, cmd->av + g_optind, count) == MEMERR))
 		return (NULL);
+	return (new_env);
+}
+*/
+static char **construct_env(t_cmd_tab *cmd, char opt, int count)
+{
+	char 	**new_env;
+	int		start;
+
+	new_env = g_sh_state.export_var;
+	if (opt == 'i')
+		new_env = NULL;
+	start = g_optind;
+	if (!(new_env = ft_tabdup(new_env)))
+		return (NULL);
+	while (start < count)
+	{
+		if (!(new_env = ms_csetenv(new_env, cmd->av[start])))
+			return (NULL);
+		start++;
+	}
 	return (new_env);
 }
 

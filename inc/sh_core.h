@@ -135,6 +135,6 @@ int						cd_dispatch_err(char *arg, char *curpath);
 void					update_env_pwd(char *pwd, char *curpath);
 int						cd_error(int errnum, char *str);
 char					*getoldpwd(void);
-
+char					**ms_csetenv(char **env, char *var);
 
 #endif

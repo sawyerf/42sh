@@ -14,6 +14,7 @@
 # define LIBFT_H
 
 # include <stdlib.h>
+# include <inttypes.h>
 # include <string.h>
 # include <unistd.h>
 # include "ft_printf.h"
