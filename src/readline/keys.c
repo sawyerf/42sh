@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:47:43 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/14 17:51:01 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/15 17:18:42 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 t_key	g_key[] =\
 {
+	{K_HOME, &begin},
+	{K_END,  &end},
 	{K_CTRA, &begin},
 	{K_CTRC, &ctrlc},
 	{K_CTRD, &ctrld},
@@ -25,10 +27,21 @@ t_key	g_key[] =\
 	{K_LEFT, &move_curs},
 	{K_SLFT, &prev_word},
 	{K_SRGT, &next_word},
+	{K_SUP,  &move_curs},
+	{K_SDOW, &move_curs},
 	{K_TAB,  &autocompl},
 	{K_ENTR, &enter},
 	{NULL,   &enter}
 };
+
+int		end(t_rdl *rdl, char *buf)
+{
+	(void)buf;
+
+	right(rdl, rdl->size - rdl->curs);
+	rdl->curs += rdl->size - rdl->curs;
+	return (0);
+}
 
 int		paste(t_rdl *rdl, char *buf)
 {

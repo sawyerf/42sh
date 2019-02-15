@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/14 18:04:58 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/15 18:40:52 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 
 # define HT_SIZE 2048
 
+# define K_HOME "\33[H"
+# define K_END  "\33[F"
 # define K_UP	"\33[A"
 # define K_LEFT	"\33[D"
 # define K_RGHT	"\33[C"
@@ -43,6 +45,8 @@
 # define K_CTRP	"\20"
 # define K_SLFT "\33[1;2D"
 # define K_SRGT "\33[1;2C"
+# define K_SUP  "\33[1;2A"
+# define K_SDOW "\33[1;2B"
 # define K_TAB	"\t"
 
 typedef struct		s_rdl
@@ -108,12 +112,17 @@ int		vm_copy(t_rdl *rdl, char *buf);
 int		vm_del(t_rdl *rdl, char *buf);
 int		paste(t_rdl *rdl, char *buf);
 int		vm_finish(t_rdl *rdl, char *buf);
+int		end(t_rdl *rdl, char *buf);
 
 //tools
 void	reprint(t_rdl *rdl, int curs);
 int		is_special(char *buf);
-void	left(t_rdl *rdl, int i);
-void	right(t_rdl *rdl, int i);
+int		left(t_rdl *rdl, int i);
+int		right(t_rdl *rdl, int i);
+int		vleft(t_rdl *rdl, int i);
+int		vright(t_rdl *rdl, int i);
+int		up(t_rdl *rdl, int i);
+int		down(t_rdl *rdl, int i);
 
 //file
 t_list	*get_exec(char *exec, char *path);
