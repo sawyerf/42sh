@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 22:17:22 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/11 18:54:32 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/15 20:06:59 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*tab_get_value(char *name, char **env)
 	}
 	return (NULL);
 }
-
+/*
 char	*get_env_value(char *name)
 {
 	t_environ	*tmp;
@@ -62,6 +62,18 @@ char	*get_env_value(char *name)
 	if (tmp != NULL)
 		return (tmp->value);
 	return (NULL);
+}*/
+
+char *get_env_value(char *name)
+{
+	char *value;
+
+	if ((value = ms_varchr(g_sh_state.export_var, name)))
+		return (value);
+	if ((value = ms_varchr(g_sh_state.internal, name)))
+		return (value);
+	return (NULL);
+
 }
 
 int		set_shell_env(char *name, char *newvalue, int to_export)

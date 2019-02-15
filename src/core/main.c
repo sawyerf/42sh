@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/12 20:40:29 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/15 21:58:13 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 #include "readline.h"
 
 t_environ **g_environ = NULL;
-
+t_sh_state	g_sh_state;
+/*
 static int		init_g_env(char **env)
 {
 	t_environ	*shlvl;
@@ -43,43 +44,19 @@ static int		init_g_env(char **env)
 	free(newlvl);
 	return (0);
 }
+*/
+
+static int	init_shell(char **env)
+{
+	if (!(g_sh_state.export_var = ms_shlvl(dup_tab(env))))
+		return (MEMERR);
+	return (0);
+}
 
 static void		silence_ac_av(char ac, char **av)
 {
 	(void)ac;
 	(void)av;
-}
-
-void	print_token(t_token *t)
-{
-	char types[100][100] = {"WORD","NEWLINE","IO_NUM","FILENAME", "ASSIGN", "PIPE", "SEMI_COL",
-				"AMPERS","ANDIF", "ORIF", "LESSAND", "GREATAND", "DGREAT", "LESS",
-				"GREAT"};
-	if (!t)
-	{
-		ft_printf("NULL\n");
-		return;
-	}
-	ft_printf("type %s |  str '%s'\n", types[t->type], t->data.str);
-}
-
-void	print_tokens(t_token *t)
-{
-	while (t)
-	{
-		print_token(t);
-		t = t->next;
-	}
-}
-
-void	expansion_tester(t_token *start)
-{
-	while (start)
-	{
-		if (ft_wordexp(start, FALSE) == MEMERR)
-		{ft_printf("wordexp memerr\n");exit(1);}		
-		start = start->next;
-	}
 }
 
 int				main(int ac, char **av, char **env)
@@ -90,8 +67,12 @@ int				main(int ac, char **av, char **env)
 
 	silence_ac_av(ac, av);
 	ht_init();
-	if ((init_g_env(env) != 0))
+	if (init_shell(env))
 		return (MEMERR);
+//	if ((init_g_env(env) != 0))
+//		return (MEMERR);
+	char *fifi = get_env_value("PATH");
+	fifi++;
 	ht_refreshall(get_env_value("PATH"));
 	while (42)
 	{

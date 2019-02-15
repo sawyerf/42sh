@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 13:58:14 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/06 15:54:02 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/15 21:48:49 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,12 @@
 static char		**construct_env(t_cmd_tab *cmd, char opt, int count)
 {
 	char		**new_env;
-	t_environ	*base_env;
 
 	count = count - g_optind;
-	base_env = *g_environ;
 	if (opt == 'i')
-		base_env = NULL;
-	new_env = lst_to_tab(base_env, count);
+		new_env = NULL;
+	else
+		new_env = ft_tabdup(g_sh_state.export_var);
 	if ((new_env == NULL)
 			|| (append_tab(new_env, cmd->av + g_optind, count) == MEMERR))
 		return (NULL);

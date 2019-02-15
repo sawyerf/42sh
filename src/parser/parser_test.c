@@ -1,6 +1,29 @@
 #include "ft_parser.h"
 #include "ft_eval.h"
 
+
+void	print_token(t_token *t)
+{
+	char types[100][100] = {"WORD","NEWLINE","IO_NUM","FILENAME", "ASSIGN", "PIPE", "SEMI_COL",
+				"AMPERS","ANDIF", "ORIF", "LESSAND", "GREATAND", "DGREAT", "LESS",
+				"GREAT"};
+	if (!t)
+	{
+		ft_printf("NULL\n");
+		return;
+	}
+	ft_printf("type %s |  str '%s'\n", types[t->type], t->data.str);
+}
+
+void	print_tokens(t_token *t)
+{
+	while (t)
+	{
+		print_token(t);
+		t = t->next;
+	}
+}
+
 void	print_tree(t_ast_node *tree)
 {
 	char types[100][100]= {"WORD", "NEWLINE", "IO_NUM", "FILENAME", "ASSIGN", "PIPE", "SEMI_COL",

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/14 19:01:41 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/15 21:56:14 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int		execve_wrap(t_cmd_tab *cmd)
 	char	*path;
 	int		ret;
 
-	cmd->process_env = craft_env(lst_to_tab(*g_environ, 0), cmd->assign_lst);
+	cmd->process_env = craft_env(g_sh_state.export_var, cmd->assign_lst);
 	if (cmd->process_env == NULL)
 		return (MEMERR);
 	if (ft_ispath(cmd->av[0]))
@@ -124,7 +124,7 @@ t_bool		is_builtin(t_cmd_tab *cmd)
 
 	if ((i = ft_cmptab(builtins, cmd->av[0])) != -1)
 	{
-		cmd->process_env = craft_env(lst_to_tab(*g_environ, 0), cmd->assign_lst);
+		cmd->process_env = craft_env(ft_tabdup(g_sh_state.export_var), cmd->assign_lst);
 		if (cmd->process_env == NULL)
 			return (MEMERR);
 		cmd->exit_status = array[i](cmd);
@@ -177,9 +177,7 @@ int		spawn_command(t_cmd_tab *cmd)
 	int		ret;
 
 	if (cmd->av[0] == NULL)
-	{
 		return (assign_to_shell(cmd));
-	}
 	if (is_builtin(cmd) == FT_TRUE)
 		return (0);
 	pid = fork();

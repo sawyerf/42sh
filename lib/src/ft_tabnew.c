@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tabdel.c                                        :+:      :+:    :+:   */
+/*   ft_tabnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/17 22:05:31 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/24 20:01:36 by apeyret          ###   ########.fr       */
+/*   Created: 2018/12/21 19:17:08 by apeyret           #+#    #+#             */
+/*   Updated: 2018/12/21 19:39:24 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_tabdel(char ***tab)
+char	**ft_tabnew(size_t size)
 {
-	int count;
+	char	**tab;
+	size_t	count;
 
 	count = 0;
-	if (!*tab)
-		return ;
-	while ((*tab)[count])
+	if (!(tab = (char**)malloc(sizeof(char**) * (size + 1))))
+		return (NULL);
+	while (count < size + 1)
 	{
-		ft_strdel(&((*tab)[count]));
+		tab[count] = NULL;
 		count++;
 	}
-	free(*tab);
-	*tab = NULL;
+	return (tab);
 }

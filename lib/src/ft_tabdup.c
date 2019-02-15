@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tabdel.c                                        :+:      :+:    :+:   */
+/*   ft_tabdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/17 22:05:31 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/24 20:01:36 by apeyret          ###   ########.fr       */
+/*   Created: 2018/12/23 18:31:38 by apeyret           #+#    #+#             */
+/*   Updated: 2019/02/15 21:45:23 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_tabdel(char ***tab)
+char	**ft_tabdup(char **tab)
 {
-	int count;
+	char	**dtab;
+	int		count;
 
 	count = 0;
-	if (!*tab)
-		return ;
-	while ((*tab)[count])
+	if (!(dtab = ft_tabnew(ft_tablen(tab))))
+		return (NULL);
+	while (tab[count])
 	{
-		ft_strdel(&((*tab)[count]));
+		if (!(dtab[count] = ft_strdup(tab[count])))
+			return (NULL);
 		count++;
 	}
-	free(*tab);
-	*tab = NULL;
+	return (dtab);
 }

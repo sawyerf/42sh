@@ -6,12 +6,14 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:22:06 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/06 15:40:08 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/15 21:58:51 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_eval.h"
-
+/*
+ * replace ft_ptr_arr_len with ft_tablen
+ */
 static int	ft_ptr_arr_len(char **ptr)
 {
 	int i;
@@ -67,8 +69,8 @@ char *get_process_env(char *key, char **env)
 
 char **craft_env(char **base_env, char **to_add)
 {
-	char **fresh;
-	int tot_len;
+	char		 **fresh;
+	int 		tot_len;
 	int 		i;
 	int			j;
 
@@ -76,9 +78,7 @@ char **craft_env(char **base_env, char **to_add)
 		return (NULL);
 	tot_len = ft_ptr_arr_len(base_env) + ft_ptr_arr_len(to_add) + 1;
 	if (!(fresh = ft_memalloc(tot_len * sizeof(char*))))
-	{
 		return (NULL);
-	}
 	cpy_array(fresh, base_env);
 	i = 0;
 	while (to_add[i])

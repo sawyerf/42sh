@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/02/12 19:00:34 by apeyret          ###   ########.fr        #
+#    Updated: 2019/02/15 19:31:05 by ktlili           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -103,7 +103,13 @@ SRC_FILE =	ft_strnsplit.c \
 			ft_strndup.c \
 			ft_cisin.c \
 			ft_tabdel.c \
-			ft_strlower.c
+			ft_strlower.c \
+			ft_tabcpy.c \
+			ft_tabdel.c \
+			ft_tabdup.c \
+			ft_tablen.c \
+			ft_tabnew.c \
+			ft_tabcpy.c 
 
 
 OBJ_DIR = .obj

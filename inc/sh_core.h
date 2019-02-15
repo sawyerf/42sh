@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/06 19:18:11 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/15 20:38:19 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,15 @@
 
 
 
+typedef struct 		s_sh_state
+{
+	int	interactive;
+	char **internal;
+	char **export_var;
+	/* stuff needed by job control will eventually live in this struct 
+	 */
+}					t_sh_state;
+
 /*
 	minishell cmd to remove
 */
@@ -60,7 +69,14 @@ typedef struct s_cmd_tab t_cmd_tab;
 
 typedef	int				(*t_builtin)(t_cmd_tab*);
 
+/* to delete*/
 extern	t_environ		**g_environ;
+extern	t_sh_state		g_sh_state;
+
+char					**ms_shlvl(char **env);
+char*					ms_varchr(char **env, char *toto);
+char**					ms_envaddint(char **caca, char *toto, int fifi);
+char*					ms_envchrr(char **env, char *var);
 t_ast_node				*get_tree(t_ast_node *tree);
 int						change_dir(t_cmd_tab *cmd);
 int						ft_exit(t_cmd_tab *cmd);
@@ -119,5 +135,6 @@ int						cd_dispatch_err(char *arg, char *curpath);
 void					update_env_pwd(char *pwd, char *curpath);
 int						cd_error(int errnum, char *str);
 char					*getoldpwd(void);
+
 
 #endif

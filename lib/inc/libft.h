@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 22:23:00 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/11 19:00:45 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/15 20:01:26 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,12 @@ int					ft_printf(const char *s, ...);
 int					ft_dprintf(int fd, const char *format, ...);
 char				*ft_zprintf(const char *format, ...);
 int					ft_cisin(char *s, char c);
-char			*ft_strechr(const char *s, int c);
-void	ft_tabdel(char ***tab);
+char				*ft_strechr(const char *s, int c);
+void				ft_tabdel(char ***tab);
+char**				ft_tabdup(char **tab);
+int					ft_tablen(char **tab);
+char**				ft_tabnew(size_t len);
+char**				ft_tabcpy(char **tab);
+char				**ms_tabcpy(char **dst, char **cpy);
+
 #endif

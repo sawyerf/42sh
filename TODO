@@ -1,0 +1,5 @@
+* internal setenv and unsetenv still broken.
+* env -i is broken
+* assign_to_shell in spawner has to be rewritten
+------------
+
