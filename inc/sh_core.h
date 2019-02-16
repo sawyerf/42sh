@@ -105,16 +105,11 @@ int						path_access(char *path);
 int						ft_ispath(char *str);
 char					*handle_pwd_l(void);
 void					init_iterator(int *read, int *write);
-int						env_tab_to_lst(char **env, t_environ **env_lst);
 char					**lst_to_tab(t_environ *env_lst, int size);
-t_environ				*new_env_node(char *name, char *value);
-t_environ				*env_to_lst(char *env_var);
-void					add_node(t_environ **head, t_environ *to_add);
 char					*get_env_value(char *name);
 int						set_shell_env(char *name, char *value, int to_export);
 int						valid_env_name(char *str);
 int						valid_env_char(char c);
-t_environ				*get_env_node(char *name);
 void					delete_env_node(t_environ *to_del);
 char					*tab_get_value(char *name, char **env);
 char					*get_value(char *env_var);
@@ -139,4 +134,6 @@ int						cd_error(int errnum, char *str);
 char					*getoldpwd(void);
 char					**ms_csetenv(char **env, char *var);
 char					**ms_envdel(char **env, char *var);
+char					**ms_envaddstr(char **env, char *var, char *value);
+
 #endif

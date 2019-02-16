@@ -62,13 +62,14 @@ int	setenv_wrapper(t_cmd_tab *cmd)
 			return (-1);
 		}
 	}
-	return (set_shell_env(cmd->av[1], cmd->av[2], 1));
+	if (!(g_sh.export_var = ms_envaddstr(g_sh.export_var, cmd->av[1], cmd->av[2])))
+		return (MEMERR);
+	return (0);
 }
 
 int	ft_unsetenv(t_cmd_tab *cmd)
 {
 	int			i;
-	t_environ	*env;
 
 	if (cmd->av[1] == NULL)
 	{
@@ -80,9 +81,8 @@ int	ft_unsetenv(t_cmd_tab *cmd)
 		i = 0;
 		while (cmd->av[i] != NULL)
 		{
-			env = get_env_node(cmd->av[i]);
-			if (env != NULL)
-				delete_env_node(env);
+			if (!(g_sh.export_var = ms_envdel(g_sh.export_var, cmd->av[i])))
+				return (MEMERR);
 			i++;
 		}
 	}

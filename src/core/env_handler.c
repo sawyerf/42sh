@@ -36,24 +36,6 @@ int		valid_env_name(char *str)
 	return (1);
 }
 
-char	*tab_get_value(char *name, char **env)
-{
-	int i;
-	int len;
-
-	if ((name == NULL) || (env == NULL))
-		return (NULL);
-	i = 0;
-	len = ft_strlen(name);
-	while (env[i] != NULL)
-	{
-		if ((!ft_strncmp(name, env[i], len)) && (env[i][len] == '='))
-			return (get_value(env[i]));
-		i++;
-	}
-	return (NULL);
-}
-
 char *get_env_value(char *name)
 {
 	char *value;
@@ -66,32 +48,10 @@ char *get_env_value(char *name)
 
 }
 
-int		set_shell_env(char *name, char *newvalue, int to_export)
+int	set_shell_env(char *name, char *newvalue, int to_export)
 {
-	t_environ *tmp;
-
-	if (newvalue == NULL)
-		newvalue = "";
-	if ((tmp = get_env_node(name)) == NULL)
-	{
-		tmp = new_env_node(ft_strdup(name), ft_strdup(newvalue));
-		if (tmp != NULL)
-			add_node(g_environ, tmp);
-		else
-			return (MEMERR);
-		tmp->to_export = to_export;
-	}
-	else
-	{
-		if (tmp->value != NULL)
-			free(tmp->value);
-		tmp->value = ft_strdup(newvalue);
-		if (tmp->value == NULL)
-			return (MEMERR);
-		tmp->to_export = to_export;
-	}
-	if (!ft_strcmp(name, "PATH"))
-		ht_refreshall(newvalue);
+	(void)to_export;
+	if (!(g_sh.export_var = ms_envaddstr(g_sh.export_var, name, newvalue)))
+		return (MEMERR);
 	return (0);
 }
-

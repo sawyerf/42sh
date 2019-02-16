@@ -146,31 +146,7 @@ int		spawn_in_pipe(t_cmd_tab *cmd)
 	else
 		return (execve_wrap(cmd));
 }
-/*
-static	int assign_to_shell(t_cmd_tab *cmd)
-{
-	int i;
-	t_environ 	*tmp;
-	t_environ 	*is_set;
-	int			to_export;
-	i = 0;
-	while (cmd->assign_lst[i])
-	{
-		to_export = 0;
-		if ((is_set = get_env_node(cmd->assign_lst[i])))
-			to_export = is_set->to_export; 
-		if (!(tmp = env_to_lst(cmd->assign_lst[i])))
-			return (MEMERR);
-		if (set_shell_env(tmp->name, tmp->value, to_export) == MEMERR)
-			return (MEMERR);
-		free(tmp->name);
-		free(tmp->value);
-		free(tmp);
-		i++;
-	}
-	return (0);
-}
-*/
+
 static int assign_to_shell(t_cmd_tab *cmd)
 {
 	int i;
