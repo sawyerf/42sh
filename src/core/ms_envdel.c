@@ -22,10 +22,12 @@ char	**ms_envdel(char **env, char *var)
 
 	count = 0;
 	counta = 0;
-	if (!var || !env || (len = ft_strlen(var)) == 1)
+	if (!var || !env || (len = ft_strlen(var)) == 0)
 		return (env);
-	if (!ms_envchrr(env, var) || !(cpy = ft_tabnew(ft_tablen(env) - 1)))
+	if (!ms_envchrr(env, var))
 		return (env);
+	if (!(cpy = ft_tabnew(ft_tablen(env) - 1)))
+		return (NULL);
 	while (env[count])
 	{
 		if (!(!ft_strncmp(env[count], var, len) && env[count][len] == '='))

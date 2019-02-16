@@ -53,8 +53,6 @@ int rev_lex(char *line, t_token **head)
 		lexer_state.cursor = lexer_state.cursor + 1;
 	while (*(lexer_state.cursor))
 	{
-		while (ft_is_whitespace(*(lexer_state.cursor)))
-			lexer_state.cursor = lexer_state.cursor + 1;
 		if (!(lexer_state.token = new_token(0)))
 			return (MEMERR);
 		if (*(lexer_state.cursor) > 0)
@@ -65,6 +63,8 @@ int rev_lex(char *line, t_token **head)
 		if (lexer_state.token->type > ASSIGN) // break first op
 			break;
 		lexer_state.token = NULL;	
+		while (ft_is_whitespace(*(lexer_state.cursor)))
+			lexer_state.cursor = lexer_state.cursor + 1;
 	}
 	add_token(head, new_token(1));
 	return (0);

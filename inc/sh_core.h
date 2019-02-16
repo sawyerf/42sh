@@ -71,7 +71,8 @@ typedef	int				(*t_builtin)(t_cmd_tab*);
 
 /* to delete*/
 extern	t_environ		**g_environ;
-extern	t_sh_state		g_sh_state;
+/**/
+extern	t_sh_state		g_sh;
 
 char					**ms_shlvl(char **env);
 char*					ms_varchr(char **env, char *toto);
@@ -84,7 +85,8 @@ int						ft_env(t_cmd_tab *cmd);
 int						ft_unsetenv(t_cmd_tab *cmd);
 int						setenv_wrapper(t_cmd_tab *cmd);
 int						ft_echo(t_cmd_tab *cmd);
-
+int						ft_set(t_cmd_tab *cmd);
+int						ft_unset(t_cmd_tab *cmd);
 void					print_env_tab(char **machintruc);
 void					print_cmd(t_command command);
 void					print_cmd_lst(t_command *command);
@@ -136,5 +138,5 @@ void					update_env_pwd(char *pwd, char *curpath);
 int						cd_error(int errnum, char *str);
 char					*getoldpwd(void);
 char					**ms_csetenv(char **env, char *var);
-
+char					**ms_envdel(char **env, char *var);
 #endif

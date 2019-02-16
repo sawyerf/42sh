@@ -15,6 +15,29 @@
  *
  *
  * */
+
+int	ft_set(t_cmd_tab *cmd)
+{
+	(void)cmd;
+	print_env_tab(g_sh.internal);
+	return (0);
+}
+
+int ft_unset(t_cmd_tab *cmd)
+{
+	int i;
+
+	i = 1;
+	while (cmd->av[i])
+	{
+		if ((!(g_sh.export_var = ms_envdel(g_sh.export_var, cmd->av[i])))
+			|| (!(g_sh.internal = ms_envdel(g_sh.internal, cmd->av[i]))))
+		return(MEMERR);
+		i++;
+	}
+	return (0);
+}
+
 int	setenv_wrapper(t_cmd_tab *cmd)
 {
 	int i;

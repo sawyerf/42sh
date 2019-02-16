@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "sh_core.h"
-
+/* maybe ft_varnamelen instead of strlen ?*/
 char	*ms_varchr(char **env, char *var)
 {
 	int		count;

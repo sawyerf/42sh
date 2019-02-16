@@ -11,27 +11,13 @@
 /* ************************************************************************** */
 
 #include "sh_core.h"
-/*
-static char		**construct_env(t_cmd_tab *cmd, char opt, int count)
-{
-	char		**new_env;
 
-	count = count - g_optind;
-	if (opt == 'i')
-		new_env = NULL;
-	new_env = ft_tabrealloc(new_env, count);	
-	if ((new_env == NULL)
-			|| (append_tab(new_env, cmd->av + g_optind, count) == MEMERR))
-		return (NULL);
-	return (new_env);
-}
-*/
 static char **construct_env(t_cmd_tab *cmd, char opt, int count)
 {
 	char 	**new_env;
 	int		start;
 
-	new_env = g_sh_state.export_var;
+	new_env = g_sh.export_var;
 	if (opt == 'i')
 		new_env = NULL;
 	start = g_optind;
@@ -55,7 +41,7 @@ static int		spawn_new_env(char **args, char **new_env)
 	if (new_cmd == NULL)
 		return (MEMERR);
 	new_cmd->process_env = new_env;
-//	ret = spawn_bin(new_cmd);
+//	ret = spawn_command(new_cmd); dis iz broken
 	free_cmdlst(new_cmd);
 	return (ret);
 }

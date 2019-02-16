@@ -70,7 +70,7 @@ static int		execve_wrap(t_cmd_tab *cmd)
 	char	*path;
 	int		ret;
 
-	cmd->process_env = craft_env(g_sh_state.export_var, cmd->assign_lst);
+	cmd->process_env = craft_env(g_sh.export_var, cmd->assign_lst);
 	if (cmd->process_env == NULL)
 		return (MEMERR);
 	if (ft_ispath(cmd->av[0]))
@@ -86,7 +86,7 @@ static int		execve_wrap(t_cmd_tab *cmd)
 		if (ht_getvalue(path, cmd) == MEMERR)
 			return (MEMERR);
 		if (!cmd->full_path)
-			exit_wrap (127, cmd);	/* maybe exit ?*/
+			exit_wrap (127, cmd);
 	}
 	ret = execve(cmd->full_path, cmd->av, cmd->process_env); 
 	putstr_stderr("21sh: bad file format\n");
@@ -116,15 +116,15 @@ void	wait_wrapper(t_cmd_tab *cmd, pid_t pid)
 
 t_bool		is_builtin(t_cmd_tab *cmd)
 {
-	static t_builtin	array[7] = {ft_echo, change_dir, setenv_wrapper,
-							ft_unsetenv, ft_env, ft_exit};
+	static t_builtin	array[9] = {ft_echo, change_dir, setenv_wrapper,
+							ft_unsetenv, ft_env, ft_exit, ft_set, ft_unset};
 	static	char		*builtins[] = {"echo", "cd", "setenv", "unsetenv",
-							"env", "exit", NULL};
+							"env", "exit", "set", "unset", NULL};
 	int					i;
 
 	if ((i = ft_cmptab(builtins, cmd->av[0])) != -1)
 	{
-		cmd->process_env = craft_env(ft_tabdup(g_sh_state.export_var), cmd->assign_lst);
+		cmd->process_env = craft_env(ft_tabdup(g_sh.export_var), cmd->assign_lst);
 		if (cmd->process_env == NULL)
 			return (MEMERR);
 		cmd->exit_status = array[i](cmd);
@@ -146,7 +146,7 @@ int		spawn_in_pipe(t_cmd_tab *cmd)
 	else
 		return (execve_wrap(cmd));
 }
-
+/*
 static	int assign_to_shell(t_cmd_tab *cmd)
 {
 	int i;
@@ -167,6 +167,35 @@ static	int assign_to_shell(t_cmd_tab *cmd)
 		free(tmp->value);
 		free(tmp);
 		i++;
+	}
+	return (0);
+}
+*/
+static int assign_to_shell(t_cmd_tab *cmd)
+{
+	int i;
+	int	len;
+	char	c;
+
+	i = 0;
+	while (cmd->assign_lst[i])
+	{
+		len = ft_strchr(cmd->assign_lst[i], '=') - cmd->assign_lst[i] + 1;
+		c = cmd->assign_lst[i][len];
+		cmd->assign_lst[i][len] = 0;
+		if (ms_varchr(g_sh.export_var, cmd->assign_lst[i]))
+		{
+			cmd->assign_lst[i][len] = c;
+			g_sh.export_var = ms_csetenv(g_sh.export_var, cmd->assign_lst[i]);
+		}
+		else
+		{
+			cmd->assign_lst[i][len] = c;
+			g_sh.internal = ms_csetenv(g_sh.internal, cmd->assign_lst[i]);
+		}
+		if ((!g_sh.internal) || (!g_sh.export_var))
+			return (MEMERR);
+		i++;	
 	}
 	return (0);
 }

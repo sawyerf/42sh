@@ -12,7 +12,7 @@
 
 #include "ft_light_parser.h"
 
-int rev_lex(char *line, t_token **head)
+/*int rev_lex(char *line, t_token **head)
 {
 	t_lexer 			lexer_state;
 	static t_func	 	table[TABLESZ];
@@ -35,10 +35,10 @@ int rev_lex(char *line, t_token **head)
 		else
 			ret = table[1](&lexer_state);
 		add_token(head, lexer_state.token);
-		if (lexer_state.token > ASSIGN) /* break first op*/
+		if (lexer_state.token > ASSIGN) // break first op
 			return (0);
 		lexer_state.token = NULL;	
 	}
 	add_token(head, new_token(1));
 	return (0);
-}
+}*/

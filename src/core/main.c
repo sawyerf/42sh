@@ -14,7 +14,7 @@
 #include "readline.h"
 
 t_environ **g_environ = NULL;
-t_sh_state	g_sh_state;
+t_sh_state	g_sh;
 /*
 static int		init_g_env(char **env)
 {
@@ -48,7 +48,9 @@ static int		init_g_env(char **env)
 
 static int	init_shell(char **env)
 {
-	if (!(g_sh_state.export_var = ms_shlvl(dup_tab(env))))
+	if (!(g_sh.export_var = ms_shlvl(dup_tab(env))))
+		return (MEMERR);
+	if (!(g_sh.internal = ft_tabnew(0)))
 		return (MEMERR);
 	return (0);
 }
@@ -66,13 +68,9 @@ int				main(int ac, char **av, char **env)
 	t_token	*tok;
 
 	silence_ac_av(ac, av);
-	ht_init();
 	if (init_shell(env))
 		return (MEMERR);
-//	if ((init_g_env(env) != 0))
-//		return (MEMERR);
-	char *fifi = get_env_value("PATH");
-	fifi++;
+	ht_init();
 	ht_refreshall(get_env_value("PATH"));
 	while (42)
 	{

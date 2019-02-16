@@ -1,5 +1,8 @@
 * internal setenv and unsetenv still broken.
-* env -i is broken
+* env -i is half broken
 * assign_to_shell in spawner has to be rewritten
+* light parser still broken with spaces at beginning of line
 ------------
-
+replace printf/write(2, etc.. by sprintf or zprintf
+g_sh should be g_sh
+assign_to_shell in spawn_bin should be fixd

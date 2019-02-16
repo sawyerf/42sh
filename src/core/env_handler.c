@@ -53,24 +53,14 @@ char	*tab_get_value(char *name, char **env)
 	}
 	return (NULL);
 }
-/*
-char	*get_env_value(char *name)
-{
-	t_environ	*tmp;
-
-	tmp = get_env_node(name);
-	if (tmp != NULL)
-		return (tmp->value);
-	return (NULL);
-}*/
 
 char *get_env_value(char *name)
 {
 	char *value;
 
-	if ((value = ms_varchr(g_sh_state.export_var, name)))
+	if ((value = ms_varchr(g_sh.export_var, name)))
 		return (value);
-	if ((value = ms_varchr(g_sh_state.internal, name)))
+	if ((value = ms_varchr(g_sh.internal, name)))
 		return (value);
 	return (NULL);
 
