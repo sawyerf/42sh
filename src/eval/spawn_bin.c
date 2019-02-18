@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/15 21:56:14 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/18 19:00:33 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,8 +190,6 @@ int		spawn_command(t_cmd_tab *cmd)
 		return (MEMERR);
 	if (pid == 0)
 	{
-		if ((ret = handle_redir(cmd->redir_lst)))
-			return (ret);
 		execve_wrap(cmd);
 		exit_wrap(1, cmd); /* handle errors here*/
 	}

@@ -11,12 +11,11 @@
 /* ************************************************************************** */
 
 #include "ft_eval.h"
-#include <fcntl.h>
+
 /*
  * to do:
- * check >& and <& t_redir->right for ambiguous redir
- * figure out why 'ls >& toto' is returning -1
- *
+ * builtin should exit when redir fail, command should continue
+ * fstat fd before dup ?
  */
 
 static int expand_redir(t_redir *redir)
@@ -28,19 +27,6 @@ static int expand_redir(t_redir *redir)
 	return (0);
 }
 
-/*
- * <&WORD and >&WORD where word is not digits should be rejected here 
- */
-
-static int	get_open_flags(t_token_type op)
-{
-	if (op == GREAT)
-		return (O_WRONLY | O_CREAT | O_TRUNC);
-	else if (op == DGREAT)
-		return (O_WRONLY | O_APPEND | O_CREAT);
-	return (O_RDONLY);
-}
-
 static t_bool check_fd(int fd)
 {
 	struct stat buf;
@@ -48,10 +34,25 @@ static t_bool check_fd(int fd)
 	ft_printf("right fd: %d\n", fd);
 	if (!fstat(fd, &buf))
 		return (FT_TRUE);
-	ft_printf("21sh: bad file descriptor: %d\n", fd);
+	ft_dprintf(STDERR_FILENO, "21sh: bad file descriptor: %d\n", fd);
 	return (FT_FALSE);
 }
 
+static void	handle_left(int *left_fd, t_redir *redir)
+{
+	if ((redir->op->type == GREAT) || (redir->op->type == GREATAND) || (redir->op->type == DGREAT))
+	{
+		if (redir->left == NULL)
+			*left_fd = 1;
+		else
+			*left_fd = ft_atoi(redir->left->data.str);
+		return;
+	}
+		if (redir->left == NULL)
+			*left_fd = 0;
+		else
+			*left_fd = ft_atoi(redir->left->data.str);
+}
 
 
 
@@ -59,35 +60,12 @@ int apply_redir(t_redir *redir)
 {
 	int left_fd;
 	int right_fd;
-	int oflag;
 
-	if ((redir->op->type == GREAT) || (redir->op->type == GREATAND) || (redir->op->type == DGREAT))
-	{
-		if (redir->left == NULL)
-			left_fd = 1;	
-	}
-	else 
-	{
-		if (redir->left == NULL)
-			left_fd = 0;
-	}	
-	if ((redir->op->type == GREATAND) || (redir->op->type == LESSAND))
-	{
-		left_fd = ft_atoi(redir->left->data.str);
-		right_fd = ft_atoi(redir->right->data.str);
-	}
-	else
-	{
-		oflag = get_open_flags(redir->op->type);
-		right_fd = open(redir->right->data.str, oflag, 0644); 
-		if (right_fd == -1)
-		{
-			ft_printf("Error opening %s\n", redir->right->data.str);
-			return (0);
-		}
-	}
-	if (check_fd(right_fd) == FT_FALSE)
+	handle_left(&left_fd, redir);
+	if (handle_right(&left_fd, &right_fd, redir))
 		return (-1);
+	if (check_fd(right_fd) == FT_FALSE)
+		return (-1); // maybe return 0 ?
 	dup2(right_fd, left_fd);
 	return (0);
 }

@@ -14,6 +14,7 @@
 # define FT_EVAL_H
 
 # include "sh_core.h"
+# include <fcntl.h>
 
 #define PIPEFAIL 20
 
@@ -68,5 +69,6 @@ char	**craft_env(char **base_env, char **to_add);
 char	*get_process_env(char *key, char **env);
 char	**expand_word_lst(t_token *word);
 int		handle_redir(t_redir *redir_lst);
-
+int		apply_redir(t_redir *redir);
+int		handle_right(int *left_fd, int *right_fd, t_redir *redir);
 #endif
