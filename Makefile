@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/02/15 16:35:18 by ktlili           ###   ########.fr        #
+#    Updated: 2019/02/15 19:48:27 by ktlili           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,6 @@ SRC_FILE =	core/builtins.c \
 			core/clean_path.c \
 			core/dynamic_buff.c \
 			core/env_handler.c \
-			core/env_lst_util.c \
 			core/env_lst_util2.c \
 			core/ft_env.c \
 			core/ft_env_tools.c \
@@ -43,6 +42,9 @@ SRC_FILE =	core/builtins.c \
 			core/path_tools.c \
 			core/util.c \
 			core/util2.c \
+			core/ms_envadd.c \
+			core/ms_env.c \
+			core/ms_envdel.c \
 			eval/expansion_wrappers.c \
 			eval/eval_pipe.c \
 			eval/bin_path.c \
@@ -50,6 +52,7 @@ SRC_FILE =	core/builtins.c \
 			eval/spawn_bin.c \
 			eval/craft_env.c \
 			eval/handle_redir.c \
+			eval/redir_handle_right.c \
 			ft_wordexp/expansion_util.c \
 			ft_wordexp/field_split.c \
 			ft_wordexp/ft_wordexp.c \

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 22:23:00 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/11 19:00:45 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/15 20:01:26 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 
 # include <stdlib.h>
+# include <inttypes.h>
 # include <string.h>
 # include <unistd.h>
 # include "ft_printf.h"
@@ -47,6 +48,7 @@ char				*ft_strrchr(const char *s, int c);
 char				*ft_strstr(const char *haystack, const char *needle);
 char				*ft_strnstr(const char *haystack,
 											const char *needle, size_t len);
+int					ft_isalldigit(char *s);
 int					ft_strcmp(const char *s1, const char *s2);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_atoi(const char *str);
@@ -102,6 +104,12 @@ int					ft_printf(const char *s, ...);
 int					ft_dprintf(int fd, const char *format, ...);
 char				*ft_zprintf(const char *format, ...);
 int					ft_cisin(char *s, char c);
-char			*ft_strechr(const char *s, int c);
-void	ft_tabdel(char ***tab);
+char				*ft_strechr(const char *s, int c);
+void				ft_tabdel(char ***tab);
+char**				ft_tabdup(char **tab);
+int					ft_tablen(char **tab);
+char**				ft_tabnew(size_t len);
+char**				ft_tabcpy(char **tab);
+char				**ms_tabcpy(char **dst, char **cpy);
+
 #endif

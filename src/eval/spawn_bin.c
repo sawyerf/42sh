@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/14 19:01:41 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/15 21:56:14 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int		execve_wrap(t_cmd_tab *cmd)
 	char	*path;
 	int		ret;
 
-	cmd->process_env = craft_env(lst_to_tab(*g_environ, 0), cmd->assign_lst);
+	cmd->process_env = craft_env(g_sh.export_var, cmd->assign_lst);
 	if (cmd->process_env == NULL)
 		return (MEMERR);
 	if (ft_ispath(cmd->av[0]))
@@ -86,7 +86,7 @@ static int		execve_wrap(t_cmd_tab *cmd)
 		if (ht_getvalue(path, cmd) == MEMERR)
 			return (MEMERR);
 		if (!cmd->full_path)
-			exit_wrap (127, cmd);	/* maybe exit ?*/
+			exit_wrap (127, cmd);
 	}
 	ret = execve(cmd->full_path, cmd->av, cmd->process_env); 
 	putstr_stderr("21sh: bad file format\n");
@@ -116,15 +116,15 @@ void	wait_wrapper(t_cmd_tab *cmd, pid_t pid)
 
 t_bool		is_builtin(t_cmd_tab *cmd)
 {
-	static t_builtin	array[7] = {ft_echo, change_dir, setenv_wrapper,
-							ft_unsetenv, ft_env, ft_exit};
+	static t_builtin	array[9] = {ft_echo, change_dir, setenv_wrapper,
+							ft_unsetenv, ft_env, ft_exit, ft_set, ft_unset};
 	static	char		*builtins[] = {"echo", "cd", "setenv", "unsetenv",
-							"env", "exit", NULL};
+							"env", "exit", "set", "unset", NULL};
 	int					i;
 
 	if ((i = ft_cmptab(builtins, cmd->av[0])) != -1)
 	{
-		cmd->process_env = craft_env(lst_to_tab(*g_environ, 0), cmd->assign_lst);
+		cmd->process_env = craft_env(ft_tabdup(g_sh.export_var), cmd->assign_lst);
 		if (cmd->process_env == NULL)
 			return (MEMERR);
 		cmd->exit_status = array[i](cmd);
@@ -147,26 +147,31 @@ int		spawn_in_pipe(t_cmd_tab *cmd)
 		return (execve_wrap(cmd));
 }
 
-static	int assign_to_shell(t_cmd_tab *cmd)
+static int assign_to_shell(t_cmd_tab *cmd)
 {
 	int i;
-	t_environ 	*tmp;
-	t_environ 	*is_set;
-	int			to_export;
+	int	len;
+	char	c;
+
 	i = 0;
 	while (cmd->assign_lst[i])
 	{
-		to_export = 0;
-		if ((is_set = get_env_node(cmd->assign_lst[i])))
-			to_export = is_set->to_export; 
-		if (!(tmp = env_to_lst(cmd->assign_lst[i])))
+		len = ft_strchr(cmd->assign_lst[i], '=') - cmd->assign_lst[i] + 1;
+		c = cmd->assign_lst[i][len];
+		cmd->assign_lst[i][len] = 0;
+		if (ms_varchr(g_sh.export_var, cmd->assign_lst[i]))
+		{
+			cmd->assign_lst[i][len] = c;
+			g_sh.export_var = ms_csetenv(g_sh.export_var, cmd->assign_lst[i]);
+		}
+		else
+		{
+			cmd->assign_lst[i][len] = c;
+			g_sh.internal = ms_csetenv(g_sh.internal, cmd->assign_lst[i]);
+		}
+		if ((!g_sh.internal) || (!g_sh.export_var))
 			return (MEMERR);
-		if (set_shell_env(tmp->name, tmp->value, to_export) == MEMERR)
-			return (MEMERR);
-		free(tmp->name);
-		free(tmp->value);
-		free(tmp);
-		i++;
+		i++;	
 	}
 	return (0);
 }
@@ -177,9 +182,9 @@ int		spawn_command(t_cmd_tab *cmd)
 	int		ret;
 
 	if (cmd->av[0] == NULL)
-	{
 		return (assign_to_shell(cmd));
-	}
+	if ((ret = handle_redir(cmd->redir_lst)))
+		return (1);
 	if (is_builtin(cmd) == FT_TRUE)
 		return (0);
 	pid = fork();
@@ -187,8 +192,6 @@ int		spawn_command(t_cmd_tab *cmd)
 		return (MEMERR);
 	if (pid == 0)
 	{
-		if ((ret = handle_redir(cmd->redir_lst)))
-			return (ret);
 		execve_wrap(cmd);
 		exit_wrap(1, cmd); /* handle errors here*/
 	}
