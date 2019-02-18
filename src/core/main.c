@@ -6,46 +6,14 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/15 21:58:13 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/18 19:40:20 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_core.h"
 #include "readline.h"
 
-t_environ **g_environ = NULL;
 t_sh_state	g_sh;
-/*
-static int		init_g_env(char **env)
-{
-	t_environ	*shlvl;
-	char		*newlvl;
-	int			lvl;
-
-	if (((g_environ = ft_memalloc(sizeof(t_environ*))) == NULL)
-			|| (env_tab_to_lst(env, g_environ) != 0))
-	{
-		dispatch_parse_err(MEMERR);
-		return (MEMERR);
-	}
-	if ((shlvl = get_env_node("SHLVL")) == NULL)
-		return (set_shell_env("SHLVL", "1", 1));
-	lvl = ft_atoi(shlvl->value);
-	if ((lvl < 0) || ((lvl + 1) < 0))
-		lvl = 0;
-	newlvl = ft_itoa(lvl + 1);
-	if (newlvl == NULL)
-		return (MEMERR);
-	if (set_shell_env("SHLVL", newlvl, 1) != 0)
-	{
-		free(newlvl);
-		return (MEMERR);
-	}
-	free(newlvl);
-	return (0);
-}
-*/
-
 static int	init_shell(char **env)
 {
 	if (!(g_sh.export_var = ms_shlvl(dup_tab(env))))

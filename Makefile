@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/02/18 16:40:43 by apeyret          ###   ########.fr        #
+#    Updated: 2019/02/18 19:12:29 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,6 +81,7 @@ SRC_FILE =	core/builtins.c \
 			readline/k_move.c \
 			readline/k_return.c \
 			readline/k_visual.c \
+			readline/env_autoclp.c \
 			light_parser/light_parser.c \
 
 OBJ_DIR = .obj

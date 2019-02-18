@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/15 20:38:19 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/18 19:15:36 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@
 # define ENVERR 4
 # define ACCERR 5
 
-
-
 typedef struct 		s_sh_state
 {
 	int	interactive;
@@ -56,21 +54,12 @@ typedef	struct			s_command
 }						t_command;
 /*
 */
-typedef	struct			s_environ
-{
-	char				*name;
-	char				*value;
-	int					to_export;
-	struct s_environ	*next;
-	struct s_environ	*previous;
-}						t_environ;
 
 typedef struct s_cmd_tab t_cmd_tab;
 
 typedef	int				(*t_builtin)(t_cmd_tab*);
 
 /* to delete*/
-extern	t_environ		**g_environ;
 /**/
 extern	t_sh_state		g_sh;
 
@@ -90,7 +79,6 @@ int						ft_unset(t_cmd_tab *cmd);
 void					print_env_tab(char **machintruc);
 void					print_cmd(t_command command);
 void					print_cmd_lst(t_command *command);
-void					print_env_lst(t_environ *lst);
 int						ft_cmptab(char **machintruc, char *str);
 void					free_tab(char **machintruc);
 void					free_tab_bytes(char **machintruc);
@@ -105,12 +93,10 @@ int						path_access(char *path);
 int						ft_ispath(char *str);
 char					*handle_pwd_l(void);
 void					init_iterator(int *read, int *write);
-char					**lst_to_tab(t_environ *env_lst, int size);
 char					*get_env_value(char *name);
 int						set_shell_env(char *name, char *value, int to_export);
 int						valid_env_name(char *str);
 int						valid_env_char(char c);
-void					delete_env_node(t_environ *to_del);
 char					*tab_get_value(char *name, char **env);
 char					*get_value(char *env_var);
 int						parser(char *line, t_command **cmd_lst);

@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/15 18:40:52 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/18 19:10:48 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ int		vm_del(t_rdl *rdl, char *buf);
 int		paste(t_rdl *rdl, char *buf);
 int		vm_finish(t_rdl *rdl, char *buf);
 int		end(t_rdl *rdl, char *buf);
+t_list	*get_cplenv(char *match);
 
 //tools
 void	reprint(t_rdl *rdl, int curs);
@@ -142,4 +143,5 @@ void	setsig(void);
 
 //print
 void	putlst(char *mtc, t_list *lst, t_rdl *rdl);
+
 #endif
