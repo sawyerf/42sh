@@ -6,64 +6,13 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/18 19:00:33 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/18 20:56:29 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_eval.h"
 #include "readline.h"
 
-void		exec_error(int errnum, char *str)
-{
-	if (errnum == BIN_NO_PATH)
-		putstr_stderr("21sh: PATH not set");
-	else if (errnum == CMD_NOT_FOUND)
-		putstr_stderr("21sh: command not found: ");
-	else if (errnum == BIN_PERM_DENY)
-		putstr_stderr("21sh: permission denied: ");
-	else if (errnum == BIN_NOT_FOUND)
-		putstr_stderr("21sh: no such file or directory: ");
-	else if (errnum == BIN_EXEC_ERR)
-		putstr_stderr("21sh: exec error: ");
-	else if (errnum == BIN_IS_DIR)
-		putstr_stderr("21sh: is a directory: ");
-	if (str != NULL)
-		putstr_stderr(str);
-	putstr_stderr("\n");
-}
-
-int			bin_perm(char *path)
-{
-	struct stat target;
-
-	if (stat(path, &target) != 0)
-		return (BIN_NOT_FOUND);
-	if (!S_ISREG(target.st_mode))
-	{
-		if (S_ISDIR(target.st_mode))
-				return (BIN_IS_DIR);
-		return (BIN_PERM_DENY);
-	}
-	if (access(path, X_OK) != 0)
-		return (BIN_PERM_DENY);
-	return (0);
-}
-
-int			handle_full_path(char *cmd_name)
-{
-	int ret;
-
-	if ((ret = bin_perm(cmd_name)) != 0)
-		return (ACCERR);
-	return (0);
-}
-void	exit_wrap(int code, t_cmd_tab *cmd)
-{	
-//	free_cmd_tab(cmd);
-	exec_error(code, cmd->av[0]);	
-	(void)cmd;
-	exit(code);
-}
 /* execve_wrap is always inside a fork*/
 static int		execve_wrap(t_cmd_tab *cmd)
 {	
@@ -75,7 +24,7 @@ static int		execve_wrap(t_cmd_tab *cmd)
 		return (MEMERR);
 	if (ft_ispath(cmd->av[0]))
 	{
-		if (handle_full_path(cmd->av[0]) != 0)
+		if (handle_perm(cmd->av[0]) != 0)
 			exit_wrap (ACCERR, cmd);
 		if ((cmd->full_path = ft_strdup(cmd->av[0])) == NULL)
 			exit_wrap(MEMERR, cmd);
@@ -178,13 +127,17 @@ static int assign_to_shell(t_cmd_tab *cmd)
 
 int		spawn_command(t_cmd_tab *cmd)
 {
-	pid_t 	pid;
-	int		ret;
+	pid_t 		pid;
+	t_list		 *fd_save;
+	int			ret;
 
 	if (cmd->av[0] == NULL)
 		return (assign_to_shell(cmd));
 	if (is_builtin(cmd) == FT_TRUE)
 		return (0);
+	fd_save = NULL;
+	if ((ret = handle_redir(cmd->redir_lst, &fd_save)))
+		return (ret);
 	pid = fork();
 	if (pid == -1)
 		return (MEMERR);
@@ -194,6 +147,6 @@ int		spawn_command(t_cmd_tab *cmd)
 		exit_wrap(1, cmd); /* handle errors here*/
 	}
 	wait_wrapper(cmd, pid);
+	restore_fd(fd_save);
 	return (0);
-
 }

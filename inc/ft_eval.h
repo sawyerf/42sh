@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/14 18:59:09 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/18 19:23:06 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,6 @@ char	**expand_word_lst(t_token *word);
 int		handle_redir(t_redir *redir_lst);
 int		apply_redir(t_redir *redir);
 int		handle_right(int *left_fd, int *right_fd, t_redir *redir);
+int		handle_perm(char *cmd_name);
+void	exit_wrap(int code, t_cmd_tab *cmd);
 #endif

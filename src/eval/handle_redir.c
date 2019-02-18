@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 14:16:02 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/08 15:45:10 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/18 20:56:27 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,23 +54,43 @@ static void	handle_left(int *left_fd, t_redir *redir)
 			*left_fd = ft_atoi(redir->left->data.str);
 }
 
+static int save_fd(int left_fd, int right_fd, t_list **head)
+{
+	t_list *new;
 
+	if (!(new = ft_lstnew(NULL, 0)))
+		return (MEMERR);
+	if (!(new->content = (int*)ft_memalloc(sizeof(int) * 2)))
+		return (MEMERR);
+	new->content_size = sizeof(int) * 2;
+	ft_lastadd(head, new);
+	return (0);
+}
 
-int apply_redir(t_redir *redir)
+int apply_redir(t_redir *redir, t_list **head)
 {
 	int left_fd;
 	int right_fd;
 
+	right_fd = 2; //temporary
 	handle_left(&left_fd, redir);
-	if (handle_right(&left_fd, &right_fd, redir))
-		return (-1);
+//	if (handle_right(&left_fd, &right_fd, redir))
+//		return (-1);
 	if (check_fd(right_fd) == FT_FALSE)
 		return (-1); // maybe return 0 ?
-	dup2(right_fd, left_fd);
+	if (dup2(right_fd, left_fd) == -1)
+	{
+		ft_dprintf(STDERR_FILENO, "21sh: dup2 fuckd up\n");
+		return (-1);
+	}
+	if (save_fd(left_fd, right_fd, head))
+		return (MEMERR);
 	return (0);
 }
-
-int	handle_redir(t_redir *redir_lst)
+/*
+ * 'ls 3>file' is broken with current implementation because FD 3 is open for file.
+ */
+int	handle_redir(t_redir *redir_lst, t_list **head)
 {
 	t_redir *iter;
 	int		ret;
@@ -84,6 +104,5 @@ int	handle_redir(t_redir *redir_lst)
 			return (ret);
 		iter = iter->next;
 	}
-	return (0);
-	
+	return (0);	
 }

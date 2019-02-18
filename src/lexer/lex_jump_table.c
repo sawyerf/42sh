@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/15 16:07:36 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/18 19:33:13 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "readline.h"
@@ -80,7 +80,7 @@ int handle_squote(t_lexer *lexer_state)
 		{
 			if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
 				return (MEMERR);
-			return (0);
+			return (handle_common(lexer_state));
 		}
 		else if (*(lexer_state->cursor) ==  '\0')
 		{
