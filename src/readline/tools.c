@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:49:02 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/14 18:00:15 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/15 18:47:30 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,47 @@ void	reprint(t_rdl *rdl, int curs)
 	left(rdl, adv - rdl->lpro - curs);
 }
 
-void	left(t_rdl *rdl, int i)
+int		up(t_rdl *rdl, int i)
 {
-	(void)rdl;
-	while (i)
+	int count;
+
+	count = 0;
+	while (count < i)
 	{
-		write(1, K_LEFT, 3);
-		i--;
+		left(rdl, rdl->col);
+		count++;
 	}
+	return (rdl->col * - i);
 }
 
-void	right(t_rdl *rdl, int i)
+int		down(t_rdl *rdl, int i)
+{
+	int count;
+
+	count = 0;
+	while (count < i)
+	{
+		right(rdl, rdl->col);
+		count++;
+	}
+	return (rdl->col * i);
+}
+
+int		left(t_rdl *rdl, int i)
+{
+	int		count;
+
+	count = 0;
+	(void)rdl;
+	while (count < i)
+	{
+		write(1, K_LEFT, 3);
+		count++;
+	}
+	return (-1 * i);
+}
+
+int		right(t_rdl *rdl, int i)
 {
 	int	count;
 
@@ -46,6 +76,36 @@ void	right(t_rdl *rdl, int i)
 			write(1, K_RGHT, 3);
 		count++;
 	}
+	return (i);
+}
+
+int		vleft(t_rdl *rdl, int i)
+{
+	int		count;
+
+	count = 0;
+	while (count < i && rdl->curs - count > 0)
+	{
+		write(1, K_LEFT, 3);
+		count++;
+	}
+	return (-1 * i);
+}
+
+int		vright(t_rdl *rdl, int i)
+{
+	int	count;
+
+	count = 0;
+	while (count < i && rdl->size > rdl->curs + count)
+	{
+		if (!((rdl->lpro + rdl->curs + count + 1) % (rdl->col)))
+			tgpstr("do");
+		else
+			write(1, K_RGHT, 3);
+		count++;
+	}
+	return (i);
 }
 
 int		is_special(char *buf)
