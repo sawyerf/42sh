@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:22:06 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/15 21:58:51 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/18 16:38:16 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ char *get_process_env(char *key, char **env)
 	if ((i = env_is_set(key, env)) == -1)
 		return (NULL);
 	return (get_value(env[i]));
-
-
 }
 
 char **craft_env(char **base_env, char **to_add)
