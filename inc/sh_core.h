@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/18 19:01:21 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/18 21:10:25 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,12 +105,10 @@ int						path_access(char *path);
 int						ft_ispath(char *str);
 char					*handle_pwd_l(void);
 void					init_iterator(int *read, int *write);
-char					**lst_to_tab(t_environ *env_lst, int size);
 char					*get_env_value(char *name);
 int						set_shell_env(char *name, char *value, int to_export);
 int						valid_env_name(char *str);
 int						valid_env_char(char c);
-void					delete_env_node(t_environ *to_del);
 char					*tab_get_value(char *name, char **env);
 char					*get_value(char *env_var);
 int						parser(char *line, t_command **cmd_lst);

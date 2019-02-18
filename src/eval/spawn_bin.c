@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/18 20:56:29 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/18 21:09:14 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,8 @@ int		spawn_command(t_cmd_tab *cmd)
 
 	if (cmd->av[0] == NULL)
 		return (assign_to_shell(cmd));
+	if ((ret = handle_redir(cmd->redir_lst)))
+		return (1);
 	if (is_builtin(cmd) == FT_TRUE)
 		return (0);
 	fd_save = NULL;
