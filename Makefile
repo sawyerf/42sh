@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/02/18 19:01:32 by ktlili           ###   ########.fr        #
+#    Updated: 2019/02/18 19:24:58 by ktlili           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,12 +47,11 @@ SRC_FILE =	core/builtins.c \
 			core/ms_envdel.c \
 			eval/expansion_wrappers.c \
 			eval/eval_pipe.c \
-			eval/bin_path.c \
+			eval/spawn_tools.c \
 			eval/eval.c \
 			eval/spawn_bin.c \
 			eval/craft_env.c \
 			eval/handle_redir.c \
-			eval/redir_handle_right.c \
 			ft_wordexp/expansion_util.c \
 			ft_wordexp/field_split.c \
 			ft_wordexp/ft_wordexp.c \
