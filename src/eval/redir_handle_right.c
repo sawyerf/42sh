@@ -22,7 +22,7 @@ static int fd_aggregator(int *left_fd, int *right_fd, t_redir *redir)
 
 	ft_bzero(&tmp, sizeof(t_redir));
 	if (!ft_isalldigit(redir->right->data.str))
-	{
+	{	
 		if ((redir->op->type == LESSAND)
 			|| ((redir->op->type == GREATAND) && (redir->left)))
 					return (ambiguous_redir(redir->right->data.str));
@@ -49,6 +49,11 @@ int	handle_right(int *left_fd, int *right_fd, t_redir *redir)
 
 	if ((redir->op->type == GREATAND) || (redir->op->type == LESSAND))
 	{
+		if (ft_strequ(redir->right->data.str, "-"))
+		{
+			close(*left_fd);
+			return (1);
+		}
 		return (fd_aggregator(left_fd, right_fd, redir));
 		//check for ambiguous redir here (data.str has to be all digit)
 	}
@@ -56,7 +61,7 @@ int	handle_right(int *left_fd, int *right_fd, t_redir *redir)
 	*right_fd = open(redir->right->data.str, oflag, 0644); 
 	if (*right_fd == -1)
 	{
-		ft_printf("Error opening %s\n", redir->right->data.str);
+		exec_error(BIN_NOT_FOUND, redir->right->data.str);
 		return (-1);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/18 21:09:14 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/19 16:55:34 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static int		execve_wrap(t_cmd_tab *cmd)
 	cmd->process_env = craft_env(g_sh.export_var, cmd->assign_lst);
 	if (cmd->process_env == NULL)
 		return (MEMERR);
+	if ((ret = handle_redir(cmd->redir_lst))) // this has to change we have more err
+		exit(1);
 	if (ft_ispath(cmd->av[0]))
 	{
 		if (handle_perm(cmd->av[0]) != 0)
@@ -128,7 +130,6 @@ static int assign_to_shell(t_cmd_tab *cmd)
 int		spawn_command(t_cmd_tab *cmd)
 {
 	pid_t 		pid;
-	int			ret;
 
 	if (cmd->av[0] == NULL)
 		return (assign_to_shell(cmd));
@@ -139,8 +140,6 @@ int		spawn_command(t_cmd_tab *cmd)
 		return (MEMERR);
 	if (pid == 0)
 	{
-		if ((ret = handle_redir(cmd->redir_lst)))
-			return (ret);
 		execve_wrap(cmd);
 		exit_wrap(1, cmd); /* handle errors here*/
 	}

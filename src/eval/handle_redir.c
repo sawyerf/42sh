@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 14:16:02 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/18 21:09:55 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/19 16:55:48 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static t_bool check_fd(int fd)
 {
 	struct stat buf;
 
-	ft_printf("right fd: %d\n", fd);
+	//ft_printf("right fd: %d\n", fd);
 	if (!fstat(fd, &buf))
 		return (FT_TRUE);
 	ft_dprintf(STDERR_FILENO, "21sh: bad file descriptor: %d\n", fd);
@@ -71,11 +71,14 @@ int apply_redir(t_redir *redir)
 {
 	int left_fd;
 	int right_fd;
+	int	ret;
 
 	right_fd = 2; //temporary
 	handle_left(&left_fd, redir);
-	if (handle_right(&left_fd, &right_fd, redir))
+	if ((ret = handle_right(&left_fd, &right_fd, redir)) == -1)
 		return (-1);
+	else if (ret == 1)
+		return (0); // case of >&- we close fd we dont use dup2
 	if (check_fd(right_fd) == FT_FALSE)
 		return (-1); // maybe return 0 ?
 	if (dup2(right_fd, left_fd) == -1)
@@ -88,7 +91,6 @@ int apply_redir(t_redir *redir)
 /*
  * 'ls 3>file' is broken with current implementation because FD 3 is open for file.
  *	child dosent exit on some failed redirs
- *  light parser is broken after redirs ?
  	add header file to ft_isalldigit.c in lib/src
  */
 int	handle_redir(t_redir *redir_lst)
