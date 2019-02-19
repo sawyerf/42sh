@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/19 18:40:35 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/19 19:19:15 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	wait_wrapper(t_cmd_tab *cmd, pid_t pid)
 
 t_bool		is_builtin(t_cmd_tab *cmd)
 {
-	static t_builtin	array[9] = {ft_echo, change_dir, setenv_wrapper,
+	static t_builtin	array[] = {ft_echo, change_dir, setenv_wrapper,
 							ft_unsetenv, ft_env, ft_exit, ft_set, ft_unset};
 	static	char		*builtins[] = {"echo", "cd", "setenv", "unsetenv",
 							"env", "exit", "set", "unset", NULL};
