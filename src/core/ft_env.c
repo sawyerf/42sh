@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 13:58:14 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/15 21:48:49 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/19 18:40:34 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char **construct_env(t_cmd_tab *cmd, char opt, int count)
 	}
 	return (new_env);
 }
-
+/*
 static int		spawn_new_env(char **args, char **new_env)
 {
 	t_command	*new_cmd;
@@ -44,6 +44,16 @@ static int		spawn_new_env(char **args, char **new_env)
 //	ret = spawn_command(new_cmd); dis iz broken
 	free_cmdlst(new_cmd);
 	return (ret);
+}
+*/
+static int		spawn_new_env(char **args, char **new_env)
+{
+	t_cmd_tab new_cmd;
+
+	ft_bzero(&new_cmd, sizeof(t_cmd_tab));
+	new_cmd.av = args;
+	new_cmd.process_env = new_env;
+	return (spawn_command(&new_cmd));
 }
 
 static char		env_parseopt(char **args)
