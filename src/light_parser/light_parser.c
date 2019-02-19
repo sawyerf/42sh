@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 14:58:34 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/18 18:44:40 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/19 16:21:51 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ static int	is_first_word(char *line, t_token *start, t_autocomplete *autocomp)
 	start = start->next;
 	while (start && start->type != NEWLINE)
 	{
-		if ((start->type == WORD) && (!parser_is_assign(start)))
+		if (((start->type == WORD) && (!parser_is_assign(start)))
+				|| ((start->type >= LESSAND) && (start->type <= GREAT)))
 		{
 			first_word = 0;
 			break;	
