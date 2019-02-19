@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd.c                                        :+:      :+:    :+:   */
+/*   k_history.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/03 18:48:23 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/19 16:56:22 by apeyret          ###   ########.fr       */
+/*   Created: 2019/02/19 13:41:29 by apeyret           #+#    #+#             */
+/*   Updated: 2019/02/19 17:50:58 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "readline.h"
 
-void	ft_lstadd(t_list **alst, t_list *new)
+int		history(t_rdl *rdl, char *buf)
 {
-	t_list *tmp;
+	char	*new;
 
+	new = NULL;
+	if (!ft_strcmp(K_UP, buf))
+		new = hstnext(rdl->str);
+	else if (!ft_strcmp(K_DOWN, buf))
+		new = hstprev();
 	if (!new)
-		return;
-	if (!alst)
-		return ;
-	tmp = new;
-	while (tmp->next)
-		tmp = tmp->next;
-	tmp->next = *alst;
-	if (*alst)
-		(*alst)->prev = tmp;
-	*alst = new;
-	new->prev = NULL;
+		return (0);
+	rdlreplace(rdl, new);
+	return (0);
 }

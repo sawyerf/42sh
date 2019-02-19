@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/03 17:41:38 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/12 18:58:26 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/18 20:06:52 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_list		*ft_lstnew(void const *content, size_t content_size)
 		newlst->content = ft_strdup(content);
 		newlst->content_size = content_size;
 	}
+	newlst->next = NULL;
 	newlst->next = NULL;
 	return (newlst);
 }

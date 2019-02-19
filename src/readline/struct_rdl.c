@@ -6,16 +6,16 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 15:15:46 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/14 18:00:20 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/19 17:04:21 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline.h"
 
-void	rdlinit(t_rdl *rdl, char *PROMPT)
+int		rdlinit(t_rdl *rdl, char *PROMPT)
 {
 	if (!(rdl->str = ft_strnew(129)))
-		return ;
+		return (MEMERR);
 	rdl->paste = NULL;
 	rdl->vcurs = 0;
 	rdl->size = 0;
@@ -24,6 +24,7 @@ void	rdlinit(t_rdl *rdl, char *PROMPT)
 	rdl->lpro = ft_printf("%s", PROMPT);
 	rdl->prompt = PROMPT;
 	rdl->col = getcolumn();
+	return (0);
 }
 
 void	rdldel(t_rdl *rdl, int curs)
@@ -34,6 +35,16 @@ void	rdldel(t_rdl *rdl, int curs)
 	reprint(rdl, curs);
 	rdl->size--;
 	rdl->curs--;
+}
+
+void	rdlreplace(t_rdl *rdl, char *s)
+{
+	right(rdl, rdl->size - rdl->curs);
+	rdl->curs = rdl->size;
+	while (rdl->curs)
+		del_cara(rdl, "bite");
+	(void)s;
+	rdladdstr(rdl, s);
 }
 
 void	rdl_realloc(t_rdl *rdl)

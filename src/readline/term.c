@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:49:43 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/14 17:41:08 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/18 20:40:40 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int		getcolumn(void)
 
 	ioctl(0, TIOCGWINSZ, &w);
 	return (w.ws_col);
-
 }
 
 void	tgpstr(char *s)
@@ -43,7 +42,10 @@ void	tgpstr(char *s)
 int		termreset(struct termios *save)
 {
 	if (tcsetattr(0, TCSADRAIN, save) == -1)
+	{
+		ft_dprintf(2, "21sh: tcsetattr fail to set the old param\n");
 		return (0);
+	}
 	return (1);
 }
 
@@ -54,7 +56,10 @@ int		terminit(struct termios *save)
 	struct termios	term;
 
 	if (!(tname = getenv("TERM")))
-		exit(2);
+	{
+		ft_dprintf(2, "21sh: TERM not set\n");
+		return (0);
+	}
 	tgetent(buf, tname);
 	if (save)
 		if (tcgetattr(0, save) == -1)

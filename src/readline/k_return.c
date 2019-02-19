@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 21:18:26 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/12 21:18:30 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/19 17:02:51 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ int		enter(t_rdl *rdl, char *buf)
 {
 	(void)buf;
 	right(rdl, rdl->size - rdl->curs);
+	hstadd(rdl->str);
+	hstreset();
 	rdladd(rdl, '\n');
 	return (1);
 }
