@@ -53,7 +53,7 @@ static void	handle_left(int *left_fd, t_redir *redir)
 		else
 			*left_fd = ft_atoi(redir->left->data.str);
 }
-
+/*
 static int save_fd(int left_fd, int right_fd, t_list **head)
 {
 	t_list *new;
@@ -66,16 +66,16 @@ static int save_fd(int left_fd, int right_fd, t_list **head)
 	ft_lastadd(head, new);
 	return (0);
 }
-
-int apply_redir(t_redir *redir, t_list **head)
+*/
+int apply_redir(t_redir *redir)
 {
 	int left_fd;
 	int right_fd;
 
 	right_fd = 2; //temporary
 	handle_left(&left_fd, redir);
-//	if (handle_right(&left_fd, &right_fd, redir))
-//		return (-1);
+	if (handle_right(&left_fd, &right_fd, redir))
+		return (-1);
 	if (check_fd(right_fd) == FT_FALSE)
 		return (-1); // maybe return 0 ?
 	if (dup2(right_fd, left_fd) == -1)
@@ -83,14 +83,15 @@ int apply_redir(t_redir *redir, t_list **head)
 		ft_dprintf(STDERR_FILENO, "21sh: dup2 fuckd up\n");
 		return (-1);
 	}
-	if (save_fd(left_fd, right_fd, head))
-		return (MEMERR);
 	return (0);
 }
 /*
  * 'ls 3>file' is broken with current implementation because FD 3 is open for file.
+ *	child dosent exit on some failed redirs
+ *  light parser is broken after redirs ?
+ 	add header file to ft_isalldigit.c in lib/src
  */
-int	handle_redir(t_redir *redir_lst, t_list **head)
+int	handle_redir(t_redir *redir_lst)
 {
 	t_redir *iter;
 	int		ret;

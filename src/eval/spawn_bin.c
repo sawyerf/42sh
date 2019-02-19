@@ -128,27 +128,22 @@ static int assign_to_shell(t_cmd_tab *cmd)
 int		spawn_command(t_cmd_tab *cmd)
 {
 	pid_t 		pid;
-	t_list		 *fd_save;
 	int			ret;
 
 	if (cmd->av[0] == NULL)
 		return (assign_to_shell(cmd));
-	if ((ret = handle_redir(cmd->redir_lst)))
-		return (1);
 	if (is_builtin(cmd) == FT_TRUE)
 		return (0);
-	fd_save = NULL;
-	if ((ret = handle_redir(cmd->redir_lst, &fd_save)))
-		return (ret);
 	pid = fork();
 	if (pid == -1)
 		return (MEMERR);
 	if (pid == 0)
 	{
+		if ((ret = handle_redir(cmd->redir_lst)))
+			return (ret);
 		execve_wrap(cmd);
 		exit_wrap(1, cmd); /* handle errors here*/
 	}
 	wait_wrapper(cmd, pid);
-	restore_fd(fd_save);
 	return (0);
 }

@@ -28,6 +28,7 @@ SRC_DIR = src
 
 SRC_FILE =	ft_strnsplit.c \
 			ft_splitblanks.c \
+			ft_isalldigit.c \
 			ft_util.c \
 			itoa_base.c \
 			ft_atoi.c \
