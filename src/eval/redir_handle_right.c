@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redir_handle_right.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/02/19 17:46:08 by ktlili            #+#    #+#             */
+/*   Updated: 2019/02/19 17:46:09 by ktlili           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_eval.h"
 
 static int	get_open_flags(t_token_type op)
@@ -26,8 +38,8 @@ static int fd_aggregator(int *left_fd, int *right_fd, t_redir *redir)
 		if ((redir->op->type == LESSAND)
 			|| ((redir->op->type == GREATAND) && (redir->left)))
 					return (ambiguous_redir(redir->right->data.str));
-		else // case >& word, equivalent to > word 2>&1 
-		{
+		else /* case >& word, equivalent to > word 2>&1*/ 
+		{ /*we construct tmp redir for '> word' apply it, then proceed with '2>&1' */
 			tmp.op = redir->op;
 			tmp.op->type = GREAT;
 			tmp.right = redir->right;
@@ -42,7 +54,9 @@ static int fd_aggregator(int *left_fd, int *right_fd, t_redir *redir)
 	*right_fd = ft_atoi(redir->right->data.str);
 	return (0);
 }
-
+/*
+ * command left_fd [>,<,>&,<&,>>,<<] right_fd
+ */
 int	handle_right(int *left_fd, int *right_fd, t_redir *redir)
 {
 	int oflag;
