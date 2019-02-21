@@ -3,7 +3,10 @@ false || true && echo fafa ; false || true && echo mimi ; false || true && echo 
 
 LEAK !
 ls ; whoami ; inex ; toto ; ls -lF | rev | rev | cat -e && false && false ; true || echo "THOU SHALL NOT" & echo "THOU SHALT" ; ls -lR ~ | cat -e | rev | rev | rev | rev | rev | rev | rev | rev ; cat whatever ; echo 'DONE !'
+-------------------
+missing error message
 
+ls 1>&2 1>&-
 
 -------------------
 
