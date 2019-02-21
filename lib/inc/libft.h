@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 22:23:00 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/18 20:05:18 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/21 15:54:21 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,6 @@ int					ft_tablen(char **tab);
 char**				ft_tabnew(size_t len);
 char**				ft_tabcpy(char **tab);
 char				**ms_tabcpy(char **dst, char **cpy);
+int					ft_strichr(char *s, char c, int n);
 
 #endif

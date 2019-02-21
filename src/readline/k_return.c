@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 21:18:26 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/19 17:02:51 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/21 13:03:43 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 int		ctrlc(t_rdl *rdl, char *buf)
 {
 	(void)buf;
+	right(rdl, rdl->size - rdl->curs);
 	rdl->str[0] = 0;
+	rdl->size = 0;
+	rdl->curs = 0;
 	return (1);
 }
 
@@ -23,6 +26,7 @@ int		enter(t_rdl *rdl, char *buf)
 {
 	(void)buf;
 	right(rdl, rdl->size - rdl->curs);
+	rdl->curs = rdl->size;
 	hstadd(rdl->str);
 	hstreset();
 	rdladd(rdl, '\n');
@@ -34,10 +38,8 @@ int		ctrld(t_rdl *rdl, char *buf)
 	(void)buf;
 	if (!rdl->str[0])
 	{
-		ft_strdel(&rdl->str);
 		write(1, "\n", 1);
-		termreset(&rdl->save);
-		exit(1);
+		return (2);
 	}
 	return (0);
 }

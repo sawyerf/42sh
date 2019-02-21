@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strichr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/08 15:28:51 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/26 21:19:07 by apeyret          ###   ########.fr       */
+/*   Created: 2018/12/17 15:11:28 by apeyret           #+#    #+#             */
+/*   Updated: 2019/01/10 17:55:22 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strcpy(char *dst, const char *src)
+#include "libft.h"
+
+int	ft_strichr(char *s, char c, int n)
 {
-	int	count;
+	int count;
 
 	count = 0;
-	if (!dst || !src)
-		return (dst);
-	while (src[count])
+	while (s[count])
 	{
-		dst[count] = src[count];
+		if (s[count] == c)
+			break ;
 		count++;
 	}
-	dst[count] = '\0';
-	return (dst);
+	if (n && s[count] == c && s[count])
+		return (count + 1);
+	return (count);
 }

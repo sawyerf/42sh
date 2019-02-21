@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/18 19:15:36 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/21 12:58:14 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ extern	t_sh_state		g_sh;
 
 char					**ms_shlvl(char **env);
 char*					ms_varchr(char **env, char *toto);
+char	*ms_envchrr(char **env, char *var);
 char**					ms_envaddint(char **caca, char *toto, int fifi);
 char*					ms_envchrr(char **env, char *var);
 t_ast_node				*get_tree(t_ast_node *tree);

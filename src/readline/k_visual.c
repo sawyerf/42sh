@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 12:42:13 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/14 18:04:44 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/20 16:10:13 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ t_key	g_vskey[] =\
 {
 	{K_RGHT, vm_move},
 	{K_LEFT, vm_move},
-	{K_ESC,  vm_finish},
-	{K_CTRC, vm_finish},
-	{K_CTRV, vm_finish},
+	{K_ESC,  finish},
+	{K_CTRC, finish},
+	{K_CTRV, finish},
 	{K_CTRY, vm_copy},
 	{K_CTRD, vm_del},
 	{NULL,   vm_move}
 };
 
-int		vm_finish(t_rdl *rdl, char *buf)
+int		finish(t_rdl *rdl, char *buf)
 {
 	(void)rdl;
 	(void)buf;

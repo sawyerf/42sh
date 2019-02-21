@@ -41,6 +41,7 @@
 # define K_CTRC	"\3"
 # define K_CTRD	"\4"
 # define K_ENTR	"\12"
+# define K_CTRR	"\22"
 # define K_CTRP	"\20"
 # define K_CTRV	"\26"
 # define K_CTRY	"\31"
@@ -110,9 +111,13 @@ int		vm_move(t_rdl *rdl, char *buf);
 int		vm_copy(t_rdl *rdl, char *buf);
 int		vm_del(t_rdl *rdl, char *buf);
 int		paste(t_rdl *rdl, char *buf);
-int		vm_finish(t_rdl *rdl, char *buf);
+int		finish(t_rdl *rdl, char *buf);
 int		end(t_rdl *rdl, char *buf);
 int		history(t_rdl *rdl, char *buf);
+int		ctrlr(t_rdl *rdl, char *buf);
+int		normal_key(t_rdl *rdl, char *buf);
+int		ctrlr(t_rdl *rdl, char *buf);
+int		return2(t_rdl *rdl, char *buf);
 t_list	*get_cplenv(char *match);
 
 //tools
@@ -150,5 +155,8 @@ void	hstadd(char *str);
 char	*hstnext(char *s);
 char	*hstprev(void);
 void	hstreset(void);
+char	*hstchc(char *s);
+void	hstaddfile(char **env);
+int		hstread(char **env);
 
 #endif

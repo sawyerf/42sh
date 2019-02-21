@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/18 19:40:20 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/21 16:17:32 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "readline.h"
 
 t_sh_state	g_sh;
+
 static int	init_shell(char **env)
 {
 	if (!(g_sh.export_var = ms_shlvl(dup_tab(env))))
@@ -40,6 +41,7 @@ int				main(int ac, char **av, char **env)
 		return (MEMERR);
 	ht_init();
 	ht_refreshall(get_env_value("PATH"));
+	hstread(g_sh.export_var);
 	while (42)
 	{
 		if (!(line = readline("$> ")))
@@ -57,8 +59,9 @@ int				main(int ac, char **av, char **env)
 			write(STDOUT_FILENO, "\n", 1);
 //		free(line);
 	}
+	hstaddfile(g_sh.export_var);
 	ret = 1;
 //	free(line);
-	write(1, "\n", 1);
+//	write(1, "\n", 1);
 	return (ret);
 }
