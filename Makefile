@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/02/21 17:03:28 by ktlili           ###   ########.fr        #
+#    Updated: 2019/02/21 17:07:41 by ktlili           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,6 @@ SRC_FILE =	core/builtins.c				\
 			core/cd_tools.c				\
 			core/changedir.c			\
 			core/clean_path.c			\
-			core/dynamic_buff.c			\
 			core/env_handler.c			\
 			core/env_lst_util2.c		\
 			core/ft_env.c				\
