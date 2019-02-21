@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/02/21 17:07:41 by ktlili           ###   ########.fr        #
+#    Updated: 2019/02/21 17:25:30 by ktlili           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,15 @@ INC_DIR =	inc
 
 INC_FILE =	ft_eval.h					\
 			ft_lexer.h					\
-			ft_wordexp.h 				\
-			sh_core.h					\
-			readline.h
+			ft_lexer_typedef.h			\
+			ft_light_parser.h			\
+			ft_light_parser_typedef.h	\
+			ft_parser.h					\
+			ft_parser_typedef.h			\
+			ft_wordexp.h				\
+			generic_typedef.h			\
+			readline.h					\
+			sh_core.h
 
 SRC_DIR =	src
 
@@ -84,7 +90,7 @@ SRC_FILE =	core/builtins.c				\
 			readline/k_history.c		\
 			readline/env_autoclp.c		\
 			readline/history.c			\
-			light_parser/light_parser.c	
+			parser/light_parser.c	
 
 OBJ_DIR =	.obj
 OBJ_FILE =	$(SRC_FILE:.c=.o)
@@ -95,7 +101,6 @@ CRT_DIR =	core 						\
 		 	eval 						\
 		 	readline 					\
 		 	parser 						\
-		 	light_parser 
 
 SRC = 		$(addprefix $(SRC_DIR)/,$(SRC_FILE))
 INC = 		$(addprefix $(INC_DIR)/,$(INC_FILE))
