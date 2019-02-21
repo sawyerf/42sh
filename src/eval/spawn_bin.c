@@ -6,12 +6,12 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/19 19:19:15 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/21 16:15:03 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_eval.h"
-#include "readline.h"
+#include "readline.h" //this should be resolved differently
 
 /* execve_wrap is always inside a fork*/
 static int		execve_wrap(t_cmd_tab *cmd)
@@ -28,7 +28,7 @@ static int		execve_wrap(t_cmd_tab *cmd)
 		if ((cmd->full_path = ft_strdup(cmd->av[0])) == NULL)
 			exit_wrap(MEMERR, cmd);
 	}
-	else 
+	else if (!cmd->full_path) //if launched with env, builtin have already set the full path 
 	{
 		path = get_process_env("PATH", cmd->process_env);
 		if (ht_getvalue(path, cmd) == MEMERR)

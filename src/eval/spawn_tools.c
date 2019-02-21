@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 19:20:53 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/19 18:23:44 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/21 16:19:11 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void		exec_error(int errnum, char *str)
 {
 	if (errnum == BIN_NO_PATH)
-		putstr_stderr("21sh: PATH not set");
+		putstr_stderr("21sh: PATH not set: ");
 	else if (errnum == CMD_NOT_FOUND)
 		putstr_stderr("21sh: command not found: ");
 	else if (errnum == BIN_PERM_DENY)

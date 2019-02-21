@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/18 21:10:25 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/21 15:05:01 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ typedef struct s_cmd_tab t_cmd_tab;
 typedef	int				(*t_builtin)(t_cmd_tab*);
 
 /* to delete*/
-extern	t_environ		**g_environ;
 /**/
 extern	t_sh_state		g_sh;
 

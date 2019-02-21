@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 14:16:02 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/19 17:41:03 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/21 16:23:58 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ int apply_redir(t_redir *redir)
 		ft_dprintf(STDERR_FILENO, "21sh: dup2 fuckd up\n");
 		return (-1);
 	}
-	close(right_fd);
+	if ((redir->op->type != GREATAND) && (redir->op->type != LESSAND))
+		close(right_fd);
 	return (0);
 }
 /*
