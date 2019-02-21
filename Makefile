@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/02/21 17:00:22 by ktlili           ###   ########.fr        #
+#    Updated: 2019/02/21 17:03:28 by ktlili           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,9 +22,9 @@ INC_DIR =	inc
 
 INC_FILE =	ft_eval.h					\
 			ft_lexer.h					\
-			ft_readline.h 				\
 			ft_wordexp.h 				\
-			sh_core.h
+			sh_core.h					\
+			readline.h
 
 SRC_DIR =	src
 
@@ -85,7 +85,7 @@ SRC_FILE =	core/builtins.c				\
 			readline/k_history.c		\
 			readline/env_autoclp.c		\
 			readline/history.c			\
-			light_parser/light_parser.c	\
+			light_parser/light_parser.c	
 
 OBJ_DIR =	.obj
 OBJ_FILE =	$(SRC_FILE:.c=.o)
