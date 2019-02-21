@@ -1,0 +1,5 @@
+* env is half broken
+* cd set_shell_env needs malloc checks
+* more precise error handling in redirections
+------------
+replace printf/write(2, etc.. by sprintf or zprintf

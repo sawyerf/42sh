@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/02/19 16:53:28 by apeyret          ###   ########.fr        #
+#    Updated: 2019/02/21 17:00:22 by ktlili           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,12 +46,13 @@ SRC_FILE =	core/builtins.c				\
 			core/ms_env.c				\
 			core/ms_envdel.c			\
 			eval/expansion_wrappers.c	\
+			eval/spawn_tools.c			\
 			eval/eval_pipe.c			\
-			eval/bin_path.c				\
 			eval/eval.c					\
 			eval/spawn_bin.c			\
 			eval/craft_env.c			\
 			eval/handle_redir.c			\
+			eval/redir_handle_right.c   \
 			ft_wordexp/expansion_util.c	\
 			ft_wordexp/field_split.c	\
 			ft_wordexp/ft_wordexp.c		\
@@ -127,7 +128,7 @@ clean:
 
 fclean: clean
 	@/bin/rm -f $(NAME)
-	@printf "\033[0;31D[21sh] Deleted minishell\033[0;0m\n"
+	@printf "\033[0;31D[21sh] Deleted 21sh\033[0;0m\n"
 
 re: fclean all
 

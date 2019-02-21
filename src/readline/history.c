@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 20:13:04 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/21 16:17:29 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/21 16:58:33 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,11 @@ int		hstread(char **env)
 	char	*path;
 	char	*home;
 
-	ft_printf("[0]\n");
 	if (!(home = ms_envchrr(env, "HOME"))
 		|| !(path = ft_zprintf("%s/%s", home, ".21sh_history")))
-	{
-		ft_printf("[1]%s\n", home);
 		return (0);
-	}
 	fd = open(path, O_RDONLY);
 	ft_strdel(&path);
-	ft_printf("[2]%d\n", fd);
 	if (fd < 0)
 		return (0);
 	while (get_next_line(fd, &line) > 0)

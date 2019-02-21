@@ -6,81 +6,29 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/15 21:56:14 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/21 16:15:03 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_eval.h"
-#include "readline.h"
+#include "readline.h" //this should be resolved differently
 
-void		exec_error(int errnum, char *str)
-{
-	if (errnum == BIN_NO_PATH)
-		putstr_stderr("21sh: PATH not set");
-	else if (errnum == CMD_NOT_FOUND)
-		putstr_stderr("21sh: command not found: ");
-	else if (errnum == BIN_PERM_DENY)
-		putstr_stderr("21sh: permission denied: ");
-	else if (errnum == BIN_NOT_FOUND)
-		putstr_stderr("21sh: no such file or directory: ");
-	else if (errnum == BIN_EXEC_ERR)
-		putstr_stderr("21sh: exec error: ");
-	else if (errnum == BIN_IS_DIR)
-		putstr_stderr("21sh: is a directory: ");
-	if (str != NULL)
-		putstr_stderr(str);
-	putstr_stderr("\n");
-}
-
-int			bin_perm(char *path)
-{
-	struct stat target;
-
-	if (stat(path, &target) != 0)
-		return (BIN_NOT_FOUND);
-	if (!S_ISREG(target.st_mode))
-	{
-		if (S_ISDIR(target.st_mode))
-				return (BIN_IS_DIR);
-		return (BIN_PERM_DENY);
-	}
-	if (access(path, X_OK) != 0)
-		return (BIN_PERM_DENY);
-	return (0);
-}
-
-int			handle_full_path(char *cmd_name)
-{
-	int ret;
-
-	if ((ret = bin_perm(cmd_name)) != 0)
-		return (ACCERR);
-	return (0);
-}
-void	exit_wrap(int code, t_cmd_tab *cmd)
-{	
-//	free_cmd_tab(cmd);
-	exec_error(code, cmd->av[0]);	
-	(void)cmd;
-	exit(code);
-}
 /* execve_wrap is always inside a fork*/
 static int		execve_wrap(t_cmd_tab *cmd)
 {	
 	char	*path;
 	int		ret;
 
-	cmd->process_env = craft_env(g_sh.export_var, cmd->assign_lst);
-	if (cmd->process_env == NULL)
-		return (MEMERR);
+	if ((ret = handle_redir(cmd->redir_lst))) // this has to change we have more err
+		exit(1);
 	if (ft_ispath(cmd->av[0]))
 	{
-		if (handle_full_path(cmd->av[0]) != 0)
+		if (handle_perm(cmd->av[0]) != 0)
 			exit_wrap (ACCERR, cmd);
 		if ((cmd->full_path = ft_strdup(cmd->av[0])) == NULL)
 			exit_wrap(MEMERR, cmd);
 	}
-	else 
+	else if (!cmd->full_path) //if launched with env, builtin have already set the full path 
 	{
 		path = get_process_env("PATH", cmd->process_env);
 		if (ht_getvalue(path, cmd) == MEMERR)
@@ -116,7 +64,7 @@ void	wait_wrapper(t_cmd_tab *cmd, pid_t pid)
 
 t_bool		is_builtin(t_cmd_tab *cmd)
 {
-	static t_builtin	array[9] = {ft_echo, change_dir, setenv_wrapper,
+	static t_builtin	array[] = {ft_echo, change_dir, setenv_wrapper,
 							ft_unsetenv, ft_env, ft_exit, ft_set, ft_unset};
 	static	char		*builtins[] = {"echo", "cd", "setenv", "unsetenv",
 							"env", "exit", "set", "unset", NULL};
@@ -144,7 +92,11 @@ int		spawn_in_pipe(t_cmd_tab *cmd)
 		return (0);
 	}
 	else
+	{
+		if (!(cmd->process_env = craft_env(g_sh.export_var, cmd->assign_lst)))
+			return (MEMERR);
 		return (execve_wrap(cmd));
+	}
 }
 
 static int assign_to_shell(t_cmd_tab *cmd)
@@ -178,8 +130,7 @@ static int assign_to_shell(t_cmd_tab *cmd)
 
 int		spawn_command(t_cmd_tab *cmd)
 {
-	pid_t 	pid;
-	int		ret;
+	pid_t 		pid;
 
 	if (cmd->av[0] == NULL)
 		return (assign_to_shell(cmd));
@@ -190,12 +141,12 @@ int		spawn_command(t_cmd_tab *cmd)
 		return (MEMERR);
 	if (pid == 0)
 	{
-		if ((ret = handle_redir(cmd->redir_lst)))
-			return (ret);
+		if ((!cmd->process_env) 
+				&& (!(cmd->process_env = craft_env(g_sh.export_var, cmd->assign_lst))))
+			return (MEMERR);
 		execve_wrap(cmd);
 		exit_wrap(1, cmd); /* handle errors here*/
 	}
 	wait_wrapper(cmd, pid);
 	return (0);
-
 }

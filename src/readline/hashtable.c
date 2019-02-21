@@ -160,8 +160,7 @@ t_list	*ht_getexec(char *path)
 			ft_lstadd(&lst, ft_lstnew(ret->d_name, ft_strlen(ret->d_name)));
 		ft_strdel(&cpath);
 	}
-	if (ret)
-		free(ret);
+	closedir(ptr);
 	return (lst);
 }
 

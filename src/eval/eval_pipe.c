@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/18 18:06:18 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/21 16:36:07 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,6 @@ int	pipe_recursion(t_cmd_tab *to, t_cmd_tab *from)
 	return (from->exit_status);
 }
 
-int	eval_pipe(t_cmd_tab *cmd)
-{
-	pid_t pid;
-	int ret;
-
-	pid = fork();
-	if (pid == -1)
-		return (-1);
-	if (pid == 0)
-	{
-		ret = pipe_recursion(cmd->next, cmd);
-		exit(ret);
-	}
-	wait_wrapper(cmd, pid);
-	//ft_printf("pipe exiting with status %d\n", cmd->exit_status);
-	return (0);
-}
 
 void	free_cmd_tab(t_cmd_tab *cmd)
 {
@@ -87,6 +70,25 @@ void	free_cmd_tab_lst(t_cmd_tab *start)
 		start = tmp;
 	}
 }
+
+int	eval_pipe(t_cmd_tab *cmd)
+{
+	pid_t pid;
+	int ret;
+
+	pid = fork();
+	if (pid == -1)
+		return (-1);
+	if (pid == 0)
+	{
+		ret = pipe_recursion(cmd->next, cmd);
+		exit(ret);
+	}
+	wait_wrapper(cmd, pid);
+	//ft_printf("pipe exiting with status %d\n", cmd->exit_status);
+	return (0);
+}
+
 int	exec_pipeline(t_ast_node *tree)
 {
 	t_cmd_tab 	*cmd_tab;

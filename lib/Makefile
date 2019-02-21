@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/02/21 15:56:38 by apeyret          ###   ########.fr        #
+#    Updated: 2019/02/21 16:37:17 by ktlili           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC = gcc
 
 CFLAGS = -I inc/ -Wall -Werror -Wextra 
 
-DEBUG= #-g3 -fsanitize=address
+DEBUG= -ggdb  #-fsanitize=address
 
 INC_DIR = inc
 
@@ -28,6 +28,7 @@ SRC_DIR = src
 
 SRC_FILE =	ft_strnsplit.c \
 			ft_splitblanks.c \
+			ft_isalldigit.c \
 			ft_util.c \
 			itoa_base.c \
 			ft_atoi.c \

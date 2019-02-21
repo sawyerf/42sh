@@ -6,11 +6,12 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 13:58:14 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/15 21:48:49 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/21 16:10:50 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_core.h"
+#include "readline.h" //this should be resolved differently
 
 static char **construct_env(t_cmd_tab *cmd, char opt, int count)
 {
@@ -34,16 +35,22 @@ static char **construct_env(t_cmd_tab *cmd, char opt, int count)
 
 static int		spawn_new_env(char **args, char **new_env)
 {
-	t_command	*new_cmd;
-	int			ret = 5;
+	t_cmd_tab 	new_cmd;
+	char		*path;
 
-	new_cmd = new_cmd_node(args);
-	if (new_cmd == NULL)
+	ft_bzero(&new_cmd, sizeof(t_cmd_tab));
+	new_cmd.av = args;
+	new_cmd.process_env = new_env;
+	if (!(path = ms_varchr(new_env, "PATH")))
+		path = get_env_value("PATH");
+	if (ht_getvalue(path, &new_cmd) == MEMERR)
 		return (MEMERR);
-	new_cmd->process_env = new_env;
-//	ret = spawn_command(new_cmd); dis iz broken
-	free_cmdlst(new_cmd);
-	return (ret);
+	if (!new_cmd.full_path)
+	{
+		exec_error(BIN_NOT_FOUND, new_cmd.av[0]);
+		return (BIN_NOT_FOUND);
+	}
+	return (spawn_command(&new_cmd));
 }
 
 static char		env_parseopt(char **args)
