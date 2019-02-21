@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 18:34:05 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/21 17:50:28 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/21 18:00:23 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int ft_unset(t_cmd_tab *cmd)
 	i = 1;
 	while (cmd->av[i])
 	{
-		if ((!(g_sh.env = ms_envdel(g_sh.env, cmd->av[i])))
-			|| (!(g_sh.local = ms_envdel(g_sh.local, cmd->av[i]))))
+		if ((!(g_sh.env = envdel(g_sh.env, cmd->av[i])))
+			|| (!(g_sh.local = envdel(g_sh.local, cmd->av[i]))))
 		return(MEMERR);
 		i++;
 	}
@@ -62,7 +62,7 @@ int	setenv_wrapper(t_cmd_tab *cmd)
 			return (-1);
 		}
 	}
-	if (!(g_sh.env = ms_envaddstr(g_sh.env, cmd->av[1], cmd->av[2])))
+	if (!(g_sh.env = envaddstr(g_sh.env, cmd->av[1], cmd->av[2])))
 		return (MEMERR);
 	return (0);
 }
@@ -81,7 +81,7 @@ int	ft_unsetenv(t_cmd_tab *cmd)
 		i = 0;
 		while (cmd->av[i] != NULL)
 		{
-			if (!(g_sh.env = ms_envdel(g_sh.env, cmd->av[i])))
+			if (!(g_sh.env = envdel(g_sh.env, cmd->av[i])))
 				return (MEMERR);
 			i++;
 		}

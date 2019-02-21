@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/21 17:56:26 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/21 18:00:23 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ t_sh	g_sh;
 
 static int	init_shell(char **env)
 {
-	if (!(g_sh.env = ms_shlvl(dup_tab(env))))
+	if (!(g_sh.env = shlvl(dup_tab(env))))
 		return (MEMERR);
 	if (!(g_sh.local = ft_tabnew(0)))
 		return (MEMERR);

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/21 17:57:11 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/21 18:00:41 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ typedef	int				(*t_builtin)(t_cmd_tab*);
 /**/
 extern	t_sh		g_sh;
 
-char					**ms_shlvl(char **env);
-char*					ms_varchr(char **env, char *toto);
-char	*ms_envchrr(char **env, char *var);
-char**					ms_envaddint(char **caca, char *toto, int fifi);
-char*					ms_envchrr(char **env, char *var);
+char					**shlvl(char **env);
+char*					varchr(char **env, char *toto);
+char	*envchrr(char **env, char *var);
+char**					envaddint(char **caca, char *toto, int fifi);
+char*					envchrr(char **env, char *var);
 t_ast_node				*get_tree(t_ast_node *tree);
 int						change_dir(t_cmd_tab *cmd);
 int						ft_exit(t_cmd_tab *cmd);
@@ -119,8 +119,8 @@ int						cd_dispatch_err(char *arg, char *curpath);
 void					update_env_pwd(char *pwd, char *curpath);
 int						cd_error(int errnum, char *str);
 char					*getoldpwd(void);
-char					**ms_csetenv(char **env, char *var);
-char					**ms_envdel(char **env, char *var);
-char					**ms_envaddstr(char **env, char *var, char *value);
+char					**csetenv(char **env, char *var);
+char					**envdel(char **env, char *var);
+char					**envaddstr(char **env, char *var, char *value);
 
 #endif

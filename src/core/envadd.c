@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_envadd.c                                        :+:      :+:    :+:   */
+/*   envadd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 23:36:39 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/19 18:41:29 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/21 18:04:47 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_core.h"
 
-char	**ms_envadd(char **env, char *var)
+char	**envadd(char **env, char *var)
 {
 	char	**cpenv;
 	int		len;
@@ -28,7 +28,7 @@ char	**ms_envadd(char **env, char *var)
 	return (cpenv);
 }
 
-char	**ms_csetenv(char **env, char *var)
+char	**csetenv(char **env, char *var)
 {
 	int	count;
 	int	len;
@@ -36,7 +36,7 @@ char	**ms_csetenv(char **env, char *var)
 	count = 0;
 	len = ft_strchr(var, '=') - var + 1;
 	if (!env)
-		return (ms_envadd(env, var));
+		return (envadd(env, var));
 	while (env[count])
 	{
 		if (!ft_strncmp(var, env[count], len))
@@ -49,30 +49,30 @@ char	**ms_csetenv(char **env, char *var)
 		count++;
 	}
 	if (!env[count])
-		return (ms_envadd(env, var));
+		return (envadd(env, var));
 	return (env);
 }
 
-char	**ms_envaddint(char **env, char *var, int value)
+char	**envaddint(char **env, char *var, int value)
 {
 	char *add;
 
 	add = NULL;
 	if (!(add = ft_zprintf("%s=%d", var, value)))
 		return (NULL);
-	env = ms_csetenv(env, add);
+	env = csetenv(env, add);
 	ft_strdel(&add);
 	return (env);
 }
 
-char	**ms_envaddstr(char **env, char *var, char *value)
+char	**envaddstr(char **env, char *var, char *value)
 {
 	char *add;
 
 		add = NULL;
 	if (!(add = ft_zprintf("%s=%s", var, value)))
 		return (NULL);
-	env = ms_csetenv(env, add);
+	env = csetenv(env, add);
 	ft_strdel(&add);
 	return (env);
 }

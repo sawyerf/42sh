@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_setenv.c                                        :+:      :+:    :+:   */
+/*   setenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 23:11:31 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/21 15:56:31 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/21 18:00:23 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ size_t env_name_len(char *var)
 	return (len);
 }
 
-char	*ms_varchr(char **env, char *var)
+char	*varchr(char **env, char *var)
 {
 	int		count;
 	int		len;
@@ -43,7 +43,7 @@ char	*ms_varchr(char **env, char *var)
 	return (NULL);
 }
 
-char	*ms_envchrr(char **env, char *var)
+char	*envchrr(char **env, char *var)
 {
 	int count;
 	int len;
@@ -61,17 +61,17 @@ char	*ms_envchrr(char **env, char *var)
 	return (NULL);
 }
 
-char	**ms_shlvl(char **env)
+char	**shlvl(char **env)
 {
 	char	*var;
 	int		lvl;
 
 	var = NULL;
-	var = ms_varchr(env, "SHLVL=");
+	var = varchr(env, "SHLVL=");
 	if (!var)
 		lvl = 1;
 	else
 		lvl = ft_atoi(var) + 1;
-	env = ms_envaddint(env, "SHLVL", lvl);
+	env = envaddint(env, "SHLVL", lvl);
 	return (env);
 }

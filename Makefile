@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/02/21 17:59:08 by apeyret          ###   ########.fr        #
+#    Updated: 2019/02/21 18:02:01 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,9 +47,9 @@ SRC_FILE =	core/builtins.c				\
 			core/path_tools.c			\
 			core/util.c					\
 			core/util2.c				\
-			core/ms_envadd.c			\
-			core/ms_env.c				\
-			core/ms_envdel.c			\
+			core/envadd.c				\
+			core/env.c					\
+			core/envdel.c				\
 			eval/expansion_wrappers.c	\
 			eval/spawn_tools.c			\
 			eval/eval_pipe.c			\

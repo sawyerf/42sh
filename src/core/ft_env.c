@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 13:58:14 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/21 17:50:28 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/21 18:00:23 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static char **construct_env(t_cmd_tab *cmd, char opt, int count)
 		return (NULL);
 	while (start < count)
 	{
-		if (!(new_env = ms_csetenv(new_env, cmd->av[start])))
+		if (!(new_env = csetenv(new_env, cmd->av[start])))
 			return (NULL);
 		start++;
 	}
@@ -41,7 +41,7 @@ static int		spawn_new_env(char **args, char **new_env)
 	ft_bzero(&new_cmd, sizeof(t_cmd_tab));
 	new_cmd.av = args;
 	new_cmd.process_env = new_env;
-	if (!(path = ms_varchr(new_env, "PATH")))
+	if (!(path = varchr(new_env, "PATH")))
 		path = get_env_value("PATH");
 	if (ht_getvalue(path, &new_cmd) == MEMERR)
 		return (MEMERR);

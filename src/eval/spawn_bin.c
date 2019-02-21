@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/21 17:50:29 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/21 18:00:24 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,15 +111,15 @@ static int assign_to_shell(t_cmd_tab *cmd)
 		len = ft_strchr(cmd->assign_lst[i], '=') - cmd->assign_lst[i] + 1;
 		c = cmd->assign_lst[i][len];
 		cmd->assign_lst[i][len] = 0;
-		if (ms_varchr(g_sh.env, cmd->assign_lst[i]))
+		if (varchr(g_sh.env, cmd->assign_lst[i]))
 		{
 			cmd->assign_lst[i][len] = c;
-			g_sh.env = ms_csetenv(g_sh.env, cmd->assign_lst[i]);
+			g_sh.env = csetenv(g_sh.env, cmd->assign_lst[i]);
 		}
 		else
 		{
 			cmd->assign_lst[i][len] = c;
-			g_sh.local = ms_csetenv(g_sh.local, cmd->assign_lst[i]);
+			g_sh.local = csetenv(g_sh.local, cmd->assign_lst[i]);
 		}
 		if ((!g_sh.local) || (!g_sh.env))
 			return (MEMERR);
