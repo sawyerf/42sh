@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/21 16:15:03 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/21 17:50:29 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_bool		is_builtin(t_cmd_tab *cmd)
 
 	if ((i = ft_cmptab(builtins, cmd->av[0])) != -1)
 	{
-		cmd->process_env = craft_env(ft_tabdup(g_sh.export_var), cmd->assign_lst);
+		cmd->process_env = craft_env(ft_tabdup(g_sh.env), cmd->assign_lst);
 		if (cmd->process_env == NULL)
 			return (MEMERR);
 		cmd->exit_status = array[i](cmd);
@@ -93,7 +93,7 @@ int		spawn_in_pipe(t_cmd_tab *cmd)
 	}
 	else
 	{
-		if (!(cmd->process_env = craft_env(g_sh.export_var, cmd->assign_lst)))
+		if (!(cmd->process_env = craft_env(g_sh.env, cmd->assign_lst)))
 			return (MEMERR);
 		return (execve_wrap(cmd));
 	}
@@ -111,17 +111,17 @@ static int assign_to_shell(t_cmd_tab *cmd)
 		len = ft_strchr(cmd->assign_lst[i], '=') - cmd->assign_lst[i] + 1;
 		c = cmd->assign_lst[i][len];
 		cmd->assign_lst[i][len] = 0;
-		if (ms_varchr(g_sh.export_var, cmd->assign_lst[i]))
+		if (ms_varchr(g_sh.env, cmd->assign_lst[i]))
 		{
 			cmd->assign_lst[i][len] = c;
-			g_sh.export_var = ms_csetenv(g_sh.export_var, cmd->assign_lst[i]);
+			g_sh.env = ms_csetenv(g_sh.env, cmd->assign_lst[i]);
 		}
 		else
 		{
 			cmd->assign_lst[i][len] = c;
-			g_sh.internal = ms_csetenv(g_sh.internal, cmd->assign_lst[i]);
+			g_sh.local = ms_csetenv(g_sh.local, cmd->assign_lst[i]);
 		}
-		if ((!g_sh.internal) || (!g_sh.export_var))
+		if ((!g_sh.local) || (!g_sh.env))
 			return (MEMERR);
 		i++;	
 	}
@@ -142,7 +142,7 @@ int		spawn_command(t_cmd_tab *cmd)
 	if (pid == 0)
 	{
 		if ((!cmd->process_env) 
-				&& (!(cmd->process_env = craft_env(g_sh.export_var, cmd->assign_lst))))
+				&& (!(cmd->process_env = craft_env(g_sh.env, cmd->assign_lst))))
 			return (MEMERR);
 		execve_wrap(cmd);
 		exit_wrap(1, cmd); /* handle errors here*/

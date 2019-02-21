@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 13:58:14 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/21 16:10:50 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/21 17:50:28 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char **construct_env(t_cmd_tab *cmd, char opt, int count)
 	char 	**new_env;
 	int		start;
 
-	new_env = g_sh.export_var;
+	new_env = g_sh.env;
 	if (opt == 'i')
 		new_env = NULL;
 	start = g_optind;

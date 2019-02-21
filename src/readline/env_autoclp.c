@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 17:28:00 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/18 19:15:35 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/21 17:50:29 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_list	*get_cplenv(char *match)
 	t_list *lst;
 
 	match++;
-	lst = get_matchenv(g_sh.internal, match);
-	ft_lstadd(&lst, get_matchenv(g_sh.export_var, match));
+	lst = get_matchenv(g_sh.local, match);
+	ft_lstadd(&lst, get_matchenv(g_sh.env, match));
 	return (lst);
 }

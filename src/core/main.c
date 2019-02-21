@@ -6,20 +6,20 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/21 16:17:32 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/21 17:56:26 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_core.h"
 #include "readline.h"
 
-t_sh_state	g_sh;
+t_sh	g_sh;
 
 static int	init_shell(char **env)
 {
-	if (!(g_sh.export_var = ms_shlvl(dup_tab(env))))
+	if (!(g_sh.env = ms_shlvl(dup_tab(env))))
 		return (MEMERR);
-	if (!(g_sh.internal = ft_tabnew(0)))
+	if (!(g_sh.local = ft_tabnew(0)))
 		return (MEMERR);
 	return (0);
 }
@@ -41,7 +41,7 @@ int				main(int ac, char **av, char **env)
 		return (MEMERR);
 	ht_init();
 	ht_refreshall(get_env_value("PATH"));
-	hstread(g_sh.export_var);
+	hstread(g_sh.env);
 	while (42)
 	{
 		if (!(line = readline("$> ")))
@@ -59,7 +59,7 @@ int				main(int ac, char **av, char **env)
 			write(STDOUT_FILENO, "\n", 1);
 //		free(line);
 	}
-	hstaddfile(g_sh.export_var);
+	hstaddfile(g_sh.env);
 	ret = 1;
 //	free(line);
 //	write(1, "\n", 1);

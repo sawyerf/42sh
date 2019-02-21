@@ -6,14 +6,13 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 20:13:04 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/21 16:58:33 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/21 17:51:53 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_core.h"
 #include "readline.h"
 
-extern	t_sh_state g_sh;
 t_list *g_hst[4] = {NULL, NULL, NULL, NULL};
 
 void	hstadd(char *str)
