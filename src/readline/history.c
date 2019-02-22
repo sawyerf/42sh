@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 20:13:04 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/21 18:00:24 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/22 16:39:19 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,38 @@ int		hstread(char **env)
 
 char	*hstchc(char *s)
 {
-	t_list *lst;
-
-	lst = g_hst[0];
-	if (!s[0] || !s)
-		return (NULL);
-	while (lst)
+	g_hst[3] = g_hst[0];
+	if (!s || !s[0])
 	{
-		if (ft_strstr(lst->content, s))
-			return (lst->content);
-		lst = lst->next;
+		g_hst[3] = NULL;
+		return (NULL);
+	}
+	while (g_hst[3])
+	{
+		if (ft_strstr(g_hst[3]->content, s))
+			return (g_hst[3]->content);
+		g_hst[3] = g_hst[3]->next;
 	}
 	return (NULL);
+}
+
+int 	hstnchc(t_rdl *rdl, char *buf)
+{
+	(void)buf;
+	if (g_hst[3])
+		g_hst[3] = g_hst[3]->next;
+	else
+		g_hst[3] = g_hst[0];
+	if (!rdl->str || !rdl->str[0])
+		return (1);
+	while (g_hst[3])
+	{
+		if (ft_strstr(g_hst[3]->content, rdl->str))
+			return (0);
+		g_hst[3] = g_hst[3]->next;
+	}
+	hstchc(rdl->str);
+	return (0);
 }
 
 char	*hstnext(char *s)
@@ -104,6 +124,7 @@ void	hstreset(void)
 		free(g_hst[2]);
 	}
 	g_hst[2] = NULL;
+	g_hst[3] = NULL;
 }
 
 void	hstwrite(int fd, t_list *lst)

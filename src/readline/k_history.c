@@ -6,22 +6,34 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 13:41:29 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/20 19:40:54 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/22 16:39:18 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline.h"
 
+extern t_list *g_hst[4];
+
 t_key	g_khst[] =\
 {
-	{K_BSPC, &del_cara},
+	{K_BSPC, &hstdelcara},
 	{K_ENTR, &return2},
 	{K_LEFT, &finish},
 	{K_RGHT, &finish},
 	{K_CTRC, &ctrlc},
 	{K_CTRD, &ctrlc},
+	{K_CTRR, &hstnchc},
+	{K_TAB,  &hstnchc},
 	{NULL,   &del_cara}
 };
+
+int		hstdelcara(t_rdl *rdl, char	*buf)
+{
+	(void)buf;
+	del_cara(rdl, buf);
+	hstchc(rdl->str);
+	return (0);
+}
 
 int		return2(t_rdl *rdl, char *buf)
 {
@@ -36,8 +48,11 @@ void	printsearch(t_rdl *hst)
 	char	*s;
 
 	left(hst, hst->vcurs + 1);
+	if (g_hst[3])
+		s = g_hst[3]->content;
+	else
+		s = NULL;
 	tgpstr("cd");
-	s = hstchc(hst->str);
 	if (!s)
 		hst->vcurs = ft_printf("%s%s': %s", hst->prompt, hst->str, "");
 	else
@@ -51,7 +66,10 @@ int	hstrouter(t_rdl *hst, char *buf)
 	if (is_special(buf))
 		ret = special_key(hst, buf, g_khst);
 	else
+	{
 		ret = normal_key(hst, buf);
+		hstchc(hst->str);
+	}
 	printsearch(hst);
 	return (ret);
 }
@@ -82,6 +100,7 @@ int		ctrlr(t_rdl *rdl, char *str)
 	if (stat == 2)
 		rdladd(rdl, '\n');
 	ft_strdel(&hst.str);
+	g_hst[3] = NULL;
 	return (stat - 1);
 }
 
