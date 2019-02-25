@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 15:15:46 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/20 18:04:12 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/25 17:55:10 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int		rdlinit(t_rdl *rdl, char *PROMPT)
 	rdl->vcurs = 0;
 	rdl->size = 0;
 	rdl->curs = 0;
+	rdl->real = 0;
 	rdl->allo = 128;
 	rdl->lpro = ft_printf("%s", PROMPT);
 	rdl->prompt = PROMPT;
@@ -29,12 +30,18 @@ int		rdlinit(t_rdl *rdl, char *PROMPT)
 
 void	rdldel(t_rdl *rdl, int curs)
 {
-	if (curs > rdl->size || rdl->size < 0 || rdl->curs <= 0)
+	if (curs > rdl->size || rdl->size < 0 || (curs < rdl->curs && rdl->curs <= 0)
+		|| (curs >= rdl->curs && rdl->size == curs))
 		return ;
 	ft_strcpy(rdl->str + curs, rdl->str + curs + 1);
-	reprint(rdl, curs);
 	rdl->size--;
-	rdl->curs--;
+	if (curs < rdl->curs)
+	{
+		reprint(rdl, rdl->curs - 1);
+		rdl->curs--;
+	}
+	else
+		reprint(rdl, rdl->curs);
 }
 
 void	rdlreplace(t_rdl *rdl, char *s)
@@ -85,7 +92,10 @@ void	rdladd(t_rdl *rdl, char c)
 	ft_memmove(rdl->str + rdl->curs + 1, rdl->str + rdl->curs, rdl->size - rdl->curs);
 	rdl->str[rdl->curs] = c;
 	adv = ft_printf("%s", rdl->str + rdl->curs);
+	rdl->real = rdl->size + 1;
 	left(rdl, adv - 1);
+	if (!((rdl->lpro + rdl->real) % (rdl->col)))
+		tgpstr("do");
 	rdl->size++;
 	rdl->curs++;
 }

@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/22 16:27:19 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/25 15:46:49 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@
 # define K_CTRR	"\22"
 # define K_CTRP	"\20"
 # define K_CTRV	"\26"
+# define K_CTRX	"\30"
 # define K_CTRY	"\31"
 # define K_ESC	"\33"
 # define K_SPC	" "
@@ -55,6 +56,7 @@ typedef struct		s_rdl
 	struct termios	save;
 	char			*prompt;
 	int				curs;
+	int				real;
 	int				col;
 	int				lpro;
 
@@ -101,6 +103,7 @@ int	    key_router(t_rdl *rdl, char *buf);
 int		next_word(t_rdl *rdl, char *buf);
 int		prev_word(t_rdl *rdl, char *buf);
 int		del_cara(t_rdl *rdl, char *buf);
+int		ddel_cara(t_rdl *rdl, char *buf);
 int		begin(t_rdl *rdl, char *buf);
 int		move_curs(t_rdl *rdl, char *buf);
 int		enter(t_rdl *rdl, char *buf);
@@ -111,6 +114,7 @@ int		visualmode(t_rdl *rdl, char *buf);
 int		vm_move(t_rdl *rdl, char *buf);
 int		vm_copy(t_rdl *rdl, char *buf);
 int		vm_del(t_rdl *rdl, char *buf);
+int		vm_cut(t_rdl *rdl, char *buf);
 int		paste(t_rdl *rdl, char *buf);
 int		finish(t_rdl *rdl, char *buf);
 int		end(t_rdl *rdl, char *buf);
@@ -126,8 +130,6 @@ void	reprint(t_rdl *rdl, int curs);
 int		is_special(char *buf);
 int		left(t_rdl *rdl, int i);
 int		right(t_rdl *rdl, int i);
-int		vleft(t_rdl *rdl, int i);
-int		vright(t_rdl *rdl, int i);
 int		up(t_rdl *rdl, int i);
 int		down(t_rdl *rdl, int i);
 
