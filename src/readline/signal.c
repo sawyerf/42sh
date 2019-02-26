@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:37:16 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/26 12:57:43 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/26 14:07:01 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	resize(int sig)
 {
 	(void)sig;
 	g_rdl.col = getcolumn();
+	reprint(&g_rdl, g_rdl.curs);
 }
 
 void	nothing(int sig)

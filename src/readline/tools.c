@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:49:02 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/26 13:12:28 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/26 17:57:59 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,19 @@ void	reprint(t_rdl *rdl, int curs)
 
 	(void)curs;
 	left(rdl, rdl->real + rdl->lpro);
-	tgpstr("dl");
+	tgpstr("cr");
+	tgpstr("cd");
 	adv = ft_printf("%s%s", rdl->prompt, rdl->str);
 	rdl->real = rdl->size;
 	if (!((rdl->lpro + rdl->real) % (rdl->col)))
 		tgpstr("do");
 	left(rdl, rdl->real - curs);
+}
+
+int		gtbegin(t_rdl *rdl)
+{
+	left(rdl, rdl->real % rdl->col);
+	return (0);
 }
 
 int		up(t_rdl *rdl, int i)
@@ -34,7 +41,8 @@ int		up(t_rdl *rdl, int i)
 	count = 0;
 	while (count < i)
 	{
-		left(rdl, rdl->col);
+		tgpstr("up");//left(rdl, rdl->col);
+		rdl->real -= rdl->col;
 		count++;
 	}
 	return (rdl->col * - i);

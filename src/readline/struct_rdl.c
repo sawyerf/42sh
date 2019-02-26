@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 15:15:46 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/26 13:12:27 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/26 16:28:14 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int		rdlinit(t_rdl *rdl, char *PROMPT)
 	rdl->curs = 0;
 	rdl->real = 0;
 	rdl->allo = 128;
+	tgpstr("cr");
+	tgpstr("cd");
 	rdl->lpro = ft_printf("%s", PROMPT);
 	rdl->prompt = PROMPT;
 	rdl->col = getcolumn();
@@ -48,10 +50,17 @@ void	rdlreplace(t_rdl *rdl, char *s)
 {
 	if (!s)
 		return ;
-	right(rdl, rdl->size - rdl->curs);
-	rdl->curs = rdl->size;
-	while (rdl->curs)
-		del_cara(rdl, "bite");
+	left(rdl, rdl->real + rdl->lpro);
+	while (rdl->size)
+	{
+		rdl->str[rdl->size] = 0;
+		rdl->size--;
+	}
+	rdl->curs = 0;
+	rdl->real = 0;
+	tgpstr("cr");
+	tgpstr("cd");
+	ft_printf("%s", rdl->prompt);
 	rdladdstr(rdl, s);
 }
 
@@ -70,15 +79,30 @@ void	rdl_realloc(t_rdl *rdl)
 void	rdladdstr(t_rdl *rdl, char *str)
 {
 	int	count;
+	int len;
 
-	count = 0;
 	if (!str)
 		return ;
+	len = ft_strlen(str);
+	if (len + rdl->size > rdl->allo)
+	{
+		rdl->allo = rdl->size + len;
+		rdl_realloc(rdl);
+	}
+	ft_memmove(rdl->str + rdl->curs + len, rdl->str + rdl->curs, rdl->size - rdl->curs);
+	count = 0;
 	while (str[count])
 	{
-		rdladd(rdl, str[count]);
+		rdl->str[rdl->curs + count] = str[count];
 		count++;
 	}
+	rdl->size += len;
+	ft_printf("%s", rdl->str + rdl->curs);
+	rdl->real = rdl->size;
+	if (!((rdl->lpro + rdl->real) % (rdl->col)))
+		tgpstr("do");
+	rdl->curs += len;
+	left(rdl, rdl->real - rdl->curs);
 }
 
 void	rdladd(t_rdl *rdl, char c)
