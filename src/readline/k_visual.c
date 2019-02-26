@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 12:42:13 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/25 16:30:05 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/25 18:16:18 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int		vm_move(t_rdl *rdl, char *buf)
 	}
 	else if (!ft_strcmp(K_LEFT, buf) && rdl->curs > 0 && rdl->curs == rdl->size)
 	{
-		left(rdl, 1);	
+		left(rdl, 1);
 		rdl->curs--;
 	}
 	return (0);
