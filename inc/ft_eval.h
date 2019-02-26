@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/18 21:10:54 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/26 18:27:36 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int		spawn_command(t_cmd_tab *cmd); /* fork before exec*/
 t_cmd_tab *expand_pipeline(t_simple_cmd *cmd_lst);
 int		exec_pipeline(t_ast_node *tree);
 void	wait_wrapper(t_cmd_tab *cmd, pid_t pid);
-t_bool	is_builtin(t_cmd_tab *cmd);
+int		is_builtin(t_cmd_tab *cmd);
 void	free_cmd_tab(t_cmd_tab *cmd);
 void	free_cmd_tab_lst(t_cmd_tab *cmd);
 char	**craft_env(char **base_env, char **to_add);

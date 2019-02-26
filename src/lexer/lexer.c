@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/15 19:08:44 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/21 18:18:00 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,5 @@ t_token	*ft_tokenizer(char *line)
 			lexer_state.cursor = lexer_state.cursor + 1;
 	}
 	add_token(&head, new_token(1));
-	free(lexer_state.line);
 	return (head);
 }

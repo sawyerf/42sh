@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/21 18:00:23 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/21 18:17:24 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static void		silence_ac_av(char ac, char **av)
 int				main(int ac, char **av, char **env)
 {
 	char	*line;
-	int		ret;
 	t_token	*tok;
 
 	silence_ac_av(ac, av);
@@ -57,11 +56,8 @@ int				main(int ac, char **av, char **env)
 		}
 		else if (*line != '\n')
 			write(STDOUT_FILENO, "\n", 1);
-//		free(line);
+		free(line);
 	}
 	hstaddfile(g_sh.env);
-	ret = 1;
-//	free(line);
-//	write(1, "\n", 1);
-	return (ret);
+	return (0);
 }

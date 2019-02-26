@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 14:16:02 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/21 16:23:58 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/26 19:47:15 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ static t_bool check_fd(int fd)
 {
 	struct stat buf;
 
-	//ft_printf("right fd: %d\n", fd);
 	if (!fstat(fd, &buf))
 		return (FT_TRUE);
 	ft_dprintf(STDERR_FILENO, "21sh: bad file descriptor: %d\n", fd);
@@ -73,7 +72,6 @@ int apply_redir(t_redir *redir)
 	int right_fd;
 	int	ret;
 
-	right_fd = 2; //temporary
 	handle_left(&left_fd, redir);
 	if ((ret = handle_right(&left_fd, &right_fd, redir)) == -1)
 		return (-1);
@@ -83,18 +81,14 @@ int apply_redir(t_redir *redir)
 		return (-1); // maybe return 0 ?
 	if (dup2(right_fd, left_fd) == -1)
 	{
-		ft_dprintf(STDERR_FILENO, "21sh: dup2 fuckd up\n");
+		ft_dprintf(STDERR_FILENO, "21sh: FATAL ERROR dup2 fuckd up\n");
 		return (-1);
 	}
 	if ((redir->op->type != GREATAND) && (redir->op->type != LESSAND))
 		close(right_fd);
 	return (0);
 }
-/*
- * 'ls 3>file' is broken with current implementation because FD 3 is open for file.
- *	child dosent exit on some failed redirs
- 	add header file to ft_isalldigit.c in lib/src
- */
+
 int	handle_redir(t_redir *redir_lst)
 {
 	t_redir *iter;
@@ -105,8 +99,11 @@ int	handle_redir(t_redir *redir_lst)
 	{
 		if (expand_redir(iter))
 			return (MEMERR);
-		if ((ret = apply_redir(iter)))
-			return (ret);
+		if (iter->right->data.str[0] != 0) /* if right side expands to null*/
+		{
+			if ((ret = apply_redir(iter)))
+				return (ret);
+		}
 		iter = iter->next;
 	}
 	return (0);	

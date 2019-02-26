@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/21 18:00:24 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/26 20:24:33 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,37 +60,61 @@ void	wait_wrapper(t_cmd_tab *cmd, pid_t pid)
 	}
 	//ft_printf("%s exiting with status %d\n", cmd->av[0], cmd->exit_status);
 }
+/* builtins handling */
+int	save_fd(void)
+{
+	dup2(STDIN_FILENO, 255);
+	dup2(STDOUT_FILENO, 255);
+	dup2(STDERR_FILENO, 255);
+	return (0);
+}
 
+int	restore_fd(void)
+{
+	dup2(255, STDOUT_FILENO);
+	dup2(255, STDIN_FILENO);
+	dup2(255, STDERR_FILENO);
+	return (0);
+}
 
-t_bool		is_builtin(t_cmd_tab *cmd)
+int		is_builtin(t_cmd_tab *cmd)
 {
 	static t_builtin	array[] = {ft_echo, change_dir, setenv_wrapper,
 							ft_unsetenv, ft_env, ft_exit, ft_set, ft_unset};
 	static	char		*builtins[] = {"echo", "cd", "setenv", "unsetenv",
 							"env", "exit", "set", "unset", NULL};
 	int					i;
+	int					ret;
 
 	if ((i = ft_cmptab(builtins, cmd->av[0])) != -1)
 	{
+		save_fd();
+		if ((ret = handle_redir(cmd->redir_lst))) // this has to change we have more err
+			return(ret);
 		cmd->process_env = craft_env(ft_tabdup(g_sh.env), cmd->assign_lst);
 		if (cmd->process_env == NULL)
 			return (MEMERR);
 		cmd->exit_status = array[i](cmd);
+		restore_fd();
 		ft_printf("BUILTIN:%s exited with status %d\n", cmd->av[0], cmd->exit_status);
-		return (FT_TRUE);
+		return (0);
 	}
-	return (FT_FALSE);
+	return (-1);
 }
 
 int		spawn_in_pipe(t_cmd_tab *cmd)
 {
+	int ret;
+
 	if (cmd->av[0] == NULL)
 		return (0);
-	if (is_builtin(cmd) == FT_TRUE)
+	if ((ret = is_builtin(cmd)) == 0)
 	{
 		free_cmd_tab(cmd);
 		return (0);
 	}
+	else if (ret == MEMERR)
+		return (MEMERR);
 	else
 	{
 		if (!(cmd->process_env = craft_env(g_sh.env, cmd->assign_lst)))
@@ -131,11 +155,14 @@ static int assign_to_shell(t_cmd_tab *cmd)
 int		spawn_command(t_cmd_tab *cmd)
 {
 	pid_t 		pid;
+	int			ret;
 
 	if (cmd->av[0] == NULL)
 		return (assign_to_shell(cmd));
-	if (is_builtin(cmd) == FT_TRUE)
+	if ((ret = is_builtin(cmd)) == 0)
 		return (0);
+	else if (ret == MEMERR)
+		return (MEMERR);
 	pid = fork();
 	if (pid == -1)
 		return (MEMERR);
