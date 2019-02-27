@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/21 16:35:13 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/27 21:38:27 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "readline.h"
@@ -25,7 +25,7 @@ int	request_new_line(t_lexer *lexer_state)
 		return (MEMERR);
 	else if (*new_line == 0)
 		return (SQUOTE_ERR);
-	free(lexer_state->line); // this has to change
+	//free(lexer_state->line); // this has to change
 	lexer_state->line = new_line;
 	lexer_state->cursor = new_line;
 	return (0);

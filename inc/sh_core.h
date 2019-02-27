@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/21 18:11:29 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/27 20:49:01 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@
 # define SYNERR 3
 # define ENVERR 4
 # define ACCERR 5
+
+#define FDSAVEIN 255
+#define FDSAVEOUT 256
+#define FDSAVEERR 257
 
 typedef struct 		s_sh
 {

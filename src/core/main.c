@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/21 18:17:24 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/27 20:27:57 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ static int	init_shell(char **env)
 		return (MEMERR);
 	if (!(g_sh.local = ft_tabnew(0)))
 		return (MEMERR);
+	if (dup2(STDIN_FILENO, FDSAVEIN) == -1)
+		return (-1);	
+	if (dup2(STDOUT_FILENO, FDSAVEOUT) == -1)
+		return (-1);
+	if (dup2(STDERR_FILENO, FDSAVEERR) == -1)
+		return (-1);
 	return (0);
 }
 

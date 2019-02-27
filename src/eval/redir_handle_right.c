@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 17:46:08 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/21 16:54:41 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/27 22:43:21 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int fd_aggregator(int *left_fd, int *right_fd, t_redir *redir)
 			tmp.op = redir->op;
 			tmp.op->type = GREAT;
 			tmp.right = redir->right;
-			if (apply_redir(&tmp))
+			if (apply_redir(&tmp, NULL))
 				return (-1);
 			redir->op->type = GREATAND;
 			*left_fd = 2;

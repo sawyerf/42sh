@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 14:16:02 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/26 19:47:15 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/27 22:33:35 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,13 @@ static int expand_redir(t_redir *redir)
 
 static t_bool check_fd(int fd)
 {
+	static int t = 0;
 	struct stat buf;
 
 	if (!fstat(fd, &buf))
 		return (FT_TRUE);
 	ft_dprintf(STDERR_FILENO, "21sh: bad file descriptor: %d\n", fd);
+	t++;
 	return (FT_FALSE);
 }
 
@@ -52,21 +54,22 @@ static void	handle_left(int *left_fd, t_redir *redir)
 		else
 			*left_fd = ft_atoi(redir->left->data.str);
 }
-/*
-static int save_fd(int left_fd, int right_fd, t_list **head)
+
+static int save_fd(int left_fd, t_list **head)
 {
 	t_list *new;
 
 	if (!(new = ft_lstnew(NULL, 0)))
 		return (MEMERR);
-	if (!(new->content = (int*)ft_memalloc(sizeof(int) * 2)))
+	if (!(new->content = (int*)ft_memalloc(sizeof(int))))
 		return (MEMERR);
-	new->content_size = sizeof(int) * 2;
-	ft_lastadd(head, new);
+	new->content_size = sizeof(int);
+	*((int*)(new->content)) = left_fd;
+	ft_lstadd(head, new);
 	return (0);
 }
-*/
-int apply_redir(t_redir *redir)
+
+int apply_redir(t_redir *redir, t_list **head)
 {
 	int left_fd;
 	int right_fd;
@@ -79,6 +82,8 @@ int apply_redir(t_redir *redir)
 		return (0); // case of >&- we close fd we dont use dup2
 	if (check_fd(right_fd) == FT_FALSE)
 		return (-1); // maybe return 0 ?
+	if ((head) && (save_fd(left_fd, head)))
+		return (MEMERR);	
 	if (dup2(right_fd, left_fd) == -1)
 	{
 		ft_dprintf(STDERR_FILENO, "21sh: FATAL ERROR dup2 fuckd up\n");
@@ -89,7 +94,7 @@ int apply_redir(t_redir *redir)
 	return (0);
 }
 
-int	handle_redir(t_redir *redir_lst)
+int	handle_redir(t_redir *redir_lst, t_list **head)
 {
 	t_redir *iter;
 	int		ret;
@@ -101,7 +106,7 @@ int	handle_redir(t_redir *redir_lst)
 			return (MEMERR);
 		if (iter->right->data.str[0] != 0) /* if right side expands to null*/
 		{
-			if ((ret = apply_redir(iter)))
+			if ((ret = apply_redir(iter, head)))
 				return (ret);
 		}
 		iter = iter->next;
