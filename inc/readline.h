@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/26 15:32:18 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/27 18:42:59 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,7 @@ void	setsig(void);
 void	putlst(char *mtc, t_list *lst, t_rdl *rdl);
 
 //history
+t_list	*gethst(void);
 void	hstadd(char *str);
 char	*hstnext(char *s);
 char	*hstprev(void);

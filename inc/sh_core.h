@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/21 18:00:41 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/27 21:53:16 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,14 @@ typedef	struct			s_command
 /*
 */
 
+typedef	struct			s_fc
+{
+	char				opt[6];
+	char				*editor;
+	char				*search[2];
+	int					range[2];
+}						t_fc;
+
 typedef struct s_cmd_tab t_cmd_tab;
 
 typedef	int				(*t_builtin)(t_cmd_tab*);
@@ -63,6 +71,7 @@ typedef	int				(*t_builtin)(t_cmd_tab*);
 /**/
 extern	t_sh		g_sh;
 
+int						run_command(char *line);
 char					**shlvl(char **env);
 char*					varchr(char **env, char *toto);
 char	*envchrr(char **env, char *var);
@@ -74,6 +83,7 @@ int						ft_exit(t_cmd_tab *cmd);
 int						ft_env(t_cmd_tab *cmd);
 int						ft_unsetenv(t_cmd_tab *cmd);
 int						setenv_wrapper(t_cmd_tab *cmd);
+int						fc(t_cmd_tab *cmd);
 int						ft_echo(t_cmd_tab *cmd);
 int						ft_set(t_cmd_tab *cmd);
 int						ft_unset(t_cmd_tab *cmd);

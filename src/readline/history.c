@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 20:13:04 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/22 16:39:19 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/27 18:42:41 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 #include "readline.h"
 
 t_list *g_hst[4] = {NULL, NULL, NULL, NULL};
+
+t_list	*gethst(void)
+{
+	return (g_hst[0]);
+}
 
 void	hstadd(char *str)
 {

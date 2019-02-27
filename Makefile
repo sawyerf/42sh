@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/02/26 15:20:16 by apeyret          ###   ########.fr        #
+#    Updated: 2019/02/27 22:03:58 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ INC_FILE =	ft_eval.h					\
 SRC_DIR =	src
 
 SRC_FILE =	core/builtins.c				\
+			core/fc.c					\
 			core/cd_l_p.c				\
 			core/cd_tools.c				\
 			core/changedir.c			\

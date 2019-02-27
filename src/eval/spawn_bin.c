@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/21 18:00:24 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/27 22:18:49 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ void	wait_wrapper(t_cmd_tab *cmd, pid_t pid)
 t_bool		is_builtin(t_cmd_tab *cmd)
 {
 	static t_builtin	array[] = {ft_echo, change_dir, setenv_wrapper,
-							ft_unsetenv, ft_env, ft_exit, ft_set, ft_unset};
+							ft_unsetenv, ft_env, ft_exit, ft_set, ft_unset, fc};
 	static	char		*builtins[] = {"echo", "cd", "setenv", "unsetenv",
-							"env", "exit", "set", "unset", NULL};
+							"env", "exit", "set", "unset", "fc", NULL};
 	int					i;
 
 	if ((i = ft_cmptab(builtins, cmd->av[0])) != -1)
@@ -76,7 +76,7 @@ t_bool		is_builtin(t_cmd_tab *cmd)
 		if (cmd->process_env == NULL)
 			return (MEMERR);
 		cmd->exit_status = array[i](cmd);
-		ft_printf("BUILTIN:%s exited with status %d\n", cmd->av[0], cmd->exit_status);
+		//ft_printf("BUILTIN:%s exited with status %d\n", cmd->av[0], cmd->exit_status);
 		return (FT_TRUE);
 	}
 	return (FT_FALSE);
