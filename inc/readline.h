@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/25 15:46:49 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/26 15:32:18 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ int		ht_hash(char *path);
 t_list	*ht_get(char *path);
 t_list	*ht_getexec(char *path);
 int 	ht_getvalue(char *path, t_cmd_tab *cmd);
+void	ht_del(void);
+int		ht_getfile(char **paths, t_cmd_tab *cmd);
 void	ht_refreshall(char *path);
 
 //termcaps

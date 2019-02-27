@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 15:15:46 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/26 16:28:14 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/27 14:53:16 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	rdladd(t_rdl *rdl, char c)
 	rdl->str[rdl->curs] = c;
 	rdl->size++;
 	adv = ft_printf("%s", rdl->str + rdl->curs);
-	rdl->real = rdl->size;
+	rdl->real += adv;
 	if (!((rdl->lpro + rdl->real) % (rdl->col)))
 		tgpstr("do");
 	rdl->curs++;

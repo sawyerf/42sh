@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 13:41:29 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/22 16:39:18 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/27 14:55:48 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	printsearch(t_rdl *hst)
 {
 	char	*s;
 
-	left(hst, hst->vcurs + 1);
+	left(hst, hst->real + hst->lpro);
 	if (g_hst[3])
 		s = g_hst[3]->content;
 	else
@@ -57,6 +57,7 @@ void	printsearch(t_rdl *hst)
 		hst->vcurs = ft_printf("%s%s': %s", hst->prompt, hst->str, "");
 	else
 		hst->vcurs = ft_printf("%s%s': %s", hst->prompt, hst->str, s);
+	hst->real = hst->vcurs - ft_strlen(hst->prompt);
 }
 
 int	hstrouter(t_rdl *hst, char *buf)
@@ -83,10 +84,9 @@ int		ctrlr(t_rdl *rdl, char *str)
 
 	(void)str;
 	stat = 0;
-	left(&hst, rdl->curs + rdl->lpro);
+	left(rdl, rdl->real + rdl->lpro);
 	if (rdlinit(&hst, "(search)`") == MEMERR)
 		return (MEMERR);
-	hst.vcurs = hst.lpro;
 	printsearch(&hst);
 	while ((ret = read(0, &buf, 10)) > 0)
 	{
