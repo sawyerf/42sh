@@ -6,11 +6,40 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 19:20:53 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/21 18:16:24 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/28 14:22:53 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_eval.h"
+
+void	free_cmd_tab(t_cmd_tab *cmd)
+{
+	if (!cmd)
+		return;
+	if (cmd->full_path)
+		free(cmd->full_path);
+	if (cmd->av)
+	{
+		free_tab(cmd->av);
+	}
+	if (cmd->process_env)
+		free_tab(cmd->process_env);
+	if (cmd->assign_lst)
+		free_tab(cmd->assign_lst);
+	free(cmd);
+}
+
+void	free_cmd_tab_lst(t_cmd_tab *start)
+{
+	t_cmd_tab *tmp;
+
+	while (start)
+	{
+		tmp = start->next;
+		free_cmd_tab(start);
+		start = tmp;
+	}
+}
 
 void		exec_error(int errnum, char *str)
 {

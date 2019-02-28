@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/27 20:27:57 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/28 14:15:01 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int				main(int ac, char **av, char **env)
 	t_token	*tok;
 
 	silence_ac_av(ac, av);
-	if (init_shell(env))
+	if (init_shell(env)) // dispatcher here
 		return (MEMERR);
 	ht_init();
 	ht_refreshall(get_env_value("PATH"));

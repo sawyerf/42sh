@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 14:58:34 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/19 16:43:47 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/28 15:43:52 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,25 @@ static int dispatch_types(char *line, t_token *start, t_autocomplete *autocomp)
 	}
 	return (is_first_word(line, start, autocomp));
 }
-/*
- */
+
+int	exp_tilde(t_autocomplete *acp)
+{
+	t_str	 tmp;
+	int 	dummy;
+
+	if (!(acp->str[0] == '~') || !(tilde_valid(acp->str[1])))
+		return (0);
+	ft_bzero(&tmp, sizeof(t_str));
+	dummy = 0;
+	tmp.str = acp->str;
+	tmp.size = ft_strlen(acp->str);
+	tmp.len = tmp.size;
+	if (expand_tilde(&tmp, &dummy, 0) == MEMERR)
+		return (MEMERR);
+	acp->str = tmp.str;
+	return (0);	
+}
+
 int	ft_light_parser(char *lin, t_autocomplete *autocomplete)
 {
 	t_token *tokens;
@@ -82,7 +99,8 @@ int	ft_light_parser(char *lin, t_autocomplete *autocomplete)
 	if (*line == '\n')
 		ft_memmove(line, line + 1, ft_strlen(line));
 	if (rev_lex(line, &tokens) == MEMERR 
-			|| dispatch_types(line, tokens, autocomplete) == MEMERR)
+			|| dispatch_types(line, tokens, autocomplete) == MEMERR
+				|| (exp_tilde(autocomplete) == MEMERR))
 	{
 		ft_strdel(&line);
 		return (MEMERR);

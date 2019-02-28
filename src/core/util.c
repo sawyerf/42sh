@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 16:10:23 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/04 14:48:29 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/28 14:16:54 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,35 +41,6 @@ int			ft_cmptab(char **tab, char *str)
 		i++;
 	}
 	return (-1);
-}
-
-void		add_cmdlst(t_command **head, t_command *to_add)
-{
-	t_command *tmp;
-
-	if (*head == NULL)
-	{
-		*head = to_add;
-		return ;
-	}
-	tmp = *head;
-	while (tmp->next != NULL)
-		tmp = tmp->next;
-	tmp->next = to_add;
-	to_add->previous = tmp;
-}
-
-t_command	*new_cmd_node(char **space_split)
-{
-	t_command	*new;
-
-	new = malloc(sizeof(t_command));
-	if (new == NULL)
-		return (NULL);
-	ft_bzero(new, sizeof(t_command));
-	if (space_split != NULL)
-		new->args = dup_tab(space_split);
-	return (new);
 }
 
 char		**dup_tab(char **tab)

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/27 22:33:16 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/28 14:44:22 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,32 @@
 #include "readline.h" //this should be resolved differently
 
 /* execve_wrap is always inside a fork*/
+
+void	restore_fd(t_list *to_close)
+{
+	dup2(FDSAVEIN, STDIN_FILENO);
+	dup2(FDSAVEOUT, STDOUT_FILENO);
+	dup2(FDSAVEERR, STDERR_FILENO);
+	while (to_close)
+	{
+		close(*((int*)(to_close->content)));
+		to_close = to_close->next;
+	}
+}
+
+void close_save(void)
+{
+	close(FDSAVEIN);
+	close(FDSAVEOUT);
+	close(FDSAVEERR);
+}
+
 static int		execve_wrap(t_cmd_tab *cmd)
 {	
 	char	*path;
 	int		ret;
 
+	close_save();
 	if ((ret = handle_redir(cmd->redir_lst, NULL))) // this has to change we have more err
 		exit(1);
 	if (ft_ispath(cmd->av[0]))
@@ -58,16 +79,8 @@ void	wait_wrapper(t_cmd_tab *cmd, pid_t pid)
 	{
 		cmd->exit_signal = WTERMSIG(wstatus);
 	}
-	//ft_printf("%s exiting with status %d\n", cmd->av[0], cmd->exit_status);
 }
 
-int	restore_fd(void)
-{
-	dup2(FDSAVEIN, STDIN_FILENO);
-	dup2(FDSAVEOUT, STDOUT_FILENO);
-	dup2(FDSAVEERR, STDERR_FILENO);
-	return (0);
-}
 
 int		is_builtin(t_cmd_tab *cmd)
 {
@@ -88,7 +101,7 @@ int		is_builtin(t_cmd_tab *cmd)
 		if (cmd->process_env == NULL)
 			return (MEMERR);
 		cmd->exit_status = array[i](cmd);
-		restore_fd();
+		restore_fd(save_head);
 		ft_printf("BUILTIN:%s exited with status %d\n", cmd->av[0], cmd->exit_status);
 		return (0);
 	}

@@ -101,11 +101,13 @@ int		ht_getfile(char **paths, t_cmd_tab *cmd)
 			ht_hash(paths[i]);
 			ft_lstadd(&g_thash[i], ft_lstnew(cmd->av[0], 0));
 			cmd->full_path = tmp;
+			free_tab(paths);
 			return (0);
 		}
 		ft_strdel(&tmp);
 		i++;
 	}
+	free_tab(paths);
 	return (0);
 }
 
@@ -131,6 +133,7 @@ int		ht_getvalue(char *path, t_cmd_tab *cmd)
 				if (!exaccess(file))
 				{
 					cmd->full_path = file;
+					free_tab(paths);
 					return (0);
 				}
 				ft_strdel(&file);

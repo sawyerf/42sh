@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/21 16:36:07 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/28 14:24:04 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,35 +40,6 @@ int	pipe_recursion(t_cmd_tab *to, t_cmd_tab *from)
 	}
 	wait_wrapper(from, pid);
 	return (from->exit_status);
-}
-
-
-void	free_cmd_tab(t_cmd_tab *cmd)
-{
-	if (!cmd)
-		return;
-	if (cmd->full_path)
-		free(cmd->full_path);
-	if (cmd->av)
-	{
-		free_tab(cmd->av);
-	}
-	if (cmd->process_env)
-		free_tab(cmd->process_env);
-	if (cmd->assign_lst)
-		free_tab(cmd->assign_lst);
-	free(cmd);
-}
-void	free_cmd_tab_lst(t_cmd_tab *start)
-{
-	t_cmd_tab *tmp;
-
-	while (start)
-	{
-		tmp = start->next;
-		free_cmd_tab(start);
-		start = tmp;
-	}
 }
 
 int	eval_pipe(t_cmd_tab *cmd)

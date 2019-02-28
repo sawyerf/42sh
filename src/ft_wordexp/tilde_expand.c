@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/26 17:12:46 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/28 15:45:13 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	insert_str(t_str *word, int *index, char *to_insert)
 	return (0);
 }
 
-int	expand_tilde(t_str *word, int *index)
+int	expand_tilde(t_str *word, int *index, int add_quote)
 {
 	char *home;
 
@@ -61,11 +61,12 @@ int	expand_tilde(t_str *word, int *index)
 	home = get_env_value("HOME");
 	if ((!home) || (*home == '\0'))
 		return (0);	
-	if (!(home = quote_home(home)))
+	if ((add_quote) && (!(home = quote_home(home))))
 		return (MEMERR);
 	if (insert_str(word, index, home) == MEMERR)
 		return (MEMERR);
-	free(home);
+	if (add_quote)
+		free(home);
 	return (0);
 }
 
@@ -74,14 +75,14 @@ int	expand_tilde_assign(t_str *word, int index)
 {
 	if ((word->str[index] == '~') && (tilde_valid(word->str[index + 1])))
 	{
-		expand_tilde(word, &index);
+		expand_tilde(word, &index, 1);
 	}
 	while (word->str[index])
 	{
 		if ((word->str[index] == ':') && (word->str[index + 1] == '~'))
 		{ //maybe check if next is tilde_valid?
 			index++;
-			if (expand_tilde(word, &index) == MEMERR)
+			if (expand_tilde(word, &index, 1) == MEMERR)
 				return (MEMERR);
 			continue;
 		}
@@ -104,7 +105,7 @@ int handle_tilde(t_token *word)
 	index = 0;
 	if ((word->data.str[0] == '~') && (tilde_valid(word->data.str[1])))
 	{
-		return (expand_tilde(&(word->data), &index));
+		return (expand_tilde(&(word->data), &index, 1));
 	}
 	if (word->type == ASSIGN)
 	{
