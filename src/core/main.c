@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/28 14:15:01 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/28 18:46:14 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int				main(int ac, char **av, char **env)
 			tok = ft_tokenizer(line);
 			if (tok) 
 			{
-				test_sh_parser(tok);
+				sh_parser(tok);
 				free_token_lst(tok);
 			}
 		}

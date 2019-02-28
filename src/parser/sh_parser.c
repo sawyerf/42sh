@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/04 12:38:27 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/28 18:41:08 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ t_ast_node *get_tree(t_ast_node *tree)
 		static_tree = tree;
 	return (static_tree);
 }
-int	test_sh_parser(t_token *start)
+int	sh_parser(t_token *start)
 {
 	t_parser parser;
 	int		ret;

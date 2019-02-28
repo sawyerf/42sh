@@ -6,11 +6,23 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 22:48:33 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/19 18:21:19 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/28 19:01:12 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_core.h"
+
+char	*get_value(char *env_var)
+{
+	int i;
+
+	i = 0;
+	while (valid_env_char(env_var[i]))
+		i++;
+	if (env_var[i] == 0)
+		return (env_var + i);
+	return (env_var + i + 1);
+}
 
 int				valid_env_var(char *str)
 {

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/28 15:44:07 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/28 16:42:27 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,6 @@
 
 typedef struct s_str t_str;
 typedef	struct	s_token t_token;
-
-
-
 
 int	ft_wordexp(t_token *word, t_bool is_redir);
 int	handle_tilde(t_token *word);

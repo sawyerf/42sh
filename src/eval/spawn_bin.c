@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/28 14:44:22 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/28 18:46:24 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 
 void	restore_fd(t_list *to_close)
 {
-	dup2(FDSAVEIN, STDIN_FILENO);
-	dup2(FDSAVEOUT, STDOUT_FILENO);
-	dup2(FDSAVEERR, STDERR_FILENO);
 	while (to_close)
 	{
 		close(*((int*)(to_close->content)));
 		to_close = to_close->next;
 	}
+	dup2(FDSAVEIN, STDIN_FILENO);
+	dup2(FDSAVEOUT, STDOUT_FILENO);
+	dup2(FDSAVEERR, STDERR_FILENO);
 }
 
 void close_save(void)

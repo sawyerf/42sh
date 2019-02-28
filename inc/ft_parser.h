@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:51:15 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/02 16:08:31 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/28 18:40:53 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 typedef struct s_ast_node t_ast_node;
 
-int	test_sh_parser(t_token *start);
+int	sh_parser(t_token *start);
 int	add_to_pipeline(t_parser *parser);
 int	build_redir(t_token *to_add, t_redir *redir);
 int	build_cmd(t_token *to_add, t_simple_cmd *cmd);
