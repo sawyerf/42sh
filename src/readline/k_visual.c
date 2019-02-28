@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 12:42:13 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/25 18:16:18 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/28 21:30:49 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int		vm_move(t_rdl *rdl, char *buf)
 		else
 			ft_printf("\e[0m%c", rdl->str[rdl->curs]);
 		rdl->real++;
+		lastcol(rdl);
 		rdl->curs++;
 		left(rdl, 2);
 		rdl->curs -= 2;
@@ -97,6 +98,7 @@ int		vm_move(t_rdl *rdl, char *buf)
 		else
 			ft_printf("\e[0m%c", rdl->str[rdl->curs]);
 		rdl->real++;
+		lastcol(rdl);
 		rdl->curs++;
 		left(rdl, 1);
 		rdl->curs--;

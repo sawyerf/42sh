@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:49:02 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/26 17:57:59 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/28 21:28:43 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ void	reprint(t_rdl *rdl, int curs)
 	tgpstr("cd");
 	adv = ft_printf("%s%s", rdl->prompt, rdl->str);
 	rdl->real = rdl->size;
-	if (!((rdl->lpro + rdl->real) % (rdl->col)))
-		tgpstr("do");
+	lastcol(rdl);
 	left(rdl, rdl->real - curs);
 }
 
@@ -61,6 +60,12 @@ int		down(t_rdl *rdl, int i)
 	return (rdl->col * i);
 }
 
+void	lastcol(t_rdl *rdl)
+{
+	if (rdl->col && !((rdl->lpro + rdl->real) % (rdl->col)))
+		tgpstr("do");
+}
+
 int		left(t_rdl *rdl, int i)
 {
 	int		count;
@@ -69,7 +74,7 @@ int		left(t_rdl *rdl, int i)
 	count = 0;
 	while (count < i)
 	{
-		if (!((rdl->lpro + rdl->real) % (rdl->col)))
+		if (rdl->col && !((rdl->lpro + rdl->real) % (rdl->col)))
 		{
 			tgpstr("up");
 			cc = 0;
@@ -91,9 +96,10 @@ int		right(t_rdl *rdl, int i)
 {
 	int	count;
 
-	count = 0; while (count < i)
+	count = 0; 
+	while (count < i)
 	{
-		if (!((rdl->lpro + rdl->real + 1) % (rdl->col)))
+		if (rdl->col && !((rdl->lpro + rdl->real + 1) % (rdl->col)))
 			tgpstr("do");
 		else
 			write(1, K_RGHT, 3);

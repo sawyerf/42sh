@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/27 15:10:23 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/27 22:31:52 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/28 19:07:00 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void	fc_init(t_fc *fc)
 {
 	ft_bzero(fc->opt, 6);
 	fc->editor = NULL;
-	fc->search[0] = NULL;
-	fc->search[1] = NULL;
 	fc->range[0] = 0;
 	fc->range[1] = 0;
 }
@@ -27,26 +25,24 @@ void	fc_print(t_fc *fc)
 {
 	ft_printf("opt:       %s\n", fc->opt);
 	ft_printf("editor:    %s\n", fc->editor);
-	ft_printf("search[0]: %s\n", fc->search[0]);
-	ft_printf("search[1]: %s\n", fc->search[1]);
-	ft_printf("range[0]:  %d\n", fc->range[0]);
-	ft_printf("range[1]:  %d\n", fc->range[1]);
+	ft_printf("range[0]:  %s\n", fc->range[0]);
+	ft_printf("range[1]:  %s\n", fc->range[1]);
 }
 
 int		fc_parser(char **av, t_fc *fc)
 {
 	char	c;
 	int		i;
-	int		y;
 
 	av++;	
 	c = 0;
 	fc_init(fc);
 	while (*av)
 	{
-		if (!ft_strcmp(*av, "--") || **av != '-')
+		if (!ft_strcmp(*av, "--") || **av != '-' || ft_strisdigit(*av))
 		{
-			av++;
+			if (!ft_strcmp(*av, "--"))
+				av++;
 			break;
 		}
 		i = 1;
@@ -57,6 +53,11 @@ int		fc_parser(char **av, t_fc *fc)
 				if (!ft_cisin(fc->opt, (*av)[i]))
 					ft_strncat(fc->opt, *av + i, 1);
 				c = (*av)[i];
+			}
+			else
+			{
+				ft_dprintf(2, "fc: -%c: invalid option\n", (*av)[i]);
+				return (-1);
 			}
 			i++;
 		}
@@ -76,18 +77,13 @@ int		fc_parser(char **av, t_fc *fc)
 		av++;
 	}
 	i = 0;
-	y = 0;
 	while (*av)
 	{
-		if (ft_strisdigit(*av) && i < 2)
+		if (i < 2)
 		{
-			fc->range[i] = ft_atoi(*av);
+			if (!(fc->range[i] = ft_strdup(*av)))
+				return (MEMERR);
 			i++;
-		}
-		else if (i < 2)
-		{
-			fc->search[y] = ft_strdup(*av);
-			y++;
 		}
 		av++;
 	}
@@ -166,9 +162,30 @@ char	*fc_read(char *file)
 		ft_strdel(&line);
 		command = tmp;
 	}
-	//ft_printf("%s\n", command);
 	close(fd);
+	ft_printf("%s\n", command);
 	return (command);
+}
+
+int		run_editor(t_fc *fc, char *file)
+{
+	char	*editor;
+
+	if (!fc->editor)
+	{
+		if ((editor = get_env_value("FCEDIT=")))
+		{
+			if (!(fc->editor = ft_strdup(editor)))
+				return (MEMERR);
+		}
+		else
+		{
+			if (!(fc->editor = ft_strdup("vim")))
+				return (MEMERR);
+		}
+	}
+	run_command(ft_zprintf("%s %s\n", fc->editor, file));
+	return (0);
 }
 
 int		fc(t_cmd_tab *cmd)
@@ -176,15 +193,23 @@ int		fc(t_cmd_tab *cmd)
 	char	*file;
 	t_list	*lst;
 	t_fc	fc;
-	(void)cmd;
 
+	(void)cmd;
+	file = NULL;
 	lst = gethst()->next;
 	if (!(file = fc_filename(lst, 1)))
 		return (1);
-	fc_parser(cmd->av, &fc);
-	fc_writelst(file, lst, 1);
-	run_command(ft_zprintf("vim %s\n", file));
-	run_command(fc_read(file));
-	unlink(file);
+	if (fc_parser(cmd->av, &fc) < 0)
+		return (1);
+	if (ft_cisin(fc.opt, 'l'))
+		;
+	else if (ft_cisin(fc.opt, 'e'))
+	{
+		fc_writelst(file, lst, 1);
+		run_editor(&fc, file);
+		run_command(fc_read(file));
+		unlink(file);
+	}
+	ft_strdel(&file);
 	return (0);
 }

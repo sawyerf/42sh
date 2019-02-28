@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 20:13:04 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/27 18:42:41 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/28 21:01:47 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,12 @@ void	hstadd(char *str)
 int		hstread(char **env)
 {
 	int		fd;
+	int		i;
 	char	*line;
 	char	*path;
 	char	*home;
 
+	i = 0;
 	if (!(home = envchrr(env, "HOME"))
 		|| !(path = ft_zprintf("%s/%s", home, ".21sh_history")))
 		return (0);
@@ -43,8 +45,9 @@ int		hstread(char **env)
 		return (0);
 	while (get_next_line(fd, &line) > 0)
 	{
-		ft_lstadd(&g_hst[0], ft_lstnew(line, 1));
+		ft_lstadd(&g_hst[0], ft_lstnew(line, 1 + 10 * i));
 		ft_strdel(&line);
+		i++;
 	}
 	close(fd);
 	return (1);

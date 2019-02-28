@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/27 18:42:59 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/28 21:07:53 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ int		left(t_rdl *rdl, int i);
 int		right(t_rdl *rdl, int i);
 int		up(t_rdl *rdl, int i);
 int		down(t_rdl *rdl, int i);
+void	lastcol(t_rdl *rdl);
 
 //file
 t_list	*get_exec(char *exec, char *path);

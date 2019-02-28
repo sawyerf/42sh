@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 13:41:29 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/27 14:55:48 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/28 21:26:07 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ void	printsearch(t_rdl *hst)
 		hst->vcurs = ft_printf("%s%s': %s", hst->prompt, hst->str, "");
 	else
 		hst->vcurs = ft_printf("%s%s': %s", hst->prompt, hst->str, s);
-	hst->real = hst->vcurs - ft_strlen(hst->prompt);
+	hst->real = hst->vcurs - hst->lpro;
+	lastcol(hst);
 }
 
 int	hstrouter(t_rdl *hst, char *buf)

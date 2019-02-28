@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 15:15:46 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/27 14:53:16 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/28 21:28:50 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ int		rdlinit(t_rdl *rdl, char *PROMPT)
 	rdl->allo = 128;
 	tgpstr("cr");
 	tgpstr("cd");
-	rdl->lpro = ft_printf("%s", PROMPT);
-	rdl->prompt = PROMPT;
 	rdl->col = getcolumn();
+	rdl->lpro = ft_printf("%s", PROMPT);
+	lastcol(rdl);
+	rdl->prompt = PROMPT;
 	return (0);
 }
 
@@ -99,8 +100,7 @@ void	rdladdstr(t_rdl *rdl, char *str)
 	rdl->size += len;
 	ft_printf("%s", rdl->str + rdl->curs);
 	rdl->real = rdl->size;
-	if (!((rdl->lpro + rdl->real) % (rdl->col)))
-		tgpstr("do");
+	lastcol(rdl);
 	rdl->curs += len;
 	left(rdl, rdl->real - rdl->curs);
 }
@@ -118,8 +118,7 @@ void	rdladd(t_rdl *rdl, char c)
 	rdl->size++;
 	adv = ft_printf("%s", rdl->str + rdl->curs);
 	rdl->real += adv;
-	if (!((rdl->lpro + rdl->real) % (rdl->col)))
-		tgpstr("do");
+	lastcol(rdl);
 	rdl->curs++;
 	left(rdl, rdl->real - rdl->curs);
 }
