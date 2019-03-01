@@ -85,9 +85,9 @@ void	wait_wrapper(t_cmd_tab *cmd, pid_t pid)
 int		is_builtin(t_cmd_tab *cmd)
 {
 	static t_builtin	array[] = {ft_echo, change_dir, setenv_wrapper,
-							ft_unsetenv, ft_env, ft_exit, ft_set, ft_unset};
+							ft_unsetenv, ft_env, ft_exit, ft_set, ft_unset, fc};
 	static	char		*builtins[] = {"echo", "cd", "setenv", "unsetenv",
-							"env", "exit", "set", "unset", NULL};
+							"env", "exit", "set", "unset", "fc", NULL};
 	int					i;
 	int					ret;
 	t_list				*save_head;

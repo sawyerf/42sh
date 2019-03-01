@@ -2,10 +2,11 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   hashtable.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */ /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                    +:+ +:+         +:+     */
+/*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 14:40:53 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/12 13:59:18 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/26 15:24:22 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,28 +144,6 @@ int		ht_getvalue(char *path, t_cmd_tab *cmd)
 		i++;
 	}
 	return (ht_getfile(paths, cmd));
-}
-
-t_list	*ht_getexec(char *path)
-{
-	t_list			*lst;
-	DIR				*ptr;
-	struct dirent	*ret;
-	char			*cpath;
-
-	lst = NULL;
-	if (!(ptr = opendir(path)))
-		return (NULL);
-	while ((ret = readdir(ptr)))
-	{
-		if (!(cpath = ft_zprintf("%s/%s", path, ret->d_name)))
-			return (NULL);
-		if (!folexaccess(cpath))
-			ft_lstadd(&lst, ft_lstnew(ret->d_name, ft_strlen(ret->d_name)));
-		ft_strdel(&cpath);
-	}
-	closedir(ptr);
-	return (lst);
 }
 
 t_list	*ht_get(char *path)

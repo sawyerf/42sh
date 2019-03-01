@@ -6,7 +6,11 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/02/27 20:49:01 by ktlili           ###   ########.fr       */
+=======
+/*   Updated: 2019/02/28 16:03:28 by apeyret          ###   ########.fr       */
+>>>>>>> d1e1ac3ef951c51451ef29bba71da79442e9d7c3
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +63,13 @@ typedef	struct			s_command
 /*
 */
 
+typedef	struct			s_fc
+{
+	char				opt[6];
+	char				*editor;
+	char				*range[2];
+}						t_fc;
+
 typedef struct s_cmd_tab t_cmd_tab;
 
 typedef	int				(*t_builtin)(t_cmd_tab*);
@@ -67,9 +78,10 @@ typedef	int				(*t_builtin)(t_cmd_tab*);
 /**/
 extern	t_sh		g_sh;
 
+int						run_command(char *line);
 char					**shlvl(char **env);
 char*					varchr(char **env, char *toto);
-char	*envchrr(char **env, char *var);
+char					*envchrr(char **env, char *var);
 char**					envaddint(char **caca, char *toto, int fifi);
 char*					envchrr(char **env, char *var);
 t_ast_node				*get_tree(t_ast_node *tree);
@@ -78,6 +90,7 @@ int						ft_exit(t_cmd_tab *cmd);
 int						ft_env(t_cmd_tab *cmd);
 int						ft_unsetenv(t_cmd_tab *cmd);
 int						setenv_wrapper(t_cmd_tab *cmd);
+int						fc(t_cmd_tab *cmd);
 int						ft_echo(t_cmd_tab *cmd);
 int						ft_set(t_cmd_tab *cmd);
 int						ft_unset(t_cmd_tab *cmd);

@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 16:23:31 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/18 19:57:43 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/25 14:19:12 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 
 int		get_maxlst(t_list *lst)
 {
-	int max;
-	
-	max = 0;
+	int max; max = 0;
 	while (lst)
 	{
 		if (max < (int)ft_strlen(lst->content))

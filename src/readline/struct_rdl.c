@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 15:15:46 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/20 18:04:12 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/28 21:28:50 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,31 +20,48 @@ int		rdlinit(t_rdl *rdl, char *PROMPT)
 	rdl->vcurs = 0;
 	rdl->size = 0;
 	rdl->curs = 0;
+	rdl->real = 0;
 	rdl->allo = 128;
-	rdl->lpro = ft_printf("%s", PROMPT);
-	rdl->prompt = PROMPT;
+	tgpstr("cr");
+	tgpstr("cd");
 	rdl->col = getcolumn();
+	rdl->lpro = ft_printf("%s", PROMPT);
+	lastcol(rdl);
+	rdl->prompt = PROMPT;
 	return (0);
 }
 
 void	rdldel(t_rdl *rdl, int curs)
 {
-	if (curs > rdl->size || rdl->size < 0 || rdl->curs <= 0)
+	if (curs > rdl->size || rdl->size < 0 || (curs < rdl->curs && rdl->curs <= 0)
+		|| (curs >= rdl->curs && rdl->size == curs))
 		return ;
 	ft_strcpy(rdl->str + curs, rdl->str + curs + 1);
-	reprint(rdl, curs);
 	rdl->size--;
-	rdl->curs--;
+	if (curs < rdl->curs)
+	{
+		reprint(rdl, rdl->curs - 1);
+		rdl->curs--;
+	}
+	else
+		reprint(rdl, rdl->curs);
 }
 
 void	rdlreplace(t_rdl *rdl, char *s)
 {
 	if (!s)
 		return ;
-	right(rdl, rdl->size - rdl->curs);
-	rdl->curs = rdl->size;
-	while (rdl->curs)
-		del_cara(rdl, "bite");
+	left(rdl, rdl->real + rdl->lpro);
+	while (rdl->size)
+	{
+		rdl->str[rdl->size] = 0;
+		rdl->size--;
+	}
+	rdl->curs = 0;
+	rdl->real = 0;
+	tgpstr("cr");
+	tgpstr("cd");
+	ft_printf("%s", rdl->prompt);
 	rdladdstr(rdl, s);
 }
 
@@ -63,15 +80,29 @@ void	rdl_realloc(t_rdl *rdl)
 void	rdladdstr(t_rdl *rdl, char *str)
 {
 	int	count;
+	int len;
 
-	count = 0;
 	if (!str)
 		return ;
+	len = ft_strlen(str);
+	if (len + rdl->size > rdl->allo)
+	{
+		rdl->allo = rdl->size + len;
+		rdl_realloc(rdl);
+	}
+	ft_memmove(rdl->str + rdl->curs + len, rdl->str + rdl->curs, rdl->size - rdl->curs);
+	count = 0;
 	while (str[count])
 	{
-		rdladd(rdl, str[count]);
+		rdl->str[rdl->curs + count] = str[count];
 		count++;
 	}
+	rdl->size += len;
+	ft_printf("%s", rdl->str + rdl->curs);
+	rdl->real = rdl->size;
+	lastcol(rdl);
+	rdl->curs += len;
+	left(rdl, rdl->real - rdl->curs);
 }
 
 void	rdladd(t_rdl *rdl, char c)
@@ -84,8 +115,10 @@ void	rdladd(t_rdl *rdl, char c)
 		rdl_realloc(rdl);
 	ft_memmove(rdl->str + rdl->curs + 1, rdl->str + rdl->curs, rdl->size - rdl->curs);
 	rdl->str[rdl->curs] = c;
-	adv = ft_printf("%s", rdl->str + rdl->curs);
-	left(rdl, adv - 1);
 	rdl->size++;
+	adv = ft_printf("%s", rdl->str + rdl->curs);
+	rdl->real += adv;
+	lastcol(rdl);
 	rdl->curs++;
+	left(rdl, rdl->real - rdl->curs);
 }

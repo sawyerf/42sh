@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/02/28 19:01:27 by ktlili           ###   ########.fr        #
+#    Updated: 2019/02/28 16:54:24 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,9 @@ NAME =		21sh
 
 CC =		gcc
 
-CFLAGS =	-I inc/ -I lib/inc/ -Wall -Werror -Wextra -ggdb  
+CFLAGS =	-I inc/ -I lib/inc/ -ggdb -Wall -Werror -Wextra 
 
-DEBUG =		#-g3 -fsanitize=address
+DEBUG =		 #-g3 -fsanitize=address
 
 INC_DIR =	inc
 
@@ -35,6 +35,7 @@ INC_FILE =	ft_eval.h					\
 SRC_DIR =	src
 
 SRC_FILE =	core/builtins.c				\
+			core/fc.c					\
 			core/cd_l_p.c				\
 			core/cd_tools.c				\
 			core/changedir.c			\
@@ -82,6 +83,7 @@ SRC_FILE =	core/builtins.c				\
 			readline/files.c			\
 			readline/print_choice.c		\
 			readline/hashtable.c		\
+			readline/ht_files.c		\
 			readline/k_autocpl.c		\
 			readline/k_move.c			\
 			readline/k_return.c			\

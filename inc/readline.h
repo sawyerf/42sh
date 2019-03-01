@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/21 16:51:16 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/28 21:07:53 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@
 # define K_CTRR	"\22"
 # define K_CTRP	"\20"
 # define K_CTRV	"\26"
+# define K_CTRX	"\30"
 # define K_CTRY	"\31"
 # define K_ESC	"\33"
 # define K_SPC	" "
@@ -55,6 +56,7 @@ typedef struct		s_rdl
 	struct termios	save;
 	char			*prompt;
 	int				curs;
+	int				real;
 	int				col;
 	int				lpro;
 
@@ -87,6 +89,8 @@ int		ht_hash(char *path);
 t_list	*ht_get(char *path);
 t_list	*ht_getexec(char *path);
 int 	ht_getvalue(char *path, t_cmd_tab *cmd);
+void	ht_del(void);
+int		ht_getfile(char **paths, t_cmd_tab *cmd);
 void	ht_refreshall(char *path);
 
 //termcaps
@@ -101,6 +105,7 @@ int	    key_router(t_rdl *rdl, char *buf);
 int		next_word(t_rdl *rdl, char *buf);
 int		prev_word(t_rdl *rdl, char *buf);
 int		del_cara(t_rdl *rdl, char *buf);
+int		ddel_cara(t_rdl *rdl, char *buf);
 int		begin(t_rdl *rdl, char *buf);
 int		move_curs(t_rdl *rdl, char *buf);
 int		enter(t_rdl *rdl, char *buf);
@@ -111,6 +116,7 @@ int		visualmode(t_rdl *rdl, char *buf);
 int		vm_move(t_rdl *rdl, char *buf);
 int		vm_copy(t_rdl *rdl, char *buf);
 int		vm_del(t_rdl *rdl, char *buf);
+int		vm_cut(t_rdl *rdl, char *buf);
 int		paste(t_rdl *rdl, char *buf);
 int		finish(t_rdl *rdl, char *buf);
 int		end(t_rdl *rdl, char *buf);
@@ -126,10 +132,9 @@ void	reprint(t_rdl *rdl, int curs);
 int		is_special(char *buf);
 int		left(t_rdl *rdl, int i);
 int		right(t_rdl *rdl, int i);
-int		vleft(t_rdl *rdl, int i);
-int		vright(t_rdl *rdl, int i);
 int		up(t_rdl *rdl, int i);
 int		down(t_rdl *rdl, int i);
+void	lastcol(t_rdl *rdl);
 
 //file
 t_list	*get_exec(char *exec, char *path);
@@ -152,6 +157,7 @@ void	setsig(void);
 void	putlst(char *mtc, t_list *lst, t_rdl *rdl);
 
 //history
+t_list	*gethst(void);
 void	hstadd(char *str);
 char	*hstnext(char *s);
 char	*hstprev(void);
@@ -159,5 +165,7 @@ void	hstreset(void);
 char	*hstchc(char *s);
 void	hstaddfile(char **env);
 int		hstread(char **env);
+int 	hstnchc(t_rdl *rdl, char *buf);
+int		hstdelcara(t_rdl *rdl, char	*buf);
 
 #endif

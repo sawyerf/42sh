@@ -1,34 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   ft_strisprint.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/04 14:37:16 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/26 14:07:01 by apeyret          ###   ########.fr       */
+/*   Created: 2019/02/27 21:34:55 by apeyret           #+#    #+#             */
+/*   Updated: 2019/02/27 21:38:11 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "readline.h"
+#include "libft.h"
 
-extern t_rdl g_rdl;
-
-void	resize(int sig)
+int		ft_strisprint(char *str)
 {
-	(void)sig;
-	g_rdl.col = getcolumn();
-	reprint(&g_rdl, g_rdl.curs);
-}
-
-void	nothing(int sig)
-{
-	(void)sig;
-	write(1, "\n", 1);
-}
-
-void	setsig(void)
-{
-	signal(SIGWINCH, &resize);
-	signal(SIGINT, &nothing);
+	if (!str)
+		return (0);
+	while (*str)
+	{
+		if (!ft_isprint(*str))
+			return (0);
+		str++;
+	}
+	return (1);
 }

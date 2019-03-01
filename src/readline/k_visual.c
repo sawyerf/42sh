@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 12:42:13 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/20 16:10:13 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/28 21:30:49 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_key	g_vskey[] =\
 	{K_CTRC, finish},
 	{K_CTRV, finish},
 	{K_CTRY, vm_copy},
+	{K_CTRX, vm_cut},
 	{K_CTRD, vm_del},
 	{NULL,   vm_move}
 };
@@ -29,6 +30,13 @@ int		finish(t_rdl *rdl, char *buf)
 	(void)rdl;
 	(void)buf;
 	return (1);
+}
+
+int		vm_cut(t_rdl *rdl, char *buf)
+{
+	if (vm_copy(rdl, buf) == MEMERR)
+		return (MEMERR);
+	return (vm_del(rdl, buf));
 }
 
 int		vm_del(t_rdl *rdl, char *buf)
@@ -77,7 +85,9 @@ int		vm_move(t_rdl *rdl, char *buf)
 			ft_printf("\e[7m%c\e[0m", rdl->str[rdl->curs]);
 		else
 			ft_printf("\e[0m%c", rdl->str[rdl->curs]);
-		rdl->curs += 1;
+		rdl->real++;
+		lastcol(rdl);
+		rdl->curs++;
 		left(rdl, 2);
 		rdl->curs -= 2;
 	}
@@ -87,6 +97,8 @@ int		vm_move(t_rdl *rdl, char *buf)
 			ft_printf("\e[7m%c\e[0m", rdl->str[rdl->curs]);
 		else
 			ft_printf("\e[0m%c", rdl->str[rdl->curs]);
+		rdl->real++;
+		lastcol(rdl);
 		rdl->curs++;
 		left(rdl, 1);
 		rdl->curs--;
@@ -95,7 +107,7 @@ int		vm_move(t_rdl *rdl, char *buf)
 	}
 	else if (!ft_strcmp(K_LEFT, buf) && rdl->curs > 0 && rdl->curs == rdl->size)
 	{
-		left(rdl, 1);	
+		left(rdl, 1);
 		rdl->curs--;
 	}
 	return (0);

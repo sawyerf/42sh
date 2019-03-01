@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:47:43 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/20 15:25:35 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/25 13:57:17 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_key	g_key[] =\
 	{K_CTRV, &visualmode},
 	{K_CTRR, &ctrlr},
 	{K_BSPC, &del_cara},
+	{K_DEL,	 &ddel_cara},
 	{K_RGHT, &move_curs},
 	{K_LEFT, &move_curs},
 	{K_UP,   &history},
@@ -59,6 +60,13 @@ int		del_cara(t_rdl *rdl, char *buf)
 {
 	(void)buf;
 	rdldel(rdl, rdl->curs - 1);
+	return (0);
+}
+
+int		ddel_cara(t_rdl *rdl, char *buf)
+{
+	(void)buf;
+	rdldel(rdl, rdl->curs);
 	return (0);
 }
 

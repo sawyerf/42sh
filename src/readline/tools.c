@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:49:02 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/21 18:00:25 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/02/28 21:28:43 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,20 @@ void	reprint(t_rdl *rdl, int curs)
 {
 	int adv;
 
-	left(rdl, rdl->curs + rdl->lpro);
-	tgpstr("dl");
+	(void)curs;
+	left(rdl, rdl->real + rdl->lpro);
+	tgpstr("cr");
+	tgpstr("cd");
 	adv = ft_printf("%s%s", rdl->prompt, rdl->str);
-	left(rdl, adv - rdl->lpro - curs);
+	rdl->real = rdl->size;
+	lastcol(rdl);
+	left(rdl, rdl->real - curs);
+}
+
+int		gtbegin(t_rdl *rdl)
+{
+	left(rdl, rdl->real % rdl->col);
+	return (0);
 }
 
 int		up(t_rdl *rdl, int i)
@@ -30,7 +40,8 @@ int		up(t_rdl *rdl, int i)
 	count = 0;
 	while (count < i)
 	{
-		left(rdl, rdl->col);
+		tgpstr("up");//left(rdl, rdl->col);
+		rdl->real -= rdl->col;
 		count++;
 	}
 	return (rdl->col * - i);
@@ -49,15 +60,33 @@ int		down(t_rdl *rdl, int i)
 	return (rdl->col * i);
 }
 
+void	lastcol(t_rdl *rdl)
+{
+	if (rdl->col && !((rdl->lpro + rdl->real) % (rdl->col)))
+		tgpstr("do");
+}
+
 int		left(t_rdl *rdl, int i)
 {
 	int		count;
+	int		cc;
 
 	count = 0;
-	(void)rdl;
 	while (count < i)
 	{
-		write(1, K_LEFT, 3);
+		if (rdl->col && !((rdl->lpro + rdl->real) % (rdl->col)))
+		{
+			tgpstr("up");
+			cc = 0;
+			while (rdl->col > cc)
+			{
+				write(1, K_RGHT, 3);
+				cc++;
+			}
+		}
+		else
+			write(1, K_LEFT, 3);
+		rdl->real--;
 		count++;
 	}
 	return (-1 * i);
@@ -67,42 +96,14 @@ int		right(t_rdl *rdl, int i)
 {
 	int	count;
 
-	count = 0;
+	count = 0; 
 	while (count < i)
 	{
-		if (!((rdl->lpro + rdl->curs + count + 1) % (rdl->col)))
+		if (rdl->col && !((rdl->lpro + rdl->real + 1) % (rdl->col)))
 			tgpstr("do");
 		else
 			write(1, K_RGHT, 3);
-		count++;
-	}
-	return (i);
-}
-
-int		vleft(t_rdl *rdl, int i)
-{
-	int		count;
-
-	count = 0;
-	while (count < i && rdl->curs - count > 0)
-	{
-		write(1, K_LEFT, 3);
-		count++;
-	}
-	return (-1 * i);
-}
-
-int		vright(t_rdl *rdl, int i)
-{
-	int	count;
-
-	count = 0;
-	while (count < i && rdl->size > rdl->curs + count)
-	{
-		if (!((rdl->lpro + rdl->curs + count + 1) % (rdl->col)))
-			tgpstr("do");
-		else
-			write(1, K_RGHT, 3);
+		rdl->real++;
 		count++;
 	}
 	return (i);

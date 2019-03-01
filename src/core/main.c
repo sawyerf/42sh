@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/28 18:46:14 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/02/28 19:06:57 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,29 @@ static void		silence_ac_av(char ac, char **av)
 	(void)av;
 }
 
+int		run_command(char *line)
+{
+	t_token	*tok;
+
+	if (!line)
+		return (-1);
+	if ((*line) && ft_strcmp(line, "\n"))
+	{
+		if ((tok = ft_tokenizer(line)))
+		{
+			test_sh_parser(tok);
+			free_token_lst(tok);
+		}
+	}
+	else if (*line != '\n')
+		return (-1);
+	return (0);
+}
+
 int				main(int ac, char **av, char **env)
 {
 	char	*line;
-	t_token	*tok;
+	int		ret;
 
 	silence_ac_av(ac, av);
 	if (init_shell(env)) // dispatcher here
@@ -51,19 +70,10 @@ int				main(int ac, char **av, char **env)
 	{
 		if (!(line = readline("$> ")))
 			break;
-		if ((*line) && (*line != '\n'))
-		{
-			tok = ft_tokenizer(line);
-			if (tok) 
-			{
-				sh_parser(tok);
-				free_token_lst(tok);
-			}
-		}
-		else if (*line != '\n')
+		if (run_command(line) < 0)
 			write(STDOUT_FILENO, "\n", 1);
-		free(line);
 	}
 	hstaddfile(g_sh.env);
-	return (0);
+	ret = 1;
+	return (ret);
 }
