@@ -72,6 +72,7 @@ int				main(int ac, char **av, char **env)
 			break;
 		if (run_command(line) < 0)
 			write(STDOUT_FILENO, "\n", 1);
+		free(line);
 	}
 	hstaddfile(g_sh.env);
 	ret = 1;

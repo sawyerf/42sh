@@ -105,6 +105,7 @@ int	ft_light_parser(char *lin, t_autocomplete *autocomplete)
 		ft_strdel(&line);
 		return (MEMERR);
 	}
+	free_token_lst(tokens);
 	ft_strdel(&line);
 	return (0);
 }
