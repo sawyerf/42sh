@@ -46,7 +46,7 @@ int		run_command(char *line)
 	{
 		if ((tok = ft_tokenizer(line)))
 		{
-			test_sh_parser(tok);
+			sh_parser(tok);
 			free_token_lst(tok);
 		}
 	}

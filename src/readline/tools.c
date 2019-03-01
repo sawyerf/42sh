@@ -15,13 +15,12 @@
 
 void	reprint(t_rdl *rdl, int curs)
 {
-	int adv;
 
 	(void)curs;
 	left(rdl, rdl->real + rdl->lpro);
 	tgpstr("cr");
 	tgpstr("cd");
-	adv = ft_printf("%s%s", rdl->prompt, rdl->str);
+	ft_printf("%s%s", rdl->prompt, rdl->str);
 	rdl->real = rdl->size;
 	lastcol(rdl);
 	left(rdl, rdl->real - curs);
