@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/03/04 18:44:51 by ktlili           ###   ########.fr        #
+#    Updated: 2019/03/04 23:22:32 by ktlili           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,6 +68,7 @@ SRC_FILE =	core/builtins.c				\
 			lexer/lex_jump_table.c		\
 			lexer/lexer.c				\
 			lexer/lexer_tools.c			\
+			lexer/rev_lex.c				\
 			lexer/memerror.c			\
 			parser/parser_ast.c			\
 			parser/parser_rules.c		\

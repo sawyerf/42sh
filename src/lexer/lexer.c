@@ -6,83 +6,84 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/21 18:18:00 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/04 23:24:01 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_lexer.h"
 
 
-void	init_jump_table(t_func table[TABLESZ])
+t_lx_fn	g_lx_fn[] =\
 {
-	size_t i;
+	{'0', &handle_digit},
+	{'1', &handle_digit},
+	{'2', &handle_digit},
+	{'3', &handle_digit},
+	{'4', &handle_digit},
+	{'5', &handle_digit},
+	{'6', &handle_digit},
+	{'7', &handle_digit},
+	{'8', &handle_digit},
+	{'9', &handle_digit},
+	{'"', &handle_dquote},
+	{'&', &handle_ampersand},
+	{'\'', &handle_squote},
+	{';', &handle_semic},
+	{'<', &handle_less},
+	{'>', &handle_great},
+	{'|', &handle_column},
+	{ 0, NULL},
+};
+
+int	dispatch_fn(t_lexer *lx_st)
+{
+	int i;
 
 	i = 0;
-
-	while (i < TABLESZ)
+	while (g_lx_fn[i].f)
 	{
-		if ((i < 58) && (i > 47))
-			table[i] = handle_digit;
-		else
-			table[i] = handle_common;
+		if (g_lx_fn[i].c == *(lx_st->cursor))
+			return (g_lx_fn[i].f(lx_st));
 		i++;
 	}
-	table[34] = handle_dquote;
-	table[38] = handle_ampersand;
-	table[39] = handle_squote;
-	table[59] = handle_semic;
-	table[60] = handle_less;
-	table[62] = handle_great;
-	table[124] = handle_column;	
-
+	return (handle_common(lx_st));
 }
 
-int rev_lex(char *line, t_token **head)
+t_token *ft_tokenizer(char *line)
 {
-	t_lexer 			lexer_state;
-	static t_func	 	table[TABLESZ];
-	static int			flag = 0;
+	t_lexer lexer_state;
+	t_token	*head;
 
+	head = NULL;
 	lexer_state.line = line;
 	lexer_state.cursor = line;
-	if (!flag)
-		init_jump_table(table);
-	flag = 1;
-	*head = NULL;
 	while (ft_is_whitespace(*(lexer_state.cursor)))
 		lexer_state.cursor = lexer_state.cursor + 1;
 	while (*(lexer_state.cursor))
 	{
 		if (!(lexer_state.token = new_token(0)))
-			return (MEMERR);
-		if (*(lexer_state.cursor) > 0)
-			table[(int)*(lexer_state.cursor)](&lexer_state);
-		else
-			table[1](&lexer_state);
-		add_token(head, lexer_state.token);
-		if (lexer_state.token->type > ASSIGN) // break first op
-			break;
-		lexer_state.token = NULL;	
+			return (NULL);
+		if (dispatch_fn(&lexer_state) == MEMERR)
+			return (NULL);
+		add_token(&head, lexer_state.token);
+		lexer_state.token = NULL;
 		while (ft_is_whitespace(*(lexer_state.cursor)))
 			lexer_state.cursor = lexer_state.cursor + 1;
 	}
-	add_token(head, new_token(1));
-	return (0);
+	add_token(&head, new_token(1)); // protect ?
+	return (head);
 }
-
+/*
 t_token	*ft_tokenizer(char *line)
 {
 	static	t_func	table[TABLESZ];
-	static	int		flag = 0;
 	t_lexer			lexer_state;
 	t_token			*head;
 	int				ret;
 
 	lexer_state.line = line;
 	lexer_state.cursor = line;
-	if (!flag)
-		init_jump_table(table);
-	flag = 1;
+	init_jump_table(table);
 	head = NULL;
 	while (ft_is_whitespace(*(lexer_state.cursor)))
 		lexer_state.cursor = lexer_state.cursor + 1;
@@ -97,9 +98,8 @@ t_token	*ft_tokenizer(char *line)
 			ret = table[1](&lexer_state);
 		add_token(&head, lexer_state.token);
 		lexer_state.token = NULL;
-		if (ret == ENDOFINPUT) /* this is useless */
+		if (ret == ENDOFINPUT) // this is useless 
 		{
-		//	ft_printf("21sh: lexer error: %d\n", ret);
 			free_token_lst(head);
 			return (NULL);
 		}
@@ -108,4 +108,4 @@ t_token	*ft_tokenizer(char *line)
 	}
 	add_token(&head, new_token(1));
 	return (head);
-}
+}*/

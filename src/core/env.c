@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 23:11:31 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/26 16:56:43 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/04 21:22:10 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*varchr(char **env, char *var)
 	len = env_name_len(var);
 	while (env[count])
 	{
-		if ((!ft_strncmp(env[count], var, len)))// && (env[count][len] == '='))
+		if ((!ft_strncmp(env[count], var, len)) && (env[count][len] == '='))
 			return (env[count] + len + 1);
 		count++;
 	}

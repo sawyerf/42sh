@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/12 14:37:38 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/04 20:48:02 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int handle_column(char **input, t_token *token);
 */
 /*t_str functions*/
 int	str_putnstr(char *str, t_str *data, size_t n);
-int	str_putchar(char **c, t_str *data);
+int	str_putc(char **c, t_str *data);
 int	ft_str_realloc(t_str *str_st, size_t newsz);
 
 
