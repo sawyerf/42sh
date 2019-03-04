@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 20:13:04 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/28 21:01:47 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/04 20:57:44 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,28 @@ t_list	*gethst(void)
 	return (g_hst[0]);
 }
 
+void	hstdellast()
+{
+	t_list *lst;
+	
+	lst = g_hst[0]->next;
+	free(g_hst[0]->content);
+	free(g_hst[0]);
+	lst->prev = NULL;
+	g_hst[0] = lst;
+}
+
 void	hstadd(char *str)
 {
+	int		i;
+
 	if (g_hst[0] && !ft_strcmp(g_hst[0]->content, str))
 		return ;
-	ft_lstadd(&g_hst[0], ft_lstnew(str, 0));
+	if (g_hst[0]->next)
+		i = g_hst[0]->next->content_size / 10;
+	else
+		i = 0;
+	ft_lstadd(&g_hst[0], ft_lstnew(str, i * 10));
 }
 
 int		hstread(char **env)
@@ -159,4 +176,65 @@ void	hstaddfile(char	**env)
 		return ;
 	hstwrite(fd, g_hst[0]);
 	close(fd);
+}
+
+
+t_list *hst_pgetcmp(t_list *lst, char *s)
+{
+	t_list *tmp;
+	int		len; 
+
+	tmp = lst;
+	if (ft_strisdigit(s))
+	{
+		len = ft_atoi(s);
+		if (len < 0)
+			len += tmp->content_size / 10;
+		while(tmp)
+		{
+			if (tmp->content_size / 10 == len)
+				return (tmp);
+			tmp = tmp->prev;
+		}
+		return (NULL);
+	}
+	len = ft_strlen(s);
+	while (tmp)
+	{
+		if (!ft_strncmp(s, tmp->content, len))
+			return (tmp);
+		tmp = tmp->prev;
+	}
+	return (NULL);
+}
+
+t_list *hst_getcmp(t_list *lst, char *s)
+{
+	t_list *tmp;
+	int		len; 
+
+	tmp = lst;
+	if (ft_strisdigit(s))
+	{
+		len = ft_atoi(s);
+		if (len < 0)
+			len += tmp->content_size / 10;
+		while(tmp)
+		{
+			if (tmp->content_size / 10 == len)
+				return (tmp);
+			tmp = tmp->next;
+		}
+	}
+	else
+	{
+		len = ft_strlen(s);
+		while (tmp)
+		{
+			if (!ft_strncmp(s, tmp->content, len))
+				return (tmp);
+			tmp = tmp->next;
+		}
+	}
+	return (hst_pget_cmp(lst, s));
 }

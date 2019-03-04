@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/28 21:07:53 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/04 20:57:43 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,5 +167,8 @@ void	hstaddfile(char **env);
 int		hstread(char **env);
 int 	hstnchc(t_rdl *rdl, char *buf);
 int		hstdelcara(t_rdl *rdl, char	*buf);
+t_list *hst_getcmp(t_list *lst, char *s);
+t_list *hst_pgetcmp(t_list *lst, char *s);
+void	hstdellast();
 
 #endif

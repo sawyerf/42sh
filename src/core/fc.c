@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/27 15:10:23 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/28 19:07:00 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/04 21:44:20 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,16 @@ int		run_editor(t_fc *fc, char *file)
 	return (0);
 }
 
+void	fc_e(t_fc fc)
+{
+	if (!(file = fc_filename(lst, 1)))
+		return (1);
+	fc_writelst(file, lst, 1);
+	run_editor(&fc, file);
+	run_command(fc_read(file));
+	unlink(file);
+}
+
 int		fc(t_cmd_tab *cmd)
 {
 	char	*file;
@@ -196,19 +206,16 @@ int		fc(t_cmd_tab *cmd)
 
 	(void)cmd;
 	file = NULL;
-	lst = gethst()->next;
-	if (!(file = fc_filename(lst, 1)))
-		return (1);
+	//hstdellast();
 	if (fc_parser(cmd->av, &fc) < 0)
 		return (1);
+	if (fc.range[0])
+		lst = hstgetcmp(fc.range[0]);
+	else
+		lst = gethst();
 	if (ft_cisin(fc.opt, 'l'))
-		;
 	else if (ft_cisin(fc.opt, 'e'))
 	{
-		fc_writelst(file, lst, 1);
-		run_editor(&fc, file);
-		run_command(fc_read(file));
-		unlink(file);
 	}
 	ft_strdel(&file);
 	return (0);
