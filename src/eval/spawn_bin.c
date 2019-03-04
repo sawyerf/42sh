@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/28 18:46:24 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/04 19:54:06 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,10 @@ static int		execve_wrap(t_cmd_tab *cmd)
 		if ((cmd->full_path = ft_strdup(cmd->av[0])) == NULL)
 			exit_wrap(MEMERR, cmd);
 	}
-	else if (!cmd->full_path) //if launched with env, builtin have already set the full path 
+	else if (!cmd->full_path) //f launched with env, builtin have already set the full path 
 	{
-		path = get_process_env("PATH", cmd->process_env);
+		if (!(path = get_process_env("PATH", cmd->process_env)))
+			path = get_env_value("PATH");
 		if (ht_getvalue(path, cmd) == MEMERR)
 			return (MEMERR);
 		if (!cmd->full_path)

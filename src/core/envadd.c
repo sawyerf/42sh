@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 23:36:39 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/26 17:47:23 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/04 19:38:27 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,12 @@ char	**envaddint(char **env, char *var, int value)
 char	**envaddstr(char **env, char *var, char *value)
 {
 	char *add;
-	
-		add = NULL;
-	if (!(add = ft_zprintf("%s=%.s", var, value)))
+	static char *empty = "";
+
+	if (!value)
+		value = empty;
+	add = NULL;
+	if (!(add = ft_zprintf("%s=%s", var, value)))
 		return (NULL);
 	env = csetenv(env, add);
 	ft_strdel(&add);

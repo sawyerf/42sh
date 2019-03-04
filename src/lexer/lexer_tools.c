@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 14:35:55 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/12 14:41:05 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/04 19:05:58 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,14 +119,14 @@ this has to be change to is_whitespace
 */
 int	ft_is_whitespace(char c)
 {
-	static char *ifs = "\n\t ";
+	static char *ws = "\n\t ";
 
 	int			i;
 
 	i = 0;
-	while (ifs[i])
+	while (ws[i])
 	{
-		if (ifs[i] == c)
+		if (ws[i] == c)
 			return (1);
 		i++;
 	}
