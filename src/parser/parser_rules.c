@@ -13,17 +13,26 @@
 #include "ft_parser.h"
 #include "ft_eval.h"
 
+t_bool expect_newline_lst(t_parser *parser)
+{
+	if (parser->current->type != NEWLINE)
+		return (0);
+	tree_add_sep(parser);
+	while (parser->current->type == NEWLINE)
+		parser->current = parser->current->next;
+	return (1);
+}
+
 t_bool	expect_linebreak(t_parser *parser)
 {
-	(void)parser;
+	expect_newline_lst(parser);
 	return (1);	
 }
 
 t_bool	expect_separator_op(t_parser *parser)
 {
 	if ((parser->current->type == AMPERS)
-		|| (parser->current->type == SEMI_COL) 
-			|| (parser->current->type == NEWLINE))
+		|| (parser->current->type == SEMI_COL)) 
 	{
 		tree_add_sep(parser);
 		parser->current = parser->current->next;
@@ -35,6 +44,11 @@ t_bool	expect_separator_op(t_parser *parser)
 t_bool	expect_separator(t_parser *parser)
 {
 	if (expect_separator_op(parser))
+	{
+		expect_linebreak(parser);
+		return (1);
+	}
+	if (expect_newline_lst(parser))
 		return (1);
 	return (0);
 
@@ -301,7 +315,8 @@ t_bool	expect_complete_cmd(t_parser *parser)
 {	
 	if (expect_list(parser))
 	{
-		if ((expect_separator(parser) || (parser->current->type == EOI)))
+		expect_separator(parser); 
+		if (parser->current->type == EOI)
 			return (1);	
 	}
 	return (0);
