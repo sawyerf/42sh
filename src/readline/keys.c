@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:47:43 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/25 13:57:17 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/04 22:02:28 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 t_key	g_key[] =\
 {
 	{K_HOME, &begin},
-	{K_END,  &end},
+	{K_END, &end},
 	{K_CTRA, &begin},
 	{K_CTRC, &ctrlc},
 	{K_CTRD, &ctrld},
@@ -24,24 +24,23 @@ t_key	g_key[] =\
 	{K_CTRV, &visualmode},
 	{K_CTRR, &ctrlr},
 	{K_BSPC, &del_cara},
-	{K_DEL,	 &ddel_cara},
+	{K_DEL, &ddel_cara},
 	{K_RGHT, &move_curs},
 	{K_LEFT, &move_curs},
-	{K_UP,   &history},
+	{K_UP, &history},
 	{K_DOWN, &history},
 	{K_SLFT, &prev_word},
 	{K_SRGT, &next_word},
-	{K_SUP,  &move_curs},
+	{K_SUP, &move_curs},
 	{K_SDOW, &move_curs},
-	{K_TAB,  &autocompl},
+	{K_TAB, &autocompl},
 	{K_ENTR, &enter},
-	{NULL,   &enter}
+	{NULL, &enter}
 };
 
 int		end(t_rdl *rdl, char *buf)
 {
 	(void)buf;
-
 	right(rdl, rdl->size - rdl->curs);
 	rdl->curs += rdl->size - rdl->curs;
 	return (0);

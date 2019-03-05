@@ -6,16 +6,14 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:49:02 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/28 21:28:43 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/04 22:00:02 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline.h"
 
-
 void	reprint(t_rdl *rdl, int curs)
 {
-
 	(void)curs;
 	left(rdl, rdl->real + rdl->lpro);
 	tgpstr("cr");
@@ -39,11 +37,11 @@ int		up(t_rdl *rdl, int i)
 	count = 0;
 	while (count < i)
 	{
-		tgpstr("up");//left(rdl, rdl->col);
+		tgpstr("up");
 		rdl->real -= rdl->col;
 		count++;
 	}
-	return (rdl->col * - i);
+	return (rdl->col * -i);
 }
 
 int		down(t_rdl *rdl, int i)
@@ -95,7 +93,7 @@ int		right(t_rdl *rdl, int i)
 {
 	int	count;
 
-	count = 0; 
+	count = 0;
 	while (count < i)
 	{
 		if (rdl->col && !((rdl->lpro + rdl->real + 1) % (rdl->col)))
@@ -111,7 +109,7 @@ int		right(t_rdl *rdl, int i)
 int		is_special(char *buf)
 {
 	int		count;
-	
+
 	count = 0;
 	while (buf[count])
 	{

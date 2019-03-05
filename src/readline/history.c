@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 20:13:04 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/04 20:57:44 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/05 11:58:21 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ t_list	*gethst(void)
 	return (g_hst[0]);
 }
 
-void	hstdellast()
+void	hstdellast(void)
 {
 	t_list *lst;
-	
+
 	lst = g_hst[0]->next;
 	free(g_hst[0]->content);
 	free(g_hst[0]);
@@ -236,5 +236,5 @@ t_list *hst_getcmp(t_list *lst, char *s)
 			tmp = tmp->next;
 		}
 	}
-	return (hst_pget_cmp(lst, s));
+	return (hst_pgetcmp(lst, s));
 }

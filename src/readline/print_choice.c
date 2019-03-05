@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 16:23:31 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/25 14:19:12 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/04 21:58:15 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 int		get_maxlst(t_list *lst)
 {
-	int max; max = 0;
+	int max;
+
+	max = 0;
 	while (lst)
 	{
 		if (max < (int)ft_strlen(lst->content))
@@ -34,7 +36,7 @@ char	*after(char *s, int i)
 		tmp++;
 	return (tmp);
 }
- 
+
 void	putlst(char *mtc, t_list *lst, t_rdl *rdl)
 {
 	int		max;
@@ -48,7 +50,9 @@ void	putlst(char *mtc, t_list *lst, t_rdl *rdl)
 		i = 0;
 		while (lst && i < (rdl->col) / max)
 		{
-			ft_printf("[%s%s%-*c", mtc, lst->content, max - ft_strlen(mtc) - ft_strlen(lst->content) - 3, ((lst->content_size % 10 == 3) ? '/': ' '));
+			ft_printf("[%s%s%-*c", mtc, lst->content, max - ft_strlen(mtc)
+				- ft_strlen(lst->content) - 3, ((lst->content_size % 10 == 3)
+					? '/' : ' '));
 			ft_printf("] ");
 			lst = lst->next;
 			i++;
