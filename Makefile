@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/03/05 13:42:17 by apeyret          ###   ########.fr        #
+#    Updated: 2019/03/05 18:09:42 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,8 @@ SRC_DIR =	src
 
 SRC_FILE =	core/builtins.c				\
 			core/fc.c					\
+			core/fc_opt.c				\
+			core/fc_parser.c			\
 			core/cd_l_p.c				\
 			core/cd_tools.c				\
 			core/changedir.c			\

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/28 16:03:28 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/05 18:09:51 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,5 +135,16 @@ char					*getoldpwd(void);
 char					**csetenv(char **env, char *var);
 char					**envdel(char **env, char *var);
 char					**envaddstr(char **env, char *var, char *value);
+
+int						fc_l(t_fc fc);
+int						fc_e(t_fc fc);
+int						fc_s(t_fc fc);
+int						fc_le(t_fc fc);
+char					*fc_filename(t_list *lst, int size);
+int						fc_writelst(char *file, t_list *lst, int size);
+char					*fc_read(char *file);
+int						run_editor(t_fc *fc, char *file);
+void					fc_print(t_fc fc, t_list *lst, int i);
+int		fc_parser(char **av, t_fc *fc);
 
 #endif
