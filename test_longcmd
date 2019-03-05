@@ -1,4 +1,4 @@
-false || true && echo fafa ; false || true && echo mimi ; false || true && echo fafa ; false || true && echo mimi ;false || true && echo fafa ; false || true && echo mimi;false || true && echo fafa ; false || true && echo mimi; ls -lRF ~ | cat -e | rev | rev | rev | rev | rev | rev  | rev | rev | rev ;
+false || true && echo fafa ; false || true && echo mimi ; false || true && echo fafa ; false || true && echo mimi ;false || true && echo fafa ; false || true && echo mimi;false || true && echo fafa ; false || true && echo mimi; ls -lRF ~ | cat -e | rev | rev | rev | rev | rev | rev  | rev | rev | rev > delete_me.txt;
 ---------------------
 
 LEAK !

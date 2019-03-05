@@ -192,7 +192,7 @@ t_list *hst_pgetcmp(t_list *lst, char *s)
 			len += tmp->content_size / 10;
 		while(tmp)
 		{
-			if (tmp->content_size / 10 == len)
+			if ((int)tmp->content_size / 10 == len)
 				return (tmp);
 			tmp = tmp->prev;
 		}
@@ -221,7 +221,7 @@ t_list *hst_getcmp(t_list *lst, char *s)
 			len += tmp->content_size / 10;
 		while(tmp)
 		{
-			if (tmp->content_size / 10 == len)
+			if ((int)tmp->content_size / 10 == len)
 				return (tmp);
 			tmp = tmp->next;
 		}

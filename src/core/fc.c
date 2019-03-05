@@ -67,9 +67,7 @@ char	*fc_filename(t_list *lst, int size)
 int		fc_writelst(char *file, t_list *lst, int size)
 {
 	int				fd;
-	int				i;
-
-	i = 0;
+	
 	fd = open(file, O_CREAT | O_WRONLY, 0600);
 	if (fd < 0)
 	{
