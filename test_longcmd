@@ -13,8 +13,7 @@ ls 1>&2 1>&-
 false && false || echo 'THOU SHALT' && \l\s '/''dev'$NONE
 
 ---------------------
-ls ~/ titi file1 inex /dev > file1 >file2 > file3 > file4 ; cat file1 ; echo -----; cat file2 ; echo ------; cat file3 ; echo ------- ; cat file 4; ecs: inex: No such file or directory file4 ; cat file1 ; echo -----; cat file2 ; echo ----ls: titi: No such file or directoryfile 4; echo DAFUQ && echo ------ && rm file1 file2 file3 file4; ls /dev | cat -e | rev | rev | rev  | rev | rev > file1; ls -lF ~ >> file1
-
+ls ~/ titi file1 inex /dev > file1 >file2 > file3 > file4 ; cat file1 ; echo -----; cat file2 ; echo ------; cat file3 ; echo ------- ; cat file 4; cat file1 ; echo -----; cat file2 ; echo ----; echo DAFUQ && echo ------ && rm file1 file2 file3 file4 | none | ffff > random_file; ls /dev | cat -e | rev | rev | rev  | rev | rev > file1; ls -lF ~ >> delete_me
 -------------------------
 CRASH !
 echo -ne 'ls\x00ls -l' | bash

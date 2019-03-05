@@ -40,7 +40,8 @@ t_bool	expect_separator_op(t_parser *parser)
 	}
 	return (0);
 }
-
+/* unused for now
+*/
 t_bool	expect_separator(t_parser *parser)
 {
 	if (expect_separator_op(parser))
@@ -310,14 +311,43 @@ t_bool	expect_list(t_parser *parser)
 	return (0);
 }
 
-//top level function, no need for backtrack var
 t_bool	expect_complete_cmd(t_parser *parser)
 {	
 	if (expect_list(parser))
 	{
-		expect_separator(parser); 
+		expect_separator_op(parser); 
+		return (1);
+	}
+	return (0);
+}
+
+t_bool expect_complete_cmds_suffix(t_parser *parser)
+{
+	t_token *backtrack;
+
+	backtrack = parser->current;
+	if (expect_newline_lst(parser))
+	{
+		if (!expect_complete_cmd(parser))
+		{
+			parser->current = backtrack;
+			return (0);
+		}
+		expect_complete_cmds_suffix(parser);
+		return (1);
+	}
+	return (0);
+}
+
+t_bool expect_complete_cmds(t_parser *parser)
+{
+	expect_linebreak(parser);
+	if (expect_complete_cmd(parser))
+	{
+		expect_complete_cmds_suffix(parser);
+		expect_linebreak(parser);
 		if (parser->current->type == EOI)
-			return (1);	
+			return (1);
 	}
 	return (0);
 }

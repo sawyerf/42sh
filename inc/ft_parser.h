@@ -46,6 +46,7 @@ void	mem_err_exit(t_parser *parser);
 /*
 recursive decent functions 
 */
+t_bool	expect_newline_lst(t_parser *parser);
 t_bool	expect_linebreak(t_parser *parser);
 t_bool	expect_separator_op(t_parser *parser);
 t_bool	expect_separator(t_parser *parser);
@@ -65,6 +66,8 @@ t_bool	expect_and_or(t_parser *parser);
 t_bool	expect_list_suffix(t_parser *parser);
 t_bool	expect_list(t_parser *parser);
 t_bool	expect_complete_cmd(t_parser *parser);
+t_bool	expect_complete_cmds_suffix(t_parser *parser);
+t_bool	expect_complete_cmds(t_parser *parser);
 
 /*parser util functions */
 int	parser_is_assign(t_token const *token);

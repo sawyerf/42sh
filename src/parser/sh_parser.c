@@ -121,7 +121,7 @@ int	sh_parser(t_token *start)
 	ft_bzero(&parser, sizeof(t_parser));
 	parser.current = start;
 	parser.head = start;
-	ret = expect_complete_cmd(&parser);
+	ret = expect_complete_cmds(&parser);
 //	ft_printf("ret = %d token %s |type %s\n", ret, parser.current->data.str, types[parser.current->type]);
 //	print_tree(parser.tree);
 	if (ret) 

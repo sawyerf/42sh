@@ -1,6 +1,7 @@
 # 21sh
 
 ## TODO
+- subtle difference between '$notexistant;' and '"";' needs to be fixed ft_wordexp
 - export builtin, set && unset missing stuff.
 - sig handling && job control.
 - moar testing on redirections.

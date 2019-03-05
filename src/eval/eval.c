@@ -23,7 +23,8 @@ int	eval_tree(t_ast_node *tree)
 		|| (tree->type == NEWLINE))
 	{
 		
-		eval_tree(tree->left);
+		if (tree->left)
+			eval_tree(tree->left);
 		if (tree->right)
 			eval_tree(tree->right);
 		return (0);

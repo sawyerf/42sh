@@ -12,18 +12,25 @@
 
 
 /*
+	Terminal tokens:
+
 	VOID
+	%token EOI (End Of Input)
 	%token WORD
 	%token NEWLINE
 	%token IO_NUM
 	%token ASSIGNEMENT_WORD 
--------------------------------
-literal tokens
 	%token AND_IF:'&&' OR_IF:'||' LESSAND:'<&' GREATAND:'>&' DGREAT:'>>' 
 	%token LESS: '<' GREAT: '>'	AMPERS: '&' SEMICOL: ';' PIPE: '|'
 	%token DLESS: '<<'
+-----------------------------------------------------
+	Productions:
 
-	complete_cmd	: list separator | list 
+	complete_cmds	: complete_cmd complete_cmds_suffix EOI| complete_cmd EOI
+
+	complete_cmds_suffix : newline_lst complete_cmd complete_cmds_suffix
+
+	complete_cmd	: list separator_op | list 
 
 	list			: and_or list_suffix | and_or
 	
@@ -73,7 +80,7 @@ literal tokens
 
 	separator_op	: AMPERS | SEMICOL
 
-	separator		: separator_op linebreak | newline_lst
+	separator		: separator_op linebreak | newline_lst /* unused*/
 
 	line_break		: newline_lst | VOID
 
