@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 15:48:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/12 14:27:11 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/04 23:09:30 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,11 @@ typedef	struct	s_token
 	t_str				data;
 	struct s_token		*next;	
 }				t_token;
+
+typedef struct s_lx_fn
+{
+	char	c;
+	int		(*f)(t_lexer*);
+}				t_lx_fn;
 
 #endif

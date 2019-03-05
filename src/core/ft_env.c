@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 13:58:14 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/21 18:00:23 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/04 19:25:34 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,24 @@ static int		spawn_new_env(char **args, char **new_env)
 	ft_bzero(&new_cmd, sizeof(t_cmd_tab));
 	new_cmd.av = args;
 	new_cmd.process_env = new_env;
-	if (!(path = varchr(new_env, "PATH")))
-		path = get_env_value("PATH");
-	if (ht_getvalue(path, &new_cmd) == MEMERR)
-		return (MEMERR);
-	if (!new_cmd.full_path)
+	if (ft_ispath(args[0]))
 	{
-		exec_error(BIN_NOT_FOUND, new_cmd.av[0]);
-		return (BIN_NOT_FOUND);
+		if (handle_perm(new_cmd.av[0]) != 0)
+			exec_error(ACCERR, new_cmd.av[0]);
+		if (!(new_cmd.full_path = ft_strdup(new_cmd.av[0])))
+			return (MEMERR);	
+	}
+	else
+	{
+		if (!(path = varchr(new_env, "PATH")))
+			path = get_env_value("PATH");
+		if (ht_getvalue(path, &new_cmd) == MEMERR)
+			return (MEMERR);
+		if (!new_cmd.full_path)
+		{
+			exec_error(BIN_NOT_FOUND, new_cmd.av[0]);
+			return (BIN_NOT_FOUND);
+		}
 	}
 	return (spawn_command(&new_cmd));
 }
@@ -89,11 +99,9 @@ int				ft_env(t_cmd_tab *cmd)
 	if ((new_env = construct_env(cmd, opt, count)) == NULL)
 		return (MEMERR);
 	if (cmd->av[count] == NULL)
-	{
 		print_env_tab(new_env);
-		free_tab(new_env);
-	}
 	else
 		ret = spawn_new_env(cmd->av + count, new_env);
+	free_tab(new_env);
 	return (ret);
 }

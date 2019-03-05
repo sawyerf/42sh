@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 14:35:55 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/12 14:41:05 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/04 22:19:57 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,13 @@ int	str_putnstr(char *str, t_str *data, size_t n)
 	while ((*str) && (n))
 	{
 		n--;
-		if (str_putchar(&str, data) == MEMERR)
+		if (str_putc(&str, data) == MEMERR)
 			return (MEMERR);
 	}
 	return (0);
 }
 
-int	str_putchar(char **c, t_str *data)
+int	str_putc(char **c, t_str *data)
 {
 	size_t i;
 
@@ -101,7 +101,7 @@ int	str_putchar(char **c, t_str *data)
 	return (0);	
 }
 /*
-int	str_putchar(char c, t_str *data)
+int	str_putc(char c, t_str *data)
 {
 	size_t i;
 
@@ -119,14 +119,14 @@ this has to be change to is_whitespace
 */
 int	ft_is_whitespace(char c)
 {
-	static char *ifs = "\n\t ";
+	static char *ws = "\n\t ";
 
 	int			i;
 
 	i = 0;
-	while (ifs[i])
+	while (ws[i])
 	{
-		if (ifs[i] == c)
+		if (ws[i] == c)
 			return (1);
 		i++;
 	}

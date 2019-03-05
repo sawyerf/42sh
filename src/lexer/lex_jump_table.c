@@ -6,17 +6,22 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/28 18:50:37 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/04 21:32:58 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "readline.h"
 #include "ft_lexer.h"
-/*
- * TODO
-add lex error for backslash followed by EOI
-*/
 
-int	request_new_line(t_lexer *lexer_state)
+static int	handle_backslash(t_lexer *lx_st)
+{
+	if ((str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
+		|| (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR))
+		return (MEMERR);
+	return (0);
+}
+
+int			request_new_line(t_lexer *lx_st)
 {
 	char *new_line;
 
@@ -25,227 +30,203 @@ int	request_new_line(t_lexer *lexer_state)
 		return (MEMERR);
 	else if (*new_line == 0)
 		return (SQUOTE_ERR);
-	//free(lexer_state->line); // this has to change
-	lexer_state->line = new_line;
-	lexer_state->cursor = new_line;
+	//free(lx_st->line);  this has to change
+	lx_st->line = new_line;
+	lx_st->cursor = new_line;
 	return (0);
 }
 
-int	handle_dquote(t_lexer *lexer_state)
+int			handle_dquote(t_lexer *lx_st)
 {
 	int ret;
 
-	if (*(lexer_state->cursor) == '"')
-	{
-		if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
-			return (MEMERR);
-	}
-	while (42)
-	{
-		if (*(lexer_state->cursor) == '"')
-		{
-			if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
-				return (MEMERR);
-			return (handle_common(lexer_state));
-		}
-		else if ((*(lexer_state->cursor) == '\\') && (*((lexer_state->cursor) + 1)))
-		{ /* this is ugly*/
-			if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
-				return (MEMERR);
-			if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
-				return (MEMERR);
-		}
-		else if (*(lexer_state->cursor) ==  '\0')
-		{
-			if ((ret = request_new_line(lexer_state)))
-				return (ret);
-		}
-		else if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
-			return (MEMERR);
-	}
-
-	return (ENDOFINPUT);
-}
-
-int handle_squote(t_lexer *lexer_state)
-{
-	int ret;
-
-	if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
+	if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 		return (MEMERR);
 	while (42)
 	{
-
-		if (*(lexer_state->cursor) == '\'')
+		if (*(lx_st->cursor) == '"')
+			return (str_putc(&(lx_st->cursor), &(lx_st->token->data))
+				== MEMERR) ? MEMERR : handle_common(lx_st);
+		else if ((*(lx_st->cursor) == '\\') && (*((lx_st->cursor) + 1)))
 		{
-			if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
+			if (handle_backslash(lx_st))
 				return (MEMERR);
-			return (handle_common(lexer_state));
 		}
-		else if (*(lexer_state->cursor) ==  '\0')
+		else if (*(lx_st->cursor) == '\0')
 		{
-			if ((ret = request_new_line(lexer_state)))
+			if ((ret = request_new_line(lx_st)))
 				return (ret);
 		}
-		else if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
+		else if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 			return (MEMERR);
 	}
 	return (ENDOFINPUT);
 }
 
-int	handle_digit(t_lexer *lexer_state)
+int			handle_squote(t_lexer *lx_st)
+{
+	int ret;
+
+	if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
+		return (MEMERR);
+	while (42)
+	{
+		if (*(lx_st->cursor) == '\'')
+		{
+			if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
+				return (MEMERR);
+			return (handle_common(lx_st));
+		}
+		else if (*(lx_st->cursor) == '\0')
+		{
+			if ((ret = request_new_line(lx_st)))
+				return (ret);
+		}
+		else if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
+			return (MEMERR);
+	}
+	return (ENDOFINPUT);
+}
+
+int			handle_digit(t_lexer *lx_st)
 {
 	static	char	*ops = "|&><;";
 
-	while (*(lexer_state->cursor))
+	while (*(lx_st->cursor))
 	{
-		if ((ft_is_whitespace(*(lexer_state->cursor))) || (ft_strchr(ops, *(lexer_state->cursor))))
+		if ((ft_is_whitespace(*(lx_st->cursor)))
+			|| (ft_strchr(ops, *(lx_st->cursor))))
 		{
-			if (ft_strchr("><", *(lexer_state->cursor)))
-				lexer_state->token->type = IO_NUM;
-			break;
+			if (ft_strchr("><", *(lx_st->cursor)))
+				lx_st->token->type = IO_NUM;
+			break ;
 		}
-		else if (!ft_isdigit(*(lexer_state->cursor)))
-			return(handle_common(lexer_state));
-		if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
+		else if (!ft_isdigit(*(lx_st->cursor)))
+			return (handle_common(lx_st));
+		if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 			return (MEMERR);
 	}
 	return (0);
 }
 
-int	handle_param_exp(t_lexer *lexer_state)
+int			handle_param_exp(t_lexer *lx_st)
 {
-	if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
+	if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 		return (MEMERR);
-	if (*(lexer_state->cursor) == '{')
+	if (*(lx_st->cursor) == '{')
 	{
-		if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
+		if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 			return (MEMERR);
-		if (*(lexer_state->cursor) == '}')
+		if (*(lx_st->cursor) == '}')
 			return (BAD_SUB);
-		while (*(lexer_state->cursor))
+		while (*(lx_st->cursor))
 		{
-			if (!parser_is_name_c(*(lexer_state->cursor)))
-				break;
-			if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
+			if (!parser_is_name_c(*(lx_st->cursor)))
+				break ;
+			if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 				return (MEMERR);
 		}
-		if (*(lexer_state->cursor) == 0)
+		if (*(lx_st->cursor) == 0)
 			return (INCOMPLETE_SUB);
-		if (*(lexer_state->cursor) != '}')
+		if (*(lx_st->cursor) != '}')
 			return (BAD_SUB);
-		if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
+		if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 			return (MEMERR);
 	}
 	return (0);
 }
 
-int	handle_common(t_lexer *lexer_state)
+int			handle_common(t_lexer *lx_st)
 {
-	int				err_ret;
-	static	char	*ops = "|&><;";
-
-	err_ret = 0;
-	while (*(lexer_state->cursor))
+	while (*(lx_st->cursor))
 	{
-		if ((ft_is_whitespace(*(lexer_state->cursor))) || (ft_strchr(ops, *(lexer_state->cursor))))
-			break;
-		if (*(lexer_state->cursor) == '"')
-			err_ret = handle_dquote(lexer_state);
-		else if (*(lexer_state->cursor) == '\'')
-			err_ret = handle_squote(lexer_state);
-		else if (*(lexer_state->cursor) == '$')
-			err_ret = handle_param_exp(lexer_state);
-		else if ((*(lexer_state->cursor) == '\\') && (*((lexer_state->cursor) + 1)))
+		if (ft_cisin("\t |&><;", *(lx_st->cursor)))
+			break ;
+		if (*(lx_st->cursor) == '"')
+			handle_dquote(lx_st);
+		else if (*(lx_st->cursor) == '\'')
+			handle_squote(lx_st);
+		else if (*(lx_st->cursor) == '$')
+			handle_param_exp(lx_st);
+		else if ((*(lx_st->cursor) == '\\') && (*((lx_st->cursor) + 1)))
 		{
-			if ((str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
-				|| (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR))
+			if (handle_backslash(lx_st))
 				return (MEMERR);
 		}
-		else
-		{
-			if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
-				return (MEMERR);
-		}
-		if (err_ret)
-			return (err_ret);
+		else if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
+			return (MEMERR);
 	}
 	return (0);
 }
 
-int	handle_semic(t_lexer *lexer_state)
+int			handle_semic(t_lexer *lx_st)
 {
-	lexer_state->token->type = SEMI_COL;
-	if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
+	lx_st->token->type = SEMI_COL;
+	if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 		return (MEMERR);
 	return (0);
-}	
+}
 
-int	handle_column(t_lexer *lexer_state)
+int			handle_column(t_lexer *lx_st)
 {
-	if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
+	if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 		return (MEMERR);
-	if (*(lexer_state->cursor) == '|')
+	if (*(lx_st->cursor) == '|')
 	{
-		if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
+		if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 			return (MEMERR);
-		lexer_state->token->type = OR_IF;
+		lx_st->token->type = OR_IF;
 	}
 	else
-		lexer_state->token->type = PIPE;
+		lx_st->token->type = PIPE;
 	return (0);
-}	
+}
 
-int	handle_ampersand(t_lexer *lexer_state)
+int			handle_ampersand(t_lexer *lx_st)
 {
-	if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
+	if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 		return (MEMERR);
-	if (*(lexer_state->cursor) == '&')
+	if (*(lx_st->cursor) == '&')
 	{
-		if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
+		if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 			return (MEMERR);
-		lexer_state->token->type = AND_IF;
+		lx_st->token->type = AND_IF;
 	}
 	else
-		lexer_state->token->type = AMPERS;
+		lx_st->token->type = AMPERS;
 	return (0);
-}	
+}
 
-int	handle_great(t_lexer *lexer_state)
+int			handle_great(t_lexer *lx_st)
 {
-	if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
+	if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 		return (MEMERR);
-	lexer_state->token->type = GREAT;
-	if (*(lexer_state->cursor) == '>')
+	lx_st->token->type = GREAT;
+	if (*(lx_st->cursor) == '>')
 	{
-		if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
+		if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 			return (MEMERR);
-		lexer_state->token->type = DGREAT;
+		lx_st->token->type = DGREAT;
 	}
-	else if (*(lexer_state->cursor) == '&')
+	else if (*(lx_st->cursor) == '&')
 	{
-		if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
+		if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 			return (MEMERR);
-		lexer_state->token->type = GREATAND;
+		lx_st->token->type = GREATAND;
 	}
 	return (0);
 }
 
-int handle_less(t_lexer *lexer_state)
+int			handle_less(t_lexer *lx_st)
 {
-	if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
+	if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 		return (MEMERR);
-	lexer_state->token->type = LESS;
-	if (*(lexer_state->cursor) == '&')
+	lx_st->token->type = LESS;
+	if (*(lx_st->cursor) == '&')
 	{
-		if (str_putchar(&(lexer_state->cursor), &(lexer_state->token->data)) == MEMERR)
+		if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 			return (MEMERR);
-		lexer_state->token->type = LESSAND;
+		lx_st->token->type = LESSAND;
 	}
-/*	else if (iter[1] == '<')
-	{
-		iter++;
-		lexer_state->token->type = DLESS; //heredoc
-	}*/
 	return (0);
 }
