@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/04 23:24:01 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/05 19:43:48 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 t_lx_fn	g_lx_fn[] =\
 {
+	{'\n', &handle_newline},
 	{'0', &handle_digit},
 	{'1', &handle_digit},
 	{'2', &handle_digit},
@@ -57,7 +58,7 @@ t_token *ft_tokenizer(char *line)
 	head = NULL;
 	lexer_state.line = line;
 	lexer_state.cursor = line;
-	while (ft_is_whitespace(*(lexer_state.cursor)))
+	while (ft_cisin(" \t", *(lexer_state.cursor)))	
 		lexer_state.cursor = lexer_state.cursor + 1;
 	while (*(lexer_state.cursor))
 	{
@@ -67,10 +68,10 @@ t_token *ft_tokenizer(char *line)
 			return (NULL);
 		add_token(&head, lexer_state.token);
 		lexer_state.token = NULL;
-		while (ft_is_whitespace(*(lexer_state.cursor)))
+		while (ft_cisin(" \t", *(lexer_state.cursor)))	
 			lexer_state.cursor = lexer_state.cursor + 1;
 	}
-	add_token(&head, new_token(1)); // protect ?
+	add_token(&head, new_token(EOI));
 	return (head);
 }
 /*

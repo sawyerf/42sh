@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/28 18:41:08 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/05 19:49:51 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,9 +122,10 @@ int	sh_parser(t_token *start)
 	parser.current = start;
 	parser.head = start;
 	ret = expect_complete_cmd(&parser);
-	if (parser.current->type != NEWLINE)
-		ret = 0;
+//	if (parser.current->type != NEWLINE)
+//		ret = 0;
 //	ft_printf("ret = %d token %s |type %s\n", ret, parser.current->data.str, types[parser.current->type]);
+	print_tree(parser.tree);
 	if (ret) 
 	{
 		get_tree(parser.tree);
@@ -133,6 +134,5 @@ int	sh_parser(t_token *start)
 	else
 		ft_printf("21sh: syntax error near : '%s'\n", parser.current->data.str);
 	free_tree(parser.tree);
-//	print_tree(parser.tree);
 	return (ret);
 }

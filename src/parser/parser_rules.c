@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/19 19:53:11 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/05 19:44:35 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ t_bool	expect_linebreak(t_parser *parser)
 t_bool	expect_separator_op(t_parser *parser)
 {
 	if ((parser->current->type == AMPERS)
-		|| (parser->current->type == SEMI_COL))
+		|| (parser->current->type == SEMI_COL) 
+			|| (parser->current->type == NEWLINE))
 	{
 		tree_add_sep(parser);
 		parser->current = parser->current->next;
@@ -300,7 +301,7 @@ t_bool	expect_complete_cmd(t_parser *parser)
 {	
 	if (expect_list(parser))
 	{
-		if ((expect_separator(parser) || (parser->current->type == NEWLINE)))
+		if ((expect_separator(parser) || (parser->current->type == EOI)))
 			return (1);	
 	}
 	return (0);

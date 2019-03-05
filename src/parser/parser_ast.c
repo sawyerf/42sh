@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 14:30:55 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/19 18:58:35 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/05 19:57:27 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ void	add_to_tree(t_ast_node **head, t_ast_node *to_add)
 			(*head)->right->right = to_add;
 		}
 	}
-	else if ((to_add->type == SEMI_COL) || (to_add->type == AMPERS))
+	else if ((to_add->type == SEMI_COL) || (to_add->type == AMPERS)
+			|| (to_add->type == NEWLINE))
 	{
 		to_add->left = *head;
 		*head = to_add;

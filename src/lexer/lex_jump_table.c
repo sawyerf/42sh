@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/04 21:32:58 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/05 19:09:53 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ int			handle_common(t_lexer *lx_st)
 {
 	while (*(lx_st->cursor))
 	{
-		if (ft_cisin("\t |&><;", *(lx_st->cursor)))
+		if (ft_cisin("\n\t |&><;", *(lx_st->cursor)))
 			break ;
 		if (*(lx_st->cursor) == '"')
 			handle_dquote(lx_st);
@@ -156,6 +156,14 @@ int			handle_common(t_lexer *lx_st)
 		else if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 			return (MEMERR);
 	}
+	return (0);
+}
+
+int			handle_newline(t_lexer *lx_st)
+{
+	lx_st->token->type = NEWLINE;
+	if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
+		return (MEMERR);
 	return (0);
 }
 

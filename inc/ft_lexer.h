@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/04 20:48:02 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/05 19:00:12 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 
 typedef int (*t_func)(t_lexer*);
 
+int	handle_newline(t_lexer *lexer_state);
 int handle_dquote(t_lexer *lexer_state);
 int handle_digit(t_lexer *lexer_state);
 int handle_common(t_lexer *lexer_state);
