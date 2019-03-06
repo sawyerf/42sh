@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 20:13:04 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/06 17:34:23 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/06 18:04:36 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char	*hstchc(char *s)
 	return (NULL);
 }
 
-int 	hstnchc(t_rdl *rdl, char *buf)
+int		hstnchc(t_rdl *rdl, char *buf)
 {
 	(void)buf;
 	if (g_hst[3])
@@ -160,7 +160,7 @@ void	hstwrite(int fd, t_list *lst)
 	ft_dprintf(fd, "%s\n", lst->content);
 }
 
-void	hstaddfile(char	**env)
+void	hstaddfile(char **env)
 {
 	int		fd;
 	char	*path;
@@ -178,11 +178,10 @@ void	hstaddfile(char	**env)
 	close(fd);
 }
 
-
-t_list *hst_pgetcmp(t_list *lst, char *s)
+t_list	*hst_pgetcmp(t_list *lst, char *s)
 {
-	t_list *tmp;
-	int		len; 
+	t_list	*tmp;
+	int		len;
 
 	tmp = lst;
 	if (ft_strisdigit(s))
@@ -190,7 +189,7 @@ t_list *hst_pgetcmp(t_list *lst, char *s)
 		len = ft_atoi(s);
 		if (len < 0)
 			len += tmp->content_size / 10;
-		while(tmp)
+		while (tmp)
 		{
 			if ((int)tmp->content_size / 10 == len)
 				return (tmp);
@@ -208,10 +207,10 @@ t_list *hst_pgetcmp(t_list *lst, char *s)
 	return (NULL);
 }
 
-t_list *hst_getcmp(t_list *lst, char *s)
+t_list	*hst_getcmp(t_list *lst, char *s)
 {
-	t_list *tmp;
-	int		len; 
+	t_list	*tmp;
+	int		len;
 
 	tmp = lst;
 	if (ft_strisdigit(s))
@@ -219,7 +218,7 @@ t_list *hst_getcmp(t_list *lst, char *s)
 		len = ft_atoi(s);
 		if (len <= 0)
 			len += tmp->content_size / 10;
-		while(tmp)
+		while (tmp)
 		{
 			if ((int)tmp->content_size / 10 == len)
 				return (tmp);

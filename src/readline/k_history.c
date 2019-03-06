@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 13:41:29 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/04 14:13:33 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/06 18:05:52 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ t_key	g_khst[] =\
 	{K_CTRC, &ctrlc},
 	{K_CTRD, &ctrlc},
 	{K_CTRR, &hstnchc},
-	{K_TAB,  &hstnchc},
-	{NULL,   &del_cara}
+	{K_TAB, &hstnchc},
+	{NULL, &del_cara}
 };
 
-int		hstdelcara(t_rdl *rdl, char	*buf)
+int		hstdelcara(t_rdl *rdl, char *buf)
 {
 	(void)buf;
 	del_cara(rdl, buf);
@@ -61,7 +61,7 @@ void	printsearch(t_rdl *hst)
 	lastcol(hst);
 }
 
-int	hstrouter(t_rdl *hst, char *buf)
+int		hstrouter(t_rdl *hst, char *buf)
 {
 	int ret;
 
@@ -93,7 +93,7 @@ int		ctrlr(t_rdl *rdl, char *str)
 	{
 		buf[ret] = 0;
 		if ((stat = hstrouter(&hst, buf)) != 0)
-			break;
+			break ;
 	}
 	ft_printf("\n%s%s", rdl->prompt, rdl->str);
 	left(rdl, rdl->size - rdl->curs);

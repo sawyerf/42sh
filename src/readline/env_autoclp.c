@@ -6,14 +6,14 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 17:28:00 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/21 17:50:29 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/06 18:04:08 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline.h"
 #include "sh_core.h"
 
-int		foundc(char	*var, int c)
+int		foundc(char *var, int c)
 {
 	int		i;
 

@@ -6,13 +6,13 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 15:15:46 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/28 21:28:50 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/06 17:52:43 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline.h"
 
-int		rdlinit(t_rdl *rdl, char *PROMPT)
+int		rdlinit(t_rdl *rdl, char *prompt)
 {
 	if (!(rdl->str = ft_strnew(129)))
 		return (MEMERR);
@@ -25,15 +25,16 @@ int		rdlinit(t_rdl *rdl, char *PROMPT)
 	tgpstr("cr");
 	tgpstr("cd");
 	rdl->col = getcolumn();
-	rdl->lpro = ft_printf("%s", PROMPT);
+	rdl->lpro = ft_printf("%s", prompt);
 	lastcol(rdl);
-	rdl->prompt = PROMPT;
+	rdl->prompt = prompt;
 	return (0);
 }
 
 void	rdldel(t_rdl *rdl, int curs)
 {
-	if (curs > rdl->size || rdl->size < 0 || (curs < rdl->curs && rdl->curs <= 0)
+	if (curs > rdl->size || rdl->size < 0 ||
+		(curs < rdl->curs && rdl->curs <= 0)
 		|| (curs >= rdl->curs && rdl->size == curs))
 		return ;
 	ft_strcpy(rdl->str + curs, rdl->str + curs + 1);
@@ -90,7 +91,8 @@ void	rdladdstr(t_rdl *rdl, char *str)
 		rdl->allo = rdl->size + len;
 		rdl_realloc(rdl);
 	}
-	ft_memmove(rdl->str + rdl->curs + len, rdl->str + rdl->curs, rdl->size - rdl->curs);
+	ft_memmove(rdl->str + rdl->curs + len, rdl->str + rdl->curs,
+		rdl->size - rdl->curs);
 	count = 0;
 	while (str[count])
 	{
@@ -113,7 +115,8 @@ void	rdladd(t_rdl *rdl, char c)
 		return ;
 	if (rdl->allo == rdl->size)
 		rdl_realloc(rdl);
-	ft_memmove(rdl->str + rdl->curs + 1, rdl->str + rdl->curs, rdl->size - rdl->curs);
+	ft_memmove(rdl->str + rdl->curs + 1, rdl->str + rdl->curs,
+		rdl->size - rdl->curs);
 	rdl->str[rdl->curs] = c;
 	rdl->size++;
 	adv = ft_printf("%s", rdl->str + rdl->curs);

@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:48:42 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/21 13:03:09 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/06 18:22:20 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_rdl	g_rdl;
 
-char	*readline(char	*PROMPT)
+char	*readline(char *prompt)
 {
 	char			buf[11];
 	int				ret;
@@ -22,7 +22,7 @@ char	*readline(char	*PROMPT)
 
 	stat = 0;
 	setsig();
-	if (!terminit(&(g_rdl.save)) || rdlinit(&g_rdl, PROMPT) == MEMERR)
+	if (!terminit(&(g_rdl.save)) || rdlinit(&g_rdl, prompt) == MEMERR)
 		return (NULL);
 	while ((ret = read(0, buf, 10)) > 0)
 	{

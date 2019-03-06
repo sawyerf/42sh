@@ -6,16 +6,11 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:49:43 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/20 15:29:15 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/06 17:55:36 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline.h"
-
-/*void	termreset()
-{
-	tcsetattr(0, TCSADRAIN, &(save));
-}*/
 
 int		tputchar(int c)
 {

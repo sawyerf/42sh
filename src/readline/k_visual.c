@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 12:42:13 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/28 21:30:49 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/06 17:57:23 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ t_key	g_vskey[] =\
 {
 	{K_RGHT, vm_move},
 	{K_LEFT, vm_move},
-	{K_ESC,  finish},
+	{K_ESC, finish},
 	{K_CTRC, finish},
 	{K_CTRV, finish},
 	{K_CTRY, vm_copy},
 	{K_CTRX, vm_cut},
 	{K_CTRD, vm_del},
-	{NULL,   vm_move}
+	{NULL, vm_move}
 };
 
 int		finish(t_rdl *rdl, char *buf)
@@ -71,7 +71,7 @@ int		vm_copy(t_rdl *rdl, char *buf)
 	else
 		start = rdl->curs;
 	if (len < 0)
-		len = - len;
+		len = -len;
 	if (!(rdl->paste = ft_strndup(&rdl->str[start], len)))
 		return (MEMERR);
 	return (1);
@@ -125,7 +125,7 @@ int		visualmode(t_rdl *rdl, char *key)
 		ret = read(0, &buf, 10);
 		buf[ret] = 0;
 		if (special_key(rdl, buf, g_vskey))
-			break;
+			break ;
 		buf[0] = 0;
 	}
 	reprint(rdl, rdl->curs);

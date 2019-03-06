@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 21:15:40 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/26 17:57:52 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/06 18:09:35 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 int		np_word(t_rdl *rdl, int i)
 {
 	int count;
-	
+
 	count = 0;
 	if ((i < 0 && rdl->curs) || (i > 0 && rdl->str[rdl->curs]))
 		count++;
-	while (rdl->curs +  i * count >= 0 && rdl->str[rdl->curs +  i * count]
-		&& (rdl->str[rdl->curs +  i * count] == ' '
-			|| rdl->str[rdl->curs +  i * count] == '\n'))
+	while (rdl->curs + i * count >= 0 && rdl->str[rdl->curs + i * count]
+		&& (rdl->str[rdl->curs + i * count] == ' '
+			|| rdl->str[rdl->curs + i * count] == '\n'))
 		count++;
-	while (rdl->curs +  i * count >= 0 && rdl->str[rdl->curs +  i * count]
-		&& rdl->str[rdl->curs +  i * count] != ' '
-			&& rdl->str[rdl->curs +  i * count] != '\n')
+	while (rdl->curs + i * count >= 0 && rdl->str[rdl->curs + i * count]
+		&& rdl->str[rdl->curs + i * count] != ' '
+			&& rdl->str[rdl->curs + i * count] != '\n')
 		count++;
 	if (rdl->curs + i * count < 0)
 		count = rdl->curs + 1;
@@ -48,7 +48,7 @@ int		next_word(t_rdl *rdl, char *buf)
 int		prev_word(t_rdl *rdl, char *buf)
 {
 	int count;
-	
+
 	(void)buf;
 	count = np_word(rdl, -1);
 	left(rdl, count);
@@ -78,7 +78,7 @@ int		move_curs(t_rdl *rdl, char *buf)
 	}
 	else if (!ft_strcmp(K_SDOW, buf) && rdl->curs + rdl->col < rdl->size)
 		rdl->curs += down(rdl, 1);
-	else if (!ft_strcmp(K_SUP, buf)&& rdl->curs - rdl->col >= 0)
+	else if (!ft_strcmp(K_SUP, buf) && rdl->curs - rdl->col >= 0)
 		rdl->curs += up(rdl, 1);
 	return (0);
 }

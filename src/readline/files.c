@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 14:48:16 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/28 21:28:49 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/06 18:06:49 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,37 +16,37 @@
 
 int		exaccess(char *file)
 {
-		struct stat st;
+	struct stat st;
 
-		if (access(file, F_OK))
-			return (2);
-		stat(file, &st);
-		if (S_ISDIR(st.st_mode))
-			return (3);
-		if (!access(file, X_OK))
-			return (0);
-		return (1);
+	if (access(file, F_OK))
+		return (2);
+	stat(file, &st);
+	if (S_ISDIR(st.st_mode))
+		return (3);
+	if (!access(file, X_OK))
+		return (0);
+	return (1);
 }
 
 int		filexist(char *file)
 {
-		if (access(file, F_OK))
-			return (2);
-		return (0);
+	if (access(file, F_OK))
+		return (2);
+	return (0);
 }
 
 int		folexaccess(char *file)
 {
-		struct stat st;
+	struct stat st;
 
-		if (access(file, F_OK))
-			return (2);
-		stat(file, &st);
-		if (S_ISDIR(st.st_mode))
-			return (0);
-		if (!access(file, X_OK))
-			return (0);
-		return (1);
+	if (access(file, F_OK))
+		return (2);
+	stat(file, &st);
+	if (S_ISDIR(st.st_mode))
+		return (0);
+	if (!access(file, X_OK))
+		return (0);
+	return (1);
 }
 
 t_list	*folderin(DIR *ptr, char *path, char *exec, int (*f)(char *file))
@@ -63,9 +63,9 @@ t_list	*folderin(DIR *ptr, char *path, char *exec, int (*f)(char *file))
 	while ((ret = readdir(ptr)))
 	{
 		cpath = ft_zprintf("%s/%s", path, ret->d_name);
-		if (!f(cpath) && !ft_strncmp(ret->d_name, exec, ft_strlen(exec)) && ft_strcmp(ret->d_name, "..") && ft_strcmp(ret->d_name, "."))
+		if (!f(cpath) && !ft_strncmp(ret->d_name, exec, ft_strlen(exec))
+				&& ft_strcmp(ret->d_name, "..") && ft_strcmp(ret->d_name, "."))
 		{
-			//ft_dprintf(2, "find: %s\n", ret->d_name);
 			ft_lstadd(&lst, ft_lstnew(ret->d_name + len, exaccess(cpath)));
 			count++;
 		}
@@ -89,7 +89,6 @@ t_list	*get_folex(char *token, int (*f)(char *file))
 		path = ft_strndup(token, exec - token);
 	else
 		path = ft_strdup(".");
-	//ft_dprintf(2, "\nexec: %s\npath: %s\nnb: %d\n", exec, path, exec - token);
 	if (!(ptr = opendir(path)))
 		return (NULL);
 	lst = folderin(ptr, path, exec, f);
