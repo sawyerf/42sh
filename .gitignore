@@ -6,4 +6,5 @@ lol*
 *.swp
 *.swo
 *.out
+*:w
 21sh

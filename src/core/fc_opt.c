@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 18:00:46 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/05 18:01:34 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/06 17:41:39 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ int		fc_l(t_fc fc)
 	int		i;
 
 	lst = gethst();
-	if (!lst)
+	if (!lst || !lst->next)
 		return (0);
+	lst = lst->next;
 	if (fc.range[0])
 	{
 		beg = hst_getcmp(lst, fc.range[0]);
@@ -32,7 +33,7 @@ int		fc_l(t_fc fc)
 	else
 	{
 		if ((int)lst->content_size / 10 - 10 < 0)
-			beg = hst_getcmp(lst, "0");
+			beg = hst_getcmp(lst, "1");
 		else
 			beg = hst_getcmp(lst, ft_itoa((int)lst->content_size / 10 - 10));
 	}
@@ -54,11 +55,15 @@ int		fc_e(t_fc fc)
 {
 	char	*file;
 	t_list	*lst;
+	t_list	*tmp;
 	t_list	*beg;
 	int		i;
 
 	i = 1;
+	hstdellast();
 	lst = gethst();
+	if (!lst)
+		return (0);
 	beg = lst;
 	if (fc.range[0])
 	{
@@ -68,7 +73,12 @@ int		fc_e(t_fc fc)
 			lst = hst_getcmp(lst, fc.range[1]);
 			i = lst->content_size / 10 - beg->content_size / 10;
 			i += (i < 0 ? -1 : 1);
-			ft_printf("%d\n", i);
+		}
+		if (ft_cisin(fc.opt, 'r'))
+		{
+			tmp = lst;
+			lst = beg;
+			beg = tmp;
 		}
 	}
 	if (!(file = fc_filename(beg, i)))
@@ -94,6 +104,9 @@ int		fc_le(t_fc fc)
 
 	i = 1;
 	lst = gethst();
+	if (!lst || !lst->next)
+		return (0);
+	lst = lst->next;
 	beg = lst;
 	if (fc.range[0])
 	{
@@ -103,7 +116,6 @@ int		fc_le(t_fc fc)
 			lst = hst_getcmp(lst, fc.range[1]);
 			i = lst->content_size / 10 - beg->content_size / 10;
 			i += (i < 0 ? -1 : 1);
-			ft_printf("%d\n", i);
 		}
 	}
 	if (!(file = fc_filename(beg, i)))
@@ -119,6 +131,7 @@ int		fc_s(t_fc fc)
 {
 	t_list	*lst;
 
+	hstdellast();
 	lst = gethst();
 	if (fc.range[0])
 		lst = hst_getcmp(lst, fc.range[0]);

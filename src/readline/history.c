@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 20:13:04 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/05 11:58:21 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/06 17:34:23 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	hstadd(char *str)
 	if (g_hst[0] && !ft_strcmp(g_hst[0]->content, str))
 		return ;
 	if (g_hst[0]->next)
-		i = g_hst[0]->next->content_size / 10;
+		i = (g_hst[0]->content_size / 10) + 1;
 	else
-		i = 0;
+		i = 1;
 	ft_lstadd(&g_hst[0], ft_lstnew(str, i * 10));
 }
 
@@ -52,7 +52,7 @@ int		hstread(char **env)
 	char	*path;
 	char	*home;
 
-	i = 0;
+	i = 1;
 	if (!(home = envchrr(env, "HOME"))
 		|| !(path = ft_zprintf("%s/%s", home, ".21sh_history")))
 		return (0);
@@ -217,7 +217,7 @@ t_list *hst_getcmp(t_list *lst, char *s)
 	if (ft_strisdigit(s))
 	{
 		len = ft_atoi(s);
-		if (len < 0)
+		if (len <= 0)
 			len += tmp->content_size / 10;
 		while(tmp)
 		{
