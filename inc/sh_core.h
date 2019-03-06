@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/05 18:09:51 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/06 20:37:35 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct 		s_sh
 	int				mode;
 	char			**local;
 	char			**env;
+	int				last_exit;
 	/* stuff needed by job control will eventually live in this struct 
 	 */
 }					t_sh;

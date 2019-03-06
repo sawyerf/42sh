@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/28 14:24:04 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/06 20:38:14 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int	exec_pipeline(t_ast_node *tree)
 	else 
 		ret = spawn_command(cmd_tab);
 	tree->exit_status = cmd_tab->exit_status;
+	g_sh.last_exit = tree->exit_status;
 	free_cmd_tab_lst(cmd_tab);
 	return (ret);
 }

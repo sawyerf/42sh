@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/05 19:13:25 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/06 20:52:34 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,7 @@
 int	eval_tree(t_ast_node *tree)
 {
 	if (tree == NULL)
-	{
-	ft_printf("fatal error in eval_tree: unknown node type\n");
-
-	}
+		ft_printf("fatal error in eval_tree: unknown node type\n");
 	if ((tree->type == SEMI_COL) || (tree->type == AMPERS)
 		|| (tree->type == NEWLINE))
 	{

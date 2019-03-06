@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/02 17:15:52 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/06 21:39:30 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,9 @@ int	build_redir(t_token *to_add, t_redir *redir)
 		return (MEMERR);
 	if (to_add->type == IO_NUM)
 		redir->left = tmp;	
-	else if ((to_add->type >= LESSAND) && (to_add->type <= GREAT))
+	else if ((to_add->type >= LESSAND) && (to_add->type <= DLESS))
 		redir->op = tmp;
-	else if (to_add->type == FILENAME)
+	else if ((to_add->type == FILENAME) || (to_add->type == WORD))
 		redir->right = tmp;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/05 19:09:53 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/06 21:04:58 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,6 +230,12 @@ int			handle_less(t_lexer *lx_st)
 	if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 		return (MEMERR);
 	lx_st->token->type = LESS;
+	if (*(lx_st->cursor) == '<')
+	{
+		if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
+			return (MEMERR);
+		lx_st->token->type = DLESS;
+	}
 	if (*(lx_st->cursor) == '&')
 	{
 		if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)

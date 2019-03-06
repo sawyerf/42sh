@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 15:48:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/05 19:42:41 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/06 21:30:20 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef	enum	e_token_type
 	DGREAT,
 	LESS,
 	GREAT,
+	DLESS,
 	EOI, // End Of Input
 }				t_token_type;
 
