@@ -1,0 +1,11 @@
+ls
+echo ls
+ls
+git push
+git push
+git commit -m "Fix: fc -el -e"
+git add .
+git add 
+git status
+git branch
+bash lol
