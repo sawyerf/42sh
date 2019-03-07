@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/27 15:10:23 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/06 17:08:45 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/06 20:22:14 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,10 @@ char	*fc_read(char *file)
 		ft_strdel(&line);
 		command = tmp;
 	}
-	close(fd);	
+	close(fd);
 	unlink(file);
-	ft_printf("%s\n", command);
+	if (command)
+		ft_printf("\33[0;34m%s\33[0;0m\n", command);
 	return (command);
 }
 
@@ -136,7 +137,8 @@ int		run_editor(t_fc *fc, char *file)
 		}
 	}
 	run_command(ft_zprintf("%s %s\n", fc->editor, file));
-	return (0);
+	printf("%d\n", g_sh.status);
+	return (g_sh.status);
 }
 
 

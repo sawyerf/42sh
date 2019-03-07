@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 14:40:53 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/04 20:33:14 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/06 20:35:14 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 #include "ft_eval.h"
 
 t_list *g_thash[HT_SIZE];
+
+t_list **ht_gget(void)
+{
+	return (g_thash);
+}
 
 void	ht_del(void)
 {

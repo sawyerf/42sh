@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/05 11:46:41 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/06 20:38:25 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int 	ht_getvalue(char *path, t_cmd_tab *cmd);
 void	ht_del(void);
 int		ht_getfile(char **paths, t_cmd_tab *cmd);
 void	ht_refreshall(char *path);
+t_list	**ht_gget(void);
 
 //termcaps
 int		terminit(struct termios *save);

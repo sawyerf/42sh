@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 18:00:46 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/06 17:41:39 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/06 20:20:49 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ int		fc_e(t_fc fc)
 	if (!(file = fc_filename(beg, i)))
 		return (1);
 	fc_writelst(file, beg, i);
-	run_editor(&fc, file);
+	if (run_editor(&fc, file))
+		return (1);
 	if (ft_cisin(fc.opt, 'e'))
 	{
 		run_command(fc_read(file));
