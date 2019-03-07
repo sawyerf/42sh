@@ -76,7 +76,6 @@ void	test_pipeline(t_simple_cmd *start)
 	{
 		test_simplecmd(start);
 		start=  start->next;
-
 	}
 	ft_printf("<<<<<<<<END OF PIPELINE>>>>>>>>\n");
 }

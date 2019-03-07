@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/03/05 19:02:52 by ktlili           ###   ########.fr        #
+#    Updated: 2019/03/07 19:34:05 by ktlili           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,7 +73,7 @@ SRC_FILE =	core/builtins.c				\
 			lexer/rev_lex.c				\
 			lexer/memerror.c			\
 			parser/parser_ast.c			\
-			parser/parser_rules.c		\
+			parser/refactor_parser.c	\
 			parser/parser_test.c		\
 			parser/parser_tools.c		\
 			parser/sh_parser.c			\

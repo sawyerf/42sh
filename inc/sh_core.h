@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/06 20:37:35 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/07 19:16:38 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # include <limits.h>
 
 # define MEMERR 2 
-# define SYNERR 3
+# define SYNERR -1 
 # define ENVERR 4
 # define ACCERR 5
 

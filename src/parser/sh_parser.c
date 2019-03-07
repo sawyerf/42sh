@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/05 20:01:29 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/07 22:07:38 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,18 +137,23 @@ int	sh_parser(t_token *start)
 
 t_token *next_token(t_parser *parser)
 {
+	t_token *new_tok;
 	t_token *tmp;
 
+	if (parser->current->next)
+		return (parser->current->next);
+	if (!(new_tok = next_tok(parser->line)))
+		return (NULL);
 	if (!(parser->head))
-		parser->head == parser->current;
+		parser->head = new_tok;
 	else
 	{
 		tmp = parser->head;
 		while (tmp->next)
 			tmp = tmp->next;
-		tmp->next = parser->current;
+		tmp->next = new_tok;
 	}
-	return (parser->current = next_tok(parser->line));
+	return (new_tok);
 }
 
 int	sh_parser_refac(char *line)
@@ -158,13 +163,33 @@ int	sh_parser_refac(char *line)
 
 	ft_bzero(&parser, sizeof(t_parser));
 	parser.line = line;
-	if (!(parser->current = next_tok(line)))
+	if (!(parser.current = next_tok(line)))
 		return (MEMERR);
 	ret = expect_complete_cmds(&parser);
 	if (ret)
+	{
+		ft_dprintf(STDERR_FILENO, "21sh: syntax error near : '%s'\n", parser.current->data.str);
 		return (ret);
+	}
+//	print_tree(parser.tree);
 	if (eval_tree(parser.tree) == MEMERR)
 		return (MEMERR);
-	free_tree(parser.tree)
+	free_tree(parser.tree);
 	return (0); //this should be exit status
 }
+/*
+t_token *next_token(t_parser *parser)
+{
+	t_token *tmp;
+
+	if (!(parser->head))
+		parser->head = parser->current;
+	else
+	{
+		tmp = parser->head;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = parser->current;
+	}
+	return (parser->current = next_tok(parser->line));
+}*/

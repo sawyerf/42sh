@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/05 20:00:40 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/07 22:09:23 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,15 @@ t_token *next_tok(char *line)
 	while (ft_cisin(" \t", *(lexer_state.cursor)))	
 		lexer_state.cursor = lexer_state.cursor + 1;
 	if (*(lexer_state.cursor) == '\0')
+	{
+		init = 1;
 		return (new_token(EOI));
+	}
 	if (!(lexer_state.token = new_token(0))
 		|| (dispatch_fn(&lexer_state) == MEMERR))
 		return (NULL);
 	return (lexer_state.token);
 }
-
 
 t_token *ft_tokenizer(char *line)
 {
@@ -100,39 +102,19 @@ t_token *ft_tokenizer(char *line)
 	add_token(&head, new_token(EOI));
 	return (head);
 }
-/*
-t_token	*ft_tokenizer(char *line)
-{
-	static	t_func	table[TABLESZ];
-	t_lexer			lexer_state;
-	t_token			*head;
-	int				ret;
 
-	lexer_state.line = line;
-	lexer_state.cursor = line;
-	init_jump_table(table);
-	head = NULL;
-	while (ft_is_whitespace(*(lexer_state.cursor)))
-		lexer_state.cursor = lexer_state.cursor + 1;
-	while (*(lexer_state.cursor))
+
+int test_lexer(char *line)
+{
+	t_token *ret;
+
+	while (42)
 	{
-		lexer_state.token = new_token(0);
-		if (!lexer_state.token)
-			return (NULL);
-		if (*(lexer_state.cursor) > 0 )
-			ret = table[(int)*(lexer_state.cursor)](&lexer_state);
-		else
-			ret = table[1](&lexer_state);
-		add_token(&head, lexer_state.token);
-		lexer_state.token = NULL;
-		if (ret == ENDOFINPUT) // this is useless 
-		{
-			free_token_lst(head);
-			return (NULL);
-		}
-		while (ft_is_whitespace(*(lexer_state.cursor)))
-			lexer_state.cursor = lexer_state.cursor + 1;
+		if (!(ret = next_tok (line)))
+			return (MEMERR);
+		print_token(ret);
+		if (ret->type == EOI)
+			break;
 	}
-	add_token(&head, new_token(1));
-	return (head);
-}*/
+	return (0);
+}

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/06 20:38:41 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/07 21:39:30 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,22 @@ static void		silence_ac_av(char ac, char **av)
 
 int		run_command(char *line)
 {
-	t_token	*tok;
+	//t_token	*tok;
 
 	if (!line)
 		return (-1);
 	if ((*line) && ft_strcmp(line, "\n"))
 	{
-		if ((tok = ft_tokenizer(line)))
+
+		if (sh_parser_refac(line) == MEMERR)
+			return (MEMERR);		
+//		test_lexer(line);
+/*		if ((tok = ft_tokenizer(line)))
 		{
 			sh_parser(tok);
 			free_token_lst(tok);
 			ft_printf("EXIT: %d\n", g_sh.last_exit);
-		}
+		}*/
 	}
 	else if (*line != '\n')
 		return (-1);
