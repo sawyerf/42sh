@@ -134,3 +134,37 @@ int	sh_parser(t_token *start)
 	free_tree(parser.tree);
 	return (ret);
 }
+
+t_token *next_token(t_parser *parser)
+{
+	t_token *tmp;
+
+	if (!(parser->head))
+		parser->head == parser->current;
+	else
+	{
+		tmp = parser->head;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = parser->current;
+	}
+	return (parser->current = next_tok(parser->line));
+}
+
+int	sh_parser_refac(char *line)
+{
+	t_parser	parser;
+	int			ret;
+
+	ft_bzero(&parser, sizeof(t_parser));
+	parser.line = line;
+	if (!(parser->current = next_tok(line)))
+		return (MEMERR);
+	ret = expect_complete_cmds(&parser);
+	if (ret)
+		return (ret);
+	if (eval_tree(parser.tree) == MEMERR)
+		return (MEMERR);
+	free_tree(parser.tree)
+	return (0); //this should be exit status
+}
