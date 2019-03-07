@@ -60,7 +60,7 @@ t_token *next_tok(char *line)
 		init = 0;
 		ft_bzero(&lexer_state, sizeof(t_lexer));
 	}
-	if ((line) && (line != lexer_state.line))
+	if ((line))
 	{
 		lexer_state.line = line;
 		lexer_state.cursor = line;

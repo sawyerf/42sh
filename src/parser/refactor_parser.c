@@ -69,7 +69,8 @@ int	expect_filename(t_parser *parser)
 		parser->current->type = FILENAME;
 		if (build_redir(parser->current, &(parser->current_redir)) == MEMERR)
 			mem_err_exit(parser);
-		if (!(parser->current = next_token(parser))) return (MEMERR);
+		if (!(parser->current = next_token(parser)))
+			return (MEMERR);
 		return (0);
 	}
 	return (SYNERR);
@@ -85,7 +86,8 @@ int	expect_io_file(t_parser *parser)
 	{
 		if (build_redir(parser->current, &(parser->current_redir)) == MEMERR)
 			mem_err_exit(parser);
-		if (!(parser->current = next_token(parser))) return (MEMERR);
+		if (!(parser->current = next_token(parser)))
+			return (MEMERR);
 		if (!expect_filename(parser))
 			return (0);
 	}
@@ -108,7 +110,8 @@ int expect_io_here(t_parser *parser)
 	{
 		if (build_redir(parser->current, &(parser->current_redir)) == MEMERR)
 			mem_err_exit(parser);
-		if (!(parser->current = next_token(parser))) return (MEMERR);
+		if (!(parser->current = next_token(parser)))
+			return (MEMERR);
 		if (!expect_here_end(parser))
 			return (0);
 	}
@@ -126,7 +129,8 @@ int	expect_io_redir(t_parser *parser)
 	{
 		if (build_redir(parser->current, &(parser->current_redir)) == MEMERR)
 			mem_err_exit(parser);
-		if (!(parser->current = next_token(parser))) return (MEMERR);
+		if (!(parser->current = next_token(parser))) 
+			return (MEMERR);
 		if ((!expect_io_file(parser)) || (!expect_io_here(parser)))
 		{
 			add_redir_lst(&(parser->current_redir), &(parser->cmd.redir_lst));
@@ -150,7 +154,8 @@ int	expect_assign(t_parser *parser)
 		parser->current->type = ASSIGN;
 		if (build_cmd(parser->current, &(parser->cmd)) == MEMERR)
 			mem_err_exit(parser);
-		if (!(parser->current = next_token(parser))) return (MEMERR);
+		if (!(parser->current = next_token(parser))) 
+			return (MEMERR);
 		return (0);
 	}
 	return (SYNERR);
@@ -186,7 +191,8 @@ int	expect_word(t_parser *parser)
 	{
 		if (build_cmd(parser->current, &(parser->cmd)) == MEMERR)
 			mem_err_exit(parser);
-		if (!(parser->current = next_token(parser))) return (MEMERR);
+		if (!(parser->current = next_token(parser))) 
+			return (MEMERR);
 		return (0);
 	}
 	return (SYNERR);
@@ -234,7 +240,8 @@ int	expect_pipeline_suffix(t_parser *parser)
 	backtrack = parser->current;
 	if (parser->current->type == PIPE)
 	{
-		if (!(parser->current = next_token(parser))) return (MEMERR);
+		if (!(parser->current = next_token(parser))) 
+			return (MEMERR);
 		expect_linebreak(parser);
 		if (expect_simple_cmd(parser) == SYNERR)
 		{
@@ -276,7 +283,8 @@ int	expect_and_or_suffix(t_parser *parser)
 	{
 		if (tree_add_and_or(parser) == MEMERR)
 			mem_err_exit(parser);
-		if (!(parser->current = next_token(parser))) return (MEMERR);
+		if (!(parser->current = next_token(parser))) 
+			return (MEMERR);
 		expect_linebreak(parser);
 		if (expect_pipeline(parser) == SYNERR)
 		{
@@ -354,8 +362,8 @@ int expect_complete_cmds_suffix(t_parser *parser)
 	{
 		if (expect_complete_cmd(parser) == SYNERR)
 		{
-			 parser->current = backtrack;
-			 return (SYNERR);
+			parser->current = backtrack;
+			return (SYNERR);
 		}
 		expect_complete_cmds_suffix(parser);
 		return (0);

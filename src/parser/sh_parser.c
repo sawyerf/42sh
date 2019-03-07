@@ -142,7 +142,7 @@ t_token *next_token(t_parser *parser)
 
 	if (parser->current->next)
 		return (parser->current->next);
-	if (!(new_tok = next_tok(parser->line)))
+	if (!(new_tok = next_tok(NULL)))
 		return (NULL);
 	if (!(parser->head))
 		parser->head = new_tok;
@@ -166,8 +166,10 @@ int	sh_parser_refac(char *line)
 	if (!(parser.current = next_tok(line)))
 		return (MEMERR);
 	ret = expect_complete_cmds(&parser);
+	next_tok("");
 	if (ret)
 	{
+		free_tree(parser.tree);
 		ft_dprintf(STDERR_FILENO, "21sh: syntax error near : '%s'\n", parser.current->data.str);
 		return (ret);
 	}
