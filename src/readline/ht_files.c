@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 14:09:25 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/26 15:32:18 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/07 15:56:49 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int		ht_getfile(char **paths, t_cmd_tab *cmd)
 		if (!exaccess(tmp))
 		{
 			ht_hash(paths[i]);
-			ft_lstadd(&g_thash[i], ft_lstnew(cmd->av[0], 0));
+			ft_lstadd(&g_thash[i], ft_lstnew(tmp, ft_strlen(paths[i])));
 			cmd->full_path = tmp;
 			free_tab(paths);
 			return (0);
@@ -79,10 +79,12 @@ t_list	*ht_getexec(char *path)
 		return (NULL);
 	while ((ret = readdir(ptr)))
 	{
+		if (!ft_strcmp(ret->d_name, "..") || !ft_strcmp(ret->d_name, "."))
+			continue;
 		if (!(cpath = ft_zprintf("%s/%s", path, ret->d_name)))
 			return (NULL);
 		if (!folexaccess(cpath))
-			ft_lstadd(&lst, ft_lstnew(ret->d_name, ft_strlen(ret->d_name)));
+			ft_lstadd(&lst, ft_lstnew(cpath, ft_strlen(path)));
 		ft_strdel(&cpath);
 	}
 	closedir(ptr);

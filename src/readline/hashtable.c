@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 14:40:53 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/06 20:35:14 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/07 15:53:01 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	ht_del(void)
 	{
 		if (g_thash[count])
 			ft_lstdel(&g_thash[count]);
+		g_thash[count] = NULL;
 		count++;
 	}
 }
@@ -79,17 +80,16 @@ int		ht_getvalue(char *path, t_cmd_tab *cmd)
 		tmp = ht_get(paths[i]);
 		while (tmp)
 		{
-			if (!ft_strcmp(cmd->av[0], tmp->content))
+			if (!ft_strcmp(cmd->av[0], tmp->content + tmp->content_size))
 			{
-				if (!(file = ft_zprintf("%s/%s", paths[i], tmp->content)))
-					return (MEMERR);
+				file = tmp->content;
 				if (!exaccess(file))
 				{
-					cmd->full_path = file;
+					if (!(cmd->full_path = ft_strdup(file)))
+						return (MEMERR);
 					free_tab(paths);
 					return (0);
 				}
-				ft_strdel(&file);
 			}
 			tmp = tmp->next;
 		}

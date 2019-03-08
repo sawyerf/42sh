@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/06 20:38:25 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/08 18:55:30 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ typedef struct		s_rdl
 	int				vcurs;
 	char			*paste;
 }					t_rdl;
-
+/*
 typedef struct		s_hash
 {
 	char			*exec;
 	char			*path;
-}					t_hash;
+}					t_hash;*/
 
 typedef struct		s_key
 {

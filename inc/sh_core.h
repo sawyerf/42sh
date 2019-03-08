@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/06 20:55:27 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/07 16:37:19 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,12 @@ typedef	struct			s_command
 }						t_command;
 /*
 */
+
+typedef	struct			s_hash
+{
+	char				opt[2];
+	char				**search;
+}						t_hash;
 
 typedef	struct			s_fc
 {
