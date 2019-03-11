@@ -77,6 +77,7 @@ SRC_FILE =	core/builtins.c				\
 			parser/parser_test.c		\
 			parser/parser_tools.c		\
 			parser/sh_parser.c			\
+			parser/parser_heredoc.c	\
 			readline/readline.c			\
 			readline/struct_rdl.c		\
 			readline/term.c				\
@@ -86,7 +87,7 @@ SRC_FILE =	core/builtins.c				\
 			readline/files.c			\
 			readline/print_choice.c		\
 			readline/hashtable.c		\
-			readline/ht_files.c		\
+			readline/ht_files.c			\
 			readline/k_autocpl.c		\
 			readline/k_move.c			\
 			readline/k_return.c			\

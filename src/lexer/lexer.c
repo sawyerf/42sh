@@ -36,7 +36,7 @@ t_lx_fn	g_lx_fn[] =\
 	{ 0, NULL},
 };
 
-int	dispatch_fn(t_lexer *lx_st)
+static int	dispatch_fn(t_lexer *lx_st)
 {
 	int i;
 
@@ -50,7 +50,7 @@ int	dispatch_fn(t_lexer *lx_st)
 	return (handle_common(lx_st));
 }
 
-t_token *next_tok(char *line)
+t_token *next_tok(char *line, t_parser *parser)
 {
 	static t_lexer lexer_state;
 	static int		init = 1;
@@ -75,6 +75,7 @@ t_token *next_tok(char *line)
 	if (!(lexer_state.token = new_token(0))
 		|| (dispatch_fn(&lexer_state) == MEMERR))
 		return (NULL);
+	parser->cursor = lexer_state.cursor;
 	return (lexer_state.token);
 }
 
@@ -107,10 +108,10 @@ t_token *ft_tokenizer(char *line)
 int test_lexer(char *line)
 {
 	t_token *ret;
-
+	t_parser dummy;
 	while (42)
 	{
-		if (!(ret = next_tok (line)))
+		if (!(ret = next_tok (line, &dummy)))
 			return (MEMERR);
 		print_token(ret);
 		if (ret->type == EOI)

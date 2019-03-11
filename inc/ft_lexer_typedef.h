@@ -32,6 +32,8 @@ typedef	enum	e_token_type
 	LESS,
 	GREAT,
 	DLESS,
+	HERE_END,
+	HERE_END_QU,
 	EOI, // End Of Input
 }				t_token_type;
 

@@ -17,6 +17,9 @@ t_sh	g_sh;
 
 static int	init_shell(char **env)
 {
+	g_sh.mode = NONINTERACTIVE;
+	if (isatty(STDIN_FILENO))
+		g_sh.mode = INTERACTIVE;
 	if (!(g_sh.env = shlvl(dup_tab(env))))
 		return (MEMERR);
 	if (!(g_sh.local = ft_tabnew(0)))

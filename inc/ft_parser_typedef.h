@@ -34,7 +34,7 @@ typedef struct			s_simple_cmd
 typedef struct	s_parser
 {
 	struct s_token		*current;
-	char				*line;
+	char				*cursor;
 	struct s_token 		*head;	
 	t_simple_cmd		cmd;
 	t_redir				current_redir;	

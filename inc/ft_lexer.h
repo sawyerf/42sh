@@ -14,6 +14,7 @@
 # define FT_LEXER_H
 
 #include "sh_core.h"
+#include "ft_parser_typedef.h"
 // to delete
 #define DQUOTE_ERR 10
 #define SQUOTE_ERR 11
@@ -57,7 +58,7 @@ t_token	*new_token(int type);
 
 /* lexer */
 int			test_lexer(char *line);
-t_token		*next_tok(char *line);
+t_token		*next_tok(char *line, t_parser *parser);
 t_token		*ft_tokenizer(char *line);
 int			ft_tokenizer_2(char *line, t_token **head);
 //int	next_token(char **line, t_token *token);

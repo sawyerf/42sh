@@ -104,7 +104,7 @@ int	handle_redir(t_redir *redir_lst, t_list **head)
 	{
 		if (expand_redir(iter))
 			return (MEMERR);
-		if (iter->right->data.str[0] != 0) /* if right side expands to null*/
+		if (iter->right->data.str[0] != 0) /* should printf ambiguous redir*/
 		{
 			if ((ret = apply_redir(iter, head)))
 				return (ret);

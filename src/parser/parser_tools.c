@@ -71,7 +71,8 @@ int	build_redir(t_token *to_add, t_redir *redir)
 		redir->left = tmp;	
 	else if ((to_add->type >= LESSAND) && (to_add->type <= DLESS))
 		redir->op = tmp;
-	else if ((to_add->type == FILENAME) || (to_add->type == WORD))
+	else if ((to_add->type == FILENAME) || (to_add->type == HERE_END)
+		|| (to_add->type == HERE_END_QU))
 		redir->right = tmp;
 	return (0);
 }

@@ -18,11 +18,14 @@
 # include "ft_eval.h"
 
 typedef struct s_ast_node t_ast_node;
-
+/* refactor */
 int	sh_parser(t_token *start);
 int	sh_parser_refac(char *line);
 t_token *next_token(t_parser *parser);
+/*here doc */
+int	handle_here_doc(t_parser *parser);
 
+/* */
 
 int	add_to_pipeline(t_parser *parser);
 int	build_redir(t_token *to_add, t_redir *redir);
@@ -56,6 +59,8 @@ int	expect_separator_op(t_parser *parser);
 int	expect_separator(t_parser *parser);
 int	expect_filename(t_parser *parser);
 int	expect_io_file(t_parser *parser);
+int	expect_here_end(t_parser *parser);
+int	expect_io_here(t_parser *parser);
 int	expect_io_redir(t_parser *parser);
 int	expect_assign(t_parser *parser);
 int	expect_cmd_pre(t_parser *parser);

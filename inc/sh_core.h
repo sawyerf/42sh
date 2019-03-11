@@ -32,10 +32,13 @@
 # define SYNERR -1 
 # define ENVERR 4
 # define ACCERR 5
-
+# define HEREDOC_ERR 6
 #define FDSAVEIN 255
 #define FDSAVEOUT 256
 #define FDSAVEERR 257
+
+#define INTERACTIVE 1
+#define NONINTERACTIVE 0
 
 typedef struct 		s_sh
 {

@@ -12,12 +12,31 @@
 
 #include "ft_eval.h"
 
+static int make_here_doc(int *right_fd, t_redir *redir)
+{
+	int tmpfile;
+	char *tmpname = "/tmp/21sh_heredoc";
+
+	tmpfile = open(tmpname, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (tmpfile == -1)
+		return (-1);
+	write(tmpfile, redir->right->data.str, ft_strlen(redir->right->data.str));
+	close(tmpfile);
+	*right_fd = open(tmpname, O_RDONLY);
+	unlink(tmpname);
+	if (*right_fd == -1)
+		return (-1);
+	return (0);
+}
+
 static int	get_open_flags(t_token_type op)
 {
 	if (op == GREAT)
 		return (O_WRONLY | O_CREAT | O_TRUNC);
 	else if (op == DGREAT)
 		return (O_WRONLY | O_APPEND | O_CREAT);
+	else if (op == LESS || op == DLESS)
+		return (O_RDONLY);
 	return (O_RDONLY);
 }
 
@@ -71,6 +90,8 @@ int	handle_right(int *left_fd, int *right_fd, t_redir *redir)
 		return (fd_aggregator(left_fd, right_fd, redir));
 		//check for ambiguous redir here (data.str has to be all digit)
 	}
+	if (redir->op->type == DLESS)
+		return (make_here_doc(right_fd, redir));
 	oflag = get_open_flags(redir->op->type);
 	*right_fd = open(redir->right->data.str, oflag, 0644); 
 	if (*right_fd == -1)

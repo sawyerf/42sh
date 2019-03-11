@@ -68,7 +68,7 @@ int	expect_filename(t_parser *parser)
 	{
 		parser->current->type = FILENAME;
 		if (build_redir(parser->current, &(parser->current_redir)) == MEMERR)
-			mem_err_exit(parser);
+			return(MEMERR);
 		if (!(parser->current = next_token(parser)))
 			return (MEMERR);
 		return (0);
@@ -85,7 +85,7 @@ int	expect_io_file(t_parser *parser)
 		&& (parser->current->type <= GREAT))
 	{
 		if (build_redir(parser->current, &(parser->current_redir)) == MEMERR)
-			mem_err_exit(parser);
+			return(MEMERR);
 		if (!(parser->current = next_token(parser)))
 			return (MEMERR);
 		if (!expect_filename(parser))
@@ -97,8 +97,19 @@ int	expect_io_file(t_parser *parser)
 
 int expect_here_end(t_parser *parser)
 {
-	(void)parser;
-	return (0);	
+	int ret;
+
+	if (parser->current->type == WORD)
+	{
+		if ((ret = handle_here_doc(parser)))
+			return (ret);
+		if (build_redir(parser->current, &(parser->current_redir)) == MEMERR)
+			return(MEMERR);
+		if (!(parser->current = next_token(parser)))
+			return (MEMERR);
+		return (0);
+	}
+	return (SYNERR);	
 }
 
 int expect_io_here(t_parser *parser)
@@ -109,7 +120,7 @@ int expect_io_here(t_parser *parser)
 	if (parser->current->type == DLESS)
 	{
 		if (build_redir(parser->current, &(parser->current_redir)) == MEMERR)
-			mem_err_exit(parser);
+			return(MEMERR);
 		if (!(parser->current = next_token(parser)))
 			return (MEMERR);
 		if (!expect_here_end(parser))
@@ -128,7 +139,7 @@ int	expect_io_redir(t_parser *parser)
 	if (parser->current->type == IO_NUM)
 	{
 		if (build_redir(parser->current, &(parser->current_redir)) == MEMERR)
-			mem_err_exit(parser);
+			return(MEMERR);
 		if (!(parser->current = next_token(parser))) 
 			return (MEMERR);
 		if ((!expect_io_file(parser)) || (!expect_io_here(parser)))
@@ -153,7 +164,7 @@ int	expect_assign(t_parser *parser)
 	{
 		parser->current->type = ASSIGN;
 		if (build_cmd(parser->current, &(parser->cmd)) == MEMERR)
-			mem_err_exit(parser);
+			return(MEMERR);
 		if (!(parser->current = next_token(parser))) 
 			return (MEMERR);
 		return (0);
@@ -190,7 +201,7 @@ int	expect_word(t_parser *parser)
 	if (parser->current->type == WORD)
 	{
 		if (build_cmd(parser->current, &(parser->cmd)) == MEMERR)
-			mem_err_exit(parser);
+			return(MEMERR);
 		if (!(parser->current = next_token(parser))) 
 			return (MEMERR);
 		return (0);
@@ -204,7 +215,7 @@ int	expect_cmd_name(t_parser *parser)
 			&& (!parser_is_assign(parser->current)))
 	{   
 		if (build_cmd(parser->current, &(parser->cmd)) == MEMERR)
-			mem_err_exit(parser);
+			return(MEMERR);
 		if (!(parser->current = next_token(parser)))
 			return (MEMERR);
 		return (0);
@@ -249,7 +260,7 @@ int	expect_pipeline_suffix(t_parser *parser)
 			return (SYNERR);
 		}
 		if (add_to_pipeline(parser) == MEMERR)
-			mem_err_exit(parser);
+			return(MEMERR);
 		expect_pipeline_suffix(parser);
 	}
 	return (0);
@@ -263,10 +274,10 @@ int	expect_pipeline(t_parser *parser)
 	if (!expect_simple_cmd(parser))
 	{
 		if (add_to_pipeline(parser) == MEMERR)
-			mem_err_exit(parser);
+			return(MEMERR);
 		expect_pipeline_suffix(parser);
 		if (tree_add_pipeline(parser) == MEMERR)
-			mem_err_exit(parser);
+			return(MEMERR);
 		return (0);
 	}
 	 parser->current = backtrack;
@@ -282,7 +293,7 @@ int	expect_and_or_suffix(t_parser *parser)
 		|| (parser->current->type == OR_IF))
 	{
 		if (tree_add_and_or(parser) == MEMERR)
-			mem_err_exit(parser);
+			return(MEMERR);
 		if (!(parser->current = next_token(parser))) 
 			return (MEMERR);
 		expect_linebreak(parser);

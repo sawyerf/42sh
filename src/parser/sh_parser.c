@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_parser.h"
+#include "readline.h"
 
 int	parser_is_name_c(char c)
 {
@@ -142,7 +143,7 @@ t_token *next_token(t_parser *parser)
 
 	if (parser->current->next)
 		return (parser->current->next);
-	if (!(new_tok = next_tok(NULL)))
+	if (!(new_tok = next_tok(NULL, parser)))
 		return (NULL);
 	if (!(parser->head))
 		parser->head = new_tok;
@@ -162,11 +163,11 @@ int	sh_parser_refac(char *line)
 	int			ret;
 
 	ft_bzero(&parser, sizeof(t_parser));
-	parser.line = line;
-	if (!(parser.current = next_tok(line)))
+	parser.cursor = line;
+	if (!(parser.current = next_tok(line, &parser)))
 		return (MEMERR);
 	ret = expect_complete_cmds(&parser);
-	next_tok("");
+	next_tok("", &parser); //reset lexer
 	if (ret)
 	{
 		free_tree(parser.tree);
@@ -179,19 +180,3 @@ int	sh_parser_refac(char *line)
 	free_tree(parser.tree);
 	return (0); //this should be exit status
 }
-/*
-t_token *next_token(t_parser *parser)
-{
-	t_token *tmp;
-
-	if (!(parser->head))
-		parser->head = parser->current;
-	else
-	{
-		tmp = parser->head;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = parser->current;
-	}
-	return (parser->current = next_tok(parser->line));
-}*/

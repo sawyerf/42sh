@@ -1,6 +1,8 @@
 # 21sh
 
 ## TODO
+
+- ls >& 2>file.txt should be valid
 - empty cmdname with redir should apply redir
 - subtle difference between '$notexistant;' and '"";' needs to be fixed ft_wordexp
 - export builtin, set && unset missing stuff.
