@@ -33,7 +33,7 @@ static int interactive_heredoc(t_token *io_here)
 		return (MEMERR);	
 	while (42)
 	{
-		if (!(new_ln = readline("> ")))
+		if (!(new_ln = readline("heredoc> ")))
 			return (MEMERR);
 		else if (*new_ln == '\0')
 			return (HEREDOC_ERR);
@@ -54,12 +54,14 @@ char *get_file_delim(char *next_nl, char *here_end)
 	char *delim;
 	int	len;
 
-	if (!(delim = ft_strstr(next_nl, here_end)))
-		return (NULL);
 	len = ft_strlen(here_end);
-	if ((delim[len] != '\n') && (delim[len] != '\0'))
-		return (NULL);
-	return (delim);
+	while ((delim = ft_strstr(next_nl, here_end)))
+	{
+		if ((delim[len] == '\n') || (delim[len] == '\0'))
+			return (delim);
+		next_nl = delim + len;
+	}
+	return (NULL);
 }
 
 int handle_here_doc(t_parser *parser)
