@@ -47,9 +47,13 @@ int		run_command(char *line)
 		return (-1);
 	if ((*line) && ft_strcmp(line, "\n"))
 	{
+		if (missing_quote(line))
+			ft_printf("bad quotes\n");
+		else
+			ft_printf("good quotes\n");
 
-		if (sh_parser_refac(line) == MEMERR)
-			return (MEMERR);		
+//		if (sh_parser_refac(line) == MEMERR)
+//			return (MEMERR);		
 //		test_lexer(line);
 /*		if ((tok = ft_tokenizer(line)))
 		{

@@ -70,6 +70,15 @@ typedef	struct			s_fc
 	char				*range[2];
 }						t_fc;
 
+typedef enum			e_quote_state
+{
+	in_dquote,
+	in_squote,
+	backslash,
+	unquoted,
+}						t_quote_state;
+
+
 typedef struct s_cmd_tab t_cmd_tab;
 
 typedef	int				(*t_builtin)(t_cmd_tab*);
@@ -139,6 +148,8 @@ char					*getoldpwd(void);
 char					**csetenv(char **env, char *var);
 char					**envdel(char **env, char *var);
 char					**envaddstr(char **env, char *var, char *value);
+
+int						missing_quote(char *line);
 
 int						fc_l(t_fc fc);
 int						fc_e(t_fc fc);

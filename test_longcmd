@@ -17,3 +17,7 @@ ls ~/ titi file1 inex /dev > file1 >file2 > file3 > file4 ; cat file1 ; echo ---
 -------------------------
 CRASH !
 echo -ne 'ls\x00ls -l' | bash
+------------------------------------
+well formed quotes
+ls "''''''''''''''''''''''''''''''''''''''''\"''" 'fqfqwfqfqwfwq \'''
+------------------------------------
