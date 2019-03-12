@@ -17,7 +17,8 @@ int expect_newline_lst(t_parser *parser)
 {
 	if (parser->current->type != NEWLINE)
 		return (SYNERR);
-	tree_add_sep(parser);
+	if (tree_add_sep(parser) == MEMERR)
+		return (MEMERR);
 	while (parser->current->type == NEWLINE)
 	{
 		if (!(parser->current = next_token(parser)))

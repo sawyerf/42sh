@@ -71,6 +71,7 @@ int handle_here_doc(t_parser *parser)
 	char *delim;
 	char *here_doc;
 	int len;
+	int tocpy;
 
 	if (here_doc_delimiter(parser->current) == MEMERR)
 		return (MEMERR);
@@ -86,7 +87,9 @@ int handle_here_doc(t_parser *parser)
 	if (!(here_doc = ft_strndup(next_nl, delim - next_nl + 1)))
 		return (MEMERR);
 	len = delim - next_nl + ft_strlen(here_end) + 1;
-	ft_memmove(next_nl, next_nl + len, ft_strlen(delim) + ft_strlen(here_end) + 1);	
+	tocpy =  ft_strlen(delim) + ft_strlen(here_end) + 1;
+	ft_memmove(next_nl, next_nl + len, tocpy);	
+	next_nl[tocpy] = 0;
 	replace_here_doc(parser->current, here_doc);
 	return (0);
 }

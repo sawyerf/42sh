@@ -20,6 +20,8 @@
 
 static int expand_redir(t_redir *redir)
 {
+	if ((redir->right) && (redir->right->type == HERE_END_QU))
+		return (0);
 	if ((redir->left) && (ft_wordexp(redir->left, FT_TRUE) == MEMERR))
 		return (MEMERR);
 	if ((redir->right) && (ft_wordexp(redir->right, FT_TRUE) == MEMERR))
@@ -107,8 +109,13 @@ int	handle_redir(t_redir *redir_lst, t_list **head)
 		if (iter->right->data.str[0] != 0) /* should printf ambiguous redir*/
 		{
 			if ((ret = apply_redir(iter, head)))
+			{
+				ft_dprintf(STDERR_FILENO, "failed redir %d\n", ret);
 				return (ret);
+			}
 		}
+		else
+			ft_dprintf(STDERR_FILENO, "ambiguous redir, null right\n");
 		iter = iter->next;
 	}
 	return (0);	

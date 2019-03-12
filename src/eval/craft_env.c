@@ -91,6 +91,6 @@ char **craft_env(char **base_env, char **to_add)
 		to_add[i] = NULL; /* to avoid double free*/
 		i++;	
 	}
-	free(base_env);
+	//free(base_env); this breaks varchr in wordexp
 	return (fresh);
 }

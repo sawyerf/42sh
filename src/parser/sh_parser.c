@@ -171,12 +171,17 @@ int	sh_parser_refac(char *line)
 	if (ret)
 	{
 		free_tree(parser.tree);
-		ft_dprintf(STDERR_FILENO, "21sh: syntax error near : '%s'\n", parser.current->data.str);
+		free_token_lst(parser.head);
+		if (ret == SYNERR)
+			ft_dprintf(STDERR_FILENO, "21sh: syntax error near : '%s'\n", parser.current->data.str);
+		else if (HEREDOC_ERR)
+			ft_dprintf(STDERR_FILENO, "21sh: premature EOF on heredoc\n", parser.current->data.str);
 		return (ret);
 	}
 //	print_tree(parser.tree);
 	if (eval_tree(parser.tree) == MEMERR)
 		return (MEMERR);
+	free_token_lst(parser.head);
 	free_tree(parser.tree);
 	return (0); //this should be exit status
 }

@@ -23,7 +23,7 @@
 #define ENDOFINPUT 14 
 
 
-#define INPUTSZ 24
+#define INPUTSZ 1
 #define TABLESZ 128
 /*
  * new lex jump table
