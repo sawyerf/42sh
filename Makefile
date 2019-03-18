@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/03/18 14:09:40 by ktlili           ###   ########.fr        #
+#    Updated: 2019/03/18 15:21:44 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,12 +34,16 @@ INC_FILE =	ft_eval.h					\
 
 SRC_DIR =	src
 
-SRC_FILE =	core/builtins.c				\
-			core/fc.c					\
-			core/fc_opt.c				\
-			core/fc_parser.c			\
-			core/cd_l_p.c				\
-			core/cd_tools.c				\
+SRC_FILE =	builtins/cd_l_p.c			\
+			builtins/cd_tools.c			\
+			builtins/echo.c				\
+			builtins/exit.c				\
+			builtins/fc.c				\
+			builtins/fc_opt.c			\
+			builtins/fc_parser.c		\
+			builtins/hash.c				\
+			builtins/setenv.c			\
+			builtins/unset.c			\
 			core/changedir.c			\
 			core/clean_path.c			\
 			core/env_handler.c			\
@@ -51,7 +55,6 @@ SRC_FILE =	core/builtins.c				\
 			core/util2.c				\
 			core/envadd.c				\
 			core/env.c					\
-			core/hash.c					\
 			core/envdel.c				\
 			eval/expansion_wrappers.c	\
 			eval/spawn_tools.c			\
@@ -102,6 +105,7 @@ OBJ_DIR =	.obj
 OBJ_FILE =	$(SRC_FILE:.c=.o)
 
 CRT_DIR =	core 						\
+		 	builtins 					\
 		 	ft_wordexp 					\
 		 	lexer 						\
 		 	eval 						\
