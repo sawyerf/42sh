@@ -41,32 +41,82 @@ static void		silence_ac_av(char ac, char **av)
 
 int		run_command(char *line)
 {
-	//t_token	*tok;
-
 	if (!line)
 		return (-1);
-	if ((*line) && ft_strcmp(line, "\n"))
+	if ((*line) && (ft_strcmp(line, "\n")))
 	{
 
 		if (sh_parser_refac(line) == MEMERR)
 			return (MEMERR);		
-//		test_lexer(line);
-/*		if ((tok = ft_tokenizer(line)))
-		{
-			sh_parser(tok);
-			free_token_lst(tok);
-			ft_printf("EXIT: %d\n", g_sh.last_exit);
-		}*/
 	}
 	else if (*line != '\n')
 		return (-1);
 	return (0);
 }
+#define READSZ 1024
+char *sh_readfile(char *prompt)
+{
+	char	 	*buffer;
+	char		*data;
+	char		*tmp;
+	int			ret;
+	int 		counter;
+	(void)prompt;
+	counter = 0;
+	data = NULL;
+	while ((ret = get_next_line(STDIN_FILENO, &buffer)) > 0)
+	{
+		if (data)
+		{
+			if (!(tmp = ft_strjoin(data, "\n")))
+				return (NULL);
+			free(data);
+			data = tmp;
+		}
+		if (!(tmp = ft_strjoin(data, buffer)))
+			return (NULL);
+		free(data);
+		free(buffer);
+		data = tmp;
+		counter = ret + counter; 
+/*		if (counter > 1024)//for testing with /dev/random
+			break;*/ 
+	}
+	return (data);
+}
+/*
+char *sh_readfile(char *prompt)
+{
+	char	 	buffer[READSZ + 1];
+	char		*data;
+	char		*tmp;
+	int			ret;
 
+	(void)prompt;
+	data = NULL;
+	ft_bzero(buffer, READSZ + 1);
+	while ((ret = read(STDIN_FILENO, buffer, READSZ)) > 0)
+	{
+		buffer[ret] = 0;
+//		if (data)
+//		{
+//			if (!(data = ft_strjoin(data, "\n")))
+//				return (NULL);
+//		}
+		if (!(tmp = ft_strjoin(data, buffer)))
+			return (NULL);
+		free(data);
+		data = tmp;
+	}
+	return (data);
+}
+*/
 int				main(int ac, char **av, char **env)
 {
 	char	*line;
 	int		ret;
+	t_read_fn	read_fn;
+
 
 	silence_ac_av(ac, av);
 	if (init_shell(env)) // dispatcher here
@@ -74,9 +124,12 @@ int				main(int ac, char **av, char **env)
 	ht_init();
 	ht_refreshall(get_env_value("PATH"));
 	hstread(g_sh.env);
+	read_fn = sh_readfile;
+	if (g_sh.mode == INTERACTIVE)
+		read_fn = readline;
 	while (42)
 	{
-		if (!(line = readline("$> ")))
+		if (!(line = read_fn("$> ")))
 			break;
 		if (run_command(line) < 0)
 			write(STDOUT_FILENO, "\n", 1);

@@ -43,6 +43,8 @@ typedef struct s_lexer
 	char *cursor;
 	char *line;
 	struct s_token *token;
+	struct s_token *head;
+	int				err;
 }				t_lexer;
 
 typedef	struct	s_token

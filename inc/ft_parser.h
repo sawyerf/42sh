@@ -21,7 +21,7 @@ typedef struct s_ast_node t_ast_node;
 /* refactor */
 int	sh_parser(t_token *start);
 int	sh_parser_refac(char *line);
-t_token *next_token(t_parser *parser);
+int next_token(t_parser *parser);
 /*here doc */
 int	handle_here_doc(t_parser *parser);
 
@@ -31,6 +31,7 @@ int	add_to_pipeline(t_parser *parser);
 int	build_redir(t_token *to_add, t_redir *redir);
 int	build_cmd(t_token *to_add, t_simple_cmd *cmd);
 int	add_redir_lst(t_redir *to_add, t_redir **head);
+int		tree_add_nl(t_parser *parser);
 int		tree_add_sep(t_parser *parser);
 int		tree_add_and_or(t_parser *parser);
 int		tree_add_pipeline(t_parser *parser);
@@ -40,6 +41,7 @@ void	print_tokens(t_token *start);
 void	test_simplecmd(t_simple_cmd *cmd);
 void	test_pipeline(t_simple_cmd *start);
 void	print_tree(t_ast_node *tree);
+void	remove_last_node(t_parser *parser);
 //
 
 void	free_token(t_token *token);

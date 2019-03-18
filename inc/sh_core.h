@@ -83,6 +83,8 @@ typedef struct s_cmd_tab t_cmd_tab;
 
 typedef	int				(*t_builtin)(t_cmd_tab*);
 
+typedef char*			(*t_read_fn)(char*);
+
 /* to delete*/
 /**/
 extern	t_sh		g_sh;

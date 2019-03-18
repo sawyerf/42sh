@@ -135,7 +135,7 @@ int	sh_parser(t_token *start)
 	free_tree(parser.tree);
 	return (ret);
 }
-
+/*
 t_token *next_token(t_parser *parser)
 {
 	t_token *new_tok;
@@ -155,30 +155,65 @@ t_token *next_token(t_parser *parser)
 		tmp->next = new_tok;
 	}
 	return (new_tok);
+}*/
+
+void	remove_last_node(t_parser *parser)
+{
+	t_ast_node *tmp;
+
+	tmp = parser->tree;
+	parser->tree = parser->tree->left;
+	free(tmp);
+}
+
+int next_token(t_parser *parser)
+{
+	t_lexer *lex;
+
+	if (parser->current->next)
+	{
+		parser->current = parser->current->next;
+		return (0);
+	}
+	lex = ft_lexer(NULL);
+	if (!lex)
+		return (MEMERR);
+	if (lex->err)
+		return (lex->err);
+	parser->cursor = lex->cursor;
+	parser->current->next = lex->head;
+	parser->current = parser->current->next;
+	return (0);
 }
 
 int	sh_parser_refac(char *line)
 {
 	t_parser	parser;
+	t_lexer		*lex;
 	int			ret;
 
 	ft_bzero(&parser, sizeof(t_parser));
 	parser.cursor = line;
-	if (!(parser.current = next_tok(line, &parser)))
-		return (MEMERR);
+	lex = ft_lexer(line);
+	if (!(ft_lexer(NULL)) || lex->err)
+	{
+		ft_dprintf(STDERR_FILENO, "21sh: premature EOF\n");
+		return (lex->err);
+	}
+	parser.current = lex->head;
+	parser.head = lex->head;
 	ret = expect_complete_cmds(&parser);
-	next_tok("", &parser); //reset lexer
 	if (ret)
 	{
-		free_tree(parser.tree);
-		free_token_lst(parser.head);
 		if (ret == SYNERR)
 			ft_dprintf(STDERR_FILENO, "21sh: syntax error near : '%s'\n", parser.current->data.str);
-		else if (HEREDOC_ERR)
+		else if (ret == HEREDOC_ERR)
 			ft_dprintf(STDERR_FILENO, "21sh: premature EOF on heredoc\n", parser.current->data.str);
+		free_token_lst(parser.head);
+		free_tree(parser.tree);
 		return (ret);
 	}
-//	print_tree(parser.tree);
+	//print_tree(parser.tree);
 	if (eval_tree(parser.tree) == MEMERR)
 		return (MEMERR);
 	free_token_lst(parser.head);

@@ -104,6 +104,51 @@ t_token *ft_tokenizer(char *line)
 	return (head);
 }
 
+void	lex_add_tk(t_lexer *lexer, t_token *tk)
+{
+	t_token *tmp;
+
+	if (!(lexer->head))
+		lexer->head = tk;
+	else
+	{
+		tmp = lexer->head;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = tk;
+	}
+}
+
+t_lexer *ft_lexer(char *input)
+{
+	static t_lexer lexer_state;
+
+	lexer_state.head = NULL;
+	if (input)
+	{
+		lexer_state.err = 0;
+		lexer_state.line = input;
+		lexer_state.cursor = input;
+		return (&lexer_state);
+	}
+	while (ft_cisin(" \t", *(lexer_state.cursor)))	
+		lexer_state.cursor = lexer_state.cursor + 1;
+	while (*(lexer_state.cursor))
+	{
+		if (!(lexer_state.token = new_token(0)))
+			return (NULL);
+		if ((lexer_state.err = dispatch_fn(&lexer_state)))
+			return (&lexer_state);
+		lex_add_tk(&lexer_state, lexer_state.token); // to modify
+		if (lexer_state.token->type == NEWLINE)
+			return (&lexer_state);
+		lexer_state.token = NULL;
+		while (ft_cisin(" \t", *(lexer_state.cursor)))	
+			lexer_state.cursor = lexer_state.cursor + 1;
+	}
+	lex_add_tk(&lexer_state, new_token(EOI));
+	return (&lexer_state);
+}
 
 int test_lexer(char *line)
 {

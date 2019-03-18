@@ -103,7 +103,6 @@ int		is_builtin(t_cmd_tab *cmd)
 			return (MEMERR);
 		cmd->exit_status = array[i](cmd);
 		restore_fd(save_head);
-		ft_printf("BUILTIN:%s exited with status %d\n", cmd->av[0], cmd->exit_status);
 		return (0);
 	}
 	return (-1);

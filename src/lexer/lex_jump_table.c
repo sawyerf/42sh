@@ -29,7 +29,7 @@ int			request_new_line(t_lexer *lx_st)
 	if (new_line == NULL)
 		return (MEMERR);
 	else if (*new_line == 0)
-		return (SQUOTE_ERR);
+		return (QUOTE_ERR);
 	//free(lx_st->line);  this has to change
 	lx_st->line = new_line;
 	lx_st->cursor = new_line;

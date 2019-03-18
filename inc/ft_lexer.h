@@ -18,6 +18,8 @@
 // to delete
 #define DQUOTE_ERR 10
 #define SQUOTE_ERR 11
+//
+#define QUOTE_ERR 10
 #define BAD_SUB	12
 #define INCOMPLETE_SUB 13
 #define ENDOFINPUT 14 
@@ -57,6 +59,8 @@ t_token	*new_token(int type);
 
 
 /* lexer */
+t_lexer *ft_lexer(char *input);
+/**/
 int			test_lexer(char *line);
 t_token		*next_tok(char *line, t_parser *parser);
 t_token		*ft_tokenizer(char *line);

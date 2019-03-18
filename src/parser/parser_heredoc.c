@@ -34,7 +34,7 @@ static int interactive_heredoc(t_token *io_here)
 	while (42)
 	{
 		if (!(new_ln = readline("heredoc> ")))
-			return (MEMERR);
+			return (HEREDOC_ERR);
 		else if (*new_ln == '\0')
 			return (HEREDOC_ERR);
 		if ((!ft_strncmp(new_ln, io_here->data.str, len))
@@ -80,10 +80,12 @@ int handle_here_doc(t_parser *parser)
 	if (!(here_end = ft_zprintf("\n%s", parser->current->data.str)))
 		return (MEMERR);
 	len = ft_strlen(here_end);
-	if ((!(next_nl = ft_strchr(parser->cursor, '\n')))
+/*	if ((!(next_nl = ft_strchr(parser->cursor, '\n')))
 		|| (!(delim = get_file_delim(next_nl, here_end))))
+		return (HEREDOC_ERR);*/
+	next_nl = parser->cursor;
+	if (!(delim = get_file_delim(next_nl, here_end)))
 		return (HEREDOC_ERR);
-	next_nl++;
 	if (!(here_doc = ft_strndup(next_nl, delim - next_nl + 1)))
 		return (MEMERR);
 	len = delim - next_nl + ft_strlen(here_end) + 1;

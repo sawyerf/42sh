@@ -3,6 +3,8 @@
 ## TODO
 
 HERE_DOC
+- leak in builtin forks
+- ${} readline
 - fix new line seeking in non interactive here_doc
 - fix error propagation in refactored parser
 - add missing_quote in readline
