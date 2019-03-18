@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 19:04:52 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/07 22:03:43 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/18 13:53:12 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,7 +252,7 @@ int	expect_cmd_name(t_parser *parser)
 		if (ret)
 			return (ret);
 		if (build_cmd(parser->current, &(parser->cmd)) == MEMERR)
-			return(MEMERR);
+			return (MEMERR);
 		if ((ret = next_token(parser)))
 			return (ret);
 		return (0);
@@ -281,6 +281,7 @@ int	expect_simple_cmd(t_parser *parser)
 			return (ret);
 		return (0);
 	}
+	free_simple_cmd(&(parser->cmd));
 	parser->current = backtrack;	
 	return (ret);
 }

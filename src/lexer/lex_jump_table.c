@@ -6,35 +6,44 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/06 21:04:58 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/18 13:44:34 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline.h"
 #include "ft_lexer.h"
 
-static int	handle_backslash(t_lexer *lx_st)
-{
-	if ((str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
-		|| (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR))
-		return (MEMERR);
-	return (0);
-}
-
-int			request_new_line(t_lexer *lx_st)
+int		request_new_line(t_lexer *lx_st)
 {
 	char *new_line;
 
+	if (g_sh.mode != INTERACTIVE)
+		return (QUOTE_ERR);
 	new_line = readline("> ");
 	if (new_line == NULL)
 		return (MEMERR);
 	else if (*new_line == 0)
 		return (QUOTE_ERR);
-	//free(lx_st->line);  this has to change
+	free(lx_st->line); // this has to change
 	lx_st->line = new_line;
 	lx_st->cursor = new_line;
 	return (0);
 }
+static int	handle_backslash(t_lexer *lx_st)
+{
+	int ret;
+
+	if ((str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
+		|| (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR))
+		return (MEMERR);
+	if (*(lx_st->cursor) == '\0')
+	{
+		if ((ret = request_new_line(lx_st)))
+			return (ret);
+	}
+	return (0);
+}
+
 
 int			handle_dquote(t_lexer *lx_st)
 {

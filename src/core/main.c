@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/07 21:39:30 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/18 11:44:52 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,10 @@ int		run_command(char *line)
 			return (MEMERR);		
 	}
 	else if (*line != '\n')
+	{
+		free(line);
 		return (-1);
+	}
 	return (0);
 }
 #define READSZ 1024
@@ -79,8 +82,8 @@ char *sh_readfile(char *prompt)
 		free(buffer);
 		data = tmp;
 		counter = ret + counter; 
-/*		if (counter > 1024)//for testing with /dev/random
-			break;*/ 
+		if (counter > 1024)//for testing with /dev/random
+			break; 
 	}
 	return (data);
 }
@@ -133,7 +136,6 @@ int				main(int ac, char **av, char **env)
 			break;
 		if (run_command(line) < 0)
 			write(STDOUT_FILENO, "\n", 1);
-		free(line);
 	}
 	hstaddfile(g_sh.env);
 	ret = 1;

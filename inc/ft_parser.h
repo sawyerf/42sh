@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:51:15 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/07 19:42:25 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/18 11:50:12 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	print_tree(t_ast_node *tree);
 void	remove_last_node(t_parser *parser);
 //
 
+void	free_simple_cmd(t_simple_cmd *cmd);
 void	free_token(t_token *token);
 void	free_token_lst(t_token *token);
 void	free_redir_lst(t_redir *redir);
