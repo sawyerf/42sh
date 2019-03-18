@@ -69,3 +69,50 @@ char		**dup_tab(char **tab)
 	copy[i] = NULL;
 	return (copy);
 }
+/* to be called by readline
+*/
+
+static void state_unquoted(char *line, t_quote_state *state)
+{
+	*state = (*line == '"') ? in_dquote : *state ;
+	*state = (*line == '\'') ? in_squote : *state ;
+	*state = (*line == '\\') ? backslash : *state ;
+
+}
+
+static int state_backslash(char **line, t_quote_state *state, t_quote_state save)
+{
+	if (**line == '\n' && *((*line) + 1) == '\0')
+		return (-1);
+	*line = *line + 1;
+	*state = save;
+	return (0);
+}
+
+int	missing_quote(char *line)
+{
+	t_quote_state state;
+	t_quote_state save;
+
+	state = unquoted;
+	while (*line)
+	{
+		save = state;
+		if (state == unquoted )
+			state_unquoted(line, &state);
+		else if (state == in_dquote)
+		{
+			state = (*line == '"') ? unquoted : state ;
+			state = (*line == '\\') ? backslash : state ;	
+		}
+		else if (state == in_squote)
+			state = (*line == '\'') ? unquoted : state ;
+		line++;
+		if (state == backslash)
+			if (state_backslash(&line, &state, save))
+				return (-1);
+	}
+	if (state != unquoted)	
+		return (-1);
+	return (0);
+}

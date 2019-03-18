@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/05 19:00:12 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/07 19:30:40 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,18 @@
 # define FT_LEXER_H
 
 #include "sh_core.h"
-
+#include "ft_parser_typedef.h"
+// to delete
 #define DQUOTE_ERR 10
 #define SQUOTE_ERR 11
+//
+#define QUOTE_ERR 10
 #define BAD_SUB	12
 #define INCOMPLETE_SUB 13
 #define ENDOFINPUT 14 
 
 
-#define INPUTSZ 24
+#define INPUTSZ 1
 #define TABLESZ 128
 /*
  * new lex jump table
@@ -41,24 +44,6 @@ int handle_less(t_lexer *lexer_state);
 int handle_great(t_lexer *lexer_state);
 int handle_column(t_lexer *lexer_state);
 
-/*
-Lexer jump table
-
-typedef int (*t_func)(char**, t_token*);
-
-int handle_dquote(char **input, t_token *token);
-int handle_digit(char **input, t_token *token);
-int handle_common(char **input, t_token *token);
-int handle_ampersand(char **input, t_token *token);
-int handle_squote(char **input, t_token *token);
-int handle_semic(char **input, t_token *token);
-int handle_less(char **input, t_token *token);
-int handle_great(char **input, t_token *token);
-int handle_column(char **input, t_token *token);
- */
-/*
-	intermediate cmd functions
-*/
 /*t_str functions*/
 int	str_putnstr(char *str, t_str *data, size_t n);
 int	str_putc(char **c, t_str *data);
@@ -74,10 +59,13 @@ t_token	*new_token(int type);
 
 
 /* lexer */
-t_token	*ft_tokenizer(char *line);
-int		ft_tokenizer_2(char *line, t_token **head);
+t_lexer *ft_lexer(char *input);
+/**/
+int			test_lexer(char *line);
+t_token		*next_tok(char *line, t_parser *parser);
+t_token		*ft_tokenizer(char *line);
+int			ft_tokenizer_2(char *line, t_token **head);
 //int	next_token(char **line, t_token *token);
-int	next_token(char *line, t_token **head);
 /* for light parser*/
 int	rev_lex(char *line, t_token **head);
 

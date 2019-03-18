@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/07 16:37:19 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/18 14:08:34 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,16 @@
 # include <limits.h>
 
 # define MEMERR 2 
-# define SYNERR 3
+# define SYNERR -1 
 # define ENVERR 4
 # define ACCERR 5
-
+# define HEREDOC_ERR 6
 #define FDSAVEIN 255
 #define FDSAVEOUT 256
 #define FDSAVEERR 257
+
+#define INTERACTIVE 1
+#define NONINTERACTIVE 0
 
 typedef struct 		s_sh
 {
@@ -43,6 +46,7 @@ typedef struct 		s_sh
 	int				status;
 	char			**local;
 	char			**env;
+	int				last_exit;
 	/* stuff needed by job control will eventually live in this struct 
 	 */
 }					t_sh;
@@ -73,9 +77,20 @@ typedef	struct			s_fc
 	char				*range[2];
 }						t_fc;
 
+typedef enum			e_quote_state
+{
+	in_dquote,
+	in_squote,
+	backslash,
+	unquoted,
+}						t_quote_state;
+
+
 typedef struct s_cmd_tab t_cmd_tab;
 
 typedef	int				(*t_builtin)(t_cmd_tab*);
+
+typedef char*			(*t_read_fn)(char*);
 
 /* to delete*/
 /**/
@@ -142,6 +157,8 @@ char					*getoldpwd(void);
 char					**csetenv(char **env, char *var);
 char					**envdel(char **env, char *var);
 char					**envaddstr(char **env, char *var, char *value);
+
+int						missing_quote(char *line);
 
 int						fc_l(t_fc fc);
 int						fc_e(t_fc fc);

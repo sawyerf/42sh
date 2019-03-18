@@ -1,6 +1,16 @@
 # 21sh
 
 ## TODO
+
+HERE_DOC
+- leak in builtin forks
+- ${} readline
+- fix new line seeking in non interactive here_doc
+- fix error propagation in refactored parser
+- add missing_quote in readline
+------------------------------------
+- ls >& 2>file.txt should be valid
+- empty cmdname with redir should apply redir
 - subtle difference between '$notexistant;' and '"";' needs to be fixed ft_wordexp
 - export builtin, set && unset missing stuff.
 - sig handling && job control.

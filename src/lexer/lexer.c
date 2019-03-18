@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/05 20:00:40 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/18 11:21:15 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_lx_fn	g_lx_fn[] =\
 	{ 0, NULL},
 };
 
-int	dispatch_fn(t_lexer *lx_st)
+static int	dispatch_fn(t_lexer *lx_st)
 {
 	int i;
 
@@ -50,63 +50,50 @@ int	dispatch_fn(t_lexer *lx_st)
 	return (handle_common(lx_st));
 }
 
-t_token *ft_tokenizer(char *line)
+static void	lex_add_tk(t_lexer *lexer, t_token *tk)
 {
-	t_lexer lexer_state;
-	t_token	*head;
+	t_token *tmp;
 
-	head = NULL;
-	lexer_state.line = line;
-	lexer_state.cursor = line;
+	if (!(lexer->head))
+		lexer->head = tk;
+	else
+	{
+		tmp = lexer->head;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = tk;
+	}
+}
+
+static void	init_lexer(char *input, t_lexer *lexer_state)
+{
+	lexer_state->err = 0;
+	lexer_state->line = input;
+	lexer_state->cursor = input;
+}
+
+t_lexer *ft_lexer(char *input)
+{
+	static t_lexer lexer_state;
+
+	lexer_state.head = NULL;
+	if (input)
+		init_lexer(input, &lexer_state);
 	while (ft_cisin(" \t", *(lexer_state.cursor)))	
 		lexer_state.cursor = lexer_state.cursor + 1;
 	while (*(lexer_state.cursor))
 	{
 		if (!(lexer_state.token = new_token(0)))
 			return (NULL);
-		if (dispatch_fn(&lexer_state) == MEMERR)
-			return (NULL);
-		add_token(&head, lexer_state.token);
+		if ((lexer_state.err = dispatch_fn(&lexer_state)))
+			return (&lexer_state);
+		lex_add_tk(&lexer_state, lexer_state.token); // to modify
+		if (lexer_state.token->type == NEWLINE)
+			return (&lexer_state);
 		lexer_state.token = NULL;
 		while (ft_cisin(" \t", *(lexer_state.cursor)))	
 			lexer_state.cursor = lexer_state.cursor + 1;
 	}
-	add_token(&head, new_token(EOI));
-	return (head);
+	lex_add_tk(&lexer_state, new_token(EOI));
+	return (&lexer_state);
 }
-/*
-t_token	*ft_tokenizer(char *line)
-{
-	static	t_func	table[TABLESZ];
-	t_lexer			lexer_state;
-	t_token			*head;
-	int				ret;
-
-	lexer_state.line = line;
-	lexer_state.cursor = line;
-	init_jump_table(table);
-	head = NULL;
-	while (ft_is_whitespace(*(lexer_state.cursor)))
-		lexer_state.cursor = lexer_state.cursor + 1;
-	while (*(lexer_state.cursor))
-	{
-		lexer_state.token = new_token(0);
-		if (!lexer_state.token)
-			return (NULL);
-		if (*(lexer_state.cursor) > 0 )
-			ret = table[(int)*(lexer_state.cursor)](&lexer_state);
-		else
-			ret = table[1](&lexer_state);
-		add_token(&head, lexer_state.token);
-		lexer_state.token = NULL;
-		if (ret == ENDOFINPUT) // this is useless 
-		{
-			free_token_lst(head);
-			return (NULL);
-		}
-		while (ft_is_whitespace(*(lexer_state.cursor)))
-			lexer_state.cursor = lexer_state.cursor + 1;
-	}
-	add_token(&head, new_token(1));
-	return (head);
-}*/

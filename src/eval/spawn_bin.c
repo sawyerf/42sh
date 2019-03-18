@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/08 19:15:08 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/18 14:08:14 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ int		is_builtin(t_cmd_tab *cmd)
 			return (MEMERR);
 		cmd->exit_status = array[i](cmd);
 		restore_fd(save_head);
-		ft_printf("BUILTIN:%s exited with status %d\n", cmd->av[0], cmd->exit_status);
 		return (0);
 	}
 	return (-1);

@@ -6,11 +6,12 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/06 20:42:34 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/18 14:08:02 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_parser.h"
+#include "readline.h"
 
 int	parser_is_name_c(char c)
 {
@@ -110,27 +111,75 @@ t_ast_node *get_tree(t_ast_node *tree)
 		static_tree = tree;
 	return (static_tree);
 }
-int	sh_parser(t_token *start)
+
+void	remove_last_node(t_parser *parser)
 {
-	t_parser parser;
-	int		ret;
-/*	char types[100][100] = {"WORD","NEWLINE","IO_NUM","FILENAME", "ASSIGN", "PIPE", "SEMI_COL",
-				"AMPERS","ANDIF", "ORIF", "LESSAND", "GREATAND", "DGREAT", "LESS",
-				"GREAT"};
-*/
-	ft_bzero(&parser, sizeof(t_parser));
-	parser.current = start;
-	parser.head = start;
-	ret = expect_complete_cmds(&parser);
-//	ft_printf("ret = %d token %s |type %s\n", ret, parser.current->data.str, types[parser.current->type]);
-//	print_tree(parser.tree);
-	if (ret) 
+	t_ast_node *tmp;
+
+	tmp = parser->tree;
+	parser->tree = parser->tree->left;
+	free(tmp);
+}
+
+int next_token(t_parser *parser)
+{
+	t_lexer *lex;
+
+	if (parser->current->next)
 	{
-		get_tree(parser.tree);
-		eval_tree(parser.tree);
+		parser->current = parser->current->next;
+		return (0);
 	}
-	else
-		ft_printf("21sh: syntax error near : '%s'\n", parser.current->data.str);
+	lex = ft_lexer(NULL);
+	if (!lex)
+		return (MEMERR);
+	if (lex->err)
+		return (lex->err);
+	parser->cursor = lex->cursor;
+	parser->current->next = lex->head;
+	parser->current = parser->current->next;
+	return (0);
+}
+
+int	sh_parser_refac(char *line)
+{
+	static 	t_parser	parser;
+	t_lexer		*lex;
+	int			ret;
+
+	ft_bzero(&parser, sizeof(t_parser));
+	parser.cursor = line;
+	if (!(lex = ft_lexer(line)) || lex->err)
+	{
+		ft_dprintf(STDERR_FILENO, "21sh: premature EOF\n");
+		return (lex->err);
+	}
+	parser.current = lex->head;
+	parser.head = lex->head;
+	ret = expect_complete_cmds(&parser);
+	free(lex->line);
+	if (ret)
+	{
+		if (ret == MEMERR)
+		{
+			ft_printf("MEMERR\n");
+			exit(1);
+		}
+		if (ret == SYNERR)
+			ft_dprintf(STDERR_FILENO, "21sh: syntax error near : '%s'\n", parser.current->data.str);
+		else if (ret == HEREDOC_ERR)
+			ft_dprintf(STDERR_FILENO, "21sh: premature EOF on heredoc\n", parser.current->data.str);
+		else
+			ft_dprintf(STDERR_FILENO, "21sh: premature EOF\n");
+		free_token_lst(parser.head);
+		return (lex->err);
+		free_tree(parser.tree);
+		return (ret);
+	}
+	//print_tree(parser.tree);
+	if (eval_tree(parser.tree) == MEMERR)
+		return (MEMERR);
+	free_token_lst(parser.head);
 	free_tree(parser.tree);
-	return (ret);
+	return (0); //this should be exit status
 }

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/02 17:15:52 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/18 13:44:51 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,6 @@ void	add_to_lst(t_token *to_add, t_token **head)
 	}
 }
 
-int	add_redir_lst(t_redir *to_add, t_redir **head)
-{
-	t_redir *tmp;
-	t_redir	*iter;
-
-	if (!(tmp = ft_memalloc(sizeof(t_redir))))
-		return (MEMERR);
-	ft_memcpy(tmp, to_add, sizeof(t_redir));
-	if (*head == NULL)
-		*head = tmp;
-	else
-	{
-		iter = *head;
-		while (iter->next)
-			iter = iter->next;
-		iter->next = tmp;
-	}
-	return (0);
-}
 
 int		build_cmd(t_token *to_add, t_simple_cmd *cmd)
 {
@@ -69,9 +50,10 @@ int	build_redir(t_token *to_add, t_redir *redir)
 		return (MEMERR);
 	if (to_add->type == IO_NUM)
 		redir->left = tmp;	
-	else if ((to_add->type >= LESSAND) && (to_add->type <= GREAT))
+	else if ((to_add->type >= LESSAND) && (to_add->type <= DLESS))
 		redir->op = tmp;
-	else if (to_add->type == FILENAME)
+	else if ((to_add->type == FILENAME) || (to_add->type == HERE_END)
+		|| (to_add->type == HERE_END_QU))
 		redir->right = tmp;
 	return (0);
 }
@@ -90,6 +72,26 @@ int	add_to_pipeline(t_parser *parser)
 	else
 	{
 		iter = parser->pipeline;
+		while (iter->next)
+			iter = iter->next;
+		iter->next = tmp;
+	}
+	return (0);
+}
+
+int	add_redir_lst(t_redir *to_add, t_redir **head)
+{
+	t_redir *tmp;
+	t_redir	*iter;
+
+	if (!(tmp = ft_memalloc(sizeof(t_redir))))
+		return (MEMERR);
+	ft_memcpy(tmp, to_add, sizeof(t_redir));
+	if (*head == NULL)
+		*head = tmp;
+	else
+	{
+		iter = *head;
 		while (iter->next)
 			iter = iter->next;
 		iter->next = tmp;

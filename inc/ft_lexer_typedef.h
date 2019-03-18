@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 15:48:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/05 19:42:41 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/07 21:36:09 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@ typedef	enum	e_token_type
 	DGREAT,
 	LESS,
 	GREAT,
+	DLESS,
+	HERE_END,
+	HERE_END_QU,
 	EOI, // End Of Input
 }				t_token_type;
 
@@ -40,6 +43,8 @@ typedef struct s_lexer
 	char *cursor;
 	char *line;
 	struct s_token *token;
+	struct s_token *head;
+	int				err;
 }				t_lexer;
 
 typedef	struct	s_token

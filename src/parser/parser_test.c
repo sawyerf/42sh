@@ -24,21 +24,42 @@ void	print_tokens(t_token *t)
 	}
 }
 
-void	print_tree(t_ast_node *tree)
+
+void	recursive_print(t_ast_node *tree, int *level)
 {
 	char types[100][100]= {"WORD", "NEWLINE", "IO_NUM", "FILENAME", "ASSIGN", "PIPE", "SEMI_COL",
 				"AMPERS", "ANDIF", "ORIF", "LESSAND", "GREATAND" , "DGREAT", "LESS", "GREAT"};
+	(void)level;
 	if (!tree)
 		return;
-	if ((tree->type == OR_IF) || (tree->type == AND_IF) || (tree->type == SEMI_COL))
+	if ((tree->type == OR_IF) || (tree->type == AND_IF) || (tree->type == SEMI_COL)
+		||(tree->type == NEWLINE))
 	{
+		int pad;
+
+		pad = *level;
+		while (pad)
+		{
+			write(STDIN_FILENO, " ", 1);
+			pad--;
+		}
 		ft_printf("++++\nNODE %s\n++++\n", types[tree->type]);
 	}
 	else 
 		test_pipeline(tree->pipeline);
-	print_tree(tree->left);
-	print_tree(tree->right);
+	*level = *level + 2;
+	recursive_print(tree->left, level);
+	recursive_print(tree->right, level);
 }
+void	print_tree(t_ast_node *tree)
+{
+	int level;
+
+	level = 0;
+	recursive_print(tree, &level);
+	return;
+}
+
 
 void	print_redir_lst(t_redir *start)
 {
@@ -76,7 +97,6 @@ void	test_pipeline(t_simple_cmd *start)
 	{
 		test_simplecmd(start);
 		start=  start->next;
-
 	}
 	ft_printf("<<<<<<<<END OF PIPELINE>>>>>>>>\n");
 }

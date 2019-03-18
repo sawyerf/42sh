@@ -146,6 +146,7 @@ int		fc(t_cmd_tab *cmd)
 {
 	t_fc	fc;
 
+	g_sh.mode = NONINTERACTIVE;
 	(void)cmd;
 	//hstdellast();
 	if (fc_parser(cmd->av, &fc) < 0)
@@ -158,5 +159,6 @@ int		fc(t_cmd_tab *cmd)
 		fc_l(fc);
 	else
 		fc_e(fc);
+	g_sh.mode = INTERACTIVE;
 	return (0);
 }

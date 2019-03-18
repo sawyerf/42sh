@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/05 19:44:35 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/06 22:06:01 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,30 @@ t_bool	expect_io_file(t_parser *parser)
 			mem_err_exit(parser);
 		parser->current = parser->current->next;
 		if (expect_filename(parser))
-		{
 			return (1);
-		}
+	}
+	parser->current = backtrack;
+	return (0);
+}
+
+t_bool expect_here_end(t_parser *parser)
+{
+	(void)parser;
+	return (1);	
+}
+
+t_bool expect_io_here(t_parser *parser)
+{
+	t_token *backtrack;
+
+	backtrack = parser->current;
+	if (parser->current->type == DLESS)
+	{
+		if (build_redir(parser->current, &(parser->current_redir)) == MEMERR)
+			mem_err_exit(parser);
+		parser->current = parser->current->next;
+		if (expect_here_end(parser))
+			return (1);
 	}
 	parser->current = backtrack;
 	return (0);
@@ -102,22 +123,20 @@ t_bool	expect_io_redir(t_parser *parser)
 		if (build_redir(parser->current, &(parser->current_redir)) == MEMERR)
 			mem_err_exit(parser);
 		parser->current = parser->current->next;
-		if (expect_io_file(parser))
+		if ((expect_io_file(parser)) || (expect_io_here(parser)))
 		{
 			add_redir_lst(&(parser->current_redir), &(parser->cmd.redir_lst));
 			return (1);
 		}
 	}
-	else if (expect_io_file(parser))
+	else if ((expect_io_file(parser)) || (expect_io_here(parser)))
 	{
 		add_redir_lst(&(parser->current_redir), &(parser->cmd.redir_lst));
 		return (1);
 	}
-	/*we still need to free redir if we fail*/
-	free_redir(&(parser->current_redir));
+		free_redir(&(parser->current_redir));
 	parser->current = backtrack;
 	return (0);
-
 }
 
 t_bool	expect_assign(t_parser *parser)

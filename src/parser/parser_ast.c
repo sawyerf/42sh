@@ -24,6 +24,17 @@ int	tree_add_sep(t_parser *parser)
 	return (0);
 }
 
+int tree_add_nl(t_parser *parser)
+{
+	t_ast_node *node;
+
+	if (!(node = ft_memalloc(sizeof(t_ast_node))))
+		return (MEMERR);
+	node->type = NEWLINE;
+	add_to_tree(&(parser->tree), node);
+	return (0);
+}
+
 int	tree_add_and_or(t_parser *parser)
 {
 	t_ast_node *node;
