@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 20:31:07 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/08 19:15:07 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/18 12:48:54 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int		hash(t_cmd_tab *cmd)
 	t_hash	hash;
 
 	hash_parser(cmd->av, &hash);
-	ft_printf("%s"
 	if (ft_cisin(hash.opt, 'r'))
 	{
 		if (ft_cisin(hash.opt, 'r'))
