@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/18 14:08:02 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/18 18:15:04 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ int next_token(t_parser *parser)
 
 int	sh_parser_refac(char *line)
 {
-	static 	t_parser	parser;
+	t_parser	parser;
 	t_lexer		*lex;
 	int			ret;
 

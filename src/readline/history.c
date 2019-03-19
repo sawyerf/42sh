@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 20:13:04 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/06 18:04:36 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/18 20:14:23 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	hstadd(char *str)
 
 	if (g_hst[0] && !ft_strcmp(g_hst[0]->content, str))
 		return ;
-	if (g_hst[0]->next)
+	if (g_hst[0] && g_hst[0]->next)
 		i = (g_hst[0]->content_size / 10) + 1;
 	else
 		i = 1;
@@ -154,7 +154,7 @@ void	hstreset(void)
 
 void	hstwrite(int fd, t_list *lst)
 {
-	if (!lst || lst->content_size)
+	if (!lst || lst->content_size % 10)
 		return ;
 	hstwrite(fd, lst->next);
 	ft_dprintf(fd, "%s\n", lst->content);

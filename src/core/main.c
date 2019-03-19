@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/18 11:44:52 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/19 18:30:48 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static int	init_shell(char **env)
 		return (-1);
 	if (dup2(STDERR_FILENO, FDSAVEERR) == -1)
 		return (-1);
+	g_sh.fd = 0;
 	return (0);
 }
 
@@ -47,15 +48,17 @@ int		run_command(char *line)
 	{
 
 		if (sh_parser_refac(line) == MEMERR)
-			return (MEMERR);		
+			return (MEMERR);
 	}
 	else if (*line != '\n')
 	{
-		free(line);
+		ft_strdel(&line);
 		return (-1);
 	}
 	return (0);
 }
+
+/*
 #define READSZ 1024
 char *sh_readfile(char *prompt)
 {
@@ -64,56 +67,67 @@ char *sh_readfile(char *prompt)
 	char		*tmp;
 	int			ret;
 	int 		counter;
+
 	(void)prompt;
 	counter = 0;
 	data = NULL;
-	while ((ret = get_next_line(STDIN_FILENO, &buffer)) > 0)
+	while ((ret = get_next_line(g_sh.fd, &buffer)) > 0)
 	{
+		ft_printf(buffer);
 		if (data)
 		{
 			if (!(tmp = ft_strjoin(data, "\n")))
 				return (NULL);
-			free(data);
+			ft_strdel(&data);
 			data = tmp;
 		}
 		if (!(tmp = ft_strjoin(data, buffer)))
 			return (NULL);
-		free(data);
-		free(buffer);
+		ft_strdel(&data);
+		ft_strdel(&buffer);
 		data = tmp;
 		counter = ret + counter; 
 		if (counter > 1024)//for testing with /dev/random
 			break; 
 	}
 	return (data);
-}
-/*
-char *sh_readfile(char *prompt)
+}*/
+
+char	*sh_readfile(char *prompt)
 {
-	char	 	buffer[READSZ + 1];
-	char		*data;
-	char		*tmp;
-	int			ret;
+	char	*line;
 
 	(void)prompt;
-	data = NULL;
-	ft_bzero(buffer, READSZ + 1);
-	while ((ret = read(STDIN_FILENO, buffer, READSZ)) > 0)
+	if (get_next_line(g_sh.fd, &line) > 0)
 	{
-		buffer[ret] = 0;
-//		if (data)
-//		{
-//			if (!(data = ft_strjoin(data, "\n")))
-//				return (NULL);
-//		}
-		if (!(tmp = ft_strjoin(data, buffer)))
-			return (NULL);
-		free(data);
-		data = tmp;
+		hstadd(line);
+		return (line);
 	}
-	return (data);
+	return (NULL);
 }
-*/
+
+void	run_script(char *file)
+{
+	int		fd;
+	char	*line;
+
+	fd = g_sh.fd;
+	if ((g_sh.fd = open(file, O_RDONLY)) < 0)
+	{
+		g_sh.fd = fd;
+		return ;
+	}
+	while (42)
+	{
+		if (!(line = readline("$> ")))
+			break;
+		if (run_command(line) < 0)
+			write(STDOUT_FILENO, "\n", 1);
+	}
+	close(g_sh.fd);
+	g_sh.fd = fd;
+}
+
 int				main(int ac, char **av, char **env)
 {
 	char	*line;
