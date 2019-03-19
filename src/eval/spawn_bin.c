@@ -37,11 +37,11 @@ void close_save(void)
 static int		execve_wrap(t_cmd_tab *cmd)
 {	
 	char	*path;
-	int		ret = 50;
+	int		ret;
 
 	close_save();
-/*	if ((ret = handle_redir(cmd->redir_lst, NULL))) // this has to change we have more err
-		exit(1);*/
+	if ((ret = handle_redir(cmd->redir_lst, NULL))) // this has to change we have more err
+		exit(1);
 	if (ft_ispath(cmd->av[0]))
 	{
 		if (handle_perm(cmd->av[0]) != 0)
@@ -58,7 +58,7 @@ static int		execve_wrap(t_cmd_tab *cmd)
 		if (!cmd->full_path)
 			exit_wrap (127, cmd);
 	}
-//	ret = execve(cmd->full_path, cmd->av, cmd->process_env); 
+	ret = execve(cmd->full_path, cmd->av, cmd->process_env); 
 	putstr_stderr("21sh: bad file format\n");
 	exit_wrap(ret, cmd);
 	return (0);
@@ -90,14 +90,14 @@ int		is_builtin(t_cmd_tab *cmd)
 	static	char		*builtins[] = {"echo", "cd", "setenv", "unsetenv",
 							"env", "exit", "set", "unset", "fc", "hash", NULL};
 	int					i;
-	//int					ret;
+	int					ret;
 	t_list				*save_head;
 
 	save_head = NULL;
 	if ((i = ft_cmptab(builtins, cmd->av[0])) != -1)
 	{
-/*		if ((ret = handle_redir(cmd->redir_lst, &save_head))) // this has to change we have more err
-			return(0);*/
+		if ((ret = handle_redir(cmd->redir_lst, &save_head))) // this has to change we have more err
+			return(0);
 		cmd->process_env = craft_env(g_sh.env, cmd->assign_lst);
 		if (cmd->process_env == NULL)
 			return (MEMERR);
