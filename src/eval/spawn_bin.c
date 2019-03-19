@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/18 14:08:14 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/19 10:36:21 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int		is_builtin(t_cmd_tab *cmd)
 	{
 		if ((ret = handle_redir(cmd->redir_lst, &save_head))) // this has to change we have more err
 			return(0);
-		cmd->process_env = craft_env(ft_tabdup(g_sh.env), cmd->assign_lst);
+		cmd->process_env = craft_env(g_sh.env, cmd->assign_lst);
 		if (cmd->process_env == NULL)
 			return (MEMERR);
 		cmd->exit_status = array[i](cmd);

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 19:04:52 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/18 13:53:12 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/19 10:40:27 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -287,7 +287,9 @@ int	expect_simple_cmd(t_parser *parser)
 		if (!(ret = expect_cmd_name(parser)))
 			if ((ret = expect_cmd_suffix(parser)) != SYNERR)
 				return (ret);
-		return (ret);
+		if (ret != SYNERR)
+			return (ret);
+		return (0);
 	}
 	else if (!(ret = expect_cmd_name(parser)))
 	{

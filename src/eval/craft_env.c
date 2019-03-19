@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:22:06 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/04 20:20:46 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/19 10:35:38 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,19 @@ static int	ft_ptr_arr_len(char **ptr)
 
 }
 
-static void	cpy_array(char **to, char **from)
+static char	**cpy_array(char **to, char **from)
 {
 	int i;
 
 	i = 0;
 	while (from[i])
 	{
-		to[i] = from[i];
+		to[i] = ft_strdup(from[i]);
+		if (to[i] == NULL)
+			return (NULL);
 		i++;
 	}
+	return (to);
 }
 
 int	env_is_set(char *key, char **env)
@@ -77,7 +80,8 @@ char **craft_env(char **base_env, char **to_add)
 	tot_len = ft_ptr_arr_len(base_env) + ft_ptr_arr_len(to_add) + 1;
 	if (!(fresh = ft_memalloc(tot_len * sizeof(char*))))
 		return (NULL);
-	cpy_array(fresh, base_env);
+	if (!(cpy_array(fresh, base_env)))
+		return (NULL);
 	i = 0;
 	while (to_add[i])
 	{
@@ -91,6 +95,6 @@ char **craft_env(char **base_env, char **to_add)
 		to_add[i] = NULL; /* to avoid double free*/
 		i++;	
 	}
-	//free(base_env); this breaks varchr in wordexp
+	//free(base_env);
 	return (fresh);
 }

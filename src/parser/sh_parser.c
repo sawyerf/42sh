@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/18 14:08:02 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/19 11:05:08 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,6 @@ int	sh_parser_refac(char *line)
 	}	
 	parser.head = parser.lx_state->head;
 	ret = expect_complete_cmds(&parser);
-	//free(parser.lx_state->line);
 	if (ret)
 	{
 		if (ret == MEMERR)
@@ -191,6 +190,7 @@ int	sh_parser_refac(char *line)
 //	if (eval_tree(parser.tree) == MEMERR)
 //		return (MEMERR);
 	free_token_lst(parser.head);
-//	free_tree(parser.tree);
+	free_tree(parser.tree);
 	return (0); //this should be exit status
+	free(parser.cursor);
 }
