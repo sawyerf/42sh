@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 15:45:19 by apeyret           #+#    #+#             */
-/*   Updated: 2019/01/10 15:35:31 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/18 18:04:21 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static char	*ft_strnjoin(char **s1, char *s2, int n)
 
 int			get_next_line(const int fd, char **line)
 {
-	static char tmp[BUFF_SIZE + 1];
+	static char tmp[1000000][BUFF_SIZE + 1];
 	char		buf[1];
 	int			curs;
 
@@ -40,16 +40,16 @@ int			get_next_line(const int fd, char **line)
 	*line = NULL;
 	while (42)
 	{
-		if (tmp[0])
-			*line = ft_strnjoin(line, tmp, ft_strichr(tmp, '\n', 0));
-		if (ft_strchr(tmp, '\n') || (!curs && tmp[0]))
+		if (tmp[fd][0])
+			*line = ft_strnjoin(line, tmp[fd], ft_strichr(tmp[fd], '\n', 0));
+		if (ft_strchr(tmp[fd], '\n') || (!curs && tmp[fd][0]))
 		{
-			ft_strcpy(tmp, &(tmp[ft_strichr(tmp, '\n', 1)]));
+			ft_strcpy(tmp[fd], &(tmp[fd][ft_strichr(tmp[fd], '\n', 1)]));
 			return (2);
 		}
 		if (!curs)
 			return ((*line && **line) ? 1 : 0);
-		curs = read(fd, tmp, BUFF_SIZE);
-		tmp[curs] = '\0';
+		curs = read(fd, tmp[fd], BUFF_SIZE);
+		tmp[fd][curs] = '\0';
 	}
 }

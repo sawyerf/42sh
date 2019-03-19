@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/19 09:57:41 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/19 18:35:49 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct 		s_sh
 	int				status;
 	char			**local;
 	char			**env;
-	int				last_exit;
+	int				fd;
 	/* stuff needed by job control will eventually live in this struct 
 	 */
 }					t_sh;
@@ -170,7 +170,9 @@ int						fc_writelst(char *file, t_list *lst, int size);
 char					*fc_read(char *file);
 int						run_editor(t_fc *fc, char *file);
 void					fc_print(t_fc fc, t_list *lst, int i);
-int		fc_parser(char **av, t_fc *fc);
+int						fc_parser(char **av, t_fc *fc);
+char					*sh_readfile(char *prompt);
+void					run_script(char *file);
 
 int		hash(t_cmd_tab *cmd);
 #endif

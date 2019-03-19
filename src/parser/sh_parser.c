@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/19 14:19:49 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/19 18:36:12 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ int	execute_cmdline(t_parser *parser)
 
 int	sh_parser_refac(char *line)
 {
- 	t_parser	parser;
+	t_parser	parser;
 	int			ret;
 
 	ft_bzero(&parser, sizeof(t_parser));

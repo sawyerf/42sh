@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/19 13:06:33 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/19 18:34:48 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static int	init_shell(char **env)
 		return (-1);
 	if (dup2(STDERR_FILENO, FDSAVEERR) == -1)
 		return (-1);
+	g_sh.fd = 0;
 	return (0);
 }
 
@@ -47,11 +48,11 @@ int		run_command(char *line)
 	{
 
 		if (sh_parser_refac(line) == MEMERR)
-			return (MEMERR);		
+			return (MEMERR);
 	}
 	else if (*line != '\n')
 	{
-		free(line);
+		ft_strdel(&line);
 		return (-1);
 	}
 	return (0);
@@ -59,19 +60,37 @@ int		run_command(char *line)
 
 char	*sh_readfile(char *prompt)
 {
-	char *line;
-	char *tmp;
-	int ret;
+	char	*line;
 
 	(void)prompt;
-	ret = get_next_line(STDIN_FILENO, &line);
-	if (ret < 1)
-		return (NULL); //this is inconsistent
-	if (!(tmp = ft_strjoin(line, "\n")))
-		return (NULL);
-	free(line);
-	line = tmp;
-	return (line);
+	if (get_next_line(g_sh.fd, &line) > 0)
+	{
+		hstadd(line);
+		return (line);
+	}
+	return (NULL);
+}
+
+void	run_script(char *file)
+{
+	int		fd;
+	char	*line;
+
+	fd = g_sh.fd;
+	if ((g_sh.fd = open(file, O_RDONLY)) < 0)
+	{
+		g_sh.fd = fd;
+		return ;
+	}
+	while (42)
+	{
+		if (!(line = readline("$> ")))
+			break;
+		if (run_command(line) < 0)
+			write(STDOUT_FILENO, "\n", 1);
+	}
+	close(g_sh.fd);
+	g_sh.fd = fd;
 }
 
 int				main(int ac, char **av, char **env)
