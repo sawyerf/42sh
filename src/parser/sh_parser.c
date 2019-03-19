@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/19 18:36:12 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/19 19:24:20 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,8 @@ int	sh_parser_refac(char *line)
 			ft_printf("MEMERR\n");
 			exit(1);
 		}
+		if (ret == SYNERR || ret != HEREDOC_ERR)
+			g_sh.status = 258;
 		if (ret == SYNERR)
 			ft_dprintf(STDERR_FILENO, "21sh: syntax error near : '%s'\n", parser.current->data.str);
 		else if (ret == HEREDOC_ERR)

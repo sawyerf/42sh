@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/27 15:10:23 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/18 13:40:52 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/19 20:01:19 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*fc_filename(t_list *lst, int size)
 		i++;
 	}
 	user = get_env_value("USER=");
-	if (!(file = ft_zprintf("/tmp/%s%x", user, hash)))
+	if (!(file = ft_zprintf("/tmp/%s%x.fc", user, hash)))
 		return (NULL);
 	if (!access(file, F_OK))
 	{
@@ -146,7 +146,6 @@ int		fc(t_cmd_tab *cmd)
 {
 	t_fc	fc;
 
-	g_sh.mode = NONINTERACTIVE;
 	(void)cmd;
 	//hstdellast();
 	if (fc_parser(cmd->av, &fc) < 0)
@@ -159,6 +158,5 @@ int		fc(t_cmd_tab *cmd)
 		fc_l(fc);
 	else
 		fc_e(fc);
-	g_sh.mode = INTERACTIVE;
 	return (0);
 }

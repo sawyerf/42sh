@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/19 18:34:48 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/19 20:01:19 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int		run_command(char *line)
 		return (-1);
 	if ((*line) && (ft_strcmp(line, "\n")))
 	{
-
 		if (sh_parser_refac(line) == MEMERR)
 			return (MEMERR);
 	}
@@ -65,6 +64,7 @@ char	*sh_readfile(char *prompt)
 	(void)prompt;
 	if (get_next_line(g_sh.fd, &line) > 0)
 	{
+		ft_printf("\33[0;34m%s\33[0;0m\n", line);
 		hstadd(line);
 		return (line);
 	}
@@ -88,6 +88,8 @@ void	run_script(char *file)
 			break;
 		if (run_command(line) < 0)
 			write(STDOUT_FILENO, "\n", 1);
+		//if (g_sh.status == 258)
+		//	break ;
 	}
 	close(g_sh.fd);
 	g_sh.fd = fd;
@@ -98,7 +100,6 @@ int				main(int ac, char **av, char **env)
 	char	*line;
 	int		ret;
 	t_read_fn	read_fn;
-
 
 	silence_ac_av(ac, av);
 	if (init_shell(env)) // dispatcher here
@@ -115,6 +116,7 @@ int				main(int ac, char **av, char **env)
 			break;
 		if (run_command(line) < 0)
 			write(STDOUT_FILENO, "\n", 1);
+		//ft_printf("%d\n", g_sh.status);
 	}
 	hstaddfile(g_sh.env);
 	ret = 1;
