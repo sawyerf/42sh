@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:51:15 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/18 11:50:12 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/19 09:58:15 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int next_token(t_parser *parser);
 int	handle_here_doc(t_parser *parser);
 
 /* */
-
+int	execute_cmdline(t_parser *parser);
 int	add_to_pipeline(t_parser *parser);
 int	build_redir(t_token *to_add, t_redir *redir);
 int	build_cmd(t_token *to_add, t_simple_cmd *cmd);

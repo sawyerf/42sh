@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 15:48:47 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/07 19:42:05 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/19 09:57:32 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct			s_simple_cmd
 
 typedef struct	s_parser
 {
+	struct s_lexer		*lx_state;
 	struct s_token		*current;
 	char				*cursor;
 	struct s_token 		*head;	
