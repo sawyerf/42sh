@@ -78,7 +78,10 @@ t_lexer *ft_lexer(char *input)
 
 	lexer_state.head = NULL;
 	if (input)
+	{
 		init_lexer(input, &lexer_state);
+		return (&lexer_state);
+	}
 	while (ft_cisin(" \t", *(lexer_state.cursor)))	
 		lexer_state.cursor = lexer_state.cursor + 1;
 	while (*(lexer_state.cursor))

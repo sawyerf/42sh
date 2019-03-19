@@ -19,14 +19,28 @@ int expect_newline_lst(t_parser *parser)
 
 	if (parser->current->type != NEWLINE)
 		return (SYNERR);
-//	if ((ret = tree_add_sep(parser)))
-//		return (ret);
 	while (parser->current->type == NEWLINE)
 	{
 		if ((ret = next_token(parser)))
 			return (ret);
 	}
 	return (0);
+}
+
+int	expect_linebreak_rdl(t_parser *parser)
+{
+	int ret;
+
+	if (((ret = expect_newline_lst(parser)) != SYNERR)
+		&& (ret))
+		return (ret);
+	if (parser->current->type == EOI)
+	{
+		if ((ret = request_new_line(parser->lx_state)))
+			return (ret);
+		return (next_token(parser));
+	}
+	return (0);	
 }
 
 int	expect_linebreak(t_parser *parser)
@@ -296,9 +310,12 @@ int	expect_pipeline_suffix(t_parser *parser)
 	{
 		if ((ret = next_token(parser))) 
 			return (ret);
-		if (((ret = expect_linebreak(parser)) != SYNERR)
+		if (((ret = expect_linebreak_rdl(parser)) != SYNERR)
 			&& (ret))
+		{
+			free_pipeline(parser->pipeline);
 			return (ret);
+		}
 		if ((ret = expect_simple_cmd(parser)))
 		{
 			parser->current = backtrack;	
@@ -345,7 +362,7 @@ int	expect_and_or_suffix(t_parser *parser)
 			return(MEMERR);
 		if ((ret = next_token(parser))) 
 			return (ret);
-		if (((ret = expect_linebreak(parser)) != SYNERR)
+		if (((ret = expect_linebreak_rdl(parser)) != SYNERR)
 			&& (ret))
 			return (ret);
 		if ((ret = expect_pipeline(parser)))
@@ -420,9 +437,10 @@ int	expect_complete_cmd(t_parser *parser)
 
 	if (!(ret = expect_list(parser)))
 	{
-		if ((ret = expect_separator_op(parser)) != SYNERR)
-			return (ret); 
-		return (0);
+		if (((ret = expect_separator_op(parser)) != SYNERR)
+			&& (ret))
+			return (ret);
+		return (execute_cmdline(parser));
 	}
 	return (ret);
 }
@@ -437,6 +455,7 @@ int expect_complete_cmds_suffix(t_parser *parser)
 	{
 		if ((ret = tree_add_nl(parser)))
 			return (ret);
+
 		if ((expect_complete_cmd(parser)))
 		{
 			parser->current = backtrack;

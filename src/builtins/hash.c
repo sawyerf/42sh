@@ -75,7 +75,7 @@ int		hash_print(t_list **hst)
 int		hash(t_cmd_tab *cmd)
 {
 	t_list	**hst;
-	char	*path;
+	//char	*path;
 	t_hash	hash;
 
 	hash_parser(cmd->av, &hash);
@@ -83,7 +83,7 @@ int		hash(t_cmd_tab *cmd)
 	{
 		if (ft_cisin(hash.opt, 'r'))
 			ht_del();
-		path = get_env_value("PATH");
+	//	path = get_env_value("PATH");
 		while (*hash.search)
 		{
 			//hstadd();

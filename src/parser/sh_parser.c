@@ -46,13 +46,13 @@ int		parser_is_assign(t_token const *token)
 
 void	free_redir(t_redir *redir)
 {
-		if (redir->left)
-			free_token(redir->left);
-		if (redir->right)
-			free_token(redir->right);
-		if (redir->op)
-			free_token(redir->op);
-	
+	if (redir->left)
+		free_token(redir->left);
+	if (redir->right)
+		free_token(redir->right);
+	if (redir->op)
+		free_token(redir->op);
+	ft_bzero(redir, sizeof(t_redir));	
 }
 
 void	free_redir_lst(t_redir *redir)
@@ -76,6 +76,7 @@ void	free_simple_cmd(t_simple_cmd *cmd)
 		free_token_lst(cmd->assign_lst);
 	if (cmd->redir_lst)
 		free_redir_lst(cmd->redir_lst);
+	ft_bzero(cmd, sizeof(t_simple_cmd));
 }
 
 void	free_pipeline(t_simple_cmd *pipeline)
@@ -125,7 +126,7 @@ int next_token(t_parser *parser)
 {
 	t_lexer *lex;
 
-	if (parser->current->next)
+	if ((parser->current) && (parser->current->next))
 	{
 		parser->current = parser->current->next;
 		return (0);
@@ -136,28 +137,37 @@ int next_token(t_parser *parser)
 	if (lex->err)
 		return (lex->err);
 	parser->cursor = lex->cursor;
-	parser->current->next = lex->head;
-	parser->current = parser->current->next;
+	if ((parser->current))
+		parser->current->next = lex->head;
+	parser->current = lex->head;
+	return (0);
+}
+
+int	execute_cmdline(t_parser *parser)
+{
+	if (eval_tree(parser->tree) == MEMERR)
+		return (MEMERR);
+	free_tree(parser->tree);
+	parser->tree = NULL;
+	parser->lx_state = ft_lexer(parser->cursor); // reinit lexer
 	return (0);
 }
 
 int	sh_parser_refac(char *line)
 {
-	static 	t_parser	parser;
-	t_lexer		*lex;
+ 	t_parser	parser;
 	int			ret;
 
 	ft_bzero(&parser, sizeof(t_parser));
-	parser.cursor = line;
-	if (!(lex = ft_lexer(line)) || lex->err)
+	parser.lx_state = ft_lexer(line); // init lexer
+	if ((ret = next_token(&parser)))
 	{
 		ft_dprintf(STDERR_FILENO, "21sh: premature EOF\n");
-		return (lex->err);
-	}
-	parser.current = lex->head;
-	parser.head = lex->head;
+		return (parser.lx_state->err);
+	}	
+	parser.head = parser.lx_state->head;
 	ret = expect_complete_cmds(&parser);
-	free(lex->line);
+	//free(parser.lx_state->line);
 	if (ret)
 	{
 		if (ret == MEMERR)
@@ -172,14 +182,15 @@ int	sh_parser_refac(char *line)
 		else
 			ft_dprintf(STDERR_FILENO, "21sh: premature EOF\n");
 		free_token_lst(parser.head);
-		return (lex->err);
 		free_tree(parser.tree);
+		free_redir(&parser.current_redir);
+		free_simple_cmd(&(parser.cmd));
 		return (ret);
 	}
 	//print_tree(parser.tree);
-	if (eval_tree(parser.tree) == MEMERR)
-		return (MEMERR);
+//	if (eval_tree(parser.tree) == MEMERR)
+//		return (MEMERR);
 	free_token_lst(parser.head);
-	free_tree(parser.tree);
+//	free_tree(parser.tree);
 	return (0); //this should be exit status
 }

@@ -19,9 +19,9 @@ int		request_new_line(t_lexer *lx_st)
 
 	if (g_sh.mode != INTERACTIVE)
 		return (QUOTE_ERR);
-	new_line = readline("> ");
-	if (new_line == NULL)
-		return (MEMERR);
+	new_line = readline("> "); //??????
+	if (new_line == NULL) // should be for mem err
+		return (QUOTE_ERR);
 	else if (*new_line == 0)
 		return (QUOTE_ERR);
 	free(lx_st->line); // this has to change

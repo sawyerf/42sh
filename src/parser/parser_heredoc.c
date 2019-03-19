@@ -27,22 +27,27 @@ static int interactive_heredoc(t_token *io_here)
 	size_t len;
 	char *here_doc;
 	char *new_ln;
+	char *tmp;
 
 	len = ft_strlen(io_here->data.str);
 	if (!(here_doc = ft_strdup("")))
 		return (MEMERR);	
 	while (42)
 	{
-		if (!(new_ln = readline("heredoc> ")))
+		if ((!(new_ln = readline("heredoc> ")))
+			|| (new_ln == '\0'))
+		{
+			free(here_doc);
 			return (HEREDOC_ERR);
-		else if (*new_ln == '\0')
-			return (HEREDOC_ERR);
+		}
 		if ((!ft_strncmp(new_ln, io_here->data.str, len))
 			&& (new_ln[len] == '\n'))
 			break;
-		if (!(here_doc = ft_strjoin(here_doc, new_ln)))
+		if (!(tmp = ft_strjoin(here_doc, new_ln)))
 			return (MEMERR);
 		free(new_ln);
+		free(here_doc);
+		here_doc = tmp;	
 	}
 	free(new_ln);
 	replace_here_doc(io_here, here_doc);
