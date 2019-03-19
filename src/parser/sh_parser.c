@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/19 11:05:08 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/19 14:19:49 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,12 +134,12 @@ int next_token(t_parser *parser)
 	lex = ft_lexer(NULL);
 	if (!lex)
 		return (MEMERR);
-	if (lex->err)
-		return (lex->err);
-	parser->cursor = lex->cursor;
 	if ((parser->current))
 		parser->current->next = lex->head;
 	parser->current = lex->head;
+	if (lex->err)
+		return (lex->err);
+	parser->cursor = lex->cursor;
 	return (0);
 }
 
@@ -149,6 +149,7 @@ int	execute_cmdline(t_parser *parser)
 		return (MEMERR);
 	free_tree(parser->tree);
 	parser->tree = NULL;
+	ft_bzero(&(parser->cmd), sizeof(t_simple_cmd));
 	parser->lx_state = ft_lexer(parser->cursor); // reinit lexer
 	return (0);
 }
@@ -160,6 +161,7 @@ int	sh_parser_refac(char *line)
 
 	ft_bzero(&parser, sizeof(t_parser));
 	parser.lx_state = ft_lexer(line); // init lexer
+	parser.lx_state->line = line;
 	if ((ret = next_token(&parser)))
 	{
 		ft_dprintf(STDERR_FILENO, "21sh: premature EOF\n");
@@ -182,15 +184,9 @@ int	sh_parser_refac(char *line)
 			ft_dprintf(STDERR_FILENO, "21sh: premature EOF\n");
 		free_token_lst(parser.head);
 		free_tree(parser.tree);
-		free_redir(&parser.current_redir);
-		free_simple_cmd(&(parser.cmd));
 		return (ret);
 	}
-	//print_tree(parser.tree);
-//	if (eval_tree(parser.tree) == MEMERR)
-//		return (MEMERR);
 	free_token_lst(parser.head);
 	free_tree(parser.tree);
 	return (0); //this should be exit status
-	free(parser.cursor);
 }

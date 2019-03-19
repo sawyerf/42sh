@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/18 11:21:15 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/19 14:21:25 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,9 @@ t_lexer *ft_lexer(char *input)
 	{
 		if (!(lexer_state.token = new_token(0)))
 			return (NULL);
+		lex_add_tk(&lexer_state, lexer_state.token); // to modify
 		if ((lexer_state.err = dispatch_fn(&lexer_state)))
 			return (&lexer_state);
-		lex_add_tk(&lexer_state, lexer_state.token); // to modify
 		if (lexer_state.token->type == NEWLINE)
 			return (&lexer_state);
 		lexer_state.token = NULL;
