@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/19 13:30:21 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/20 19:07:44 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void close_save(void)
 
 static int		execve_wrap(t_cmd_tab *cmd)
 {	
-	char	*path;
+	//char	*path;
 	int		ret;
 
 	close_save();
@@ -49,7 +49,7 @@ static int		execve_wrap(t_cmd_tab *cmd)
 		if ((cmd->full_path = ft_strdup(cmd->av[0])) == NULL)
 			exit_wrap(MEMERR, cmd);
 	}
-	else if (!cmd->full_path) //f launched with env, builtin have already set the full path 
+/*	else if (!cmd->full_path) //f launched with env, builtin have already set the full path 
 	{
 		if (!(path = get_process_env("PATH", cmd->process_env)))
 			path = get_env_value("PATH");
@@ -57,7 +57,7 @@ static int		execve_wrap(t_cmd_tab *cmd)
 			return (MEMERR);
 		if (!cmd->full_path)
 			exit_wrap (127, cmd);
-	}
+	}*/
 	ret = execve(cmd->full_path, cmd->av, cmd->process_env); 
 	putstr_stderr("21sh: bad file format\n");
 	exit_wrap(ret, cmd);
@@ -111,6 +111,7 @@ int		is_builtin(t_cmd_tab *cmd)
 int		spawn_in_pipe(t_cmd_tab *cmd)
 {
 	int ret;
+	char *path;
 
 	if (cmd->av[0] == NULL)
 		return (0);
@@ -121,12 +122,22 @@ int		spawn_in_pipe(t_cmd_tab *cmd)
 	}
 	else if (ret == MEMERR)
 		return (MEMERR);
-	else
+	if ((!cmd->process_env) 
+			&& (!(cmd->process_env = craft_env(g_sh.env, cmd->assign_lst))))
+		return (MEMERR);
+	if (!cmd->full_path) //f launched with env, builtin have already set the full path 
 	{
-		if (!(cmd->process_env = craft_env(g_sh.env, cmd->assign_lst)))
+		if (!(path = get_process_env("PATH", cmd->process_env)))
+			path = get_env_value("PATH");
+		if (ht_getvalue(path, cmd) == MEMERR)
 			return (MEMERR);
-		return (execve_wrap(cmd));
+		if (!cmd->full_path)
+		{
+			putstr_stderr("21sh: cmd not found\n");
+			return (127);
+		}
 	}
+	return (execve_wrap(cmd));
 }
 
 static int assign_to_shell(t_cmd_tab *cmd)
@@ -162,6 +173,7 @@ int		spawn_command(t_cmd_tab *cmd)
 {
 	pid_t 		pid;
 	int			ret;
+	char 		*path;
 
 	if (cmd->av[0] == NULL)
 		return (assign_to_shell(cmd));
@@ -169,14 +181,26 @@ int		spawn_command(t_cmd_tab *cmd)
 		return (0);
 	else if (ret == MEMERR)
 		return (MEMERR);
+	if ((!cmd->process_env) 
+			&& (!(cmd->process_env = craft_env(g_sh.env, cmd->assign_lst))))
+		return (MEMERR);
+	if (!cmd->full_path) //f launched with env, builtin have already set the full path 
+	{
+		if (!(path = get_process_env("PATH", cmd->process_env)))
+			path = get_env_value("PATH");
+		if (ht_getvalue(path, cmd) == MEMERR)
+			return (MEMERR);
+		if (!cmd->full_path)
+		{
+			putstr_stderr("21sh: cmd not found\n");
+			return (127);
+		}
+	}
 	pid = fork();
 	if (pid == -1)
 		return (MEMERR);
 	if (pid == 0)
 	{
-		if ((!cmd->process_env) 
-				&& (!(cmd->process_env = craft_env(g_sh.env, cmd->assign_lst))))
-			return (MEMERR);
 		execve_wrap(cmd);
 		exit_wrap(1, cmd); /* handle errors here*/
 	}
