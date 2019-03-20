@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/20 19:37:08 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/20 19:56:22 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,14 @@ static void		silence_ac_av(char ac, char **av)
 
 int		run_command(char *line)
 {
+	int ret;
+
 	if (!line)
 		return (-1);
 	if ((*line) && (ft_strcmp(line, "\n")))
 	{
-		if (sh_parser_refac(line) == MEMERR)
-			return (MEMERR);
+		if ((ret = sh_parser_refac(line)))
+			return (ret);
 	}
 	else if (*line != '\n')
 	{
@@ -93,7 +95,8 @@ void	run_script(char *file)
 	{
 		if (!(line = readline("$> ")))
 			break;
-		if (run_command(line) < 0)
+		if (run_command(line))
+			break;
 			write(STDOUT_FILENO, "\n", 1);
 		//if (g_sh.status == 258)
 		//	break ;
@@ -121,8 +124,9 @@ int				main(int ac, char **av, char **env)
 	{
 		if (!(line = read_fn("$> ")))
 			break;
-		if (run_command(line) < 0)
-			write(STDOUT_FILENO, "\n", 1);
+		if (run_command(line))
+			break;
+		write(STDOUT_FILENO, "\n", 1);
 		//ft_printf("%d\n", g_sh.status);
 	}
 	hstaddfile(g_sh.env);
