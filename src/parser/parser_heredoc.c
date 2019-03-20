@@ -28,13 +28,17 @@ static int interactive_heredoc(t_token *io_here)
 	char *here_doc;
 	char *new_ln;
 	char *tmp;
+	t_read_fn read_fn;
 
+	read_fn = readline;
+	if (g_sh.mode != INTERACTIVE)
+		read_fn = sh_readfile;
 	len = ft_strlen(io_here->data.str);
 	if (!(here_doc = ft_strdup("")))
 		return (MEMERR);	
 	while (42)
 	{
-		if ((!(new_ln = readline("heredoc> ")))
+		if ((!(new_ln = read_fn("heredoc> ")))
 			|| (new_ln == '\0'))
 		{
 			free(here_doc);
@@ -54,14 +58,25 @@ static int interactive_heredoc(t_token *io_here)
 	return (0);
 }
 
-char *get_file_delim(char *next_nl, char *here_end)
+char *get_file_delim(char *next_nl, char *here_end, t_parser *parser)
 {
 	char *delim;
+	char *ln;
 	int	len;
+	char *tmp;
 
+	(void)parser;
 	len = ft_strlen(here_end);
-	while ((delim = ft_strstr(next_nl, here_end)))
+	while (42)
 	{
+		ln = readline(">");
+		if ((!ln) || (*ln == 0))
+			return (NULL);
+		free(next_nl);
+		tmp = ft_strjoin(next_nl, ln);
+		free(next_nl);
+		next_nl = tmp;
+		delim = ft_strstr(next_nl, here_end);
 		if ((delim[len] == '\n') || (delim[len] == '\0'))
 			return (delim);
 		next_nl = delim + len;
@@ -80,12 +95,12 @@ int handle_here_doc(t_parser *parser)
 
 	if (here_doc_delimiter(parser->current) == MEMERR)
 		return (MEMERR);
-	if (g_sh.mode == INTERACTIVE)
+//	if (g_sh.mode == INTERACTIVE)
 		return (interactive_heredoc(parser->current));			
 	if (!(here_end = ft_zprintf("\n%s", parser->current->data.str)))
 		return (MEMERR);
 	next_nl = parser->cursor;
-	if (!(delim = get_file_delim(next_nl, here_end)))
+	if (!(delim = get_file_delim(next_nl, here_end, parser)))
 		return (HEREDOC_ERR);
 	if (!(here_doc = ft_strndup(next_nl, delim - next_nl + 1)))
 		return (MEMERR);

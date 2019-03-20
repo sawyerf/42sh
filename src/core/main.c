@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/20 18:21:42 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/20 19:26:11 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,16 @@ int		run_command(char *line)
 char	*sh_readfile(char *prompt)
 {
 	char	*line;
+	char	*tmp;
 
 	(void)prompt;
 	if (get_next_line(g_sh.fd, &line) > 0)
 	{
+		tmp = ft_strjoin(line, "\n");
+		if (!tmp)
+			return (NULL);
+		free(line);
+		line = tmp;
 		ft_printf("\33[0;34m%s\33[0;0m\n", line);
 		hstadd(line);
 		return (line);
