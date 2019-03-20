@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 20:31:07 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/20 18:27:50 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/20 19:24:29 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int		hash(t_cmd_tab *cmd)
 {
 	t_list	**hst;
 	char	*path;
+	char	**paths;
 	t_hash	hash;
 
 	hash_parser(cmd->av, &hash);
@@ -87,12 +88,15 @@ int		hash(t_cmd_tab *cmd)
 		if (ft_cisin(hash.opt, 'r'))
 			ht_del();
 		path = get_env_value("PATH");
+		if (!(paths = ft_strsplit(path, ':')))
+			return (MEMERR);
 		while (path && *hash.search)
 		{
-			ht_getvalue(path, NULL);
-			//hstadd();
+			if (!ht_getpath(paths, *hash.search))
+				ht_addfile(paths, *hash.search);
 			hash.search++;
 		}
+		ft_tabdel(&paths);
 	}
 	else
 	{

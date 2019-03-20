@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 14:40:53 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/20 18:48:59 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/20 19:34:17 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,21 +69,21 @@ char	*ht_getpath(char **paths, char *exec)
 {
 	t_list	*tmp;
 	int		i;
+	int		hash;
 
 	i = 0;
 	while (paths[i])
 	{
-		tmp = ht_get(paths[i]);
+		if ((hash = ht_hash(paths[i])) >= 0)
+			tmp = g_thash[hash];
+		else
+			tmp = NULL;
 		while (tmp)
 		{
-			//ft_printf("hash: %s | %s\n", tmp->content, tmp->content + tmp->content_size);
 			if (!ft_strcmp(exec, tmp->content + tmp->content_size))
 			{
 				if (!exaccess(tmp->content))
-				{
-					free_tab(paths);
 					return (tmp->content);
-				}
 			}
 			tmp = tmp->next;
 		}
