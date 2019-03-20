@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/19 20:01:19 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/20 18:21:42 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "readline.h"
 
 t_sh	g_sh;
+extern t_list	*g_thash[];
 
 static int	init_shell(char **env)
 {
@@ -112,10 +113,12 @@ int				main(int ac, char **av, char **env)
 		read_fn = readline;
 	while (42)
 	{
+		ft_printf("avant: %p\n", g_thash[2017]);
 		if (!(line = read_fn("$> ")))
 			break;
 		if (run_command(line) < 0)
 			write(STDOUT_FILENO, "\n", 1);
+		ft_printf("apres: %p\n", g_thash[2017]);
 		//ft_printf("%d\n", g_sh.status);
 	}
 	hstaddfile(g_sh.env);

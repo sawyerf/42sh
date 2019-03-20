@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 13:41:29 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/06 18:05:52 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/19 20:15:08 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ int		history(t_rdl *rdl, char *buf)
 		new = hstnext(rdl->str);
 	else if (!ft_strcmp(K_DOWN, buf))
 		new = hstprev();
+	//ft_dprintf(2, "%s\n", new);
 	if (!new)
 		return (0);
 	rdlreplace(rdl, new);

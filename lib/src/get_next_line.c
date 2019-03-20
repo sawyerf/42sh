@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/12 15:45:19 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/18 18:04:21 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/20 18:15:46 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static char	*ft_strnjoin(char **s1, char *s2, int n)
 
 int			get_next_line(const int fd, char **line)
 {
-	static char tmp[1000000][BUFF_SIZE + 1];
+	static char tmp[1000][BUFF_SIZE + 1];
 	char		buf[1];
 	int			curs;
 

@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 14:09:25 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/07 15:56:49 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/20 18:46:04 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,31 @@ void	ht_refreshall(char *path)
 	ft_tabdel(&paths);
 }
 
+int		ht_addfile(char	**paths, char *exec)
+{
+	int		i;
+	char	*tmp;
+
+	i = 0;
+	while (paths[i])
+	{
+		if (!(tmp = ft_zprintf("%s/%s", paths[i], exec)))
+			return (MEMERR);
+		if (!exaccess(tmp))
+		{
+			ht_hash(paths[i]);
+			ft_lstadd(&g_thash[i], ft_lstnew(tmp, ft_strlen(paths[i]) + 1));
+			ft_strdel(&tmp);
+			free_tab(paths);
+			return (0);
+		}
+		ft_strdel(&tmp);
+		i++;
+	}
+	free_tab(paths);
+	return (0);
+}
+
 int		ht_getfile(char **paths, t_cmd_tab *cmd)
 {
 	int		i;
@@ -55,7 +80,7 @@ int		ht_getfile(char **paths, t_cmd_tab *cmd)
 		if (!exaccess(tmp))
 		{
 			ht_hash(paths[i]);
-			ft_lstadd(&g_thash[i], ft_lstnew(tmp, ft_strlen(paths[i])));
+			ft_lstadd(&g_thash[i], ft_lstnew(tmp, ft_strlen(paths[i]) + 1));
 			cmd->full_path = tmp;
 			free_tab(paths);
 			return (0);
@@ -84,7 +109,7 @@ t_list	*ht_getexec(char *path)
 		if (!(cpath = ft_zprintf("%s/%s", path, ret->d_name)))
 			return (NULL);
 		if (!folexaccess(cpath))
-			ft_lstadd(&lst, ft_lstnew(cpath, ft_strlen(path)));
+			ft_lstadd(&lst, ft_lstnew(cpath, ft_strlen(path) + 1));
 		ft_strdel(&cpath);
 	}
 	closedir(ptr);

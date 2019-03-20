@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 14:40:53 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/07 15:53:01 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/20 18:48:59 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,35 +65,45 @@ int		ht_hash(char *path)
 	return (-1);
 }
 
-int		ht_getvalue(char *path, t_cmd_tab *cmd)
+char	*ht_getpath(char **paths, char *exec)
 {
 	t_list	*tmp;
-	char	*file;
-	char	**paths;
 	int		i;
 
 	i = 0;
-	if (!(paths = ft_strsplit(path, ':')))
-		return (MEMERR);
 	while (paths[i])
 	{
 		tmp = ht_get(paths[i]);
 		while (tmp)
 		{
-			if (!ft_strcmp(cmd->av[0], tmp->content + tmp->content_size))
+			//ft_printf("hash: %s | %s\n", tmp->content, tmp->content + tmp->content_size);
+			if (!ft_strcmp(exec, tmp->content + tmp->content_size))
 			{
-				file = tmp->content;
-				if (!exaccess(file))
+				if (!exaccess(tmp->content))
 				{
-					if (!(cmd->full_path = ft_strdup(file)))
-						return (MEMERR);
 					free_tab(paths);
-					return (0);
+					return (tmp->content);
 				}
 			}
 			tmp = tmp->next;
 		}
 		i++;
+	}
+	return (NULL);
+}
+
+int		ht_getvalue(char *path, t_cmd_tab *cmd)
+{
+	char	*result;
+	char	**paths;
+
+	if (!(paths = ft_strsplit(path, ':')))
+		return (MEMERR);
+	if ((result = ht_getpath(paths, cmd->av[0])))
+	{
+		if (!(cmd->full_path = ft_strdup(result)))
+			return (MEMERR);
+		return (0);
 	}
 	return (ht_getfile(paths, cmd));
 }

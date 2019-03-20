@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/27 15:10:23 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/19 20:01:19 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/19 20:18:04 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,6 @@ int		run_editor(t_fc *fc, char *file)
 		}
 	}
 	run_command(ft_zprintf("%s %s\n", fc->editor, file));
-	printf("%d\n", g_sh.status);
 	return (g_sh.status);
 }
 

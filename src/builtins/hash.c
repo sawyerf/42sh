@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 20:31:07 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/18 12:48:54 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/20 18:27:50 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	hash_parser(char **av, t_hash *hash)
 {
 	int	i;
 
+	av++;
+	hash_init(hash);
 	while (*av)
 	{
 		if (!ft_strcmp(*av, "--") || **av != '-')
@@ -75,17 +77,19 @@ int		hash_print(t_list **hst)
 int		hash(t_cmd_tab *cmd)
 {
 	t_list	**hst;
-	//char	*path;
+	char	*path;
 	t_hash	hash;
 
 	hash_parser(cmd->av, &hash);
-	if (ft_cisin(hash.opt, 'r'))
+	ft_printf("opt: %s\n", hash.opt);
+	if (ft_cisin(hash.opt, 'r') || *hash.search)
 	{
 		if (ft_cisin(hash.opt, 'r'))
 			ht_del();
-	//	path = get_env_value("PATH");
-		while (*hash.search)
+		path = get_env_value("PATH");
+		while (path && *hash.search)
 		{
+			ht_getvalue(path, NULL);
 			//hstadd();
 			hash.search++;
 		}

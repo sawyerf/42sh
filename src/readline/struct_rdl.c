@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 15:15:46 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/06 17:52:43 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/19 20:15:07 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	rdlreplace(t_rdl *rdl, char *s)
 		rdl->str[rdl->size] = 0;
 		rdl->size--;
 	}
+	rdl->str[0] = 0;
 	rdl->curs = 0;
 	rdl->real = 0;
 	tgpstr("cr");
