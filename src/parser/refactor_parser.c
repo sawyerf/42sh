@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/07 19:04:52 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/19 18:35:05 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/20 19:39:58 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -443,7 +443,7 @@ int	expect_complete_cmd(t_parser *parser)
 		if (((ret = expect_separator_op(parser)) != SYNERR)
 			&& (ret))
 			return (ret);
-		return (execute_cmdline(parser));
+		return (0);
 	}
 	return (ret);
 }
@@ -458,7 +458,7 @@ int expect_complete_cmds_suffix(t_parser *parser)
 	{
 		if ((ret = tree_add_nl(parser)))
 			return (ret);
-
+		execute_cmdline(parser);
 		if ((expect_complete_cmd(parser)))
 		{
 			parser->current = backtrack;
