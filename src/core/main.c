@@ -6,12 +6,13 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/20 19:56:22 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/22 16:32:18 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_core.h"
 #include "readline.h"
+#include "hashtable.h"
 
 t_sh	g_sh;
 extern t_list	*g_thash[];
@@ -126,7 +127,6 @@ int				main(int ac, char **av, char **env)
 			break;
 		if (run_command(line))
 			break;
-		write(STDOUT_FILENO, "\n", 1);
 		//ft_printf("%d\n", g_sh.status);
 	}
 	hstaddfile(g_sh.env);

@@ -6,12 +6,11 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 14:40:53 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/20 19:34:17 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/22 17:20:28 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "readline.h"
-#include "ft_eval.h"
+#include "hashtable.h"
 
 t_list *g_thash[HT_SIZE];
 
@@ -65,49 +64,7 @@ int		ht_hash(char *path)
 	return (-1);
 }
 
-char	*ht_getpath(char **paths, char *exec)
-{
-	t_list	*tmp;
-	int		i;
-	int		hash;
-
-	i = 0;
-	while (paths[i])
-	{
-		if ((hash = ht_hash(paths[i])) >= 0)
-			tmp = g_thash[hash];
-		else
-			tmp = NULL;
-		while (tmp)
-		{
-			if (!ft_strcmp(exec, tmp->content + tmp->content_size))
-			{
-				if (!exaccess(tmp->content))
-					return (tmp->content);
-			}
-			tmp = tmp->next;
-		}
-		i++;
-	}
-	return (NULL);
-}
-
-int		ht_getvalue(char *path, t_cmd_tab *cmd)
-{
-	char	*result;
-	char	**paths;
-
-	if (!(paths = ft_strsplit(path, ':')))
-		return (MEMERR);
-	if ((result = ht_getpath(paths, cmd->av[0])))
-	{
-		if (!(cmd->full_path = ft_strdup(result)))
-			return (MEMERR);
-		return (0);
-	}
-	return (ht_getfile(paths, cmd));
-}
-
+/*
 t_list	*ht_get(char *path)
 {
 	int hash;
@@ -120,4 +77,4 @@ t_list	*ht_get(char *path)
 			return (NULL);
 	}
 	return (g_thash[hash]);
-}
+}*/

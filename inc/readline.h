@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/20 16:23:44 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/22 18:58:28 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@
 # include <dirent.h>
 # include <sys/stat.h>
 # include "ft_eval.h"
-
-# define HT_SIZE 2048
 
 # define K_SUP  "\33[1;2A"
 # define K_SDOW "\33[1;2B"
@@ -83,18 +81,6 @@ typedef struct		s_key
 //main
 char				*readline(char	*PROMPT);
 
-//hashtable
-void	ht_init(void);
-int		ht_hash(char *path);
-t_list	*ht_get(char *path);
-t_list	*ht_getexec(char *path);
-int 	ht_getvalue(char *path, t_cmd_tab *cmd);
-void	ht_del(void);
-int		ht_getfile(char **paths, t_cmd_tab *cmd);
-void	ht_refreshall(char *path);
-t_list	**ht_gget(void);
-int		ht_addfile(char	**paths, char *exec);
-char	*ht_getpath(char **path, char *exec);
 
 //termcaps
 int		terminit(struct termios *save);

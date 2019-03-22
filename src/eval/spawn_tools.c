@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 19:20:53 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/06 20:37:05 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/22 19:56:51 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ int			handle_perm(char *cmd_name)
 
 void	exit_wrap(int code, t_cmd_tab *cmd)
 {	
-//	free_cmd_tab(cmd); maybe this is where fork leaks ?
-	exec_error(code, cmd->av[0]);	
+	//free_cmd_tab(cmd); maybe this is where fork leaks ?
+	//exec_error(code, cmd->av[0]);	
 	(void)cmd;
 	exit(code);
 }

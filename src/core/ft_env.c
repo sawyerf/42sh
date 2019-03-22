@@ -6,12 +6,12 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 13:58:14 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/04 19:25:34 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/22 20:00:34 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_core.h"
-#include "readline.h" //this should be resolved differently
+#include "hashtable.h" //this should be resolved differently
 
 static char **construct_env(t_cmd_tab *cmd, char opt, int count)
 {
@@ -41,7 +41,7 @@ static int		spawn_new_env(char **args, char **new_env)
 	ft_bzero(&new_cmd, sizeof(t_cmd_tab));
 	new_cmd.av = args;
 	new_cmd.process_env = new_env;
-	if (ft_ispath(args[0]))
+	if (ft_cisin(args[0], '/'))
 	{
 		if (handle_perm(new_cmd.av[0]) != 0)
 			exec_error(ACCERR, new_cmd.av[0]);

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/19 18:35:49 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/22 18:15:45 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # include <sys/wait.h>
 # include <limits.h>
 
-# define MEMERR 2 
+# define MEMERR 1234
 # define SYNERR -1 
 # define ENVERR 4
 # define ACCERR 5

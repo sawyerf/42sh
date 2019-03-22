@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 14:48:16 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/06 18:06:49 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/22 19:40:47 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,30 @@ t_list	*filterpath(char *exec, t_list *lst)
 	return (match);
 }
 
+t_list	*hst_getexec(char *path)
+{
+	t_list			*lst;
+	DIR				*ptr;
+	struct dirent	*ret;
+	char			*cpath;
+
+	lst = NULL;
+	if (!(ptr = opendir(path)))
+		return (NULL);
+	while ((ret = readdir(ptr)))
+	{
+		if (!ft_strcmp(ret->d_name, "..") || !ft_strcmp(ret->d_name, "."))
+			continue;
+		if (!(cpath = ft_zprintf("%s/%s", path, ret->d_name)))
+			return (NULL);
+		if (!exaccess(cpath))
+			ft_lstadd(&lst, ft_lstnew(ret->d_name, 0));
+		ft_strdel(&cpath);
+	}
+	closedir(ptr);
+	return (lst);
+}
+
 t_list	*get_exec(char *exec, char *path)
 {
 	char	**paths;
@@ -126,7 +150,7 @@ t_list	*get_exec(char *exec, char *path)
 	count = 0;
 	while (paths[count])
 	{
-		ft_lstadd(&lst, filterpath(exec, ht_get(paths[count])));
+		ft_lstadd(&lst, filterpath(exec, hst_getexec(paths[count])));
 		count++;
 	}
 	return (lst);

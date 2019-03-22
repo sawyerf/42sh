@@ -6,12 +6,12 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 20:31:07 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/20 19:24:29 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/22 16:29:59 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_core.h"
-#include "readline.h"
+#include "hashtable.h"
 
 void	hash_init(t_hash *hash)
 {

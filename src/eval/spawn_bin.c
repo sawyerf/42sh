@@ -6,14 +6,41 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/20 19:07:44 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/22 20:02:20 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_eval.h"
-#include "readline.h" //this should be resolved differently
+#include "hashtable.h" //this should be resolved differently
 
 /* execve_wrap is always inside a fork*/
+
+int		br_print(int err, t_cmd_tab *cmd)
+{
+	if (cmd->full_path)
+	{
+		if (err == br_NOTFOUND)
+			ft_dprintf(2, "21sh: %s: command not found\n", cmd->av[0]);
+		else if (err == br_PERMDENIED)
+			ft_dprintf(2, "21sh: %s: Permission denied\n", cmd->full_path);
+		else if (err == br_ISDIR)
+			ft_dprintf(2, "21sh: %s: is a directory\n", cmd->full_path);
+	}
+	else
+	{
+		if (err == br_NOTFOUND)
+			ft_dprintf(2, "21sh: %s: No such file or directory\n", cmd->av[0]);
+		else if (err == br_PERMDENIED)
+			ft_dprintf(2, "21sh: %s: Permission denied\n", cmd->av[0]);
+		else if (err == br_ISDIR)
+			ft_dprintf(2, "21sh: %s: is a directory\n", cmd->av[0]);
+	}
+	if (err == br_PERMDENIED || err == br_ISDIR)
+		return (126);
+	else if (err == br_NOTFOUND)
+		return (127);
+	return (err);
+}
 
 void	restore_fd(t_list *to_close)
 {
@@ -42,7 +69,7 @@ static int		execve_wrap(t_cmd_tab *cmd)
 	close_save();
 	if ((ret = handle_redir(cmd->redir_lst, NULL))) // this has to change we have more err
 		exit(1);
-	if (ft_ispath(cmd->av[0]))
+	if (ft_cisin(cmd->av[0], '/'))
 	{
 		if (handle_perm(cmd->av[0]) != 0)
 			exit_wrap (ACCERR, cmd);
@@ -59,7 +86,7 @@ static int		execve_wrap(t_cmd_tab *cmd)
 			exit_wrap (127, cmd);
 	}*/
 	ret = execve(cmd->full_path, cmd->av, cmd->process_env); 
-	putstr_stderr("21sh: bad file format\n");
+	ft_dprintf(2, "21sh: bad file format\n");
 	exit_wrap(ret, cmd);
 	return (0);
 }
@@ -129,13 +156,8 @@ int		spawn_in_pipe(t_cmd_tab *cmd)
 	{
 		if (!(path = get_process_env("PATH", cmd->process_env)))
 			path = get_env_value("PATH");
-		if (ht_getvalue(path, cmd) == MEMERR)
-			return (MEMERR);
-		if (!cmd->full_path)
-		{
-			putstr_stderr("21sh: cmd not found\n");
-			return (127);
-		}
+		if ((ret = ht_getvalue(path, cmd)))
+			return (br_print(ret, cmd));
 	}
 	return (execve_wrap(cmd));
 }
@@ -188,13 +210,8 @@ int		spawn_command(t_cmd_tab *cmd)
 	{
 		if (!(path = get_process_env("PATH", cmd->process_env)))
 			path = get_env_value("PATH");
-		if (ht_getvalue(path, cmd) == MEMERR)
-			return (MEMERR);
-		if (!cmd->full_path)
-		{
-			putstr_stderr("21sh: cmd not found\n");
-			return (127);
-		}
+		if ((ret = ht_getvalue(path, cmd)))
+			return (br_print(ret, cmd));
 	}
 	pid = fork();
 	if (pid == -1)

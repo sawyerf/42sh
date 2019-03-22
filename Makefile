@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/03/20 18:14:36 by apeyret          ###   ########.fr        #
+#    Updated: 2019/03/22 16:28:40 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ INC_FILE =	ft_eval.h					\
 			ft_wordexp.h				\
 			generic_typedef.h			\
 			readline.h					\
+			hashtable.h					\
 			sh_core.h
 
 SRC_DIR =	src
@@ -81,7 +82,7 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			parser/parser_test.c		\
 			parser/parser_tools.c		\
 			parser/sh_parser.c			\
-			parser/parser_heredoc.c	\
+			parser/parser_heredoc.c		\
 			readline/readline.c			\
 			readline/struct_rdl.c		\
 			readline/term.c				\
@@ -90,8 +91,6 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			readline/keys.c				\
 			readline/files.c			\
 			readline/print_choice.c		\
-			readline/hashtable.c		\
-			readline/ht_files.c			\
 			readline/k_autocpl.c		\
 			readline/k_move.c			\
 			readline/k_return.c			\
@@ -99,7 +98,10 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			readline/k_history.c		\
 			readline/env_autoclp.c		\
 			readline/history.c			\
-			parser/light_parser.c	
+			parser/light_parser.c		\
+			hashtable/hashtable.c		\
+			hashtable/ht_files.c		\
+			hashtable/ht_spawnbin.c
 
 OBJ_DIR =	.obj
 OBJ_FILE =	$(SRC_FILE:.c=.o)
@@ -111,6 +113,7 @@ CRT_DIR =	core 						\
 		 	eval 						\
 		 	readline 					\
 		 	parser 						\
+		 	hashtable 
 
 SRC = 		$(addprefix $(SRC_DIR)/,$(SRC_FILE))
 INC = 		$(addprefix $(INC_DIR)/,$(INC_FILE))

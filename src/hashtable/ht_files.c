@@ -6,11 +6,12 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 14:09:25 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/20 19:34:24 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/22 16:35:54 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "readline.h"
+#include "hashtable.h"
+#include <dirent.h>
 
 extern t_list *g_thash[HT_SIZE];
 
@@ -66,32 +67,6 @@ int		ht_addfile(char	**paths, char *exec)
 	return (0);
 }
 
-int		ht_getfile(char **paths, t_cmd_tab *cmd)
-{
-	int		i;
-	int		hash;
-	char	*tmp;
-
-	i = 0;
-	while (paths[i])
-	{
-		if (!(tmp = ft_zprintf("%s/%s", paths[i], cmd->av[0])))
-			return (MEMERR);
-		if (!exaccess(tmp))
-		{
-			hash = ht_hash(paths[i]);
-			ft_lstadd(&g_thash[hash], ft_lstnew(tmp, ft_strlen(paths[i]) + 1));
-			cmd->full_path = tmp;
-			free_tab(paths);
-			return (0);
-		}
-		ft_strdel(&tmp);
-		i++;
-	}
-	free_tab(paths);
-	return (0);
-}
-
 t_list	*ht_getexec(char *path)
 {
 	t_list			*lst;
@@ -108,7 +83,7 @@ t_list	*ht_getexec(char *path)
 			continue;
 		if (!(cpath = ft_zprintf("%s/%s", path, ret->d_name)))
 			return (NULL);
-		if (!folexaccess(cpath))
+		if (!exaccess(cpath))
 			ft_lstadd(&lst, ft_lstnew(cpath, ft_strlen(path) + 1));
 		ft_strdel(&cpath);
 	}
