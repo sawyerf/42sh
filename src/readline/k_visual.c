@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 12:42:13 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/06 17:57:23 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/25 21:16:50 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,12 +122,15 @@ int		visualmode(t_rdl *rdl, char *key)
 	rdl->vcurs = rdl->curs;
 	while (42)
 	{
-		ret = read(0, &buf, 10);
+		if (!(ret = read(0, &buf, 10)))
+			return (-1);
 		buf[ret] = 0;
 		if (special_key(rdl, buf, g_vskey))
 			break ;
 		buf[0] = 0;
 	}
 	reprint(rdl, rdl->curs);
+	if (ret == MEMERR)
+		return (MEMERR + 1);
 	return (0);
 }

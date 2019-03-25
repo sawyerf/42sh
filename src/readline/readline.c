@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:48:42 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/25 19:35:45 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/25 21:16:49 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,15 @@ t_rdl	g_rdl;
 
 int		rreadd(char *str)
 {
-	static char	buf[SIZE_READ + 202];
+	static char	buf[SIZE_READ + 1];
 	int			ret;
 	int			adv;
 
 	if (buf[0])
 	{
-		adv = ft_strichr(buf, '\n', 1);
+		adv = ft_strichr(buf, '\n', 0);
+		if (buf[0] == '\n')
+			adv = 1;
 		ft_strncpy(str, buf, adv);
 		str[adv] = 0;
 		ft_strcpy(buf, &(buf[adv]));
@@ -35,7 +37,9 @@ int		rreadd(char *str)
 	if ((ret = read(0, buf, SIZE_READ)) <= 0)
 		return (ret);
 	buf[ret] = 0;
-	adv = ft_strichr(buf, '\n', 1);
+	adv = ft_strichr(buf, '\n', 0);
+	if (buf[0] == '\n')
+		adv = 1;
 	ft_strncpy(str, buf, adv);
 	str[adv] = 0;
 	ft_strcpy(buf, &(buf[adv]));
@@ -59,8 +63,9 @@ int		readline(char *prompt, char **str)
 		if ((stet = key_router(&g_rdl, buf)))
 			break ;
 	}
-	if (!termreset(&(g_rdl.save)) || stet == 2)
+	if (!termreset(&(g_rdl.save)) || stet > 1)
 		ft_strdel(&g_rdl.str);
 	*str = g_rdl.str;
-	return (0);
+	//ft_printf("ret={statue:%d, str='%.*s'}\n", stet - 1, ft_strlen(*str) - 1, *str);
+	return (stet - 1);
 }

@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 13:41:29 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/19 20:15:08 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/25 21:13:37 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ extern t_list *g_hst[4];
 t_key	g_khst[] =\
 {
 	{K_BSPC, &hstdelcara},
-	{K_ENTR, &return2},
+	{K_ENTR, &k_hstret},
 	{K_LEFT, &finish},
 	{K_RGHT, &finish},
-	{K_CTRC, &ctrlc},
-	{K_CTRD, &ctrlc},
+	{K_CTRC, &k_hstret},
+	{K_CTRD, &k_hstret},
 	{K_CTRR, &hstnchc},
 	{K_TAB, &hstnchc},
 	{NULL, &del_cara}
@@ -35,12 +35,16 @@ int		hstdelcara(t_rdl *rdl, char *buf)
 	return (0);
 }
 
-int		return2(t_rdl *rdl, char *buf)
+int		k_hstret(t_rdl *rdl, char *buf)
 {
 	(void)buf;
-	if (!rdl->str[0])
-		return (1);
-	return (2);
+	if (!ft_strcmp(K_ENTR, buf))
+		return (rdl->str[0] ? 2 : 1);
+	else if (!ft_strcmp(K_CTRC, buf))
+		return (4);
+	else if (!ft_strcmp(K_CTRD, buf))
+		return (rdl->str[0] ? 1 : 3);
+	return (0);
 }
 
 void	printsearch(t_rdl *hst)
@@ -87,7 +91,7 @@ int		ctrlr(t_rdl *rdl, char *str)
 	stat = 0;
 	left(rdl, rdl->real + rdl->lpro);
 	if (rdlinit(&hst, "(search)`") == MEMERR)
-		return (MEMERR);
+		return (MEMERR + 1);
 	printsearch(&hst);
 	while ((ret = read(0, &buf, 10)) > 0)
 	{

@@ -22,10 +22,37 @@
 
 ## READLINE
 ### Return
-| status | info |
-|:------:|:----:|
-| MEMERR |malloc|
-|   -1   |error |
-|    0   |  OK  |
-|    1   |Ctrl+D|
-|    2   |Ctrl+C|
+| info | status | str |
+|:----:|:------:|:---:|
+|malloc| MEMERR |  ?  |
+|error |   -1   |  ?  |
+|  OK  |    0   | cmd |
+|Ctrl+D|    1   | NULL|
+|Ctrl+C|    2   | NULL|
+
+### Keys
+
+|  keys  |          description        |
+|:------:|:---------------------------:|
+| K_SUP  | monte dans l'historique     |
+| K_SDOW | descant dans l'historique   |
+| K_SRGT | avance d'un mot             |
+| K_SLFT | recule d'un mot             |
+| K_DEL  | supprime une lettre         |
+| K_UP   | monte dans l'historique     |
+| K_LEFT | va a gauche                 |
+| K_RGHT | va a droite                 |
+| K_DOWN | descant dans l'historique   | 
+| K_END  | va a la fin                 |
+| K_HOME | va au debut                 |
+| K_TAB  | autocompletion              |
+| K_CTRA | va au debut                 |
+| K_CTRC | annule la commande en cours |
+| K_CTRD | quitte le shell             |
+| K_ENTR | confirme la commande        |
+| K_CTRR | recherche de commande       |
+| K_CTRP | colle la selection          |
+| K_CTRV | va en visual mode           |
+| K_CTRX | coupe la selection          |
+| K_CTRY | copie la selection          |
+| K_BSPC | supprime un caractere       |

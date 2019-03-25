@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/25 11:38:24 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/25 21:27:40 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,8 @@ int		history(t_rdl *rdl, char *buf);
 int		ctrlr(t_rdl *rdl, char *buf);
 int		normal_key(t_rdl *rdl, char *buf);
 int		ctrlr(t_rdl *rdl, char *buf);
-int		return2(t_rdl *rdl, char *buf);
 t_list	*get_cplenv(char *match);
+int		k_hstret(t_rdl *rdl, char *buf);
 
 //tools
 void	reprint(t_rdl *rdl, int curs);

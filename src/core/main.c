@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/25 19:36:02 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/25 20:40:41 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,9 +124,9 @@ int				main(int ac, char **av, char **env)
 		read_fn = readline;
 	while (42)
 	{
-		if ((ret = read_fn("$> ", &line)))
+		if ((ret = read_fn("$> ", &line)) == 1 || ret == MEMERR || ret == -1)
 			break;
-		if (run_command(line))
+		if (ret != 2 && run_command(line))
 			break;
 	}
 	hstaddfile(g_sh.env);
