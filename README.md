@@ -22,8 +22,8 @@
 
 ## READLINE
 ### Return
-|:status:|:info:|
------------------
+| status | info |
+|:------:|:----:|
 | MEMERR |malloc|
 |   -1   |error |
 |    0   |  OK  |
