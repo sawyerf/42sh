@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/25 12:49:13 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/25 19:36:02 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,6 @@ int				main(int ac, char **av, char **env)
 			break;
 		if (run_command(line))
 			break;
-		//ft_printf("%d\n", g_sh.status);
 	}
 	hstaddfile(g_sh.env);
 	return (0);

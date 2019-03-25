@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:49:02 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/04 22:00:02 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/25 18:35:55 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int		is_special(char *buf)
 	count = 0;
 	while (buf[count])
 	{
-		if (!ft_isprint(buf[count]))
+		if (!ft_isprint(buf[count]) && buf[count] != '\n')
 			return (1);
 		count++;
 	}

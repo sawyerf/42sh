@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/08 15:32:26 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/25 15:06:23 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/25 18:30:08 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,5 @@ char	*ft_strncpy(char *dst, const char *src, size_t len)
 		dst[count] = '\0';
 		count++;
 	}
-	dst[count + 1] = 0;
 	return (dst);
 }
