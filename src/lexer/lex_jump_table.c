@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/20 17:22:34 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/25 12:04:06 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		request_new_line(t_lexer *lx_st)
 	read_fn = readline;
 	if (g_sh.mode != INTERACTIVE)
 		read_fn = sh_readfile;
-	new_line = read_fn("> "); //??????
+	read_fn("> ", &new_line); //??????
 	if (new_line == NULL) // should be for mem err
 		return (QUOTE_ERR);
 	else if (*new_line == 0)

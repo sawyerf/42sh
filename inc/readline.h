@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/22 18:58:28 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/25 11:38:24 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,7 @@ typedef struct		s_key
 }					t_key;
 
 //main
-char				*readline(char	*PROMPT);
-
+int		readline(char *prompt, char **str);
 
 //termcaps
 int		terminit(struct termios *save);

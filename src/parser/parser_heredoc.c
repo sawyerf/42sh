@@ -38,7 +38,7 @@ static int interactive_heredoc(t_token *io_here)
 		return (MEMERR);	
 	while (42)
 	{
-		if ((!(new_ln = read_fn("heredoc> ")))
+		if ((read_fn("heredoc> ", &new_ln))
 			|| (new_ln == '\0'))
 		{
 			free(here_doc);
@@ -69,7 +69,7 @@ char *get_file_delim(char *next_nl, char *here_end, t_parser *parser)
 	len = ft_strlen(here_end);
 	while (42)
 	{
-		ln = readline(">");
+		readline(">", &ln);
 		if ((!ln) || (*ln == 0))
 			return (NULL);
 		free(next_nl);

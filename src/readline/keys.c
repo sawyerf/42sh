@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:47:43 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/04 22:02:28 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/25 16:14:40 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ int		normal_key(t_rdl *rdl, char *buf)
 	count = 0;
 	while (buf[count])
 	{
+		if (buf[count] == '\n')
+			return (enter(rdl, buf));
 		rdladd(rdl, buf[count]);
 		count++;
 	}

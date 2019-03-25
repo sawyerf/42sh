@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/22 16:32:18 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/25 12:49:13 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,24 +61,26 @@ int		run_command(char *line)
 	return (0);
 }
 
-char	*sh_readfile(char *prompt)
+int		sh_readfile(char *prompt, char **str)
 {
 	char	*line;
 	char	*tmp;
+	int		ret;
 
 	(void)prompt;
-	if (get_next_line(g_sh.fd, &line) > 0)
-	{
-		tmp = ft_strjoin(line, "\n");
-		if (!tmp)
-			return (NULL);
-		free(line);
-		line = tmp;
-		ft_printf("\33[0;34m%s\33[0;0m\n", line);
-		hstadd(line);
-		return (line);
-	}
-	return (NULL);
+	*str = NULL;
+	if ((ret = get_next_line(g_sh.fd, &line)) == -1)
+		return (-1);
+	if (ret == 0)
+		return (1);
+	if (!(tmp = ft_strjoin(line, "\n")))
+		return (MEMERR);
+	ft_strdel(&line);
+	line = tmp;
+	ft_printf("\33[0;34m%s\33[0;0m\n", line);
+	hstadd(line);
+	str = &line;
+	return (0);
 }
 
 void	run_script(char *file)
@@ -94,11 +96,10 @@ void	run_script(char *file)
 	}
 	while (42)
 	{
-		if (!(line = readline("$> ")))
+		if ((readline("$> ", &line)))
 			break;
 		if (run_command(line))
 			break;
-			write(STDOUT_FILENO, "\n", 1);
 		//if (g_sh.status == 258)
 		//	break ;
 	}
@@ -123,13 +124,12 @@ int				main(int ac, char **av, char **env)
 		read_fn = readline;
 	while (42)
 	{
-		if (!(line = read_fn("$> ")))
+		if ((ret = read_fn("$> ", &line)))
 			break;
 		if (run_command(line))
 			break;
 		//ft_printf("%d\n", g_sh.status);
 	}
 	hstaddfile(g_sh.env);
-	ret = 1;
-	return (ret);
+	return (0);
 }

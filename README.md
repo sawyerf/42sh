@@ -9,7 +9,7 @@
 - subtle difference between '$notexistant;' and '"";' needs to be fixed ft_wordexp
 - export builtin, set && unset missing stuff.
 - del la hashtable quand on modifie le PATH
-- readline return values from char* to int
+- readline return values from char\* to int
 - move full path bin checking out of fork
 
 ------------------------------------
@@ -19,3 +19,13 @@
 - moar testing on redirections.
 - cd set_shell_env needs malloc checks.
 - replace printf/write(2, etc.. by sprintf or zprintf.
+
+## READLINE
+### Return
+|:status:|:info:|
+-----------------
+| MEMERR |malloc|
+|   -1   |error |
+|    0   |  OK  |
+|    1   |Ctrl+D|
+|    2   |Ctrl+C|

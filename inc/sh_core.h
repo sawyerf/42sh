@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/22 18:15:45 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/25 12:02:28 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ typedef struct s_cmd_tab t_cmd_tab;
 
 typedef	int				(*t_builtin)(t_cmd_tab*);
 
-typedef char*			(*t_read_fn)(char*);
+typedef int				(*t_read_fn)(char*, char**);
 
 /* to delete*/
 /**/
@@ -171,7 +171,7 @@ char					*fc_read(char *file);
 int						run_editor(t_fc *fc, char *file);
 void					fc_print(t_fc fc, t_list *lst, int i);
 int						fc_parser(char **av, t_fc *fc);
-char					*sh_readfile(char *prompt);
+int						sh_readfile(char *prompt, char **str);
 void					run_script(char *file);
 
 int		hash(t_cmd_tab *cmd);
