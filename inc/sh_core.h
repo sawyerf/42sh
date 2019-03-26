@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/25 12:02:28 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/26 16:55:54 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ typedef	struct			s_fc
 	char				opt[6];
 	char				*editor;
 	char				*range[2];
+	char				*by;
+	char				*to;
 }						t_fc;
 
 typedef enum			e_quote_state

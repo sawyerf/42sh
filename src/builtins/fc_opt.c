@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 18:00:46 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/26 14:41:29 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/26 18:37:55 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ int		fc_l(t_fc fc)
 			beg = hst_getcmp(lst, ft_itoa((int)lst->content_size / 10 - 10));
 	}
 	if (!lst || !beg)
+	{
+		ft_dprintf(2, "fc: history specification out of range\n");
 		return (0);
+	}
 	if (ft_cisin(fc.opt, 'r'))
 	{
 		tmp = lst;
@@ -70,7 +73,11 @@ int		fc_e(t_fc fc)
 		beg = hst_getcmp(lst, fc.range[0]);
 		if (fc.range[1])
 		{
-			lst = hst_getcmp(lst, fc.range[1]);
+			if (!(lst = hst_getcmp(lst, fc.range[1])))
+			{
+				ft_dprintf(2, "fc: history specification out of range\n");
+				return (0);
+			}
 			i = lst->content_size / 10 - beg->content_size / 10;
 			i += (i < 0 ? -1 : 1);
 		}
@@ -80,6 +87,11 @@ int		fc_e(t_fc fc)
 			lst = beg;
 			beg = tmp;
 		}
+	}
+	if (!beg)
+	{
+		ft_dprintf(2, "fc: history specification out of range\n");
+		return (0);
 	}
 	if (!(file = fc_filename(beg, i)))
 		return (1);
@@ -129,19 +141,25 @@ int		fc_le(t_fc fc)
 int		fc_s(t_fc fc)
 {
 	t_list	*lst;
+	char	*pre;
 	char	*tmp;
 
+	pre = NULL;
 	hstdellast();
-	lst = gethst();
-	if (fc.range[0])
+	if ((lst = gethst()) && fc.range[0])
 		lst = hst_getcmp(lst, fc.range[0]);
-	if (!lst)
+	if (!lst && (ft_dprintf(2, "fc:history specification out of range\n") || 1))
 		return (0);
-	ft_printf("\33[0;34m%s\33[0;0m\n", lst->content);
-	if (!(tmp = ft_strjoin(lst->content, "\n")))
+	if (fc.by && fc.to && !((pre = ft_replace(lst->content, fc.to, fc.by))))
 		return (MEMERR);
+	else if (!pre && !(pre = ft_strdup(lst->content)))
+		return (MEMERR);
+	hstadd(pre);
+	if (!(tmp = ft_strjoin(pre, "\n")))
+		return (MEMERR);
+	ft_strdel(&pre);
+	ft_printf("\33[0;34m%s\33[0;0m", tmp);
 	g_sh.mode = NONINTERACTIVE;
 	run_command(tmp);
-	g_sh.mode = INTERACTIVE;
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 14:54:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/26 15:29:23 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/26 16:52:10 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int		rpllen(char *str, char *to, char *by)
 	return (lenstr - (lento * word) + (lenby * word));
 }
 
-static int		lennext(char *str, char *to)
+int		ft_strnext(char *str, char *to)
 {
 	char *tmp;
 	
@@ -64,7 +64,7 @@ static char		*strstrcpy(char *dst, char *src, char *to, char *by)
 	tmp = dst;
 	while (*src)
 	{
-		next = lennext(src, to);
+		next = ft_strnext(src, to);
 		ft_strncpy(tmp, src, next);
 		tmp += next;
 		src += next;
@@ -84,13 +84,7 @@ char	*ft_replace(char *str, char *to, char *by)
 	char	*dst;
 
 	len = rpllen(str, to, by);
-	strstrcpy(dst, str, to, by);
 	if (!(dst = ft_strnew(len)))
 		return (NULL);
 	return (strstrcpy(dst, str, to, by));
-}
-int main(int ac, char **av)
-{
-	(void)ac;
-	ft_printf("%s\n", ft_replace(av[1], av[2], av[3]));
 }

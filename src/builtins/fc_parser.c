@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 18:07:04 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/26 14:50:12 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/26 17:13:04 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	fc_init(t_fc *fc)
 {
 	ft_bzero(fc->opt, 6);
 	fc->editor = NULL;
+	fc->to = NULL;
+	fc->by = NULL;
 	fc->range[0] = 0;
 	fc->range[1] = 0;
 }
@@ -66,7 +68,7 @@ int		fc_parser(char **av, t_fc *fc)
 			if (!*av)
 			{
 				ft_dprintf(2, "fc: -e: option requires an argument\n");
-				ft_dprintf(2, "fc: usage: fc [-e ename] [-nlr] [first] [last]");
+				ft_dprintf(2, "fc: usage: fc [-e ename] [-nlr] [first] [last]\n");
 				return (-1);
 			}
 			fc->editor = ft_strdup(*av);
@@ -74,6 +76,14 @@ int		fc_parser(char **av, t_fc *fc)
 			c = 0;
 			continue ;
 		}
+		av++;
+	}
+	if (*av &&  ft_cisin(fc->opt, 's') && ft_cisin(*av, '='))
+	{
+		if (!(fc->to = ft_strndup(*av, ft_strnext(*av, "="))))
+			return (-1);
+		if (!(fc->by = ft_strdup(*av + ft_strnext(*av, "=") + 1)))
+			return (-1);
 		av++;
 	}
 	i = 0;

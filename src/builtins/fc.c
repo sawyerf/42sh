@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/27 15:10:23 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/26 14:13:22 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/26 18:37:36 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,18 +141,20 @@ int		run_editor(t_fc *fc, char *file)
 int		fc(t_cmd_tab *cmd)
 {
 	t_fc	fc;
+	int		mode;
 
 	(void)cmd;
 	//hstdellast();
+	mode = g_sh.mode;
 	if (fc_parser(cmd->av, &fc) < 0)
 		return (1);
-	if (ft_cisin(fc.opt, 'l') && ft_cisin(fc.opt, 'e'))
-		fc_le(fc);
-	else if (ft_cisin(fc.opt, 's'))
-		fc_s(fc);
+	if (ft_cisin(fc.opt, 's'))
+		return (fc_s(fc));
+	else if (ft_cisin(fc.opt, 'l') && ft_cisin(fc.opt, 'e'))
+		return (fc_le(fc));
 	else if (ft_cisin(fc.opt, 'l'))
-		fc_l(fc);
+		return (fc_l(fc));
 	else
-		fc_e(fc);
-	return (0);
+		return (fc_e(fc));
+	g_sh.mode = mode;
 }
