@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/27 15:10:23 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/22 16:29:25 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/26 14:13:22 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ char	*fc_filename(t_list *lst, int size)
 	int				i;
 	unsigned int	hash;
 	char			*file;
-	char			*user;
 
 	i = 0;
 	hash = 0;
@@ -52,14 +51,12 @@ char	*fc_filename(t_list *lst, int size)
 		lst = lst->next;
 		i++;
 	}
-	user = get_env_value("USER=");
-	if (!(file = ft_zprintf("/tmp/%s%x.fc", user, hash)))
-		return (NULL);
-	if (!access(file, F_OK))
+	hash += ht_hash(get_env_value("USER="));
+	while ((file = ft_zprintf("/tmp/%x.fc", hash)) && !access(file, F_OK))
 	{
-		ft_dprintf(2, "fc: file %s already exist\n", file);
+		ft_printf("Retry\n");
 		ft_strdel(&file);
-		return (NULL);
+		hash++;
 	}
 	return (file);
 }

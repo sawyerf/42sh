@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/25 20:40:41 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/26 14:40:06 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ int		sh_readfile(char *prompt, char **str)
 		return (-1);
 	if (ret == 0)
 		return (1);
+	hstadd(line);
 	if (!(tmp = ft_strjoin(line, "\n")))
 		return (MEMERR);
 	ft_strdel(&line);
 	line = tmp;
-	ft_printf("\33[0;34m%s\33[0;0m\n", line);
-	hstadd(line);
-	str = &line;
+	ft_printf("\33[0;34m%s\33[0;0m", line);
+	*str = line;
 	return (0);
 }
 
@@ -96,7 +96,7 @@ void	run_script(char *file)
 	}
 	while (42)
 	{
-		if ((readline("$> ", &line)))
+		if (readline("$> ", &line))
 			break;
 		if (run_command(line))
 			break;
@@ -109,8 +109,8 @@ void	run_script(char *file)
 
 int				main(int ac, char **av, char **env)
 {
-	char	*line;
-	int		ret;
+	char		*line;
+	int			ret;
 	t_read_fn	read_fn;
 
 	silence_ac_av(ac, av);
@@ -124,7 +124,7 @@ int				main(int ac, char **av, char **env)
 		read_fn = readline;
 	while (42)
 	{
-		if ((ret = read_fn("$> ", &line)) == 1 || ret == MEMERR || ret == -1)
+		if ((ret = read_fn("$> ", &line)) == 1 || ret == MEMERR || ret == -2)
 			break;
 		if (ret != 2 && run_command(line))
 			break;

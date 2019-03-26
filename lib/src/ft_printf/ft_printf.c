@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:08:18 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/07 16:38:23 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/26 15:04:20 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	pf_cpy_spec(t_printf *lst, char *tmp)
 	if (lst->type == 'c')
 	{
 		pf_options("*", lst->opt);
-		ft_replace(tmp, '*', lst->var[0], lst->len);
+		pf_replace(tmp, '*', lst->var[0], lst->len);
 	}
 	else
 		pf_options(lst->var, lst->opt);

@@ -9,7 +9,6 @@
 - subtle difference between '$notexistant;' and '"";' needs to be fixed ft_wordexp
 - export builtin, set && unset missing stuff.
 - del la hashtable quand on modifie le PATH
-- readline return values from char\* to int
 - move full path bin checking out of fork
 
 ------------------------------------
@@ -20,12 +19,21 @@
 - cd set_shell_env needs malloc checks.
 - replace printf/write(2, etc.. by sprintf or zprintf.
 
+## Bug
+|check|     `command`     |                result               | info complementaire |
+|:---:|:-----------------:|:-----------------------------------:||
+|     | ` `               | 21sh: syntax error near : '' + exit ||
+|     | `ls \\n` + Ctrl+c | 21sh: premature EOF + exit          ||
+|     | `ls "\n` + Ctrl+c | 21sh: premature EOF + exit          ||
+|     | `fc -s` apres celle d'avant | boucle infini | 1. le terminale est en NONINTERACTIVE quand la commande est lancer 2. s'arrete avec Ctrl+d |
+|     |
+
 ## READLINE
 ### Return
 | info | status | str |
 |:----:|:------:|:---:|
 |malloc| MEMERR |  ?  |
-|error |   -1   |  ?  |
+|error |   -2   |  ?  |
 |  OK  |    0   | cmd |
 |Ctrl+D|    1   | NULL|
 |Ctrl+C|    2   | NULL|

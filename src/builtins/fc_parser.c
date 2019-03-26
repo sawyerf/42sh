@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 18:07:04 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/05 18:47:33 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/26 14:50:12 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int		fc_parser(char **av, t_fc *fc)
 			if (!*av)
 			{
 				ft_dprintf(2, "fc: -e: option requires an argument\n");
+				ft_dprintf(2, "fc: usage: fc [-e ename] [-nlr] [first] [last]");
 				return (-1);
 			}
 			fc->editor = ft_strdup(*av);

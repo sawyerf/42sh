@@ -6,13 +6,13 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:09:24 by apeyret           #+#    #+#             */
-/*   Updated: 2019/01/16 14:09:27 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/26 15:04:30 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_replace(char *s, char c1, char c2, int len)
+void	pf_replace(char *s, char c1, char c2, int len)
 {
 	int count;
 

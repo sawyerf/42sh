@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 18:00:46 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/18 18:08:14 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/26 14:41:29 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ int		fc_le(t_fc fc)
 int		fc_s(t_fc fc)
 {
 	t_list	*lst;
+	char	*tmp;
 
 	hstdellast();
 	lst = gethst();
@@ -136,7 +137,11 @@ int		fc_s(t_fc fc)
 		lst = hst_getcmp(lst, fc.range[0]);
 	if (!lst)
 		return (0);
-	ft_printf("%s\n", lst->content);
-	run_command(ft_strdup(lst->content));
+	ft_printf("\33[0;34m%s\33[0;0m\n", lst->content);
+	if (!(tmp = ft_strjoin(lst->content, "\n")))
+		return (MEMERR);
+	g_sh.mode = NONINTERACTIVE;
+	run_command(tmp);
+	g_sh.mode = INTERACTIVE;
 	return (0);
 }
