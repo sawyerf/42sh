@@ -21,7 +21,7 @@
 
 ## Bug
 |check|     `command`     |                result               | info complementaire |
-|:---:|:-----------------:|:-----------------------------------:||
+|:---:|:-----------------:|:-----------------------------------:|:-------------------:|
 |     | ` `               | 21sh: syntax error near : '' + exit ||
 |     | `ls \\n` + Ctrl+c | 21sh: premature EOF + exit          ||
 |     | `ls "\n` + Ctrl+c | 21sh: premature EOF + exit          ||
