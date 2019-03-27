@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 16:26:00 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/22 18:55:27 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/27 15:12:25 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef enum	e_binerr
 	br_PERMDENIED = 1,
 	br_NOTFOUND = 2,
 	br_ISDIR = 3,
+	br_PATHNOTSET = 4,
 }				t_binerr;
 
 //hashtable
@@ -32,7 +33,7 @@ void	ht_init(void);
 int		ht_hash(char *path);
 t_list	*ht_get(char *path);
 t_list	*ht_getexec(char *path);
-int 	ht_getvalue(char *path, t_cmd_tab *cmd);
+int 	ht_spawnbin(char *path, t_cmd_tab *cmd);
 void	ht_del(void);
 int		ht_getfile(char **paths, t_cmd_tab *cmd);
 void	ht_refreshall(char *path);

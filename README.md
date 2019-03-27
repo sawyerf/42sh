@@ -8,7 +8,7 @@
 - empty cmdname with redir should apply redir
 - subtle difference between '$notexistant;' and '"";' needs to be fixed ft_wordexp
 - export builtin, set && unset missing stuff.
-- del la hashtable quand on modifie le PATH
+- ~~del la hashtable quand on modifie le PATH~~
 - move full path bin checking out of fork
 
 ------------------------------------

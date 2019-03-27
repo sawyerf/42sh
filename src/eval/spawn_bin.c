@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/25 11:30:53 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/27 15:14:17 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 int		br_print(int err, t_cmd_tab *cmd)
 {
+	(err == br_PATHNOTSET) ? ft_dprintf(2, "PATH not set\n") : 0;
 	if (cmd->full_path)
 	{
 		if (err == br_NOTFOUND)
@@ -156,7 +157,7 @@ int		spawn_in_pipe(t_cmd_tab *cmd)
 	{
 		if (!(path = get_process_env("PATH", cmd->process_env)))
 			path = get_env_value("PATH");
-		if ((ret = ht_getvalue(path, cmd)))
+		if ((ret = ht_spawnbin(path, cmd)))
 			return (br_print(ret, cmd));
 	}
 	return (execve_wrap(cmd));
@@ -210,7 +211,7 @@ int		spawn_command(t_cmd_tab *cmd)
 	{
 		if (!(path = get_process_env("PATH", cmd->process_env)))
 			path = get_env_value("PATH");
-		if ((ret = ht_getvalue(path, cmd)))
+		if ((ret = ht_spawnbin(path, cmd)))
 			return (br_print(ret, cmd));
 	}
 	pid = fork();

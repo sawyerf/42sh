@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 16:12:50 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/25 11:30:52 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/27 15:13:09 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ char	*ht_getpath(char **paths, char *exec)
 	return (NULL);
 }
 
-int		ht_getvalue(char *path, t_cmd_tab *cmd)
+int		ht_spawnbin(char *path, t_cmd_tab *cmd)
 {
 	char	*result;
 	char	**paths;
@@ -97,6 +97,8 @@ int		ht_getvalue(char *path, t_cmd_tab *cmd)
 
 	if (ft_cisin(cmd->av[0], '/'))
 		return (exaccess(cmd->av[0]));
+	if (!path)
+		return (br_PATHNOTSET);
 	if (!(paths = ft_strsplit(path, ':')))
 		return (MEMERR);
 	if ((result = ht_getpath(paths, cmd->av[0])))

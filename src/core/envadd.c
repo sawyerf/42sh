@@ -6,11 +6,12 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/10 23:36:39 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/04 20:46:40 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/27 15:05:58 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_core.h"
+#include "hashtable.h"
 
 char	**envadd(char **env, char *var)
 {
@@ -35,6 +36,8 @@ char	**csetenv(char **env, char *var)
 
 	count = 0;
 	len = ft_strchr(var, '=') - var + 1;
+	if (!ft_strncmp(var, "PATH=", 5))
+		ht_del();
 	if (!env)
 		return (envadd(env, var));
 	while (env[count])

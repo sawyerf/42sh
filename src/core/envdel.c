@@ -6,12 +6,12 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/15 19:26:22 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/21 18:00:23 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/27 15:17:09 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "sh_core.h"
+#include "hashtable.h"
 
 char	**envdel(char **env, char *var)
 {
@@ -40,5 +40,7 @@ char	**envdel(char **env, char *var)
 		count++;
 	}
 	free(env);
+	if (!ft_strncmp(var, "PATH", 4))
+		ht_del();
 	return (cpy);
 }

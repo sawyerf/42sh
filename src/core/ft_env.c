@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 13:58:14 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/22 20:00:34 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/27 14:43:09 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int		spawn_new_env(char **args, char **new_env)
 	{
 		if (!(path = varchr(new_env, "PATH")))
 			path = get_env_value("PATH");
-		if (ht_getvalue(path, &new_cmd) == MEMERR)
+		if (ht_spawnbin(path, &new_cmd) == MEMERR)
 			return (MEMERR);
 		if (!new_cmd.full_path)
 		{
