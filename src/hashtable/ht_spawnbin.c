@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 16:12:50 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/27 15:13:09 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/27 17:10:15 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,34 @@ int		ht_getfile(char **paths, t_cmd_tab *cmd)
 	return (ret[1]);
 }
 
+int		ht_verif(char *path, t_list *lst)
+{
+	char	*tmp;
+	int		ret;
+
+	if (ft_strncmp(path, lst->content, lst->content_size - 1))
+	{
+		if (!(tmp = ft_zprintf("%s/%s", path, lst->content)))
+			return (MEMERR);
+		if (!(ret = exaccess(tmp)))
+		{
+			ft_strdel((char**)&lst->content);
+			lst->content = tmp;
+			lst->content_size = ft_strlen(path) + 1;
+			return (ret);
+		}
+		else
+			ft_strdel(&tmp);
+		return (br_NOTFOUND);
+	}
+	return (exaccess(lst->content));
+}
+
 char	*ht_getpath(char **paths, char *exec)
 {
 	t_list	*tmp;
 	int		i;
+	int		ret;
 
 	i = 0;
 	while (paths[i])
@@ -79,8 +103,10 @@ char	*ht_getpath(char **paths, char *exec)
 		{
 			if (!ft_strcmp(exec, tmp->content + tmp->content_size))
 			{
-				if (!exaccess(tmp->content))
+				if (!(ret = ht_verif(paths[i], tmp)))
 					return (tmp->content);
+				else if (ret == MEMERR)
+					return (NULL);
 			}
 			tmp = tmp->next;
 		}
