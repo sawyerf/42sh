@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/26 16:55:54 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/28 14:48:46 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <limits.h>
+
+
+# define CTRL_D 1
+# define CTRL_C 2
 
 # define MEMERR 1234
 # define SYNERR -1 

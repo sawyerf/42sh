@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/25 12:04:06 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/28 14:50:26 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,19 @@ int		request_new_line(t_lexer *lx_st)
 {
 	char *new_line;
 	t_read_fn read_fn;
+	int ret;
 
 	read_fn = readline;
 	if (g_sh.mode != INTERACTIVE)
 		read_fn = sh_readfile;
-	read_fn("> ", &new_line); //??????
+	ret = read_fn("> ", &new_line); //??????
+	if (ret)
+		return (ret);
+/*	ft_printf("***ret is %d ptr %p\n***", ret, new_line);
 	if (new_line == NULL) // should be for mem err
 		return (QUOTE_ERR);
 	else if (*new_line == 0)
-		return (QUOTE_ERR);
+		return (QUOTE_ERR);*/
 	free(lx_st->line); // this has to change
 	lx_st->line = new_line;
 	lx_st->cursor = new_line;

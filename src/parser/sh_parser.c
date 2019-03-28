@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/19 19:24:20 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/28 15:04:32 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,26 @@ int	execute_cmdline(t_parser *parser)
 	return (0);
 }
 
+
+int	dispatch_errors(int errnum, t_parser parser)
+{
+	//ft_printf("*** errnum %d  ***\n", errnum);
+	if (errnum == MEMERR)
+	{
+		ft_printf("MEMERR exiting..\n");
+		exit(1);
+	}
+	if (errnum == SYNERR || errnum != HEREDOC_ERR)
+		g_sh.status = 258;
+	if (errnum == SYNERR)
+		ft_dprintf(STDERR_FILENO, "21sh: syntax error near : '%s'\n", parser.current->data.str);
+	else if (errnum == HEREDOC_ERR)
+		ft_dprintf(STDERR_FILENO, "21sh: premature EOF on heredoc\n", parser.current->data.str);
+	else if (errnum == CTRL_D)
+		ft_dprintf(STDERR_FILENO, "21sh: premature EOF\n");	
+	return (errnum);
+}
+
 int	sh_parser_refac(char *line)
 {
 	t_parser	parser;
@@ -164,26 +184,15 @@ int	sh_parser_refac(char *line)
 	parser.lx_state->line = line;
 	if ((ret = next_token(&parser)))
 	{
-		ft_dprintf(STDERR_FILENO, "21sh: premature EOF\n");
+		dispatch_errors(ret, parser);
+		free_token_lst(parser.head);
 		return (parser.lx_state->err);
 	}	
 	parser.head = parser.lx_state->head;
 	ret = expect_complete_cmds(&parser);
 	if (ret)
 	{
-		if (ret == MEMERR)
-		{
-			ft_printf("MEMERR\n");
-			exit(1);
-		}
-		if (ret == SYNERR || ret != HEREDOC_ERR)
-			g_sh.status = 258;
-		if (ret == SYNERR)
-			ft_dprintf(STDERR_FILENO, "21sh: syntax error near : '%s'\n", parser.current->data.str);
-		else if (ret == HEREDOC_ERR)
-			ft_dprintf(STDERR_FILENO, "21sh: premature EOF on heredoc\n", parser.current->data.str);
-		else
-			ft_dprintf(STDERR_FILENO, "21sh: premature EOF\n");
+		dispatch_errors(ret, parser);
 		free_token_lst(parser.head);
 		free_tree(parser.tree);
 		return (ret);
