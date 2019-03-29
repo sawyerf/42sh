@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   envadd.c                                        :+:      :+:    :+:   */
+/*   envadd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/10 23:36:39 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/27 15:05:58 by apeyret          ###   ########.fr       */
+/*   Created: 2019/03/29 21:55:42 by apeyret           #+#    #+#             */
+/*   Updated: 2019/03/29 21:56:43 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	**envadd(char **env, char *var)
 
 	len = ft_tablen(env) + 1;
 	if (!(cpenv = ft_tabnew(len)))
-		return (NULL); // should be returning NULL
+		return (NULL);
 	cpenv = ms_tabcpy(cpenv, env);
 	if (!(cpenv[len - 1] = ft_strdup(var)))
 		return (NULL);
@@ -70,8 +70,8 @@ char	**envaddint(char **env, char *var, int value)
 
 char	**envaddstr(char **env, char *var, char *value)
 {
-	char *add;
-	static char *empty = "";
+	char		*add;
+	static char	*empty = "";
 
 	if (!value)
 		value = empty;

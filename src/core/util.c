@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 16:10:23 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/28 14:16:54 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/29 22:50:51 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,9 @@ int			add_slash(char **path)
 	len = ft_strlen(*path);
 	if ((len != 0) && ((*path)[len - 1] != '/'))
 	{
-		tmp = ft_strjoin(*path, "/");
-		if (tmp == NULL)
+		if (!(tmp = ft_strjoin(*path, "/")))
 			return (MEMERR);
-		free(*path);
+		ft_strdel(path);
 		*path = tmp;
 	}
 	return (0);
@@ -61,7 +60,7 @@ char		**dup_tab(char **tab)
 		copy[i] = ft_strdup(tab[i]);
 		if (copy[i] == NULL)
 		{
-			free_tab(copy);
+			ft_tabdel(&copy);
 			return (NULL);
 		}
 		i++;
@@ -69,18 +68,15 @@ char		**dup_tab(char **tab)
 	copy[i] = NULL;
 	return (copy);
 }
-/* to be called by readline
-*/
 
-static void state_unquoted(char *line, t_quote_state *state)
+static void	state_unquoted(char *line, t_quote_state *state)
 {
-	*state = (*line == '"') ? in_dquote : *state ;
-	*state = (*line == '\'') ? in_squote : *state ;
-	*state = (*line == '\\') ? backslash : *state ;
-
+	*state = (*line == '"') ? in_dquote : *state;
+	*state = (*line == '\'') ? in_squote : *state;
+	*state = (*line == '\\') ? backslash : *state;
 }
 
-static int state_backslash(char **line, t_quote_state *state, t_quote_state save)
+static int	state_backslash(char **line, t_quote_state *state, t_quote_state save)
 {
 	if (**line == '\n' && *((*line) + 1) == '\0')
 		return (-1);
@@ -89,7 +85,7 @@ static int state_backslash(char **line, t_quote_state *state, t_quote_state save
 	return (0);
 }
 
-int	missing_quote(char *line)
+int			missing_quote(char *line)
 {
 	t_quote_state state;
 	t_quote_state save;
@@ -98,21 +94,21 @@ int	missing_quote(char *line)
 	while (*line)
 	{
 		save = state;
-		if (state == unquoted )
+		if (state == unquoted)
 			state_unquoted(line, &state);
 		else if (state == in_dquote)
 		{
-			state = (*line == '"') ? unquoted : state ;
-			state = (*line == '\\') ? backslash : state ;	
+			state = (*line == '"') ? unquoted : state;
+			state = (*line == '\\') ? backslash : state;
 		}
 		else if (state == in_squote)
-			state = (*line == '\'') ? unquoted : state ;
+			state = (*line == '\'') ? unquoted : state;
 		line++;
 		if (state == backslash)
 			if (state_backslash(&line, &state, save))
 				return (-1);
 	}
-	if (state != unquoted)	
+	if (state != unquoted)
 		return (-1);
 	return (0);
 }

@@ -6,13 +6,13 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 15:16:45 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/27 15:17:10 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/29 20:17:59 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_core.h"
 
-int ft_unset(t_cmd_tab *cmd)
+int	ft_unset(t_cmd_tab *cmd)
 {
 	int i;
 
@@ -21,7 +21,7 @@ int ft_unset(t_cmd_tab *cmd)
 	{
 		if ((!(g_sh.env = envdel(g_sh.env, cmd->av[i])))
 			|| (!(g_sh.local = envdel(g_sh.local, cmd->av[i]))))
-		return(MEMERR);
+			return (MEMERR);
 		i++;
 	}
 	return (0);
@@ -29,7 +29,7 @@ int ft_unset(t_cmd_tab *cmd)
 
 int	ft_unsetenv(t_cmd_tab *cmd)
 {
-	int			i;
+	int	i;
 
 	if (cmd->av[1] == NULL)
 	{

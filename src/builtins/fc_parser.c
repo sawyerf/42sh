@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 18:07:04 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/26 17:13:04 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/29 20:15:36 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int		fc_parser(char **av, t_fc *fc)
 	char	c;
 	int		i;
 
-	av++;	
+	av++;
 	c = 0;
 	fc_init(fc);
 	while (*av)
@@ -44,7 +44,7 @@ int		fc_parser(char **av, t_fc *fc)
 		{
 			if (!ft_strcmp(*av, "--"))
 				av++;
-			break;
+			break ;
 		}
 		i = 1;
 		while ((*av)[i])
@@ -78,7 +78,7 @@ int		fc_parser(char **av, t_fc *fc)
 		}
 		av++;
 	}
-	if (*av &&  ft_cisin(fc->opt, 's') && ft_cisin(*av, '='))
+	if (*av && ft_cisin(fc->opt, 's') && ft_cisin(*av, '='))
 	{
 		if (!(fc->to = ft_strndup(*av, ft_strnext(*av, "="))))
 			return (-1);
@@ -97,6 +97,5 @@ int		fc_parser(char **av, t_fc *fc)
 		}
 		av++;
 	}
-	//fc_pprint(fc);
 	return (0);
 }

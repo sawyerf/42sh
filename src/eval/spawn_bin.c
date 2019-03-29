@@ -6,16 +6,14 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/27 15:14:17 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/29 22:25:11 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_eval.h"
-#include "hashtable.h" //this should be resolved differently
+#include "hashtable.h"
 
-/* execve_wrap is always inside a fork*/
-
-int		br_print(int err, t_cmd_tab *cmd)
+int				br_print(int err, t_cmd_tab *cmd)
 {
 	(err == br_PATHNOTSET) ? ft_dprintf(2, "PATH not set\n") : 0;
 	if (cmd->full_path)
@@ -43,7 +41,7 @@ int		br_print(int err, t_cmd_tab *cmd)
 	return (err);
 }
 
-void	restore_fd(t_list *to_close)
+void			restore_fd(t_list *to_close)
 {
 	while (to_close)
 	{
@@ -55,7 +53,7 @@ void	restore_fd(t_list *to_close)
 	dup2(FDSAVEERR, STDERR_FILENO);
 }
 
-void close_save(void)
+void			close_save(void)
 {
 	close(FDSAVEIN);
 	close(FDSAVEOUT);
@@ -63,8 +61,7 @@ void close_save(void)
 }
 
 static int		execve_wrap(t_cmd_tab *cmd)
-{	
-	//char	*path;
+{
 	int		ret;
 
 	close_save();
@@ -73,50 +70,35 @@ static int		execve_wrap(t_cmd_tab *cmd)
 	if (ft_cisin(cmd->av[0], '/'))
 	{
 		if (handle_perm(cmd->av[0]) != 0)
-			exit_wrap (ACCERR, cmd);
+			exit_wrap(ACCERR, cmd);
 		if ((cmd->full_path = ft_strdup(cmd->av[0])) == NULL)
 			exit_wrap(MEMERR, cmd);
 	}
-/*	else if (!cmd->full_path) //f launched with env, builtin have already set the full path 
-	{
-		if (!(path = get_process_env("PATH", cmd->process_env)))
-			path = get_env_value("PATH");
-		if (ht_getvalue(path, cmd) == MEMERR)
-			return (MEMERR);
-		if (!cmd->full_path)
-			exit_wrap (127, cmd);
-	}*/
-	ret = execve(cmd->full_path, cmd->av, cmd->process_env); 
+	ret = execve(cmd->full_path, cmd->av, cmd->process_env);
 	ft_dprintf(2, "21sh: bad file format\n");
 	exit_wrap(ret, cmd);
 	return (0);
 }
 
-
-void	wait_wrapper(t_cmd_tab *cmd, pid_t pid)
+void			wait_wrapper(t_cmd_tab *cmd, pid_t pid)
 {
-	int		wstatus;
+	int	wstatus;
 
-	waitpid(pid, &wstatus, 0);	
+	waitpid(pid, &wstatus, 1);
 	cmd->exit_signal = -1;
 	cmd->exit_status = -1;
 	if (WIFEXITED(wstatus))
-	{
 		cmd->exit_status = (int)WEXITSTATUS(wstatus);
-	}
 	else if (WIFSIGNALED(wstatus))
-	{
 		cmd->exit_signal = WTERMSIG(wstatus);
-	}
 }
 
-
-int		is_builtin(t_cmd_tab *cmd)
+int				is_builtin(t_cmd_tab *cmd)
 {
 	static t_builtin	array[] = {ft_echo, change_dir, setenv_wrapper,
-							ft_unsetenv, ft_env, ft_exit, ft_set, ft_unset, fc, hash}; //, hash};
+				ft_unsetenv, ft_env, ft_exit, ft_set, ft_unset, fc, hash};
 	static	char		*builtins[] = {"echo", "cd", "setenv", "unsetenv",
-							"env", "exit", "set", "unset", "fc", "hash", NULL};
+				"env", "exit", "set", "unset", "fc", "hash", NULL};
 	int					i;
 	int					ret;
 	t_list				*save_head;
@@ -125,7 +107,7 @@ int		is_builtin(t_cmd_tab *cmd)
 	if ((i = ft_cmptab(builtins, cmd->av[0])) != -1)
 	{
 		if ((ret = handle_redir(cmd->redir_lst, &save_head))) // this has to change we have more err
-			return(0);
+			return (0);
 		cmd->process_env = craft_env(g_sh.env, cmd->assign_lst);
 		if (cmd->process_env == NULL)
 			return (MEMERR);
@@ -138,8 +120,8 @@ int		is_builtin(t_cmd_tab *cmd)
 
 int		spawn_in_pipe(t_cmd_tab *cmd)
 {
-	int ret;
-	char *path;
+	int		ret;
+	char	*path;
 
 	if (cmd->av[0] == NULL)
 		return (0);
@@ -150,10 +132,10 @@ int		spawn_in_pipe(t_cmd_tab *cmd)
 	}
 	else if (ret == MEMERR)
 		return (MEMERR);
-	if ((!cmd->process_env) 
-			&& (!(cmd->process_env = craft_env(g_sh.env, cmd->assign_lst))))
+	if ((!cmd->process_env)
+		&& (!(cmd->process_env = craft_env(g_sh.env, cmd->assign_lst))))
 		return (MEMERR);
-	if (!cmd->full_path) //f launched with env, builtin have already set the full path 
+	if (!cmd->full_path) //if launched with env, builtin have already set the full path
 	{
 		if (!(path = get_process_env("PATH", cmd->process_env)))
 			path = get_env_value("PATH");
@@ -163,10 +145,10 @@ int		spawn_in_pipe(t_cmd_tab *cmd)
 	return (execve_wrap(cmd));
 }
 
-static int assign_to_shell(t_cmd_tab *cmd)
+static int	assign_to_shell(t_cmd_tab *cmd)
 {
-	int i;
-	int	len;
+	int		i;
+	int		len;
 	char	c;
 
 	i = 0;
@@ -187,16 +169,16 @@ static int assign_to_shell(t_cmd_tab *cmd)
 		}
 		if ((!g_sh.local) || (!g_sh.env))
 			return (MEMERR);
-		i++;	
+		i++;
 	}
 	return (0);
 }
 
 int		spawn_command(t_cmd_tab *cmd)
 {
-	pid_t 		pid;
-	int			ret;
-	char 		*path;
+	pid_t	pid;
+	int		ret;
+	char	*path;
 
 	if (cmd->av[0] == NULL)
 		return (assign_to_shell(cmd));
@@ -207,7 +189,7 @@ int		spawn_command(t_cmd_tab *cmd)
 	if ((!cmd->process_env) 
 			&& (!(cmd->process_env = craft_env(g_sh.env, cmd->assign_lst))))
 		return (MEMERR);
-	if (!cmd->full_path) //f launched with env, builtin have already set the full path 
+	if (!cmd->full_path) //if launched with env, builtin have already set the full path 
 	{
 		if (!(path = get_process_env("PATH", cmd->process_env)))
 			path = get_env_value("PATH");
@@ -220,7 +202,7 @@ int		spawn_command(t_cmd_tab *cmd)
 	if (pid == 0)
 	{
 		execve_wrap(cmd);
-		exit_wrap(1, cmd); /* handle errors here*/
+		exit_wrap(1, cmd);/* handle errors here*/
 	}
 	wait_wrapper(cmd, pid);
 	return (0);

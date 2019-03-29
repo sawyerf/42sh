@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 22:17:22 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/04 19:54:07 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/29 21:49:14 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int		valid_env_name(char *str)
 	return (1);
 }
 
-char *get_env_value(char *name)
+char	*get_env_value(char *name)
 {
 	char *value;
 
@@ -45,10 +45,9 @@ char *get_env_value(char *name)
 	if ((value = varchr(g_sh.local, name)))
 		return (value);
 	return (NULL);
-
 }
 
-int	set_shell_env(char *name, char *newvalue, int to_export)
+int		set_shell_env(char *name, char *newvalue, int to_export)
 {
 	(void)to_export;
 	if (!(g_sh.env = envaddstr(g_sh.env, name, newvalue)))

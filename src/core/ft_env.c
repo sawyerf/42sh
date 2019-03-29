@@ -6,16 +6,16 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 13:58:14 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/27 14:43:09 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/29 21:44:43 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_core.h"
-#include "hashtable.h" //this should be resolved differently
+#include "hashtable.h"
 
-static char **construct_env(t_cmd_tab *cmd, char opt, int count)
+static char	**construct_env(t_cmd_tab *cmd, char opt, int count)
 {
-	char 	**new_env;
+	char	**new_env;
 	int		start;
 
 	new_env = g_sh.env;
@@ -33,9 +33,9 @@ static char **construct_env(t_cmd_tab *cmd, char opt, int count)
 	return (new_env);
 }
 
-static int		spawn_new_env(char **args, char **new_env)
+static int	spawn_new_env(char **args, char **new_env)
 {
-	t_cmd_tab 	new_cmd;
+	t_cmd_tab	new_cmd;
 	char		*path;
 
 	ft_bzero(&new_cmd, sizeof(t_cmd_tab));
@@ -46,7 +46,7 @@ static int		spawn_new_env(char **args, char **new_env)
 		if (handle_perm(new_cmd.av[0]) != 0)
 			exec_error(ACCERR, new_cmd.av[0]);
 		if (!(new_cmd.full_path = ft_strdup(new_cmd.av[0])))
-			return (MEMERR);	
+			return (MEMERR);
 	}
 	else
 	{
@@ -63,7 +63,7 @@ static int		spawn_new_env(char **args, char **new_env)
 	return (spawn_command(&new_cmd));
 }
 
-static char		env_parseopt(char **args)
+static char	env_parseopt(char **args)
 {
 	int		flag;
 	char	opt;
@@ -83,12 +83,12 @@ static char		env_parseopt(char **args)
 	return (opt);
 }
 
-int				ft_env(t_cmd_tab *cmd)
+int			ft_env(t_cmd_tab *cmd)
 {
-	int			count;
-	char		**new_env;
-	char		opt;
-	int			ret;
+	char	**new_env;
+	char	opt;
+	int		count;
+	int		ret;
 
 	ret = 0;
 	if ((opt = env_parseopt(cmd->av)) == '?')

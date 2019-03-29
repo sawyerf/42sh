@@ -6,13 +6,13 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/18 20:01:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/01 14:07:27 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/29 21:54:54 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_core.h"
 
-void			init_iterator(int *read, int *write)
+void		init_iterator(int *read, int *write)
 {
 	*read = 0;
 	*write = 0;

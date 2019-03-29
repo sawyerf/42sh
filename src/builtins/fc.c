@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/27 15:10:23 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/26 18:37:36 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/29 20:11:41 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,13 @@ void	fc_print(t_fc fc, t_list *lst, int i)
 			i++;
 			lst = lst->next;
 		}
-		else 
+		else
 		{
 			i--;
 			lst = lst->prev;
 		}
 	}
 }
-
 
 char	*fc_filename(t_list *lst, int size)
 {
@@ -46,7 +45,7 @@ char	*fc_filename(t_list *lst, int size)
 	if (!lst)
 		return (NULL);
 	while (lst && i < size)
-	{ 
+	{
 		hash += ht_hash(lst->content);
 		lst = lst->next;
 		i++;
@@ -63,8 +62,8 @@ char	*fc_filename(t_list *lst, int size)
 
 int		fc_writelst(char *file, t_list *lst, int size)
 {
-	int				fd;
-	
+	int	fd;
+
 	fd = open(file, O_CREAT | O_WRONLY, 0600);
 	if (fd < 0)
 	{
@@ -79,7 +78,7 @@ int		fc_writelst(char *file, t_list *lst, int size)
 			size++;
 			lst = lst->next;
 		}
-		else 
+		else
 		{
 			size--;
 			lst = lst->prev;
@@ -137,14 +136,12 @@ int		run_editor(t_fc *fc, char *file)
 	return (g_sh.status);
 }
 
-
 int		fc(t_cmd_tab *cmd)
 {
 	t_fc	fc;
 	int		mode;
 
 	(void)cmd;
-	//hstdellast();
 	mode = g_sh.mode;
 	if (fc_parser(cmd->av, &fc) < 0)
 		return (1);

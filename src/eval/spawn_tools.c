@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 19:20:53 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/22 19:56:51 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/29 22:58:30 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,11 @@
 void	free_cmd_tab(t_cmd_tab *cmd)
 {
 	if (!cmd)
-		return;
+		return ;
 	if (cmd->full_path)
-		free(cmd->full_path);
+		ft_strdel(&cmd->full_path);
 	if (cmd->av)
-	{
 		free_tab(cmd->av);
-	}
 	if (cmd->process_env)
 		free_tab(cmd->process_env);
 	if (cmd->assign_lst)
@@ -31,7 +29,7 @@ void	free_cmd_tab(t_cmd_tab *cmd)
 
 void	free_cmd_tab_lst(t_cmd_tab *start)
 {
-	t_cmd_tab *tmp;
+	t_cmd_tab	*tmp;
 
 	while (start)
 	{
@@ -69,7 +67,7 @@ int			bin_perm(char *path)
 	if (!S_ISREG(target.st_mode))
 	{
 		if (S_ISDIR(target.st_mode))
-				return (BIN_IS_DIR);
+			return (BIN_IS_DIR);
 		return (BIN_PERM_DENY);
 	}
 	if (access(path, X_OK) != 0)
@@ -89,7 +87,7 @@ int			handle_perm(char *cmd_name)
 void	exit_wrap(int code, t_cmd_tab *cmd)
 {	
 	//free_cmd_tab(cmd); maybe this is where fork leaks ?
-	//exec_error(code, cmd->av[0]);	
+	//exec_error(code, cmd->av[0]);
 	(void)cmd;
 	exit(code);
 }

@@ -6,13 +6,13 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 17:46:08 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/28 14:31:51 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/29 22:59:08 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_eval.h"
 
-static int make_here_doc(int *right_fd, t_redir *redir)
+static int	make_here_doc(int *right_fd, t_redir *redir)
 {
 	int tmpfile;
 	char *tmpname = "/tmp/21sh_heredoc";
@@ -40,14 +40,14 @@ static int	get_open_flags(t_token_type op)
 	return (O_RDONLY);
 }
 
-static int ambiguous_redir(char *file)
+static int	ambiguous_redir(char *file)
 {
 	ft_dprintf(STDERR_FILENO, "21sh: %s : ambiguous redirection\n"
 		, file);
 	return (-1);
 }
 
-static int fd_aggregator(int *left_fd, int *right_fd, t_redir *redir)
+static int	fd_aggregator(int *left_fd, int *right_fd, t_redir *redir)
 {
 	t_redir tmp;
 
@@ -76,7 +76,7 @@ static int fd_aggregator(int *left_fd, int *right_fd, t_redir *redir)
 /*
  * command left_fd [>,<,>&,<&,>>,<<] right_fd
  */
-int	handle_right(int *left_fd, int *right_fd, t_redir *redir)
+int			handle_right(int *left_fd, int *right_fd, t_redir *redir)
 {
 	int oflag;
 

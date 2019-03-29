@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:08:33 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/06 16:03:36 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/29 20:09:26 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		cd_error(int errnum, char *str)
 	return (0);
 }
 
-int	cd_dispatch_err(char *arg, char *curpath)
+int		cd_dispatch_err(char *arg, char *curpath)
 {
 	int ret;
 
@@ -40,7 +40,6 @@ int	cd_dispatch_err(char *arg, char *curpath)
 		cd_error(ret, arg);
 	return (ret);
 }
-
 
 void	update_env_pwd(char *pwd, char *curpath)
 {

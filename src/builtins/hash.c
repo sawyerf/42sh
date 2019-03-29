@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 20:31:07 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/22 16:29:59 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/29 20:16:41 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	hash_parser(char **av, t_hash *hash)
 
 int		hash_print(t_list **hst)
 {
-	t_list *lst;
+	t_list	*lst;
 	int		i;
 
 	i = 0;

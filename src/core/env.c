@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setenv.c                                        :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/21 23:11:31 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/04 21:22:10 by ktlili           ###   ########.fr       */
+/*   Created: 2019/03/29 21:53:59 by apeyret           #+#    #+#             */
+/*   Updated: 2019/03/29 21:54:01 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_core.h"
-/* maybe ft_varnamelen instead of strlen ?*/
-size_t env_name_len(char *var)
+
+size_t	env_name_len(char *var)
 {
 	size_t len;
 
@@ -27,8 +27,8 @@ size_t env_name_len(char *var)
 
 char	*varchr(char **env, char *var)
 {
-	int		count;
-	int		len;
+	int	count;
+	int	len;
 
 	if (!env || !var)
 		return (NULL);

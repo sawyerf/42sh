@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 16:12:50 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/29 17:44:04 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/29 19:59:42 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,8 @@ int		ht_spawnbin(char *path, t_cmd_tab *cmd)
 	char	**paths;
 	int		ret;
 
+	if (!*cmd->av[0])
+		return (br_NOTFOUND);
 	if (ft_cisin(cmd->av[0], '/'))
 		return (exaccess(cmd->av[0]));
 	if (!path)
