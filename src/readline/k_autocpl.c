@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 21:17:33 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/22 15:50:14 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/29 17:40:02 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ int		autocompl(t_rdl *rdl, char *buf)
 	lst = get_choice(acp);
 	rdl->str[rdl->curs] = c;
 	if (!lst)
+	{
+		ft_strdel(&acp.str);
 		return (0);
+	}
 	if (!lst->next)
 	{
 		rdladdstr(rdl, lst->content);
@@ -57,5 +60,7 @@ int		autocompl(t_rdl *rdl, char *buf)
 	}
 	else
 		putlst(acp.str, lst, rdl);
+	ft_strdel(&acp.str);
+	ft_lstdel(&lst);
 	return (0);
 }

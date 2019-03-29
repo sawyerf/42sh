@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 14:48:16 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/22 19:40:47 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/29 19:04:37 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ t_list	*folderin(DIR *ptr, char *path, char *exec, int (*f)(char *file))
 	len = ft_strlen(exec);
 	while ((ret = readdir(ptr)))
 	{
-		cpath = ft_zprintf("%s/%s", path, ret->d_name);
+		if (!(cpath = ft_zprintf("%s/%s", path, ret->d_name)))
+			continue ;
 		if (!f(cpath) && !ft_strncmp(ret->d_name, exec, ft_strlen(exec))
 				&& ft_strcmp(ret->d_name, "..") && ft_strcmp(ret->d_name, "."))
 		{
@@ -71,8 +72,6 @@ t_list	*folderin(DIR *ptr, char *path, char *exec, int (*f)(char *file))
 		}
 		ft_strdel(&cpath);
 	}
-	if (ret)
-		free(ret);
 	return (lst);
 }
 
@@ -92,6 +91,7 @@ t_list	*get_folex(char *token, int (*f)(char *file))
 	if (!(ptr = opendir(path)))
 		return (NULL);
 	lst = folderin(ptr, path, exec, f);
+	ft_strdel(&path);
 	closedir(ptr);
 	return (lst);
 }
@@ -99,6 +99,7 @@ t_list	*get_folex(char *token, int (*f)(char *file))
 t_list	*filterpath(char *exec, t_list *lst)
 {
 	t_list	*match;
+	t_list	*tmp;
 	int		len;
 
 	len = ft_strlen(exec);
@@ -107,6 +108,7 @@ t_list	*filterpath(char *exec, t_list *lst)
 	{
 		if (!ft_strncmp(exec, lst->content, len))
 			ft_lstadd(&match, ft_lstnew(lst->content + len, 0));
+		tmp = lst;
 		lst = lst->next;
 	}
 	return (match);
@@ -141,6 +143,7 @@ t_list	*get_exec(char *exec, char *path)
 	char	**paths;
 	int		count;
 	t_list	*lst;
+	t_list	*tmp;
 
 	if (exec[0] == '/' || !ft_strncmp("./", exec, 2))
 		return (get_folex(exec, &folexaccess));
@@ -150,8 +153,11 @@ t_list	*get_exec(char *exec, char *path)
 	count = 0;
 	while (paths[count])
 	{
-		ft_lstadd(&lst, filterpath(exec, hst_getexec(paths[count])));
+		tmp = hst_getexec(paths[count]);
+		ft_lstadd(&lst, filterpath(exec, tmp));
+		ft_lstdel(&tmp);
 		count++;
 	}
+	ft_tabdel(&paths);
 	return (lst);
 }

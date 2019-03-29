@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/28 15:06:40 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/03/29 18:37:50 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int				main(int ac, char **av, char **env)
 	t_read_fn	read_fn;
 
 	silence_ac_av(ac, av);
-	if (init_shell(env)) // dispatcher here
+	if (init_shell(env))// dispatcher here
 		return (MEMERR);
 	ht_init();
 	ht_refreshall(get_env_value("PATH"));

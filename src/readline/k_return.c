@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 21:18:26 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/25 20:39:22 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/03/29 17:11:28 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int		ctrlc(t_rdl *rdl, char *buf)
 	rdl->size = 0;
 	rdl->curs = 0;
 	ft_printf("\n");
+	ft_strdel(&rdl->str);
 	return (3);
 }
 
@@ -39,6 +40,7 @@ int		ctrld(t_rdl *rdl, char *buf)
 	(void)buf;
 	if (!rdl->str[0])
 	{
+		ft_strdel(&rdl->str);
 		write(1, "\n", 1);
 		return (2);
 	}
