@@ -165,7 +165,7 @@ int	dispatch_errors(int errnum, t_parser parser)
 	}
 	if (errnum == SYNERR || errnum != HEREDOC_ERR)
 		g_sh.status = 258;
-	if (errnum == SYNERR)
+	if ((errnum == SYNERR) && (parser.current->type != EOI))
 		ft_dprintf(STDERR_FILENO, "21sh: syntax error near : '%s'\n", parser.current->data.str);
 	else if (errnum == HEREDOC_ERR)
 		ft_dprintf(STDERR_FILENO, "21sh: premature EOF on heredoc\n", parser.current->data.str);
