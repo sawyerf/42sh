@@ -124,8 +124,13 @@ int			main(int ac, char **av, char **env)
 	{
 		if ((ret = read_fn("$> ", &line)) == CTRL_D || ret == MEMERR || ret == -2)
 			break ;
-		if (ret != CTRL_C && (((ret = run_command(line)) == SYNERR) || (ret == MEMERR)))
+		if (ret == CTRL_C)
+			break;
+		if  (((ret = run_command(line)) == SYNERR) 
+			&&  (g_sh.mode == NONINTERACTIVE))
 			break ;
+		if (ret == MEMERR)
+			return (MEMERR);
 	}
 	hstaddfile(g_sh.env);
 	return (0);
