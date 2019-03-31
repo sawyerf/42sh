@@ -53,10 +53,10 @@ int			run_command(char *line)
 		if ((ret = sh_parser_refac(line)))
 			return (ret);
 	}
-	else if (*line != '\n')
+	else //if (*line != '\n')
 	{
 		ft_strdel(&line);
-		return (-1);
+	//	return (-1);
 	}
 	return (0);
 }
@@ -78,7 +78,7 @@ int			sh_readfile(char *prompt, char **str)
 		return (MEMERR);
 	ft_strdel(&line);
 	line = tmp;
-	ft_printf("\33[0;34m%s\33[0;0m", line);
+//	ft_printf("\33[0;34m%s\33[0;0m", line);
 	*str = line;
 	return (0);
 }
@@ -124,7 +124,7 @@ int			main(int ac, char **av, char **env)
 	{
 		if ((ret = read_fn("$> ", &line)) == CTRL_D || ret == MEMERR || ret == -2)
 			break ;
-		if (ret != CTRL_C && (run_command(line) == MEMERR))
+		if (ret != CTRL_C && (((ret = run_command(line)) == SYNERR) || (ret == MEMERR)))
 			break ;
 	}
 	hstaddfile(g_sh.env);

@@ -25,11 +25,6 @@ int		request_new_line(t_lexer *lx_st)
 	ret = read_fn("> ", &new_line); //??????
 	if (ret)
 		return (ret);
-/*	ft_printf("***ret is %d ptr %p\n***", ret, new_line);
-	if (new_line == NULL) // should be for mem err
-		return (QUOTE_ERR);
-	else if (*new_line == 0)
-		return (QUOTE_ERR);*/
 	free(lx_st->line); // this has to change
 	lx_st->line = new_line;
 	lx_st->cursor = new_line;
@@ -153,6 +148,8 @@ int			handle_param_exp(t_lexer *lx_st)
 
 int			handle_common(t_lexer *lx_st)
 {
+	int ret;
+
 	while (*(lx_st->cursor))
 	{
 		if (ft_cisin("\n\t |&><;", *(lx_st->cursor)))
@@ -165,8 +162,8 @@ int			handle_common(t_lexer *lx_st)
 			handle_param_exp(lx_st);
 		else if ((*(lx_st->cursor) == '\\') && (*((lx_st->cursor) + 1)))
 		{
-			if (handle_backslash(lx_st))
-				return (MEMERR);
+			if ((ret = handle_backslash(lx_st)))
+				return (ret);
 		}
 		else if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 			return (MEMERR);

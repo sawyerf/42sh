@@ -99,7 +99,7 @@ t_list	*get_folex(char *token, int (*f)(char *file))
 t_list	*filterpath(char *exec, t_list *lst)
 {
 	t_list	*match;
-	t_list	*tmp;
+//	t_list	*tmp;
 	int		len;
 
 	len = ft_strlen(exec);
@@ -108,7 +108,7 @@ t_list	*filterpath(char *exec, t_list *lst)
 	{
 		if (!ft_strncmp(exec, lst->content, len))
 			ft_lstadd(&match, ft_lstnew(lst->content + len, 0));
-		tmp = lst;
+//		tmp = lst;
 		lst = lst->next;
 	}
 	return (match);

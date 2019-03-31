@@ -10,7 +10,7 @@
 - export builtin, set && unset missing stuff.
 - ~~del la hashtable quand on modifie le PATH~~
 - move full path bin checking out of fork
-
+- Parameter expansions has invalid read/write on multiline command with ' or "
 ------------------------------------
 ### 42sh
 
@@ -22,9 +22,10 @@
 ## Bug
 |check|     `command`     |                result               | info complementaire |
 |:---:|:-----------------:|:-----------------------------------:|:-------------------:|
+|     | `env - i ./21sh ` | double free						    ||
 |     | ` `               | 21sh: syntax error near : '' + exit ||
-|     | `ls \\n` + Ctrl+c | 21sh: premature EOF + exit          ||
-|     | `ls "\n` + Ctrl+c | 21sh: premature EOF + exit          ||
+|  ✓  | `ls \\n` + Ctrl+c | 21sh: premature EOF + exit          ||
+|  ✓  | `ls "\n` + Ctrl+c | 21sh: premature EOF + exit          ||
 |     | `fc -s` apres celle d'avant | boucle infini | 1. le terminale est en NONINTERACTIVE quand la commande est lancer 2. s'arrete avec Ctrl+d |
 |     |
 

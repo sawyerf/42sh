@@ -84,7 +84,7 @@ void			wait_wrapper(t_cmd_tab *cmd, pid_t pid)
 {
 	int	wstatus;
 
-	waitpid(pid, &wstatus, 1);
+	waitpid(pid, &wstatus, 0);
 	cmd->exit_signal = -1;
 	cmd->exit_status = -1;
 	if (WIFEXITED(wstatus))

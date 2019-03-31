@@ -150,7 +150,7 @@ int	execute_cmdline(t_parser *parser)
 	free_tree(parser->tree);
 	parser->tree = NULL;
 	ft_bzero(&(parser->cmd), sizeof(t_simple_cmd));
-	parser->lx_state = ft_lexer(parser->cursor); // reinit lexer
+//	parser->lx_state = ft_lexer(parser->cursor); // reinit lexer
 	return (0);
 }
 
@@ -185,11 +185,13 @@ int	sh_parser_refac(char *line)
 	if ((ret = next_token(&parser)))
 	{
 		dispatch_errors(ret, parser);
+		free(parser.lx_state->line);
 		free_token_lst(parser.head);
 		return (parser.lx_state->err);
 	}	
 	parser.head = parser.lx_state->head;
 	ret = expect_complete_cmds(&parser);
+	free(parser.lx_state->line);
 	if (ret)
 	{
 		dispatch_errors(ret, parser);
@@ -198,6 +200,6 @@ int	sh_parser_refac(char *line)
 		return (ret);
 	}
 	free_token_lst(parser.head);
-	free_tree(parser.tree);
+//	free_tree(parser.tree);
 	return (0); //this should be exit status
 }

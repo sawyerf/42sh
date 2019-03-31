@@ -39,7 +39,7 @@ static int interactive_heredoc(t_token *io_here)
 	while (42)
 	{
 		if ((read_fn("heredoc> ", &new_ln))
-			|| (new_ln == '\0'))
+			|| (new_ln == '\0')) /* this is wrong */ 
 		{
 			free(here_doc);
 			return (HEREDOC_ERR);

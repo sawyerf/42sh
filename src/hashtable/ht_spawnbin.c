@@ -109,8 +109,8 @@ char	*ht_getpath(char **paths, char *exec)
 					return (NULL);
 			}
 			tmp = tmp->next;
-		}
-		i++;
+				}
+				i++;
 	}
 	return (NULL);
 }
