@@ -6,14 +6,14 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/06 22:06:01 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/01 14:16:53 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_parser.h"
 #include "ft_eval.h"
 
-t_bool expect_newline_lst(t_parser *parser)
+t_bool	expect_newline_lst(t_parser *parser)
 {
 	if (parser->current->type != NEWLINE)
 		return (0);
@@ -26,13 +26,13 @@ t_bool expect_newline_lst(t_parser *parser)
 t_bool	expect_linebreak(t_parser *parser)
 {
 	expect_newline_lst(parser);
-	return (1);	
+	return (1);
 }
 
 t_bool	expect_separator_op(t_parser *parser)
 {
 	if ((parser->current->type == AMPERS)
-		|| (parser->current->type == SEMI_COL)) 
+		|| (parser->current->type == SEMI_COL))
 	{
 		tree_add_sep(parser);
 		parser->current = parser->current->next;
@@ -40,8 +40,11 @@ t_bool	expect_separator_op(t_parser *parser)
 	}
 	return (0);
 }
-/* unused for now
+
+/*
+** unused for now
 */
+
 t_bool	expect_separator(t_parser *parser)
 {
 	if (expect_separator_op(parser))
@@ -52,14 +55,14 @@ t_bool	expect_separator(t_parser *parser)
 	if (expect_newline_lst(parser))
 		return (1);
 	return (0);
-
 }
 
+/*
+** expand stuff here, see posix rule 2
+*/
 
 t_bool	expect_filename(t_parser *parser)
 {
-/* expand stuff here, see posix rule 2
-*/
 	if (parser->current->type == WORD)
 	{
 		parser->current->type = FILENAME;
@@ -89,13 +92,13 @@ t_bool	expect_io_file(t_parser *parser)
 	return (0);
 }
 
-t_bool expect_here_end(t_parser *parser)
+t_bool	expect_here_end(t_parser *parser)
 {
 	(void)parser;
-	return (1);	
+	return (1);
 }
 
-t_bool expect_io_here(t_parser *parser)
+t_bool	expect_io_here(t_parser *parser)
 {
 	t_token *backtrack;
 
@@ -134,7 +137,7 @@ t_bool	expect_io_redir(t_parser *parser)
 		add_redir_lst(&(parser->current_redir), &(parser->cmd.redir_lst));
 		return (1);
 	}
-		free_redir(&(parser->current_redir));
+	free_redir(&(parser->current_redir));
 	parser->current = backtrack;
 	return (0);
 }
@@ -163,7 +166,6 @@ t_bool	expect_cmd_pre(t_parser *parser)
 	return (0);
 }
 
-
 t_bool	expect_cmd_suffix(t_parser *parser)
 {
 	if ((expect_io_redir(parser))
@@ -173,7 +175,6 @@ t_bool	expect_cmd_suffix(t_parser *parser)
 		return (1);
 	}
 	return (0);
-		
 }
 
 t_bool	expect_word(t_parser *parser)
@@ -192,7 +193,7 @@ t_bool	expect_cmd_name(t_parser *parser)
 {
 	if ((parser->current->type == WORD)
 			&& (!parser_is_assign(parser->current)))
-	{   
+	{
 		if (build_cmd(parser->current, &(parser->cmd)) == MEMERR)
 			mem_err_exit(parser);
 		parser->current = parser->current->next;
@@ -203,7 +204,7 @@ t_bool	expect_cmd_name(t_parser *parser)
 
 t_bool	expect_simple_cmd(t_parser *parser)
 {
-	t_token 		*backtrack;
+	t_token	*backtrack;
 
 	ft_bzero(&(parser->cmd), sizeof(t_simple_cmd));
 	backtrack = parser->current;
@@ -218,7 +219,7 @@ t_bool	expect_simple_cmd(t_parser *parser)
 		expect_cmd_suffix(parser);
 		return (1);
 	}
-	parser->current = backtrack;	
+	parser->current = backtrack;
 	return (0);
 }
 
@@ -233,7 +234,7 @@ t_bool	expect_pipeline_suffix(t_parser *parser)
 		expect_linebreak(parser);
 		if (!expect_simple_cmd(parser))
 		{
-			parser->current = backtrack;	
+			parser->current = backtrack;
 			return (0);
 		}
 		if (add_to_pipeline(parser) == MEMERR)
@@ -263,9 +264,9 @@ t_bool	expect_pipeline(t_parser *parser)
 
 t_bool	expect_and_or_suffix(t_parser *parser)
 {
-	t_token 		*backtrack;
-	backtrack = parser->current;
+	t_token	*backtrack;
 
+	backtrack = parser->current;
 	if ((parser->current->type == AND_IF)
 		|| (parser->current->type == OR_IF))
 	{
@@ -282,13 +283,12 @@ t_bool	expect_and_or_suffix(t_parser *parser)
 		return (1);
 	}
 	return (0);
-
 }
 
 t_bool	expect_and_or(t_parser *parser)
 {
 	t_token *backtrack;
-	
+
 	backtrack = parser->current;
 	if (expect_pipeline(parser))
 	{
@@ -302,7 +302,7 @@ t_bool	expect_and_or(t_parser *parser)
 t_bool	expect_list_suffix(t_parser *parser)
 {
 	t_token *backtrack;
-	
+
 	backtrack = parser->current;
 	if (expect_separator_op(parser))
 	{
@@ -318,12 +318,12 @@ t_bool	expect_list_suffix(t_parser *parser)
 
 t_bool	expect_list(t_parser *parser)
 {
-	t_token *backtrack;
+	t_token	*backtrack;
 
 	backtrack = parser->current;
 	if (expect_and_or(parser))
 	{
- 		expect_list_suffix(parser);
+		expect_list_suffix(parser);
 		return (1);
 	}
 	parser->current = backtrack;
@@ -331,16 +331,16 @@ t_bool	expect_list(t_parser *parser)
 }
 
 t_bool	expect_complete_cmd(t_parser *parser)
-{	
+{
 	if (expect_list(parser))
 	{
-		expect_separator_op(parser); 
+		expect_separator_op(parser);
 		return (1);
 	}
 	return (0);
 }
 
-t_bool expect_complete_cmds_suffix(t_parser *parser)
+t_bool	expect_complete_cmds_suffix(t_parser *parser)
 {
 	t_token *backtrack;
 
@@ -358,7 +358,7 @@ t_bool expect_complete_cmds_suffix(t_parser *parser)
 	return (0);
 }
 
-t_bool expect_complete_cmds(t_parser *parser)
+t_bool	expect_complete_cmds(t_parser *parser)
 {
 	expect_linebreak(parser);
 	if (expect_complete_cmd(parser))
