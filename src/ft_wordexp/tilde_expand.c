@@ -80,7 +80,6 @@ int		expand_tilde_assign(t_str *word, int index)
 	{
 		if ((word->str[index] == ':') && (word->str[index + 1] == '~'))
 		{
-			//maybe check if next is tilde_valid?
 			index++;
 			if (expand_tilde(word, &index, 1) == MEMERR)
 				return (MEMERR);

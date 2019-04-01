@@ -58,9 +58,7 @@ static int	fd_aggregator(int *left_fd, int *right_fd, t_redir *redir)
 				|| ((redir->op->type == GREATAND) && (redir->left)))
 			return (ambiguous_redir(redir->right->data.str));
 		else
-		// case >& word, equivalent to > word 2>&1*/ 
 		{
-			//we construct tmp redir for '> word' apply it, then proceed with '2>&1'
 			tmp.op = redir->op;
 			tmp.op->type = GREAT;
 			tmp.right = redir->right;
@@ -76,10 +74,6 @@ static int	fd_aggregator(int *left_fd, int *right_fd, t_redir *redir)
 	return (0);
 }
 
-/*
-** command left_fd [>,<,>&,<&,>>,<<] right_fd
-*/
-
 int			handle_right(int *left_fd, int *right_fd, t_redir *redir)
 {
 	int oflag;
@@ -92,7 +86,6 @@ int			handle_right(int *left_fd, int *right_fd, t_redir *redir)
 			return (1);
 		}
 		return (fd_aggregator(left_fd, right_fd, redir));
-		//check for ambiguous redir here (data.str has to be all digit)
 	}
 	if (redir->op->type == DLESS)
 		return (make_here_doc(right_fd, redir));

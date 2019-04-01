@@ -83,10 +83,9 @@ int				apply_redir(t_redir *redir, t_list **head)
 		return (-1);
 	else if (ret == 1)
 		return (0);
-		// case of >&- we close fd we dont use dup2
 	if (check_fd(right_fd) == FT_FALSE)
 		return (-1);
-		// maybe return 0 ?
+		// to review 
 	if ((head) && (save_fd(left_fd, head)))
 		return (MEMERR);
 	if (dup2(right_fd, left_fd) == -1)

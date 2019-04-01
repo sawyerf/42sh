@@ -32,7 +32,6 @@ void	inside_dquote_qr(t_str *str_w, int *index)
 		{
 			shift_str_left(str_w, *index);
 			if (str_w->str[*index])
-				// we should reject backslahs at endofline in lexer
 				*index = *index + 1;
 		}
 		else
@@ -69,7 +68,6 @@ int		quote_removal(t_token *word)
 		{
 			shift_str_left(&(word->data), index);
 			if (word->data.str[index])
-				// we should reject backslahs at endofline in lexer
 				index = index + 1;
 		}
 		else

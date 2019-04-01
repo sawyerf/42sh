@@ -86,8 +86,6 @@ int		handle_perm(char *cmd_name)
 
 void	exit_wrap(int code, t_cmd_tab *cmd)
 {
-	//free_cmd_tab(cmd); maybe this is where fork leaks ?
-	//exec_error(code, cmd->av[0]);
 	(void)cmd;
 	exit(code);
 }

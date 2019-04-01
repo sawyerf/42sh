@@ -65,8 +65,7 @@ static int		execve_wrap(t_cmd_tab *cmd)
 	int		ret;
 
 	close_save();
-	if ((ret = handle_redir(cmd->redir_lst, NULL)))
-	// this has to change we have more err
+	if ((ret = handle_redir(cmd->redir_lst, NULL))) // we need to dispatch more errors here
 		exit(1);
 	if (ft_cisin(cmd->av[0], '/'))
 	{
@@ -138,7 +137,6 @@ int				spawn_in_pipe(t_cmd_tab *cmd)
 		&& (!(cmd->process_env = craft_env(g_sh.env, cmd->assign_lst))))
 		return (MEMERR);
 	if (!cmd->full_path)
-	//if launched with env, builtin have already set the full path
 	{
 		if (!(path = get_process_env("PATH", cmd->process_env)))
 			path = get_env_value("PATH");
@@ -193,7 +191,6 @@ int				spawn_command(t_cmd_tab *cmd)
 			&& (!(cmd->process_env = craft_env(g_sh.env, cmd->assign_lst))))
 		return (MEMERR);
 	if (!cmd->full_path)
-	//if launched with env, builtin have already set the full path
 	{
 		if (!(path = get_process_env("PATH", cmd->process_env)))
 			path = get_env_value("PATH");
@@ -207,7 +204,6 @@ int				spawn_command(t_cmd_tab *cmd)
 	{
 		execve_wrap(cmd);
 		exit_wrap(1, cmd);
-		// handle errors here*/
 	}
 	wait_wrapper(cmd, pid);
 	return (0);

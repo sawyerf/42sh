@@ -52,7 +52,6 @@ int		expand_param(t_str *str_w, int *index, char *to_insert)
 
 	i = *index + 1;
 	trunc = 1;
-	// single $
 	if (str_w->str[i] == '{')
 	{
 		i++;
@@ -84,7 +83,6 @@ char	*build_param(t_str *str_w, int index)
 		value = empty_str;
 	if (!(value = quote_str(value)))
 		return (NULL);
-	//MEMERR
 	return (value);
 }
 
@@ -96,7 +94,6 @@ int		handle_exp_param(t_token *word)
 
 	index = 0;
 	inside_dquote = 1;
-	// > 0 when outside dquotes, < 0 when inside dquotes
 	while (word->data.str[index])
 	{
 		if (word->data.str[index] == '"')

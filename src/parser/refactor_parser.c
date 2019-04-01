@@ -275,8 +275,6 @@ int	expect_cmd_name(t_parser *parser)
 	return (SYNERR);
 }
 
-/*to move*/
-
 int	wrapper_free_cmd(int ret, t_parser *parser)
 {
 	free_simple_cmd(&(parser->cmd));
@@ -471,48 +469,3 @@ int	expect_complete_cmd(t_parser *parser)
 	}
 	return (ret);
 }
-
-/*
-int expect_complete_cmds_suffix(t_parser *parser)
-{
-	t_token *backtrack;
-	int		ret;
-
-	backtrack = parser->current;
-	if (!(ret = expect_newline_lst(parser)))
-	{
-		if ((ret = tree_add_nl(parser)))
-			return (ret);
-		execute_cmdline(parser);
-		if ((expect_complete_cmd(parser)))
-		{
-			parser->current = backtrack;
-			return (ret);
-		}
-		if ((ret = expect_complete_cmds_suffix(parser)) != SYNERR)
-			return (ret);
-		return (0);
-	}
-	return (ret);
-}
-
-int expect_complete_cmds(t_parser *parser)
-{
-	int ret;
-
-	if (((ret = expect_linebreak(parser)) != SYNERR) && (ret))
-		return (ret);
-	if (!(ret = expect_complete_cmd(parser)))
-	{
-		if (((ret = expect_complete_cmds_suffix(parser)) != SYNERR)
-			&& (ret))
-			return (ret);
-		if (((ret = expect_linebreak(parser)) != SYNERR)
-			&& (ret))
-			return (ret);
-		if (parser->current->type == EOI)
-			return (0);
-		return (SYNERR);
-	}
-	return (ret);
-}*/

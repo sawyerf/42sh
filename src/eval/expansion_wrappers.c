@@ -21,7 +21,6 @@ void		token_to_array(t_token *word, char **array)
 	{
 		array[i] = word->data.str;
 		word->data.str = NULL;
-		// to avoid double free
 		word = word->next;
 		i++;
 	}
@@ -66,7 +65,6 @@ t_cmd_tab	*expand_simple_cmd(t_simple_cmd *before)
 		return (NULL);
 	if (!(after->assign_lst = expand_word_lst(before->assign_lst)))
 		return (NULL);
-	//all assignements are done in subshell*/
 	after->redir_lst = before->redir_lst;
 	return (after);
 }

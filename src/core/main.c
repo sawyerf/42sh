@@ -53,11 +53,8 @@ int			run_command(char *line)
 		if ((ret = sh_parser_refac(line)))
 			return (ret);
 	}
-	else //if (*line != '\n')
-	{
+	else
 		ft_strdel(&line);
-	//	return (-1);
-	}
 	return (0);
 }
 

@@ -21,8 +21,7 @@ int	pipe_recursion(t_cmd_tab *to, t_cmd_tab *from)
 		return (PIPEFAIL);
 	pid = fork();
 	if (pid == -1)
-		return (-1);
-		//should be exec error
+		return (MEMERR);
 	if (pid == 0)
 	{
 		if (to)
