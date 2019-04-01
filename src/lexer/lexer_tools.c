@@ -99,11 +99,7 @@ int		str_putc(char **c, t_str *data)
 	return (0);
 }
 
-/*
-** this has to be change to is_whitespace
-*/
-
-int		ft_is_whitespace(char c)
+int	ft_is_whitespace(char c)
 {
 	static char	*ws = "\n\t ";
 	int			i;

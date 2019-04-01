@@ -26,7 +26,6 @@ int			request_new_line(t_lexer *lx_st)
 	if (ret)
 		return (ret);
 	free(lx_st->line);
-	// this has to change
 	lx_st->line = new_line;
 	lx_st->cursor = new_line;
 	return (0);

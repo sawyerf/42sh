@@ -87,7 +87,7 @@ t_lexer		*ft_lexer(char *input)
 	{
 		if (!(lexer_state.token = new_token(0)))
 			return (NULL);
-		lex_add_tk(&lexer_state, lexer_state.token); // to modify
+		lex_add_tk(&lexer_state, lexer_state.token);
 		if ((lexer_state.err = dispatch_fn(&lexer_state)))
 			return (&lexer_state);
 		if (lexer_state.token->type == NEWLINE)

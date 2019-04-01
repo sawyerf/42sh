@@ -149,13 +149,11 @@ int	execute_cmdline(t_parser *parser)
 	free_tree(parser->tree);
 	parser->tree = NULL;
 	ft_bzero(&(parser->cmd), sizeof(t_simple_cmd));
-	//parser->lx_state = ft_lexer(parser->cursor); // reinit lexer
 	return (0);
 }
 
 int	dispatch_errors(int errnum, t_parser parser)
 {
-	//ft_printf("*** errnum %d  ***\n", errnum);
 	if (errnum == MEMERR)
 	{
 		ft_printf("MEMERR exiting..\n");
@@ -181,7 +179,6 @@ int	sh_parser_refac(char *line)
 
 	ft_bzero(&parser, sizeof(t_parser));
 	parser.lx_state = ft_lexer(line);
-	//init lexer
 	parser.lx_state->line = line;
 	if ((ret = next_token(&parser)))
 	{
@@ -201,7 +198,5 @@ int	sh_parser_refac(char *line)
 		return (ret);
 	}
 	free_token_lst(parser.head);
-	//free_tree(parser.tree);
 	return (0);
-	//this should be exit status
 }

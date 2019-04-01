@@ -19,7 +19,6 @@ void	free_parser(t_parser *parser)
 	free_redir_lst(parser->cmd.redir_lst);
 	free_token_lst(parser->head);
 	free_pipeline(parser->pipeline);
-	//free_list_lst(parser->list);
 }
 
 void	mem_err_exit(t_parser *parser)

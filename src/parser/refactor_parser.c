@@ -68,9 +68,6 @@ int	expect_separator_op(t_parser *parser)
 	return (SYNERR);
 }
 
-/* unused for now
-*/
-
 int	expect_separator(t_parser *parser)
 {
 	int ret;
@@ -91,7 +88,6 @@ int	expect_separator(t_parser *parser)
 int	expect_filename(t_parser *parser)
 {
 	int ret;
-	// expand stuff here, see posix rule 2
 
 	if (parser->current->type == WORD)
 	{
@@ -415,7 +411,6 @@ int	expect_list_suffix(t_parser *parser)
 
 	backtrack = parser->current;
 	if (!(ret = expect_separator_op(parser)))
-	// this generates extra token
 	{
 		if ((ret = expect_and_or(parser)))
 		{

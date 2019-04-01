@@ -59,9 +59,8 @@ int		rev_lex(char *line, t_token **head)
 			table[1](&lexer_state);
 		add_token(head, lexer_state.token);
 		if (lexer_state.token->type > ASSIGN)
-		// break first op
-			break ;
-		lexer_state.token = NULL;
+			break;
+		lexer_state.token = NULL;	
 		while (ft_is_whitespace(*(lexer_state.cursor)))
 			lexer_state.cursor = lexer_state.cursor + 1;
 	}
