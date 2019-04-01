@@ -79,7 +79,6 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			lexer/memerror.c			\
 			parser/parser_ast.c			\
 			parser/refactor_parser.c	\
-			parser/parser_test.c		\
 			parser/parser_tools.c		\
 			parser/sh_parser.c			\
 			parser/parser_heredoc.c		\

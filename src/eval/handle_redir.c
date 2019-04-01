@@ -109,8 +109,9 @@ int				handle_redir(t_redir *redir_lst, t_list **head)
 	{
 		if (expand_redir(iter))
 			return (MEMERR);
-		if (iter->right->data.str[0] != 0)
-		// should printf ambiguous redir*/
+		if ((iter->op->type == DLESS)
+			|| (iter->right->data.str[0] != 0))
+		// second condition to prevent \0 filename open
 		{
 			if ((ret = apply_redir(iter, head)))
 			{
