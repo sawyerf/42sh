@@ -113,6 +113,7 @@ int				is_builtin(t_cmd_tab *cmd)
 			return (MEMERR);
 		cmd->exit_status = array[i](cmd);
 		restore_fd(save_head);
+		ft_lstdel(&save_head);
 		return (0);
 	}
 	return (-1);

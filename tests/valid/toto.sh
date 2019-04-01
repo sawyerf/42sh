@@ -1,3 +1,3 @@
 echo toto |
 rev
-echo not;;
+echo not;
