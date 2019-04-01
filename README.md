@@ -1,7 +1,7 @@
 # 21sh
 
 ## TODO
-
+- "PATH=ko /usr/bin/env | grep PATH" gives duplicate PATH 
 - leak in builtin forks
 - ${} readline
 - ls >& 2>file.txt should be valid
