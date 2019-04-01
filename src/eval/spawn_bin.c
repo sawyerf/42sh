@@ -65,7 +65,7 @@ static int		execve_wrap(t_cmd_tab *cmd)
 	int		ret;
 
 	close_save();
-	if ((ret = handle_redir(cmd->redir_lst, NULL))) // we need to dispatch more errors here
+	if ((ret = handle_redir(cmd->redir_lst, NULL)))
 		exit(1);
 	if (ft_cisin(cmd->av[0], '/'))
 	{
@@ -107,8 +107,7 @@ int				is_builtin(t_cmd_tab *cmd)
 	if ((i = ft_cmptab(builtins, cmd->av[0])) != -1)
 	{
 		if ((ret = handle_redir(cmd->redir_lst, &save_head)))
-		// this has to change we have more err
-			return (0);
+			return (1);
 		cmd->process_env = craft_env(g_sh.env, cmd->assign_lst);
 		if (cmd->process_env == NULL)
 			return (MEMERR);

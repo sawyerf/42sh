@@ -93,7 +93,7 @@ int			handle_right(int *left_fd, int *right_fd, t_redir *redir)
 	*right_fd = open(redir->right->data.str, oflag, 0644);
 	if (*right_fd == -1)
 	{
-		exec_error(BIN_NOT_FOUND, redir->right->data.str);
+		exec_error(bin_perm(redir->right->data.str), redir->right->data.str);
 		return (-1);
 	}
 	return (0);
