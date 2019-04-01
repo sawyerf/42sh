@@ -6,16 +6,15 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/18 13:44:51 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/01 15:41:59 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_parser.h"
 
-
 void	add_to_lst(t_token *to_add, t_token **head)
 {
-	t_token *tmp;
+	t_token	*tmp;
 
 	if (*head == NULL)
 		*head = to_add;
@@ -28,10 +27,9 @@ void	add_to_lst(t_token *to_add, t_token **head)
 	}
 }
 
-
 int		build_cmd(t_token *to_add, t_simple_cmd *cmd)
 {
-	t_token *tmp;
+	t_token	*tmp;
 
 	if (!(tmp = dup_token(to_add)))
 		return (MEMERR);
@@ -42,14 +40,14 @@ int		build_cmd(t_token *to_add, t_simple_cmd *cmd)
 	return (0);
 }
 
-int	build_redir(t_token *to_add, t_redir *redir)
+int		build_redir(t_token *to_add, t_redir *redir)
 {
-	t_token *tmp;
+	t_token	*tmp;
 
 	if (!(tmp = dup_token(to_add)))
 		return (MEMERR);
 	if (to_add->type == IO_NUM)
-		redir->left = tmp;	
+		redir->left = tmp;
 	else if ((to_add->type >= LESSAND) && (to_add->type <= DLESS))
 		redir->op = tmp;
 	else if ((to_add->type == FILENAME) || (to_add->type == HERE_END)
@@ -58,11 +56,10 @@ int	build_redir(t_token *to_add, t_redir *redir)
 	return (0);
 }
 
-
-int	add_to_pipeline(t_parser *parser)
+int		add_to_pipeline(t_parser *parser)
 {
-	t_simple_cmd *tmp;
-	t_simple_cmd *iter;
+	t_simple_cmd	*tmp;
+	t_simple_cmd	*iter;
 
 	if (!(tmp = ft_memalloc(sizeof(t_simple_cmd))))
 		return (MEMERR);
@@ -79,9 +76,9 @@ int	add_to_pipeline(t_parser *parser)
 	return (0);
 }
 
-int	add_redir_lst(t_redir *to_add, t_redir **head)
+int		add_redir_lst(t_redir *to_add, t_redir **head)
 {
-	t_redir *tmp;
+	t_redir	*tmp;
 	t_redir	*iter;
 
 	if (!(tmp = ft_memalloc(sizeof(t_redir))))

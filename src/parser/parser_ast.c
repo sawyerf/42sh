@@ -6,14 +6,13 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 14:30:55 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/05 20:00:01 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/01 15:32:59 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_eval.h"
 
-
-int	tree_add_sep(t_parser *parser)
+int		tree_add_sep(t_parser *parser)
 {
 	t_ast_node *node;
 
@@ -24,7 +23,7 @@ int	tree_add_sep(t_parser *parser)
 	return (0);
 }
 
-int tree_add_nl(t_parser *parser)
+int		tree_add_nl(t_parser *parser)
 {
 	t_ast_node *node;
 
@@ -35,7 +34,7 @@ int tree_add_nl(t_parser *parser)
 	return (0);
 }
 
-int	tree_add_and_or(t_parser *parser)
+int		tree_add_and_or(t_parser *parser)
 {
 	t_ast_node *node;
 
@@ -46,7 +45,7 @@ int	tree_add_and_or(t_parser *parser)
 	return (0);
 }
 
-int	tree_add_pipeline(t_parser *parser)
+int		tree_add_pipeline(t_parser *parser)
 {
 	t_ast_node *node;
 
@@ -56,16 +55,15 @@ int	tree_add_pipeline(t_parser *parser)
 	node->type = PIPE;
 	add_to_tree(&(parser->tree), node);
 	parser->pipeline = NULL;
-	return (0);	
+	return (0);
 }
 
 void	add_to_tree(t_ast_node **head, t_ast_node *to_add)
 {
-
 	if (*head == NULL)
 	{
 		*head = to_add;
-		return;
+		return ;
 	}
 	if (to_add->type == PIPE)
 	{

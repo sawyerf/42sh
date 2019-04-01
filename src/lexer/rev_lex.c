@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 22:20:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/04 23:23:43 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/01 13:48:27 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 void	init_jump_table(t_func table[TABLESZ])
 {
-	size_t 		i;
+	size_t		i;
 	static int	flag = 0;
 
 	i = 0;
-
 	if (flag)
-		return;
+		return ;
 	flag = 1;
 	while (i < TABLESZ)
 	{
@@ -36,13 +35,13 @@ void	init_jump_table(t_func table[TABLESZ])
 	table[59] = handle_semic;
 	table[60] = handle_less;
 	table[62] = handle_great;
-	table[124] = handle_column;	
-
+	table[124] = handle_column;
 }
-int rev_lex(char *line, t_token **head)
+
+int		rev_lex(char *line, t_token **head)
 {
-	t_lexer 			lexer_state;
-	static t_func	 	table[TABLESZ];
+	t_lexer			lexer_state;
+	static t_func	table[TABLESZ];
 
 	lexer_state.line = line;
 	lexer_state.cursor = line;
@@ -59,13 +58,13 @@ int rev_lex(char *line, t_token **head)
 		else
 			table[1](&lexer_state);
 		add_token(head, lexer_state.token);
-		if (lexer_state.token->type > ASSIGN) // break first op
-			break;
-		lexer_state.token = NULL;	
+		if (lexer_state.token->type > ASSIGN)
+		// break first op
+			break ;
+		lexer_state.token = NULL;
 		while (ft_is_whitespace(*(lexer_state.cursor)))
 			lexer_state.cursor = lexer_state.cursor + 1;
 	}
 	add_token(head, new_token(1));
 	return (0);
 }
-

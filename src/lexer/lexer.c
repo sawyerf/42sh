@@ -6,12 +6,11 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/20 16:41:34 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/01 13:38:33 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_lexer.h"
-
 
 t_lx_fn	g_lx_fn[] =\
 {
@@ -72,7 +71,7 @@ static void	init_lexer(char *input, t_lexer *lexer_state)
 	lexer_state->cursor = input;
 }
 
-t_lexer *ft_lexer(char *input)
+t_lexer		*ft_lexer(char *input)
 {
 	static t_lexer lexer_state;
 
@@ -82,7 +81,7 @@ t_lexer *ft_lexer(char *input)
 		init_lexer(input, &lexer_state);
 		return (&lexer_state);
 	}
-	while (ft_cisin(" \t", *(lexer_state.cursor)))	
+	while (ft_cisin(" \t", *(lexer_state.cursor)))
 		lexer_state.cursor = lexer_state.cursor + 1;
 	while (*(lexer_state.cursor))
 	{
@@ -94,7 +93,7 @@ t_lexer *ft_lexer(char *input)
 		if (lexer_state.token->type == NEWLINE)
 			return (&lexer_state);
 		lexer_state.token = NULL;
-		while (ft_cisin(" \t", *(lexer_state.cursor)))	
+		while (ft_cisin(" \t", *(lexer_state.cursor)))
 			lexer_state.cursor = lexer_state.cursor + 1;
 	}
 	lex_add_tk(&lexer_state, new_token(EOI));

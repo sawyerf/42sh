@@ -6,30 +6,32 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/28 14:50:26 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/01 13:48:29 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline.h"
 #include "ft_lexer.h"
 
-int		request_new_line(t_lexer *lx_st)
+int			request_new_line(t_lexer *lx_st)
 {
-	char *new_line;
-	t_read_fn read_fn;
-	int ret;
+	t_read_fn	read_fn;
+	char		*new_line;
+	int			ret;
 
 	read_fn = readline;
 	if (g_sh.mode != INTERACTIVE)
 		read_fn = sh_readfile;
-	ret = read_fn("> ", &new_line); //??????
+	ret = read_fn("> ", &new_line);
 	if (ret)
 		return (ret);
-	free(lx_st->line); // this has to change
+	free(lx_st->line);
+	// this has to change
 	lx_st->line = new_line;
 	lx_st->cursor = new_line;
 	return (0);
 }
+
 static int	handle_backslash(t_lexer *lx_st)
 {
 	int ret;
@@ -44,7 +46,6 @@ static int	handle_backslash(t_lexer *lx_st)
 	}
 	return (0);
 }
-
 
 int			handle_dquote(t_lexer *lx_st)
 {

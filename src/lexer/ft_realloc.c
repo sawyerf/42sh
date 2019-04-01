@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/04/01 13:31:39 by apeyret           #+#    #+#             */
+/*   Updated: 2019/04/01 13:31:40 by apeyret          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_lexer.h"
 
 int		ft_str_realloc(t_str *str_st, size_t newsz)
@@ -14,11 +26,3 @@ int		ft_str_realloc(t_str *str_st, size_t newsz)
 	str_st->str = ptr;
 	return (0);
 }
-/*
-void	print_st(t_display *display)
-{
-	ft_printf("oput: %s$$\n", display->oput.str);
-	ft_printf("oput sz: %zu\n", display->oput.size);
-	ft_printf("olen: %zu\n", display->o_len);
-	ft_printf("cursor_pos: %zu\n", display->cursor_pos);
-}*/

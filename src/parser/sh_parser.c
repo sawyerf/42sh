@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/28 15:04:32 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/01 15:59:43 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		parser_is_assign(t_token const *token)
 
 	i = 0;
 	ptr = token->data.str;
-	while ((ptr[i]) && (ptr[i] != '=')) 
+	while ((ptr[i]) && (ptr[i] != '='))
 		i++;
 	if (ptr[i] != '=')
 		return (0);
@@ -52,7 +52,7 @@ void	free_redir(t_redir *redir)
 		free_token(redir->right);
 	if (redir->op)
 		free_token(redir->op);
-	ft_bzero(redir, sizeof(t_redir));	
+	ft_bzero(redir, sizeof(t_redir));
 }
 
 void	free_redir_lst(t_redir *redir)
@@ -87,7 +87,6 @@ void	free_pipeline(t_simple_cmd *pipeline)
 	{
 		tmp = pipeline->next;
 		free_simple_cmd(pipeline);
-	
 		free(pipeline);
 		pipeline = tmp;
 	}
@@ -96,7 +95,7 @@ void	free_pipeline(t_simple_cmd *pipeline)
 void	free_tree(t_ast_node *tree)
 {
 	if (tree == NULL)
-		return;
+		return ;
 	free_tree(tree->left);
 	free_tree(tree->right);
 	if (tree->pipeline)
@@ -104,7 +103,7 @@ void	free_tree(t_ast_node *tree)
 	free(tree);
 }
 
-t_ast_node *get_tree(t_ast_node *tree)
+t_ast_node	*get_tree(t_ast_node *tree)
 {
 	static t_ast_node *static_tree = NULL;
 
@@ -122,7 +121,7 @@ void	remove_last_node(t_parser *parser)
 	free(tmp);
 }
 
-int next_token(t_parser *parser)
+int	next_token(t_parser *parser)
 {
 	t_lexer *lex;
 
@@ -150,10 +149,9 @@ int	execute_cmdline(t_parser *parser)
 	free_tree(parser->tree);
 	parser->tree = NULL;
 	ft_bzero(&(parser->cmd), sizeof(t_simple_cmd));
-//	parser->lx_state = ft_lexer(parser->cursor); // reinit lexer
+	//parser->lx_state = ft_lexer(parser->cursor); // reinit lexer
 	return (0);
 }
-
 
 int	dispatch_errors(int errnum, t_parser parser)
 {
@@ -166,11 +164,13 @@ int	dispatch_errors(int errnum, t_parser parser)
 	if (errnum == SYNERR || errnum != HEREDOC_ERR)
 		g_sh.status = 258;
 	if ((errnum == SYNERR) && (parser.current->type != EOI))
-		ft_dprintf(STDERR_FILENO, "21sh: syntax error near : '%s'\n", parser.current->data.str);
+		ft_dprintf(STDERR_FILENO, "21sh: syntax error near : '%s'\n",
+			parser.current->data.str);
 	else if (errnum == HEREDOC_ERR)
-		ft_dprintf(STDERR_FILENO, "21sh: premature EOF on heredoc\n", parser.current->data.str);
+		ft_dprintf(STDERR_FILENO, "21sh: premature EOF on heredoc\n",
+			parser.current->data.str);
 	else if (errnum == CTRL_D)
-		ft_dprintf(STDERR_FILENO, "21sh: premature EOF\n");	
+		ft_dprintf(STDERR_FILENO, "21sh: premature EOF\n");
 	return (errnum);
 }
 
@@ -180,7 +180,8 @@ int	sh_parser_refac(char *line)
 	int			ret;
 
 	ft_bzero(&parser, sizeof(t_parser));
-	parser.lx_state = ft_lexer(line); // init lexer
+	parser.lx_state = ft_lexer(line);
+	//init lexer
 	parser.lx_state->line = line;
 	if ((ret = next_token(&parser)))
 	{
@@ -188,7 +189,7 @@ int	sh_parser_refac(char *line)
 		free(parser.lx_state->line);
 		free_token_lst(parser.head);
 		return (parser.lx_state->err);
-	}	
+	}
 	parser.head = parser.lx_state->head;
 	ret = expect_complete_cmds(&parser);
 	free(parser.lx_state->line);
@@ -200,6 +201,7 @@ int	sh_parser_refac(char *line)
 		return (ret);
 	}
 	free_token_lst(parser.head);
-//	free_tree(parser.tree);
-	return (0); //this should be exit status
+	//free_tree(parser.tree);
+	return (0);
+	//this should be exit status
 }

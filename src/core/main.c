@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/01 12:55:16 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/01 16:00:18 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ int			main(int ac, char **av, char **env)
 		read_fn = readline;
 	while (42)
 	{
-		if ((ret = read_fn("$> ", &line)) == CTRL_D || ret == CTRL_C ||
+		if ((ret = read_fn("$> ", &line)) == CTRL_D ||
 				ret == MEMERR || ret == -2)
 			break ;
 		if (((ret = run_command(line)) == SYNERR)

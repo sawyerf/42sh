@@ -1,7 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   memerror.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/04/01 13:49:01 by apeyret           #+#    #+#             */
+/*   Updated: 2019/04/01 13:49:49 by apeyret          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_lexer.h"
-
-/* lexer mem error exit */
-
 
 void	free_parser(t_parser *parser)
 {
@@ -10,7 +19,7 @@ void	free_parser(t_parser *parser)
 	free_redir_lst(parser->cmd.redir_lst);
 	free_token_lst(parser->head);
 	free_pipeline(parser->pipeline);
-//	free_list_lst(parser->list);
+	//free_list_lst(parser->list);
 }
 
 void	mem_err_exit(t_parser *parser)
