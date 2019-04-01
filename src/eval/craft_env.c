@@ -6,24 +6,11 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:22:06 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/19 10:35:38 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/01 13:09:58 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_eval.h"
-/*
- * replace ft_ptr_arr_len with ft_tablen
- */
-static int	ft_ptr_arr_len(char **ptr)
-{
-	int i;
-
-	i = 0;
-	while (ptr[i])
-		i++;
-	return (i);
-
-}
 
 static char	**cpy_array(char **to, char **from)
 {
@@ -40,10 +27,10 @@ static char	**cpy_array(char **to, char **from)
 	return (to);
 }
 
-int	env_is_set(char *key, char **env)
+int			env_is_set(char *key, char **env)
 {
-	int i;
-	int len;
+	int	i;
+	int	len;
 
 	i = 0;
 	len = 0;
@@ -52,13 +39,13 @@ int	env_is_set(char *key, char **env)
 	while (env[i])
 	{
 		if (!ft_strncmp(key, env[i], len))
-			return (i);	
+			return (i);
 		i++;
 	}
 	return (-1);
-
 }
-char *get_process_env(char *key, char **env)
+
+char		*get_process_env(char *key, char **env)
 {
 	int i;
 
@@ -68,16 +55,16 @@ char *get_process_env(char *key, char **env)
 	return (get_value(env[i]));
 }
 
-char **craft_env(char **base_env, char **to_add)
+char		**craft_env(char **base_env, char **to_add)
 {
-	char		 **fresh;
-	int 		tot_len;
-	int 		i;
-	int			j;
+	char	**fresh;
+	int		tot_len;
+	int		i;
+	int		j;
 
 	if (!base_env)
 		return (NULL);
-	tot_len = ft_ptr_arr_len(base_env) + ft_ptr_arr_len(to_add) + 1;
+	tot_len = ft_tablen(base_env) + ft_tablen(to_add) + 1;
 	if (!(fresh = ft_memalloc(tot_len * sizeof(char*))))
 		return (NULL);
 	if (!(cpy_array(fresh, base_env)))
@@ -91,9 +78,10 @@ char **craft_env(char **base_env, char **to_add)
 			fresh[j] = to_add[i];
 		}
 		else
-			fresh[ft_ptr_arr_len(fresh)] = to_add[i];
-		to_add[i] = NULL; /* to avoid double free*/
-		i++;	
+			fresh[ft_tablen(fresh)] = to_add[i];
+		to_add[i] = NULL;
+		// to avoid double free
+		i++;
 	}
 	//free(base_env);
 	return (fresh);

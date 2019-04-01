@@ -6,13 +6,13 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/28 18:44:53 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/01 12:30:06 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_wordexp.h"
 
-int	tilde_valid(char c)
+int		tilde_valid(char c)
 {
 	if ((c == 0) || (c == '/') || (c == ':'))
 		return (1);
@@ -32,7 +32,7 @@ char	*quote_home(char *str)
 	return (new);
 }
 
-int	insert_str(t_str *word, int *index, char *to_insert)
+int		insert_str(t_str *word, int *index, char *to_insert)
 {
 	char *save;
 
@@ -51,7 +51,7 @@ int	insert_str(t_str *word, int *index, char *to_insert)
 	return (0);
 }
 
-int	expand_tilde(t_str *word, int *index, int add_quote)
+int		expand_tilde(t_str *word, int *index, int add_quote)
 {
 	char *home;
 
@@ -60,7 +60,7 @@ int	expand_tilde(t_str *word, int *index, int add_quote)
 	word->str[word->len] = '\0';
 	home = get_env_value("HOME");
 	if ((!home) || (*home == '\0'))
-		return (0);	
+		return (0);
 	if ((add_quote) && (!(home = quote_home(home))))
 		return (MEMERR);
 	if (insert_str(word, index, home) == MEMERR)
@@ -70,8 +70,7 @@ int	expand_tilde(t_str *word, int *index, int add_quote)
 	return (0);
 }
 
-
-int	expand_tilde_assign(t_str *word, int index)
+int		expand_tilde_assign(t_str *word, int index)
 {
 	if ((word->str[index] == '~') && (tilde_valid(word->str[index + 1])))
 	{
@@ -80,7 +79,8 @@ int	expand_tilde_assign(t_str *word, int index)
 	while (word->str[index])
 	{
 		if ((word->str[index] == ':') && (word->str[index + 1] == '~'))
-		{ //maybe check if next is tilde_valid?
+		{
+			//maybe check if next is tilde_valid?
 			index++;
 			if (expand_tilde(word, &index, 1) == MEMERR)
 				return (MEMERR);
@@ -94,14 +94,13 @@ int	expand_tilde_assign(t_str *word, int index)
 			index = next_dquote(word->str, index);
 		index++;
 	}
-	return (0);	
+	return (0);
 }
 
-
-int handle_tilde(t_token *word)
+int		handle_tilde(t_token *word)
 {
 	int index;
-	
+
 	index = 0;
 	if ((word->data.str[0] == '~') && (tilde_valid(word->data.str[1])))
 	{
@@ -112,10 +111,10 @@ int handle_tilde(t_token *word)
 		while (word->data.str[index])
 		{
 			if (word->data.str[index] == '=')
-				break;
+				break ;
 			index++;
 		}
-		return (expand_tilde_assign(&(word->data), index + 1)); 
+		return (expand_tilde_assign(&(word->data), index + 1));
 	}
 	return (0);
 }

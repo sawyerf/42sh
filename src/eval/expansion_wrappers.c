@@ -6,13 +6,13 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/06 19:22:10 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/01 13:14:15 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_eval.h"
 
-void	token_to_array(t_token *word, char **array)
+void		token_to_array(t_token *word, char **array)
 {
 	int i;
 
@@ -20,20 +20,20 @@ void	token_to_array(t_token *word, char **array)
 	while (word)
 	{
 		array[i] = word->data.str;
-		word->data.str = NULL; /* to avoid double free */
+		word->data.str = NULL;
+		// to avoid double free
 		word = word->next;
 		i++;
 	}
-	return;
+	return ;
 }
 
-
-char **expand_word_lst(t_token *word)
+char		**expand_word_lst(t_token *word)
 {
-	size_t lst_len;
+	size_t	lst_len;
 	char	**cmd_av;
 	t_token	*iter;
-	t_token *save;
+	t_token	*save;
 
 	iter = word;
 	while (iter)
@@ -61,18 +61,17 @@ t_cmd_tab	*expand_simple_cmd(t_simple_cmd *before)
 	t_cmd_tab *after;
 
 	if (!(after = ft_memalloc(sizeof(t_cmd_tab))))
-			return (NULL);	
-	if ((after->av = expand_word_lst(before->word_lst)) == NULL)
 		return (NULL);
-	if ((after->assign_lst = expand_word_lst(before->assign_lst)) == NULL)
+	if (!(after->av = expand_word_lst(before->word_lst)))
 		return (NULL);
-	/* all assignements are done in subshell*/
+	if (!(after->assign_lst = expand_word_lst(before->assign_lst)))
+		return (NULL);
+	//all assignements are done in subshell*/
 	after->redir_lst = before->redir_lst;
 	return (after);
 }
 
-
-void	add_cmd_tab(t_cmd_tab **head, t_cmd_tab *to_add)
+void		add_cmd_tab(t_cmd_tab **head, t_cmd_tab *to_add)
 {
 	t_cmd_tab *tmp;
 
@@ -88,13 +87,13 @@ void	add_cmd_tab(t_cmd_tab **head, t_cmd_tab *to_add)
 	}
 }
 
-t_cmd_tab *expand_pipeline(t_simple_cmd *cmd_lst)
+t_cmd_tab	*expand_pipeline(t_simple_cmd *cmd_lst)
 {
-	t_simple_cmd 	*iter;
+	t_simple_cmd	*iter;
 	t_cmd_tab		*cmd_tab;
 	t_cmd_tab		*head;
 
-	iter = cmd_lst;	
+	iter = cmd_lst;
 	head = NULL;
 	while (iter)
 	{

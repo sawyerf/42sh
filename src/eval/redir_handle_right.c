@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 17:46:08 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/29 22:59:08 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/01 13:25:07 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int	make_here_doc(int *right_fd, t_redir *redir)
 {
-	int tmpfile;
-	char *tmpname = "/tmp/21sh_heredoc";
+	int		tmpfile;
+	char	*tmpname = "/tmp/21sh_heredoc";
 
 	tmpfile = open(tmpname, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (tmpfile == -1)
@@ -53,12 +53,14 @@ static int	fd_aggregator(int *left_fd, int *right_fd, t_redir *redir)
 
 	ft_bzero(&tmp, sizeof(t_redir));
 	if (!ft_isalldigit(redir->right->data.str))
-	{	
+	{
 		if ((redir->op->type == LESSAND)
-			|| ((redir->op->type == GREATAND) && (redir->left)))
-					return (ambiguous_redir(redir->right->data.str));
-		else /* case >& word, equivalent to > word 2>&1*/ 
-		{ /*we construct tmp redir for '> word' apply it, then proceed with '2>&1' */
+				|| ((redir->op->type == GREATAND) && (redir->left)))
+			return (ambiguous_redir(redir->right->data.str));
+		else
+		// case >& word, equivalent to > word 2>&1*/ 
+		{
+			//we construct tmp redir for '> word' apply it, then proceed with '2>&1'
 			tmp.op = redir->op;
 			tmp.op->type = GREAT;
 			tmp.right = redir->right;
@@ -73,9 +75,11 @@ static int	fd_aggregator(int *left_fd, int *right_fd, t_redir *redir)
 	*right_fd = ft_atoi(redir->right->data.str);
 	return (0);
 }
+
 /*
- * command left_fd [>,<,>&,<&,>>,<<] right_fd
- */
+** command left_fd [>,<,>&,<&,>>,<<] right_fd
+*/
+
 int			handle_right(int *left_fd, int *right_fd, t_redir *redir)
 {
 	int oflag;
@@ -93,7 +97,7 @@ int			handle_right(int *left_fd, int *right_fd, t_redir *redir)
 	if (redir->op->type == DLESS)
 		return (make_here_doc(right_fd, redir));
 	oflag = get_open_flags(redir->op->type);
-	*right_fd = open(redir->right->data.str, oflag, 0644); 
+	*right_fd = open(redir->right->data.str, oflag, 0644);
 	if (*right_fd == -1)
 	{
 		exec_error(BIN_NOT_FOUND, redir->right->data.str);

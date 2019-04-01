@@ -6,15 +6,15 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/21 14:59:39 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/01 12:45:13 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_wordexp.h"
 
-char *quote_str(char *str)
+char	*quote_str(char *str)
 {
-	size_t 	count;
+	size_t	count;
 	int		j;
 	int		i;
 	char	*quoted;
@@ -45,13 +45,14 @@ char *quote_str(char *str)
 	return (quoted);
 }
 
-int	expand_param(t_str *str_w, int *index, char *to_insert)
+int		expand_param(t_str *str_w, int *index, char *to_insert)
 {
 	int		trunc;
 	int		i;
 
 	i = *index + 1;
-	trunc = 1; /* single $*/
+	trunc = 1;
+	// single $
 	if (str_w->str[i] == '{')
 	{
 		i++;
@@ -62,7 +63,8 @@ int	expand_param(t_str *str_w, int *index, char *to_insert)
 		trunc++;
 		i++;
 	}
-	ft_memmove(str_w->str + *index, str_w->str + *index + trunc, str_w->len - *index - trunc);
+	ft_memmove(str_w->str + *index, str_w->str + *index + trunc,
+			str_w->len - *index - trunc);
 	str_w->len = str_w->len - trunc;
 	str_w->str[str_w->len] = '\0';
 	if (insert_str(str_w, index, to_insert) == MEMERR)
@@ -70,10 +72,10 @@ int	expand_param(t_str *str_w, int *index, char *to_insert)
 	return (0);
 }
 
-char *build_param(t_str *str_w, int index)
+char	*build_param(t_str *str_w, int index)
 {
-	char *value;
-	static char *empty_str = "";
+	static char	*empty_str = "";
+	char		*value;
 
 	if (str_w->str[index] == '{')
 		index++;
@@ -81,23 +83,24 @@ char *build_param(t_str *str_w, int index)
 	if (!value)
 		value = empty_str;
 	if (!(value = quote_str(value)))
-		return (NULL); /*MEMERR*/
+		return (NULL);
+	//MEMERR
 	return (value);
 }
 
-
-int	handle_exp_param(t_token *word)
+int		handle_exp_param(t_token *word)
 {
-	int index;
-	char *value;
-	int inside_dquote;
+	int		index;
+	char	*value;
+	int		inside_dquote;
 
 	index = 0;
-	inside_dquote = 1; /* > 0 when outside dquotes, < 0 when inside dquotes */
+	inside_dquote = 1;
+	// > 0 when outside dquotes, < 0 when inside dquotes
 	while (word->data.str[index])
 	{
 		if (word->data.str[index] == '"')
-			inside_dquote = -inside_dquote; 
+			inside_dquote = -inside_dquote;
 		if ((word->data.str[index] == '$') && (word->data.str[index + 1] != 0))
 		{
 			value = build_param(&(word->data), index + 1);

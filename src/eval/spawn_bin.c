@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/29 22:25:11 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/01 13:28:59 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,8 @@ static int		execve_wrap(t_cmd_tab *cmd)
 	int		ret;
 
 	close_save();
-	if ((ret = handle_redir(cmd->redir_lst, NULL))) // this has to change we have more err
+	if ((ret = handle_redir(cmd->redir_lst, NULL)))
+	// this has to change we have more err
 		exit(1);
 	if (ft_cisin(cmd->av[0], '/'))
 	{
@@ -106,7 +107,8 @@ int				is_builtin(t_cmd_tab *cmd)
 	save_head = NULL;
 	if ((i = ft_cmptab(builtins, cmd->av[0])) != -1)
 	{
-		if ((ret = handle_redir(cmd->redir_lst, &save_head))) // this has to change we have more err
+		if ((ret = handle_redir(cmd->redir_lst, &save_head)))
+		// this has to change we have more err
 			return (0);
 		cmd->process_env = craft_env(g_sh.env, cmd->assign_lst);
 		if (cmd->process_env == NULL)
@@ -118,7 +120,7 @@ int				is_builtin(t_cmd_tab *cmd)
 	return (-1);
 }
 
-int		spawn_in_pipe(t_cmd_tab *cmd)
+int				spawn_in_pipe(t_cmd_tab *cmd)
 {
 	int		ret;
 	char	*path;
@@ -135,7 +137,8 @@ int		spawn_in_pipe(t_cmd_tab *cmd)
 	if ((!cmd->process_env)
 		&& (!(cmd->process_env = craft_env(g_sh.env, cmd->assign_lst))))
 		return (MEMERR);
-	if (!cmd->full_path) //if launched with env, builtin have already set the full path
+	if (!cmd->full_path)
+	//if launched with env, builtin have already set the full path
 	{
 		if (!(path = get_process_env("PATH", cmd->process_env)))
 			path = get_env_value("PATH");
@@ -145,7 +148,7 @@ int		spawn_in_pipe(t_cmd_tab *cmd)
 	return (execve_wrap(cmd));
 }
 
-static int	assign_to_shell(t_cmd_tab *cmd)
+static int		assign_to_shell(t_cmd_tab *cmd)
 {
 	int		i;
 	int		len;
@@ -174,7 +177,7 @@ static int	assign_to_shell(t_cmd_tab *cmd)
 	return (0);
 }
 
-int		spawn_command(t_cmd_tab *cmd)
+int				spawn_command(t_cmd_tab *cmd)
 {
 	pid_t	pid;
 	int		ret;
@@ -186,10 +189,11 @@ int		spawn_command(t_cmd_tab *cmd)
 		return (0);
 	else if (ret == MEMERR)
 		return (MEMERR);
-	if ((!cmd->process_env) 
+	if ((!cmd->process_env)
 			&& (!(cmd->process_env = craft_env(g_sh.env, cmd->assign_lst))))
 		return (MEMERR);
-	if (!cmd->full_path) //if launched with env, builtin have already set the full path 
+	if (!cmd->full_path)
+	//if launched with env, builtin have already set the full path
 	{
 		if (!(path = get_process_env("PATH", cmd->process_env)))
 			path = get_env_value("PATH");
@@ -202,7 +206,8 @@ int		spawn_command(t_cmd_tab *cmd)
 	if (pid == 0)
 	{
 		execve_wrap(cmd);
-		exit_wrap(1, cmd);/* handle errors here*/
+		exit_wrap(1, cmd);
+		// handle errors here*/
 	}
 	wait_wrapper(cmd, pid);
 	return (0);

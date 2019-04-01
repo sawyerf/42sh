@@ -6,19 +6,19 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 14:16:02 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/28 14:21:30 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/01 13:22:15 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_eval.h"
 
 /*
- * to do:
- * builtin should exit when redir fail, command should continue
- * fstat fd before dup ?
- */
+** to do:
+** builtin should exit when redir fail, command should continue
+** fstat fd before dup ?
+*/
 
-static int expand_redir(t_redir *redir)
+static int		expand_redir(t_redir *redir)
 {
 	if ((redir->right) && (redir->right->type == HERE_END_QU))
 		return (0);
@@ -29,10 +29,10 @@ static int expand_redir(t_redir *redir)
 	return (0);
 }
 
-static t_bool check_fd(int fd)
+static t_bool	check_fd(int fd)
 {
-	static int t = 0;
-	struct stat buf;
+	static int	t = 0;
+	struct stat	buf;
 
 	if (!fstat(fd, &buf))
 		return (FT_TRUE);
@@ -41,25 +41,26 @@ static t_bool check_fd(int fd)
 	return (FT_FALSE);
 }
 
-static void	handle_left(int *left_fd, t_redir *redir)
+static void		handle_left(int *left_fd, t_redir *redir)
 {
-	if ((redir->op->type == GREAT) || (redir->op->type == GREATAND) || (redir->op->type == DGREAT))
+	if ((redir->op->type == GREAT) || (redir->op->type == GREATAND)
+			|| (redir->op->type == DGREAT))
 	{
-		if (redir->left == NULL)
+		if (!redir->left)
 			*left_fd = 1;
 		else
 			*left_fd = ft_atoi(redir->left->data.str);
-		return;
+		return ;
 	}
-		if (redir->left == NULL)
-			*left_fd = 0;
-		else
-			*left_fd = ft_atoi(redir->left->data.str);
+	if (!redir->left)
+		*left_fd = 0;
+	else
+		*left_fd = ft_atoi(redir->left->data.str);
 }
 
-static int save_fd(int left_fd, t_list **head)
+static int		save_fd(int left_fd, t_list **head)
 {
-	t_list *new;
+	t_list	*new;
 
 	if (!(new = ft_lstnew(NULL, 0)))
 		return (MEMERR);
@@ -71,7 +72,7 @@ static int save_fd(int left_fd, t_list **head)
 	return (0);
 }
 
-int apply_redir(t_redir *redir, t_list **head)
+int				apply_redir(t_redir *redir, t_list **head)
 {
 	int left_fd;
 	int right_fd;
@@ -81,11 +82,13 @@ int apply_redir(t_redir *redir, t_list **head)
 	if ((ret = handle_right(&left_fd, &right_fd, redir)) == -1)
 		return (-1);
 	else if (ret == 1)
-		return (0); // case of >&- we close fd we dont use dup2
+		return (0);
+		// case of >&- we close fd we dont use dup2
 	if (check_fd(right_fd) == FT_FALSE)
-		return (-1); // maybe return 0 ?
+		return (-1);
+		// maybe return 0 ?
 	if ((head) && (save_fd(left_fd, head)))
-		return (MEMERR);	
+		return (MEMERR);
 	if (dup2(right_fd, left_fd) == -1)
 	{
 		ft_dprintf(STDERR_FILENO, "21sh: FATAL ERROR dup2 fuckd up\n");
@@ -96,7 +99,7 @@ int apply_redir(t_redir *redir, t_list **head)
 	return (0);
 }
 
-int	handle_redir(t_redir *redir_lst, t_list **head)
+int				handle_redir(t_redir *redir_lst, t_list **head)
 {
 	t_redir *iter;
 	int		ret;
@@ -106,7 +109,8 @@ int	handle_redir(t_redir *redir_lst, t_list **head)
 	{
 		if (expand_redir(iter))
 			return (MEMERR);
-		if (iter->right->data.str[0] != 0) /* should printf ambiguous redir*/
+		if (iter->right->data.str[0] != 0)
+		// should printf ambiguous redir*/
 		{
 			if ((ret = apply_redir(iter, head)))
 			{
@@ -118,5 +122,5 @@ int	handle_redir(t_redir *redir_lst, t_list **head)
 			ft_dprintf(STDERR_FILENO, "ambiguous redir, null right\n");
 		iter = iter->next;
 	}
-	return (0);	
+	return (0);
 }

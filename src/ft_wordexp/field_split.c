@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   field_split.c                                     :+:      :+:    :+:   */
+/*   field_split.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/01 14:09:34 by apeyret          ###   ########.fr       */
+/*   Created: 2019/04/01 12:46:44 by apeyret           #+#    #+#             */
+/*   Updated: 2019/04/01 12:48:08 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_wordexp.h"
 
-int	is_ifs(char c, char *ifs)
+int		is_ifs(char c, char *ifs)
 {
 	while (*ifs)
 	{
@@ -23,7 +23,7 @@ int	is_ifs(char c, char *ifs)
 	return (0);
 }
 
-int	split_candidate(char *str, char *ifs)
+int		split_candidate(char *str, char *ifs)
 {
 	int index;
 
@@ -39,7 +39,7 @@ int	split_candidate(char *str, char *ifs)
 
 void	trim_str(t_str *str_w, char *ifs)
 {
-	int index;
+	int	index;
 
 	index = 0;
 	while (is_ifs(str_w->str[index], ifs))
@@ -55,19 +55,18 @@ void	ft_trim_ifs(t_str *str_w, char *ifs)
 	ft_strrev(str_w->str);
 	trim_str(str_w, ifs);
 	ft_strrev(str_w->str);
-
 }
 
-int	extract_field(t_str *str_w, int *index, t_token **head, char *ifs)
+int		extract_field(t_str *str_w, int *index, t_token **head, char *ifs)
 {
-	int end;
-	t_token *new;
+	int		end;
+	t_token	*new;
 
 	end = *index;
 	while (str_w->str[end])
 	{
-		if (is_ifs(str_w->str[end], ifs)) 
-			break;
+		if (is_ifs(str_w->str[end], ifs))
+			break ;
 		if (str_w->str[end] == '\'')
 			end = next_squote(str_w->str, end) + 1;
 		else if (str_w->str[end] == '"')
@@ -77,8 +76,8 @@ int	extract_field(t_str *str_w, int *index, t_token **head, char *ifs)
 		else
 			end++;
 	}
-	if ((!(new = new_token(0)))
-		|| (str_putnstr(str_w->str + *index, &(new->data), end - *index) == MEMERR))
+	if ((!(new = new_token(0))) || (str_putnstr(str_w->str + *index,
+			&(new->data), end - *index) == MEMERR))
 		return (MEMERR);
 	add_token(head, new);
 	*index = end;
@@ -87,7 +86,7 @@ int	extract_field(t_str *str_w, int *index, t_token **head, char *ifs)
 
 void	replace_token(t_token *word, t_token *new_fields)
 {
-	t_token *save;
+	t_token	*save;
 
 	save = word->next;
 	if (word->data.str)
@@ -99,9 +98,9 @@ void	replace_token(t_token *word, t_token *new_fields)
 	free(new_fields);
 }
 
-int	handle_ifs(t_token *word, char *ifs)
+int		handle_ifs(t_token *word, char *ifs)
 {
-	int index;
+	int		index;
 	t_token	*new_fields;
 
 	ft_trim_ifs(&(word->data), ifs);
@@ -109,7 +108,7 @@ int	handle_ifs(t_token *word, char *ifs)
 		return (0);
 	index = 0;
 	new_fields = NULL;
-	while(word->data.str[index])
+	while (word->data.str[index])
 	{
 		while (is_ifs(word->data.str[index], ifs))
 			index++;
@@ -117,13 +116,13 @@ int	handle_ifs(t_token *word, char *ifs)
 			return (MEMERR);
 	}
 	replace_token(word, new_fields);
-	return (0);	
+	return (0);
 }
 
-int handle_field_split(t_token *word)
+int		handle_field_split(t_token *word)
 {
-	char *ifs;
-	static char *default_ifs = " \t\n";
+	static char	*default_ifs = " \t\n";
+	char		*ifs;
 
 	if (!(ifs = get_env_value("IFS")))
 		ifs = default_ifs;

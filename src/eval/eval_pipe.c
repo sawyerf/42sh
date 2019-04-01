@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/19 13:28:40 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/01 13:02:10 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	pipe_recursion(t_cmd_tab *to, t_cmd_tab *from)
 		return (PIPEFAIL);
 	pid = fork();
 	if (pid == -1)
-		return (-1); //should be exec error
+		return (-1);
+		//should be exec error
 	if (pid == 0)
 	{
 		if (to)
@@ -44,8 +45,8 @@ int	pipe_recursion(t_cmd_tab *to, t_cmd_tab *from)
 
 int	eval_pipe(t_cmd_tab *cmd)
 {
-	pid_t pid;
-	int ret;
+	pid_t	pid;
+	int		ret;
 
 	pid = fork();
 	if (pid == -1)
@@ -56,13 +57,12 @@ int	eval_pipe(t_cmd_tab *cmd)
 		exit(ret);
 	}
 	wait_wrapper(cmd, pid);
-	//ft_printf("pipe exiting with status %d\n", cmd->exit_status);
 	return (0);
 }
 
 int	exec_pipeline(t_ast_node *tree)
 {
-	t_cmd_tab 	*cmd_tab;
+	t_cmd_tab	*cmd_tab;
 	int			ret;
 
 	ret = 0;
@@ -70,11 +70,10 @@ int	exec_pipeline(t_ast_node *tree)
 		return (MEMERR);
 	if (cmd_tab->next)
 		ret = eval_pipe(cmd_tab);
-	else 
+	else
 		ret = spawn_command(cmd_tab);
 	tree->exit_status = cmd_tab->exit_status;
 	g_sh.status = tree->exit_status;
 	free_cmd_tab_lst(cmd_tab);
 	return (ret);
 }
-
