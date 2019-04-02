@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/27 15:10:23 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/29 20:11:41 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/02 18:30:03 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ int		run_editor(t_fc *fc, char *file)
 		}
 		else
 		{
-			if (!(fc->editor = ft_strdup("vim")))
+			if (!(fc->editor = ft_strdup("vi")))
 				return (MEMERR);
 		}
 	}

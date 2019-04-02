@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/04/02 17:51:21 by apeyret          ###   ########.fr        #
+#    Updated: 2019/04/02 19:32:03 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			builtins/hash.c				\
 			builtins/setenv.c			\
 			builtins/unset.c			\
+			builtins/parser_tools.c		\
 			core/changedir.c			\
 			core/clean_path.c			\
 			core/env_handler.c			\
