@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 12:42:13 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/25 21:16:50 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/01 18:06:44 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,42 +75,6 @@ int		vm_copy(t_rdl *rdl, char *buf)
 	if (!(rdl->paste = ft_strndup(&rdl->str[start], len)))
 		return (MEMERR);
 	return (1);
-}
-
-int		vm_move(t_rdl *rdl, char *buf)
-{
-	if (!ft_strcmp(K_LEFT, buf) && rdl->curs > 0 && rdl->curs != rdl->size)
-	{
-		if (rdl->vcurs >= rdl->curs)
-			ft_printf("\e[7m%c\e[0m", rdl->str[rdl->curs]);
-		else
-			ft_printf("\e[0m%c", rdl->str[rdl->curs]);
-		rdl->real++;
-		lastcol(rdl);
-		rdl->curs++;
-		left(rdl, 2);
-		rdl->curs -= 2;
-	}
-	else if (!ft_strcmp(K_RGHT, buf) && rdl->size > rdl->curs)
-	{
-		if (rdl->vcurs <= rdl->curs)
-			ft_printf("\e[7m%c\e[0m", rdl->str[rdl->curs]);
-		else
-			ft_printf("\e[0m%c", rdl->str[rdl->curs]);
-		rdl->real++;
-		lastcol(rdl);
-		rdl->curs++;
-		left(rdl, 1);
-		rdl->curs--;
-		right(rdl, 1);
-		rdl->curs++;
-	}
-	else if (!ft_strcmp(K_LEFT, buf) && rdl->curs > 0 && rdl->curs == rdl->size)
-	{
-		left(rdl, 1);
-		rdl->curs--;
-	}
-	return (0);
 }
 
 int		visualmode(t_rdl *rdl, char *key)

@@ -6,48 +6,13 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 14:48:16 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/29 19:04:37 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/01 18:30:54 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline.h"
 #include <dirent.h>
 #include <sys/stat.h>
-
-int		exaccess(char *file)
-{
-	struct stat st;
-
-	if (access(file, F_OK))
-		return (2);
-	stat(file, &st);
-	if (S_ISDIR(st.st_mode))
-		return (3);
-	if (!access(file, X_OK))
-		return (0);
-	return (1);
-}
-
-int		filexist(char *file)
-{
-	if (access(file, F_OK))
-		return (2);
-	return (0);
-}
-
-int		folexaccess(char *file)
-{
-	struct stat st;
-
-	if (access(file, F_OK))
-		return (2);
-	stat(file, &st);
-	if (S_ISDIR(st.st_mode))
-		return (0);
-	if (!access(file, X_OK))
-		return (0);
-	return (1);
-}
 
 t_list	*folderin(DIR *ptr, char *path, char *exec, int (*f)(char *file))
 {
@@ -99,7 +64,6 @@ t_list	*get_folex(char *token, int (*f)(char *file))
 t_list	*filterpath(char *exec, t_list *lst)
 {
 	t_list	*match;
-//	t_list	*tmp;
 	int		len;
 
 	len = ft_strlen(exec);
@@ -108,7 +72,6 @@ t_list	*filterpath(char *exec, t_list *lst)
 	{
 		if (!ft_strncmp(exec, lst->content, len))
 			ft_lstadd(&match, ft_lstnew(lst->content + len, 0));
-//		tmp = lst;
 		lst = lst->next;
 	}
 	return (match);

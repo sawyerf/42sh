@@ -1,45 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tools.c                                            :+:      :+:    :+:   */
+/*   files_right.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/01 17:49:02 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/01 18:18:17 by apeyret          ###   ########.fr       */
+/*   Created: 2019/04/01 18:30:23 by apeyret           #+#    #+#             */
+/*   Updated: 2019/04/01 18:30:55 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline.h"
 
-void	reprint(t_rdl *rdl, int curs)
+int		exaccess(char *file)
 {
-	(void)curs;
-	left(rdl, rdl->real + rdl->lpro);
-	tgpstr("cr");
-	tgpstr("cd");
-	ft_printf("%s%s", rdl->prompt, rdl->str);
-	rdl->real = rdl->size;
-	lastcol(rdl);
-	left(rdl, rdl->real - curs);
+	struct stat st;
+
+	if (access(file, F_OK))
+		return (2);
+	stat(file, &st);
+	if (S_ISDIR(st.st_mode))
+		return (3);
+	if (!access(file, X_OK))
+		return (0);
+	return (1);
 }
 
-int		gtbegin(t_rdl *rdl)
+int		filexist(char *file)
 {
-	left(rdl, rdl->real % rdl->col);
+	if (access(file, F_OK))
+		return (2);
 	return (0);
 }
 
-int		is_special(char *buf)
+int		folexaccess(char *file)
 {
-	int		count;
+	struct stat st;
 
-	count = 0;
-	while (buf[count])
-	{
-		if (!ft_isprint(buf[count]))
-			return (1);
-		count++;
-	}
-	return (0);
+	if (access(file, F_OK))
+		return (2);
+	stat(file, &st);
+	if (S_ISDIR(st.st_mode))
+		return (0);
+	if (!access(file, X_OK))
+		return (0);
+	return (1);
 }

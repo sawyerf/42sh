@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 21:17:33 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/29 17:40:02 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/01 17:59:25 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,27 +29,35 @@ t_list	*get_choice(t_autocomplete acp)
 	return (NULL);
 }
 
+int		acp_gettype(t_rdl *rdl, t_autocomplete *acp)
+{
+	char	c;
+	int		ret;
+
+	c = rdl->str[rdl->curs];
+	rdl->str[rdl->curs] = 0;
+	if ((ret = ft_light_parser(rdl->str, acp)))
+	{
+		rdl->str[rdl->curs] = c;
+		return (ret);
+	}
+	rdl->str[rdl->curs] = c;
+	return (0);
+}
+
 int		autocompl(t_rdl *rdl, char *buf)
 {
-	char			c;
 	t_list			*lst;
 	t_autocomplete	acp;
 
 	(void)buf;
-	c = rdl->str[rdl->curs];
-	rdl->str[rdl->curs] = 0;
-	if (ft_light_parser(rdl->str, &acp))
-	{
-		rdl->str[rdl->curs] = c;
+	if (acp_gettype(rdl, &acp))
 		return (0);
-	}
 	lst = get_choice(acp);
-	rdl->str[rdl->curs] = c;
 	if (!lst)
-	{
 		ft_strdel(&acp.str);
+	if (!lst)
 		return (0);
-	}
 	if (!lst->next)
 	{
 		rdladdstr(rdl, lst->content);

@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:48:42 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/25 21:16:49 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/01 16:36:03 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,5 @@ int		readline(char *prompt, char **str)
 	if (!termreset(&(g_rdl.save)) || stet > 1)
 		ft_strdel(&g_rdl.str);
 	*str = g_rdl.str;
-	//ft_printf("ret={statue:%d, str='%.*s'}\n", stet - 1, ft_strlen(*str) - 1, *str);
 	return (stet - 1);
 }

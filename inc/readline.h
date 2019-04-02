@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/28 14:21:16 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/02 17:51:58 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int		terminit(struct termios *save);
 int		getcolumn(void);
 int		termreset(struct termios *save);
 void	tgpstr(char *s);
+void	get_cursor_position(int *col, int *rows);
 
 //keys
 int		special_key(t_rdl *rdl, char *buf, t_key *key);
