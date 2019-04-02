@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 14:30:55 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/01 15:32:59 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/02 21:22:18 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,23 +58,9 @@ int		tree_add_pipeline(t_parser *parser)
 	return (0);
 }
 
-void	add_to_tree(t_ast_node **head, t_ast_node *to_add)
+void	add_to_tree_sep(t_ast_node **head, t_ast_node *to_add)
 {
-	if (*head == NULL)
-	{
-		*head = to_add;
-		return ;
-	}
-	if (to_add->type == PIPE)
-	{
-		if ((*head)->right == NULL)
-			(*head)->right = to_add;
-		else
-		{
-			(*head)->right->right = to_add;
-		}
-	}
-	else if ((to_add->type == SEMI_COL) || (to_add->type == AMPERS)
+	if ((to_add->type == SEMI_COL) || (to_add->type == AMPERS)
 			|| (to_add->type == NEWLINE))
 	{
 		to_add->left = *head;
@@ -93,4 +79,23 @@ void	add_to_tree(t_ast_node **head, t_ast_node *to_add)
 			*head = to_add;
 		}
 	}
+}
+
+void	add_to_tree(t_ast_node **head, t_ast_node *to_add)
+{
+	if (*head == NULL)
+	{
+		*head = to_add;
+		return ;
+	}
+	if (to_add->type == PIPE)
+	{
+		if ((*head)->right == NULL)
+			(*head)->right = to_add;
+		else
+		{
+			(*head)->right->right = to_add;
+		}
+	}
+	return (add_to_tree_sep(head, to_add));
 }

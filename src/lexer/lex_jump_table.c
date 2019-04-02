@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/02 20:37:25 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/02 21:24:48 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int			request_new_line(t_lexer *lx_st)
 	int			ret;
 
 	read_fn = readline;
+	if (g_sh.mode == MODE_FC)
+		return (CTRL_D);
 	if (g_sh.mode != INTERACTIVE)
 		read_fn = sh_readfile;
 	ret = read_fn("> ", &new_line);

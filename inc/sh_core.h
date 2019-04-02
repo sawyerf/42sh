@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/28 14:48:46 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/02 21:17:43 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@
 #define FDSAVEOUT 256
 #define FDSAVEERR 257
 
+#define MODE_FC 2 
 #define INTERACTIVE 1
 #define NONINTERACTIVE 0
-
 typedef struct 		s_sh
 {
 	int				mode;

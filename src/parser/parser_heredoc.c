@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 15:33:08 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/01 15:39:52 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/02 21:24:03 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ static void	replace_here_doc(t_token *io_here, char *here_doc)
 
 static int	interactive_heredoc(t_token *io_here)
 {
-	size_t len;
-	char *here_doc;
-	char *new_ln;
-	char *tmp;
+	size_t	len;
+	char 	*here_doc;
+	char	*new_ln;
+	char	*tmp;
 	t_read_fn read_fn;
 	int			ret;
 

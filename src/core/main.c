@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/01 16:00:18 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/02 21:11:13 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,10 @@ int			main(int ac, char **av, char **env)
 				&& (g_sh.mode == NONINTERACTIVE))
 			break ;
 		if (ret == MEMERR)
+		{
+			ft_dprintf(STDERR_FILENO, "21sh: memory failure\n");
 			return (MEMERR);
+		}
 	}
 	hstaddfile(g_sh.env);
 	return (0);
