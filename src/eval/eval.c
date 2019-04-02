@@ -11,13 +11,13 @@
 /* ************************************************************************** */
 
 #include "ft_eval.h"
-
+/* work in progress here*/
 int	eval_tree(t_ast_node *tree)
 {
 	if (tree == NULL)
 	{
 		ft_printf("fatal error in eval_tree: unknown node type\n");
-		return (-1); // this has to change
+		return (-1);
 	}
 	if ((tree->type == SEMI_COL) || (tree->type == AMPERS)
 		|| (tree->type == NEWLINE))

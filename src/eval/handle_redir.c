@@ -12,12 +12,6 @@
 
 #include "ft_eval.h"
 
-/*
-** to do:
-** builtin should exit when redir fail, command should continue
-** fstat fd before dup ?
-*/
-
 static int		expand_redir(t_redir *redir)
 {
 	if ((redir->right) && (redir->right->type == HERE_END_QU))
@@ -31,13 +25,11 @@ static int		expand_redir(t_redir *redir)
 
 static t_bool	check_fd(int fd)
 {
-	static int	t = 0;
 	struct stat	buf;
 
 	if (!fstat(fd, &buf))
 		return (FT_TRUE);
 	ft_dprintf(STDERR_FILENO, "21sh: bad file descriptor: %d\n", fd);
-	t++;
 	return (FT_FALSE);
 }
 
@@ -85,7 +77,6 @@ int				apply_redir(t_redir *redir, t_list **head)
 		return (0);
 	if (check_fd(right_fd) == FT_FALSE)
 		return (-1);
-		// to review 
 	if ((head) && (save_fd(left_fd, head)))
 		return (MEMERR);
 	if (dup2(right_fd, left_fd) == -1)
@@ -110,16 +101,12 @@ int				handle_redir(t_redir *redir_lst, t_list **head)
 			return (MEMERR);
 		if ((iter->op->type == DLESS)
 			|| (iter->right->data.str[0] != 0))
-		// second condition to prevent \0 filename open
 		{
 			if ((ret = apply_redir(iter, head)))
-			{
-				ft_dprintf(STDERR_FILENO, "failed redir %d\n", ret);
 				return (ret);
-			}
 		}
 		else
-			ft_dprintf(STDERR_FILENO, "ambiguous redir, null right\n");
+			ft_dprintf(STDERR_FILENO, "21sh: ambiguous redir filename expands to empty string\n");
 		iter = iter->next;
 	}
 	return (0);

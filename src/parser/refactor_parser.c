@@ -292,10 +292,9 @@ int	expect_simple_cmd(t_parser *parser)
 	if (!(ret = expect_cmd_pre(parser)))
 	{
 		if (!(ret = expect_cmd_name(parser)))
-			if ((ret = expect_cmd_suffix(parser)) != SYNERR)
+			if (((ret = expect_cmd_suffix(parser)) != SYNERR)
+					&& (ret))
 				return (wrapper_free_cmd(ret, parser));
-		if (ret != SYNERR)
-			return (wrapper_free_cmd(ret, parser));
 		return (0);
 	}
 	else if (!(ret = expect_cmd_name(parser)))
