@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/02 21:17:43 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/02 21:29:35 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,4 +181,5 @@ int						sh_readfile(char *prompt, char **str);
 void					run_script(char *file);
 
 int		hash(t_cmd_tab *cmd);
+int		parser_takeopt(char *opt, char *arg, char *in, char *name);
 #endif

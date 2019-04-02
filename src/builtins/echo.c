@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 15:16:16 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/18 15:16:32 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/02 18:06:30 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	ft_echo(t_cmd_tab *cmd)
 	if (cmd->av[1] != NULL)
 	{
 		i = 1;
+		if (!ft_strcmp(cmd->av[1], "-n"))
+			i = 2;
 		while (cmd->av[i] != NULL)
 		{
 			ft_printf("%s", cmd->av[i]);
@@ -27,6 +29,7 @@ int	ft_echo(t_cmd_tab *cmd)
 				ft_printf(" ");
 		}
 	}
-	ft_printf("\n");
+	if ((cmd->av[1] && ft_strcmp(cmd->av[1], "-n")) || !cmd->av[1])
+		ft_printf("\n");
 	return (0);
 }

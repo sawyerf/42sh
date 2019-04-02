@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 18:07:04 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/29 20:15:36 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/02 20:57:35 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,54 +30,46 @@ void	fc_init(t_fc *fc)
 	fc->range[1] = 0;
 }
 
-int		fc_parser(char **av, t_fc *fc)
+int		fc_parsertr(char ***av, t_fc *fc)
 {
 	char	c;
+
+	c = 0;
+	while (**av)
+	{
+		if (!ft_strcmp(**av, "--") || ***av != '-' || ft_strisdigit(**av))
+		{
+			if (!ft_strcmp(**av, "--"))
+				(*av)++;
+			return (0);
+		}
+		if (!(c = parser_takeopt("elnrs", **av, fc->opt, "fc")))
+			return (-1);
+		if (c == 'e')
+		{
+			(*av)++;
+			if (!**av)
+			{
+				ft_dprintf(2, "fc: -e: option requires an argument\n");
+				return (-1);
+			}
+			if (!(fc->editor = ft_strdup(**av)))
+				return (MEMERR);
+			c = 0;
+		}
+		(*av)++;
+	}
+	return (0);
+}
+
+int		fc_parser(char **av, t_fc *fc)
+{
 	int		i;
 
 	av++;
-	c = 0;
 	fc_init(fc);
-	while (*av)
-	{
-		if (!ft_strcmp(*av, "--") || **av != '-' || ft_strisdigit(*av))
-		{
-			if (!ft_strcmp(*av, "--"))
-				av++;
-			break ;
-		}
-		i = 1;
-		while ((*av)[i])
-		{
-			if (ft_cisin("elnrs", (*av)[i]))
-			{
-				if (!ft_cisin(fc->opt, (*av)[i]))
-					ft_strncat(fc->opt, *av + i, 1);
-				c = (*av)[i];
-			}
-			else
-			{
-				ft_dprintf(2, "fc: -%c: invalid option\n", (*av)[i]);
-				return (-1);
-			}
-			i++;
-		}
-		if (c == 'e')
-		{
-			av++;
-			if (!*av)
-			{
-				ft_dprintf(2, "fc: -e: option requires an argument\n");
-				ft_dprintf(2, "fc: usage: fc [-e ename] [-nlr] [first] [last]\n");
-				return (-1);
-			}
-			fc->editor = ft_strdup(*av);
-			av++;
-			c = 0;
-			continue ;
-		}
-		av++;
-	}
+	if (fc_parsertr(&av, fc) < 0)
+		return (-1);
 	if (*av && ft_cisin(fc->opt, 's') && ft_cisin(*av, '='))
 	{
 		if (!(fc->to = ft_strndup(*av, ft_strnext(*av, "="))))
