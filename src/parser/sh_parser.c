@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/02 19:57:43 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/02 20:38:43 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,8 @@ int	dispatch_errors(int errnum, t_parser parser)
 			parser.current->data.str);
 	else if (errnum == CTRL_D)
 		ft_dprintf(STDERR_FILENO, "21sh: premature EOF\n");
+	else if (errnum == BAD_SUB)
+		ft_dprintf(STDERR_FILENO, "21sh: bad substitution\n");
 	return (errnum);
 }
 
