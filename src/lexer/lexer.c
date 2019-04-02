@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/01 13:38:33 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/02 20:35:25 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,38 +64,31 @@ static void	lex_add_tk(t_lexer *lexer, t_token *tk)
 	}
 }
 
-static void	init_lexer(char *input, t_lexer *lexer_state)
+void	init_lexer(char *input, t_lexer *lexer_state)
 {
 	lexer_state->err = 0;
 	lexer_state->line = input;
 	lexer_state->cursor = input;
 }
 
-t_lexer		*ft_lexer(char *input)
+int			ft_lexer(t_lexer *lexer_state)
 {
-	static t_lexer lexer_state;
-
-	lexer_state.head = NULL;
-	if (input)
+	lexer_state->head = NULL;
+	while (ft_cisin(" \t", *(lexer_state->cursor)))
+		lexer_state->cursor = lexer_state->cursor + 1;
+	while (*(lexer_state->cursor))
 	{
-		init_lexer(input, &lexer_state);
-		return (&lexer_state);
+		if (!(lexer_state->token = new_token(0)))
+			return (MEMERR);
+		lex_add_tk(lexer_state, lexer_state->token);
+		if ((lexer_state->err = dispatch_fn(lexer_state)))
+			return (lexer_state->err);
+		if (lexer_state->token->type == NEWLINE)
+			return (0);
+		lexer_state->token = NULL;
+		while (ft_cisin(" \t", *(lexer_state->cursor)))
+			lexer_state->cursor = lexer_state->cursor + 1;
 	}
-	while (ft_cisin(" \t", *(lexer_state.cursor)))
-		lexer_state.cursor = lexer_state.cursor + 1;
-	while (*(lexer_state.cursor))
-	{
-		if (!(lexer_state.token = new_token(0)))
-			return (NULL);
-		lex_add_tk(&lexer_state, lexer_state.token);
-		if ((lexer_state.err = dispatch_fn(&lexer_state)))
-			return (&lexer_state);
-		if (lexer_state.token->type == NEWLINE)
-			return (&lexer_state);
-		lexer_state.token = NULL;
-		while (ft_cisin(" \t", *(lexer_state.cursor)))
-			lexer_state.cursor = lexer_state.cursor + 1;
-	}
-	lex_add_tk(&lexer_state, new_token(EOI));
-	return (&lexer_state);
+	lex_add_tk(lexer_state, new_token(EOI));
+	return (0);
 }

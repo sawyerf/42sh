@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/01 15:59:43 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/02 20:38:43 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,22 +123,20 @@ void	remove_last_node(t_parser *parser)
 
 int	next_token(t_parser *parser)
 {
-	t_lexer *lex;
+	int ret;
 
 	if ((parser->current) && (parser->current->next))
 	{
 		parser->current = parser->current->next;
 		return (0);
 	}
-	lex = ft_lexer(NULL);
-	if (!lex)
-		return (MEMERR);
+	ret = ft_lexer(parser->lx_state);
 	if ((parser->current))
-		parser->current->next = lex->head;
-	parser->current = lex->head;
-	if (lex->err)
-		return (lex->err);
-	parser->cursor = lex->cursor;
+		parser->current->next = parser->lx_state->head;
+	parser->current = parser->lx_state->head;
+	if ((parser->lx_state->err) || (ret))
+		return (parser->lx_state->err);
+	parser->cursor = parser->lx_state->cursor;
 	return (0);
 }
 
@@ -169,22 +167,26 @@ int	dispatch_errors(int errnum, t_parser parser)
 			parser.current->data.str);
 	else if (errnum == CTRL_D)
 		ft_dprintf(STDERR_FILENO, "21sh: premature EOF\n");
+	else if (errnum == BAD_SUB)
+		ft_dprintf(STDERR_FILENO, "21sh: bad substitution\n");
 	return (errnum);
 }
 
 int	sh_parser_refac(char *line)
 {
 	t_parser	parser;
+	t_lexer		lexer;
 	int			ret;
 
 	ft_bzero(&parser, sizeof(t_parser));
-	parser.lx_state = ft_lexer(line);
-	parser.lx_state->line = line;
+	ft_bzero(&lexer, sizeof(t_lexer));
+	init_lexer(line, &lexer);
+	parser.lx_state = &lexer;
 	if ((ret = next_token(&parser)))
 	{
 		dispatch_errors(ret, parser);
 		free(parser.lx_state->line);
-		free_token_lst(parser.head);
+		free_token_lst(parser.lx_state->head);
 		return (parser.lx_state->err);
 	}
 	parser.head = parser.lx_state->head;

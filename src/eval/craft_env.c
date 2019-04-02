@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:22:06 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/01 13:09:58 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/02 20:32:49 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char		**craft_env(char **base_env, char **to_add)
 	i = 0;
 	while (to_add[i])
 	{
-		if ((j = env_is_set(to_add[i], fresh) > -1))
+		if (((j = env_is_set(to_add[i], fresh)) > -1))
 		{
 			free(fresh[j]);
 			fresh[j] = to_add[i];

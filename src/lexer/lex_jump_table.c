@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/01 13:48:29 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/02 20:37:25 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,10 @@ int			handle_common(t_lexer *lx_st)
 		else if (*(lx_st->cursor) == '\'')
 			handle_squote(lx_st);
 		else if (*(lx_st->cursor) == '$')
-			handle_param_exp(lx_st);
+		{
+			if ((ret = handle_param_exp(lx_st)))
+				return (ret);
+		}
 		else if ((*(lx_st->cursor) == '\\') && (*((lx_st->cursor) + 1)))
 		{
 			if ((ret = handle_backslash(lx_st)))
