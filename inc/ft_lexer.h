@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/07 19:30:40 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/02 19:42:44 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,10 @@
 
 #define INPUTSZ 1
 #define TABLESZ 128
-/*
- * new lex jump table
- */
 
 typedef int (*t_func)(t_lexer*);
+
+void	init_lexer(char *input, t_lexer *lexer_state);
 
 int	handle_newline(t_lexer *lexer_state);
 int handle_dquote(t_lexer *lexer_state);
@@ -59,7 +58,7 @@ t_token	*new_token(int type);
 
 
 /* lexer */
-t_lexer *ft_lexer(char *input);
+int ft_lexer(t_lexer *lexer_state);
 /**/
 int			test_lexer(char *line);
 t_token		*next_tok(char *line, t_parser *parser);
