@@ -1,9 +1,6 @@
 # 21sh
 
 ## TODO
-- "PATH=ko /usr/bin/env | grep PATH" gives duplicate PATH 
-- leak in builtin forks
-- ${} readline
 - ls >& 2>file.txt should be valid
 - empty cmdname with redir should apply redir
 - subtle difference between '$notexistant;' and '"";' needs to be fixed ft_wordexp
@@ -16,7 +13,7 @@
 
 - sig handling && job control.
 - moar testing on redirections.
-- cd set_shell_env needs malloc checks.
+- cd set_shell_env needs malloc checks. <= this
 - replace printf/write(2, etc.. by sprintf or zprintf.
 
 ## Bug
@@ -26,7 +23,7 @@
 |     | ` `               | 21sh: syntax error near : '' + exit ||
 |  ✓  | `ls \\n` + Ctrl+c | 21sh: premature EOF + exit          ||
 |  ✓  | `ls "\n` + Ctrl+c | 21sh: premature EOF + exit          ||
-|     | `fc -s` apres celle d'avant | boucle infini | 1. le terminale est en NONINTERACTIVE quand la commande est lancer 2. s'arrete avec Ctrl+d |
+|     | `fc -s` apres celle d'avant | boucle infini | UPDATE: added MODE_FC in sh_core.h and in request_new_line--le terminale est en NONINTERACTIVE quand la commande est lancer 2. s'arrete avec Ctrl+d |
 |     |
 
 ## READLINE

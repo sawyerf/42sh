@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/02 21:29:35 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/03 19:32:30 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 #define FDSAVEIN 255
 #define FDSAVEOUT 256
 #define FDSAVEERR 257
+#define BUILTIN 666
 
 #define MODE_FC 2 
 #define INTERACTIVE 1

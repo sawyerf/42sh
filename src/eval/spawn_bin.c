@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/01 13:28:59 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/03 19:46:27 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,15 @@ static int		execve_wrap(t_cmd_tab *cmd)
 	close_save();
 	if ((ret = handle_redir(cmd->redir_lst, NULL)))
 		exit(1);
-	if (ft_cisin(cmd->av[0], '/'))
+	if ((cmd->av[0]) && (ft_cisin(cmd->av[0], '/')))
 	{
 		if (handle_perm(cmd->av[0]) != 0)
 			exit_wrap(ACCERR, cmd);
 		if ((cmd->full_path = ft_strdup(cmd->av[0])) == NULL)
 			exit_wrap(MEMERR, cmd);
 	}
+	if ((!cmd->full_path))
+		exit(CMD_NOT_FOUND);
 	ret = execve(cmd->full_path, cmd->av, cmd->process_env);
 	ft_dprintf(2, "21sh: bad file format\n");
 	exit_wrap(ret, cmd);
@@ -119,33 +121,6 @@ int				is_builtin(t_cmd_tab *cmd)
 	return (-1);
 }
 
-int				spawn_in_pipe(t_cmd_tab *cmd)
-{
-	int		ret;
-	char	*path;
-
-	if (cmd->av[0] == NULL)
-		return (0);
-	if ((ret = is_builtin(cmd)) == 0)
-	{
-		free_cmd_tab(cmd);
-		return (0);
-	}
-	else if (ret == MEMERR)
-		return (MEMERR);
-	if ((!cmd->process_env)
-		&& (!(cmd->process_env = craft_env(g_sh.env, cmd->assign_lst))))
-		return (MEMERR);
-	if (!cmd->full_path)
-	{
-		if (!(path = get_process_env("PATH", cmd->process_env)))
-			path = get_env_value("PATH");
-		if ((ret = ht_spawnbin(path, cmd)))
-			return (br_print(ret, cmd));
-	}
-	return (execve_wrap(cmd));
-}
-
 static int		assign_to_shell(t_cmd_tab *cmd)
 {
 	int		i;
@@ -175,36 +150,72 @@ static int		assign_to_shell(t_cmd_tab *cmd)
 	return (0);
 }
 
-int				spawn_command(t_cmd_tab *cmd)
+int		pathfinder(t_cmd_tab *cmd)
 {
-	pid_t	pid;
-	int		ret;
 	char	*path;
+	int		ret;
 
+	if (!(path = get_process_env("PATH", cmd->process_env)))
+		path = get_env_value("PATH");
+	if ((ret = ht_spawnbin(path, cmd)))
+	{
+		if (cmd->full_path)
+			ft_strdel(&(cmd->full_path));
+		br_print(ret, cmd);
+		if (!cmd->redir_lst)
+			return (ret);
+	}
+	return (0);
+}
+
+int		pre_execution(t_cmd_tab *cmd)
+{
+	int		ret;
+
+	ret = 0;
 	if (cmd->av[0] == NULL)
-		return (assign_to_shell(cmd));
-	if ((ret = is_builtin(cmd)) == 0)
-		return (0);
-	else if (ret == MEMERR)
+		if (assign_to_shell(cmd))
+			return (MEMERR);
+	if ((cmd->av[0]) && ((ret = is_builtin(cmd)) == 0))
+		return (BUILTIN);
+	if (ret == MEMERR)
 		return (MEMERR);
 	if ((!cmd->process_env)
 			&& (!(cmd->process_env = craft_env(g_sh.env, cmd->assign_lst))))
 		return (MEMERR);
-	if (!cmd->full_path)
+	if ((!cmd->full_path) && (cmd->av[0]))
 	{
-		if (!(path = get_process_env("PATH", cmd->process_env)))
-			path = get_env_value("PATH");
-		if ((ret = ht_spawnbin(path, cmd)))
-			return (br_print(ret, cmd));
+		if ((ret = pathfinder(cmd)))
+			return (ret);
 	}
+	return (0);
+}
+
+int				spawn_in_pipe(t_cmd_tab *cmd)
+{
+	int ret;
+
+	if ((ret = pre_execution(cmd)) == MEMERR)
+		return (MEMERR);
+	else if (ret == BUILTIN)
+		return (0);
+	return (execve_wrap(cmd));
+}
+
+int				spawn_command(t_cmd_tab *cmd)
+{
+	pid_t	pid;
+	int		ret;
+
+	if ((ret = pre_execution(cmd)) == MEMERR)
+		return (MEMERR);
+	else if (ret == BUILTIN)
+		return (0);
 	pid = fork();
 	if (pid == -1)
 		return (MEMERR);
 	if (pid == 0)
-	{
 		execve_wrap(cmd);
-		exit_wrap(1, cmd);
-	}
 	wait_wrapper(cmd, pid);
 	return (0);
 }

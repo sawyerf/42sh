@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 18:00:46 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/29 20:12:35 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/02 21:04:59 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,5 +160,6 @@ int		fc_s(t_fc fc)
 	ft_printf("\33[0;34m%s\33[0;0m", tmp);
 	g_sh.mode = NONINTERACTIVE;
 	run_command(tmp);
+	g_sh.mode = INTERACTIVE;
 	return (0);
 }
