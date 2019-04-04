@@ -1,13 +1,15 @@
 # 21sh
 
 ## TODO
+- IFS in ft_wordexp is broken on IFS != ` \n\t` and quote removal
+- backslash and single quotes bugged: `var='\'\'\'\''' ; echo $var`
 - ls >& 2>file.txt should be valid
-- empty cmdname with redir should apply redir
-- subtle difference between '$notexistant;' and '"";' needs to be fixed ft_wordexp
+- ~~empty cmdname with redir should apply redir
+- ~~subtle difference between '$notexistant;' and '"";' needs to be fixed ft_wordexp
 - export builtin, set && unset missing stuff.
 - ~~del la hashtable quand on modifie le PATH~~
-- move full path bin checking out of fork
-- Parameter expansions has invalid read/write on multiline command with ' or "
+- ~~move full path bin checking out of fork
+- ~~Parameter expansions has invalid read/write on multiline command with ' or "
 ------------------------------------
 ### 42sh
 
@@ -23,7 +25,7 @@
 |     | ` `               | 21sh: syntax error near : '' + exit ||
 |  ✓  | `ls \\n` + Ctrl+c | 21sh: premature EOF + exit          ||
 |  ✓  | `ls "\n` + Ctrl+c | 21sh: premature EOF + exit          ||
-|     | `fc -s` apres celle d'avant | boucle infini | UPDATE: added MODE_FC in sh_core.h and in request_new_line--le terminale est en NONINTERACTIVE quand la commande est lancer 2. s'arrete avec Ctrl+d |
+|  ✓  | `fc -s` apres celle d'avant | boucle infini | UPDATE: added MODE_FC in sh_core.h and in request_new_line--le terminale est en NONINTERACTIVE quand la commande est lancer 2. s'arrete avec Ctrl+d |
 |     |
 
 ## READLINE
