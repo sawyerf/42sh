@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/04/03 17:21:25 by ktlili           ###   ########.fr        #
+#    Updated: 2019/04/04 14:30:23 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -113,6 +113,7 @@ SRC_FILE =	ft_strnsplit.c \
 			ft_replace.c \
 			ft_strichr.c \
 			ft_strisprint.c \
+			ft_rperr.c \
 			ft_strisdigit.c \
 			ft_tabcpy.c 
 

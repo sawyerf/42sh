@@ -6,11 +6,11 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/06 20:31:07 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/02 19:30:20 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/04 14:00:03 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh_core.h"
+#include "builtins.h"
 #include "hashtable.h"
 
 void	hash_init(t_hash *hash)

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 22:23:00 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/26 16:49:32 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/04 14:30:24 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,6 @@ int					ft_strisprint(char *str);
 int					ft_strisdigit(char *str);
 int					ft_strnext(char *str, char *to);
 char				*ft_replace(char *str, char *to, char *by);
+int					ft_rperr(int ret, char *str);
 
 #endif

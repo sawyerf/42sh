@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/03 19:32:30 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/04 14:32:13 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,20 +69,6 @@ typedef	struct			s_command
 /*
 */
 
-typedef	struct			s_hash
-{
-	char				opt[2];
-	char				**search;
-}						t_hash;
-
-typedef	struct			s_fc
-{
-	char				opt[6];
-	char				*editor;
-	char				*range[2];
-	char				*by;
-	char				*to;
-}						t_fc;
 
 typedef enum			e_quote_state
 {
@@ -111,13 +97,7 @@ char					*envchrr(char **env, char *var);
 char**					envaddint(char **caca, char *toto, int fifi);
 char*					envchrr(char **env, char *var);
 t_ast_node				*get_tree(t_ast_node *tree);
-int						change_dir(t_cmd_tab *cmd);
-int						ft_exit(t_cmd_tab *cmd);
-int						ft_env(t_cmd_tab *cmd);
-int						ft_unsetenv(t_cmd_tab *cmd);
 int						setenv_wrapper(t_cmd_tab *cmd);
-int						fc(t_cmd_tab *cmd);
-int						ft_echo(t_cmd_tab *cmd);
 int						ft_set(t_cmd_tab *cmd);
 int						ft_unset(t_cmd_tab *cmd);
 void					print_env_tab(char **machintruc);
@@ -156,31 +136,14 @@ int						add_slash(char **path);
 void					cleandotdot(char *path);
 int						valid_env_var(char *str);
 int						append_tab(char **new_env, char **to_add, int count);
-int						cd_l(char *curpath, char *arg);
-int						cd_p(char *curpath, char *arg);
-int						cd_dispatch_err(char *arg, char *curpath);
 void					update_env_pwd(char *pwd, char *curpath);
-int						cd_error(int errnum, char *str);
 char					*getoldpwd(void);
 char					**csetenv(char **env, char *var);
 char					**envdel(char **env, char *var);
 char					**envaddstr(char **env, char *var, char *value);
+int						sh_readfile(char *prompt, char **str);
 
 int						missing_quote(char *line);
 
-int						fc_l(t_fc fc);
-int						fc_e(t_fc fc);
-int						fc_s(t_fc fc);
-int						fc_le(t_fc fc);
-char					*fc_filename(t_list *lst, int size);
-int						fc_writelst(char *file, t_list *lst, int size);
-char					*fc_read(char *file);
-int						run_editor(t_fc *fc, char *file);
-void					fc_print(t_fc fc, t_list *lst, int i);
-int						fc_parser(char **av, t_fc *fc);
-int						sh_readfile(char *prompt, char **str);
-void					run_script(char *file);
 
-int		hash(t_cmd_tab *cmd);
-int		parser_takeopt(char *opt, char *arg, char *in, char *name);
 #endif

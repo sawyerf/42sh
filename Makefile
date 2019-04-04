@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/04/03 17:21:18 by ktlili           ###   ########.fr        #
+#    Updated: 2019/04/04 14:08:46 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,16 +37,17 @@ SRC_DIR =	src
 
 SRC_FILE =	builtins/cd_l_p.c			\
 			builtins/cd_tools.c			\
+			builtins/changedir.c		\
 			builtins/echo.c				\
 			builtins/exit.c				\
 			builtins/fc.c				\
 			builtins/fc_opt.c			\
+			builtins/fc_range.c			\
 			builtins/fc_parser.c		\
 			builtins/hash.c				\
 			builtins/setenv.c			\
 			builtins/unset.c			\
 			builtins/parser_tools.c		\
-			core/changedir.c			\
 			core/clean_path.c			\
 			core/env_handler.c			\
 			core/ft_env.c				\
