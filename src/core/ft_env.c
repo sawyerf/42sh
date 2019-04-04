@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 13:58:14 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/29 21:44:43 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/04 16:03:42 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,9 @@ static int	spawn_new_env(char **args, char **new_env)
 		if (ht_spawnbin(path, &new_cmd) == MEMERR)
 			return (MEMERR);
 		if (!new_cmd.full_path)
-		{
 			exec_error(BIN_NOT_FOUND, new_cmd.av[0]);
+		if (!new_cmd.full_path)
 			return (BIN_NOT_FOUND);
-		}
 	}
 	return (spawn_command(&new_cmd));
 }

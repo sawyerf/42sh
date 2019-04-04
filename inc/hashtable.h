@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 16:26:00 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/27 15:12:25 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/04 16:35:51 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,6 @@ void	ht_refreshall(char *path);
 t_list	**ht_gget(void);
 int		ht_addfile(char	**paths, char *exec);
 char	*ht_getpath(char **path, char *exec);
+int		ht_addpath(char *path, char *npath);
 
 #endif

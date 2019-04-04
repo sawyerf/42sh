@@ -6,17 +6,29 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 14:40:53 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/22 17:20:28 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/04 16:34:54 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hashtable.h"
 
-t_list *g_thash[HT_SIZE];
+t_list	*g_thash[HT_SIZE];
 
-t_list **ht_gget(void)
+t_list	**ht_gget(void)
 {
 	return (g_thash);
+}
+
+int		ht_addpath(char *path, char *npath)
+{
+	int		hash;
+	t_list	*lst;
+
+	hash = ht_hash(path);
+	if (!(lst = ft_lstnew(npath, ft_strlen(path) + 1)))
+		return (MEMERR);
+	ft_lstadd(&g_thash[hash], lst);
+	return (0);
 }
 
 void	ht_del(void)
@@ -63,18 +75,3 @@ int		ht_hash(char *path)
 		return (hash % HT_SIZE);
 	return (-1);
 }
-
-/*
-t_list	*ht_get(char *path)
-{
-	int hash;
-
-	if ((hash = ht_hash(path)) < 0)
-		return (NULL);
-	if (!g_thash[hash])
-	{
-		if (!(g_thash[hash] = ht_getexec(path)))
-			return (NULL);
-	}
-	return (g_thash[hash]);
-}*/

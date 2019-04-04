@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 14:09:25 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/29 19:04:38 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/04 16:28:47 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ht_refreshall(char *path)
 	ft_tabdel(&paths);
 }
 
-int		ht_addfile(char	**paths, char *exec)
+int		ht_addfile(char **paths, char *exec)
 {
 	int		i;
 	int		hash;

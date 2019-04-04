@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 16:10:23 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/29 22:50:51 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/04 16:13:43 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,33 +42,6 @@ int			ft_cmptab(char **tab, char *str)
 	return (-1);
 }
 
-char		**dup_tab(char **tab)
-{
-	size_t	len;
-	size_t	i;
-	char	**copy;
-
-	len = 0;
-	i = 0;
-	while (tab[len] != NULL)
-		len++;
-	copy = malloc((len + 1) * sizeof(char*));
-	if (copy == NULL)
-		return (NULL);
-	while (i < len)
-	{
-		copy[i] = ft_strdup(tab[i]);
-		if (copy[i] == NULL)
-		{
-			ft_tabdel(&copy);
-			return (NULL);
-		}
-		i++;
-	}
-	copy[i] = NULL;
-	return (copy);
-}
-
 static void	state_unquoted(char *line, t_quote_state *state)
 {
 	*state = (*line == '"') ? in_dquote : *state;
@@ -76,7 +49,8 @@ static void	state_unquoted(char *line, t_quote_state *state)
 	*state = (*line == '\\') ? backslash : *state;
 }
 
-static int	state_backslash(char **line, t_quote_state *state, t_quote_state save)
+static int	state_backslash(char **line, t_quote_state *state,
+		t_quote_state save)
 {
 	if (**line == '\n' && *((*line) + 1) == '\0')
 		return (-1);

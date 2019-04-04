@@ -6,14 +6,13 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 16:12:50 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/03 19:32:36 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/04 16:35:51 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hashtable.h"
 
 extern t_list *g_thash[];
-
 
 t_list	*ht_getghash(char *path)
 {
@@ -24,41 +23,25 @@ t_list	*ht_getghash(char *path)
 	return (NULL);
 }
 
-int		ht_addpath(char	*path, char *npath)
-{
-	int		hash;
-	t_list	*lst;
-
-	hash = ht_hash(path);
-	if (!(lst = ft_lstnew(npath, ft_strlen(path) + 1)))
-		return (MEMERR);
-	ft_lstadd(&g_thash[hash], lst);
-	return (0);
-}
-
 int		ht_getfile(char **paths, t_cmd_tab *cmd)
 {
 	int		i;
 	int		ret[2];
-	char	*tmp;
 
 	i = 0;
 	ret[0] = 0;
 	ret[1] = br_NOTFOUND;
 	while (paths[i])
 	{
-		if (!(tmp = ft_zprintf("%s/%s", paths[i], cmd->av[0])))
+		ft_strdel(&cmd->full_path);
+		if (!(cmd->full_path = ft_zprintf("%s/%s", paths[i], cmd->av[0])))
 			return (MEMERR);
-		if (!(ret[0] = exaccess(tmp)))
+		if (!(ret[0] = exaccess(cmd->full_path)))
 		{
-			if (ht_addpath(paths[i], tmp) == MEMERR)
+			if (ht_addpath(paths[i], cmd->full_path) == MEMERR)
 				return (MEMERR);
-			ft_strdel(&cmd->full_path);
-			cmd->full_path = tmp;
 			return (0);
 		}
-		ft_strdel(&cmd->full_path);
-		cmd->full_path = tmp;
 		if (ret[0] != br_NOTFOUND)
 			ret[1] = ret[0];
 		i++;
@@ -109,8 +92,8 @@ char	*ht_getpath(char **paths, char *exec)
 					return (NULL);
 			}
 			tmp = tmp->next;
-				}
-				i++;
+		}
+		i++;
 	}
 	return (NULL);
 }

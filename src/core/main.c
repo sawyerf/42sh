@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/04 15:06:23 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/04 16:15:09 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	init_shell(char **env)
 	g_sh.mode = MODEFILE;
 	if (isatty(STDIN_FILENO))
 		g_sh.mode = INTERACTIVE;
-	if (!(g_sh.env = shlvl(dup_tab(env))))
+	if (!(g_sh.env = shlvl(ft_tabdup(env))))
 		return (MEMERR);
 	if (!(g_sh.local = ft_tabnew(0)))
 		return (MEMERR);
@@ -40,66 +40,6 @@ static void	silence_ac_av(char ac, char **av)
 {
 	(void)ac;
 	(void)av;
-}
-
-int			run_command(char *line)
-{
-	int ret;
-
-	if (!line)
-		return (-1);
-	if ((*line) && (ft_strcmp(line, "\n")))
-	{
-		if ((ret = sh_parser_refac(line)))
-			return (ret);
-	}
-	else
-		ft_strdel(&line);
-	return (0);
-}
-
-int			sh_readfile(char *prompt, char **str)
-{
-	char	*line;
-	char	*tmp;
-	int		ret;
-
-	(void)prompt;
-	*str = NULL;
-	if ((ret = get_next_line(g_sh.fd, &line)) == -1)
-		return (-1);
-	if (ret == 0)
-		return (1);
-	hstadd(line);
-	if (!(tmp = ft_strjoin(line, "\n")))
-		return (MEMERR);
-	ft_strdel(&line);
-	line = tmp;
-//	ft_printf("\33[0;34m%s\33[0;0m", line);
-	*str = line;
-	return (0);
-}
-
-void		run_script(char *file)
-{
-	int		fd;
-	char	*line;
-
-	fd = g_sh.fd;
-	if ((g_sh.fd = open(file, O_RDONLY)) < 0)
-	{
-		g_sh.fd = fd;
-		return ;
-	}
-	while (42)
-	{
-		if (readline("$> ", &line))
-			break ;
-		if (run_command(line) == MEMERR)
-			break ;
-	}
-	close(g_sh.fd);
-	g_sh.fd = fd;
 }
 
 int			main(int ac, char **av, char **env)
@@ -132,6 +72,5 @@ int			main(int ac, char **av, char **env)
 		}
 	}
 	hstaddfile(g_sh.env);
-
 	return (0);
 }
