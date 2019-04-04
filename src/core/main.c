@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/03 16:55:56 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/04 15:06:23 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ extern t_list	*g_thash[];
 
 static int	init_shell(char **env)
 {
-	g_sh.mode = NONINTERACTIVE;
+	g_sh.mode = MODEFILE;
 	if (isatty(STDIN_FILENO))
 		g_sh.mode = INTERACTIVE;
 	if (!(g_sh.env = shlvl(dup_tab(env))))
@@ -123,7 +123,7 @@ int			main(int ac, char **av, char **env)
 				ret == MEMERR || ret == -2)
 			break ;
 		if (((ret = run_command(line)) == SYNERR)
-				&& (g_sh.mode == NONINTERACTIVE))
+				&& (g_sh.mode == MODEFILE))
 			break ;
 		if (ret == MEMERR)
 		{

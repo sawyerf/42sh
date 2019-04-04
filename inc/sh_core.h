@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/04 14:32:13 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/04 15:09:28 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@
 #define FDSAVEERR 257
 #define BUILTIN 666
 
-#define MODE_FC 2 
+#define MODEFILE 2 
 #define INTERACTIVE 1
 #define NONINTERACTIVE 0
 typedef struct 		s_sh
