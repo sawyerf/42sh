@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 19:27:49 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/04 14:00:08 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/04 15:29:34 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int		parser_takeopt(char *opt, char *arg, char *in, char *name)
 			{
 				ft_dprintf(2, "%s: -%c: invalid option\n", name, arg[i]);
 				//ft_dprintf(2, "usage: hash [-r] [name ...]\n");
-				//ft_dprintf(2, "fc: usage: fc [-e ename] [-nlr] [first] [last]\n");
+				//ft_dprintf(2, \
+				//"fc: usage: fc [-e ename] [-nlr] [first] [last]\n");
 				return (0);
 			}
 		}

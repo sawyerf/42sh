@@ -6,12 +6,33 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 18:00:46 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/04 15:11:25 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/04 15:24:07 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 #include "readline.h"
+
+void	fc_print(t_fc fc, t_list *lst, int i)
+{
+	while (lst && i)
+	{
+		if (!ft_cisin(fc.opt, 'n'))
+			ft_printf("%-6d%s\n", lst->content_size / 10, lst->content);
+		else
+			ft_printf("      %s\n", lst->content);
+		if (i < 0)
+		{
+			i++;
+			lst = lst->next;
+		}
+		else
+		{
+			i--;
+			lst = lst->prev;
+		}
+	}
+}
 
 int		fc_l(t_fc fc)
 {

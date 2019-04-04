@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:24:29 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/04 13:59:12 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/04 15:32:46 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ char			*handle_pwd_l(void)
 	p_pwd = getcwd(NULL, 0);
 	if ((p_pwd == NULL) && (env_pwd == NULL))
 		return (NULL);
-	if ((env_pwd != NULL) && (!path_access(env_pwd)))
+	if (env_pwd && (!path_access(env_pwd)))
 	{
 		ret = ft_strdup(env_pwd);
 		if (ret == NULL)
 			return (p_pwd);
-		if (p_pwd != NULL)
+		if (p_pwd)
 			free(p_pwd);
 		return (ret);
 	}
@@ -54,22 +54,21 @@ int				cd_l(char *curpath, char *arg)
 	int		ret;
 
 	pwd = handle_pwd_l();
-	if ((curpath[0] != '/') && (pwd != NULL))
+	if ((curpath[0] != '/') && pwd)
 	{
-		if (add_slash(&pwd) != 0)
+		if (add_slash(&pwd))
 			return (MEMERR);
 		tmp = curpath;
 		curpath = ft_strjoin(pwd, curpath);
-		free(tmp);
-		if (curpath == NULL)
-		{
+		ft_strdel(&tmp);
+		if (!curpath)
 			free(pwd);
+		if (!curpath)
 			return (MEMERR);
-		}
 	}
 	canon_form(curpath);
 	ret = 0;
-	if (chdir(curpath) != 0)
+	if (chdir(curpath))
 		ret = cd_dispatch_err(arg, curpath);
 	else
 		update_env_pwd(pwd, curpath);

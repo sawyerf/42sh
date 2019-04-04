@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 18:07:04 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/04 13:59:57 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/04 15:28:43 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ int		fc_parsertr(char ***av, t_fc *fc)
 {
 	char	c;
 
-	c = 0;
 	while (**av)
 	{
 		if (!ft_strcmp(**av, "--") || ***av != '-' || ft_strisdigit(**av))
@@ -49,9 +48,7 @@ int		fc_parsertr(char ***av, t_fc *fc)
 		{
 			(*av)++;
 			if (!**av)
-				ft_dprintf(2, "fc: -e: option requires an argument\n");
-			if (!**av)
-				return (-1);
+				return (ft_rperr(-1, "fc: -e: option requires an argument\n"));
 			if (!(fc->editor = ft_strdup(**av)))
 				return (MEMERR);
 			c = 0;
@@ -71,9 +68,8 @@ int		fc_parser(char **av, t_fc *fc)
 		return (-1);
 	if (*av && ft_cisin(fc->opt, 's') && ft_cisin(*av, '='))
 	{
-		if (!(fc->to = ft_strndup(*av, ft_strnext(*av, "="))))
-			return (-1);
-		if (!(fc->by = ft_strdup(*av + ft_strnext(*av, "=") + 1)))
+		if (!(fc->to = ft_strndup(*av, ft_strnext(*av, "=")))
+			|| !(fc->by = ft_strdup(*av + ft_strnext(*av, "=") + 1)))
 			return (-1);
 		av++;
 	}

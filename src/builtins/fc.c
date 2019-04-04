@@ -6,33 +6,12 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/27 15:10:23 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/04 13:47:43 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/04 15:23:55 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 #include "hashtable.h"
-
-void	fc_print(t_fc fc, t_list *lst, int i)
-{
-	while (lst && i)
-	{
-		if (!ft_cisin(fc.opt, 'n'))
-			ft_printf("%-6d%s\n", lst->content_size / 10, lst->content);
-		else
-			ft_printf("      %s\n", lst->content);
-		if (i < 0)
-		{
-			i++;
-			lst = lst->next;
-		}
-		else
-		{
-			i--;
-			lst = lst->prev;
-		}
-	}
-}
 
 char	*fc_filename(t_list *lst, int size)
 {

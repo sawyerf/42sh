@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 13:42:22 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/04 14:08:31 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/04 15:23:00 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int		fc_rangel(t_fc fc, t_list **beg, int *i)
 {
 	t_list	*lst;
 
-	if (!(lst = gethst()) || !(lst = lst->next))
+	if (!(lst = gethst())
+			|| !(lst = lst->next))
 		return (1);
 	if (fc.range[0])
 	{
@@ -47,7 +48,7 @@ int		fc_rangel(t_fc fc, t_list **beg, int *i)
 		fc_reverse(beg, &lst);
 	*i = lst->content_size / 10 - ((*beg)->content_size / 10);
 	*i += (*i < 0 ? -1 : 1);
-	return (1);
+	return (0);
 }
 
 int		fc_rangee(t_fc fc, t_list **beg, int *i)
@@ -63,8 +64,7 @@ int		fc_rangee(t_fc fc, t_list **beg, int *i)
 		if (fc.range[1])
 		{
 			if (!(lst = hst_getcmp(lst, fc.range[1])))
-				return (ft_rperr(1,
-					"fc: history specification out of range\n"));
+				return (ft_rperr(1, "fc:history specification out of range\n"));
 			*i = lst->content_size / 10 - (*beg)->content_size / 10;
 			*i += (*i < 0 ? -1 : 1);
 		}
