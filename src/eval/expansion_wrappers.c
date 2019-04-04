@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/04 21:05:24 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/04 22:31:28 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	remove_token(t_simple_cmd *cmd, t_token *todel)
 	{
 		free_token(todel);
 		cmd->word_lst = tmp;
-		return;
+		return ;
 	}
 	tmp = cmd->word_lst;
 	while (tmp->next)
@@ -45,7 +45,7 @@ void	remove_token(t_simple_cmd *cmd, t_token *todel)
 		{
 			tmp->next = todel->next;
 			free_token(todel);
-			return;
+			return ;
 		}
 		tmp = tmp->next;
 	}
@@ -82,7 +82,7 @@ int			expand_token_lst(t_simple_cmd *sim_cmd)
 		prev = iter;
 		iter = save;
 	}
-	return (0);	
+	return (0);
 }
 
 char		**tokens_to_str(t_token *word)
@@ -110,15 +110,19 @@ void	extract_assign(t_simple_cmd *before)
 	t_token *words;
 	t_token	*assigns;
 	t_token *save;
+	int		flag;
 
+	flag = 0;
 	words = NULL;
 	assigns = NULL;
 	iter = before->word_lst;
-	while (iter)
+	while ((iter))
 	{
+		if (iter->type == WORD)
+			flag = 1;
 		save = iter->next;
-		if ((iter->data.str[0] != '=')
-			&& (parser_is_assign(iter)))
+		if (((iter->data.str[0] != '=')
+			&& (parser_is_assign(iter))) && (!flag))
 			add_token(&assigns, iter);
 		else
 			add_token(&words, iter);

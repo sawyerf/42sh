@@ -6,18 +6,16 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/01 12:45:13 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/04 22:08:14 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_wordexp.h"
 
-char	*quote_str(char *str)
+static	size_t	quote_str_len(char *str)
 {
-	size_t	count;
-	int		j;
 	int		i;
-	char	*quoted;
+	size_t	count;
 
 	i = 0;
 	count = 0;
@@ -27,6 +25,18 @@ char	*quote_str(char *str)
 			count++;
 		i++;
 	}
+	return (count);
+}
+
+char	*quote_str(char *str)
+{
+	size_t	count;
+	int		j;
+	int		i;
+	char	*quoted;
+
+	count = quote_str_len(str);
+	i = ft_strlen(str);
 	if (!(quoted = ft_strnew(i + count)))
 		return (NULL);
 	i = 0;
@@ -100,10 +110,8 @@ int		handle_exp_param(t_token *word)
 			inside_dquote = -inside_dquote;
 		if ((word->data.str[index] == '$') && (word->data.str[index + 1] != 0))
 		{
-			value = build_param(&(word->data), index + 1);
-			if (!value)
-				return (MEMERR);
-			if (expand_param(&(word->data), &index, value) == MEMERR)
+			if ((!(value = build_param(&(word->data), index + 1)))
+			|| (expand_param(&(word->data), &index, value) == MEMERR))
 				return (MEMERR);
 			free(value);
 			continue;

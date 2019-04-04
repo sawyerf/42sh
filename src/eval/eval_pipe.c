@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/01 13:02:10 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/04 22:33:05 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ int	pipe_recursion(t_cmd_tab *to, t_cmd_tab *from)
 
 	if (pipe(pipes) != 0)
 		return (PIPEFAIL);
-	pid = fork();
-	if (pid == -1)
+	if ((pid = fork()) == -1)
 		return (MEMERR);
 	if (pid == 0)
 	{

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 17:46:08 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/04 21:11:05 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/04 22:09:15 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int	make_here_doc(int *right_fd, t_redir *redir)
 {
-	int		tmpfile;
-	char	*tmpname = "/tmp/21sh_heredoc";
+	int			tmpfile;
+	static char	*tmpname = "/tmp/21sh_heredoc";
 
 	tmpfile = open(tmpname, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (tmpfile == -1)

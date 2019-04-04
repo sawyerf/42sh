@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:22:06 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/02 20:32:49 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/04 22:31:55 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,12 @@ char		*get_process_env(char *key, char **env)
 	return (get_value(env[i]));
 }
 
+void	replace_var(char **fresh, char *to_add)
+{
+	free(*fresh);
+	*fresh = to_add;
+}
+
 char		**craft_env(char **base_env, char **to_add)
 {
 	char	**fresh;
@@ -73,10 +79,7 @@ char		**craft_env(char **base_env, char **to_add)
 	while (to_add[i])
 	{
 		if (((j = env_is_set(to_add[i], fresh)) > -1))
-		{
-			free(fresh[j]);
-			fresh[j] = to_add[i];
-		}
+			replace_var(fresh + j, to_add[i]);
 		else
 			fresh[ft_tablen(fresh)] = to_add[i];
 		to_add[i] = NULL;
