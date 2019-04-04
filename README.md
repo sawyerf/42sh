@@ -4,12 +4,12 @@
 - IFS in ft_wordexp is broken on IFS != ` \n\t` and quote removal
 - backslash and single quotes bugged: `var='\'\'\'\''' ; echo $var`
 - ls >& 2>file.txt should be valid
-- ~~empty cmdname with redir should apply redir
-- ~~subtle difference between '$notexistant;' and '"";' needs to be fixed ft_wordexp
+- ~~empty cmdname with redir should apply redir~~
+- ~~subtle difference between '$notexistant;' and '"";' needs to be fixed ft_wordexp~~
 - export builtin, set && unset missing stuff.
 - ~~del la hashtable quand on modifie le PATH~~
-- ~~move full path bin checking out of fork
-- ~~Parameter expansions has invalid read/write on multiline command with ' or "
+- ~~move full path bin checking out of fork~~
+- ~~Parameter expansions has invalid read/write on multiline command with ' or "~~
 ------------------------------------
 ### 42sh
 
