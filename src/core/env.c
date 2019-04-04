@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 21:53:59 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/04 19:03:49 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/04 20:23:03 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,7 @@ char	**shlvl(char **env)
 	int		lvl;
 
 	var = NULL;
-	var = varchr(env, "SHLVL=");
-	if (!var)
+	if (!(var = varchr(env, "SHLVL=")))
 		lvl = 1;
 	else
 		lvl = ft_atoi(var) + 1;

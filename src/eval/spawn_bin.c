@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/04 19:32:44 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/04 21:39:51 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int				br_print(int err, t_cmd_tab *cmd)
 	else
 	{
 		if (err == br_NOTFOUND)
-			ft_dprintf(2, "21sh: %s: No such file or directory\n", cmd->av[0]);
+			ft_dprintf(2, "21sh: %s: command not found\n", cmd->av[0]);
 		else if (err == br_PERMDENIED)
 			ft_dprintf(2, "21sh: %s: Permission denied\n", cmd->av[0]);
 		else if (err == br_ISDIR)

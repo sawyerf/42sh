@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 18:00:46 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/04 15:24:07 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/04 20:14:39 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,11 @@ int		fc_e(t_fc fc)
 		return (1);
 	fc_writelst(file, beg, i);
 	if (run_editor(&fc, file))
+	{
+		unlink(file);
+		ft_strdel(&file);
 		return (1);
+	}
 	if (ft_cisin(fc.opt, 'e'))
 		run_script(file);
 	unlink(file);
@@ -80,8 +84,8 @@ int		fc_le(t_fc fc)
 		return (1);
 	fc_writelst(file, beg, i);
 	run_command(fc_read(file));
-	ft_strdel(&file);
 	unlink(file);
+	ft_strdel(&file);
 	return (0);
 }
 
