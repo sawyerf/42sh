@@ -156,10 +156,10 @@ int			handle_common(t_lexer *lx_st)
 	{
 		if (ft_cisin("\n\t |&><;", *(lx_st->cursor)))
 			break ;
-		if (*(lx_st->cursor) == '"')
-			handle_dquote(lx_st);
-		else if (*(lx_st->cursor) == '\'')
-			handle_squote(lx_st);
+		if ((*(lx_st->cursor) == '"') && ((ret = handle_dquote(lx_st))))
+			return (ret);
+		else if ((*(lx_st->cursor) == '\'') && ((ret = handle_squote(lx_st))))
+			return (ret);
 		else if (*(lx_st->cursor) == '$')
 		{
 			if ((ret = handle_param_exp(lx_st)))
