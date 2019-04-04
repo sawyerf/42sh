@@ -6,11 +6,11 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 18:07:04 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/02 20:57:35 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/04 13:59:57 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh_core.h"
+#include "builtins.h"
 
 void	fc_pprint(t_fc *fc)
 {
@@ -49,10 +49,9 @@ int		fc_parsertr(char ***av, t_fc *fc)
 		{
 			(*av)++;
 			if (!**av)
-			{
 				ft_dprintf(2, "fc: -e: option requires an argument\n");
+			if (!**av)
 				return (-1);
-			}
 			if (!(fc->editor = ft_strdup(**av)))
 				return (MEMERR);
 			c = 0;

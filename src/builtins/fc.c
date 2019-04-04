@@ -6,11 +6,11 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/27 15:10:23 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/02 18:30:03 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/04 13:47:43 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh_core.h"
+#include "builtins.h"
 #include "hashtable.h"
 
 void	fc_print(t_fc fc, t_list *lst, int i)
@@ -140,18 +140,20 @@ int		fc(t_cmd_tab *cmd)
 {
 	t_fc	fc;
 	int		mode;
+	int		ret;
 
 	(void)cmd;
 	mode = g_sh.mode;
 	if (fc_parser(cmd->av, &fc) < 0)
 		return (1);
 	if (ft_cisin(fc.opt, 's'))
-		return (fc_s(fc));
+		ret = fc_s(fc);
 	else if (ft_cisin(fc.opt, 'l') && ft_cisin(fc.opt, 'e'))
-		return (fc_le(fc));
+		ret = fc_le(fc);
 	else if (ft_cisin(fc.opt, 'l'))
-		return (fc_l(fc));
+		ret = fc_l(fc);
 	else
-		return (fc_e(fc));
+		ret = fc_e(fc);
 	g_sh.mode = mode;
+	return (ret);
 }

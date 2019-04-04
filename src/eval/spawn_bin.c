@@ -6,12 +6,13 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/03 19:46:27 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/04 14:01:18 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_eval.h"
 #include "hashtable.h"
+#include "builtins.h"
 
 int				br_print(int err, t_cmd_tab *cmd)
 {

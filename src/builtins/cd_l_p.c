@@ -6,11 +6,11 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:24:29 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/06 16:03:01 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/04 13:59:12 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh_core.h"
+#include "builtins.h"
 
 static void		canon_form(char *curpath)
 {

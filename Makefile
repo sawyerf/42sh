@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/04/03 17:21:18 by ktlili           ###   ########.fr        #
+#    Updated: 2019/04/04 14:45:43 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,16 +37,17 @@ SRC_DIR =	src
 
 SRC_FILE =	builtins/cd_l_p.c			\
 			builtins/cd_tools.c			\
+			builtins/changedir.c		\
 			builtins/echo.c				\
 			builtins/exit.c				\
 			builtins/fc.c				\
 			builtins/fc_opt.c			\
+			builtins/fc_range.c			\
 			builtins/fc_parser.c		\
 			builtins/hash.c				\
 			builtins/setenv.c			\
 			builtins/unset.c			\
 			builtins/parser_tools.c		\
-			core/changedir.c			\
 			core/clean_path.c			\
 			core/env_handler.c			\
 			core/ft_env.c				\
@@ -66,12 +67,12 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			eval/craft_env.c			\
 			eval/handle_redir.c			\
 			eval/redir_handle_right.c   \
-			ft_wordexp/expansion_util.c	\
-			ft_wordexp/field_split.c	\
-			ft_wordexp/ft_wordexp.c		\
-			ft_wordexp/param_expand.c	\
-			ft_wordexp/quote_removal.c	\
-			ft_wordexp/tilde_expand.c	\
+			wordexp/expansion_util.c	\
+			wordexp/field_split.c		\
+			wordexp/ft_wordexp.c		\
+			wordexp/param_expand.c		\
+			wordexp/quote_removal.c		\
+			wordexp/tilde_expand.c		\
 			lexer/ft_realloc.c			\
 			lexer/lex_jump_table.c		\
 			lexer/lexer.c				\
@@ -117,7 +118,7 @@ OBJ_FILE =	$(SRC_FILE:.c=.o)
 
 CRT_DIR =	core 						\
 		 	builtins 					\
-		 	ft_wordexp 					\
+		 	wordexp 					\
 		 	lexer 						\
 		 	eval 						\
 		 	readline 					\

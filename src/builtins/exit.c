@@ -6,11 +6,11 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 15:17:24 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/19 17:45:02 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/04 13:59:33 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh_core.h"
+#include "builtins.h"
 #include "readline.h"
 
 int	ft_exit(t_cmd_tab *cmd)
