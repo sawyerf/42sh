@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/27 15:10:23 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/04 15:23:55 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/04 20:14:38 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ char	*fc_filename(t_list *lst, int size)
 	hash += ht_hash(get_env_value("USER="));
 	while ((file = ft_zprintf("/tmp/%x.fc", hash)) && !access(file, F_OK))
 	{
-		ft_printf("Retry\n");
 		ft_strdel(&file);
 		hash++;
 	}
@@ -111,8 +110,19 @@ int		run_editor(t_fc *fc, char *file)
 				return (MEMERR);
 		}
 	}
+	g_sh.mode = NONINTERACTIVE;
 	run_command(ft_zprintf("%s %s\n", fc->editor, file));
+	ft_strdel(&fc->editor);
 	return (g_sh.status);
+}
+
+void	fc_del(t_fc *fc)
+{
+	ft_strdel(&fc->editor);
+	ft_strdel(&fc->range[0]);
+	ft_strdel(&fc->range[1]);
+	ft_strdel(&fc->to);
+	ft_strdel(&fc->by);
 }
 
 int		fc(t_cmd_tab *cmd)
@@ -124,7 +134,10 @@ int		fc(t_cmd_tab *cmd)
 	(void)cmd;
 	mode = g_sh.mode;
 	if (fc_parser(cmd->av, &fc) < 0)
+	{
+		fc_del(&fc);
 		return (1);
+	}
 	if (ft_cisin(fc.opt, 's'))
 		ret = fc_s(fc);
 	else if (ft_cisin(fc.opt, 'l') && ft_cisin(fc.opt, 'e'))
@@ -134,5 +147,6 @@ int		fc(t_cmd_tab *cmd)
 	else
 		ret = fc_e(fc);
 	g_sh.mode = mode;
+	fc_del(&fc);
 	return (ret);
 }
