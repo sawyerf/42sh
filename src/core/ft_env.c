@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 13:58:14 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/04 16:03:42 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/04 19:27:45 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static char	**construct_env(t_cmd_tab *cmd, char opt, int count)
 static int	spawn_new_env(char **args, char **new_env)
 {
 	t_cmd_tab	new_cmd;
-	char		*path;
+	int			ret;
 
 	ft_bzero(&new_cmd, sizeof(t_cmd_tab));
 	new_cmd.av = args;
@@ -50,14 +50,8 @@ static int	spawn_new_env(char **args, char **new_env)
 	}
 	else
 	{
-		if (!(path = varchr(new_env, "PATH")))
-			path = get_env_value("PATH");
-		if (ht_spawnbin(path, &new_cmd) == MEMERR)
-			return (MEMERR);
-		if (!new_cmd.full_path)
-			exec_error(BIN_NOT_FOUND, new_cmd.av[0]);
-		if (!new_cmd.full_path)
-			return (BIN_NOT_FOUND);
+		if ((ret = pathfinder(&new_cmd)))
+			return (ret);
 	}
 	return (spawn_command(&new_cmd));
 }

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/04 16:55:07 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/04 20:22:45 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ int		pre_execution(t_cmd_tab *cmd)
 	if (cmd->av[0] == NULL)
 		if (assign_to_shell(cmd))
 			return (MEMERR);
-	if ((cmd->av[0]) && ((ret = is_builtin(cmd)) == 0))
+	if ((!cmd->full_path) && (cmd->av[0]) && ((ret = is_builtin(cmd)) == 0))
 		return (BUILTIN);
 	if (ret == MEMERR)
 		return (MEMERR);
