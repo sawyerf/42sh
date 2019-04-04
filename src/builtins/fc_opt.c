@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 18:00:46 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/04 15:06:22 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/04 15:11:25 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int		fc_s(t_fc fc)
 		return (MEMERR);
 	ft_strdel(&pre);
 	ft_printf("\33[0;34m%s\33[0;0m", tmp);
-	g_sh.mode = MODEFILE;
+	g_sh.mode = NONINTERACTIVE;
 	run_command(tmp);
 	return (0);
 }
