@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/01 13:14:15 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/04 21:05:24 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	remove_token(t_simple_cmd *cmd, t_token *todel)
 	{
 		if (tmp->next == todel)
 		{
-			free_token(todel);
 			tmp->next = todel->next;
+			free_token(todel);
 			return;
 		}
 		tmp = tmp->next;

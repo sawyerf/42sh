@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 12:46:44 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/01 12:48:08 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/04 21:22:47 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,19 @@ int		handle_ifs(t_token *word, char *ifs)
 	return (0);
 }
 
+char	*expand_ifs(char *ifs)
+{
+	t_token tmp;
+
+	tmp.type = WORD;
+	tmp.data.str = ifs;
+	tmp.data.len = ft_strlen(ifs);
+	tmp.data.size = ft_strlen(ifs);
+	if (ft_wordexp(&tmp, FT_TRUE) == MEMERR)
+		return (NULL);
+	return (tmp.data.str);
+}
+
 int		handle_field_split(t_token *word)
 {
 	static char	*default_ifs = " \t\n";
@@ -126,6 +139,16 @@ int		handle_field_split(t_token *word)
 
 	if (!(ifs = get_env_value("IFS")))
 		ifs = default_ifs;
+	else
+	{
+		if (!(ifs = expand_ifs(ifs)))
+			return (MEMERR);
+		if (*ifs == 0)
+		{
+			free(ifs);
+			ifs = default_ifs;
+		}
+	}
 	if ((*ifs == '\0') || (!split_candidate(word->data.str, ifs)))
 		return (0);
 	if (handle_ifs(word, ifs) == MEMERR)
