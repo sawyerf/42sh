@@ -12,6 +12,20 @@
 
 #include "ft_wordexp.h"
 
+
+int	ft_wordexp_heredoc(t_token *word)
+{
+	int i;
+
+	if (handle_tilde(word) == MEMERR)
+		return (MEMERR);
+	if (handle_exp_param(word) == MEMERR)
+		return (MEMERR);
+	i = 0;
+	inside_dquote_qr(&(word->data), &i);
+	return (0);
+}
+
 int	ft_wordexp(t_token *word, t_bool is_redir)
 {
 	if (handle_tilde(word) == MEMERR)

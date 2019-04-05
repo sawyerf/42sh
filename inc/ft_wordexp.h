@@ -19,6 +19,9 @@
 typedef struct s_str t_str;
 typedef	struct	s_token t_token;
 
+void	inside_dquote_qr(t_str *str_w, int *index);
+void	shift_str_left(t_str *str_w, int index);
+int	ft_wordexp_heredoc(t_token *word);
 int	ft_wordexp(t_token *word, t_bool is_redir);
 int	handle_tilde(t_token *word);
 int	handle_exp_param(t_token *word);

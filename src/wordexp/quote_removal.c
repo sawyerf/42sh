@@ -37,7 +37,8 @@ void	inside_dquote_qr(t_str *str_w, int *index)
 			shift_str_left(str_w, *index);
 			break ;
 		}
-		else if (str_w->str[*index] == '\\')
+		else if ((str_w->str[*index] == '\\')
+			&& (ft_cisin("$\n\"", str_w->str[*index + 1])))
 			shift_bslash(str_w, index);
 		else
 			*index = *index + 1;

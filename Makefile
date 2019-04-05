@@ -12,11 +12,11 @@
 
 NAME =		21sh 
 
-CC =		gcc
+CC =		clang	
 
 CFLAGS =	-I inc/ -I lib/inc/ -Wall -Werror -Wextra -ggdb
 
-DEBUG =		 #	-g3 -fsanitize=address
+DEBUG =		#	-g3 -fsanitize=address
 
 INC_DIR =	inc
 
@@ -146,7 +146,7 @@ norm:
 $(NAME): $(OBJ)
 	@printf "\033[0;32m[21sh] Compilation [OK]\033[0;0m\n"
 	@make -C lib/
-	@gcc $(CFLAGS) -ltermcap $(DEBUG) $(OBJ) lib/libft.a -o $(NAME)
+	@$(CC) $(CFLAGS) -ltermcap $(DEBUG) $(OBJ) lib/libft.a -o $(NAME)
 
 clean:
 	@make clean -C lib/

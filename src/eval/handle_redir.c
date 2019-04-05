@@ -16,6 +16,8 @@ static int		expand_redir(t_redir *redir)
 {
 	if ((redir->right) && (redir->right->type == HERE_END_QU))
 		return (0);
+	if ((redir->right) && (redir->right->type == HERE_END))
+		return (ft_wordexp_heredoc(redir->right));
 	if ((redir->left) && (ft_wordexp(redir->left, FT_TRUE) == MEMERR))
 		return (MEMERR);
 	if ((redir->right) && (ft_wordexp(redir->right, FT_TRUE) == MEMERR))
