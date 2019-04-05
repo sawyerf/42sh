@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 12:46:44 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/04 21:40:44 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/05 19:26:45 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,15 @@ int		extract_field(t_str *str_w, int *index, t_token **head, char *ifs)
 
 void	replace_token(t_token *word, t_token *new_fields)
 {
-	t_token	*save;
+	t_token			*save;
+	t_token_type	type;
 
 	save = word->next;
+	type = word->type;
 	if (word->data.str)
 		free(word->data.str);
 	ft_memcpy(word, new_fields, sizeof(t_token));
+	word->type = type;
 	while (word->next)
 		word = word->next;
 	word->next = save;
@@ -149,7 +152,8 @@ int		handle_field_split(t_token *word)
 			ifs = default_ifs;
 		}
 	}
-	if ((*ifs == '\0') || (!split_candidate(word->data.str, ifs)))
+	if ((*ifs == '\0') || (!split_candidate(word->data.str, ifs))
+		|| (word->type != WORD))
 		return (0);
 	if (handle_ifs(word, ifs) == MEMERR)
 		return (MEMERR);

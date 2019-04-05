@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 15:33:08 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/02 21:24:03 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/05 18:11:02 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,42 +34,12 @@ static void	replace_here_doc(t_token *io_here, char *here_doc)
 	io_here->data.size = ft_strlen(here_doc) + 1;
 }
 
-static int	interactive_heredoc(t_token *io_here)
+static int	here_doc_err(char *to_free, int ret)
 {
-	size_t	len;
-	char 	*here_doc;
-	char	*new_ln;
-	char	*tmp;
-	t_read_fn read_fn;
-	int			ret;
-
-	read_fn = readline;
-	if (g_sh.mode != INTERACTIVE)
-		read_fn = sh_readfile;
-	len = ft_strlen(io_here->data.str);
-	if (!(here_doc = ft_strdup("")))
+	free(to_free);
+	if (ret == MEMERR)
 		return (MEMERR);
-	while (42)
-	{
-		if ((ret = read_fn("heredoc> ", &new_ln)))
-		{
-			free(here_doc);
-			if (ret == MEMERR)
-				return (MEMERR);
-			return (HEREDOC_ERR);
-		}
-		if ((!ft_strncmp(new_ln, io_here->data.str, len))
-			&& (new_ln[len] == '\n'))
-			break ;
-		if (!(tmp = ft_strjoin(here_doc, new_ln)))
-			return (MEMERR);
-		free(new_ln);
-		free(here_doc);
-		here_doc = tmp;
-	}
-	free(new_ln);
-	replace_here_doc(io_here, here_doc);
-	return (0);
+	return (HEREDOC_ERR);
 }
 
 char		*get_file_delim(char *next_nl, char *here_end, t_parser *parser)
@@ -98,9 +68,41 @@ char		*get_file_delim(char *next_nl, char *here_end, t_parser *parser)
 	return (NULL);
 }
 
+static int	read_heredoc(t_token *io_here, size_t len)
+{
+	char		*here_doc;
+	char		*new_ln;
+	char		*tmp;
+	t_read_fn	read_fn;
+	int			ret;
+
+	read_fn = (g_sh.mode == INTERACTIVE) ? readline : sh_readfile;
+	if (!(here_doc = ft_strdup("")))
+		return (MEMERR);
+	while (42)
+	{
+		if ((ret = read_fn("heredoc> ", &new_ln)))
+			return (here_doc_err(here_doc, ret));
+		if ((!ft_strncmp(new_ln, io_here->data.str, len))
+			&& (new_ln[len] == '\n'))
+			break ;
+		if (!(tmp = ft_strjoin(here_doc, new_ln)))
+			return (MEMERR);
+		free(new_ln);
+		free(here_doc);
+		here_doc = tmp;
+	}
+	free(new_ln);
+	replace_here_doc(io_here, here_doc);
+	return (0);
+}
+
 int			handle_here_doc(t_parser *parser)
 {
+	size_t len;
+
 	if (here_doc_delimiter(parser->current) == MEMERR)
 		return (MEMERR);
-	return (interactive_heredoc(parser->current));			
+	len = ft_strlen(parser->current->data.str);
+	return (read_heredoc(parser->current, len));
 }
