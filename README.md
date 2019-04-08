@@ -1,7 +1,6 @@
 # 21sh
 
 ## TODO
-- ls >& 2>file.txt should be valid
 - export builtin, set && unset missing stuff.
 - autocomplete after >& is wrong
 - ~~IFS in ft_wordexp is broken on IFS != ` \n\t` and quote removal~~
