@@ -7,19 +7,17 @@ g_max_fd = 3
 
 
 g_tokens = ['"', '\'', '$', '\\', '']
-
 g_redir = ['>', '<', '>&', '<&']
-
-
+g_redir_pre = "/tmp/shell_fuzz/"
 sep = [';']
-
 g_op = ["&&", "||"]
-
-random.seed
-
 wspace = ['\n', ' ']
 
 #word += random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits)
+
+g_var_list = []
+
+random.seed
 
 def	random_n_str(n):
 	return ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for _ in range(n))
@@ -41,7 +39,7 @@ def insert_word():
 			if (in_sq == -1):
 				in_dq = -in_dq
 		elif (rand == 7):
-			word += '$'
+			word += '$' + random.choice(g_var_list)
 		elif (rand == 8):
 			word += '\\'
 		word += c
@@ -52,12 +50,14 @@ def insert_word():
 	return word 
 
 def insert_redir():
-	redir = str(random.randint(0, g_max_fd)) + random.choice(g_redir) + random_n_str(random.randint(1, 6))
+	redir = str(random.randint(0, g_max_fd)) + random.choice(g_redir) + g_redir_pre + random_n_str(random.randint(1, 6))
 	return redir 
 
 def insert_assign():
-	assign = random_n_str(random.randint(1, 6)) + "=" + random_n_str(random.randint(1, 12))
-	return assign 
+        var_name = random_n_str(random.randint(1, 6)) 
+        assign = var_name + "=" + random_n_str(random.randint(1, 12))
+        g_var_list.append(var_name)
+        return assign 
 
 def	generate_prefix():
 	pre = " "
@@ -76,10 +76,10 @@ def	generate_suffix():
 	return suf
 
 def create_simple_cmd(line):
-	while (random.randint(1,7) != 1):	
-		line = line  + generate_prefix()	
-	line = line + " " + insert_word()
 	while (random.randint(1,7) != 1):
+            line = line  + generate_prefix()	
+        line = line + " " + "echo"
+        while (random.randint(1,7) != 1):
 		line = line + " " + generate_suffix()	
 	return line
 
