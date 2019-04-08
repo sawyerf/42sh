@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 16:23:31 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/04 21:58:15 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/08 16:31:19 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,6 @@ void	putlst(char *mtc, t_list *lst, t_rdl *rdl)
 			lst = lst->next;
 	}
 	ft_printf("%s%s", rdl->prompt, rdl->str);
+	rdl->real = rdl->size;
 	left(rdl, rdl->size - rdl->curs);
 }
