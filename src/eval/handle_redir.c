@@ -108,8 +108,11 @@ int				handle_redir(t_redir *redir_lst, t_list **head)
 				return (ret);
 		}
 		else
-			ft_dprintf(STDERR_FILENO, "21sh: ambiguous redir filename\
-					expands to empty string\n");
+		{
+			ft_dprintf(STDERR_FILENO,
+				"21sh: ambiguous redir: filename expands to empty string\n");
+			return (-1);
+		}
 		iter = iter->next;
 	}
 	return (0);

@@ -77,7 +77,7 @@ int			expand_token_lst(t_simple_cmd *sim_cmd)
 		save = iter->next;
 		if (ft_wordexp(iter, FT_FALSE) == MEMERR)
 			return (MEMERR);
-		if ((!quoted) && (iter->data.str[0] == 0))
+		if ((!quoted) && (iter->data.str[0] == 0) && (iter->next == save)) //hack to keep empty str from field splitting
 			remove_token(sim_cmd, iter);
 		prev = iter;
 		iter = save;

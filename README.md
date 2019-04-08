@@ -1,6 +1,9 @@
 # 21sh
 
 ## TODO
+
+- autocomplete after >& is wrong
+- field splitting has to be handled in handle_exp_param/build_param
 - ls >& 2>file.txt should be valid
 - empty cmdname with redir should apply redir
 - subtle difference between '$notexistant;' and '"";' needs to be fixed ft_wordexp
@@ -20,7 +23,8 @@
 |check|     `command`     |                result               | info complementaire |
 |:---:|:-----------------:|:-----------------------------------:|:-------------------:|
 |     | `env - i ./21sh ` | double free						    ||
-|     | ` `               | 21sh: syntax error near : '' + exit ||
+|     | `env - i TERM=$TERM ./21sh + fc ` | segfault						    ||
+|  ✓  | ` `               | 21sh: syntax error near : '' + exit ||
 |  ✓  | `ls \\n` + Ctrl+c | 21sh: premature EOF + exit          ||
 |  ✓  | `ls "\n` + Ctrl+c | 21sh: premature EOF + exit          ||
 |     | `fc -s` apres celle d'avant | boucle infini | UPDATE: added MODE_FC in sh_core.h and in request_new_line--le terminale est en NONINTERACTIVE quand la commande est lancer 2. s'arrete avec Ctrl+d |

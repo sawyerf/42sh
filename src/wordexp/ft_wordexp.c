@@ -19,7 +19,7 @@ int	ft_wordexp_heredoc(t_token *word)
 
 	if (handle_tilde(word) == MEMERR)
 		return (MEMERR);
-	if (handle_exp_param(word) == MEMERR)
+	if (handle_exp_param(word, FT_TRUE) == MEMERR)
 		return (MEMERR);
 	i = 0;
 	inside_dquote_qr(&(word->data), &i);
@@ -30,10 +30,10 @@ int	ft_wordexp(t_token *word, t_bool is_redir)
 {
 	if (handle_tilde(word) == MEMERR)
 		return (MEMERR);
-	if (handle_exp_param(word) == MEMERR)
+	if (handle_exp_param(word, is_redir) == MEMERR)
 		return (MEMERR);
-	if ((is_redir == FT_FALSE) && (handle_field_split(word) == MEMERR))
-		return (MEMERR);
+/*	if ((is_redir == FT_FALSE) && (handle_field_split(word) == MEMERR))
+		return (MEMERR);*/
 	if (quote_removal(word) == MEMERR)
 		return (MEMERR);
 	return (0);
