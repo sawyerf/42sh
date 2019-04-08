@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 14:58:34 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/08 18:43:53 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/08 18:48:22 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,8 @@ void		clear_autocom(t_autocomplete *autoc)
 	ft_strrev(autoc->str);
 	while (autoc->str[i])
 	{
-		if ((autoc->str[i] == '"') || (autoc->str[i] == '\'') || (autoc->str[i] == '\\'))
+		if ((autoc->str[i] == '"') || (autoc->str[i] == '\'')
+			|| (autoc->str[i] == '\\'))
 		{
 			if (autoc->str[i + 1])
 				autoc->type = arg;
