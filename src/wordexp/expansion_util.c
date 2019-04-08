@@ -6,17 +6,16 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/01 12:31:01 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/08 17:39:58 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_wordexp.h"
 
-
 int	c_insert_str(t_token *word, char *cursor, char *to_insert)
 {
-	char *save;
-	int i;
+	char	*save;
+	int		i;
 
 	i = cursor - (word->data.str);
 	word->data.len = ft_strlen(word->data.str);
@@ -34,7 +33,6 @@ int	c_insert_str(t_token *word, char *cursor, char *to_insert)
 	word->data.len = ft_strlen(word->data.str);
 	free(save);
 	return (0);
-
 }
 
 char	*c_next_bslash(char *cursor)

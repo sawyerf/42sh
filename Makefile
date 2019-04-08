@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/04/04 21:37:46 by ktlili           ###   ########.fr        #
+#    Updated: 2019/04/08 16:49:16 by ktlili           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,6 +74,7 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			wordexp/param_expand.c		\
 			wordexp/quote_removal.c		\
 			wordexp/tilde_expand.c		\
+			wordexp/field_split_tools.c \
 			lexer/ft_realloc.c			\
 			lexer/lex_jump_table.c		\
 			lexer/lexer.c				\

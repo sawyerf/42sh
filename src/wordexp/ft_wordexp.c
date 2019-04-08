@@ -6,12 +6,11 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/04 22:05:59 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/08 17:40:16 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_wordexp.h"
-
 
 int	ft_wordexp_heredoc(t_token *word)
 {
@@ -32,8 +31,6 @@ int	ft_wordexp(t_token *word, t_bool is_redir)
 		return (MEMERR);
 	if (handle_exp_param(word, is_redir) == MEMERR)
 		return (MEMERR);
-/*	if ((is_redir == FT_FALSE) && (handle_field_split(word) == MEMERR))
-		return (MEMERR);*/
 	if (quote_removal(word) == MEMERR)
 		return (MEMERR);
 	return (0);
