@@ -21,13 +21,12 @@
 ## Bug
 |check|     `command`     |                result               | info complementaire |
 |:---:|:-----------------:|:-----------------------------------:|:-------------------:|
-|     | `env - i ./21sh ` | double free						    ||
-|     | ` `               | 21sh: syntax error near : '' + exit ||
-|     | `ls '<tab><ctrl+c/d`| segfault ||
+|     | `ls '<tab><ctrl+c/d`| segfault |la fonction est surement appele dans light_parser|
+|  ✓  | ` `               | 21sh: syntax error near : '' + exit ||
+|  ✓  | `env - i ./21sh ` | double free						    ||
 |  ✓  | `ls \\n` + Ctrl+c | 21sh: premature EOF + exit          ||
 |  ✓  | `ls "\n` + Ctrl+c | 21sh: premature EOF + exit          ||
 |  ✓  | `fc -s` apres celle d'avant | boucle infini | UPDATE: added MODE_FC in sh_core.h and in request_new_line--le terminale est en NONINTERACTIVE quand la commande est lancer 2. s'arrete avec Ctrl+d |
-|     |
 
 ## READLINE
 ### Return

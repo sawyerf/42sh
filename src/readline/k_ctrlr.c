@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 18:29:28 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/04 16:46:06 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/08 17:09:28 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,13 @@ int		hstrouter(t_rdl *hst, char *buf)
 	return (ret);
 }
 
+char	*hstfinal(char *s)
+{
+	if (g_hst[3] && ft_strstr(g_hst[3]->content, s))
+		return (g_hst[3]->content);
+	return (NULL);
+}
+
 int		ctrlr(t_rdl *rdl, char *str)
 {
 	char	buf[11];
@@ -69,7 +76,7 @@ int		ctrlr(t_rdl *rdl, char *str)
 	}
 	ft_printf("\n%s%s", rdl->prompt, rdl->str);
 	left(rdl, rdl->size - rdl->curs);
-	rdlreplace(rdl, hstchc(hst.str));
+	rdlreplace(rdl, hstfinal(hst.str));
 	if (stat == 2 || stat == 4)
 		rdladd(rdl, '\n');
 	ft_strdel(&hst.str);
