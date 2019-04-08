@@ -41,6 +41,7 @@
 #define FDSAVEOUT 256
 #define FDSAVEERR 257
 #define BUILTIN 666
+#define BUILTIN_FAIL 667
 
 #define MODEFILE 2 
 #define INTERACTIVE 1

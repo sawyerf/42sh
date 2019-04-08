@@ -110,7 +110,10 @@ int				is_builtin(t_cmd_tab *cmd)
 	if ((i = ft_cmptab(builtins, cmd->av[0])) != -1)
 	{
 		if ((ret = handle_redir(cmd->redir_lst, &save_head)))
-			return (1);
+		{
+			ft_lstdel(&save_head);
+			return (BUILTIN_FAIL);
+		}
 		cmd->process_env = craft_env(g_sh.env, cmd->assign_lst);
 		if (cmd->process_env == NULL)
 			return (MEMERR);
@@ -179,8 +182,8 @@ int		pre_execution(t_cmd_tab *cmd)
 			return (MEMERR);
 	if ((!cmd->full_path) && (cmd->av[0]) && ((ret = is_builtin(cmd)) == 0))
 		return (BUILTIN);
-	if (ret == MEMERR)
-		return (MEMERR);
+	if ((ret == MEMERR) || (ret == BUILTIN_FAIL))
+		return (ret);
 	if ((!cmd->process_env)
 			&& (!(cmd->process_env = craft_env(g_sh.env, cmd->assign_lst))))
 		return (MEMERR);
@@ -198,7 +201,7 @@ int				spawn_in_pipe(t_cmd_tab *cmd)
 
 	if ((ret = pre_execution(cmd)) == MEMERR)
 		return (MEMERR);
-	else if (ret == BUILTIN)
+	else if ((ret == BUILTIN) || (ret == BUILTIN_FAIL))
 		return (0);
 	return (execve_wrap(cmd));
 }
@@ -210,7 +213,7 @@ int				spawn_command(t_cmd_tab *cmd)
 
 	if ((ret = pre_execution(cmd)) == MEMERR)
 		return (MEMERR);
-	else if (ret == BUILTIN)
+	else if ((ret == BUILTIN) || (ret == BUILTIN_FAIL))
 		return (0);
 	pid = fork();
 	if (pid == -1)
