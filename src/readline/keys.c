@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:47:43 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/01 18:28:33 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/08 17:51:23 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int		special_key(t_rdl *rdl, char *buf, t_key *key)
 			return (key[count].f(rdl, buf));
 		count++;
 	}
+	tgpstr("vb");
 	return (0);
 }
 
