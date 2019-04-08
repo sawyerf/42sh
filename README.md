@@ -34,6 +34,7 @@
 |:----:|:------:|:---:|
 |malloc| MEMERR |  ?  |
 |error |   -2   |  ?  |
+|error |   -1   |  ?  |
 |  OK  |    0   | cmd |
 |Ctrl+D|    1   | NULL|
 |Ctrl+C|    2   | NULL|
@@ -64,3 +65,11 @@
 | K_CTRX | coupe la selection          |
 | K_CTRY | copie la selection          |
 | K_BSPC | supprime un caractere       |
+
+# PARSER/LEXER
+### Mode
+|nb|      mode      |description|
+|:-:|-|-|
+|2 |    MODEFILE    |quand stdin est fermé|
+|1 |   INTERACTIVE  |appele readline quand la commande n'est pas complete |
+|0 | NONINTERACTIVE |traite la commande tel quelle |
