@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 18:07:04 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/04 15:28:43 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/08 14:52:46 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,15 @@ void	fc_pprint(t_fc *fc)
 	ft_printf("editor:    %s\n", fc->editor);
 	ft_printf("range[0]:  %s\n", fc->range[0]);
 	ft_printf("range[1]:  %s\n", fc->range[1]);
+}
+
+void	fc_del(t_fc *fc)
+{
+	ft_strdel(&fc->editor);
+	ft_strdel(&fc->range[0]);
+	ft_strdel(&fc->range[1]);
+	ft_strdel(&fc->to);
+	ft_strdel(&fc->by);
 }
 
 void	fc_init(t_fc *fc)

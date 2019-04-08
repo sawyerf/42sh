@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 13:46:10 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/04 14:32:13 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/08 13:37:27 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void					run_script(char *file);
 int						fc_rangel(t_fc fc, t_list **beg, int *i);
 int						fc_rangee(t_fc fc, t_list **beg, int *i);
 int						fc_rangele(t_fc fc, t_list **beg, int *i);
+void					fc_del(t_fc *fc);
 
 int						hash(t_cmd_tab *cmd);
 int						parser_takeopt(char *opt, char *arg, char *in, char *name);
