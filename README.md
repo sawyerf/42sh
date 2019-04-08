@@ -1,12 +1,12 @@
 # 21sh
 
 ## TODO
-- ~~IFS in ft_wordexp is broken on IFS != ` \n\t` and quote removal~~
-- ~~ backslash and single quotes bugged: `var='\'\'\'\''' ; echo $var`~~
-- autocomplete after >& is wrong
-- ~~ field splitting has to be handled in handle_exp_param/build_param ~~
 - ls >& 2>file.txt should be valid
 - export builtin, set && unset missing stuff.
+- autocomplete after >& is wrong
+- ~~IFS in ft_wordexp is broken on IFS != ` \n\t` and quote removal~~
+- ~~backslash and single quotes bugged: `var='\'\'\'\''' ; echo $var`~~
+- ~~field splitting has to be handled in handle_exp_param/build_param~~
 - ~~empty cmdname with redir should apply redir~~
 - ~~subtle difference between '$notexistant;' and '"";' needs to be fixed ft_wordexp~~
 - ~~del la hashtable quand on modifie le PATH~~
@@ -23,7 +23,7 @@
 ## Bug
 |check|     `command`     |                result               | info complementaire |
 |:---:|:-----------------:|:-----------------------------------:|:-------------------:|
-|     | `ls '<tab><ctrl+c/d`| segfault |la fonction est surement appele dans light_parser|
+|  ✓  | `ls '<tab><ctrl+c/d`| segfault |la fonction est surement readline appele dans light_parser||
 |  ✓  | ` `               | 21sh: syntax error near : '' + exit ||
 |  ✓  | `env - i ./21sh ` | double free						    ||
 |  ✓  | `ls \\n` + Ctrl+c | 21sh: premature EOF + exit          ||
