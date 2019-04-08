@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 14:58:34 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/01 14:19:09 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/08 19:40:02 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,37 @@ int			exp_tilde(t_autocomplete *acp)
 	return (0);
 }
 
+void		clear_autocom(t_autocomplete *autoc)
+{
+	int i;
+
+	i = 0;
+	ft_strrev(autoc->str);
+	while (autoc->str[i])
+	{
+		if ((autoc->str[i] == '"') || (autoc->str[i] == '\'')
+			|| (autoc->str[i] == '\\'))
+		{
+			if (autoc->str[i + 1])
+				autoc->type = arg;
+			autoc->str[i] = 0;
+			ft_strrev(autoc->str);
+			return ;
+		}
+		i++;
+	}
+	ft_strrev(autoc->str);
+	return ;
+}
+
 int			ft_light_parser(char *lin, t_autocomplete *autocomplete)
 {
 	t_token	*tokens;
 	char	*line;
+	int		mode;
 
+	mode = g_sh.mode;
+	g_sh.mode = NONINTERACTIVE;
 	if (!(line = ft_strdup(lin)))
 		return (MEMERR);
 	ft_strrev(line);
@@ -103,6 +129,8 @@ int			ft_light_parser(char *lin, t_autocomplete *autocomplete)
 		ft_strdel(&line);
 		return (MEMERR);
 	}
+	clear_autocom(autocomplete);
+	g_sh.mode = mode;
 	free_token_lst(tokens);
 	ft_strdel(&line);
 	return (0);
