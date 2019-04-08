@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 14:16:02 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/03 19:44:53 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/04 21:13:02 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static int		expand_redir(t_redir *redir)
 {
 	if ((redir->right) && (redir->right->type == HERE_END_QU))
 		return (0);
+	if ((redir->right) && (redir->right->type == HERE_END))
+		return (ft_wordexp_heredoc(redir->right));
 	if ((redir->left) && (ft_wordexp(redir->left, FT_TRUE) == MEMERR))
 		return (MEMERR);
 	if ((redir->right) && (ft_wordexp(redir->right, FT_TRUE) == MEMERR))
@@ -106,8 +108,11 @@ int				handle_redir(t_redir *redir_lst, t_list **head)
 				return (ret);
 		}
 		else
-			ft_dprintf(STDERR_FILENO, "21sh: ambiguous redir filename\
-					expands to empty string\n");
+		{
+			ft_dprintf(STDERR_FILENO,
+				"21sh: ambiguous redir: filename expands to empty string\n");
+			return (-1);
+		}
 		iter = iter->next;
 	}
 	return (0);

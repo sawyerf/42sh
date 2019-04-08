@@ -6,13 +6,13 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/04/08 15:46:14 by apeyret          ###   ########.fr        #
+#    Updated: 2019/04/08 18:08:49 by ktlili           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =		21sh 
 
-CC =		gcc
+CC =		clang	
 
 CFLAGS =	-I inc/ -I lib/inc/ -Wall -Werror -Wextra -ggdb
 
@@ -74,6 +74,7 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			wordexp/param_expand.c		\
 			wordexp/quote_removal.c		\
 			wordexp/tilde_expand.c		\
+			wordexp/field_split_tools.c \
 			lexer/ft_realloc.c			\
 			lexer/lex_jump_table.c		\
 			lexer/lexer.c				\
@@ -146,7 +147,7 @@ norm:
 $(NAME): $(OBJ)
 	@printf "\033[0;32m[21sh] Compilation [OK]\033[0;0m\n"
 	@make -C lib/
-	@gcc $(CFLAGS) -ltermcap $(DEBUG) $(OBJ) lib/libft.a -o $(NAME)
+	@$(CC) $(CFLAGS) -ltermcap $(DEBUG) $(OBJ) lib/libft.a -o $(NAME)
 
 clean:
 	@make clean -C lib/

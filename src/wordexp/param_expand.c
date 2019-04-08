@@ -6,18 +6,16 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/01 12:45:13 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/08 17:41:29 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_wordexp.h"
 
-char	*quote_str(char *str)
+static	size_t	quote_str_len(char *str)
 {
-	size_t	count;
-	int		j;
 	int		i;
-	char	*quoted;
+	size_t	count;
 
 	i = 0;
 	count = 0;
@@ -27,6 +25,18 @@ char	*quote_str(char *str)
 			count++;
 		i++;
 	}
+	return (count);
+}
+
+char	*quote_str(char *str)
+{
+	size_t	count;
+	int		j;
+	int		i;
+	char	*quoted;
+
+	count = quote_str_len(str);
+	i = ft_strlen(str);
 	if (!(quoted = ft_strnew(i + count)))
 		return (NULL);
 	i = 0;
@@ -45,40 +55,14 @@ char	*quote_str(char *str)
 	return (quoted);
 }
 
-int		expand_param(t_str *str_w, int *index, char *to_insert)
-{
-	int		trunc;
-	int		i;
-
-	i = *index + 1;
-	trunc = 1;
-	if (str_w->str[i] == '{')
-	{
-		i++;
-		trunc = 3;
-	}
-	while (parser_is_name_c(str_w->str[i]))
-	{
-		trunc++;
-		i++;
-	}
-	ft_memmove(str_w->str + *index, str_w->str + *index + trunc,
-			str_w->len - *index - trunc);
-	str_w->len = str_w->len - trunc;
-	str_w->str[str_w->len] = '\0';
-	if (insert_str(str_w, index, to_insert) == MEMERR)
-		return (MEMERR);
-	return (0);
-}
-
-char	*build_param(t_str *str_w, int index)
+char	*build_param(char *cursor)
 {
 	static char	*empty_str = "";
 	char		*value;
 
-	if (str_w->str[index] == '{')
-		index++;
-	value = get_env_value(str_w->str + index);
+	if (*cursor == '{')
+		cursor++;
+	value = get_env_value(cursor + 1);
 	if (!value)
 		value = empty_str;
 	if (!(value = quote_str(value)))
@@ -86,33 +70,93 @@ char	*build_param(t_str *str_w, int index)
 	return (value);
 }
 
-int		handle_exp_param(t_token *word)
+int		get_ifs(char **ifs)
 {
-	int		index;
+	static char *default_ifs = "  \t\n";
+
+	if (!(*ifs = get_env_value("IFS")))
+		*ifs = default_ifs;
+	else
+	{
+		if (!(*ifs = expand_ifs(*ifs)))
+			return (MEMERR);
+		if (*ifs == 0)
+		{
+			free(*ifs);
+			*ifs = NULL;
+		}
+	}
+	return (0);
+}
+
+void		delete_varname(char *cursor)
+{
+	int		trunc;
+	int		i;
+
+	i = 1;
+	trunc = 1;
+	if (*(cursor + 1) == '{')
+	{
+		i++;
+		trunc = 3;
+	}
+	while (parser_is_name_c(cursor[i]))
+	{
+		trunc++;
+		i++;
+	}
+	i = ft_strlen(cursor + trunc);
+	ft_memmove(cursor, cursor + trunc, ft_strlen(cursor + trunc));
+	cursor[i] = 0;
+	return ;
+}
+
+int		expand_param(t_token **word, char **cursor,
+			char *value, t_bool is_redir)
+{
+	char				*ifs;
+	int					i;
+
+	if (get_ifs(&ifs) == MEMERR)
+		return (MEMERR);
+	delete_varname(*cursor);
+	if ((!ifs) || (is_redir == FT_TRUE) || (!split_candidate(value, ifs)))
+	{
+		i = *cursor - (*word)->data.str;
+		if (c_insert_str(*word, *cursor, value) == MEMERR)
+			return (MEMERR);
+		*cursor = (*word)->data.str + i + strlen(value);
+		return (0);
+	}
+	return (handle_ifs(word, cursor, value, ifs));
+}
+
+int		handle_exp_param(t_token *word, t_bool is_redir)
+{
+	char	*cursor;
 	char	*value;
 	int		inside_dquote;
 
-	index = 0;
+	cursor = word->data.str;
 	inside_dquote = 1;
-	while (word->data.str[index])
+	while (*cursor)
 	{
-		if (word->data.str[index] == '"')
+		if (*cursor == '"')
 			inside_dquote = -inside_dquote;
-		if ((word->data.str[index] == '$') && (word->data.str[index + 1] != 0))
+		if ((*cursor == '$') && (*(cursor + 1) != 0))
 		{
-			value = build_param(&(word->data), index + 1);
-			if (!value)
-				return (MEMERR);
-			if (expand_param(&(word->data), &index, value) == MEMERR)
+			if ((!(value = build_param(cursor))
+			|| (expand_param(&word, &cursor, value, is_redir) == MEMERR)))
 				return (MEMERR);
 			free(value);
 			continue;
 		}
-		else if ((word->data.str[index] == '\'') && (inside_dquote == 1))
-			index = next_squote(word->data.str, index);
-		else if (word->data.str[index] == '\\')
-			index = next_bslash(word->data.str, index);
-		index++;
+		else if ((*cursor == '\'') && (inside_dquote == 1))
+			cursor = c_next_squote(cursor);
+		else if (*cursor == '\\')
+			cursor = c_next_bslash(cursor);
+		cursor++;
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/04 15:07:55 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/05 19:38:12 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,8 +154,6 @@ int			handle_common(t_lexer *lx_st)
 
 	while (*(lx_st->cursor))
 	{
-		if (ft_cisin("\n\t |&><;", *(lx_st->cursor)))
-			break ;
 		if ((*(lx_st->cursor) == '"') && ((ret = handle_dquote(lx_st))))
 			return (ret);
 		else if ((*(lx_st->cursor) == '\'') && ((ret = handle_squote(lx_st))))
@@ -170,6 +168,8 @@ int			handle_common(t_lexer *lx_st)
 			if ((ret = handle_backslash(lx_st)))
 				return (ret);
 		}
+		else if (ft_cisin("\n\t |&><;", *(lx_st->cursor)))
+			break ;
 		else if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 			return (MEMERR);
 	}

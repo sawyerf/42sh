@@ -1,8 +1,10 @@
 # 21sh
 
 ## TODO
-- IFS in ft_wordexp is broken on IFS != ` \n\t` and quote removal
-- backslash and single quotes bugged: `var='\'\'\'\''' ; echo $var`
+- ~~IFS in ft_wordexp is broken on IFS != ` \n\t` and quote removal~~
+- ~~ backslash and single quotes bugged: `var='\'\'\'\''' ; echo $var`~~
+- autocomplete after >& is wrong
+- ~~ field splitting has to be handled in handle_exp_param/build_param ~~
 - ls >& 2>file.txt should be valid
 - export builtin, set && unset missing stuff.
 - ~~empty cmdname with redir should apply redir~~

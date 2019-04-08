@@ -6,129 +6,162 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 12:46:44 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/01 12:48:08 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/08 17:38:11 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_wordexp.h"
 
-int		is_ifs(char c, char *ifs)
+int		ft_is_ifs(char *ifs, char c)
 {
-	while (*ifs)
-	{
-		if (*ifs == c)
-			return (1);
-		ifs++;
-	}
-	return (0);
-}
+	static char *wspace = " \n\t";
 
-int		split_candidate(char *str, char *ifs)
-{
-	int index;
-
-	index = 0;
-	while (str[index])
-	{
-		if (is_ifs(str[index], ifs))
-			return (1);
-		index++;
-	}
-	return (0);
-}
-
-void	trim_str(t_str *str_w, char *ifs)
-{
-	int	index;
-
-	index = 0;
-	while (is_ifs(str_w->str[index], ifs))
-		index++;
-	ft_memmove(str_w->str, str_w->str + index, ft_strlen(str_w->str) - index);
-	str_w->len = str_w->len - index;
-	str_w->str[str_w->len] = '\0';
-}
-
-void	ft_trim_ifs(t_str *str_w, char *ifs)
-{
-	trim_str(str_w, ifs);
-	ft_strrev(str_w->str);
-	trim_str(str_w, ifs);
-	ft_strrev(str_w->str);
-}
-
-int		extract_field(t_str *str_w, int *index, t_token **head, char *ifs)
-{
-	int		end;
-	t_token	*new;
-
-	end = *index;
-	while (str_w->str[end])
-	{
-		if (is_ifs(str_w->str[end], ifs))
-			break ;
-		if (str_w->str[end] == '\'')
-			end = next_squote(str_w->str, end) + 1;
-		else if (str_w->str[end] == '"')
-			end = next_dquote(str_w->str, end) + 1;
-		else if (str_w->str[end] == '\\')
-			end = next_bslash(str_w->str, end) + 1;
-		else
-			end++;
-	}
-	if ((!(new = new_token(0))) || (str_putnstr(str_w->str + *index,
-			&(new->data), end - *index) == MEMERR))
-		return (MEMERR);
-	add_token(head, new);
-	*index = end;
-	return (0);
-}
-
-void	replace_token(t_token *word, t_token *new_fields)
-{
-	t_token	*save;
-
-	save = word->next;
-	if (word->data.str)
-		free(word->data.str);
-	ft_memcpy(word, new_fields, sizeof(t_token));
-	while (word->next)
-		word = word->next;
-	word->next = save;
-	free(new_fields);
-}
-
-int		handle_ifs(t_token *word, char *ifs)
-{
-	int		index;
-	t_token	*new_fields;
-
-	ft_trim_ifs(&(word->data), ifs);
-	if (!split_candidate(word->data.str, ifs))
+	if (!(ft_cisin(ifs, c)))
 		return (0);
-	index = 0;
-	new_fields = NULL;
-	while (word->data.str[index])
+	if ((ft_cisin(wspace, c)))
+		return (IFS_WSPACE);
+	return (IFS_REG);
+}
+
+char	*ft_next_field(char *value, char *ifs)
+{
+	int		i;
+	char	*new_field;
+
+	i = 0;
+	while ((value[i]) && (!ft_is_ifs(ifs, value[i])))
+		i++;
+	if (!(new_field = ft_strndup(value, i)))
+		return (NULL);
+	while (ft_is_ifs(ifs, value[i]) == IFS_WSPACE)
+		i++;
+	if (ft_is_ifs(ifs, value[i]) == IFS_REG)
+		i++;
+	ft_memmove(value, value + i, ft_strlen(value + i));
+	value[ft_strlen(value + i)] = 0;
+	return (new_field);
+}
+
+char	*extract_field(char *value, char *ifs)
+{
+	int		i;
+	char	*next_field;
+
+	i = 0;
+	while (ft_is_ifs(ifs, value[i]) == IFS_WSPACE)
+		i++;
+	if ((ft_is_ifs(ifs, value[i]) == IFS_REG))
 	{
-		while (is_ifs(word->data.str[index], ifs))
-			index++;
-		if (extract_field(&(word->data), &index, &new_fields, ifs) == MEMERR)
+		i++;
+		ft_memmove(value, value + i, ft_strlen(value + i));
+		value[ft_strlen(value + i)] = 0;
+		return (ft_strdup(""));
+	}
+	ft_memmove(value, value + i, ft_strlen(value + i));
+	value[ft_strlen(value + i)] = 0;
+	if (!(next_field = ft_next_field(value, ifs)))
+		return (NULL);
+	return (next_field);
+}
+
+int		join_token(t_token *word, char *new_field, int before)
+{
+	char *tmp;
+
+	if ((!before) && (!(tmp = ft_strjoin(word->data.str, new_field))))
+		return (MEMERR);
+	if ((before) && (!(tmp = ft_strjoin(new_field, word->data.str))))
+		return (MEMERR);
+	free(word->data.str);
+	word->data.str = tmp;
+	word->data.len = ft_strlen(tmp);
+	word->data.size = ft_strlen(tmp);
+	return (0);
+}
+
+int		ifs_first_field(t_token **word, char *value, char *ifs)
+{
+	char	*new_field;
+	t_token *tmp;
+
+	if ((ft_is_ifs(ifs, *value)) && ((*word)->data.str[0] != 0))
+	{
+		if (!(new_field = extract_field(value, ifs)))
 			return (MEMERR);
+		if (!(tmp = new_token(WORD)))
+			return (MEMERR);
+		free(tmp->data.str);
+		tmp->data.str = new_field;
+		tmp->data.len = ft_strlen(new_field);
+		tmp->data.size = ft_strlen(new_field);
+		(*word)->next = tmp;
 	}
-	replace_token(word, new_fields);
+	else
+	{
+		if (!(new_field = extract_field(value, ifs)))
+			return (MEMERR);
+		if (join_token(*word, new_field, 0) == MEMERR)
+			return (MEMERR);
+		free(new_field);
+	}
 	return (0);
 }
 
-int		handle_field_split(t_token *word)
+t_token		*ifs_next_fields(t_token **word, t_token *word_2,
+				char *value, char *ifs)
 {
-	static char	*default_ifs = " \t\n";
-	char		*ifs;
+	t_token *tmp;
+	t_token *iter;
+	char	*new_field;
 
-	if (!(ifs = get_env_value("IFS")))
-		ifs = default_ifs;
-	if ((*ifs == '\0') || (!split_candidate(word->data.str, ifs)))
-		return (0);
-	if (handle_ifs(word, ifs) == MEMERR)
+	iter = ((*word)->next != NULL) ? (*word)->next : (*word);
+	while (*value)
+	{
+		if (!split_candidate(value, ifs))
+		{
+			if (join_token(word_2, value, 1) == MEMERR)
+				return (NULL);
+			break ;
+		}
+		if (!(new_field = extract_field(value, ifs))
+			|| (!(tmp = new_token(WORD))))
+			return (NULL);
+		remove_wspace(value, ifs);
+		free(tmp->data.str);
+		tmp->data.str = new_field;
+		tmp->data.len = ft_strlen(new_field);
+		tmp->data.size = ft_strlen(new_field);
+		iter->next = tmp;
+		iter = tmp;
+	}
+	return (iter);
+}
+
+int		handle_ifs(t_token **word, char **cursor, char *value, char *ifs)
+{
+	t_token *word_2;
+	t_token *last;
+
+	if (!(word_2 = ft_split_word(*cursor)))
 		return (MEMERR);
+	word_2->next = (*word)->next;
+	(*word)->next = NULL;
+	if (ifs_first_field(word, value, ifs) == MEMERR)
+		return (MEMERR);
+	if (!(last = ifs_next_fields(word, word_2, value, ifs)))
+		return (MEMERR);
+	if (word_2->data.str[0] == 0)
+	{
+		last->next = word_2->next;
+		free_token(word_2);
+		*cursor = last->data.str + ft_strlen(last->data.str);
+		*word = last->next;
+	}
+	else
+	{
+		last->next = word_2;
+		*cursor = word_2->data.str;
+		*word = word_2;
+	}
 	return (0);
 }

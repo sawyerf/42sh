@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/01 13:14:15 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/04 22:34:55 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,16 @@ void	remove_token(t_simple_cmd *cmd, t_token *todel)
 	{
 		free_token(todel);
 		cmd->word_lst = tmp;
-		return;
+		return ;
 	}
 	tmp = cmd->word_lst;
 	while (tmp->next)
 	{
 		if (tmp->next == todel)
 		{
-			free_token(todel);
 			tmp->next = todel->next;
-			return;
+			free_token(todel);
+			return ;
 		}
 		tmp = tmp->next;
 	}
@@ -77,12 +77,12 @@ int			expand_token_lst(t_simple_cmd *sim_cmd)
 		save = iter->next;
 		if (ft_wordexp(iter, FT_FALSE) == MEMERR)
 			return (MEMERR);
-		if ((!quoted) && (iter->data.str[0] == 0))
+		if ((!quoted) && (iter->data.str[0] == 0) && (iter->next == save)) //hack to keep empty str from field splitting
 			remove_token(sim_cmd, iter);
 		prev = iter;
 		iter = save;
 	}
-	return (0);	
+	return (0);
 }
 
 char		**tokens_to_str(t_token *word)
@@ -110,15 +110,19 @@ void	extract_assign(t_simple_cmd *before)
 	t_token *words;
 	t_token	*assigns;
 	t_token *save;
+	int		flag;
 
+	flag = 0;
 	words = NULL;
 	assigns = NULL;
 	iter = before->word_lst;
-	while (iter)
+	while ((iter))
 	{
+		if (iter->type == WORD)
+			flag = 1;
 		save = iter->next;
-		if ((iter->data.str[0] != '=')
-			&& (parser_is_assign(iter)))
+		if (((iter->data.str[0] != '=')
+			&& (parser_is_assign(iter))) && (!flag))
 			add_token(&assigns, iter);
 		else
 			add_token(&words, iter);
