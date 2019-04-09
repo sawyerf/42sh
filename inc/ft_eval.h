@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/04 21:11:42 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/09 20:35:22 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,9 @@ typedef struct			s_cmd_tab
 	struct s_cmd_tab	*previous;
 }						t_cmd_tab;
 
+void	restore_fd(t_list *to_close);
+void	close_save(void);
+int		pre_execution(t_cmd_tab *cmd);
 int		eval_tree(t_ast_node *tree);
 void	add_to_tree(t_ast_node **head, t_ast_node *to_add);
 int		bin_pathfinder(t_cmd_tab *cmd, char *path);
@@ -74,4 +77,10 @@ int		handle_right(int *left_fd, int *right_fd, t_redir *redir);
 int		handle_perm(char *cmd_name);
 void	exit_wrap(int code, t_cmd_tab *cmd);
 int		pathfinder(t_cmd_tab *cmd);
+void	token_to_array(t_token *word, char **array);
+void	add_cmd_tab(t_cmd_tab **head, t_cmd_tab *to_add);
+void	remove_token(t_simple_cmd *cmd, t_token *todel);
+int		is_quoted(char *str);
+t_bool	check_fd(int fd);
+
 #endif

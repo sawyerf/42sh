@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/08 17:39:15 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/09 21:43:11 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,8 @@ int	quote_removal(t_token *word);
 int	insert_str(t_str *word, int *index, char *to_insert);
 int	tilde_valid(char c);
 int	expand_tilde(t_str *word, int *index, int add_quote);
+char	*ft_next_field(char *value, char *ifs);
+int		get_ifs(char **ifs);
+void	delete_varname(char *cursor);
 
 #endif

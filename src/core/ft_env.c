@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/24 13:58:14 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/04 22:34:53 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/09 20:17:33 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	spawn_new_env(char **args, char **new_env)
 	if (ft_cisin(args[0], '/'))
 	{
 		if (handle_perm(new_cmd.av[0]) != 0)
-			exec_error(ACCERR, new_cmd.av[0]);
+			exec_error(BIN_PERM_DENY, new_cmd.av[0]);
 		if (!(new_cmd.full_path = ft_strdup(new_cmd.av[0])))
 			return (MEMERR);
 	}

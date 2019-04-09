@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/04 21:11:46 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/09 20:16:13 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ typedef int				(*t_read_fn)(char*, char**);
 /**/
 extern	t_sh		g_sh;
 
+int						br_print(int err, t_cmd_tab *cmd);
 int						request_new_line(t_lexer *lx);
 int						run_command(char *line);
 char					**shlvl(char **env);

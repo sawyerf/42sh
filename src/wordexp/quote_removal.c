@@ -6,13 +6,13 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 19:33:29 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/05 19:37:10 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/09 21:46:33 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_wordexp.h"
 
-void	shift_str_left(t_str *str_w, int index)
+void		shift_str_left(t_str *str_w, int index)
 {
 	ft_memmove(str_w->str + index, str_w->str + index + 1, str_w->len - index);
 	str_w->len = str_w->len - 1;
@@ -27,7 +27,7 @@ static void	shift_bslash(t_str *str_w, int *index)
 		*index = *index + 1;
 }
 
-void	inside_dquote_qr(t_str *str_w, int *index)
+void		inside_dquote_qr(t_str *str_w, int *index)
 {
 	shift_str_left(str_w, *index);
 	while (str_w->str[*index])
@@ -45,7 +45,7 @@ void	inside_dquote_qr(t_str *str_w, int *index)
 	}
 }
 
-void	inside_squote_qr(t_str *str_w, int *index)
+void		inside_squote_qr(t_str *str_w, int *index)
 {
 	shift_str_left(str_w, *index);
 	while (str_w->str[*index])
@@ -59,7 +59,7 @@ void	inside_squote_qr(t_str *str_w, int *index)
 	}
 }
 
-int		quote_removal(t_token *word)
+int			quote_removal(t_token *word)
 {
 	int index;
 

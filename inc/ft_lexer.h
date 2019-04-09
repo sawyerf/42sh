@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/02 20:07:51 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/09 21:18:19 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int handle_semic(t_lexer *lexer_state);
 int handle_less(t_lexer *lexer_state);
 int handle_great(t_lexer *lexer_state);
 int handle_column(t_lexer *lexer_state);
+int handle_backslash(t_lexer *lexer_state);
 
 /*t_str functions*/
 int	str_putnstr(char *str, t_str *data, size_t n);

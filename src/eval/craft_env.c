@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:22:06 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/04 22:31:55 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/09 21:15:13 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char		*get_process_env(char *key, char **env)
 	return (get_value(env[i]));
 }
 
-void	replace_var(char **fresh, char *to_add)
+void		replace_var(char **fresh, char *to_add)
 {
 	free(*fresh);
 	*fresh = to_add;

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/02 20:35:25 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/09 21:29:44 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	lex_add_tk(t_lexer *lexer, t_token *tk)
 	}
 }
 
-void	init_lexer(char *input, t_lexer *lexer_state)
+void		init_lexer(char *input, t_lexer *lexer_state)
 {
 	lexer_state->err = 0;
 	lexer_state->line = input;

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 14:16:02 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/04 21:13:02 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/09 20:34:51 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,6 @@ static int		expand_redir(t_redir *redir)
 	if ((redir->right) && (ft_wordexp(redir->right, FT_TRUE) == MEMERR))
 		return (MEMERR);
 	return (0);
-}
-
-static t_bool	check_fd(int fd)
-{
-	struct stat	buf;
-
-	if (!fstat(fd, &buf))
-		return (FT_TRUE);
-	ft_dprintf(STDERR_FILENO, "21sh: bad file descriptor: %d\n", fd);
-	return (FT_FALSE);
 }
 
 static void		handle_left(int *left_fd, t_redir *redir)

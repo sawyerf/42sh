@@ -6,14 +6,14 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/05 19:38:12 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/09 21:28:59 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline.h"
 #include "ft_lexer.h"
 
-int			request_new_line(t_lexer *lx_st)
+int	request_new_line(t_lexer *lx_st)
 {
 	t_read_fn	read_fn;
 	char		*new_line;
@@ -33,74 +33,7 @@ int			request_new_line(t_lexer *lx_st)
 	return (0);
 }
 
-static int	handle_backslash(t_lexer *lx_st)
-{
-	int ret;
-
-	if ((str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
-		|| (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR))
-		return (MEMERR);
-	if (*(lx_st->cursor) == '\0')
-	{
-		if ((ret = request_new_line(lx_st)))
-			return (ret);
-	}
-	return (0);
-}
-
-int			handle_dquote(t_lexer *lx_st)
-{
-	int ret;
-
-	if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
-		return (MEMERR);
-	while (42)
-	{
-		if (*(lx_st->cursor) == '"')
-			return (str_putc(&(lx_st->cursor), &(lx_st->token->data))
-				== MEMERR) ? MEMERR : handle_common(lx_st);
-		else if ((*(lx_st->cursor) == '\\') && (*((lx_st->cursor) + 1)))
-		{
-			if (handle_backslash(lx_st))
-				return (MEMERR);
-		}
-		else if (*(lx_st->cursor) == '\0')
-		{
-			if ((ret = request_new_line(lx_st)))
-				return (ret);
-		}
-		else if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
-			return (MEMERR);
-	}
-	return (ENDOFINPUT);
-}
-
-int			handle_squote(t_lexer *lx_st)
-{
-	int ret;
-
-	if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
-		return (MEMERR);
-	while (42)
-	{
-		if (*(lx_st->cursor) == '\'')
-		{
-			if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
-				return (MEMERR);
-			return (handle_common(lx_st));
-		}
-		else if (*(lx_st->cursor) == '\0')
-		{
-			if ((ret = request_new_line(lx_st)))
-				return (ret);
-		}
-		else if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
-			return (MEMERR);
-	}
-	return (ENDOFINPUT);
-}
-
-int			handle_digit(t_lexer *lx_st)
+int	handle_digit(t_lexer *lx_st)
 {
 	static	char	*ops = "|&><;";
 
@@ -121,7 +54,7 @@ int			handle_digit(t_lexer *lx_st)
 	return (0);
 }
 
-int			handle_param_exp(t_lexer *lx_st)
+int	handle_param_exp(t_lexer *lx_st)
 {
 	if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 		return (MEMERR);
@@ -148,7 +81,7 @@ int			handle_param_exp(t_lexer *lx_st)
 	return (0);
 }
 
-int			handle_common(t_lexer *lx_st)
+int	handle_common(t_lexer *lx_st)
 {
 	int ret;
 
@@ -176,88 +109,10 @@ int			handle_common(t_lexer *lx_st)
 	return (0);
 }
 
-int			handle_newline(t_lexer *lx_st)
+int	handle_newline(t_lexer *lx_st)
 {
 	lx_st->token->type = NEWLINE;
 	if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 		return (MEMERR);
-	return (0);
-}
-
-int			handle_semic(t_lexer *lx_st)
-{
-	lx_st->token->type = SEMI_COL;
-	if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
-		return (MEMERR);
-	return (0);
-}
-
-int			handle_column(t_lexer *lx_st)
-{
-	if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
-		return (MEMERR);
-	if (*(lx_st->cursor) == '|')
-	{
-		if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
-			return (MEMERR);
-		lx_st->token->type = OR_IF;
-	}
-	else
-		lx_st->token->type = PIPE;
-	return (0);
-}
-
-int			handle_ampersand(t_lexer *lx_st)
-{
-	if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
-		return (MEMERR);
-	if (*(lx_st->cursor) == '&')
-	{
-		if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
-			return (MEMERR);
-		lx_st->token->type = AND_IF;
-	}
-	else
-		lx_st->token->type = AMPERS;
-	return (0);
-}
-
-int			handle_great(t_lexer *lx_st)
-{
-	if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
-		return (MEMERR);
-	lx_st->token->type = GREAT;
-	if (*(lx_st->cursor) == '>')
-	{
-		if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
-			return (MEMERR);
-		lx_st->token->type = DGREAT;
-	}
-	else if (*(lx_st->cursor) == '&')
-	{
-		if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
-			return (MEMERR);
-		lx_st->token->type = GREATAND;
-	}
-	return (0);
-}
-
-int			handle_less(t_lexer *lx_st)
-{
-	if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
-		return (MEMERR);
-	lx_st->token->type = LESS;
-	if (*(lx_st->cursor) == '<')
-	{
-		if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
-			return (MEMERR);
-		lx_st->token->type = DLESS;
-	}
-	if (*(lx_st->cursor) == '&')
-	{
-		if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
-			return (MEMERR);
-		lx_st->token->type = LESSAND;
-	}
 	return (0);
 }

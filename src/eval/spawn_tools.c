@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 19:20:53 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/01 13:28:13 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/09 21:15:33 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,6 @@ int		handle_perm(char *cmd_name)
 	int ret;
 
 	if ((ret = bin_perm(cmd_name)) != 0)
-		return (ACCERR);
+		return (ret);
 	return (0);
-}
-
-void	exit_wrap(int code, t_cmd_tab *cmd)
-{
-	(void)cmd;
-	exit(code);
 }

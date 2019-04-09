@@ -6,55 +6,66 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/05 18:12:15 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/09 19:52:21 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_eval.h"
-/* work in progress here*/
-int	eval_tree(t_ast_node *tree)
+
+static int	eval_sep(t_ast_node *tree)
+{
+	if ((tree->left) && (eval_tree(tree->left) == MEMERR))
+		return (MEMERR);
+	if ((tree->right) && (eval_tree(tree->right) == MEMERR))
+		return (MEMERR);
+	return (0);
+}
+
+static int	eval_and_if(t_ast_node *tree)
+{
+	if (eval_tree(tree->left) == MEMERR)
+		return (MEMERR);
+	if (tree->left->exit_status == 0)
+	{
+		if (eval_tree(tree->right) == MEMERR)
+			return (MEMERR);
+		tree->exit_status = tree->right->exit_status;
+	}
+	return (0);
+}
+
+static int	eval_or_if(t_ast_node *tree)
+{
+	if (eval_tree(tree->left) == MEMERR)
+		return (MEMERR);
+	if (tree->left->exit_status != 0)
+	{
+		if (eval_tree(tree->right) == MEMERR)
+			return (MEMERR);
+		tree->exit_status = tree->right->exit_status;
+	}
+	else
+		tree->exit_status = tree->left->exit_status;
+	return (0);
+}
+
+int			eval_tree(t_ast_node *tree)
 {
 	if (tree == NULL)
-	{
-		ft_printf("fatal error in eval_tree: unknown node type\n");
 		return (-1);
-	}
 	if ((tree->type == SEMI_COL) || (tree->type == AMPERS)
 		|| (tree->type == NEWLINE))
-	{
-		if (tree->left)
-			eval_tree(tree->left);
-		if (tree->right)
-			eval_tree(tree->right);
-		return (0);
-	}
+		return (eval_sep(tree));
 	else if (tree->type == AND_IF)
-	{
-		eval_tree(tree->left);
-		if (tree->left->exit_status == 0)
-		{
-			eval_tree(tree->right);
-			tree->exit_status = tree->right->exit_status;
-		}
-		return (0);
-	}
+		return (eval_and_if(tree));
 	else if (tree->type == OR_IF)
-	{
-		eval_tree(tree->left);
-		if (tree->left->exit_status != 0)
-		{
-			eval_tree(tree->right);
-			tree->exit_status = tree->right->exit_status;
-		}
-		else
-			tree->exit_status = tree->left->exit_status;
-		return (0);
-	}
+		return (eval_or_if(tree));
 	else if (tree->type == PIPE)
 	{
-		exec_pipeline(tree);
+		if (exec_pipeline(tree) == MEMERR)
+			return (MEMERR);
 		return (0);
 	}
-	ft_printf("fatal error in eval_tree: unknown node type\n");
-	exit(1);
+	ft_dprintf(STDERR_FILENO, "21sh: fatal error in eval: unknown node type\n");
+	return (-1);
 }

@@ -6,43 +6,13 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 12:46:44 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/08 17:38:11 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/09 21:46:56 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_wordexp.h"
 
-int		ft_is_ifs(char *ifs, char c)
-{
-	static char *wspace = " \n\t";
-
-	if (!(ft_cisin(ifs, c)))
-		return (0);
-	if ((ft_cisin(wspace, c)))
-		return (IFS_WSPACE);
-	return (IFS_REG);
-}
-
-char	*ft_next_field(char *value, char *ifs)
-{
-	int		i;
-	char	*new_field;
-
-	i = 0;
-	while ((value[i]) && (!ft_is_ifs(ifs, value[i])))
-		i++;
-	if (!(new_field = ft_strndup(value, i)))
-		return (NULL);
-	while (ft_is_ifs(ifs, value[i]) == IFS_WSPACE)
-		i++;
-	if (ft_is_ifs(ifs, value[i]) == IFS_REG)
-		i++;
-	ft_memmove(value, value + i, ft_strlen(value + i));
-	value[ft_strlen(value + i)] = 0;
-	return (new_field);
-}
-
-char	*extract_field(char *value, char *ifs)
+char		*extract_field(char *value, char *ifs)
 {
 	int		i;
 	char	*next_field;
@@ -64,7 +34,7 @@ char	*extract_field(char *value, char *ifs)
 	return (next_field);
 }
 
-int		join_token(t_token *word, char *new_field, int before)
+int			join_token(t_token *word, char *new_field, int before)
 {
 	char *tmp;
 
@@ -79,7 +49,7 @@ int		join_token(t_token *word, char *new_field, int before)
 	return (0);
 }
 
-int		ifs_first_field(t_token **word, char *value, char *ifs)
+int			ifs_first_field(t_token **word, char *value, char *ifs)
 {
 	char	*new_field;
 	t_token *tmp;
@@ -137,7 +107,7 @@ t_token		*ifs_next_fields(t_token **word, t_token *word_2,
 	return (iter);
 }
 
-int		handle_ifs(t_token **word, char **cursor, char *value, char *ifs)
+int			handle_ifs(t_token **word, char **cursor, char *value, char *ifs)
 {
 	t_token *word_2;
 	t_token *last;

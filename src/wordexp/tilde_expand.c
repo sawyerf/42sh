@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/04 21:40:46 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/09 21:39:01 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,25 +30,6 @@ char	*quote_home(char *str)
 	ft_strcpy(new + 1, str);
 	new[ft_strlen(new)] = '\'';
 	return (new);
-}
-
-int		insert_str(t_str *word, int *index, char *to_insert)
-{
-	char *save;
-
-	while ((word->len + ft_strlen(to_insert)) >= word->size)
-	{
-		if (ft_str_realloc(word, INPUTSZ) == MEMERR)
-			return (MEMERR);
-	}
-	if (!(save = ft_strdup(&(word->str[*index]))))
-		return (MEMERR);
-	ft_memcpy(&(word->str[*index]), to_insert, ft_strlen(to_insert));
-	*index = ft_strlen(to_insert) + *index;
-	ft_strcpy(&(word->str[*index]), save);
-	word->len = ft_strlen(word->str);
-	free(save);
-	return (0);
 }
 
 int		expand_tilde(t_str *word, int *index, int add_quote)

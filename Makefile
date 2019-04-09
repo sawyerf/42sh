@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/04/08 18:08:49 by ktlili           ###   ########.fr        #
+#    Updated: 2019/04/09 21:42:46 by ktlili           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,6 +68,11 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			eval/craft_env.c			\
 			eval/handle_redir.c			\
 			eval/redir_handle_right.c   \
+			eval/spawn_tools_2.c		\
+			eval/pre_execution.c		\
+			eval/expansion_tools.c		\
+			wordexp/expansion_util_3.c	\
+			wordexp/expansion_util_2.c	\
 			wordexp/expansion_util.c	\
 			wordexp/field_split.c		\
 			wordexp/ft_wordexp.c		\
@@ -81,8 +86,18 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			lexer/lexer_tools.c			\
 			lexer/rev_lex.c				\
 			lexer/memerror.c			\
+			lexer/lex_quotes.c			\
+			lexer/lex_op.c				\
+			lexer/token_tools.c			\
+			parser/parser_tools_2.c		\
+			parser/parser_free_fn.c		\
 			parser/parser_ast.c			\
 			parser/refactor_parser.c	\
+			parser/parser_cmd_misc.c	\
+			parser/parser_complete_cmd.c\
+			parser/parser_expect_and_or.c\
+			parser/parser_simple_cmd.c	\
+			parser/parser_expect_redir.c\
 			parser/parser_tools.c		\
 			parser/sh_parser.c			\
 			parser/parser_heredoc.c		\

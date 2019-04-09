@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 15:33:08 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/05 18:11:02 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/09 21:12:56 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,33 +42,7 @@ static int	here_doc_err(char *to_free, int ret)
 	return (HEREDOC_ERR);
 }
 
-char		*get_file_delim(char *next_nl, char *here_end, t_parser *parser)
-{
-	char	*delim;
-	char	*ln;
-	int		len;
-	char	*tmp;
-
-	(void)parser;
-	len = ft_strlen(here_end);
-	while (42)
-	{
-		readline(">", &ln);
-		if ((!ln) || (*ln == 0))
-			return (NULL);
-		free(next_nl);
-		tmp = ft_strjoin(next_nl, ln);
-		free(next_nl);
-		next_nl = tmp;
-		delim = ft_strstr(next_nl, here_end);
-		if ((delim[len] == '\n') || (delim[len] == '\0'))
-			return (delim);
-		next_nl = delim + len;
-	}
-	return (NULL);
-}
-
-static int	read_heredoc(t_token *io_here, size_t len)
+int			read_heredoc(t_token *io_here, size_t len)
 {
 	char		*here_doc;
 	char		*new_ln;

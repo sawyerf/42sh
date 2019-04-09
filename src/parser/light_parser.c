@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 14:58:34 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/08 19:40:02 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/09 21:07:10 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,29 +84,6 @@ int			exp_tilde(t_autocomplete *acp)
 		return (MEMERR);
 	acp->str = tmp.str;
 	return (0);
-}
-
-void		clear_autocom(t_autocomplete *autoc)
-{
-	int i;
-
-	i = 0;
-	ft_strrev(autoc->str);
-	while (autoc->str[i])
-	{
-		if ((autoc->str[i] == '"') || (autoc->str[i] == '\'')
-			|| (autoc->str[i] == '\\'))
-		{
-			if (autoc->str[i + 1])
-				autoc->type = arg;
-			autoc->str[i] = 0;
-			ft_strrev(autoc->str);
-			return ;
-		}
-		i++;
-	}
-	ft_strrev(autoc->str);
-	return ;
 }
 
 int			ft_light_parser(char *lin, t_autocomplete *autocomplete)

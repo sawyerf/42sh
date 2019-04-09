@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 14:30:55 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/02 21:22:18 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/09 21:12:24 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,23 +79,4 @@ void	add_to_tree_sep(t_ast_node **head, t_ast_node *to_add)
 			*head = to_add;
 		}
 	}
-}
-
-void	add_to_tree(t_ast_node **head, t_ast_node *to_add)
-{
-	if (*head == NULL)
-	{
-		*head = to_add;
-		return ;
-	}
-	if (to_add->type == PIPE)
-	{
-		if ((*head)->right == NULL)
-			(*head)->right = to_add;
-		else
-		{
-			(*head)->right->right = to_add;
-		}
-	}
-	return (add_to_tree_sep(head, to_add));
 }

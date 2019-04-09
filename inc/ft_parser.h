@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:51:15 by ktlili            #+#    #+#             */
-/*   Updated: 2019/03/19 10:07:44 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/09 21:11:51 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int		tree_add_nl(t_parser *parser);
 int		tree_add_sep(t_parser *parser);
 int		tree_add_and_or(t_parser *parser);
 int		tree_add_pipeline(t_parser *parser);
+void	add_to_tree_sep(t_ast_node **head, t_ast_node *to_add);
+int		dispatch_errors(int errnum, t_parser parser);
 // test functions
 void	print_token(t_token *t);
 void	print_tokens(t_token *start);
@@ -58,6 +60,7 @@ recursive decent functions
 */
 int	expect_newline_lst(t_parser *parser);
 int	expect_linebreak(t_parser *parser);
+int	expect_linebreak_rdl(t_parser *parser);
 int	expect_separator_op(t_parser *parser);
 int	expect_separator(t_parser *parser);
 int	expect_filename(t_parser *parser);
@@ -70,7 +73,7 @@ int	expect_cmd_pre(t_parser *parser);
 int	expect_word(t_parser *parser);
 int	expect_cmd_suffix(t_parser *parser);
 int	expect_cmd_name(t_parser *parser);
-int	expect_simeple_cmd(t_parser *parser);
+int	expect_simple_cmd(t_parser *parser);
 int	expect_pipeline_suffix(t_parser *parser);
 int	expect_pipeline(t_parser *parser);
 int	expect_and_or_suffix(t_parser *parser);

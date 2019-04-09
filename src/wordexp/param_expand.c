@@ -6,13 +6,13 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/08 17:41:29 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/09 21:45:18 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_wordexp.h"
 
-static	size_t	quote_str_len(char *str)
+static size_t	quote_str_len(char *str)
 {
 	int		i;
 	size_t	count;
@@ -28,7 +28,7 @@ static	size_t	quote_str_len(char *str)
 	return (count);
 }
 
-char	*quote_str(char *str)
+static char		*quote_str(char *str)
 {
 	size_t	count;
 	int		j;
@@ -55,7 +55,7 @@ char	*quote_str(char *str)
 	return (quoted);
 }
 
-char	*build_param(char *cursor)
+char			*build_param(char *cursor)
 {
 	static char	*empty_str = "";
 	char		*value;
@@ -70,50 +70,8 @@ char	*build_param(char *cursor)
 	return (value);
 }
 
-int		get_ifs(char **ifs)
-{
-	static char *default_ifs = "  \t\n";
-
-	if (!(*ifs = get_env_value("IFS")))
-		*ifs = default_ifs;
-	else
-	{
-		if (!(*ifs = expand_ifs(*ifs)))
-			return (MEMERR);
-		if (*ifs == 0)
-		{
-			free(*ifs);
-			*ifs = NULL;
-		}
-	}
-	return (0);
-}
-
-void		delete_varname(char *cursor)
-{
-	int		trunc;
-	int		i;
-
-	i = 1;
-	trunc = 1;
-	if (*(cursor + 1) == '{')
-	{
-		i++;
-		trunc = 3;
-	}
-	while (parser_is_name_c(cursor[i]))
-	{
-		trunc++;
-		i++;
-	}
-	i = ft_strlen(cursor + trunc);
-	ft_memmove(cursor, cursor + trunc, ft_strlen(cursor + trunc));
-	cursor[i] = 0;
-	return ;
-}
-
-int		expand_param(t_token **word, char **cursor,
-			char *value, t_bool is_redir)
+int				expand_param(t_token **word, char **cursor,
+					char *value, t_bool is_redir)
 {
 	char				*ifs;
 	int					i;
@@ -132,7 +90,7 @@ int		expand_param(t_token **word, char **cursor,
 	return (handle_ifs(word, cursor, value, ifs));
 }
 
-int		handle_exp_param(t_token *word, t_bool is_redir)
+int				handle_exp_param(t_token *word, t_bool is_redir)
 {
 	char	*cursor;
 	char	*value;
