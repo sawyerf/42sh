@@ -27,15 +27,29 @@ int	ft_unset(t_cmd_tab *cmd)
 	return (0);
 }
 
-int	ft_unsetenv(t_cmd_tab *cmd)
+static int error_handle(t_cmd_tab *cmd)
 {
-	int	i;
-
 	if (cmd->av[1] == NULL)
 	{
 		putstr_stderr("usage: unsetenv [NAME] ..\n");
 		return (-1);
 	}
+	if (cmd->av[1][0] == 0)
+	{
+		ft_dprintf(STDERR_FILENO,
+			"21sh: setenv : variable name cannot be empty\n");
+		return(-1);
+	}
+	return (0);
+}
+
+int	ft_unsetenv(t_cmd_tab *cmd)
+{
+	int	i;
+
+
+	if (error_handle(cmd))
+		return (-1);
 	else
 	{
 		i = 0;

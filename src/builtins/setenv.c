@@ -28,12 +28,12 @@ int	setenv_wrapper(t_cmd_tab *cmd)
 		ft_printf("usage: setenv [NAME] [VALUE]\n");
 		return (-1);
 	}
-	i = 0;
-	if (!valid_env_name(cmd->av[1]))
+	if ((cmd->av[1][0] == 0) || (!valid_env_name(cmd->av[1])))
 	{
 		putstr_stderr("setenv: variable name is invalid\n");
 		return (-1);
 	}
+	i = 0;
 	while (cmd->av[i] != NULL)
 	{
 		i++;

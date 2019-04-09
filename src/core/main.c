@@ -14,10 +14,10 @@
 #include "readline.h"
 #include "hashtable.h"
 
-t_sh	g_sh;
+t_sh			g_sh;
 extern t_list	*g_thash[];
 
-static int	init_shell(char **env)
+static int	init_shell(char **env, t_read_fn *read_fn)
 {
 	g_sh.mode = MODEFILE;
 	if (isatty(STDIN_FILENO))
@@ -33,6 +33,12 @@ static int	init_shell(char **env)
 	if (dup2(STDERR_FILENO, FDSAVEERR) == -1)
 		return (-1);
 	g_sh.fd = 0;
+	ht_init();
+	ht_refreshall(get_env_value("PATH"));
+	hstread(g_sh.env);
+	*read_fn = sh_readfile;
+	if (g_sh.mode == INTERACTIVE)
+		*read_fn = readline;
 	return (0);
 }
 
@@ -49,14 +55,8 @@ int			main(int ac, char **av, char **env)
 	t_read_fn	read_fn;
 
 	silence_ac_av(ac, av);
-	if (init_shell(env))
+	if (init_shell(env, &read_fn))
 		return (MEMERR);
-	ht_init();
-	ht_refreshall(get_env_value("PATH"));
-	hstread(g_sh.env);
-	read_fn = sh_readfile;
-	if (g_sh.mode == INTERACTIVE)
-		read_fn = readline;
 	while (42)
 	{
 		if ((ret = read_fn("$> ", &line)) == CTRL_D ||
