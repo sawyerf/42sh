@@ -6,19 +6,18 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 15:48:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/04 21:19:19 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/10 18:21:22 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LEXER_TYPEDEF_H
 # define FT_LEXER_TYPEDEF_H
 
-
 typedef	enum	e_token_type
 {
 	WORD,
 	NEWLINE,
-	IO_NUM, 
+	IO_NUM,
 	FILENAME,
 	ASSIGN,
 	PIPE,
@@ -34,30 +33,29 @@ typedef	enum	e_token_type
 	DLESS,
 	HERE_END,
 	HERE_END_QU,
-	EOI, // End Of Input
+	EOI,
 }				t_token_type;
 
-
-typedef struct s_lexer
+typedef struct		s_lexer
 {
-	char *cursor;
-	char *line;
-	struct s_token *token;
-	struct s_token *head;
+	char			*cursor;
+	char			*line;
+	struct s_token	*token;
+	struct s_token	*head;
 	int				err;
-}				t_lexer;
+}					t_lexer;
 
-typedef	struct	s_token
+typedef	struct		s_token
 {
-	t_token_type		type;
-	t_str				data;
-	struct s_token		*next;	
-}				t_token;
+	t_token_type	type;
+	t_str			data;
+	struct s_token	*next;
+}					t_token;
 
-typedef struct s_lx_fn
+typedef struct		s_lx_fn
 {
-	char	c;
-	int		(*f)(t_lexer*);
-}				t_lx_fn;
+	char			c;
+	int				(*f)(t_lexer*);
+}					t_lx_fn;
 
 #endif

@@ -6,13 +6,13 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/08 17:40:16 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/10 17:50:03 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_wordexp.h"
 
-static void heredoc_quote_rm(t_token *word)
+static void	heredoc_quote_rm(t_token *word)
 {
 	int index;
 
@@ -27,20 +27,17 @@ static void heredoc_quote_rm(t_token *word)
 	}
 }
 
-int	ft_wordexp_heredoc(t_token *word)
+int			ft_wordexp_heredoc(t_token *word)
 {
-
 	if (handle_tilde(word) == MEMERR)
 		return (MEMERR);
 	if (handle_exp_param(word, FT_TRUE) == MEMERR)
 		return (MEMERR);
-
 	heredoc_quote_rm(word);
-//	inside_dquote_qr(&(word->data), &i);
 	return (0);
 }
 
-int	ft_wordexp(t_token *word, t_bool is_redir)
+int			ft_wordexp(t_token *word, t_bool is_redir)
 {
 	if (handle_tilde(word) == MEMERR)
 		return (MEMERR);

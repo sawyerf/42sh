@@ -6,14 +6,22 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/09 21:12:17 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/10 17:48:37 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_parser.h"
 #include "readline.h"
 
-int	next_token(t_parser *parser)
+static void	init_parser(t_parser *parser, t_lexer *lexer, char *line)
+{
+	ft_bzero(parser, sizeof(t_parser));
+	ft_bzero(lexer, sizeof(t_lexer));
+	init_lexer(line, lexer);
+	parser->lx_state = lexer;
+}
+
+int			next_token(t_parser *parser)
 {
 	int ret;
 
@@ -32,7 +40,7 @@ int	next_token(t_parser *parser)
 	return (0);
 }
 
-int	execute_cmdline(t_parser *parser)
+int			execute_cmdline(t_parser *parser)
 {
 	if (eval_tree(parser->tree) == MEMERR)
 		return (MEMERR);
@@ -42,7 +50,7 @@ int	execute_cmdline(t_parser *parser)
 	return (0);
 }
 
-void	add_to_tree(t_ast_node **head, t_ast_node *to_add)
+void		add_to_tree(t_ast_node **head, t_ast_node *to_add)
 {
 	if (*head == NULL)
 	{
@@ -59,16 +67,13 @@ void	add_to_tree(t_ast_node **head, t_ast_node *to_add)
 	return (add_to_tree_sep(head, to_add));
 }
 
-int	sh_parser_refac(char *line)
+int			sh_parser(char *line)
 {
 	t_parser	parser;
 	t_lexer		lexer;
 	int			ret;
 
-	ft_bzero(&parser, sizeof(t_parser));
-	ft_bzero(&lexer, sizeof(t_lexer));
-	init_lexer(line, &lexer);
-	parser.lx_state = &lexer;
+	init_parser(&parser, &lexer, line);
 	if ((ret = next_token(&parser)))
 	{
 		dispatch_errors(ret, parser);

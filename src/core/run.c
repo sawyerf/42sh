@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 16:08:26 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/04 19:49:48 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/10 17:42:56 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int			run_command(char *line)
 		return (-1);
 	if ((*line) && (ft_strcmp(line, "\n")))
 	{
-		if ((ret = sh_parser_refac(line)))
+		if ((ret = sh_parser(line)))
 			return (ret);
 	}
 	else

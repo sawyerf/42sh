@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_light_parser.h                                        :+:      :+:    :+:   */
+/*   ft_light_parser.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/01 14:51:15 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/09 21:07:32 by ktlili           ###   ########.fr       */
+/*   Created: 2019/04/10 18:19:04 by ktlili            #+#    #+#             */
+/*   Updated: 2019/04/10 18:19:13 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef Ft_light_parser_H
-# define Ft_light_parser_H
+#ifndef FT_LIGHT_PARSER_H
+# define FT_LIGHT_PARSER_H
 
 # include "sh_core.h"
 # include "ft_lexer.h"

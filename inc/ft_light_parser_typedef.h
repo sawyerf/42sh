@@ -6,26 +6,26 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 15:02:34 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/08 19:08:08 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/10 18:18:32 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LIGHT_PARSER_TYPEDEF_H
-#define  FT_LIGHT_PARSER_TYPEDEF_H
+# define FT_LIGHT_PARSER_TYPEDEF_H
 
-#define VALID 1 
-#define INVALID	0
+# define VALID 1
+# define INVALID 0
 
-typedef enum e_expecting
+typedef enum	e_expecting
 {
-	cmd_name, 
-	arg, // arg = filename for autocompletion
+	cmd_name,
+	arg,
 	param,
-}			t_expecting;
+}				t_expecting;
 
-typedef struct 	s_autocomplete
+typedef struct	s_autocomplete
 {
-	char 		*str;
+	char		*str;
 	t_expecting type;
 }				t_autocomplete;
 

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/09 20:16:13 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/10 18:14:24 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,38 +28,37 @@
 # include <sys/wait.h>
 # include <limits.h>
 
-
 # define CTRL_D 1
 # define CTRL_C 2
 
 # define MEMERR 1234
-# define SYNERR -1 
+# define SYNERR -1
 # define ENVERR 4
 # define ACCERR 5
 # define HEREDOC_ERR 6
-#define FDSAVEIN 255
-#define FDSAVEOUT 256
-#define FDSAVEERR 257
-#define BUILTIN 666
-#define BUILTIN_FAIL 667
+# define FDSAVEIN 255
+# define FDSAVEOUT 256
+# define FDSAVEERR 257
+# define BUILTIN 666
+# define BUILTIN_FAIL 667
 
-#define MODEFILE 2 
-#define INTERACTIVE 1
-#define NONINTERACTIVE 0
-typedef struct 		s_sh
+# define MODEFILE 2
+# define INTERACTIVE 1
+# define NONINTERACTIVE 0
+
+typedef struct s_cmd_tab	t_cmd_tab;
+typedef	int				(*t_builtin)(t_cmd_tab*);
+typedef int				(*t_read_fn)(char*, char**);
+
+typedef struct			s_sh
 {
-	int				mode;
-	int				status;
-	char			**local;
-	char			**env;
-	int				fd;
-	/* stuff needed by job control will eventually live in this struct 
-	 */
-}					t_sh;
+	int					mode;
+	int					status;
+	char				**local;
+	char				**env;
+	int					fd;
+}						t_sh;
 
-/*
-	minishell cmd to remove
-*/
 typedef	struct			s_command
 {
 	char				**args;
@@ -67,9 +66,6 @@ typedef	struct			s_command
 	struct s_command	*next;
 	struct s_command	*previous;
 }						t_command;
-/*
-*/
-
 
 typedef enum			e_quote_state
 {
@@ -79,25 +75,16 @@ typedef enum			e_quote_state
 	unquoted,
 }						t_quote_state;
 
-
-typedef struct s_cmd_tab t_cmd_tab;
-
-typedef	int				(*t_builtin)(t_cmd_tab*);
-
-typedef int				(*t_read_fn)(char*, char**);
-
-/* to delete*/
-/**/
-extern	t_sh		g_sh;
+extern	t_sh			g_sh;
 
 int						br_print(int err, t_cmd_tab *cmd);
 int						request_new_line(t_lexer *lx);
 int						run_command(char *line);
 char					**shlvl(char **env);
-char*					varchr(char **env, char *toto);
+char					*varchr(char **env, char *toto);
 char					*envchrr(char **env, char *var);
-char**					envaddint(char **caca, char *toto, int fifi);
-char*					envchrr(char **env, char *var);
+char					**envaddint(char **caca, char *toto, int fifi);
+char					*envchrr(char **env, char *var);
 t_ast_node				*get_tree(t_ast_node *tree);
 int						setenv_wrapper(t_cmd_tab *cmd);
 int						ft_set(t_cmd_tab *cmd);
@@ -144,8 +131,6 @@ char					**csetenv(char **env, char *var);
 char					**envdel(char **env, char *var);
 char					**envaddstr(char **env, char *var, char *value);
 int						sh_readfile(char *prompt, char **str);
-
 int						missing_quote(char *line);
-
 
 #endif

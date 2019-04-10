@@ -6,15 +6,15 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 13:46:10 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/08 13:37:27 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/10 18:15:02 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
-#include "libft.h"
-#include "sh_core.h"
+# include "libft.h"
+# include "sh_core.h"
 
 typedef	struct			s_hash
 {
@@ -47,10 +47,9 @@ int						fc_rangel(t_fc fc, t_list **beg, int *i);
 int						fc_rangee(t_fc fc, t_list **beg, int *i);
 int						fc_rangele(t_fc fc, t_list **beg, int *i);
 void					fc_del(t_fc *fc);
-
 int						hash(t_cmd_tab *cmd);
-int						parser_takeopt(char *opt, char *arg, char *in, char *name);
-
+int						parser_takeopt(char *opt, char *arg, char *in,
+							char *name);
 int						cd_l(char *curpath, char *arg);
 int						cd_p(char *curpath, char *arg);
 int						cd_dispatch_err(char *arg, char *curpath);
