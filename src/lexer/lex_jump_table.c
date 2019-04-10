@@ -91,17 +91,12 @@ int	handle_common(t_lexer *lx_st)
 			return (ret);
 		else if ((*(lx_st->cursor) == '\'') && ((ret = handle_squote(lx_st))))
 			return (ret);
-		else if (*(lx_st->cursor) == '$')
-		{
-			if ((ret = handle_param_exp(lx_st)))
+		else if ((*(lx_st->cursor) == '$') && ((ret = handle_param_exp(lx_st))))
 				return (ret);
-		}
-		else if ((*(lx_st->cursor) == '\\') && (*((lx_st->cursor) + 1)))
-		{
-			if ((ret = handle_backslash(lx_st)))
+		else if (((*(lx_st->cursor) == '\\') && (*((lx_st->cursor) + 1)))
+			&& ((ret = handle_backslash(lx_st))))
 				return (ret);
-		}
-		else if (ft_cisin("\n\t |><;", *(lx_st->cursor)))
+		else if (ft_cisin("\n\t &|><;", *(lx_st->cursor)))
 			break ;
 		else if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 			return (MEMERR);

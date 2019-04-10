@@ -27,6 +27,7 @@ t_lx_fn	g_lx_fn[] =\
 	{'9', &handle_digit},
 	{'"', &handle_dquote},
 	{'\'', &handle_squote},
+	{'&', &handle_ampersand},
 	{';', &handle_semic},
 	{'<', &handle_less},
 	{'>', &handle_great},

@@ -47,7 +47,7 @@ int			sh_readfile(char *prompt, char **str)
 		return (MEMERR);
 	ft_strdel(&line);
 	line = tmp;
-	ft_printf("\33[0;34m%s\33[0;0m", line);
+//	ft_printf("\33[0;34m%s\33[0;0m", line);
 	*str = line;
 	return (0);
 }

@@ -13,6 +13,18 @@
 #include "ft_lexer.h"
 #include "readline.h"
 
+int	handle_ampersand(t_lexer *lx_st)
+{
+	if ((*(lx_st->cursor) == '&') && (*(lx_st->cursor + 1) == '&'))
+		lx_st->token->type = AND_IF;	
+	if ((str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
+		|| (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR))
+		return (MEMERR);
+	if (lx_st->token->type == AND_IF)
+		return (0);
+	return (handle_common(lx_st));
+}
+
 int	handle_semic(t_lexer *lx_st)
 {
 	lx_st->token->type = SEMI_COL;
