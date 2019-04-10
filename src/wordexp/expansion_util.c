@@ -29,7 +29,7 @@ int		c_insert_str(t_token *word, char *cursor, char *to_insert)
 		return (MEMERR);
 	ft_memcpy(cursor, to_insert, ft_strlen(to_insert));
 	cursor = cursor + ft_strlen(to_insert);
-	ft_memcpy(cursor, save, ft_strlen(save));
+	ft_memcpy(cursor, save, ft_strlen(save) + 1);
 	word->data.len = ft_strlen(word->data.str);
 	free(save);
 	return (0);
