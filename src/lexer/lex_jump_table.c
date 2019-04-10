@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/09 21:28:59 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/10 20:03:18 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	request_new_line(t_lexer *lx_st)
 
 int	handle_digit(t_lexer *lx_st)
 {
-	static	char	*ops = "|&><;";
+	static	char	*ops = "|><;";
 
 	while (*(lx_st->cursor))
 	{
@@ -101,7 +101,7 @@ int	handle_common(t_lexer *lx_st)
 			if ((ret = handle_backslash(lx_st)))
 				return (ret);
 		}
-		else if (ft_cisin("\n\t |&><;", *(lx_st->cursor)))
+		else if (ft_cisin("\n\t |><;", *(lx_st->cursor)))
 			break ;
 		else if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 			return (MEMERR);

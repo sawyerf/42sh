@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 14:54:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/26 16:52:10 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/10 18:45:30 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int		rpllen(char *str, char *to, char *by)
 	int lenby;
 	int	lenstr;
 	int word;
-	
+
 	lento = ft_strlen(to);
 	lenby = ft_strlen(by);
 	lenstr = ft_strlen(str);
@@ -43,10 +43,10 @@ static int		rpllen(char *str, char *to, char *by)
 	return (lenstr - (lento * word) + (lenby * word));
 }
 
-int		ft_strnext(char *str, char *to)
+int				ft_strnext(char *str, char *to)
 {
 	char *tmp;
-	
+
 	if (!(tmp = ft_strstr(str, to)))
 		return (ft_strlen(str));
 	return (tmp - str);
@@ -78,7 +78,7 @@ static char		*strstrcpy(char *dst, char *src, char *to, char *by)
 	return (dst);
 }
 
-char	*ft_replace(char *str, char *to, char *by)
+char			*ft_replace(char *str, char *to, char *by)
 {
 	int		len;
 	char	*dst;

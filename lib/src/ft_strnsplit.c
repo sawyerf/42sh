@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 19:55:35 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/12 18:58:26 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/10 18:44:07 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int		ft_wordcount(char const *s, char *sep)
 	i = 0;
 	while (s[i] != '\0')
 	{
-		if (ft_is_sep(s[i], sep)) 
+		if (ft_is_sep(s[i], sep))
 			i++;
 		else
 		{

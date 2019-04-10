@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/09 19:52:21 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/10 20:05:06 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int			eval_tree(t_ast_node *tree)
 {
 	if (tree == NULL)
 		return (-1);
-	if ((tree->type == SEMI_COL) || (tree->type == AMPERS)
+	if ((tree->type == SEMI_COL)
 		|| (tree->type == NEWLINE))
 		return (eval_sep(tree));
 	else if (tree->type == AND_IF)

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 21:25:01 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/09 21:28:13 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/10 20:03:42 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,21 +33,6 @@ int	handle_column(t_lexer *lx_st)
 	}
 	else
 		lx_st->token->type = PIPE;
-	return (0);
-}
-
-int	handle_ampersand(t_lexer *lx_st)
-{
-	if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
-		return (MEMERR);
-	if (*(lx_st->cursor) == '&')
-	{
-		if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
-			return (MEMERR);
-		lx_st->token->type = AND_IF;
-	}
-	else
-		lx_st->token->type = AMPERS;
 	return (0);
 }
 

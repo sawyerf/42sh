@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 15:48:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/10 18:21:22 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/10 20:05:17 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ typedef	enum	e_token_type
 	ASSIGN,
 	PIPE,
 	SEMI_COL,
-	AMPERS,
 	AND_IF,
 	OR_IF,
 	LESSAND,

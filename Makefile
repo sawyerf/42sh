@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/04/09 21:42:46 by ktlili           ###   ########.fr        #
+#    Updated: 2019/04/10 20:05:48 by ktlili           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,7 @@ NAME =		21sh
 
 CC =		clang	
 
-CFLAGS =	-I inc/ -I lib/inc/ -Wall -Werror -Wextra -ggdb
-
-DEBUG =		#-g3 -fsanitize=address
+CFLAGS =	-I inc/ -I lib/inc/ -Wall -Werror -Wextra
 
 INC_DIR =	inc
 
@@ -92,14 +90,14 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			parser/parser_tools_2.c		\
 			parser/parser_free_fn.c		\
 			parser/parser_ast.c			\
-			parser/refactor_parser.c	\
+			parser/sh_parser.c			\
 			parser/parser_cmd_misc.c	\
 			parser/parser_complete_cmd.c\
 			parser/parser_expect_and_or.c\
 			parser/parser_simple_cmd.c	\
 			parser/parser_expect_redir.c\
+			parser/parser_newline.c		\
 			parser/parser_tools.c		\
-			parser/sh_parser.c			\
 			parser/parser_heredoc.c		\
 			parser/light_parser.c		\
 			hashtable/hashtable.c		\

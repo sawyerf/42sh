@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/10 18:10:13 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/10 18:40:56 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ int					folexaccess(char *file);
 int					exaccess(char *file);
 int					filexist(char *file);
 
-int					rdlinit(t_rdl *rdl, char *PROMPT);
+int					rdlinit(t_rdl *rdl, char *prompt);
 void				rdladd(t_rdl *rdl, char c);
 void				rdldel(t_rdl *rdl, int curs);
 void				rdladdstr(t_rdl *rdl, char *str);

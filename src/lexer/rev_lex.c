@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 22:20:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/05 17:51:12 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/10 20:02:44 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	init_jump_table(t_func table[TABLESZ])
 		i++;
 	}
 	table[34] = handle_dquote;
-	table[38] = handle_ampersand;
 	table[39] = handle_squote;
 	table[59] = handle_semic;
 	table[60] = handle_less;

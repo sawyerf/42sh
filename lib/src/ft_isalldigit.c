@@ -6,13 +6,13 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 17:46:24 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/26 18:02:05 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/10 18:43:52 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_isalldigit(char *s)
+int	ft_isalldigit(char *s)
 {
 	while (*s)
 	{

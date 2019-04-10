@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 20:44:14 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/09 20:54:08 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/10 20:04:30 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ int	expect_separator_op(t_parser *parser)
 {
 	int ret;
 
-	if ((parser->current->type == AMPERS)
-		|| (parser->current->type == SEMI_COL))
+	if (parser->current->type == SEMI_COL)
 	{
 		if ((ret = tree_add_sep(parser)))
 			return (ret);
