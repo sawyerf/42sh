@@ -12,16 +12,31 @@
 
 #include "ft_wordexp.h"
 
+static void heredoc_quote_rm(t_token *word)
+{
+	int index;
+
+	index = 0;
+	while (word->data.str[index])
+	{
+		if ((word->data.str[index] == '\\')
+			&& (ft_cisin("$\n\\", word->data.str[index + 1])))
+			shift_bslash(&(word->data), &index);
+		else
+			index++;
+	}
+}
+
 int	ft_wordexp_heredoc(t_token *word)
 {
-	int i;
 
 	if (handle_tilde(word) == MEMERR)
 		return (MEMERR);
 	if (handle_exp_param(word, FT_TRUE) == MEMERR)
 		return (MEMERR);
-	i = 0;
-	inside_dquote_qr(&(word->data), &i);
+
+	heredoc_quote_rm(word);
+//	inside_dquote_qr(&(word->data), &i);
 	return (0);
 }
 

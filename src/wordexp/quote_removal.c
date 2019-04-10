@@ -18,7 +18,7 @@ void		shift_str_left(t_str *str_w, int index)
 	str_w->len = str_w->len - 1;
 }
 
-static void	shift_bslash(t_str *str_w, int *index)
+void	shift_bslash(t_str *str_w, int *index)
 {
 	shift_str_left(str_w, *index);
 	if (str_w->str[*index] == '\n')
@@ -29,7 +29,8 @@ static void	shift_bslash(t_str *str_w, int *index)
 
 void		inside_dquote_qr(t_str *str_w, int *index)
 {
-	shift_str_left(str_w, *index);
+	if (str_w->str[*index] == '"')
+		shift_str_left(str_w, *index);
 	while (str_w->str[*index])
 	{
 		if (str_w->str[*index] == '"')
@@ -38,7 +39,7 @@ void		inside_dquote_qr(t_str *str_w, int *index)
 			break ;
 		}
 		else if ((str_w->str[*index] == '\\')
-			&& (ft_cisin("$\n\"", str_w->str[*index + 1])))
+			&& (ft_cisin("$\n\"\\", str_w->str[*index + 1])))
 			shift_bslash(str_w, index);
 		else
 			*index = *index + 1;

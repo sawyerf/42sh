@@ -30,6 +30,7 @@ char	*c_next_bslash(char *cursor);
 char	*c_next_dquote(char *cursor);
 char	*c_next_squote(char *cursor);
 int		split_candidate(char *str, char *ifs);
+void	shift_bslash(t_str *str_w, int *index);
 
 char *expand_ifs(char *ifs);
 
