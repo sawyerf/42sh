@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/10 20:03:47 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/11 22:01:01 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ t_lx_fn	g_lx_fn[] =\
 	{'8', &handle_digit},
 	{'9', &handle_digit},
 	{'"', &handle_dquote},
-	{'\'', &handle_squote},
 	{'&', &handle_ampersand},
+	{'\'', &handle_squote},
 	{';', &handle_semic},
 	{'<', &handle_less},
 	{'>', &handle_great},

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/10 18:00:53 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/11 23:05:59 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 # define PIPEFAIL 20
 
 # define BIN_NO_PATH 1
-# define CMD_NOT_FOUND 2
+# define CMD_NOT_FOUND 127
 # define BIN_PERM_DENY 3
-# define BIN_NOT_FOUND 127
+# define BIN_NOT_FOUND 128
 # define BIN_EXEC_ERR 5
 # define BIN_IS_DIR 6
 

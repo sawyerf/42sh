@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/10 20:03:18 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/11 22:01:53 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,18 @@ int	handle_common(t_lexer *lx_st)
 			return (ret);
 		else if ((*(lx_st->cursor) == '\'') && ((ret = handle_squote(lx_st))))
 			return (ret);
-		else if ((*(lx_st->cursor) == '$') && ((ret = handle_param_exp(lx_st))))
+		else if (*(lx_st->cursor) == '$')
+		{
+			if ((ret = handle_param_exp(lx_st)))
 				return (ret);
-		else if (((*(lx_st->cursor) == '\\') && (*((lx_st->cursor) + 1)))
-			&& ((ret = handle_backslash(lx_st))))
+		}
+		else if (*(lx_st->cursor) == '\\')
+		{
+			if ((ret = handle_backslash(lx_st)))
 				return (ret);
-		else if (ft_cisin("\n\t &|><;", *(lx_st->cursor)))
+		}
+		else if ((ft_cisin("\n\t |><;", *(lx_st->cursor)))
+			|| (!ft_strncmp(lx_st->cursor, "&&", 2)))
 			break ;
 		else if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 			return (MEMERR);

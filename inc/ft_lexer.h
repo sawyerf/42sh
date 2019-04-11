@@ -30,7 +30,6 @@ typedef int	(*t_func)(t_lexer*);
 
 void	init_lexer(char *input, t_lexer *lexer_state);
 
-int		handle_ampersand(t_lexer *lx_st);
 int		handle_newline(t_lexer *lexer_state);
 int		handle_dquote(t_lexer *lexer_state);
 int		handle_digit(t_lexer *lexer_state);

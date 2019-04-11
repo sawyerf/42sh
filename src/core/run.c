@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 16:08:26 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/10 17:42:56 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/11 22:24:49 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ int			sh_readfile(char *prompt, char **str)
 		return (MEMERR);
 	ft_strdel(&line);
 	line = tmp;
-//	ft_printf("\33[0;34m%s\33[0;0m", line);
 	*str = line;
 	return (0);
 }

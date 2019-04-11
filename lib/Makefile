@@ -6,17 +6,15 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/04/04 14:30:23 by apeyret          ###   ########.fr        #
+#    Updated: 2019/04/11 22:46:05 by ktlili           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
-CC = gcc
+CC = clang
 
-CFLAGS = -I inc/ -Wall -Werror -Wextra -ggdb
-
-DEBUG= #-fsanitize=address
+CFLAGS = -I inc/ -Wall -Werror -Wextra
 
 INC_DIR = inc
 
@@ -152,7 +150,6 @@ clean:
 
 fclean: clean
 	@/bin/rm -f $(NAME)
-	@printf "\033[0;31D[Libft] Deleted minishell\033[0;0m\n"
 
 re: fclean all
 

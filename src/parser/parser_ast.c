@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 14:30:55 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/10 20:05:04 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/09 21:12:24 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ int		tree_add_pipeline(t_parser *parser)
 
 void	add_to_tree_sep(t_ast_node **head, t_ast_node *to_add)
 {
-	if ((to_add->type == SEMI_COL) || (to_add->type == NEWLINE))
+	if ((to_add->type == SEMI_COL) || (to_add->type == AMPERS)
+			|| (to_add->type == NEWLINE))
 	{
 		to_add->left = *head;
 		*head = to_add;

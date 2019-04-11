@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/08 16:11:22 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/11 23:01:02 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static int	init_shell(char **env, t_read_fn *read_fn)
 	if (dup2(STDERR_FILENO, FDSAVEERR) == -1)
 		return (-1);
 	g_sh.fd = 0;
+	g_sh.status = 0;
 	ht_init();
 	ht_refreshall(get_env_value("PATH"));
 	hstread(g_sh.env);
@@ -72,5 +73,5 @@ int			main(int ac, char **av, char **env)
 		}
 	}
 	hstaddfile(g_sh.env);
-	return (0);
+	return (g_sh.status);
 }
