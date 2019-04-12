@@ -12,15 +12,13 @@
 
 #include "ft_eval.h"
 
-int	pipe_recursion(t_cmd_tab *to, t_cmd_tab *from)
+int	pipe_recursion(t_cmd_tab *to, t_cmd_tab *from, int wpid)
 {
 	int pipes[2];
 	int pid;
 
-	if (pipe(pipes) != 0)
+	if ((pipe(pipes) != 0) || ((pid = fork()) == -1))
 		return (PIPEFAIL);
-	if ((pid = fork()) == -1)
-		return (MEMERR);
 	if (pid == 0)
 	{
 		if (to)
@@ -31,11 +29,13 @@ int	pipe_recursion(t_cmd_tab *to, t_cmd_tab *from)
 		spawn_in_pipe(from);
 		exit(0);
 	}
+	if (wpid)
+		wait_wrapper(from, wpid);
 	if (to)
 	{
 		dup2(pipes[0], STDIN_FILENO);
 		close(pipes[1]);
-		return (pipe_recursion(to->next, to));
+		return (pipe_recursion(to->next, to, pid));
 	}
 	wait_wrapper(from, pid);
 	return (from->exit_status);
@@ -51,7 +51,7 @@ int	eval_pipe(t_cmd_tab *cmd)
 		return (-1);
 	if (pid == 0)
 	{
-		ret = pipe_recursion(cmd->next, cmd);
+		ret = pipe_recursion(cmd->next, cmd, 0);
 		exit(ret);
 	}
 	wait_wrapper(cmd, pid);
