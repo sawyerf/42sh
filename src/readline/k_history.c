@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 13:41:29 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/04 16:46:07 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/12 18:07:32 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_key	g_khst[] =\
 {
 	{K_BSPC, &hstdelcara},
 	{K_ENTR, &k_hstret},
+	{K_ENTD, &k_hstret},
 	{K_LEFT, &finish},
 	{K_RGHT, &finish},
 	{K_CTRC, &k_hstret},

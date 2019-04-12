@@ -6,36 +6,36 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/04 22:33:05 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/12 16:53:24 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_eval.h"
 
-int	pipe_recursion(t_cmd_tab *to, t_cmd_tab *from, int wpid)
+int	pipe_recursion(t_cmd_tab *to, t_cmd_tab *from)
 {
 	int pipes[2];
 	int pid;
 
 	if ((pipe(pipes) != 0) || ((pid = fork()) == -1))
-		return (PIPEFAIL);
+		return (MEMERR);
 	if (pid == 0)
 	{
 		if (to)
 		{
-			dup2(pipes[1], STDOUT_FILENO);
+			if (dup2(pipes[1], STDOUT_FILENO) == -1)
+				return (PIPEFAIL);
 			close(pipes[0]);
 		}
 		spawn_in_pipe(from);
-		exit(0);
+		exit_wrap(0, from);
 	}
-	if (wpid)
-		wait_wrapper(from, wpid);
 	if (to)
 	{
-		dup2(pipes[0], STDIN_FILENO);
+		if (dup2(pipes[0], STDIN_FILENO) == -1)
+			return (PIPEFAIL);
 		close(pipes[1]);
-		return (pipe_recursion(to->next, to, pid));
+		return (pipe_recursion(to->next, to));
 	}
 	wait_wrapper(from, pid);
 	return (from->exit_status);
@@ -51,8 +51,8 @@ int	eval_pipe(t_cmd_tab *cmd)
 		return (-1);
 	if (pid == 0)
 	{
-		ret = pipe_recursion(cmd->next, cmd, 0);
-		exit(ret);
+		ret = pipe_recursion(cmd->next, cmd);
+		exit_wrap(ret, cmd);
 	}
 	wait_wrapper(cmd, pid);
 	return (0);

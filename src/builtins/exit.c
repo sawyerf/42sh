@@ -6,14 +6,14 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 15:17:24 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/04 13:59:33 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/12 16:49:12 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
-#include "readline.h"
+#include "sh_core.h"
 
-int	ft_exit(t_cmd_tab *cmd)
+int		ft_exit(t_cmd_tab *cmd)
 {
 	int exit_val;
 	int i;
@@ -38,6 +38,6 @@ int	ft_exit(t_cmd_tab *cmd)
 		}
 		exit_val = ft_atoi(cmd->av[1]);
 	}
-	hstaddfile(g_sh.env);
+	global_del();
 	exit(exit_val);
 }

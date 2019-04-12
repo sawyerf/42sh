@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/10 18:14:24 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/12 18:13:28 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ typedef enum			e_quote_state
 
 extern	t_sh			g_sh;
 
+void					global_del(void);
 int						br_print(int err, t_cmd_tab *cmd);
 int						request_new_line(t_lexer *lx);
 int						run_command(char *line);

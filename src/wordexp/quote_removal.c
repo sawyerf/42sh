@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 19:33:29 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/11 22:38:44 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/12 15:24:03 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ void	shift_str_left(t_str *str_w, int index)
 void	shift_bslash(t_str *str_w, int *index)
 {
 	shift_str_left(str_w, *index);
-	if (str_w->str[*index])
-		*index = *index + 1;
 	if (str_w->str[*index] == '\n')
 		shift_str_left(str_w, *index);
 }

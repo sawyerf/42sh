@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 18:10:27 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/04 20:22:00 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/12 16:13:13 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,5 @@ void	hstaddfile(char **env)
 		return ;
 	hstwrite(fd, g_hst[0]);
 	close(fd);
+	ft_lstdel(&g_hst[0]);
 }

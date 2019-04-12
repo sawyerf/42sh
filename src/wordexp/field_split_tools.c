@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 16:46:34 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/08 17:39:00 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/12 15:26:42 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,21 +37,13 @@ int		split_candidate(char *str, char *ifs)
 	return (0);
 }
 
-void	replace_token(t_token *word, t_token *new_fields)
+void	replace_token(t_token **word, t_token *word_2, t_token *last,
+			char **cursor)
 {
-	t_token			*save;
-	t_token_type	type;
-
-	save = word->next;
-	type = word->type;
-	if (word->data.str)
-		free(word->data.str);
-	ft_memcpy(word, new_fields, sizeof(t_token));
-	word->type = type;
-	while (word->next)
-		word = word->next;
-	word->next = save;
-	free(new_fields);
+	last->next = word_2->next;
+	free_token(word_2);
+	*cursor = last->data.str + ft_strlen(last->data.str);
+	*word = last->next;
 }
 
 char	*expand_ifs(char *ifs)

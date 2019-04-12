@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 20:20:45 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/10 19:30:34 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/12 16:48:54 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ void	close_save(void)
 void	exit_wrap(int code, t_cmd_tab *cmd)
 {
 	(void)cmd;
+	global_del();
 	exit(code);
 }

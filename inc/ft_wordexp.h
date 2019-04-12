@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 18:04:30 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/10 18:05:07 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/12 14:47:33 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ int		expand_tilde(t_str *word, int *index, int add_quote);
 char	*ft_next_field(char *value, char *ifs);
 int		get_ifs(char **ifs);
 void	delete_varname(char *cursor);
+void	replace_token(t_token **wd, t_token *wd_2, t_token *ir, char **cursor);
 
 #endif

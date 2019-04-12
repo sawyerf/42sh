@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 15:33:08 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/09 21:12:56 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/12 15:01:24 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,10 @@ int			read_heredoc(t_token *io_here, size_t len)
 		return (MEMERR);
 	while (42)
 	{
-		if ((ret = read_fn("heredoc> ", &new_ln)))
+		if (((ret = read_fn("heredoc> ", &new_ln))) && (ret != CTRL_D))
 			return (here_doc_err(here_doc, ret));
-		if ((!ft_strncmp(new_ln, io_here->data.str, len))
-			&& (new_ln[len] == '\n'))
+		if ((ret == CTRL_D) || ((!ft_strncmp(new_ln, io_here->data.str, len))
+			&& (new_ln[len] == '\n')))
 			break ;
 		if (!(tmp = ft_strjoin(here_doc, new_ln)))
 			return (MEMERR);

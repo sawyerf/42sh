@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 12:46:44 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/09 21:46:56 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/12 15:26:42 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,15 +84,12 @@ t_token		*ifs_next_fields(t_token **word, t_token *word_2,
 	t_token *iter;
 	char	*new_field;
 
+	word_2 = word_2 + 5;
 	iter = ((*word)->next != NULL) ? (*word)->next : (*word);
 	while (*value)
 	{
 		if (!split_candidate(value, ifs))
-		{
-			if (join_token(word_2, value, 1) == MEMERR)
-				return (NULL);
 			break ;
-		}
 		if (!(new_field = extract_field(value, ifs))
 			|| (!(tmp = new_token(WORD))))
 			return (NULL);
@@ -120,17 +117,17 @@ int			handle_ifs(t_token **word, char **cursor, char *value, char *ifs)
 		return (MEMERR);
 	if (!(last = ifs_next_fields(word, word_2, value, ifs)))
 		return (MEMERR);
-	if (word_2->data.str[0] == 0)
+	if (!split_candidate(value, ifs))
 	{
-		last->next = word_2->next;
-		free_token(word_2);
-		*cursor = last->data.str + ft_strlen(last->data.str);
-		*word = last->next;
+		if (join_token(word_2, value, 1) == MEMERR)
+			return (MEMERR);
 	}
+	if (word_2->data.str[0] == 0)
+		replace_token(word, word_2, last, cursor);
 	else
 	{
 		last->next = word_2;
-		*cursor = word_2->data.str;
+		*cursor = word_2->data.str + ft_strlen(value);
 		*word = word_2;
 	}
 	return (0);

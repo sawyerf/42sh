@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 14:16:02 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/09 20:34:51 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/12 12:45:50 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int				apply_redir(t_redir *redir, t_list **head)
 		return (MEMERR);
 	if (dup2(right_fd, left_fd) == -1)
 	{
-		ft_dprintf(STDERR_FILENO, "21sh: FATAL ERROR dup2 fuckd up\n");
+		ft_dprintf(STDERR_FILENO, "21sh: fatal error dup2 fail\n");
 		return (-1);
 	}
 	if ((redir->op->type != GREATAND) && (redir->op->type != LESSAND))
