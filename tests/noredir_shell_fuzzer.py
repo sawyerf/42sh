@@ -27,8 +27,8 @@ random.seed
 def random_n_str(n):
     return ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for _ in range(n))
 
-def insert_word():  
-    rand_s =  " " + random_n_str(random.randint(1, 6))
+def insert_word(maxlen, addvar):  
+    rand_s =  random_n_str(random.randint(1, maxlen))
     in_sq = -1;
     in_dq = -1;
     rand = 0;
@@ -43,10 +43,10 @@ def insert_word():
             word += '"'
             if (in_sq == -1):
                 in_dq = -in_dq
-        elif (rand == 7):
-            word += '$' + random.choice(g_var_list)
         elif (rand == 8):
             word += '\\'
+        elif (rand < 20) and (addvar == True):
+            word += '$' + random.choice(g_var_list)
         word += c
     if (in_sq == 1):
         word = word + "'"
@@ -68,7 +68,7 @@ def insert_assign(attach):
             var_name = random.choice(string.ascii_uppercase + string.ascii_lowercase) + var_name
         if (attach == True):
           g_var_list.append(var_name)
-        assign = var_name + "=" + random_n_str(random.randint(1, 12))
+        assign = var_name + "=" + insert_word(50, False)# random_n_str(random.randint(1, 12))
         return assign 
 
 def generate_prefix():
@@ -84,7 +84,7 @@ def generate_suffix():
     if (random.randint(1,3) == 2):
         suf = suf #+  insert_redir()
     else:
-        suf = suf +  insert_word()
+        suf = suf +  insert_word(25, True)
     return suf
 
 def create_simple_cmd(line):
