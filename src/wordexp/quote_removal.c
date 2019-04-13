@@ -21,8 +21,8 @@ void	shift_str_left(t_str *str_w, int index)
 void	shift_bslash(t_str *str_w, int *index)
 {
 	shift_str_left(str_w, *index);
-	if (str_w->str[*index] == '\n')
-		shift_str_left(str_w, *index);
+	if (str_w->str[*index] != 0)
+		*index = *index + 1;
 }
 
 void	inside_dquote_qr(t_str *str_w, int *index)

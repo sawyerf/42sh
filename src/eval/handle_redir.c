@@ -56,6 +56,14 @@ static int		save_fd(int left_fd, t_list **head)
 	return (0);
 }
 
+int				redir_fd_range(int fd)
+{
+	if ((fd >= 0) && (fd < 256))
+		return (0);
+	ft_dprintf(STDERR_FILENO, "21sh: File descriptor %d is out of range\n", fd);
+	return (-1);
+}
+
 int				apply_redir(t_redir *redir, t_list **head)
 {
 	int left_fd;
@@ -63,6 +71,8 @@ int				apply_redir(t_redir *redir, t_list **head)
 	int	ret;
 
 	handle_left(&left_fd, redir);
+	if (redir_fd_range(left_fd) == -1)
+		return (-1);
 	if ((ret = handle_right(&left_fd, &right_fd, redir)) == -1)
 		return (-1);
 	else if (ret == 1)
@@ -71,6 +81,8 @@ int				apply_redir(t_redir *redir, t_list **head)
 		return (-1);
 	if ((head) && (save_fd(left_fd, head)))
 		return (MEMERR);
+	if (redir_fd_range(right_fd) == -1)
+		return (-1);
 	if (dup2(right_fd, left_fd) == -1)
 	{
 		ft_dprintf(STDERR_FILENO, "21sh: fatal error dup2 fail\n");

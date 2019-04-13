@@ -60,7 +60,7 @@ char			*build_param(char *cursor)
 	static char	*empty_str = "";
 	char		*value;
 
-	if (*cursor == '{')
+	if (*(cursor + 1) == '{')
 		cursor++;
 	value = get_env_value(cursor + 1);
 	if (!value)

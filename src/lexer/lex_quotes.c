@@ -17,7 +17,9 @@ int	handle_backslash(t_lexer *lx_st)
 {
 	int ret;
 
-	if ((str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
+	if (*(lx_st->cursor + 1) == '\n')
+		lx_st->cursor = lx_st->cursor + 2;
+	else if ((str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 		|| (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR))
 		return (MEMERR);
 	if (*(lx_st->cursor) == '\0')
