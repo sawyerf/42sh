@@ -70,7 +70,7 @@ static int	fd_aggregator(int *left_fd, int *right_fd, t_redir *redir)
 			return (0);
 		}
 	}
-	*right_fd = ft_atoi(redir->right->data.str);
+	*right_fd = ft_atoi(redir->right->data.str); // set max FD
 	return (0);
 }
 
