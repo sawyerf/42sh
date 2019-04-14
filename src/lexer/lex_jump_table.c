@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/12 12:59:29 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/14 18:58:40 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	handle_common(t_lexer *lx_st)
 				return (ret);
 		}
 		else if ((ft_cisin("\n\t |><;", *(lx_st->cursor)))
-			|| (!ft_strncmp(lx_st->cursor, "&&", 2)))
+			|| (!ft_strncmp(lx_st->cursor, "&&", 2)) || (!*lx_st->cursor))
 			break ;
 		else if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 			return (MEMERR);
