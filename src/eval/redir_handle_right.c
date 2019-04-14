@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 17:46:08 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/04 22:09:15 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/14 16:00:18 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int	fd_aggregator(int *left_fd, int *right_fd, t_redir *redir)
 			return (0);
 		}
 	}
-	*right_fd = ft_atoi(redir->right->data.str); // set max FD
+	*right_fd = ft_atoi(redir->right->data.str);
 	return (0);
 }
 

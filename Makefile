@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/04/12 17:25:28 by ktlili           ###   ########.fr        #
+#    Updated: 2019/04/14 16:36:12 by ktlili           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME =		21sh
 
 CC =		clang	
 
-CFLAGS =	-I inc/ -I lib/inc/ -Wall -Werror -Wextra
+CFLAGS =	-I inc/ -I lib/inc/ -Wall -Werror -Wextra -ggdb
 
 INC_DIR =	inc
 
@@ -58,6 +58,7 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			core/env.c					\
 			core/envdel.c				\
 			core/run.c					\
+			eval/redir_tools.c			\
 			eval/expansion_wrappers.c	\
 			eval/spawn_tools.c			\
 			eval/eval_pipe.c			\

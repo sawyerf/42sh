@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/11 23:05:59 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/14 16:05:48 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,5 @@ void					add_cmd_tab(t_cmd_tab **head, t_cmd_tab *to_add);
 void					remove_token(t_simple_cmd *cmd, t_token *todel);
 int						is_quoted(char *str);
 t_bool					check_fd(int fd);
-
+int						redir_fd_range(int left_fd);
 #endif

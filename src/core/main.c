@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/12 18:12:28 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/14 15:59:59 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,13 +76,13 @@ int			main(int ac, char **av, char **env)
 		if ((ret = read_fn("$> ", &line)) == CTRL_D ||
 				ret == MEMERR || ret < 0)
 			break ;
-		signal(SIGINT, &sig_exit);
 		if (((ret = run_command(line)) == SYNERR)
 				&& (g_sh.mode == MODEFILE))
 			break ;
 		if (ret == MEMERR)
 		{
 			ft_dprintf(STDERR_FILENO, "21sh: memory failure\n");
+			global_del();
 			return (MEMERR);
 		}
 	}
