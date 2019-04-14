@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 21:23:31 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/09 21:29:19 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/14 19:03:33 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int	handle_dquote(t_lexer *lx_st)
 				== MEMERR) ? MEMERR : handle_common(lx_st);
 		else if ((*(lx_st->cursor) == '\\') && (*((lx_st->cursor) + 1)))
 		{
-			if (handle_backslash(lx_st))
-				return (MEMERR);
+			if ((ret = handle_backslash(lx_st)))
+				return (ret);
 		}
 		else if (*(lx_st->cursor) == '\0')
 		{
