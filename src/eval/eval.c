@@ -31,6 +31,8 @@ static int	eval_and_if(t_ast_node *tree)
 			return (MEMERR);
 		tree->exit_status = tree->right->exit_status;
 	}
+	else
+		tree->exit_status = tree->left->exit_status;
 	return (0);
 }
 
