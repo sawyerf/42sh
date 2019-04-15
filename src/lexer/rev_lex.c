@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/04 22:20:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/14 16:51:53 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/15 20:35:14 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,11 @@ void	init_jump_table(t_func table[TABLESZ])
 	table[124] = handle_column;
 }
 
-void	init_rev_lex(t_lexer *lex, char *line)
+void	init_rev_lex(t_lexer *lex, char **line, t_token **head)
 {
-	lex->line = line;
-	lex->cursor = line;
+	*head = NULL;
+	lex->line = *line;
+	lex->cursor = *line;
 }
 
 int		rev_lex(char *line, t_token **head)
@@ -49,9 +50,8 @@ int		rev_lex(char *line, t_token **head)
 	t_lexer			lexer_state;
 	static t_func	table[TABLESZ];
 
-	init_rev_lex(&lexer_state, line);
+	init_rev_lex(&lexer_state, &line, head);
 	init_jump_table(table);
-	*head = NULL;
 	while (ft_is_whitespace(*(lexer_state.cursor)))
 		lexer_state.cursor = lexer_state.cursor + 1;
 	while (*(lexer_state.cursor))

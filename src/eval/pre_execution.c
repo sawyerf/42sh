@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 20:19:10 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/09 21:15:59 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/15 20:24:01 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int				pre_execution(t_cmd_tab *cmd)
 	if ((!cmd->process_env)
 			&& (!(cmd->process_env = craft_env(g_sh.env, cmd->assign_lst))))
 		return (MEMERR);
-	if ((!cmd->full_path) && (cmd->av[0]))
+	if (!(cmd->full_path) && (cmd->av[0]))
 	{
 		if ((ret = pathfinder(cmd)))
 			return (ret);
