@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 21:46:28 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/15 21:47:23 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/15 22:45:00 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,10 @@ char	cmdisin(char *cmd)
 
 	while (*cmd)
 	{
-		if (*cmd == '\\')
-		{
-			if (!cmd[1])
-				return ('\\');
+		if (*cmd == '\\' && !cmd[1])
+			return ('\\');
+		if (*cmd)
 			cmd += 2;
-		}
 		if (ft_cisin("'\"", *cmd))
 		{
 			c = *cmd;

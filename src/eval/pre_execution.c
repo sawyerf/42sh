@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 20:19:10 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/15 20:24:01 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/15 22:43:06 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ static int		assign_to_shell(t_cmd_tab *cmd)
 
 int				pathfinder(t_cmd_tab *cmd)
 {
-	char	*path;
-	int		ret;
-	static char *curr_dir = "./";
+	char		*path;
+	int			ret;
+	static char	*curr_dir = "./";
 
 	if (!(path = get_process_env("PATH", cmd->process_env)))
 		path = get_env_value("PATH");

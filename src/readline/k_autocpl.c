@@ -6,16 +6,15 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 21:17:33 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/15 22:38:40 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/15 22:42:14 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline.h"
 
-
 t_list	*get_choice(t_rdl *rdl, t_autocomplete acp)
 {
-	char			*path;
+	char	*path;
 
 	if (cmdisincurs(rdl) == '\\')
 		return (ft_lstnew("\\", 4));
