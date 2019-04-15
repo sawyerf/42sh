@@ -14,6 +14,7 @@
 ------------------------------------
 ### 42sh
 
+- finir la feature historique
 - sig handling && job control.
 - moar testing on redirections.
 - cd set_shell_env needs malloc checks. <= this
@@ -22,6 +23,9 @@
 ## Bug
 |check|     `command`     |                result               | info complementaire |
 |:---:|:-----------------:|:-----------------------------------:|:-------------------:|
+|     | `ls \ <tab>`      | ca ne comprends le ' '              |||
+|     | `ls "file <tab>`  | ne considere pas le debut des quote |||
+|  ✓  | `ls "<tab>`       | ne referme pas les quotes           |||
 |  ✓  | `ls '<tab><ctrl+c/d`| segfault |la fonction est surement readline appele dans light_parser||
 |  ✓  | ` `               | 21sh: syntax error near : '' + exit ||
 |  ✓  | `env - i ./21sh ` | double free						    ||

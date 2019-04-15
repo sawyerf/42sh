@@ -6,17 +6,60 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 21:17:33 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/08 16:18:47 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/15 21:41:09 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline.h"
 
-t_list	*get_choice(t_autocomplete acp)
+char	cmdisin(char *cmd)
+{
+	char	c;
+
+	while (*cmd)
+	{
+		if (*cmd == '\\')
+		{
+			if (!cmd[1])
+				return ('\\');
+			cmd += 2;
+		}
+		if (ft_cisin("'\"", *cmd))
+		{
+			c = *cmd;
+			cmd++;
+			while (*cmd != c)
+			{
+				if (!*cmd)
+					return (c);
+				if (*cmd == '\\' && cmd[1])
+					cmd++;
+				cmd++;
+			}
+		}
+		cmd++;
+	}
+	return (0);
+}
+
+int		cmdisincurs(t_rdl *rdl)
+{
+	char	c;
+	char	ret;
+
+	c = rdl->str[rdl->curs];
+	ret = cmdisin(rdl->str);
+	rdl->str[rdl->curs] = c;
+	return (ret);
+}
+
+t_list	*get_choice(t_rdl *rdl, t_autocomplete acp)
 {
 	char			*path;
 
-	if (acp.type == cmd_name)
+	if (cmdisincurs(rdl) == '\\')
+		return (ft_lstnew("\\", 4));
+	else if (acp.type == cmd_name)
 	{
 		if (!(path = get_env_value("PATH")))
 			return (NULL);
@@ -45,6 +88,29 @@ int		acp_gettype(t_rdl *rdl, t_autocomplete *acp)
 	return (0);
 }
 
+void	fill_complt(t_rdl *rdl, t_list *lst)
+{
+	char	c;
+	char	*tmp;
+
+	c = cmdisincurs(rdl);
+	if (!c)
+	{
+		tmp = ft_replace(lst->content, " ", "\\ ");
+		ft_strdel((char**)&lst->content);
+		lst->content = tmp;
+	}
+	rdladdstr(rdl, lst->content);
+	if (lst->content_size == 0 || lst->content_size == 1)
+	{
+		if (c == '"' || c == '\'')
+			rdladd(rdl, c);
+		rdladd(rdl, ' ');
+	}
+	else if (lst->content_size == 3)
+		rdladd(rdl, '/');
+}
+
 int		autocompl(t_rdl *rdl, char *buf)
 {
 	t_list			*lst;
@@ -53,19 +119,13 @@ int		autocompl(t_rdl *rdl, char *buf)
 	(void)buf;
 	if (acp_gettype(rdl, &acp))
 		return (0);
-	if (!(lst = get_choice(acp)))
+	if (!(lst = get_choice(rdl, acp)))
 	{
 		ft_strdel(&acp.str);
 		return (0);
 	}
-	if (!lst->next)
-	{
-		rdladdstr(rdl, lst->content);
-		if (lst->content_size == 0 || lst->content_size == 1)
-			rdladd(rdl, ' ');
-		else if (lst->content_size == 3)
-			rdladd(rdl, '/');
-	}
+	if (!lst->next && !ft_cisin(lst->content, '\n'))
+		fill_complt(rdl, lst);
 	else
 		putlst(acp.str, lst, rdl);
 	ft_strdel(&acp.str);
