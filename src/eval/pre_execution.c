@@ -76,9 +76,12 @@ int				pathfinder(t_cmd_tab *cmd)
 {
 	char	*path;
 	int		ret;
+	static char *curr_dir = "./";
 
 	if (!(path = get_process_env("PATH", cmd->process_env)))
 		path = get_env_value("PATH");
+	if ((path) && (*path == 0))
+		path = curr_dir;
 	if ((ret = ht_spawnbin(path, cmd)))
 	{
 		if (cmd->full_path)
