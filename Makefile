@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/04/14 16:36:12 by ktlili           ###   ########.fr        #
+#    Updated: 2019/04/15 21:48:52 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,6 +104,7 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			hashtable/hashtable.c		\
 			hashtable/ht_files.c		\
 			hashtable/ht_spawnbin.c		\
+			readline/cmdisin.c			\
 			readline/env_autoclp.c		\
 			readline/files.c			\
 			readline/files_right.c		\

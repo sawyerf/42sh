@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 16:23:31 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/15 15:28:35 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/15 21:45:25 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*after(char *s, int i)
 	return (tmp);
 }
 
-static void	replacefree(char **s1, char **s2)
+void	replacefree(char **s1, char **s2)
 {
 	char	*tmp;
 
@@ -79,8 +79,7 @@ void	putlst(char *mtc, t_list *lst, t_rdl *rdl)
 			i++;
 		}
 		ft_printf("\n");
-		if (lst)
-			lst = lst->next;
+		(lst) ? lst = lst->next : 0;
 	}
 	ft_printf("%s%s", rdl->prompt, rdl->str);
 	rdl->real = rdl->size;

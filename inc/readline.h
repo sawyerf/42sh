@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/12 18:09:19 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/15 21:48:22 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ void				rdlreplace(t_rdl *rdl, char *s);
 void				setsig(void);
 
 void				putlst(char *mtc, t_list *lst, t_rdl *rdl);
+int					cmdisincurs(t_rdl *rdl);
 
 t_list				*gethst(void);
 void				hstadd(char *str);
