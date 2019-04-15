@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 21:17:33 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/08 16:18:47 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/15 16:37:13 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		autocompl(t_rdl *rdl, char *buf)
 		ft_strdel(&acp.str);
 		return (0);
 	}
-	if (!lst->next)
+	if (!lst->next && !ft_cisin(lst->content, '\n'))
 	{
 		rdladdstr(rdl, lst->content);
 		if (lst->content_size == 0 || lst->content_size == 1)
