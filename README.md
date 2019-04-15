@@ -1,4 +1,4 @@
-# 21sh
+# 42sh
 
 ## TODO
 - export builtin, set && unset missing stuff.
