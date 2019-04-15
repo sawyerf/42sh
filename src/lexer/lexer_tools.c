@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 14:35:55 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/09 21:31:41 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/15 22:29:14 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		str_putnstr(char *str, t_str *data, size_t n)
 {
-	while ((*str) && (n))
+	while (*str && n)
 	{
 		n--;
 		if (str_putc(&str, data) == MEMERR)

@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 21:17:33 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/15 21:51:31 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/15 22:38:40 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,14 @@ int		acp_gettype(t_rdl *rdl, t_autocomplete *acp)
 void	fill_complt(t_rdl *rdl, t_list *lst)
 {
 	char	c;
-	char	*tmp;
 
 	c = cmdisincurs(rdl);
 	if (!c)
 	{
-		tmp = ft_replace(lst->content, " ", "\\ ");
-		ft_strdel((char**)&lst->content);
-		lst->content = tmp;
+		lst->content = ft_rereplace(lst->content, " ", "\\ ");
+		lst->content = ft_rereplace(lst->content, "\n", "\\n");
+		lst->content = ft_rereplace(lst->content, "\t", "\\t");
+		lst->content = ft_rereplace(lst->content, "\r", "\\r");
 	}
 	rdladdstr(rdl, lst->content);
 	if (lst->content_size == 0 || lst->content_size == 1)
@@ -84,7 +84,7 @@ int		autocompl(t_rdl *rdl, char *buf)
 		ft_strdel(&acp.str);
 		return (0);
 	}
-	if (!lst->next && !ft_cisin(lst->content, '\n'))
+	if (!lst->next)
 		fill_complt(rdl, lst);
 	else
 		putlst(acp.str, lst, rdl);

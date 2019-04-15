@@ -6,11 +6,11 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/04/15 21:48:52 by apeyret          ###   ########.fr        #
+#    Updated: 2019/04/15 21:58:32 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME =		21sh 
+NAME =		42sh 
 
 CC =		clang	
 
@@ -150,17 +150,17 @@ CRT = 		$(addprefix $(OBJ_DIR)/,$(CRT_DIR))
 all: $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(INC) Makefile
-	@printf "\033[0;32m[21sh] Compilation [o.]\033[0;0m\r"
+	@printf "\033[0;32m[42sh] Compilation [o.]\033[0;0m\r"
 	@mkdir -p $(CRT) 2> /dev/null || true
 	@$(CC) $(CFLAGS) -c $< -o $@
-	@printf "\033[0;32m[21sh] Compilation [.o]\033[0;0m\r"
+	@printf "\033[0;32m[42sh] Compilation [.o]\033[0;0m\r"
 
 norm:
 	@norminette $(SRC)
 	@norminette $(INC)
 
 $(NAME): $(OBJ)
-	@printf "\033[0;32m[21sh] Compilation [OK]\033[0;0m\n"
+	@printf "\033[0;32m[42sh] Compilation [OK]\033[0;0m\n"
 	@make -C lib/
 	@$(CC) $(CFLAGS) -ltermcap $(DEBUG) $(OBJ) lib/libft.a -o $(NAME)
 
@@ -168,12 +168,12 @@ clean:
 	@make clean -C lib/
 	@/bin/rm -f $(OBJ)
 	@/bin/rm -rf $(OBJ_DIR)
-	@printf "\033[0;31m[21sh] Deleted *.o\033[0;0m\n"
+	@printf "\033[0;31m[42sh] Deleted *.o\033[0;0m\n"
 
 fclean: clean
 	@/bin/rm -f $(NAME)
 	@/bin/rm -f lib/libft.a
-	@printf "\033[0;31D[21sh] Deleted 21sh\033[0;0m\n"
+	@printf "\033[0;31D[42sh] Deleted 42sh\033[0;0m\n"
 
 re: fclean all
 
