@@ -6,17 +6,20 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 21:17:33 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/15 16:37:13 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/15 21:51:31 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline.h"
 
-t_list	*get_choice(t_autocomplete acp)
+
+t_list	*get_choice(t_rdl *rdl, t_autocomplete acp)
 {
 	char			*path;
 
-	if (acp.type == cmd_name)
+	if (cmdisincurs(rdl) == '\\')
+		return (ft_lstnew("\\", 4));
+	else if (acp.type == cmd_name)
 	{
 		if (!(path = get_env_value("PATH")))
 			return (NULL);
@@ -45,6 +48,29 @@ int		acp_gettype(t_rdl *rdl, t_autocomplete *acp)
 	return (0);
 }
 
+void	fill_complt(t_rdl *rdl, t_list *lst)
+{
+	char	c;
+	char	*tmp;
+
+	c = cmdisincurs(rdl);
+	if (!c)
+	{
+		tmp = ft_replace(lst->content, " ", "\\ ");
+		ft_strdel((char**)&lst->content);
+		lst->content = tmp;
+	}
+	rdladdstr(rdl, lst->content);
+	if (lst->content_size == 0 || lst->content_size == 1)
+	{
+		if (c == '"' || c == '\'')
+			rdladd(rdl, c);
+		rdladd(rdl, ' ');
+	}
+	else if (lst->content_size == 3)
+		rdladd(rdl, '/');
+}
+
 int		autocompl(t_rdl *rdl, char *buf)
 {
 	t_list			*lst;
@@ -53,19 +79,13 @@ int		autocompl(t_rdl *rdl, char *buf)
 	(void)buf;
 	if (acp_gettype(rdl, &acp))
 		return (0);
-	if (!(lst = get_choice(acp)))
+	if (!(lst = get_choice(rdl, acp)))
 	{
 		ft_strdel(&acp.str);
 		return (0);
 	}
 	if (!lst->next && !ft_cisin(lst->content, '\n'))
-	{
-		rdladdstr(rdl, lst->content);
-		if (lst->content_size == 0 || lst->content_size == 1)
-			rdladd(rdl, ' ');
-		else if (lst->content_size == 3)
-			rdladd(rdl, '/');
-	}
+		fill_complt(rdl, lst);
 	else
 		putlst(acp.str, lst, rdl);
 	ft_strdel(&acp.str);
