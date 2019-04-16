@@ -38,7 +38,19 @@ int	handle_column(t_lexer *lx_st)
 
 int	handle_ampersand(t_lexer *lx_st)
 {
-	if (!ft_strncmp(lx_st->cursor, "&&", 2))
+	if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
+		return (MEMERR);
+	if (*(lx_st->cursor) == '&')
+	{
+		if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
+			return (MEMERR);
+		lx_st->token->type = AND_IF;
+	}
+	else
+		lx_st->token->type = AMPERS;
+	return (0);
+/*
+if (!ft_strncmp(lx_st->cursor, "&&", 2))
 	{
 		if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 			return (MEMERR);
@@ -48,7 +60,7 @@ int	handle_ampersand(t_lexer *lx_st)
 		return (0);
 	}
 	lx_st->token->type = WORD;
-	return (handle_common(lx_st));
+	return (handle_common(lx_st));*/
 }
 
 int	handle_great(t_lexer *lx_st)

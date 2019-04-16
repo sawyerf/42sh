@@ -29,7 +29,9 @@ INC_FILE =	ft_eval.h					\
 			generic_typedef.h			\
 			readline.h					\
 			hashtable.h					\
-			sh_core.h
+			sh_core.h					\
+			jobctl.h					\
+			jobctl_typedef.h			\
 
 SRC_DIR =	src
 
@@ -128,7 +130,9 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			readline/struct_rdladd.c	\
 			readline/termget.c			\
 			readline/terminit.c			\
-			readline/tools.c			
+			readline/tools.c			\
+			jobcontrol/init_jobctl.c	\
+			jobcontrol/make_job.c
 
 OBJ_DIR =	.obj
 OBJ_FILE =	$(SRC_FILE:.c=.o)
@@ -140,7 +144,8 @@ CRT_DIR =	core 						\
 		 	eval 						\
 		 	readline 					\
 		 	parser 						\
-		 	hashtable 
+		 	hashtable					\
+			jobcontrol
 
 SRC = 		$(addprefix $(SRC_DIR)/,$(SRC_FILE))
 INC = 		$(addprefix $(INC_DIR)/,$(INC_FILE))

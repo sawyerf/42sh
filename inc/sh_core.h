@@ -16,6 +16,7 @@
 # include "libft.h"
 # include "generic_typedef.h"
 # include "ft_lexer_typedef.h"
+# include "jobctl_typedef.h"
 # include "ft_lexer.h"
 # include "ft_parser_typedef.h"
 # include "ft_parser.h"
@@ -23,6 +24,7 @@
 # include "ft_eval.h"
 # include "ft_light_parser_typedef.h"
 # include "ft_light_parser.h"
+# include "jobctl.h"
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <sys/wait.h>
@@ -74,6 +76,7 @@ typedef enum			e_quote_state
 	backslash,
 	unquoted,
 }						t_quote_state;
+
 
 extern	t_sh			g_sh;
 

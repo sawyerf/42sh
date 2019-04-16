@@ -40,6 +40,11 @@ static int	init_shell(char **env, t_read_fn *read_fn)
 	*read_fn = sh_readfile;
 	if (g_sh.mode == INTERACTIVE)
 		*read_fn = readline;
+	if ((g_sh.mode == INTERACTIVE) && (init_jobctl() == SH_ABORT))
+	{
+		global_del();
+		return (SH_ABORT);
+	} 
 	return (0);
 }
 

@@ -19,6 +19,7 @@ static int		execve_wrap(t_cmd_tab *cmd)
 	int		ret;
 
 	close_save();
+	reset_sig();
 	if ((ret = handle_redir(cmd->redir_lst, NULL)))
 		exit(1);
 	if ((cmd->av[0]) && (ft_cisin(cmd->av[0], '/')))
@@ -60,6 +61,30 @@ int				spawn_in_pipe(t_cmd_tab *cmd)
 	return (execve_wrap(cmd));
 }
 
+int				launch_command(t_cmd_tab *cmd, t_job *job)
+{
+	pid_t	pid;
+	int		ret;
+
+	if ((ret = pre_execution(cmd)) == MEMERR)
+		return (MEMERR);
+	else if ((ret == BUILTIN) || (ret == BUILTIN_FAIL))
+		return (0);
+	pid = fork();
+	if (pid == -1)
+		return (MEMERR);
+	if (pid == 0)
+	{
+		reset_sig();
+		if ((g_sh.mode == INTERACTIVE) && (setpgid_wrap(pid, job) == -1))
+			exit_wrap(MEMERR, cmd);
+		execve_wrap(cmd);
+	}
+	if ((g_sh.mode == INTERACTIVE) && (setpgid_wrap(pid, job) == -1))
+		return (MEMERR);
+	wait_wrapper(cmd, pid);
+	return (0);
+}
 int				spawn_command(t_cmd_tab *cmd)
 {
 	pid_t	pid;

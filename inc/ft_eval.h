@@ -14,6 +14,7 @@
 # define FT_EVAL_H
 
 # include "sh_core.h"
+# include "jobctl.h"
 # include <fcntl.h>
 
 # define PIPEFAIL 20
@@ -50,6 +51,9 @@ typedef struct			s_cmd_tab
 	struct s_cmd_tab	*next;
 	struct s_cmd_tab	*previous;
 }						t_cmd_tab;
+
+int						launch_command(t_cmd_tab *cmd, t_job *job);
+
 
 t_cmd_tab				*expand_pipeline(t_simple_cmd *cmd_lst);
 void					restore_fd(t_list *to_close);

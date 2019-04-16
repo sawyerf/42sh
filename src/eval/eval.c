@@ -14,6 +14,8 @@
 
 static int	eval_sep(t_ast_node *tree)
 {
+	if (tree->type == AMPERS)
+		tree->left->async = 1;
 	if ((tree->left) && (eval_tree(tree->left) == MEMERR))
 		return (MEMERR);
 	if ((tree->right) && (eval_tree(tree->right) == MEMERR))

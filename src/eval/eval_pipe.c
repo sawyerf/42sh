@@ -12,7 +12,7 @@
 
 #include "ft_eval.h"
 
-int	pipe_recursion(t_cmd_tab *to, t_cmd_tab *from)
+int	pipe_recursion(t_cmd_tab *to, t_cmd_tab *from, t_job *job)
 {
 	int pipes[2];
 	int pid;
@@ -21,6 +21,7 @@ int	pipe_recursion(t_cmd_tab *to, t_cmd_tab *from)
 		return (MEMERR);
 	if (pid == 0)
 	{
+		reset_sig();
 		if (to)
 		{
 			if (dup2(pipes[1], STDOUT_FILENO) == -1)
@@ -28,30 +29,31 @@ int	pipe_recursion(t_cmd_tab *to, t_cmd_tab *from)
 			close(pipes[0]);
 		}
 		spawn_in_pipe(from);
-		exit_wrap(0, from);
 	}
+	if ((g_sh.mode == INTERACTIVE) && (setpgid_wrap(pid, job) == -1))
+		return (MEMERR);
 	if (to)
 	{
 		if (dup2(pipes[0], STDIN_FILENO) == -1)
 			return (PIPEFAIL);
 		close(pipes[1]);
-		return (pipe_recursion(to->next, to));
+		return (pipe_recursion(to->next, to, job));
 	}
 	wait_wrapper(from, pid);
 	return (from->exit_status);
 }
 
-int	eval_pipe(t_cmd_tab *cmd)
+int	eval_pipe(t_cmd_tab *cmd, t_job *job)
 {
 	pid_t	pid;
-	int		ret;
+ 	int		ret;
 
 	pid = fork();
 	if (pid == -1)
 		return (-1);
 	if (pid == 0)
 	{
-		ret = pipe_recursion(cmd->next, cmd);
+  		ret = pipe_recursion(cmd->next, cmd, job);
 		exit_wrap(ret, cmd);
 	}
 	wait_wrapper(cmd, pid);
@@ -61,17 +63,30 @@ int	eval_pipe(t_cmd_tab *cmd)
 int	exec_pipeline(t_ast_node *tree)
 {
 	t_cmd_tab	*cmd_tab;
+	t_job		*job;
 	int			ret;
+	t_cmd_tab	*iter;
 
 	ret = 0;
 	if (!(cmd_tab = expand_pipeline(tree->pipeline)))
 		return (MEMERR);
+	if (!(job = make_job(cmd_tab)))
+		return (MEMERR);
 	if (cmd_tab->next)
-		ret = eval_pipe(cmd_tab);
+		ret = eval_pipe(cmd_tab, job);
 	else
-		ret = spawn_command(cmd_tab);
-	tree->exit_status = cmd_tab->exit_status;
+		ret = launch_command(cmd_tab, job);
+	iter = cmd_tab;
+	while (iter->next)
+		iter = iter->next;
+	tree->exit_status = iter->exit_status;
 	g_sh.status = tree->exit_status;
 	free_cmd_tab_lst(cmd_tab);
 	return (ret);
 }
+
+/*
+int	launch_job(t_job *job, int fg)
+{
+
+}*/
