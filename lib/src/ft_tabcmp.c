@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_tabcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/21 18:40:35 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/16 18:32:07 by apeyret          ###   ########.fr       */
+/*   Created: 2019/04/16 15:13:10 by apeyret           #+#    #+#             */
+/*   Updated: 2019/04/16 15:19:16 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdlib.h>
-#include <string.h>
 
-char			*ft_strdup(const char *s1)
+int			ft_tabcmp(char **tab, char *str)
 {
-	char	*copy;
-	int		len;
-	int		i;
+	int	i;
 
 	i = 0;
-	len = ft_strlen(s1);
-	if (!s1)
-		return (NULL);
-	if (!(copy = ft_strnew(len)))
-		return (0);
-	while (s1[i] != '\0')
+	while (tab[i] != NULL)
 	{
-		copy[i] = s1[i];
+		if (!ft_strcmp(tab[i], str))
+			return (i);
 		i++;
 	}
-	copy[len] = '\0';
-	return (copy);
+	return (-1);
 }

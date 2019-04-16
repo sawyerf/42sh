@@ -8,6 +8,7 @@ lel*
 *.swo
 *.out
 *:w
+*:W
 21sh
 42sh
 test*

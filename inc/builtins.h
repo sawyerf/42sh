@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 13:46:10 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/10 18:15:02 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/16 16:08:58 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int						cd_error(int errnum, char *str);
 int						change_dir(t_cmd_tab *cmd);
 
 int						ft_echo(t_cmd_tab *cmd);
+
+int						type(t_cmd_tab *cmd);
 
 int						ft_exit(t_cmd_tab *cmd);
 int						ft_env(t_cmd_tab *cmd);

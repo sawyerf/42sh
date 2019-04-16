@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 22:23:00 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/15 22:36:33 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/16 15:20:17 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,6 @@ int					ft_strnext(char *str, char *to);
 char				*ft_replace(char *str, char *to, char *by);
 char				*ft_rereplace(char *str, char *to, char *by);
 int					ft_rperr(int ret, char *str);
+int					ft_tabcmp(char **tab, char *s);
 
 #endif

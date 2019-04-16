@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 20:19:10 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/15 22:43:06 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/16 18:54:59 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,22 @@
 #include "hashtable.h"
 #include "builtins.h"
 
+t_builtin	g_array[] =\
+{ft_echo, change_dir, setenv_wrapper, ft_unsetenv, ft_env, ft_exit, ft_set,
+ft_unset, fc, hash, type};
+char		*g_builtins[] =\
+{"echo", "cd", "setenv", "unsetenv", "env", "exit", "set", "unset", "fc",
+"hash", "type", NULL};
+
 int				is_builtin(t_cmd_tab *cmd)
 {
-	static t_builtin	array[] = {ft_echo, change_dir, setenv_wrapper,
-				ft_unsetenv, ft_env, ft_exit, ft_set, ft_unset, fc, hash};
-	static	char		*builtins[] = {"echo", "cd", "setenv", "unsetenv",
-				"env", "exit", "set", "unset", "fc", "hash", NULL};
-	int					i;
-	int					ret;
-	t_list				*save_head;
+	t_list	*save_head;
+	int		i;
 
 	save_head = NULL;
-	if ((i = ft_cmptab(builtins, cmd->av[0])) != -1)
+	if ((i = ft_tabcmp(g_builtins, cmd->av[0])) != -1)
 	{
-		if ((ret = handle_redir(cmd->redir_lst, &save_head)))
+		if (handle_redir(cmd->redir_lst, &save_head))
 		{
 			ft_lstdel(&save_head);
 			return (BUILTIN_FAIL);
@@ -35,7 +37,7 @@ int				is_builtin(t_cmd_tab *cmd)
 		cmd->process_env = craft_env(g_sh.env, cmd->assign_lst);
 		if (cmd->process_env == NULL)
 			return (MEMERR);
-		cmd->exit_status = array[i](cmd);
+		cmd->exit_status = g_array[i](cmd);
 		restore_fd(save_head);
 		ft_lstdel(&save_head);
 		return (0);

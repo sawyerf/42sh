@@ -6,11 +6,31 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 18:06:38 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/01 18:08:11 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/16 19:37:48 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline.h"
+
+int		vm_begin(t_rdl *rdl, char *buf)
+{
+	left(rdl, rdl->real + rdl->lpro);
+	ft_printf("%s\e[7m%.*s\e[0m%s", rdl->prompt, rdl->vcurs, rdl->str, rdl->str + rdl->vcurs);
+	rdl->real = rdl->size;
+	begin(rdl, buf);
+	rdl->curs = 0;
+	return (0);
+}
+
+int		vm_end(t_rdl *rdl, char *buf)
+{
+	(void)buf;
+	left(rdl, rdl->real + rdl->lpro);
+	ft_printf("%s%.*s\e[7m%s\e[0m", rdl->prompt, rdl->vcurs, rdl->str, rdl->str + rdl->vcurs);
+	rdl->real = rdl->size;
+	rdl->curs = rdl->size;
+	return (0);
+}
 
 int		vm_left(t_rdl *rdl)
 {

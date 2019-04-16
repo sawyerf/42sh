@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/26 14:54:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/10 18:45:30 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/16 13:16:41 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ char			*ft_replace(char *str, char *to, char *by)
 	int		len;
 	char	*dst;
 
+	if (!str || !to || !by)
+		return (NULL);
 	len = rpllen(str, to, by);
 	if (!(dst = ft_strnew(len)))
 		return (NULL);

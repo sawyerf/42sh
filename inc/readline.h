@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/15 21:48:22 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/16 19:26:15 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ int					vm_move(t_rdl *rdl, char *buf);
 int					vm_copy(t_rdl *rdl, char *buf);
 int					vm_del(t_rdl *rdl, char *buf);
 int					vm_cut(t_rdl *rdl, char *buf);
+int					vm_begin(t_rdl *rdl, char *buf);
+int					vm_end(t_rdl *rdl, char *buf);
 int					paste(t_rdl *rdl, char *buf);
 int					finish(t_rdl *rdl, char *buf);
 int					end(t_rdl *rdl, char *buf);

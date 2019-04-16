@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/12 18:13:28 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/16 15:18:36 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ int						ft_unset(t_cmd_tab *cmd);
 void					print_env_tab(char **machintruc);
 void					print_cmd(t_command command);
 void					print_cmd_lst(t_command *command);
-int						ft_cmptab(char **machintruc, char *str);
 void					free_tab(char **machintruc);
 void					free_tab_bytes(char **machintruc);
 char					**dup_tab(char **machintruc);

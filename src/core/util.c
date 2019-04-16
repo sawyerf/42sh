@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 16:10:23 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/04 16:13:43 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/16 15:13:14 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,6 @@ int			add_slash(char **path)
 		*path = tmp;
 	}
 	return (0);
-}
-
-int			ft_cmptab(char **tab, char *str)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i] != NULL)
-	{
-		if (!ft_strcmp(tab[i], str))
-			return (i);
-		i++;
-	}
-	return (-1);
 }
 
 static void	state_unquoted(char *line, t_quote_state *state)
