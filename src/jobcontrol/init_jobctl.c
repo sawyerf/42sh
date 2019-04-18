@@ -50,6 +50,7 @@ int		reset_sig(void)
 		|| (sigaction(SIGTSTP,&new_act, NULL) < 0)
 		|| (sigaction(SIGTTIN,&new_act, NULL) < 0)
 		|| (sigaction(SIGTTOU,&new_act, NULL) < 0)
+		|| (sigaction(SIGTERM,&new_act, NULL) < 0)
 		|| (sigaction(SIGCHLD,&new_act, NULL) < 0))
 		return(SH_ABORT);
 	return (0);
@@ -65,6 +66,7 @@ int		enable_jobctl(void)
 		return (SH_ABORT);
 	if (tcsetpgrp(STDIN_FILENO, pgid) == -1)
 		return (SH_ABORT);
+	tcgetattr(STDIN_FILENO, &g_sh.term_save);
 	ignore_sigs();
 /*	if ((pgid = getpgrp()) == -1)
 		return (SH_ABORT);

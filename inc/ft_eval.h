@@ -52,7 +52,7 @@ typedef struct			s_cmd_tab
 	struct s_cmd_tab	*previous;
 }						t_cmd_tab;
 
-int						launch_command(t_cmd_tab *cmd, t_job *job);
+int						launch_command(t_job *job);
 
 
 t_cmd_tab				*expand_pipeline(t_simple_cmd *cmd_lst);

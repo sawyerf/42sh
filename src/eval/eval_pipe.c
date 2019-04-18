@@ -43,7 +43,7 @@ int	pipe_recursion(t_cmd_tab *to, t_cmd_tab *from, t_job *job)
 	return (from->exit_status);
 }
 
-int	eval_pipe(t_cmd_tab *cmd, t_job *job)
+int	eval_pipe(t_job *job)
 {
 	pid_t	pid;
  	int		ret;
@@ -53,10 +53,10 @@ int	eval_pipe(t_cmd_tab *cmd, t_job *job)
 		return (-1);
 	if (pid == 0)
 	{
-  		ret = pipe_recursion(cmd->next, cmd, job);
-		exit_wrap(ret, cmd);
+  		ret = pipe_recursion(job->pipeline->next, job->pipeline, job);
+		exit_wrap(ret, job->pipeline);
 	}
-	wait_wrapper(cmd, pid);
+	wait_wrapper(job->pipeline, pid);
 	return (0);
 }
 
@@ -72,10 +72,12 @@ int	exec_pipeline(t_ast_node *tree)
 		return (MEMERR);
 	if (!(job = make_job(cmd_tab)))
 		return (MEMERR);
+	if (tree->async)
+		job->fg = 0;
 	if (cmd_tab->next)
-		ret = eval_pipe(cmd_tab, job);
+		ret = eval_pipe(job);
 	else
-		ret = launch_command(cmd_tab, job);
+		ret = launch_command(job);
 	iter = cmd_tab;
 	while (iter->next)
 		iter = iter->next;

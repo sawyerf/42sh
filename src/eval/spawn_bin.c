@@ -19,7 +19,6 @@ static int		execve_wrap(t_cmd_tab *cmd)
 	int		ret;
 
 	close_save();
-	reset_sig();
 	if ((ret = handle_redir(cmd->redir_lst, NULL)))
 		exit(1);
 	if ((cmd->av[0]) && (ft_cisin(cmd->av[0], '/')))
@@ -31,6 +30,7 @@ static int		execve_wrap(t_cmd_tab *cmd)
 	}
 	if ((!cmd->full_path))
 		exit_wrap(CMD_NOT_FOUND, cmd);
+	reset_sig();
 	ret = execve(cmd->full_path, cmd->av, cmd->process_env);
 	ft_dprintf(2, "21sh: bad file format\n");
 	exit_wrap(ret, cmd);
@@ -41,7 +41,7 @@ void			wait_wrapper(t_cmd_tab *cmd, pid_t pid)
 {
 	int	wstatus;
 
-	waitpid(pid, &wstatus, 0);
+	waitpid(pid, &wstatus, WUNTRACED);
 	cmd->exit_signal = -1;
 	cmd->exit_status = -1;
 	if (WIFEXITED(wstatus))
@@ -61,12 +61,12 @@ int				spawn_in_pipe(t_cmd_tab *cmd)
 	return (execve_wrap(cmd));
 }
 
-int				launch_command(t_cmd_tab *cmd, t_job *job)
+int				launch_command(t_job *job)
 {
 	pid_t	pid;
 	int		ret;
 
-	if ((ret = pre_execution(cmd)) == MEMERR)
+	if ((ret = pre_execution(job->pipeline)) == MEMERR)
 		return (MEMERR);
 	else if ((ret == BUILTIN) || (ret == BUILTIN_FAIL))
 		return (0);
@@ -75,14 +75,19 @@ int				launch_command(t_cmd_tab *cmd, t_job *job)
 		return (MEMERR);
 	if (pid == 0)
 	{
-		reset_sig();
 		if ((g_sh.mode == INTERACTIVE) && (setpgid_wrap(pid, job) == -1))
-			exit_wrap(MEMERR, cmd);
-		execve_wrap(cmd);
+			exit_wrap(MEMERR, job->pipeline);
+		tcsetpgrp(STDIN_FILENO, job->pgid);
+		execve_wrap(job->pipeline);
 	}
 	if ((g_sh.mode == INTERACTIVE) && (setpgid_wrap(pid, job) == -1))
 		return (MEMERR);
-	wait_wrapper(cmd, pid);
+	if ((g_sh.mode != INTERACTIVE))
+		wait_wrapper(job->pipeline, pid);
+	else if (job->fg)
+		fg_job(job, 0);
+	else{ft_printf("async job\n");
+		wait_wrapper(job->pipeline, pid);} // bg to be changed
 	return (0);
 }
 int				spawn_command(t_cmd_tab *cmd)

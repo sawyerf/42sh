@@ -6,13 +6,14 @@
 
 typedef struct			s_job
 {
+	char				*cmd_ln;
 	pid_t				pgid;
+	int					fg;
 	int					notified;
-	struct termios		save_tio;
 	int					status;
+	struct termios		save_tio;
 	struct s_cmd_tab	*pipeline;
 	struct s_job		*next;
-
 }						t_job;
 
 #endif
