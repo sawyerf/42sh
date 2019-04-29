@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keys.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: apeyret <apeyret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:47:43 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/12 18:06:52 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/29 15:43:44 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,10 @@ int		normal_key(t_rdl *rdl, char *buf)
 int		key_router(t_rdl *rdl, char *buf)
 {
 	if (is_special(buf))
+	{
+		
 		return (special_key(rdl, buf, g_key));
+	}
 	else
 		return (normal_key(rdl, buf));
 }
