@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/04/16 15:58:35 by apeyret          ###   ########.fr        #
+#    Updated: 2019/04/29 14:22:27 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME =		42sh
 
 CC =		clang	
 
-CFLAGS =	-I inc/ -I lib/inc/ -Wall -Werror -Wextra -ggdb
+CFLAGS =	-I inc/ -I libft/inc/ -Wall -Werror -Wextra -ggdb
 
 INC_DIR =	inc
 
@@ -162,18 +162,18 @@ norm:
 
 $(NAME): $(OBJ)
 	@printf "\033[0;32m[42sh] Compilation [OK]\033[0;0m\n"
-	@make -C lib/
-	@$(CC) $(CFLAGS) -ltermcap $(DEBUG) $(OBJ) lib/libft.a -o $(NAME)
+	@make -C libft/
+	@$(CC) $(CFLAGS) -ltermcap $(DEBUG) $(OBJ) libft/libft.a -o $(NAME)
 
 clean:
-	@make clean -C lib/
+	@make clean -C libft/
 	@/bin/rm -f $(OBJ)
 	@/bin/rm -rf $(OBJ_DIR)
 	@printf "\033[0;31m[42sh] Deleted *.o\033[0;0m\n"
 
 fclean: clean
 	@/bin/rm -f $(NAME)
-	@/bin/rm -f lib/libft.a
+	@/bin/rm -f libft/libft.a
 	@printf "\033[0;31D[42sh] Deleted 42sh\033[0;0m\n"
 
 re: fclean all
