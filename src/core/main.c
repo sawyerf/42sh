@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/15 16:30:22 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/29 15:53:16 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,10 @@ int			main(int ac, char **av, char **env)
 	int			ret;
 	t_read_fn	read_fn;
 
+// LOGGER   ---------------------------------------------------------------
+    if (logger_init(D_TRACE, "out.log") != 0)
+        printf("failed to open the logger\n");
+// LOGGER   ---------------------------------------------------------------
 	silence_ac_av(ac, av);
 	if (init_shell(env, &read_fn))
 		return (MEMERR);
@@ -88,4 +92,6 @@ int			main(int ac, char **av, char **env)
 	}
 	global_del();
 	return (g_sh.status);
+// LOGGER   ---------------------------------------------------------------
+	logger_close();
 }

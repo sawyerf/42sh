@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/04/29 14:22:27 by apeyret          ###   ########.fr        #
+#    Updated: 2019/04/29 15:47:01 by juhallyn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -163,7 +163,7 @@ norm:
 $(NAME): $(OBJ)
 	@printf "\033[0;32m[42sh] Compilation [OK]\033[0;0m\n"
 	@make -C libft/
-	@$(CC) $(CFLAGS) -ltermcap $(DEBUG) $(OBJ) libft/libft.a -o $(NAME)
+	@$(CC) $(CFLAGS) -I logger logger/liblogger.a -ltermcap $(DEBUG) $(OBJ) libft/libft.a -o $(NAME)
 
 clean:
 	@make clean -C libft/

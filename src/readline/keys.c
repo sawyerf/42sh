@@ -6,7 +6,7 @@
 /*   By: apeyret <apeyret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:47:43 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/29 15:43:44 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/04/29 16:10:15 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,7 @@ int		normal_key(t_rdl *rdl, char *buf)
 int		key_router(t_rdl *rdl, char *buf)
 {
 	if (is_special(buf))
-	{
-		
 		return (special_key(rdl, buf, g_key));
-	}
 	else
 		return (normal_key(rdl, buf));
 }

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/16 15:18:36 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/29 15:51:10 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,9 @@
 # define FDSAVEERR 257
 # define BUILTIN 666
 # define BUILTIN_FAIL 667
+
+// DEBUG
+#include "../logger/incs/logger.h"
 
 # define MODEFILE 2
 # define INTERACTIVE 1

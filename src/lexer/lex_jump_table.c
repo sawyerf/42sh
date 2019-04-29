@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lex_jump_table.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/14 18:58:40 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/29 17:51:44 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,11 @@ int	handle_param_exp(t_lexer *lx_st)
 		while (*(lx_st->cursor))
 		{
 			if (!parser_is_name_c(*(lx_st->cursor)))
+			{
+				log_info("handle_param_exp cursor [%s]\n", ((lx_st->cursor)));
+				log_info("handle_param_exp token [%s]\n", ((lx_st->line)));
 				break ;
+			}
 			if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 				return (MEMERR);
 		}

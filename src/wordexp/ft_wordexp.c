@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_wordexp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/10 17:50:03 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/29 19:32:42 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int			ft_wordexp_heredoc(t_token *word)
 
 int			ft_wordexp(t_token *word, t_bool is_redir)
 {
+	log_info("------------  ft_wordexp -------------------------");
+	log_info("Word : [%s]", word->data.str);
 	if (handle_tilde(word) == MEMERR)
 		return (MEMERR);
 	if (handle_exp_param(word, is_redir) == MEMERR)

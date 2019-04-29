@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   param_expand.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/12 15:26:34 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/29 19:35:08 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,5 +117,6 @@ int				handle_exp_param(t_token *word, t_bool is_redir)
 			cursor = c_next_bslash(cursor);
 		cursor++;
 	}
+	log_warn("Word-exp : [%s]", word->data.str);
 	return (0);
 }
