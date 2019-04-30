@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/04/29 14:22:27 by apeyret          ###   ########.fr        #
+#    Updated: 2019/04/29 19:37:20 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,6 +86,7 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			lexer/lexer_tools.c			\
 			lexer/rev_lex.c				\
 			lexer/memerror.c			\
+			lexer/lex_bang.c			\
 			lexer/lex_quotes.c			\
 			lexer/lex_op.c				\
 			lexer/token_tools.c			\
