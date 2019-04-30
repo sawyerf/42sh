@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/29 19:35:08 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/04/30 18:07:41 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,72 @@ static char		*quote_str(char *str)
 	return (quoted);
 }
 
+
+char			*get_var_exp(char *cursor)
+{
+	char	*var;
+	char	*tmp;
+	int		len;
+
+	len = 0;
+	var = NULL;
+	tmp = cursor;
+	while (*tmp && *tmp != ':')
+	{
+		len++;
+		tmp++;
+	}
+	var = ft_strndup(cursor, len);
+	log_warn("get_var_exp == [%s]", var);
+	return (var);
+}
+
+// ${parameter:-word}
+int				substitute_word_if_null(char *cursor, char *zone)
+{
+	log_warn("------------------ substitute_word_if_null -------------------");
+	char	*env_var;
+
+	cursor++;
+	env_var = get_var_exp(cursor);
+	log_info("CURSOR = [%s]\nzone = [%s]", cursor, zone);
+	return (0);
+}
+
+void			exp_sup(char *cursor)
+{
+	char	previous_char;
+	char	*tmp;
+
+	previous_char = '\0';
+	tmp = cursor;
+	tmp++;
+	while (*tmp)
+	{
+		previous_char = *(tmp - 1);
+		log_info("PREV : [%c]", (previous_char));
+		log_info("tmp : [%c]", (*tmp));
+		if (previous_char == ':' && (*tmp) == '-')
+		{
+			substitute_word_if_null(cursor, tmp);
+			break;
+		}
+		tmp++;
+	}
+}
+
 char			*build_param(char *cursor)
 {
 	static char	*empty_str = "";
 	char		*value;
 
 	if (*(cursor + 1) == '{')
+	{
 		cursor++;
+		exp_sup(cursor);
+		// log_info("--------------- BUILD PARAM -------------------------");
+		// log_warn("cursor : [%s]", cursor);
+	}
 	value = get_env_value(cursor + 1);
 	if (!value)
 		value = empty_str;
