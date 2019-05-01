@@ -66,7 +66,7 @@ int			eval_tree(t_ast_node *tree)
 		return (eval_or_if(tree));
 	else if (tree->type == PIPE)
 	{
-		if (exec_pipeline(tree) == MEMERR)
+		if (exec_pipeline(tree, NULL) == MEMERR)
 			return (MEMERR);
 		return (0);
 	}

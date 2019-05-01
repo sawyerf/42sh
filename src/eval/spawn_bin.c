@@ -61,12 +61,12 @@ int				spawn_in_pipe(t_cmd_tab *cmd)
 	return (execve_wrap(cmd));
 }
 
-int				launch_command(t_job *job)
+int				launch_command(t_cmd_tab *cmd, t_job *job)
 {
 	pid_t	pid;
 	int		ret;
 
-	if ((ret = pre_execution(job->pipeline)) == MEMERR)
+	if ((ret = pre_execution(cmd)) == MEMERR)
 		return (MEMERR);
 	else if ((ret == BUILTIN) || (ret == BUILTIN_FAIL))
 		return (0);
@@ -75,21 +75,25 @@ int				launch_command(t_job *job)
 		return (MEMERR);
 	if (pid == 0)
 	{
-		if ((g_sh.mode == INTERACTIVE) && (setpgid_wrap(pid, job) == -1))
-			exit_wrap(MEMERR, job->pipeline);
-		tcsetpgrp(STDIN_FILENO, job->pgid);
-		execve_wrap(job->pipeline);
+		if (job) //Has to be done in parent to avoid race condition
+		{
+			if ((setpgid_wrap(pid, job) == -1))
+				exit_wrap(MEMERR, cmd);
+			tcsetpgrp(STDIN_FILENO, job->pgid);
+		}
+		execve_wrap(cmd);
 	}
 	if ((g_sh.mode == INTERACTIVE) && (setpgid_wrap(pid, job) == -1))
 		return (MEMERR);
 	if ((g_sh.mode != INTERACTIVE))
-		wait_wrapper(job->pipeline, pid);
+		wait_wrapper(cmd, pid);
 	else if (job->fg)
-		fg_job(job, 0);
+		fg_job(cmd, job, 0);
 	else{ft_printf("async job\n");
-		wait_wrapper(job->pipeline, pid);} // bg to be changed
+		wait_wrapper(cmd, pid);} // bg to be changed
 	return (0);
 }
+
 int				spawn_command(t_cmd_tab *cmd)
 {
 	pid_t	pid;

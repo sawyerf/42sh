@@ -12,7 +12,6 @@ typedef struct			s_job
 	int					notified;
 	int					status;
 	struct termios		save_tio;
-	struct s_cmd_tab	*pipeline;
 	struct s_job		*next;
 }						t_job;
 

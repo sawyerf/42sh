@@ -52,7 +52,7 @@ typedef struct			s_cmd_tab
 	struct s_cmd_tab	*previous;
 }						t_cmd_tab;
 
-int						launch_command(t_job *job);
+int						launch_command(t_cmd_tab *cmd, t_job *job);
 
 
 t_cmd_tab				*expand_pipeline(t_simple_cmd *cmd_lst);
@@ -64,7 +64,7 @@ void					add_to_tree(t_ast_node **head, t_ast_node *to_add);
 int						bin_pathfinder(t_cmd_tab *cmd, char *path);
 int						spawn_in_pipe(t_cmd_tab *cmd);
 int						spawn_command(t_cmd_tab *cmd);
-int						exec_pipeline(t_ast_node *tree);
+int						exec_pipeline(t_ast_node *tree, t_job *job);
 void					wait_wrapper(t_cmd_tab *cmd, pid_t pid);
 int						is_builtin(t_cmd_tab *cmd);
 void					free_cmd_tab(t_cmd_tab *cmd);

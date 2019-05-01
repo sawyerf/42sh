@@ -52,6 +52,8 @@ int			execute_cmdline(t_parser *parser)
 
 void		add_to_tree(t_ast_node **head, t_ast_node *to_add)
 {
+	t_ast_node *insert;
+
 	if (*head == NULL)
 	{
 		*head = to_add;
@@ -59,10 +61,11 @@ void		add_to_tree(t_ast_node **head, t_ast_node *to_add)
 	}
 	if (to_add->type == PIPE)
 	{
-		if ((*head)->right == NULL)
-			(*head)->right = to_add;
-		else
-			(*head)->right->right = to_add;
+		insert = *head;
+		while (insert->right)
+			insert = insert->right;
+		insert->right = to_add;
+		return;
 	}
 	return (add_to_tree_sep(head, to_add));
 }
