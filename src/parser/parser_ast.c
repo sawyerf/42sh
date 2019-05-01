@@ -103,10 +103,9 @@ void	add_to_tree_sep(t_ast_node **head, t_ast_node *to_add)
 	{
 		while ((insert->right) && (is_sep(insert->right)))
 			insert = insert->right;
-		if ((insert == *head) && ((insert->type == OR_IF)
-			|| (insert->type == AND_IF)))
-			replace_higher(head, to_add);
-		else
+		if (insert != *head)
 			replace_right(insert, to_add);
+		else
+			replace_higher(head, to_add);
 	}
 }
