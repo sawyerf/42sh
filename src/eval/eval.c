@@ -14,9 +14,32 @@
 
 static int	eval_sep(t_ast_node *tree)
 {
-	if (tree->type == AMPERS)
-		tree->left->async = 1;
-	if ((tree->left) && (eval_tree(tree->left) == MEMERR))
+	t_job	*job;
+	pid_t	pid;
+
+	job = NULL;
+	pid = 0;
+	if ((tree->type == AMPERS) && (g_sh.mode == INTERACTIVE))
+	{
+		if (!(job = make_job(0)))
+			return (MEMERR);
+		if ((pid = fork()) == -1)
+			return (MEMERR); //should fork error or sthing
+		if (pid == 0)
+		{
+			if (setpgid_wrap(pid, job) == -1)
+				exit_wrap(MEMERR, NULL);
+			g_sh.mode = NONINTERACTIVE;
+			eval_tree(tree->left);
+			waitpid(job->pgid, NULL, WUNTRACED);
+			exit_wrap(0, NULL);
+		}	
+		if (setpgid_wrap(pid, job) == -1)
+			return(MEMERR);
+		ft_printf("job started in bg %d, subshell waiting\n", pid);
+			
+	}
+	else if ((tree->left) && (eval_tree(tree->left) == MEMERR))
 		return (MEMERR);
 	if ((tree->right) && (eval_tree(tree->right) == MEMERR))
 		return (MEMERR);

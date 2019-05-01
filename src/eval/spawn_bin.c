@@ -79,7 +79,8 @@ int				launch_command(t_cmd_tab *cmd, t_job *job)
 		{
 			if ((setpgid_wrap(pid, job) == -1))
 				exit_wrap(MEMERR, cmd);
-			tcsetpgrp(STDIN_FILENO, job->pgid);
+			if (job->fg)
+				tcsetpgrp(STDIN_FILENO, job->pgid);
 		}
 		execve_wrap(cmd);
 	}
@@ -87,10 +88,10 @@ int				launch_command(t_cmd_tab *cmd, t_job *job)
 		return (MEMERR);
 	if ((g_sh.mode != INTERACTIVE))
 		wait_wrapper(cmd, pid);
-	else if (job->fg)
+	else if ((job) && (job->fg))
 		fg_job(cmd, job, 0);
-	else{ft_printf("async job\n");
-		wait_wrapper(cmd, pid);} // bg to be changed
+/*	else{ft_printf("async job\n");
+		wait_wrapper(cmd, pid);} // bg to be changed*/
 	return (0);
 }
 

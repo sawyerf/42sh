@@ -21,7 +21,8 @@ int	pipe_recursion(t_cmd_tab *to, t_cmd_tab *from, t_job *job)
 		return (MEMERR);
 	if (pid == 0)
 	{
-		reset_sig();
+//		if (setpgid_wrap(pid, job) == -1)
+//			exit_wrap(MEMERR, from);
 		if (to)
 		{
 			if (dup2(pipes[1], STDOUT_FILENO) == -1)
@@ -39,7 +40,8 @@ int	pipe_recursion(t_cmd_tab *to, t_cmd_tab *from, t_job *job)
 		close(pipes[1]);
 		return (pipe_recursion(to->next, to, job));
 	}
-	wait_wrapper(from, pid);
+//	if ((g_sh.mode != INTERACTIVE) || ((job) && (job->fg)))
+		wait_wrapper(from, pid);
 	return (from->exit_status);
 }
 
@@ -53,10 +55,19 @@ int	eval_pipe(t_cmd_tab *pipeln, t_job *job)
 		return (-1);
 	if (pid == 0)
 	{
+		if ((g_sh.mode == INTERACTIVE) && (setpgid_wrap(pid, job) == -1))
+			exit_wrap(MEMERR, pipeln);
+		if (job->fg)
+			tcsetpgrp(STDIN_FILENO, job->pgid);
   		ret = pipe_recursion(pipeln->next, pipeln, job);
 		exit_wrap(ret, pipeln);
 	}
-	wait_wrapper(pipeln, pid);
+	if ((g_sh.mode == INTERACTIVE) && (setpgid_wrap(pid, job) == -1))
+		return (MEMERR);
+	if (g_sh.mode != INTERACTIVE)
+		wait_wrapper(pipeln, pid);
+	else if ((job) && (job->fg))
+		fg_job(pipeln, job, 0);
 	return (0);
 }
 
@@ -69,7 +80,8 @@ int	exec_pipeline(t_ast_node *tree, t_job *job)
 	ret = 0;
 	if (!(cmd_tab = expand_pipeline(tree->pipeline)))
 		return (MEMERR);
-	if (!(job = make_job(1)))
+	if ((g_sh.mode == INTERACTIVE)
+		&& (!job) && (!(job = make_job(1))))
 		return (MEMERR);
 	if (cmd_tab->next)
 		ret = eval_pipe(cmd_tab, job);
