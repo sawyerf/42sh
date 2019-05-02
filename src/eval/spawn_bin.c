@@ -37,6 +37,17 @@ static int		execve_wrap(t_cmd_tab *cmd)
 	return (0);
 }
 
+void			wait_wrapper(t_job *job, pid_t pid)
+{
+	waitpid(pid, &(job->wstatus), WUNTRACED);
+	cmd->exit_signal = -1;
+	cmd->exit_status = -1;
+	if (WIFEXITED(wstatus))
+		cmd->exit_status = (int)WEXITSTATUS(wstatus);
+	else if (WIFSIGNALED(wstatus))
+		cmd->exit_signal = WTERMSIG(wstatus);
+}
+
 void			wait_wrapper(t_cmd_tab *cmd, pid_t pid)
 {
 	int	wstatus;
@@ -89,7 +100,7 @@ int				launch_command(t_cmd_tab *cmd, t_job *job)
 	if ((g_sh.mode != INTERACTIVE))
 		wait_wrapper(cmd, pid);
 	else if ((job) && (job->fg))
-		fg_job(cmd, job, 0);
+		fg_job( job, 0);
 /*	else{ft_printf("async job\n");
 		wait_wrapper(cmd, pid);} // bg to be changed*/
 	return (0);

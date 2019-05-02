@@ -59,6 +59,7 @@ typedef struct			s_sh
 	char				**local;
 	char				**env;
 	int					fd;
+	t_job				*job_lst;
 	struct termios		term_save;
 }						t_sh;
 

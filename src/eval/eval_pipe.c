@@ -41,7 +41,7 @@ int	pipe_recursion(t_cmd_tab *to, t_cmd_tab *from, t_job *job)
 		return (pipe_recursion(to->next, to, job));
 	}
 //	if ((g_sh.mode != INTERACTIVE) || ((job) && (job->fg)))
-		wait_wrapper(from, pid);
+		//wait_wrapper(from, pid);
 	return (from->exit_status);
 }
 
@@ -59,7 +59,9 @@ int	eval_pipe(t_cmd_tab *pipeln, t_job *job)
 			exit_wrap(MEMERR, pipeln);
 		if (job->fg)
 			tcsetpgrp(STDIN_FILENO, job->pgid);
+		reset_sig();
   		ret = pipe_recursion(pipeln->next, pipeln, job);
+		waitpid(WAIT_ANY, NULL, 0);
 		exit_wrap(ret, pipeln);
 	}
 	if ((g_sh.mode == INTERACTIVE) && (setpgid_wrap(pid, job) == -1))
@@ -67,7 +69,7 @@ int	eval_pipe(t_cmd_tab *pipeln, t_job *job)
 	if (g_sh.mode != INTERACTIVE)
 		wait_wrapper(pipeln, pid);
 	else if ((job) && (job->fg))
-		fg_job(pipeln, job, 0);
+		fg_job(job, 0);
 	return (0);
 }
 
