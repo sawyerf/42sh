@@ -1,0 +1,88 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
+/*   Updated: 2018/10/12 23:14:47 by ktlili           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
+/*
+	Terminal tokens:
+
+	VOID
+	%token EOI (End Of Input)
+	%token WORD
+	%token NEWLINE
+	%token IO_NUM
+	%token ASSIGNEMENT_WORD 
+	%token AND_IF:'&&' OR_IF:'||' LESSAND:'<&' GREATAND:'>&' DGREAT:'>>' 
+	%token LESS: '<' GREAT: '>'	AMPERS: '&' SEMICOL: ';' PIPE: '|'
+	%token DLESS: '<<'
+-----------------------------------------------------
+	Productions:
+
+
+	complete_cmd_ln : newline_lst EOI | complete_cmd
+
+	complete_cmd	: list separator_op EOI | list EOI 
+
+	list			: and_or list_suffix | and_or
+	
+	list_suffix		: separator_op and_or list_suffix 
+
+	and_or			: pipeline and_or_suffix | pipeline
+
+	and_or_suffix	: AND_IF linebreak pipeline and_or_suffix 
+
+	pipeline		: simple_cmd pipeline_suffix | simple_cmd
+
+	pipeline_suffix : PIPE linebreak simple_cmd pipeline_suffix
+
+	simple_cmd		: cmd_pre cmd_word cmd_suffix 
+					| cm_pre cmd_word
+					| cmd_pre
+					| cmd_name cmd_suffix
+					| cmd_name
+
+	cmd_pre			: io_redir 
+					| ASSIGN 
+					| io_redir cmd_pre 
+					| ASSIGN cmd_pre
+
+	cmd_suf			: io_redir 
+					| WORD 
+					| io_redir cmd_suf 
+					| WORD cmd_suf
+
+	cmd_word		: WORD /* rule 7b
+
+	cmd_name		: WORD /* rule 7a
+	
+	io_redir		: io_file 
+					| IO_NUM io_file 
+					| io_here
+					| IO_NUM io_here
+	
+	io_file			: LESS filename | LESSAND filename | GREAT filename
+					| GREATAND filename | DGREAT filename
+
+	io_here			: DLESS here_end
+
+	here_end		: WORD /* rule 3*/
+
+	filename		: WORD #see posix rule2
+
+	separator_op	: AMPERS | SEMICOL
+
+	separator		: separator_op linebreak | newline_lst /* unused*/
+
+	line_break		: newline_lst | VOID
+
+	newline_lst		: NEWLINE | newline_lst NEWLINE
+	
+*/
