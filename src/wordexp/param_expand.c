@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/02 20:25:30 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/05/03 22:09:49 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,12 @@ char			*check_second_exp_var(char *zone)
 
 	var_name = NULL;
 	var_name = ft_strsub(zone, 1, (ft_strlen(zone) - 2));
-	log_warn("VAR_NAME : [%s] ------------  ", var_name);
-	log_warn("VAR_NAME : [%s] ------------  ", var_name);
+	log_warn(
+		"var_name = %s", var_name
+	);
 	if (var_name)
 		return (var_name);
-	return (NULL);
+	return (var_name);
 }
 
 char			*get_var_exp(char *cursor)
@@ -97,6 +98,7 @@ char			*substitute_word_if_null(char *cursor, char *zone)
 	char	*env_value;
 
 	cursor++;
+	env_var = NULL;
 	env_value = NULL;
 	env_var = get_var_exp(cursor);
 	env_value = get_env_value(env_var);
@@ -146,15 +148,22 @@ char			*build_param(char *cursor)
 	if (*(cursor + 1) == '{')
 	{
 		cursor++;
-		value = exp_sup(cursor);
+		// value = exp_sup(cursor);
 		log_warn("result -- = [%s]", value);
 		// log_info("--------------- BUILD PARAM -------------------------");
 		// log_warn("cursor : [%s]", cursor);
 	}
 	if (!value)
-		value = get_env_value(cursor + 1);
+	{
+		log_warn("!value : get_env_value");
+		// value = get_env_value(cursor + 1);
+		value = exp_sup(cursor);
+	}
 	if (!value)
+	{
+		log_warn("!value : empty_str");
 		value = empty_str;
+	}
 	if (!(value = quote_str(value)))
 		return (NULL);
 	log_warn("value	= [%s]", value);
@@ -167,6 +176,7 @@ int				expand_param(t_token **word, char **cursor,
 	char				*ifs;
 	int					i;
 
+	log_warn("--------- expand param --------- [%s]  ", value);
 	is_redir = FT_TRUE;
 	if (get_ifs(&ifs) == MEMERR)
 		return (MEMERR);
@@ -176,7 +186,7 @@ int				expand_param(t_token **word, char **cursor,
 		i = *cursor - (*word)->data.str;
 		if (c_insert_str(*word, *cursor, value) == MEMERR)
 			return (MEMERR);
-		*cursor = (*word)->data.str + i + strlen(value);
+		*cursor = (*word)->data.str + i + ft_strlen(value);
 		return (0);
 	}
 	return (handle_ifs(word, cursor, value, ifs));
@@ -200,9 +210,8 @@ int				handle_exp_param(t_token *word, t_bool is_redir)
 			if ((!(value = build_param(cursor))
 			|| (expand_param(&word, &cursor, value, is_redir) == MEMERR)))
 				return (MEMERR);
-			ft_strdel(&word->data.str);
-			word->data.str = ft_strdup(value);
-			free(value);
+			// word->data.str = ft_strdup(value);
+			ft_strdel(&value);
 			continue;
 		}
 		else if ((*cursor == '\'') && (inside_dquote == 1))

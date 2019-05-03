@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_util_3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 21:42:35 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/09 21:45:20 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/03 21:48:41 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	delete_varname(char *cursor)
 		i++;
 		trunc = 3;
 	}
-	while (parser_is_name_c(cursor[i]))
+	while (parser_is_name_c(cursor[i])) //|| cursor[i] == '-')
 	{
 		trunc++;
 		i++;
@@ -51,5 +51,4 @@ void	delete_varname(char *cursor)
 	i = ft_strlen(cursor + trunc);
 	ft_memmove(cursor, cursor + trunc, ft_strlen(cursor + trunc));
 	cursor[i] = 0;
-	return ;
 }
