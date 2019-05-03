@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 21:17:33 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/18 20:49:52 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/05/03 19:03:23 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int		autocompl(t_rdl *rdl, char *buf)
 	}
 	if (!lst->next)
 		fill_complt(rdl, lst);
-	else
+	else if (!acp_multichc(rdl, lst))
 		putlst(acp.str, lst, rdl);
 	ft_strdel(&acp.str);
 	ft_lstdel(&lst);

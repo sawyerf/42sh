@@ -14,11 +14,11 @@
 ------------------------------------
 ### 42sh
 
-- finir la feature historique
+- ~~finir la feature historique~~
 - sig handling && job control.
 - moar testing on redirections.
 - cd set_shell_env needs malloc checks. <= this
-- replace printf/write(2, etc.. by sprintf or zprintf.
+- replace printf/write(2, etc.. by dprintf
 
 ## Bug
 |check|     `command`     |                result               | info complementaire |
