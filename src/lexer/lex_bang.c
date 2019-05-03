@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 18:18:48 by apeyret           #+#    #+#             */
-/*   Updated: 2019/05/03 17:16:35 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/05/03 18:34:10 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ char	*desactivate_bang(char *s)
 {
 	t_str	str;
 
-	ft_printf("in:   %s\n", s);
 	str.str = NULL;
 	while (*s)
 	{
@@ -58,42 +57,50 @@ char	*desactivate_bang(char *s)
 	return (str.str);
 }
 
+char	*bangjoin(char *line, int curs, char *bang, char *cursor)
+{
+	char	*s;
+	char	*tmp;
+
+	if (!(s = ft_zprintf("%.*s%s", curs, line, bang)))
+		return (NULL);
+	if (!(tmp = desactivate_bang(s)))
+		return (NULL);
+	ft_strdel(&s);
+	if (!(s = ft_zprintf("%s%s", tmp, cursor)))
+		return (NULL);
+	ft_strdel(&tmp);
+	return (s);
+}
+
 int		simple_bang(t_lexer *lx_st)
 {
 	char	*line;
 	int		curs;
 	t_list	*lst;
 	
-	g_hst[1] = g_hst[0];
-	if (!(lst = hst_getcmp(g_hst[1], "-1")))
-		return (1);
-	g_hst[1] = NULL;
+	lst = g_hst[0];
+	if (!(lst = hst_getcmp(lst, "-1")))
+		return (BANG_NF);
 	curs = lx_st->cursor - lx_st->line;
-	line = ft_zprintf("%.*s%s", curs, lx_st->line, lst->content);
-	ft_printf("add:  %s\n", line);
-	line = desactivate_bang(line);
-	ft_printf("des:  %s\n", line);
-	line = ft_zprintf("%s%s", line, lx_st->cursor + 2);
+	if (!(line = bangjoin(lx_st->line, curs, (char*)lst->content, lx_st->cursor + 2)))
+		return (MEMERR);
 	ft_strdel(&lx_st->line);
 	lx_st->line = line;
 	lx_st->cursor = line + curs;
-	ft_printf("line: %s\n", lx_st->line);
 	return (0);
 }
 
-int		word_bang(t_lexer *lx_st)
+char	*getbang(t_lexer *lx_st)
 {
 	char	*s;
 	char	c;
 	char	d;
 	int		i;
-	int		curs;
-	t_list	*lst;
 
 	c = *lx_st->cursor;
 	*lx_st->cursor = 0;
 	d = cmdisin(lx_st->line);
-	ft_printf("[3]%c\n", c);
 	*lx_st->cursor = c;
 	i = 0;
 	s = lx_st->cursor + 1;
@@ -105,37 +112,45 @@ int		word_bang(t_lexer *lx_st)
 		s++;
 	}
 	if (!(s = ft_strndup(lx_st->cursor + 1, i)))
+		return (NULL);
+	return (s);
+}
+
+int		word_bang(t_lexer *lx_st)
+{
+	char	*s;
+	int		i;
+	int		curs;
+	t_list	*lst;
+
+	if (!(s = getbang(lx_st)))
 		return (MEMERR);
-	g_hst[1] = g_hst[0]->next;
-	if (!(lst = hst_getcmp(g_hst[1], s)))
-		return (1);
-	g_hst[1] = NULL;
+	i = ft_strlen(s);
+	lst = g_hst[0]->next;
+	if (!(lst = hst_getcmp(lst, s)))
+		return (BANG_NF);
 	curs = lx_st->cursor - lx_st->line;
 	ft_strdel(&s);
-	ft_printf("avant: %s", lx_st->line);
-	s = ft_zprintf("%.*s%s", curs, lx_st->line, lst->content);
-	ft_printf("add: %s\n", s);
-	s = desactivate_bang(s);
-	ft_printf("des: %s\n", s);
-	s = ft_zprintf("%s%s", s, lx_st->cursor + i + 1);
+	if (!(s = bangjoin(lx_st->line, curs, (char*)lst->content, lx_st->cursor + i + 1)))
+		return (MEMERR);
 	ft_strdel(&lx_st->line);
 	lx_st->line = s;
 	lx_st->cursor = s + curs;
-	ft_printf("line: %s\n", lx_st->line);
 	return (0);
 }
 
 int	handle_bang(t_lexer *lx_st)
 {
-	ft_printf("[1]\n");
+	int ret;
+
+	ret = 0;
 	if (*(lx_st->cursor + 1) == '!')
-		return (simple_bang(lx_st));
+		ret = simple_bang(lx_st);
 	else if (!ft_cisin("\n \t", *(lx_st->cursor + 1)) && *(lx_st->cursor + 1))
-	{
-		ft_printf("[2]\n");
-		return (word_bang(lx_st));
-	}
+		ret = word_bang(lx_st);
 	else
 		lx_st->cursor++;
-	return (0);
+	if (!ret)
+		ft_printf("%s", lx_st->line);
+	return (ret);
 }

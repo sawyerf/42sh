@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 21:10:15 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/09 21:13:53 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/03 17:46:12 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int		dispatch_errors(int errnum, t_parser parser)
 		ft_dprintf(STDERR_FILENO, "21sh: premature EOF\n");
 	else if (errnum == BAD_SUB)
 		ft_dprintf(STDERR_FILENO, "21sh: bad substitution\n");
+	else if (errnum == BANG_NF)
+		ft_dprintf(STDERR_FILENO, "21sh: event not found\n");
 	return (errnum);
 }
 
