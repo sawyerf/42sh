@@ -10,6 +10,8 @@ typedef struct			s_job
 	pid_t				pgid;
 	int					fg;
 	int					notified;
+	int					completed;
+	int					stopped;
 	int					status;
 	struct termios		save_tio;
 	struct s_job		*next;

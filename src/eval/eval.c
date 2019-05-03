@@ -21,7 +21,7 @@ static int	eval_sep(t_ast_node *tree)
 	pid = 0;
 	if ((tree->type == AMPERS) && (g_sh.mode == INTERACTIVE))
 	{
-		if (!(job = make_job(0)))
+		if (!(job = make_job(0)) || (!(job->cmd_ln = make_cmdline(tree->start, tree->end))))
 			return (MEMERR);
 		if ((pid = fork()) == -1)
 			return (MEMERR); //should fork error or sthing
@@ -31,18 +31,28 @@ static int	eval_sep(t_ast_node *tree)
 				exit_wrap(MEMERR, NULL);
 			g_sh.mode = NONINTERACTIVE;
 			eval_tree(tree->left);
+			if (tree->right->type == PIPE)
+				eval_tree(tree->right);
 			waitpid(job->pgid, NULL, WUNTRACED);
 			exit_wrap(0, NULL);
 		}	
 		if (setpgid_wrap(pid, job) == -1)
 			return(MEMERR);
+		register_job(job);
 		ft_printf("job started in bg %d, subshell waiting\n", pid);
+		if ((tree->right) 
+			&& (tree->right->type != PIPE) 
+				&& (eval_tree(tree->right) == MEMERR))
+			return (MEMERR);
 			
 	}
-	else if ((tree->left) && (eval_tree(tree->left) == MEMERR))
-		return (MEMERR);
-	if ((tree->right) && (eval_tree(tree->right) == MEMERR))
-		return (MEMERR);
+	else 
+	{
+		if ((tree->left) && (eval_tree(tree->left) == MEMERR))
+			return (MEMERR);
+		if ((tree->right) && (eval_tree(tree->right) == MEMERR))
+			return (MEMERR);
+	}
 	return (0);
 }
 

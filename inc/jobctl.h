@@ -12,5 +12,7 @@ int	init_jobctl(void);
 int	reset_sig(void);
 int	setpgid_wrap(pid_t pid, t_job *job);
 int	fg_job(t_job *job, int cont);
-
+int	bg_job(t_job *job, int cont);
+void	update_job(t_job *job);
+void	register_job(t_job *job);
 #endif

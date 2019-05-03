@@ -53,7 +53,7 @@ static int	spawn_new_env(char **args, char **new_env)
 		if ((ret = pathfinder(&new_cmd)))
 			return (ret);
 	}
-	if ((ret = spawn_command(&new_cmd)))
+	if ((ret = spawn_command(&new_cmd, NULL)))
 		return (ret);
 	ft_strdel(&new_cmd.full_path);
 	return (0);

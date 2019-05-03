@@ -48,6 +48,7 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			builtins/setenv.c			\
 			builtins/unset.c			\
 			builtins/parser_tools.c		\
+			builtins/jobs.c				\
 			core/clean_path.c			\
 			core/env_handler.c			\
 			core/ft_env.c				\
@@ -72,6 +73,7 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			eval/spawn_tools_2.c		\
 			eval/pre_execution.c		\
 			eval/expansion_tools.c		\
+			eval/launch_pipe.c			\
 			wordexp/expansion_util_3.c	\
 			wordexp/expansion_util_2.c	\
 			wordexp/expansion_util.c	\

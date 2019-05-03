@@ -39,6 +39,8 @@ typedef struct			s_parser
 	t_redir				current_redir;
 	t_simple_cmd		*pipeline;
 	struct s_ast_node	*tree;
+	struct s_token		*start;
+	struct s_token		*end;
 }						t_parser;
 
 #endif

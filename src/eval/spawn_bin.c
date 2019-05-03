@@ -37,30 +37,6 @@ static int		execve_wrap(t_cmd_tab *cmd)
 	return (0);
 }
 
-void			wait_wrapper(t_job *job, pid_t pid)
-{
-	waitpid(pid, &(job->wstatus), WUNTRACED);
-	cmd->exit_signal = -1;
-	cmd->exit_status = -1;
-	if (WIFEXITED(wstatus))
-		cmd->exit_status = (int)WEXITSTATUS(wstatus);
-	else if (WIFSIGNALED(wstatus))
-		cmd->exit_signal = WTERMSIG(wstatus);
-}
-
-void			wait_wrapper(t_cmd_tab *cmd, pid_t pid)
-{
-	int	wstatus;
-
-	waitpid(pid, &wstatus, WUNTRACED);
-	cmd->exit_signal = -1;
-	cmd->exit_status = -1;
-	if (WIFEXITED(wstatus))
-		cmd->exit_status = (int)WEXITSTATUS(wstatus);
-	else if (WIFSIGNALED(wstatus))
-		cmd->exit_signal = WTERMSIG(wstatus);
-}
-
 int				spawn_in_pipe(t_cmd_tab *cmd)
 {
 	int ret;
@@ -86,7 +62,7 @@ int				launch_command(t_cmd_tab *cmd, t_job *job)
 		return (MEMERR);
 	if (pid == 0)
 	{
-		if (job) //Has to be done in parent to avoid race condition
+		if ((job) && (g_sh.mode == INTERACTIVE))
 		{
 			if ((setpgid_wrap(pid, job) == -1))
 				exit_wrap(MEMERR, cmd);
@@ -95,10 +71,11 @@ int				launch_command(t_cmd_tab *cmd, t_job *job)
 		}
 		execve_wrap(cmd);
 	}
-	if ((g_sh.mode == INTERACTIVE) && (setpgid_wrap(pid, job) == -1))
+	if ((g_sh.mode == INTERACTIVE) && (!job->pgid) 
+		&& (setpgid_wrap(pid, job) == -1))
 		return (MEMERR);
 	if ((g_sh.mode != INTERACTIVE))
-		wait_wrapper(cmd, pid);
+		wait_job(job);
 	else if ((job) && (job->fg))
 		fg_job( job, 0);
 /*	else{ft_printf("async job\n");
@@ -106,12 +83,11 @@ int				launch_command(t_cmd_tab *cmd, t_job *job)
 	return (0);
 }
 
-int				spawn_command(t_cmd_tab *cmd)
+int				spawn_command(t_cmd_tab *cmd, t_job *job)
 {
 	pid_t	pid;
 	int		ret;
-
-	if ((ret = pre_execution(cmd)) == MEMERR)
+	if (((ret = pre_execution(cmd)) == MEMERR))
 		return (MEMERR);
 	else if ((ret == BUILTIN) || (ret == BUILTIN_FAIL))
 		return (0);
@@ -120,6 +96,6 @@ int				spawn_command(t_cmd_tab *cmd)
 		return (MEMERR);
 	if (pid == 0)
 		execve_wrap(cmd);
-	wait_wrapper(cmd, pid);
+	wait_job(job);
 	return (0);
 }

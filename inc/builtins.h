@@ -61,4 +61,5 @@ int						ft_echo(t_cmd_tab *cmd);
 int						ft_exit(t_cmd_tab *cmd);
 int						ft_env(t_cmd_tab *cmd);
 int						ft_unsetenv(t_cmd_tab *cmd);
+int						jobs(t_cmd_tab *cmd);
 #endif

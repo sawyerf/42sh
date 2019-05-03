@@ -1,17 +1,45 @@
 #include "jobctl.h"
 
+void	register_job(t_job *job)
+{
+	t_job *iter;
+
+	if (!g_sh.job_lst)
+		g_sh.job_lst = job;
+	else
+	{
+		iter = g_sh.job_lst;
+		while (iter)
+		{
+			if (iter == job)
+				return;
+			iter = iter->next;
+		}
+		iter = g_sh.job_lst;
+		while (iter->next)
+			iter = iter->next;
+		iter->next = job;	
+	}
+}
+
+void	update_job(t_job *job)
+{
+	if (!job->pgid)
+		job->pgid = WAIT_ANY;
+	waitpid(job->pgid, &(job->status), WNOHANG);
+}
 
 void	wait_job(t_job *job)
 {
 	pid_t pid;
-	t_job *iter;
 
+	if (!job->pgid)
+		job->pgid = WAIT_ANY;
 	pid = waitpid(job->pgid, &(job->status), WUNTRACED);
 	ft_printf("waitpid ret %d\n", pid);
 	if (WIFEXITED(job->status))
 	{
 		ft_printf("job %d exited normally\n", job->pgid);
-		job->status = (int)WEXITSTATUS(
 	}
 	else
 	{
@@ -21,19 +49,6 @@ void	wait_job(t_job *job)
 	return;
 }
 
-void	register_job(t_job *job)
-{
-
-	if (!g_sh.job_lst)
-		g_sh.job_lst = job;
-	else
-	{
-		iter = g_sh.job_lst;
-		while (iter->next)
-			iter = iter->next;
-		iter->next = job;	
-	}
-}
 
 int		fg_job(t_job *job, int cont)
 {

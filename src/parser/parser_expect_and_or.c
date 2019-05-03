@@ -16,13 +16,21 @@
 int	expect_and_or(t_parser *parser)
 {
 	t_token *backtrack;
+	t_token *start;
 	int		ret;
 
 	backtrack = parser->current;
+	start = parser->current;
 	if (!(ret = expect_pipeline(parser)))
 	{
 		if ((ret = expect_and_or_suffix(parser)) != SYNERR)
+		{
+			parser->start = start;
+			parser->end = parser->current;
 			return (ret);
+		}
+		parser->start = start;
+		parser->end = parser->current;
 		return (0);
 	}
 	parser->current = backtrack;

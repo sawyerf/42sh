@@ -138,5 +138,6 @@ char					**envdel(char **env, char *var);
 char					**envaddstr(char **env, char *var, char *value);
 int						sh_readfile(char *prompt, char **str);
 int						missing_quote(char *line);
+char					*make_cmdline(t_token *start, t_token *end);
 
 #endif
