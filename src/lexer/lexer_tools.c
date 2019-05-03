@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 14:35:55 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/15 22:29:14 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/05/02 11:19:05 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,21 @@ int		str_putc(char **c, t_str *data)
 {
 	size_t i;
 
+	if (!data->str || data->len <= data->size + 1)
+	{
+		if (!data->str)
+		{
+			data->size = 0;
+			data->len = 0;
+			data->str = NULL;
+		}
+		if (ft_str_realloc(data, INPUTSZ) == MEMERR)
+			return (MEMERR);
+	}
 	i = data->len;
 	data->str[i] = **c;
 	*c = *c + 1;
 	data->len = i + 1;
-	if (data->len == data->size)
-		if (ft_str_realloc(data, INPUTSZ) == MEMERR)
-			return (MEMERR);
 	return (0);
 }
 

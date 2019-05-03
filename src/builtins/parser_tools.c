@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 19:27:49 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/11 22:03:26 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/29 14:43:15 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int		parser_takeopt(char *opt, char *arg, char *in, char *name)
 	char	c;
 
 	i = 1;
+	c = 0;
 	while (arg[i])
 	{
 		c = arg[i];
