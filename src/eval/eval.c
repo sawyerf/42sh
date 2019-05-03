@@ -31,28 +31,22 @@ static int	eval_sep(t_ast_node *tree)
 				exit_wrap(MEMERR, NULL);
 			g_sh.mode = NONINTERACTIVE;
 			eval_tree(tree->left);
-			if (tree->right->type == PIPE)
-				eval_tree(tree->right);
+			reset_sig();
 			waitpid(job->pgid, NULL, WUNTRACED);
 			exit_wrap(0, NULL);
 		}	
 		if (setpgid_wrap(pid, job) == -1)
 			return(MEMERR);
 		register_job(job);
-		ft_printf("job started in bg %d, subshell waiting\n", pid);
-		if ((tree->right) 
-			&& (tree->right->type != PIPE) 
-				&& (eval_tree(tree->right) == MEMERR))
-			return (MEMERR);
-			
+		ft_printf("job started in bg %d, subshell waiting\n", pid);	
 	}
 	else 
 	{
 		if ((tree->left) && (eval_tree(tree->left) == MEMERR))
 			return (MEMERR);
-		if ((tree->right) && (eval_tree(tree->right) == MEMERR))
-			return (MEMERR);
 	}
+	if ((tree->right) && (eval_tree(tree->right) == MEMERR))
+		return (MEMERR);
 	return (0);
 }
 
