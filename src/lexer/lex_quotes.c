@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 21:23:31 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/29 18:31:59 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/05/02 11:25:06 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,11 @@ int	handle_dquote(t_lexer *lx_st)
 		else if ((*(lx_st->cursor) == '\\') && (*((lx_st->cursor) + 1)))
 		{
 			if ((ret = handle_backslash(lx_st)))
+				return (ret);
+		}
+		else if (*(lx_st->cursor) == '!')
+		{
+			if ((ret = handle_bang(lx_st)))
 				return (ret);
 		}
 		else if (*(lx_st->cursor) == '\0')
