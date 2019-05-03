@@ -3,6 +3,7 @@
 
 #include "sh_core.h"
 # include <termios.h> 
+# include <signal.h>
 # define SH_ABORT -1
 
 typedef struct s_cmd_tab t_cmd_tab;

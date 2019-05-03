@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 13:46:10 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/10 18:15:02 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/03 16:43:31 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef	struct			s_fc
 	char				*to;
 }						t_fc;
 
+int						fg(t_cmd_tab *cmd);
 int						fc(t_cmd_tab *cmd);
 int						fc_l(t_fc fc);
 int						fc_e(t_fc fc);

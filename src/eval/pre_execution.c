@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 20:19:10 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/15 22:43:06 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/05/03 16:43:58 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 int				is_builtin(t_cmd_tab *cmd)
 {
 	static t_builtin	array[] = {ft_echo, change_dir, setenv_wrapper,
-				ft_unsetenv, ft_env, ft_exit, ft_set, ft_unset, fc, hash, jobs};
+				ft_unsetenv, ft_env, ft_exit, ft_set, ft_unset, fc, hash, jobs, fg};
 	static	char		*builtins[] = {"echo", "cd", "setenv", "unsetenv",
-				"env", "exit", "set", "unset", "fc", "hash", "jobs", NULL};
+				"env", "exit", "set", "unset", "fc", "hash", "jobs", "fg", NULL};
 	int					i;
 	int					ret;
 	t_list				*save_head;
