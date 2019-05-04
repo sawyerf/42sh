@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/12 18:13:28 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/04 20:11:16 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,6 @@ char					**envdel(char **env, char *var);
 char					**envaddstr(char **env, char *var, char *value);
 int						sh_readfile(char *prompt, char **str);
 int						missing_quote(char *line);
-char					*make_cmdline(t_token *start, t_token *end);
+char					*make_cmdline(t_token *start, t_token *end, int last);
 
 #endif

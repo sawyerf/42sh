@@ -21,8 +21,5 @@ t_job	*make_job(int fg)
 	ft_bzero(job, sizeof(t_job));
 	if (fg)
 		job->fg = 1;
-
-//	if (!(job->cmd_ln = make_cmdln(pipeline)))
-//		return (NULL);
 	return (job);
 }

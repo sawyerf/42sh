@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/09 19:52:21 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/04 20:11:00 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	eval_sep(t_ast_node *tree)
 	pid = 0;
 	if ((tree->type == AMPERS) && (g_sh.mode == INTERACTIVE))
 	{
-		if (!(job = make_job(0)) || (!(job->cmd_ln = make_cmdline(tree->start, tree->end))))
+		if (!(job = make_job(0)) || (!(job->cmd_ln = make_cmdline(tree->start, tree->end, 1))))
 			return (MEMERR);
 		if ((pid = fork()) == -1)
 			return (MEMERR); //should fork error or sthing
