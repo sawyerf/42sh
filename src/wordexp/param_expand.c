@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/07 16:05:14 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/05/07 16:13:46 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,10 +123,11 @@ char			*classic_sub(char *cursor)
 	env_var = get_var_exp(cursor);
 	if (env_var)
 	{
-		log_warn("classic_sub ret");
 		env_value = get_env_value(env_var);
+		log_warn("classic_sub ret : [%s]", env_value);
 		ft_strdel(&env_var);
-		return (env_value);
+		if (env_value)
+			return (env_value);
 	}
 	return (ft_strnew(1));
 }
