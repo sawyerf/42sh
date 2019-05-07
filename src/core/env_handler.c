@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 22:17:22 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/04 21:20:02 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/07 15:06:37 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,15 @@ char	*get_env_value(char *name)
 	char *value;
 
 	if ((value = varchr(g_sh.env, name)))
-		return (value);
+	{
+		// return (value);
+		return (ft_strdup(value));
+	}
 	if ((value = varchr(g_sh.local, name)))
-		return (value);
+	{
+		return (ft_strdup(value));
+		// return (value);
+	}
 	return (NULL);
 }
 

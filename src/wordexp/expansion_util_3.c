@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 21:42:35 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/03 21:48:41 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/05/07 14:29:25 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	delete_varname(char *cursor)
 		i++;
 		trunc = 3;
 	}
-	while (parser_is_name_c(cursor[i])) //|| cursor[i] == '-')
+	while (parser_is_name_c(cursor[i]) || cursor[i] == '-' || cursor[i] == ':')
 	{
 		trunc++;
 		i++;

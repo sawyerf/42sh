@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/02 20:19:02 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/05/07 14:42:16 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		c_insert_str(t_token *word, char *cursor, char *to_insert)
 	log_info("word->data.len : [%d]", word->data.len);
 	log_info("word->str  : [%s]", word->data.str);
 	log_info("to_insert : [%s]", to_insert);
-	
+
 	while ((word->data.len + ft_strlen(to_insert)) >= word->data.size)
 	{
 		if (ft_str_realloc(&(word->data), INPUTSZ) == MEMERR)
