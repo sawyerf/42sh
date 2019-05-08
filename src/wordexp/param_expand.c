@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/07 17:38:23 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/05/08 15:06:47 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,12 @@ static char		*quote_str(char *str)
 		i++;
 		j++;
 	}
-	if (str)
+	log_fatal("quoted str [%p]", str);
+	if (str && str[0])
+	{
+		log_fatal("IS free");
 		free(str);
+	}
 	return (quoted);
 }
 
@@ -86,6 +90,7 @@ char			*get_var_exp(char *cursor)
 	}
 	var = ft_strndup(cursor, len);
 	log_warn("get_var_exp == [%s]", var);
+	log_fatal("ptr addr [%p]", var);
 	return (var);
 }
 
@@ -100,36 +105,43 @@ char			*substitute_word_if_null(char *cursor, char *zone)
 	var_name = NULL;
 	env_value = NULL;
 	var_name = get_var_exp(cursor);
+	log_fatal("var_name ptr addr [%p]", var_name);
 	env_value = ft_strdup(get_env_value(var_name));
 	if (!env_value)
 		env_value = check_second_exp_var(zone);
 	if (var_name)
+	{
+		log_fatal("var_name ptr addr [%p]", var_name);
 		ft_strdel(&var_name);
+	}
 	return (env_value);
 }
 
 char			*classic_sub(char *cursor)
 {
 	log_warn("------------------ classic_sub -------------------");
-	char	*env_var;
-	char	*env_value;
+	char		*env_var;
+	char		*env_value;
+	const char	*empty_str = "";
 
 	cursor++;
+	empty_str = NULL;
 	env_var = NULL;
 	env_value = NULL;
 	env_var = get_var_exp(cursor);
 	if (env_var)
 	{
 		env_value = ft_strdup(get_env_value(env_var));
+		log_fatal("var_name ptr addr [%p]", env_var);
 		log_warn("classic_sub ret : [%s]", env_value);
 		ft_strdel(&env_var);
-		if (env_value)
+		if (env_value && *env_value)
 			return (env_value);
 	}
-	return (ft_strnew(1));
+	return ((char*)empty_str);
 }
 
-char			*exp_sup(char *cursor, bool *str_free)
+char			*exp_sup(char *cursor)
 {
 	char	previous_char;
 	char	*tmp;
@@ -145,8 +157,6 @@ char			*exp_sup(char *cursor, bool *str_free)
 		if (previous_char == ':' && (*tmp) == '-')
 		{
 			result = substitute_word_if_null(cursor, tmp);
-			if (result)
-				(*str_free) = true;
 			return (result);
 		}
 		tmp++;
@@ -157,7 +167,7 @@ char			*exp_sup(char *cursor, bool *str_free)
 char			*build_param(char *cursor)
 {
 	log_warn("---------------- build_param -------------");
-	static char	*empty_str = "";
+	const char	*empty_str = "";
 	char		*value;
 	bool		str_free;
 
@@ -165,11 +175,13 @@ char			*build_param(char *cursor)
 	str_free = false;
 	if (*(cursor + 1) == '{')
 		cursor++;
+	else
+		return (NULL);
 	if (!value)
 	{
-		value = exp_sup(cursor, &str_free);
+		value = exp_sup(cursor);
 		if (!value)
-			value = empty_str;
+			value = (char*)empty_str;
 	}
 	if (!(value = quote_str(value)))
 		return (NULL);

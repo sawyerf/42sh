@@ -1159,3 +1159,1963 @@
 [36m[ 13:09:31 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
 [36m[ 13:09:31 ] (l. 43) ft_wordexp.c         -> Word : [ls][0m
 [31m[1;33m[ 13:09:31 ] (l.229) param_expand.c       -> Word-exp : [ls][0m
+
+[32m>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> [0m[32mNEW INSTANCE OF THE APPLICATION[0m[32m <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[0m
+
+[36m[ 13:28:15 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 13:28:15 ] (l. 43) ft_wordexp.c         -> Word : [ls][0m
+[31m[1;33m[ 13:28:15 ] (l.229) param_expand.c       -> Word-exp : [ls][0m
+[36m[ 13:28:16 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 13:28:16 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 13:28:16 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 13:28:16 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 13:28:16 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL:-word}][0m
+[31m[1;33m[ 13:28:16 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 13:28:16 ] (l. 95) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 13:28:16 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVL:-word}][0m
+[31m[1;33m[ 13:28:16 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[1;33m[ 13:28:16 ] (l.176) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 13:28:16 ] (l.183) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 13:28:16 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 13:28:16 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 13:28:16 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 13:28:16 ] (l.229) param_expand.c       -> Word-exp : [3][0m
+[36m[ 13:28:20 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 13:28:20 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 13:28:20 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 13:28:20 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 13:28:20 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL}][0m
+[31m[1;33m[ 13:28:20 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 13:28:20 ] (l.113) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 13:28:20 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVL}][0m
+[31m[1;33m[ 13:28:20 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[1;33m[ 13:28:20 ] (l.124) param_expand.c       -> classic_sub ret : [3][0m
+[31m[1;33m[ 13:28:20 ] (l.176) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 13:28:20 ] (l.183) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 13:28:20 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 13:28:20 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 13:28:20 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 13:28:20 ] (l.229) param_expand.c       -> Word-exp : [3][0m
+[36m[ 13:28:22 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 13:28:22 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 13:28:22 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 13:28:22 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 13:28:22 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL:ss}][0m
+[31m[1;33m[ 13:28:22 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 13:28:22 ] (l.113) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 13:28:22 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVL:ss}][0m
+[31m[1;33m[ 13:28:22 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[1;33m[ 13:28:22 ] (l.124) param_expand.c       -> classic_sub ret : [3][0m
+[31m[1;33m[ 13:28:22 ] (l.176) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 13:28:22 ] (l.183) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 13:28:22 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 13:28:22 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 13:28:22 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 13:28:22 ] (l.229) param_expand.c       -> Word-exp : [3][0m
+[36m[ 13:28:25 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 13:28:25 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 13:28:25 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 13:28:25 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 13:28:25 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL:-ss}][0m
+[31m[1;33m[ 13:28:25 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 13:28:25 ] (l. 95) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 13:28:25 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVL:-ss}][0m
+[31m[1;33m[ 13:28:25 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[1;33m[ 13:28:25 ] (l.176) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 13:28:25 ] (l.183) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 13:28:25 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 13:28:25 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 13:28:25 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 13:28:25 ] (l.229) param_expand.c       -> Word-exp : [3][0m
+[36m[ 13:28:30 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 13:28:30 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 13:28:30 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 13:28:30 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 13:28:30 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL:-}][0m
+[31m[1;33m[ 13:28:30 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 13:28:30 ] (l. 95) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 13:28:30 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVL:-}][0m
+[31m[1;33m[ 13:28:30 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[1;33m[ 13:28:30 ] (l.176) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 13:28:30 ] (l.183) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 13:28:30 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 13:28:30 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 13:28:30 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 13:28:30 ] (l.229) param_expand.c       -> Word-exp : [3][0m
+
+[32m>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> [0m[32mNEW INSTANCE OF THE APPLICATION[0m[32m <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[0m
+
+[36m[ 13:32:33 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 13:32:33 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 13:32:33 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 13:32:33 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 13:32:33 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL}][0m
+[31m[1;33m[ 13:32:33 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 13:32:33 ] (l.113) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 13:32:33 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVL}][0m
+[31m[1;33m[ 13:32:33 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[1;33m[ 13:32:33 ] (l.124) param_expand.c       -> classic_sub ret : [3][0m
+[31m[1;33m[ 13:32:33 ] (l.176) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 13:32:33 ] (l.183) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 13:32:33 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 13:32:33 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 13:32:33 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 13:32:33 ] (l.229) param_expand.c       -> Word-exp : [3][0m
+[36m[ 13:32:40 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 13:32:40 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 13:32:40 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 13:32:40 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 13:32:40 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLk:-ygyg}][0m
+[31m[1;33m[ 13:32:40 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 13:32:40 ] (l. 95) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 13:32:40 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVLk:-ygyg}][0m
+[31m[1;33m[ 13:32:40 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVLk][0m
+[31m[1;33m[ 13:32:40 ] (l. 63) param_expand.c       -> -----------  check_second_exp_var : [-ygyg}] ------------  [0m
+[31m[1;33m[ 13:32:40 ] (l. 68) param_expand.c       -> var_name = ygyg[0m
+[31m[1;33m[ 13:32:40 ] (l.176) param_expand.c       -> result build_param = [ygyg][0m
+[31m[1;33m[ 13:32:40 ] (l.183) param_expand.c       -> --------- expand param --------- [ygyg]  [0m
+[36m[ 13:32:40 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 13:32:40 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 13:32:40 ] (l. 25) expansion_util.c     -> to_insert : [ygyg][0m
+[31m[1;33m[ 13:32:40 ] (l.229) param_expand.c       -> Word-exp : [ygyg][0m
+
+[32m>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> [0m[32mNEW INSTANCE OF THE APPLICATION[0m[32m <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[0m
+
+[36m[ 14:07:24 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:07:24 ] (l. 43) ft_wordexp.c         -> Word : [clear][0m
+[31m[1;33m[ 14:07:24 ] (l.229) param_expand.c       -> Word-exp : [clear][0m
+[36m[ 14:07:25 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:07:25 ] (l. 43) ft_wordexp.c         -> Word : [ls][0m
+[31m[1;33m[ 14:07:25 ] (l.229) param_expand.c       -> Word-exp : [ls][0m
+[36m[ 14:07:26 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:07:26 ] (l. 43) ft_wordexp.c         -> Word : [ls][0m
+[31m[1;33m[ 14:07:26 ] (l.229) param_expand.c       -> Word-exp : [ls][0m
+[36m[ 14:07:26 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:07:26 ] (l. 43) ft_wordexp.c         -> Word : [-l][0m
+[31m[1;33m[ 14:07:26 ] (l.229) param_expand.c       -> Word-exp : [-l][0m
+[36m[ 14:07:34 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:07:34 ] (l. 43) ft_wordexp.c         -> Word : [./42sh][0m
+[31m[1;33m[ 14:07:34 ] (l.229) param_expand.c       -> Word-exp : [./42sh][0m
+
+[32m>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> [0m[32mNEW INSTANCE OF THE APPLICATION[0m[32m <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[0m
+
+[36m[ 14:07:35 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:07:35 ] (l. 43) ft_wordexp.c         -> Word : [ls][0m
+[31m[1;33m[ 14:07:35 ] (l.229) param_expand.c       -> Word-exp : [ls][0m
+
+[32m>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> [0m[32mNEW INSTANCE OF THE APPLICATION[0m[32m <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[0m
+
+[36m[ 14:07:39 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:07:39 ] (l. 43) ft_wordexp.c         -> Word : [ls][0m
+[31m[1;33m[ 14:07:39 ] (l.229) param_expand.c       -> Word-exp : [ls][0m
+
+[32m>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> [0m[32mNEW INSTANCE OF THE APPLICATION[0m[32m <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[0m
+
+[36m[ 14:28:41 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:28:41 ] (l. 43) ft_wordexp.c         -> Word : [ls][0m
+[31m[1;33m[ 14:28:41 ] (l.229) param_expand.c       -> Word-exp : [ls][0m
+[36m[ 14:28:45 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:28:45 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:28:45 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:28:45 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:28:45 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL:-}][0m
+[31m[1;33m[ 14:28:45 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:28:45 ] (l. 95) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:28:45 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVL:-}][0m
+[31m[1;33m[ 14:28:45 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[1;33m[ 14:28:45 ] (l.176) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 14:28:45 ] (l.183) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 14:28:45 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:28:45 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:28:45 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 14:28:45 ] (l.229) param_expand.c       -> Word-exp : [3][0m
+[36m[ 14:28:49 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:28:49 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:28:49 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:28:49 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:28:49 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL:-3}][0m
+[31m[1;33m[ 14:28:49 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:28:49 ] (l. 95) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:28:49 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVL:-3}][0m
+[31m[1;33m[ 14:28:49 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[1;33m[ 14:28:49 ] (l.176) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 14:28:49 ] (l.183) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 14:28:49 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:28:49 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:28:49 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 14:28:49 ] (l.229) param_expand.c       -> Word-exp : [3][0m
+[36m[ 14:28:53 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:28:53 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:28:53 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:28:53 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:28:53 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL:-dd}][0m
+[31m[1;33m[ 14:28:53 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:28:53 ] (l. 95) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:28:53 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVL:-dd}][0m
+[31m[1;33m[ 14:28:53 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[1;33m[ 14:28:53 ] (l.176) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 14:28:53 ] (l.183) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 14:28:53 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:28:53 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:28:53 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 14:28:53 ] (l.229) param_expand.c       -> Word-exp : [3][0m
+[36m[ 14:28:55 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:28:55 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:28:55 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:28:55 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:28:55 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLd:-dd}][0m
+[31m[1;33m[ 14:28:55 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:28:55 ] (l. 95) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:28:55 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVLd:-dd}][0m
+[31m[1;33m[ 14:28:55 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVLd][0m
+[31m[1;33m[ 14:28:55 ] (l. 63) param_expand.c       -> -----------  check_second_exp_var : [-dd}] ------------  [0m
+[31m[1;33m[ 14:28:55 ] (l. 68) param_expand.c       -> var_name = dd[0m
+[31m[1;33m[ 14:28:55 ] (l.176) param_expand.c       -> result build_param = [dd][0m
+[31m[1;33m[ 14:28:55 ] (l.183) param_expand.c       -> --------- expand param --------- [dd]  [0m
+[36m[ 14:28:55 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:28:55 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:28:55 ] (l. 25) expansion_util.c     -> to_insert : [dd][0m
+[31m[1;33m[ 14:28:55 ] (l.229) param_expand.c       -> Word-exp : [dd][0m
+[36m[ 14:28:59 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:28:59 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:28:59 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:28:59 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:28:59 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLd:-WORD}][0m
+[31m[1;33m[ 14:28:59 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:28:59 ] (l. 95) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:28:59 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVLd:-WORD}][0m
+[31m[1;33m[ 14:28:59 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVLd][0m
+[31m[1;33m[ 14:28:59 ] (l. 63) param_expand.c       -> -----------  check_second_exp_var : [-WORD}] ------------  [0m
+[31m[1;33m[ 14:28:59 ] (l. 68) param_expand.c       -> var_name = WORD[0m
+[31m[1;33m[ 14:28:59 ] (l.176) param_expand.c       -> result build_param = [WORD][0m
+[31m[1;33m[ 14:28:59 ] (l.183) param_expand.c       -> --------- expand param --------- [WORD]  [0m
+[36m[ 14:28:59 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:28:59 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:28:59 ] (l. 25) expansion_util.c     -> to_insert : [WORD][0m
+[31m[1;33m[ 14:28:59 ] (l.229) param_expand.c       -> Word-exp : [WORD][0m
+
+[32m>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> [0m[32mNEW INSTANCE OF THE APPLICATION[0m[32m <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[0m
+
+[36m[ 14:29:36 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:29:36 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:29:36 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:29:36 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:29:36 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLd:-dd}][0m
+[31m[1;33m[ 14:29:36 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:29:36 ] (l. 95) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:29:36 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVLd:-dd}][0m
+[31m[1;33m[ 14:29:36 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVLd][0m
+[31m[1;33m[ 14:29:36 ] (l. 63) param_expand.c       -> -----------  check_second_exp_var : [-dd}] ------------  [0m
+[31m[1;33m[ 14:29:36 ] (l. 68) param_expand.c       -> var_name = dd[0m
+[31m[1;33m[ 14:29:36 ] (l.176) param_expand.c       -> result build_param = [dd][0m
+[31m[1;33m[ 14:29:36 ] (l.183) param_expand.c       -> --------- expand param --------- [dd]  [0m
+[36m[ 14:29:36 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:29:36 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:29:36 ] (l. 25) expansion_util.c     -> to_insert : [dd][0m
+[31m[1;33m[ 14:29:36 ] (l.229) param_expand.c       -> Word-exp : [dd][0m
+
+[32m>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> [0m[32mNEW INSTANCE OF THE APPLICATION[0m[32m <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[0m
+
+[36m[ 14:30:11 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:30:11 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:30:11 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:30:11 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:30:11 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLd:-WORD}][0m
+[31m[1;33m[ 14:30:11 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:30:11 ] (l. 95) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:30:11 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVLd:-WORD}][0m
+[31m[1;33m[ 14:30:11 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVLd][0m
+[31m[1;33m[ 14:30:11 ] (l. 63) param_expand.c       -> -----------  check_second_exp_var : [-WORD}] ------------  [0m
+[31m[1;33m[ 14:30:11 ] (l. 68) param_expand.c       -> var_name = WORD[0m
+[31m[1;33m[ 14:30:11 ] (l.176) param_expand.c       -> result build_param = [WORD][0m
+[31m[1;33m[ 14:30:11 ] (l.183) param_expand.c       -> --------- expand param --------- [WORD]  [0m
+[36m[ 14:30:11 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:30:11 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:30:11 ] (l. 25) expansion_util.c     -> to_insert : [WORD][0m
+[31m[1;33m[ 14:30:11 ] (l.229) param_expand.c       -> Word-exp : [WORD][0m
+[36m[ 14:30:13 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:30:13 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:30:13 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:30:13 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:30:13 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL:-WORD}][0m
+[31m[1;33m[ 14:30:13 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:30:13 ] (l. 95) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:30:13 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVL:-WORD}][0m
+[31m[1;33m[ 14:30:13 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[1;33m[ 14:30:13 ] (l.176) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 14:30:13 ] (l.183) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 14:30:13 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:30:13 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:30:13 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 14:30:13 ] (l.229) param_expand.c       -> Word-exp : [3][0m
+[36m[ 14:30:32 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:30:32 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:30:32 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:30:32 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:30:32 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL:-WORD}][0m
+[31m[1;33m[ 14:30:32 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:30:32 ] (l. 95) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:30:32 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVL:-WORD}][0m
+[31m[1;33m[ 14:30:32 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[1;33m[ 14:30:32 ] (l.176) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 14:30:32 ] (l.183) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 14:30:32 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:30:32 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:30:32 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 14:30:32 ] (l.229) param_expand.c       -> Word-exp : [3][0m
+[36m[ 14:30:36 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:30:36 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:30:36 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:30:36 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:30:36 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL:}][0m
+[31m[1;33m[ 14:30:36 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:30:36 ] (l.113) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:30:36 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVL:}][0m
+[31m[1;33m[ 14:30:36 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[1;33m[ 14:30:36 ] (l.124) param_expand.c       -> classic_sub ret : [3][0m
+[31m[1;33m[ 14:30:36 ] (l.176) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 14:30:36 ] (l.183) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 14:30:36 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:30:36 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:30:36 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 14:30:36 ] (l.229) param_expand.c       -> Word-exp : [3][0m
+[36m[ 14:30:37 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:30:37 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:30:37 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:30:37 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:30:37 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLs:}][0m
+[31m[1;33m[ 14:30:37 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:30:37 ] (l.113) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:30:37 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVLs:}][0m
+[31m[1;33m[ 14:30:37 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVLs][0m
+[31m[1;33m[ 14:30:37 ] (l.124) param_expand.c       -> classic_sub ret : [(null)][0m
+[31m[1;33m[ 14:30:37 ] (l.176) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:30:37 ] (l.183) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:30:37 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:30:37 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:30:37 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:30:37 ] (l.229) param_expand.c       -> Word-exp : [][0m
+[36m[ 14:30:42 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:30:42 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:30:42 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:30:42 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:30:42 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLs}][0m
+[31m[1;33m[ 14:30:42 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:30:42 ] (l.113) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:30:42 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVLs}][0m
+[31m[1;33m[ 14:30:42 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVLs][0m
+[31m[1;33m[ 14:30:42 ] (l.124) param_expand.c       -> classic_sub ret : [(null)][0m
+[31m[1;33m[ 14:30:42 ] (l.176) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:30:42 ] (l.183) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:30:42 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:30:42 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:30:42 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:30:42 ] (l.229) param_expand.c       -> Word-exp : [][0m
+[36m[ 14:30:43 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:30:43 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:30:43 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:30:43 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:30:43 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLs}][0m
+[31m[1;33m[ 14:30:43 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:30:43 ] (l.113) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:30:43 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVLs}][0m
+[31m[1;33m[ 14:30:43 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVLs][0m
+[31m[1;33m[ 14:30:43 ] (l.124) param_expand.c       -> classic_sub ret : [(null)][0m
+[31m[1;33m[ 14:30:43 ] (l.176) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:30:43 ] (l.183) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:30:43 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:30:43 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:30:43 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:30:43 ] (l.229) param_expand.c       -> Word-exp : [][0m
+
+[32m>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> [0m[32mNEW INSTANCE OF THE APPLICATION[0m[32m <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[0m
+
+[36m[ 14:32:39 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:32:39 ] (l. 43) ft_wordexp.c         -> Word : [clear][0m
+[31m[1;33m[ 14:32:39 ] (l.229) param_expand.c       -> Word-exp : [clear][0m
+[36m[ 14:32:41 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:32:41 ] (l. 43) ft_wordexp.c         -> Word : [ls][0m
+[31m[1;33m[ 14:32:41 ] (l.229) param_expand.c       -> Word-exp : [ls][0m
+[36m[ 14:32:44 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:32:44 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:32:44 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:32:44 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:32:44 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLs}][0m
+[31m[1;33m[ 14:32:44 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:32:44 ] (l.113) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:32:44 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVLs}][0m
+[31m[1;33m[ 14:32:44 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVLs][0m
+[31m[1;33m[ 14:32:44 ] (l.124) param_expand.c       -> classic_sub ret : [(null)][0m
+[31m[1;33m[ 14:32:44 ] (l.176) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:32:44 ] (l.183) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:32:44 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:32:44 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:32:44 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:32:44 ] (l.229) param_expand.c       -> Word-exp : [][0m
+[36m[ 14:32:47 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:32:47 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:32:47 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:32:47 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:32:47 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLs:-w}][0m
+[31m[1;33m[ 14:32:47 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:32:47 ] (l. 95) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:32:47 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVLs:-w}][0m
+[31m[1;33m[ 14:32:47 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVLs][0m
+[31m[1;33m[ 14:32:47 ] (l. 63) param_expand.c       -> -----------  check_second_exp_var : [-w}] ------------  [0m
+[31m[1;33m[ 14:32:47 ] (l. 68) param_expand.c       -> var_name = w[0m
+[31m[1;33m[ 14:32:47 ] (l.176) param_expand.c       -> result build_param = [w][0m
+[31m[1;33m[ 14:32:47 ] (l.183) param_expand.c       -> --------- expand param --------- [w]  [0m
+[36m[ 14:32:47 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:32:47 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:32:47 ] (l. 25) expansion_util.c     -> to_insert : [w][0m
+[31m[1;33m[ 14:32:47 ] (l.229) param_expand.c       -> Word-exp : [w][0m
+[36m[ 14:32:49 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:32:49 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:32:49 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:32:49 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:32:49 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLs:-}][0m
+[31m[1;33m[ 14:32:49 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:32:49 ] (l. 95) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:32:49 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVLs:-}][0m
+[31m[1;33m[ 14:32:49 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVLs][0m
+[31m[1;33m[ 14:32:49 ] (l. 63) param_expand.c       -> -----------  check_second_exp_var : [-}] ------------  [0m
+[31m[1;33m[ 14:32:49 ] (l. 68) param_expand.c       -> var_name = [0m
+[31m[1;33m[ 14:32:49 ] (l.176) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:32:49 ] (l.183) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:32:49 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:32:49 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:32:49 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:32:49 ] (l.229) param_expand.c       -> Word-exp : [][0m
+
+[32m>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> [0m[32mNEW INSTANCE OF THE APPLICATION[0m[32m <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[0m
+
+[36m[ 14:33:16 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:33:16 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:33:16 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:33:16 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:33:16 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLs:-s}][0m
+[31m[1;33m[ 14:33:16 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:33:16 ] (l. 95) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:33:16 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVLs:-s}][0m
+[31m[1;33m[ 14:33:16 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVLs][0m
+[31m[1;33m[ 14:33:16 ] (l. 63) param_expand.c       -> -----------  check_second_exp_var : [-s}] ------------  [0m
+[31m[1;33m[ 14:33:16 ] (l. 68) param_expand.c       -> var_name = s[0m
+[31m[1;33m[ 14:33:16 ] (l.176) param_expand.c       -> result build_param = [s][0m
+[31m[1;33m[ 14:33:16 ] (l.183) param_expand.c       -> --------- expand param --------- [s]  [0m
+[36m[ 14:33:16 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:33:16 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:33:16 ] (l. 25) expansion_util.c     -> to_insert : [s][0m
+[31m[1;33m[ 14:33:16 ] (l.229) param_expand.c       -> Word-exp : [s][0m
+[36m[ 14:33:18 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:33:18 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:33:18 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:33:18 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:33:18 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLs:-}][0m
+[31m[1;33m[ 14:33:18 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:33:18 ] (l. 95) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:33:18 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVLs:-}][0m
+[31m[1;33m[ 14:33:18 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVLs][0m
+[31m[1;33m[ 14:33:18 ] (l. 63) param_expand.c       -> -----------  check_second_exp_var : [-}] ------------  [0m
+[31m[1;33m[ 14:33:18 ] (l. 68) param_expand.c       -> var_name = [0m
+[31m[1;33m[ 14:33:18 ] (l.176) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:33:18 ] (l.183) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:33:18 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:33:18 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:33:18 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:33:18 ] (l.229) param_expand.c       -> Word-exp : [][0m
+[36m[ 14:33:25 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:33:25 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:33:25 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:33:25 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:33:25 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL:-}][0m
+[31m[1;33m[ 14:33:25 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:33:25 ] (l. 95) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:33:25 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVL:-}][0m
+[31m[1;33m[ 14:33:25 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[1;33m[ 14:33:25 ] (l.176) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 14:33:25 ] (l.183) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 14:33:25 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:33:25 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:33:25 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 14:33:25 ] (l.229) param_expand.c       -> Word-exp : [3][0m
+[36m[ 14:33:26 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:33:26 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:33:26 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:33:26 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:33:26 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL:-}][0m
+[31m[1;33m[ 14:33:26 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:33:26 ] (l. 95) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:33:26 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVL:-}][0m
+[31m[1;33m[ 14:33:26 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[1;33m[ 14:33:26 ] (l.176) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 14:33:26 ] (l.183) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 14:33:26 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:33:26 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:33:26 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 14:33:26 ] (l.229) param_expand.c       -> Word-exp : [3][0m
+[36m[ 14:33:27 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:33:27 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:33:27 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:33:27 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:33:27 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL:-}][0m
+[31m[1;33m[ 14:33:27 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:33:27 ] (l. 95) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:33:27 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVL:-}][0m
+[31m[1;33m[ 14:33:27 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[1;33m[ 14:33:27 ] (l.176) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 14:33:27 ] (l.183) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 14:33:27 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:33:27 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:33:27 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 14:33:27 ] (l.229) param_expand.c       -> Word-exp : [3][0m
+[36m[ 14:33:27 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:33:27 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:33:27 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:33:27 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:33:27 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL:-}][0m
+[31m[1;33m[ 14:33:27 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:33:27 ] (l. 95) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:33:27 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVL:-}][0m
+[31m[1;33m[ 14:33:27 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[1;33m[ 14:33:27 ] (l.176) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 14:33:27 ] (l.183) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 14:33:27 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:33:27 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:33:27 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 14:33:27 ] (l.229) param_expand.c       -> Word-exp : [3][0m
+[36m[ 14:35:17 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:35:17 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:35:17 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:35:17 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:35:17 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL}][0m
+[31m[1;33m[ 14:35:17 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:35:17 ] (l.113) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:35:17 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVL}][0m
+[31m[1;33m[ 14:35:17 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[1;33m[ 14:35:17 ] (l.124) param_expand.c       -> classic_sub ret : [3][0m
+[31m[1;33m[ 14:35:17 ] (l.176) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 14:35:17 ] (l.183) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 14:35:17 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:35:17 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:35:17 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 14:35:17 ] (l.229) param_expand.c       -> Word-exp : [3][0m
+[36m[ 14:35:22 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:35:22 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:35:22 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:35:22 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:35:22 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLk}][0m
+[31m[1;33m[ 14:35:22 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:35:22 ] (l.113) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:35:22 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVLk}][0m
+[31m[1;33m[ 14:35:22 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVLk][0m
+[31m[1;33m[ 14:35:22 ] (l.124) param_expand.c       -> classic_sub ret : [(null)][0m
+[31m[1;33m[ 14:35:22 ] (l.176) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:35:22 ] (l.183) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:35:22 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:35:22 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:35:22 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:35:22 ] (l.229) param_expand.c       -> Word-exp : [][0m
+[36m[ 14:35:24 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:35:24 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:35:24 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:35:24 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:35:24 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLk}][0m
+[31m[1;33m[ 14:35:24 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:35:24 ] (l.113) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:35:24 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVLk}][0m
+[31m[1;33m[ 14:35:24 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVLk][0m
+[31m[1;33m[ 14:35:24 ] (l.124) param_expand.c       -> classic_sub ret : [(null)][0m
+[31m[1;33m[ 14:35:24 ] (l.176) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:35:24 ] (l.183) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:35:24 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:35:24 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:35:24 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:35:24 ] (l.229) param_expand.c       -> Word-exp : [][0m
+[36m[ 14:35:24 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:35:24 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:35:24 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:35:24 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:35:24 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLk}][0m
+[31m[1;33m[ 14:35:24 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:35:24 ] (l.113) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:35:24 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVLk}][0m
+[31m[1;33m[ 14:35:24 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVLk][0m
+[31m[1;33m[ 14:35:24 ] (l.124) param_expand.c       -> classic_sub ret : [(null)][0m
+[31m[1;33m[ 14:35:24 ] (l.176) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:35:24 ] (l.183) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:35:24 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:35:24 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:35:24 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:35:24 ] (l.229) param_expand.c       -> Word-exp : [][0m
+[36m[ 14:35:25 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:35:25 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:35:25 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:35:25 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:35:25 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLk}][0m
+[31m[1;33m[ 14:35:25 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:35:25 ] (l.113) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:35:25 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVLk}][0m
+[31m[1;33m[ 14:35:25 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVLk][0m
+[31m[1;33m[ 14:35:25 ] (l.124) param_expand.c       -> classic_sub ret : [(null)][0m
+[31m[1;33m[ 14:35:25 ] (l.176) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:35:25 ] (l.183) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:35:25 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:35:25 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:35:25 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:35:25 ] (l.229) param_expand.c       -> Word-exp : [][0m
+[36m[ 14:35:26 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:35:26 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:35:26 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:35:26 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:35:26 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLk}][0m
+[31m[1;33m[ 14:35:26 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:35:26 ] (l.113) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:35:26 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVLk}][0m
+[31m[1;33m[ 14:35:26 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVLk][0m
+[31m[1;33m[ 14:35:26 ] (l.124) param_expand.c       -> classic_sub ret : [(null)][0m
+[31m[1;33m[ 14:35:26 ] (l.176) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:35:26 ] (l.183) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:35:26 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:35:26 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:35:26 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:35:26 ] (l.229) param_expand.c       -> Word-exp : [][0m
+[36m[ 14:35:28 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:35:28 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:35:28 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:35:28 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:35:28 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLk}][0m
+[31m[1;33m[ 14:35:28 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:35:28 ] (l.113) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:35:28 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVLk}][0m
+[31m[1;33m[ 14:35:28 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVLk][0m
+[31m[1;33m[ 14:35:28 ] (l.124) param_expand.c       -> classic_sub ret : [(null)][0m
+[31m[1;33m[ 14:35:28 ] (l.176) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:35:28 ] (l.183) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:35:28 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:35:28 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:35:28 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:35:28 ] (l.229) param_expand.c       -> Word-exp : [][0m
+[36m[ 14:35:31 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:35:31 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:35:31 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:35:31 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:35:31 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLk}][0m
+[31m[1;33m[ 14:35:31 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:35:31 ] (l.113) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:35:31 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVLk}][0m
+[31m[1;33m[ 14:35:31 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVLk][0m
+[31m[1;33m[ 14:35:31 ] (l.124) param_expand.c       -> classic_sub ret : [(null)][0m
+[31m[1;33m[ 14:35:31 ] (l.176) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:35:31 ] (l.183) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:35:31 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:35:31 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:35:31 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:35:31 ] (l.229) param_expand.c       -> Word-exp : [][0m
+[36m[ 14:35:31 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:35:31 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:35:31 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:35:31 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:35:31 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLk}][0m
+[31m[1;33m[ 14:35:31 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:35:31 ] (l.113) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:35:31 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVLk}][0m
+[31m[1;33m[ 14:35:31 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVLk][0m
+[31m[1;33m[ 14:35:31 ] (l.124) param_expand.c       -> classic_sub ret : [(null)][0m
+[31m[1;33m[ 14:35:31 ] (l.176) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:35:31 ] (l.183) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:35:31 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:35:31 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:35:31 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:35:31 ] (l.229) param_expand.c       -> Word-exp : [][0m
+[36m[ 14:36:01 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:36:01 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:36:01 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:36:01 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:36:01 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLk}][0m
+[31m[1;33m[ 14:36:01 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:36:01 ] (l.113) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:36:01 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVLk}][0m
+[31m[1;33m[ 14:36:01 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVLk][0m
+[31m[1;33m[ 14:36:01 ] (l.124) param_expand.c       -> classic_sub ret : [(null)][0m
+[31m[1;33m[ 14:36:01 ] (l.176) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:36:01 ] (l.183) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:36:01 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:36:01 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:36:01 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:36:01 ] (l.229) param_expand.c       -> Word-exp : [][0m
+[36m[ 14:36:03 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:36:03 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:36:03 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:36:03 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:36:03 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLk}][0m
+[31m[1;33m[ 14:36:03 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:36:03 ] (l.113) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:36:03 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVLk}][0m
+[31m[1;33m[ 14:36:03 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVLk][0m
+[31m[1;33m[ 14:36:03 ] (l.124) param_expand.c       -> classic_sub ret : [(null)][0m
+[31m[1;33m[ 14:36:03 ] (l.176) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:36:03 ] (l.183) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:36:03 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:36:03 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:36:03 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:36:03 ] (l.229) param_expand.c       -> Word-exp : [][0m
+
+[32m>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> [0m[32mNEW INSTANCE OF THE APPLICATION[0m[32m <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[0m
+
+[36m[ 14:36:18 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:36:18 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:36:18 ] (l.229) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:36:18 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:36:18 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLk}][0m
+[31m[1;33m[ 14:36:18 ] (l.159) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:36:18 ] (l.113) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:36:18 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVLk}][0m
+[31m[1;33m[ 14:36:18 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVLk][0m
+[31m[1;33m[ 14:36:18 ] (l.124) param_expand.c       -> classic_sub ret : [(null)][0m
+[31m[1;33m[ 14:36:18 ] (l.176) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:36:18 ] (l.183) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:36:18 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:36:18 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:36:18 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:36:18 ] (l.229) param_expand.c       -> Word-exp : [][0m
+
+[32m>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> [0m[32mNEW INSTANCE OF THE APPLICATION[0m[32m <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[0m
+
+[36m[ 14:37:45 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:37:45 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:37:45 ] (l.230) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:37:45 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:37:45 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLk}][0m
+[31m[1;33m[ 14:37:45 ] (l.160) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:37:45 ] (l.114) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:37:45 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVLk}][0m
+[31m[1;33m[ 14:37:45 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVLk][0m
+[31m[ 14:37:45 ] (l. 89) param_expand.c       -> ptr addr [0x7f8086402710][0m
+[31m[1;33m[ 14:37:45 ] (l.125) param_expand.c       -> classic_sub ret : [(null)][0m
+[31m[1;33m[ 14:37:45 ] (l.177) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:37:45 ] (l.184) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:37:45 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:37:45 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:37:45 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:37:45 ] (l.230) param_expand.c       -> Word-exp : [][0m
+
+[32m>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> [0m[32mNEW INSTANCE OF THE APPLICATION[0m[32m <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[0m
+
+[36m[ 14:39:04 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:39:04 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:39:04 ] (l.233) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:39:04 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:39:04 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLk}][0m
+[31m[1;33m[ 14:39:04 ] (l.163) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:39:04 ] (l.117) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:39:04 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVLk}][0m
+[31m[1;33m[ 14:39:04 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVLk][0m
+[31m[ 14:39:04 ] (l. 89) param_expand.c       -> ptr addr [0x7fe6aaf2e830][0m
+[31m[1;33m[ 14:39:04 ] (l.128) param_expand.c       -> classic_sub ret : [(null)][0m
+[31m[1;33m[ 14:39:04 ] (l.180) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:39:04 ] (l.187) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:39:04 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:39:04 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:39:04 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:39:04 ] (l.233) param_expand.c       -> Word-exp : [][0m
+[36m[ 14:39:49 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:39:49 ] (l. 43) ft_wordexp.c         -> Word : [make][0m
+[31m[1;33m[ 14:39:49 ] (l.233) param_expand.c       -> Word-exp : [make][0m
+
+[32m>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> [0m[32mNEW INSTANCE OF THE APPLICATION[0m[32m <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[0m
+
+[36m[ 14:39:52 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:39:52 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:39:52 ] (l.234) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:39:52 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:39:52 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLk}][0m
+[31m[1;33m[ 14:39:52 ] (l.164) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:39:52 ] (l.118) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:39:52 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVLk}][0m
+[31m[1;33m[ 14:39:52 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVLk][0m
+[31m[ 14:39:52 ] (l. 89) param_expand.c       -> ptr addr [0x7fb84842d130][0m
+[31m[1;33m[ 14:39:52 ] (l.129) param_expand.c       -> classic_sub ret : [(null)][0m
+[31m[1;33m[ 14:39:52 ] (l.181) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:39:52 ] (l.188) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:39:52 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:39:52 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:39:52 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:39:52 ] (l.234) param_expand.c       -> Word-exp : [][0m
+[36m[ 14:40:00 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:40:00 ] (l. 43) ft_wordexp.c         -> Word : [make][0m
+[31m[1;33m[ 14:40:00 ] (l.234) param_expand.c       -> Word-exp : [make][0m
+
+[32m>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> [0m[32mNEW INSTANCE OF THE APPLICATION[0m[32m <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[0m
+
+[36m[ 14:41:28 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:41:28 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:41:28 ] (l.235) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:41:28 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:41:28 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLk}][0m
+[31m[1;33m[ 14:41:28 ] (l.165) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:41:28 ] (l.118) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:41:28 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVLk}][0m
+[31m[1;33m[ 14:41:28 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVLk][0m
+[31m[ 14:41:28 ] (l. 89) param_expand.c       -> ptr addr [0x7fc2d2e00240][0m
+[31m[ 14:41:28 ] (l.129) param_expand.c       -> var_name ptr addr [0x7fc2d2e00240][0m
+[31m[1;33m[ 14:41:28 ] (l.130) param_expand.c       -> classic_sub ret : [(null)][0m
+[31m[1;33m[ 14:41:28 ] (l.182) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:41:28 ] (l.189) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:41:28 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:41:28 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:41:28 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:41:28 ] (l.235) param_expand.c       -> Word-exp : [][0m
+
+[32m>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> [0m[32mNEW INSTANCE OF THE APPLICATION[0m[32m <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[0m
+
+[36m[ 14:43:17 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:43:17 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:43:17 ] (l.236) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:43:17 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:43:17 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLk}][0m
+[31m[1;33m[ 14:43:17 ] (l.166) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:43:17 ] (l.118) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:43:17 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVLk}][0m
+[31m[1;33m[ 14:43:17 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVLk][0m
+[31m[ 14:43:17 ] (l. 89) param_expand.c       -> ptr addr [0x7f88fa7001c0][0m
+[31m[ 14:43:17 ] (l.129) param_expand.c       -> var_name ptr addr [0x7f88fa7001c0][0m
+[31m[1;33m[ 14:43:17 ] (l.130) param_expand.c       -> classic_sub ret : [(null)][0m
+[31m[1;33m[ 14:43:17 ] (l.183) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:43:17 ] (l.190) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:43:17 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:43:17 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:43:17 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:43:17 ] (l.236) param_expand.c       -> Word-exp : [][0m
+[36m[ 14:43:44 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:43:44 ] (l. 43) ft_wordexp.c         -> Word : [make][0m
+[31m[1;33m[ 14:43:44 ] (l.236) param_expand.c       -> Word-exp : [make][0m
+
+[32m>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> [0m[32mNEW INSTANCE OF THE APPLICATION[0m[32m <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[0m
+
+[36m[ 14:43:49 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:43:49 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:43:49 ] (l.237) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:43:49 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:43:49 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLk}][0m
+[31m[1;33m[ 14:43:49 ] (l.167) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:43:49 ] (l.118) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:43:49 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVLk}][0m
+[31m[1;33m[ 14:43:49 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVLk][0m
+[31m[ 14:43:49 ] (l. 89) param_expand.c       -> ptr addr [0x7fd902f00000][0m
+[31m[ 14:43:49 ] (l.129) param_expand.c       -> var_name ptr addr [0x7fd902f00000][0m
+[31m[1;33m[ 14:43:49 ] (l.130) param_expand.c       -> classic_sub ret : [(null)][0m
+
+[32m>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> [0m[32mNEW INSTANCE OF THE APPLICATION[0m[32m <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[0m
+
+[36m[ 14:44:43 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:44:43 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:44:43 ] (l.233) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:44:43 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:44:43 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLk}][0m
+[31m[1;33m[ 14:44:43 ] (l.163) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:44:43 ] (l.118) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:44:43 ] (l. 74) param_expand.c       -> get_var_exp  CURSOR == [SHLVLk}][0m
+[31m[1;33m[ 14:44:43 ] (l. 88) param_expand.c       -> get_var_exp == [SHLVLk][0m
+[31m[ 14:44:43 ] (l. 89) param_expand.c       -> ptr addr [0x7fdb79700dd0][0m
+[31m[ 14:44:43 ] (l.129) param_expand.c       -> var_name ptr addr [0x7fdb79700dd0][0m
+[31m[1;33m[ 14:44:43 ] (l.130) param_expand.c       -> classic_sub ret : [(null)][0m
+[31m[1;33m[ 14:44:43 ] (l.180) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:44:43 ] (l.187) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:44:43 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:44:43 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:44:43 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:44:43 ] (l.233) param_expand.c       -> Word-exp : [][0m
+[36m[ 14:45:31 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:45:31 ] (l. 43) ft_wordexp.c         -> Word : [make][0m
+[31m[1;33m[ 14:45:31 ] (l.233) param_expand.c       -> Word-exp : [make][0m
+
+[32m>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> [0m[32mNEW INSTANCE OF THE APPLICATION[0m[32m <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[0m
+
+[36m[ 14:45:39 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:45:39 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:45:39 ] (l.236) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:45:39 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:45:39 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLk}][0m
+[31m[1;33m[ 14:45:39 ] (l.166) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:45:39 ] (l.121) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:45:39 ] (l. 77) param_expand.c       -> get_var_exp  CURSOR == [SHLVLk}][0m
+[31m[1;33m[ 14:45:39 ] (l. 91) param_expand.c       -> get_var_exp == [SHLVLk][0m
+[31m[ 14:45:39 ] (l. 92) param_expand.c       -> ptr addr [0x7fe58d601aa0][0m
+[31m[ 14:45:39 ] (l.132) param_expand.c       -> var_name ptr addr [0x7fe58d601aa0][0m
+[31m[1;33m[ 14:45:39 ] (l.133) param_expand.c       -> classic_sub ret : [(null)][0m
+[31m[ 14:45:39 ] (l. 55) param_expand.c       -> quoted str [0x7fe58d601aa0][0m
+[31m[1;33m[ 14:45:39 ] (l.183) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:45:39 ] (l.190) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:45:39 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:45:39 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:45:39 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:45:39 ] (l.236) param_expand.c       -> Word-exp : [][0m
+[36m[ 14:46:03 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:46:03 ] (l. 43) ft_wordexp.c         -> Word : [male][0m
+[31m[1;33m[ 14:46:03 ] (l.236) param_expand.c       -> Word-exp : [male][0m
+[36m[ 14:46:04 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:46:04 ] (l. 43) ft_wordexp.c         -> Word : [make][0m
+[31m[1;33m[ 14:46:04 ] (l.236) param_expand.c       -> Word-exp : [make][0m
+
+[32m>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> [0m[32mNEW INSTANCE OF THE APPLICATION[0m[32m <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[0m
+
+[36m[ 14:46:08 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:46:08 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:46:08 ] (l.237) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:46:08 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:46:08 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLk}][0m
+[31m[1;33m[ 14:46:08 ] (l.167) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:46:08 ] (l.122) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:46:08 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHLVLk}][0m
+[31m[1;33m[ 14:46:08 ] (l. 92) param_expand.c       -> get_var_exp == [SHLVLk][0m
+[31m[ 14:46:08 ] (l. 93) param_expand.c       -> ptr addr [0x7f9a36c02d30][0m
+[31m[ 14:46:08 ] (l.133) param_expand.c       -> var_name ptr addr [0x7f9a36c02d30][0m
+[31m[1;33m[ 14:46:08 ] (l.134) param_expand.c       -> classic_sub ret : [(null)][0m
+[31m[ 14:46:08 ] (l. 55) param_expand.c       -> quoted str [0x7f9a36c02d30][0m
+[31m[1;33m[ 14:46:08 ] (l.184) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:46:08 ] (l.191) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:46:08 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:46:08 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:46:08 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:46:08 ] (l.237) param_expand.c       -> Word-exp : [][0m
+[36m[ 14:46:29 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:46:29 ] (l. 43) ft_wordexp.c         -> Word : [make][0m
+[31m[1;33m[ 14:46:29 ] (l.237) param_expand.c       -> Word-exp : [make][0m
+
+[32m>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> [0m[32mNEW INSTANCE OF THE APPLICATION[0m[32m <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[0m
+
+[36m[ 14:46:32 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:46:32 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:46:32 ] (l.237) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:46:32 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:46:32 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLk}][0m
+[31m[1;33m[ 14:46:32 ] (l.167) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:46:32 ] (l.122) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:46:32 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHLVLk}][0m
+[31m[1;33m[ 14:46:32 ] (l. 92) param_expand.c       -> get_var_exp == [SHLVLk][0m
+[31m[ 14:46:32 ] (l. 93) param_expand.c       -> ptr addr [0x7f95e9c097c0][0m
+[31m[ 14:46:32 ] (l.133) param_expand.c       -> var_name ptr addr [0x7f95e9c097c0][0m
+[31m[1;33m[ 14:46:32 ] (l.134) param_expand.c       -> classic_sub ret : [(null)][0m
+[31m[ 14:46:32 ] (l. 55) param_expand.c       -> quoted str [0x7f95e9c097c0][0m
+[31m[ 14:46:32 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 14:46:32 ] (l.184) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:46:32 ] (l.191) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:46:32 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:46:32 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:46:32 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:46:32 ] (l.237) param_expand.c       -> Word-exp : [][0m
+[36m[ 14:46:36 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:46:36 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:46:36 ] (l.237) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:46:36 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:46:36 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLk}][0m
+[31m[1;33m[ 14:46:36 ] (l.167) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:46:36 ] (l.122) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:46:36 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHLVLk}][0m
+[31m[1;33m[ 14:46:36 ] (l. 92) param_expand.c       -> get_var_exp == [SHLVLk][0m
+[31m[ 14:46:36 ] (l. 93) param_expand.c       -> ptr addr [0x7f95e9f1b690][0m
+[31m[ 14:46:36 ] (l.133) param_expand.c       -> var_name ptr addr [0x7f95e9f1b690][0m
+[31m[1;33m[ 14:46:36 ] (l.134) param_expand.c       -> classic_sub ret : [(null)][0m
+[31m[ 14:46:36 ] (l. 55) param_expand.c       -> quoted str [0x7f95e9f1b690][0m
+[31m[ 14:46:36 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 14:46:36 ] (l.184) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:46:36 ] (l.191) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:46:36 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:46:36 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:46:36 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:46:36 ] (l.237) param_expand.c       -> Word-exp : [][0m
+[36m[ 14:46:39 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:46:39 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:46:39 ] (l.237) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:46:39 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:46:39 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLk:-woe}][0m
+[31m[1;33m[ 14:46:39 ] (l.167) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:46:39 ] (l.100) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:46:39 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHLVLk:-woe}][0m
+[31m[1;33m[ 14:46:39 ] (l. 92) param_expand.c       -> get_var_exp == [SHLVLk][0m
+[31m[ 14:46:39 ] (l. 93) param_expand.c       -> ptr addr [0x7f95e9d00830][0m
+[31m[ 14:46:39 ] (l.108) param_expand.c       -> var_name ptr addr [0x7f95e9d00830][0m
+[31m[1;33m[ 14:46:39 ] (l. 67) param_expand.c       -> -----------  check_second_exp_var : [-woe}] ------------  [0m
+[31m[1;33m[ 14:46:39 ] (l. 72) param_expand.c       -> var_name = woe[0m
+[31m[ 14:46:39 ] (l.114) param_expand.c       -> var_name ptr addr [0x7f95e9d00830][0m
+[31m[ 14:46:39 ] (l. 55) param_expand.c       -> quoted str [0x7f95e9d00820][0m
+[31m[ 14:46:39 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 14:46:39 ] (l.184) param_expand.c       -> result build_param = [woe][0m
+[31m[1;33m[ 14:46:39 ] (l.191) param_expand.c       -> --------- expand param --------- [woe]  [0m
+[36m[ 14:46:39 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:46:39 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:46:39 ] (l. 25) expansion_util.c     -> to_insert : [woe][0m
+[31m[1;33m[ 14:46:39 ] (l.237) param_expand.c       -> Word-exp : [woe][0m
+[36m[ 14:46:42 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:46:42 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:46:42 ] (l.237) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:46:42 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:46:42 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL:-woe}][0m
+[31m[1;33m[ 14:46:42 ] (l.167) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:46:42 ] (l.100) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:46:42 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHLVL:-woe}][0m
+[31m[1;33m[ 14:46:42 ] (l. 92) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[ 14:46:42 ] (l. 93) param_expand.c       -> ptr addr [0x7f95e9e00ee0][0m
+[31m[ 14:46:42 ] (l.108) param_expand.c       -> var_name ptr addr [0x7f95e9e00ee0][0m
+[31m[ 14:46:42 ] (l.114) param_expand.c       -> var_name ptr addr [0x7f95e9e00ee0][0m
+[31m[ 14:46:42 ] (l. 55) param_expand.c       -> quoted str [0x7f95e9e02130][0m
+[31m[ 14:46:42 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 14:46:42 ] (l.184) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 14:46:42 ] (l.191) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 14:46:42 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:46:42 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:46:42 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 14:46:42 ] (l.237) param_expand.c       -> Word-exp : [3][0m
+[36m[ 14:46:44 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:46:44 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:46:44 ] (l.237) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:46:44 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:46:44 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL:-woe}][0m
+[31m[1;33m[ 14:46:44 ] (l.167) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:46:44 ] (l.100) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:46:44 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHLVL:-woe}][0m
+[31m[1;33m[ 14:46:44 ] (l. 92) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[ 14:46:44 ] (l. 93) param_expand.c       -> ptr addr [0x7f95e9f1b4f0][0m
+[31m[ 14:46:44 ] (l.108) param_expand.c       -> var_name ptr addr [0x7f95e9f1b4f0][0m
+[31m[ 14:46:44 ] (l.114) param_expand.c       -> var_name ptr addr [0x7f95e9f1b4f0][0m
+[31m[ 14:46:44 ] (l. 55) param_expand.c       -> quoted str [0x7f95e9f1b690][0m
+[31m[ 14:46:44 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 14:46:44 ] (l.184) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 14:46:44 ] (l.191) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 14:46:44 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:46:44 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:46:44 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 14:46:44 ] (l.237) param_expand.c       -> Word-exp : [3][0m
+[36m[ 14:46:45 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:46:45 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:46:45 ] (l.237) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:46:45 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:46:45 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL:-woe}][0m
+[31m[1;33m[ 14:46:45 ] (l.167) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:46:45 ] (l.100) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:46:45 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHLVL:-woe}][0m
+[31m[1;33m[ 14:46:45 ] (l. 92) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[ 14:46:45 ] (l. 93) param_expand.c       -> ptr addr [0x7f95e9f1b680][0m
+[31m[ 14:46:45 ] (l.108) param_expand.c       -> var_name ptr addr [0x7f95e9f1b680][0m
+[31m[ 14:46:45 ] (l.114) param_expand.c       -> var_name ptr addr [0x7f95e9f1b680][0m
+[31m[ 14:46:45 ] (l. 55) param_expand.c       -> quoted str [0x7f95e9f1b330][0m
+[31m[ 14:46:45 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 14:46:45 ] (l.184) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 14:46:45 ] (l.191) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 14:46:45 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:46:45 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:46:45 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 14:46:45 ] (l.237) param_expand.c       -> Word-exp : [3][0m
+[36m[ 14:46:46 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:46:46 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:46:46 ] (l.237) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:46:46 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:46:46 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL:-woe}][0m
+[31m[1;33m[ 14:46:46 ] (l.167) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:46:46 ] (l.100) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:46:46 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHLVL:-woe}][0m
+[31m[1;33m[ 14:46:46 ] (l. 92) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[ 14:46:46 ] (l. 93) param_expand.c       -> ptr addr [0x7f95e9d00730][0m
+[31m[ 14:46:46 ] (l.108) param_expand.c       -> var_name ptr addr [0x7f95e9d00730][0m
+[31m[ 14:46:46 ] (l.114) param_expand.c       -> var_name ptr addr [0x7f95e9d00730][0m
+[31m[ 14:46:46 ] (l. 55) param_expand.c       -> quoted str [0x7f95e9d00740][0m
+[31m[ 14:46:46 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 14:46:46 ] (l.184) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 14:46:46 ] (l.191) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 14:46:46 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:46:46 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:46:46 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 14:46:46 ] (l.237) param_expand.c       -> Word-exp : [3][0m
+
+[32m>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> [0m[32mNEW INSTANCE OF THE APPLICATION[0m[32m <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[0m
+
+[36m[ 14:47:00 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:47:00 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:47:00 ] (l.237) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:47:00 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:47:00 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL:-woe}][0m
+[31m[1;33m[ 14:47:00 ] (l.167) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:47:00 ] (l.100) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:47:00 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHLVL:-woe}][0m
+[31m[1;33m[ 14:47:00 ] (l. 92) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[ 14:47:00 ] (l. 93) param_expand.c       -> ptr addr [0x7fb87ff02bf0][0m
+[31m[ 14:47:00 ] (l.108) param_expand.c       -> var_name ptr addr [0x7fb87ff02bf0][0m
+[31m[ 14:47:00 ] (l.114) param_expand.c       -> var_name ptr addr [0x7fb87ff02bf0][0m
+[31m[ 14:47:00 ] (l. 55) param_expand.c       -> quoted str [0x7fb87ff02e10][0m
+[31m[ 14:47:00 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 14:47:00 ] (l.184) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 14:47:00 ] (l.191) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 14:47:00 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:47:00 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:47:00 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 14:47:00 ] (l.237) param_expand.c       -> Word-exp : [3][0m
+[36m[ 14:47:03 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:47:03 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:47:03 ] (l.237) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:47:03 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:47:03 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLx:-woe}][0m
+[31m[1;33m[ 14:47:03 ] (l.167) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:47:03 ] (l.100) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:47:03 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHLVLx:-woe}][0m
+[31m[1;33m[ 14:47:03 ] (l. 92) param_expand.c       -> get_var_exp == [SHLVLx][0m
+[31m[ 14:47:03 ] (l. 93) param_expand.c       -> ptr addr [0x7fb87ff02bd0][0m
+[31m[ 14:47:03 ] (l.108) param_expand.c       -> var_name ptr addr [0x7fb87ff02bd0][0m
+[31m[1;33m[ 14:47:03 ] (l. 67) param_expand.c       -> -----------  check_second_exp_var : [-woe}] ------------  [0m
+[31m[1;33m[ 14:47:03 ] (l. 72) param_expand.c       -> var_name = woe[0m
+[31m[ 14:47:03 ] (l.114) param_expand.c       -> var_name ptr addr [0x7fb87ff02bd0][0m
+[31m[ 14:47:03 ] (l. 55) param_expand.c       -> quoted str [0x7fb87ff02c80][0m
+[31m[ 14:47:03 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 14:47:03 ] (l.184) param_expand.c       -> result build_param = [woe][0m
+[31m[1;33m[ 14:47:03 ] (l.191) param_expand.c       -> --------- expand param --------- [woe]  [0m
+[36m[ 14:47:03 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:47:03 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:47:03 ] (l. 25) expansion_util.c     -> to_insert : [woe][0m
+[31m[1;33m[ 14:47:03 ] (l.237) param_expand.c       -> Word-exp : [woe][0m
+[36m[ 14:47:08 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:47:08 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:47:08 ] (l.237) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:47:08 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:47:08 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLx}][0m
+[31m[1;33m[ 14:47:08 ] (l.167) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:47:08 ] (l.122) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:47:08 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHLVLx}][0m
+[31m[1;33m[ 14:47:08 ] (l. 92) param_expand.c       -> get_var_exp == [SHLVLx][0m
+[31m[ 14:47:08 ] (l. 93) param_expand.c       -> ptr addr [0x7fb87fc02640][0m
+[31m[ 14:47:08 ] (l.133) param_expand.c       -> var_name ptr addr [0x7fb87fc02640][0m
+[31m[1;33m[ 14:47:08 ] (l.134) param_expand.c       -> classic_sub ret : [(null)][0m
+[31m[ 14:47:08 ] (l. 55) param_expand.c       -> quoted str [0x7fb87fc02640][0m
+[31m[1;33m[ 14:47:08 ] (l.184) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:47:08 ] (l.191) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:47:08 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:47:08 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:47:08 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:47:08 ] (l.237) param_expand.c       -> Word-exp : [][0m
+[36m[ 14:47:15 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:47:15 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:47:15 ] (l.237) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:47:15 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:47:15 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLx}][0m
+[31m[1;33m[ 14:47:15 ] (l.167) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:47:15 ] (l.122) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:47:15 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHLVLx}][0m
+[31m[1;33m[ 14:47:15 ] (l. 92) param_expand.c       -> get_var_exp == [SHLVLx][0m
+[31m[ 14:47:15 ] (l. 93) param_expand.c       -> ptr addr [0x7fb87fd2c5c0][0m
+[31m[ 14:47:15 ] (l.133) param_expand.c       -> var_name ptr addr [0x7fb87fd2c5c0][0m
+[31m[1;33m[ 14:47:15 ] (l.134) param_expand.c       -> classic_sub ret : [(null)][0m
+[31m[ 14:47:15 ] (l. 55) param_expand.c       -> quoted str [0x7fb87fd2c5c0][0m
+[31m[1;33m[ 14:47:15 ] (l.184) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:47:15 ] (l.191) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:47:15 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:47:15 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:47:15 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:47:15 ] (l.237) param_expand.c       -> Word-exp : [][0m
+[36m[ 14:47:20 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:47:20 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:47:20 ] (l.237) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:47:20 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:47:20 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLx}][0m
+[31m[1;33m[ 14:47:20 ] (l.167) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:47:20 ] (l.122) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:47:20 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHLVLx}][0m
+[31m[1;33m[ 14:47:20 ] (l. 92) param_expand.c       -> get_var_exp == [SHLVLx][0m
+[31m[ 14:47:20 ] (l. 93) param_expand.c       -> ptr addr [0x7fb87fc026b0][0m
+[31m[ 14:47:20 ] (l.133) param_expand.c       -> var_name ptr addr [0x7fb87fc026b0][0m
+[31m[1;33m[ 14:47:20 ] (l.134) param_expand.c       -> classic_sub ret : [(null)][0m
+[31m[ 14:47:20 ] (l. 55) param_expand.c       -> quoted str [0x7fb87fc026b0][0m
+[31m[1;33m[ 14:47:20 ] (l.184) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:47:20 ] (l.191) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:47:20 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:47:20 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:47:20 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:47:20 ] (l.237) param_expand.c       -> Word-exp : [][0m
+[36m[ 14:48:25 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:48:25 ] (l. 43) ft_wordexp.c         -> Word : [make][0m
+[31m[1;33m[ 14:48:25 ] (l.237) param_expand.c       -> Word-exp : [make][0m
+
+[32m>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> [0m[32mNEW INSTANCE OF THE APPLICATION[0m[32m <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[0m
+
+[36m[ 14:48:30 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:48:30 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:48:30 ] (l.238) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:48:30 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:48:30 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLx}][0m
+[31m[1;33m[ 14:48:30 ] (l.168) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:48:30 ] (l.122) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:48:30 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHLVLx}][0m
+[31m[1;33m[ 14:48:30 ] (l. 92) param_expand.c       -> get_var_exp == [SHLVLx][0m
+[31m[ 14:48:30 ] (l. 93) param_expand.c       -> ptr addr [0x7ffc6a7001c0][0m
+[31m[ 14:48:30 ] (l.134) param_expand.c       -> var_name ptr addr [0x7ffc6a7001c0][0m
+[31m[1;33m[ 14:48:30 ] (l.135) param_expand.c       -> classic_sub ret : [(null)][0m
+[31m[ 14:48:30 ] (l. 55) param_expand.c       -> quoted str [0x1094f585f][0m
+[31m[1;33m[ 14:48:30 ] (l.185) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:48:30 ] (l.192) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:48:30 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:48:30 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:48:30 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:48:30 ] (l.238) param_expand.c       -> Word-exp : [][0m
+[36m[ 14:48:39 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:48:39 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:48:39 ] (l.238) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:48:39 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:48:39 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLx}][0m
+[31m[1;33m[ 14:48:39 ] (l.168) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:48:39 ] (l.122) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:48:39 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHLVLx}][0m
+[31m[1;33m[ 14:48:39 ] (l. 92) param_expand.c       -> get_var_exp == [SHLVLx][0m
+[31m[ 14:48:39 ] (l. 93) param_expand.c       -> ptr addr [0x7ffc6a431280][0m
+[31m[ 14:48:39 ] (l.134) param_expand.c       -> var_name ptr addr [0x7ffc6a431280][0m
+[31m[1;33m[ 14:48:39 ] (l.135) param_expand.c       -> classic_sub ret : [(null)][0m
+[31m[ 14:48:39 ] (l. 55) param_expand.c       -> quoted str [0x1094f585f][0m
+[31m[1;33m[ 14:48:39 ] (l.185) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:48:39 ] (l.192) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:48:39 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:48:39 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:48:39 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:48:39 ] (l.238) param_expand.c       -> Word-exp : [][0m
+[36m[ 14:48:42 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:48:42 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:48:42 ] (l.238) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:48:42 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:48:42 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL}][0m
+[31m[1;33m[ 14:48:42 ] (l.168) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:48:42 ] (l.122) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:48:42 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHLVL}][0m
+[31m[1;33m[ 14:48:42 ] (l. 92) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[ 14:48:42 ] (l. 93) param_expand.c       -> ptr addr [0x7ffc6a7000a0][0m
+[31m[ 14:48:42 ] (l.134) param_expand.c       -> var_name ptr addr [0x7ffc6a7000a0][0m
+[31m[1;33m[ 14:48:42 ] (l.135) param_expand.c       -> classic_sub ret : [3][0m
+[31m[ 14:48:42 ] (l. 55) param_expand.c       -> quoted str [0x7ffc6a7001c0][0m
+[31m[ 14:48:42 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 14:48:42 ] (l.185) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 14:48:42 ] (l.192) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 14:48:42 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:48:42 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:48:42 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 14:48:42 ] (l.238) param_expand.c       -> Word-exp : [3][0m
+[36m[ 14:48:44 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:48:44 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:48:44 ] (l.238) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:48:44 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:48:44 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLx}][0m
+[31m[1;33m[ 14:48:44 ] (l.168) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:48:44 ] (l.122) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:48:44 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHLVLx}][0m
+[31m[1;33m[ 14:48:44 ] (l. 92) param_expand.c       -> get_var_exp == [SHLVLx][0m
+[31m[ 14:48:44 ] (l. 93) param_expand.c       -> ptr addr [0x7ffc6a7001d0][0m
+[31m[ 14:48:44 ] (l.134) param_expand.c       -> var_name ptr addr [0x7ffc6a7001d0][0m
+[31m[1;33m[ 14:48:44 ] (l.135) param_expand.c       -> classic_sub ret : [(null)][0m
+[31m[ 14:48:44 ] (l. 55) param_expand.c       -> quoted str [0x1094f585f][0m
+[31m[1;33m[ 14:48:44 ] (l.185) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:48:44 ] (l.192) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:48:44 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:48:44 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:48:44 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:48:44 ] (l.238) param_expand.c       -> Word-exp : [][0m
+[36m[ 14:48:48 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:48:48 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:48:48 ] (l.238) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:48:48 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:48:48 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL:-dwef}][0m
+[31m[1;33m[ 14:48:48 ] (l.168) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:48:48 ] (l.100) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:48:48 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHLVL:-dwef}][0m
+[31m[1;33m[ 14:48:48 ] (l. 92) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[ 14:48:48 ] (l. 93) param_expand.c       -> ptr addr [0x7ffc6a5007b0][0m
+[31m[ 14:48:48 ] (l.108) param_expand.c       -> var_name ptr addr [0x7ffc6a5007b0][0m
+[31m[ 14:48:48 ] (l.114) param_expand.c       -> var_name ptr addr [0x7ffc6a5007b0][0m
+[31m[ 14:48:48 ] (l. 55) param_expand.c       -> quoted str [0x7ffc6a5006c0][0m
+[31m[ 14:48:48 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 14:48:48 ] (l.185) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 14:48:48 ] (l.192) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 14:48:48 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:48:48 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:48:48 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 14:48:48 ] (l.238) param_expand.c       -> Word-exp : [3][0m
+[36m[ 14:48:51 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:48:51 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:48:51 ] (l.238) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:48:51 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:48:51 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL}][0m
+[31m[1;33m[ 14:48:51 ] (l.168) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:48:51 ] (l.122) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:48:51 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHLVL}][0m
+[31m[1;33m[ 14:48:51 ] (l. 92) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[ 14:48:51 ] (l. 93) param_expand.c       -> ptr addr [0x7ffc6a600070][0m
+[31m[ 14:48:51 ] (l.134) param_expand.c       -> var_name ptr addr [0x7ffc6a600070][0m
+[31m[1;33m[ 14:48:51 ] (l.135) param_expand.c       -> classic_sub ret : [3][0m
+[31m[ 14:48:51 ] (l. 55) param_expand.c       -> quoted str [0x7ffc6a600060][0m
+[31m[ 14:48:51 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 14:48:51 ] (l.185) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 14:48:51 ] (l.192) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 14:48:51 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:48:51 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:48:51 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 14:48:51 ] (l.238) param_expand.c       -> Word-exp : [3][0m
+[36m[ 14:48:54 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:48:54 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:48:54 ] (l.238) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:48:54 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:48:54 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL:-de}][0m
+[31m[1;33m[ 14:48:54 ] (l.168) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:48:54 ] (l.100) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:48:54 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHLVL:-de}][0m
+[31m[1;33m[ 14:48:54 ] (l. 92) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[ 14:48:54 ] (l. 93) param_expand.c       -> ptr addr [0x7ffc6a431310][0m
+[31m[ 14:48:54 ] (l.108) param_expand.c       -> var_name ptr addr [0x7ffc6a431310][0m
+[31m[ 14:48:54 ] (l.114) param_expand.c       -> var_name ptr addr [0x7ffc6a431310][0m
+[31m[ 14:48:54 ] (l. 55) param_expand.c       -> quoted str [0x7ffc6a431260][0m
+[31m[ 14:48:54 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 14:48:54 ] (l.185) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 14:48:54 ] (l.192) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 14:48:54 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:48:54 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:48:54 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 14:48:54 ] (l.238) param_expand.c       -> Word-exp : [3][0m
+[36m[ 14:48:56 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:48:56 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:48:56 ] (l.238) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:48:56 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:48:56 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLx:-de}][0m
+[31m[1;33m[ 14:48:56 ] (l.168) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:48:56 ] (l.100) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:48:56 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHLVLx:-de}][0m
+[31m[1;33m[ 14:48:56 ] (l. 92) param_expand.c       -> get_var_exp == [SHLVLx][0m
+[31m[ 14:48:56 ] (l. 93) param_expand.c       -> ptr addr [0x7ffc6a430e60][0m
+[31m[ 14:48:56 ] (l.108) param_expand.c       -> var_name ptr addr [0x7ffc6a430e60][0m
+[31m[1;33m[ 14:48:56 ] (l. 67) param_expand.c       -> -----------  check_second_exp_var : [-de}] ------------  [0m
+[31m[1;33m[ 14:48:56 ] (l. 72) param_expand.c       -> var_name = de[0m
+[31m[ 14:48:56 ] (l.114) param_expand.c       -> var_name ptr addr [0x7ffc6a430e60][0m
+[31m[ 14:48:56 ] (l. 55) param_expand.c       -> quoted str [0x7ffc6a4312b0][0m
+[31m[ 14:48:56 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 14:48:56 ] (l.185) param_expand.c       -> result build_param = [de][0m
+[31m[1;33m[ 14:48:56 ] (l.192) param_expand.c       -> --------- expand param --------- [de]  [0m
+[36m[ 14:48:56 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:48:56 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:48:56 ] (l. 25) expansion_util.c     -> to_insert : [de][0m
+[31m[1;33m[ 14:48:56 ] (l.238) param_expand.c       -> Word-exp : [de][0m
+[36m[ 14:48:59 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:48:59 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:48:59 ] (l.238) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:48:59 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:48:59 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVLx}][0m
+[31m[1;33m[ 14:48:59 ] (l.168) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:48:59 ] (l.122) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:48:59 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHLVLx}][0m
+[31m[1;33m[ 14:48:59 ] (l. 92) param_expand.c       -> get_var_exp == [SHLVLx][0m
+[31m[ 14:48:59 ] (l. 93) param_expand.c       -> ptr addr [0x7ffc6a600000][0m
+[31m[ 14:48:59 ] (l.134) param_expand.c       -> var_name ptr addr [0x7ffc6a600000][0m
+[31m[1;33m[ 14:48:59 ] (l.135) param_expand.c       -> classic_sub ret : [(null)][0m
+[31m[ 14:48:59 ] (l. 55) param_expand.c       -> quoted str [0x1094f585f][0m
+[31m[1;33m[ 14:48:59 ] (l.185) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:48:59 ] (l.192) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:48:59 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:48:59 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:48:59 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:48:59 ] (l.238) param_expand.c       -> Word-exp : [][0m
+[36m[ 14:49:01 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:49:01 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:49:01 ] (l.238) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:49:01 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:49:01 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL}][0m
+[31m[1;33m[ 14:49:01 ] (l.168) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:49:01 ] (l.122) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:49:01 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHLVL}][0m
+[31m[1;33m[ 14:49:01 ] (l. 92) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[ 14:49:01 ] (l. 93) param_expand.c       -> ptr addr [0x7ffc6a7005c0][0m
+[31m[ 14:49:01 ] (l.134) param_expand.c       -> var_name ptr addr [0x7ffc6a7005c0][0m
+[31m[1;33m[ 14:49:01 ] (l.135) param_expand.c       -> classic_sub ret : [3][0m
+[31m[ 14:49:01 ] (l. 55) param_expand.c       -> quoted str [0x7ffc6a7005b0][0m
+[31m[ 14:49:01 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 14:49:01 ] (l.185) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 14:49:01 ] (l.192) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 14:49:01 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:49:01 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:49:01 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 14:49:01 ] (l.238) param_expand.c       -> Word-exp : [3][0m
+[36m[ 14:49:02 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:49:02 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:49:02 ] (l.238) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:49:02 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:49:02 ] (l. 43) ft_wordexp.c         -> Word : [${SHLV}][0m
+[31m[1;33m[ 14:49:02 ] (l.168) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:49:02 ] (l.122) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 14:49:02 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHLV}][0m
+[31m[1;33m[ 14:49:02 ] (l. 92) param_expand.c       -> get_var_exp == [SHLV][0m
+[31m[ 14:49:02 ] (l. 93) param_expand.c       -> ptr addr [0x7ffc6a5007e0][0m
+[31m[ 14:49:02 ] (l.134) param_expand.c       -> var_name ptr addr [0x7ffc6a5007e0][0m
+[31m[1;33m[ 14:49:02 ] (l.135) param_expand.c       -> classic_sub ret : [(null)][0m
+[31m[ 14:49:02 ] (l. 55) param_expand.c       -> quoted str [0x1094f585f][0m
+[31m[1;33m[ 14:49:02 ] (l.185) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:49:02 ] (l.192) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:49:02 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:49:02 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:49:02 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:49:02 ] (l.238) param_expand.c       -> Word-exp : [][0m
+[36m[ 14:49:05 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:49:05 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:49:05 ] (l.238) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:49:05 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:49:05 ] (l. 43) ft_wordexp.c         -> Word : [${SHL:-efw}][0m
+[31m[1;33m[ 14:49:05 ] (l.168) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:49:05 ] (l.100) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:49:05 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHL:-efw}][0m
+[31m[1;33m[ 14:49:05 ] (l. 92) param_expand.c       -> get_var_exp == [SHL][0m
+[31m[ 14:49:05 ] (l. 93) param_expand.c       -> ptr addr [0x7ffc6a431260][0m
+[31m[ 14:49:05 ] (l.108) param_expand.c       -> var_name ptr addr [0x7ffc6a431260][0m
+[31m[1;33m[ 14:49:05 ] (l. 67) param_expand.c       -> -----------  check_second_exp_var : [-efw}] ------------  [0m
+[31m[1;33m[ 14:49:05 ] (l. 72) param_expand.c       -> var_name = efw[0m
+[31m[ 14:49:05 ] (l.114) param_expand.c       -> var_name ptr addr [0x7ffc6a431260][0m
+[31m[ 14:49:05 ] (l. 55) param_expand.c       -> quoted str [0x7ffc6a430e60][0m
+[31m[ 14:49:05 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 14:49:05 ] (l.185) param_expand.c       -> result build_param = [efw][0m
+[31m[1;33m[ 14:49:05 ] (l.192) param_expand.c       -> --------- expand param --------- [efw]  [0m
+[36m[ 14:49:05 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:49:05 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:49:05 ] (l. 25) expansion_util.c     -> to_insert : [efw][0m
+[31m[1;33m[ 14:49:05 ] (l.238) param_expand.c       -> Word-exp : [efw][0m
+[36m[ 14:49:09 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:49:09 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:49:09 ] (l.238) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:49:09 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:49:09 ] (l. 43) ft_wordexp.c         -> Word : [${SHL:-efw}][0m
+[31m[1;33m[ 14:49:09 ] (l.168) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:49:09 ] (l.100) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:49:09 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHL:-efw}][0m
+[31m[1;33m[ 14:49:09 ] (l. 92) param_expand.c       -> get_var_exp == [SHL][0m
+[31m[ 14:49:09 ] (l. 93) param_expand.c       -> ptr addr [0x7ffc6a430e60][0m
+[31m[ 14:49:09 ] (l.108) param_expand.c       -> var_name ptr addr [0x7ffc6a430e60][0m
+[31m[1;33m[ 14:49:09 ] (l. 67) param_expand.c       -> -----------  check_second_exp_var : [-efw}] ------------  [0m
+[31m[1;33m[ 14:49:09 ] (l. 72) param_expand.c       -> var_name = efw[0m
+[31m[ 14:49:09 ] (l.114) param_expand.c       -> var_name ptr addr [0x7ffc6a430e60][0m
+[31m[ 14:49:09 ] (l. 55) param_expand.c       -> quoted str [0x7ffc6a4313f0][0m
+[31m[ 14:49:09 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 14:49:09 ] (l.185) param_expand.c       -> result build_param = [efw][0m
+[31m[1;33m[ 14:49:09 ] (l.192) param_expand.c       -> --------- expand param --------- [efw]  [0m
+[36m[ 14:49:09 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:49:09 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:49:09 ] (l. 25) expansion_util.c     -> to_insert : [efw][0m
+[31m[1;33m[ 14:49:09 ] (l.238) param_expand.c       -> Word-exp : [efw][0m
+[36m[ 14:50:15 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:50:15 ] (l. 43) ft_wordexp.c         -> Word : [make][0m
+[31m[1;33m[ 14:50:15 ] (l.238) param_expand.c       -> Word-exp : [make][0m
+[36m[ 14:50:25 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:50:25 ] (l. 43) ft_wordexp.c         -> Word : [make][0m
+[31m[1;33m[ 14:50:25 ] (l.238) param_expand.c       -> Word-exp : [make][0m
+[36m[ 14:50:36 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:50:36 ] (l. 43) ft_wordexp.c         -> Word : [clear][0m
+[31m[1;33m[ 14:50:36 ] (l.238) param_expand.c       -> Word-exp : [clear][0m
+
+[32m>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> [0m[32mNEW INSTANCE OF THE APPLICATION[0m[32m <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[0m
+
+[36m[ 14:56:33 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:56:33 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:56:33 ] (l.239) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:56:33 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:56:33 ] (l. 43) ft_wordexp.c         -> Word : [$test:-test][0m
+[31m[1;33m[ 14:56:33 ] (l.169) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:56:33 ] (l.100) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:56:33 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [test:-test][0m
+[31m[1;33m[ 14:56:33 ] (l. 92) param_expand.c       -> get_var_exp == [test][0m
+[31m[ 14:56:33 ] (l. 93) param_expand.c       -> ptr addr [0x7fdfe5700210][0m
+[31m[ 14:56:33 ] (l.108) param_expand.c       -> var_name ptr addr [0x7fdfe5700210][0m
+[31m[1;33m[ 14:56:33 ] (l. 67) param_expand.c       -> -----------  check_second_exp_var : [-test] ------------  [0m
+[31m[1;33m[ 14:56:33 ] (l. 72) param_expand.c       -> var_name = tes[0m
+[31m[ 14:56:33 ] (l.114) param_expand.c       -> var_name ptr addr [0x7fdfe5700210][0m
+[31m[ 14:56:33 ] (l. 55) param_expand.c       -> quoted str [0x7fdfe5700120][0m
+[31m[ 14:56:33 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 14:56:33 ] (l.186) param_expand.c       -> result build_param = [tes][0m
+[31m[1;33m[ 14:56:33 ] (l.193) param_expand.c       -> --------- expand param --------- [tes]  [0m
+[36m[ 14:56:33 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:56:33 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:56:33 ] (l. 25) expansion_util.c     -> to_insert : [tes][0m
+[31m[1;33m[ 14:56:33 ] (l.239) param_expand.c       -> Word-exp : [tes][0m
+[36m[ 14:56:37 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:56:37 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:56:37 ] (l.239) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:56:37 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:56:37 ] (l. 43) ft_wordexp.c         -> Word : [$test:-test][0m
+[31m[1;33m[ 14:56:37 ] (l.169) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:56:37 ] (l.100) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:56:37 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [test:-test][0m
+[31m[1;33m[ 14:56:37 ] (l. 92) param_expand.c       -> get_var_exp == [test][0m
+[31m[ 14:56:37 ] (l. 93) param_expand.c       -> ptr addr [0x7fdfe5430990][0m
+[31m[ 14:56:37 ] (l.108) param_expand.c       -> var_name ptr addr [0x7fdfe5430990][0m
+[31m[1;33m[ 14:56:37 ] (l. 67) param_expand.c       -> -----------  check_second_exp_var : [-test] ------------  [0m
+[31m[1;33m[ 14:56:37 ] (l. 72) param_expand.c       -> var_name = tes[0m
+[31m[ 14:56:37 ] (l.114) param_expand.c       -> var_name ptr addr [0x7fdfe5430990][0m
+[31m[ 14:56:37 ] (l. 55) param_expand.c       -> quoted str [0x7fdfe5430880][0m
+[31m[ 14:56:37 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 14:56:37 ] (l.186) param_expand.c       -> result build_param = [tes][0m
+[31m[1;33m[ 14:56:37 ] (l.193) param_expand.c       -> --------- expand param --------- [tes]  [0m
+[36m[ 14:56:37 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:56:37 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:56:37 ] (l. 25) expansion_util.c     -> to_insert : [tes][0m
+[31m[1;33m[ 14:56:37 ] (l.239) param_expand.c       -> Word-exp : [tes][0m
+[36m[ 14:56:40 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:56:40 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:56:40 ] (l.239) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:56:40 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:56:40 ] (l. 43) ft_wordexp.c         -> Word : [$test:-tes][0m
+[31m[1;33m[ 14:56:40 ] (l.169) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:56:40 ] (l.100) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:56:40 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [test:-tes][0m
+[31m[1;33m[ 14:56:40 ] (l. 92) param_expand.c       -> get_var_exp == [test][0m
+[31m[ 14:56:40 ] (l. 93) param_expand.c       -> ptr addr [0x7fdfe5430460][0m
+[31m[ 14:56:40 ] (l.108) param_expand.c       -> var_name ptr addr [0x7fdfe5430460][0m
+[31m[1;33m[ 14:56:40 ] (l. 67) param_expand.c       -> -----------  check_second_exp_var : [-tes] ------------  [0m
+[31m[1;33m[ 14:56:40 ] (l. 72) param_expand.c       -> var_name = te[0m
+[31m[ 14:56:40 ] (l.114) param_expand.c       -> var_name ptr addr [0x7fdfe5430460][0m
+[31m[ 14:56:40 ] (l. 55) param_expand.c       -> quoted str [0x7fdfe5430880][0m
+[31m[ 14:56:40 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 14:56:40 ] (l.186) param_expand.c       -> result build_param = [te][0m
+[31m[1;33m[ 14:56:40 ] (l.193) param_expand.c       -> --------- expand param --------- [te]  [0m
+[36m[ 14:56:40 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:56:40 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:56:40 ] (l. 25) expansion_util.c     -> to_insert : [te][0m
+[31m[1;33m[ 14:56:40 ] (l.239) param_expand.c       -> Word-exp : [te][0m
+[36m[ 14:56:43 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:56:43 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:56:43 ] (l.239) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:56:43 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:56:43 ] (l. 43) ft_wordexp.c         -> Word : [$test:-ts][0m
+[31m[1;33m[ 14:56:43 ] (l.169) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:56:43 ] (l.100) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:56:43 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [test:-ts][0m
+[31m[1;33m[ 14:56:43 ] (l. 92) param_expand.c       -> get_var_exp == [test][0m
+[31m[ 14:56:43 ] (l. 93) param_expand.c       -> ptr addr [0x7fdfe5700210][0m
+[31m[ 14:56:43 ] (l.108) param_expand.c       -> var_name ptr addr [0x7fdfe5700210][0m
+[31m[1;33m[ 14:56:43 ] (l. 67) param_expand.c       -> -----------  check_second_exp_var : [-ts] ------------  [0m
+[31m[1;33m[ 14:56:43 ] (l. 72) param_expand.c       -> var_name = t[0m
+[31m[ 14:56:43 ] (l.114) param_expand.c       -> var_name ptr addr [0x7fdfe5700210][0m
+[31m[ 14:56:43 ] (l. 55) param_expand.c       -> quoted str [0x7fdfe5700540][0m
+[31m[ 14:56:43 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 14:56:43 ] (l.186) param_expand.c       -> result build_param = [t][0m
+[31m[1;33m[ 14:56:43 ] (l.193) param_expand.c       -> --------- expand param --------- [t]  [0m
+[36m[ 14:56:43 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:56:43 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:56:43 ] (l. 25) expansion_util.c     -> to_insert : [t][0m
+[31m[1;33m[ 14:56:43 ] (l.239) param_expand.c       -> Word-exp : [t][0m
+[36m[ 14:56:49 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:56:49 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:56:49 ] (l.239) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:56:49 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:56:49 ] (l. 43) ft_wordexp.c         -> Word : [$test:-s][0m
+[31m[1;33m[ 14:56:49 ] (l.169) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:56:49 ] (l.100) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:56:49 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [test:-s][0m
+[31m[1;33m[ 14:56:49 ] (l. 92) param_expand.c       -> get_var_exp == [test][0m
+[31m[ 14:56:49 ] (l. 93) param_expand.c       -> ptr addr [0x7fdfe5700590][0m
+[31m[ 14:56:49 ] (l.108) param_expand.c       -> var_name ptr addr [0x7fdfe5700590][0m
+[31m[1;33m[ 14:56:49 ] (l. 67) param_expand.c       -> -----------  check_second_exp_var : [-s] ------------  [0m
+[31m[1;33m[ 14:56:49 ] (l. 72) param_expand.c       -> var_name = [0m
+[31m[ 14:56:49 ] (l.114) param_expand.c       -> var_name ptr addr [0x7fdfe5700590][0m
+[31m[ 14:56:49 ] (l. 55) param_expand.c       -> quoted str [0x7fdfe57002c0][0m
+[31m[1;33m[ 14:56:49 ] (l.186) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 14:56:49 ] (l.193) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 14:56:49 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:56:49 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:56:49 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 14:56:49 ] (l.239) param_expand.c       -> Word-exp : [][0m
+[36m[ 14:56:50 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:56:50 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:56:50 ] (l.239) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:56:50 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:56:50 ] (l. 43) ft_wordexp.c         -> Word : [$test:-ss][0m
+[31m[1;33m[ 14:56:50 ] (l.169) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:56:50 ] (l.100) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:56:50 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [test:-ss][0m
+[31m[1;33m[ 14:56:50 ] (l. 92) param_expand.c       -> get_var_exp == [test][0m
+[31m[ 14:56:50 ] (l. 93) param_expand.c       -> ptr addr [0x7fdfe54308d0][0m
+[31m[ 14:56:50 ] (l.108) param_expand.c       -> var_name ptr addr [0x7fdfe54308d0][0m
+[31m[1;33m[ 14:56:50 ] (l. 67) param_expand.c       -> -----------  check_second_exp_var : [-ss] ------------  [0m
+[31m[1;33m[ 14:56:50 ] (l. 72) param_expand.c       -> var_name = s[0m
+[31m[ 14:56:50 ] (l.114) param_expand.c       -> var_name ptr addr [0x7fdfe54308d0][0m
+[31m[ 14:56:50 ] (l. 55) param_expand.c       -> quoted str [0x7fdfe5430470][0m
+[31m[ 14:56:50 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 14:56:50 ] (l.186) param_expand.c       -> result build_param = [s][0m
+[31m[1;33m[ 14:56:50 ] (l.193) param_expand.c       -> --------- expand param --------- [s]  [0m
+[36m[ 14:56:50 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:56:50 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:56:50 ] (l. 25) expansion_util.c     -> to_insert : [s][0m
+[31m[1;33m[ 14:56:50 ] (l.239) param_expand.c       -> Word-exp : [s][0m
+[36m[ 14:56:53 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:56:53 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:56:53 ] (l.239) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:56:53 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:56:53 ] (l. 43) ft_wordexp.c         -> Word : [$test:-sx][0m
+[31m[1;33m[ 14:56:53 ] (l.169) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:56:53 ] (l.100) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:56:53 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [test:-sx][0m
+[31m[1;33m[ 14:56:53 ] (l. 92) param_expand.c       -> get_var_exp == [test][0m
+[31m[ 14:56:53 ] (l. 93) param_expand.c       -> ptr addr [0x7fdfe57005d0][0m
+[31m[ 14:56:53 ] (l.108) param_expand.c       -> var_name ptr addr [0x7fdfe57005d0][0m
+[31m[1;33m[ 14:56:53 ] (l. 67) param_expand.c       -> -----------  check_second_exp_var : [-sx] ------------  [0m
+[31m[1;33m[ 14:56:53 ] (l. 72) param_expand.c       -> var_name = s[0m
+[31m[ 14:56:53 ] (l.114) param_expand.c       -> var_name ptr addr [0x7fdfe57005d0][0m
+[31m[ 14:56:53 ] (l. 55) param_expand.c       -> quoted str [0x7fdfe57005c0][0m
+[31m[ 14:56:53 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 14:56:53 ] (l.186) param_expand.c       -> result build_param = [s][0m
+[31m[1;33m[ 14:56:53 ] (l.193) param_expand.c       -> --------- expand param --------- [s]  [0m
+[36m[ 14:56:53 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:56:53 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:56:53 ] (l. 25) expansion_util.c     -> to_insert : [s][0m
+[31m[1;33m[ 14:56:53 ] (l.239) param_expand.c       -> Word-exp : [s][0m
+[36m[ 14:56:58 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:56:58 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:56:58 ] (l.239) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:56:58 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:56:58 ] (l. 43) ft_wordexp.c         -> Word : [${test:-sx}][0m
+[31m[1;33m[ 14:56:58 ] (l.169) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:56:58 ] (l.100) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:56:58 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [test:-sx}][0m
+[31m[1;33m[ 14:56:58 ] (l. 92) param_expand.c       -> get_var_exp == [test][0m
+[31m[ 14:56:58 ] (l. 93) param_expand.c       -> ptr addr [0x7fdfe54308a0][0m
+[31m[ 14:56:58 ] (l.108) param_expand.c       -> var_name ptr addr [0x7fdfe54308a0][0m
+[31m[1;33m[ 14:56:58 ] (l. 67) param_expand.c       -> -----------  check_second_exp_var : [-sx}] ------------  [0m
+[31m[1;33m[ 14:56:58 ] (l. 72) param_expand.c       -> var_name = sx[0m
+[31m[ 14:56:58 ] (l.114) param_expand.c       -> var_name ptr addr [0x7fdfe54308a0][0m
+[31m[ 14:56:58 ] (l. 55) param_expand.c       -> quoted str [0x7fdfe5430470][0m
+[31m[ 14:56:58 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 14:56:58 ] (l.186) param_expand.c       -> result build_param = [sx][0m
+[31m[1;33m[ 14:56:58 ] (l.193) param_expand.c       -> --------- expand param --------- [sx]  [0m
+[36m[ 14:56:58 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:56:58 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:56:58 ] (l. 25) expansion_util.c     -> to_insert : [sx][0m
+[31m[1;33m[ 14:56:58 ] (l.239) param_expand.c       -> Word-exp : [sx][0m
+
+[32m>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> [0m[32mNEW INSTANCE OF THE APPLICATION[0m[32m <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[0m
+
+[36m[ 14:58:57 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:58:57 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:58:57 ] (l.241) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:58:57 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:58:57 ] (l. 43) ft_wordexp.c         -> Word : [${test:-sx}][0m
+[31m[1;33m[ 14:58:57 ] (l.169) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:58:57 ] (l.100) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:58:57 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [test:-sx}][0m
+[31m[1;33m[ 14:58:57 ] (l. 92) param_expand.c       -> get_var_exp == [test][0m
+[31m[ 14:58:57 ] (l. 93) param_expand.c       -> ptr addr [0x7fb6d3f0a2e0][0m
+[31m[ 14:58:57 ] (l.108) param_expand.c       -> var_name ptr addr [0x7fb6d3f0a2e0][0m
+[31m[1;33m[ 14:58:57 ] (l. 67) param_expand.c       -> -----------  check_second_exp_var : [-sx}] ------------  [0m
+[31m[1;33m[ 14:58:57 ] (l. 72) param_expand.c       -> var_name = sx[0m
+[31m[ 14:58:57 ] (l.114) param_expand.c       -> var_name ptr addr [0x7fb6d3f0a2e0][0m
+[31m[ 14:58:57 ] (l. 55) param_expand.c       -> quoted str [0x7fb6d3f0a430][0m
+[31m[ 14:58:57 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 14:58:57 ] (l.188) param_expand.c       -> result build_param = [sx][0m
+[31m[1;33m[ 14:58:57 ] (l.195) param_expand.c       -> --------- expand param --------- [sx]  [0m
+[36m[ 14:58:57 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:58:57 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:58:57 ] (l. 25) expansion_util.c     -> to_insert : [sx][0m
+[31m[1;33m[ 14:58:57 ] (l.241) param_expand.c       -> Word-exp : [sx][0m
+[36m[ 14:59:06 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:59:06 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:59:06 ] (l.241) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:59:06 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:59:06 ] (l. 43) ft_wordexp.c         -> Word : [${test:-SErous}][0m
+[31m[1;33m[ 14:59:06 ] (l.169) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:59:06 ] (l.100) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:59:06 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [test:-SErous}][0m
+[31m[1;33m[ 14:59:06 ] (l. 92) param_expand.c       -> get_var_exp == [test][0m
+[31m[ 14:59:06 ] (l. 93) param_expand.c       -> ptr addr [0x7fb6d3f0a5e0][0m
+[31m[ 14:59:06 ] (l.108) param_expand.c       -> var_name ptr addr [0x7fb6d3f0a5e0][0m
+[31m[1;33m[ 14:59:06 ] (l. 67) param_expand.c       -> -----------  check_second_exp_var : [-SErous}] ------------  [0m
+[31m[1;33m[ 14:59:06 ] (l. 72) param_expand.c       -> var_name = SErous[0m
+[31m[ 14:59:06 ] (l.114) param_expand.c       -> var_name ptr addr [0x7fb6d3f0a5e0][0m
+[31m[ 14:59:06 ] (l. 55) param_expand.c       -> quoted str [0x7fb6d3f0a430][0m
+[31m[ 14:59:06 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 14:59:06 ] (l.188) param_expand.c       -> result build_param = [SErous][0m
+[31m[1;33m[ 14:59:06 ] (l.195) param_expand.c       -> --------- expand param --------- [SErous]  [0m
+[36m[ 14:59:06 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:59:06 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:59:06 ] (l. 25) expansion_util.c     -> to_insert : [SErous][0m
+[31m[1;33m[ 14:59:06 ] (l.241) param_expand.c       -> Word-exp : [SErous][0m
+[36m[ 14:59:10 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:59:10 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 14:59:10 ] (l.241) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 14:59:10 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 14:59:10 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL:-SErous}][0m
+[31m[1;33m[ 14:59:10 ] (l.169) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 14:59:10 ] (l.100) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 14:59:10 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHLVL:-SErous}][0m
+[31m[1;33m[ 14:59:10 ] (l. 92) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[ 14:59:10 ] (l. 93) param_expand.c       -> ptr addr [0x7fb6d3e005c0][0m
+[31m[ 14:59:10 ] (l.108) param_expand.c       -> var_name ptr addr [0x7fb6d3e005c0][0m
+[31m[ 14:59:10 ] (l.114) param_expand.c       -> var_name ptr addr [0x7fb6d3e005c0][0m
+[31m[ 14:59:10 ] (l. 55) param_expand.c       -> quoted str [0x7fb6d3e005d0][0m
+[31m[ 14:59:10 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 14:59:10 ] (l.188) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 14:59:10 ] (l.195) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 14:59:10 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 14:59:10 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 14:59:10 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 14:59:10 ] (l.241) param_expand.c       -> Word-exp : [3][0m
+
+[32m>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> [0m[32mNEW INSTANCE OF THE APPLICATION[0m[32m <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<[0m
+
+[36m[ 15:07:07 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 15:07:07 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 15:07:07 ] (l.241) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 15:07:07 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 15:07:07 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL:-SErous}][0m
+[31m[1;33m[ 15:07:07 ] (l.169) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 15:07:07 ] (l.100) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 15:07:07 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHLVL:-SErous}][0m
+[31m[1;33m[ 15:07:07 ] (l. 92) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[ 15:07:07 ] (l. 93) param_expand.c       -> ptr addr [0x7ffd1af00510][0m
+[31m[ 15:07:07 ] (l.108) param_expand.c       -> var_name ptr addr [0x7ffd1af00510][0m
+[31m[ 15:07:07 ] (l.114) param_expand.c       -> var_name ptr addr [0x7ffd1af00510][0m
+[31m[ 15:07:07 ] (l. 55) param_expand.c       -> quoted str [0x7ffd1af00590][0m
+[31m[ 15:07:07 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 15:07:07 ] (l.188) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 15:07:07 ] (l.195) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 15:07:07 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 15:07:07 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 15:07:07 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 15:07:07 ] (l.241) param_expand.c       -> Word-exp : [3][0m
+[36m[ 15:07:12 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 15:07:12 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 15:07:12 ] (l.241) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 15:07:12 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 15:07:12 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL:-SErious}][0m
+[31m[1;33m[ 15:07:12 ] (l.169) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 15:07:12 ] (l.100) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 15:07:12 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHLVL:-SErious}][0m
+[31m[1;33m[ 15:07:12 ] (l. 92) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[ 15:07:12 ] (l. 93) param_expand.c       -> ptr addr [0x7ffd1ae2f170][0m
+[31m[ 15:07:12 ] (l.108) param_expand.c       -> var_name ptr addr [0x7ffd1ae2f170][0m
+[31m[ 15:07:12 ] (l.114) param_expand.c       -> var_name ptr addr [0x7ffd1ae2f170][0m
+[31m[ 15:07:12 ] (l. 55) param_expand.c       -> quoted str [0x7ffd1ae2f190][0m
+[31m[ 15:07:12 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 15:07:12 ] (l.188) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 15:07:12 ] (l.195) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 15:07:12 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 15:07:12 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 15:07:12 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 15:07:12 ] (l.241) param_expand.c       -> Word-exp : [3][0m
+[36m[ 15:07:15 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 15:07:15 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 15:07:15 ] (l.241) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 15:07:15 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 15:07:15 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL:}][0m
+[31m[1;33m[ 15:07:15 ] (l.169) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 15:07:15 ] (l.122) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 15:07:15 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHLVL:}][0m
+[31m[1;33m[ 15:07:15 ] (l. 92) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[ 15:07:15 ] (l. 93) param_expand.c       -> ptr addr [0x7ffd1af00000][0m
+[31m[ 15:07:15 ] (l.135) param_expand.c       -> var_name ptr addr [0x7ffd1af00000][0m
+[31m[1;33m[ 15:07:15 ] (l.136) param_expand.c       -> classic_sub ret : [3][0m
+[31m[ 15:07:15 ] (l. 55) param_expand.c       -> quoted str [0x7ffd1af00010][0m
+[31m[ 15:07:15 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 15:07:15 ] (l.188) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 15:07:15 ] (l.195) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 15:07:15 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 15:07:15 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 15:07:15 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 15:07:15 ] (l.241) param_expand.c       -> Word-exp : [3][0m
+[36m[ 15:07:16 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 15:07:16 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 15:07:16 ] (l.241) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 15:07:16 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 15:07:16 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL}][0m
+[31m[1;33m[ 15:07:16 ] (l.169) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 15:07:16 ] (l.122) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 15:07:16 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHLVL}][0m
+[31m[1;33m[ 15:07:16 ] (l. 92) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[ 15:07:16 ] (l. 93) param_expand.c       -> ptr addr [0x7ffd1ac02cb0][0m
+[31m[ 15:07:16 ] (l.135) param_expand.c       -> var_name ptr addr [0x7ffd1ac02cb0][0m
+[31m[1;33m[ 15:07:16 ] (l.136) param_expand.c       -> classic_sub ret : [3][0m
+[31m[ 15:07:16 ] (l. 55) param_expand.c       -> quoted str [0x7ffd1ac033f0][0m
+[31m[ 15:07:16 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 15:07:16 ] (l.188) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 15:07:16 ] (l.195) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 15:07:16 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 15:07:16 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 15:07:16 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 15:07:16 ] (l.241) param_expand.c       -> Word-exp : [3][0m
+[36m[ 15:10:39 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 15:10:39 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 15:10:39 ] (l.241) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 15:10:39 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 15:10:39 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL}][0m
+[31m[1;33m[ 15:10:39 ] (l.169) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 15:10:39 ] (l.122) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 15:10:39 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHLVL}][0m
+[31m[1;33m[ 15:10:39 ] (l. 92) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[ 15:10:39 ] (l. 93) param_expand.c       -> ptr addr [0x7ffd1ae2ecc0][0m
+[31m[ 15:10:39 ] (l.135) param_expand.c       -> var_name ptr addr [0x7ffd1ae2ecc0][0m
+[31m[1;33m[ 15:10:39 ] (l.136) param_expand.c       -> classic_sub ret : [3][0m
+[31m[ 15:10:39 ] (l. 55) param_expand.c       -> quoted str [0x7ffd1ae2f550][0m
+[31m[ 15:10:39 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 15:10:39 ] (l.188) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 15:10:39 ] (l.195) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 15:10:39 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 15:10:39 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 15:10:39 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 15:10:39 ] (l.241) param_expand.c       -> Word-exp : [3][0m
+[36m[ 15:10:44 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 15:10:44 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 15:10:44 ] (l.241) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 15:10:44 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 15:10:44 ] (l. 43) ft_wordexp.c         -> Word : [${:-SHLVL}][0m
+[31m[1;33m[ 15:10:44 ] (l.169) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 15:10:44 ] (l.100) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 15:10:44 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [:-SHLVL}][0m
+[31m[1;33m[ 15:10:44 ] (l. 92) param_expand.c       -> get_var_exp == [][0m
+[31m[ 15:10:44 ] (l. 93) param_expand.c       -> ptr addr [0x7ffd1ac02dc0][0m
+[31m[ 15:10:44 ] (l.108) param_expand.c       -> var_name ptr addr [0x7ffd1ac02dc0][0m
+[31m[1;33m[ 15:10:44 ] (l. 67) param_expand.c       -> -----------  check_second_exp_var : [-SHLVL}] ------------  [0m
+[31m[1;33m[ 15:10:44 ] (l. 72) param_expand.c       -> var_name = SHLVL[0m
+[31m[ 15:10:44 ] (l.114) param_expand.c       -> var_name ptr addr [0x7ffd1ac02dc0][0m
+[31m[ 15:10:44 ] (l. 55) param_expand.c       -> quoted str [0x7ffd1ac02e30][0m
+[31m[ 15:10:44 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 15:10:44 ] (l.188) param_expand.c       -> result build_param = [SHLVL][0m
+[31m[1;33m[ 15:10:44 ] (l.195) param_expand.c       -> --------- expand param --------- [SHLVL]  [0m
+[36m[ 15:10:44 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 15:10:44 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 15:10:44 ] (l. 25) expansion_util.c     -> to_insert : [SHLVL][0m
+[31m[1;33m[ 15:10:44 ] (l.241) param_expand.c       -> Word-exp : [SHLVL][0m
+[36m[ 15:11:59 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 15:11:59 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 15:11:59 ] (l.241) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 15:11:59 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 15:11:59 ] (l. 43) ft_wordexp.c         -> Word : [${:-SHLVL}][0m
+[31m[1;33m[ 15:11:59 ] (l.169) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 15:11:59 ] (l.100) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 15:11:59 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [:-SHLVL}][0m
+[31m[1;33m[ 15:11:59 ] (l. 92) param_expand.c       -> get_var_exp == [][0m
+[31m[ 15:11:59 ] (l. 93) param_expand.c       -> ptr addr [0x7ffd1af004c0][0m
+[31m[ 15:11:59 ] (l.108) param_expand.c       -> var_name ptr addr [0x7ffd1af004c0][0m
+[31m[1;33m[ 15:11:59 ] (l. 67) param_expand.c       -> -----------  check_second_exp_var : [-SHLVL}] ------------  [0m
+[31m[1;33m[ 15:11:59 ] (l. 72) param_expand.c       -> var_name = SHLVL[0m
+[31m[ 15:11:59 ] (l.114) param_expand.c       -> var_name ptr addr [0x7ffd1af004c0][0m
+[31m[ 15:11:59 ] (l. 55) param_expand.c       -> quoted str [0x7ffd1af004d0][0m
+[31m[ 15:11:59 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 15:11:59 ] (l.188) param_expand.c       -> result build_param = [SHLVL][0m
+[31m[1;33m[ 15:11:59 ] (l.195) param_expand.c       -> --------- expand param --------- [SHLVL]  [0m
+[36m[ 15:11:59 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 15:11:59 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 15:11:59 ] (l. 25) expansion_util.c     -> to_insert : [SHLVL][0m
+[31m[1;33m[ 15:11:59 ] (l.241) param_expand.c       -> Word-exp : [SHLVL][0m
+[36m[ 15:12:01 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 15:12:01 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 15:12:01 ] (l.241) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 15:12:01 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 15:12:01 ] (l. 43) ft_wordexp.c         -> Word : [${d:-SHLVL}][0m
+[31m[1;33m[ 15:12:01 ] (l.169) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 15:12:01 ] (l.100) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 15:12:01 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [d:-SHLVL}][0m
+[31m[1;33m[ 15:12:01 ] (l. 92) param_expand.c       -> get_var_exp == [d][0m
+[31m[ 15:12:01 ] (l. 93) param_expand.c       -> ptr addr [0x7ffd1ae2ecc0][0m
+[31m[ 15:12:01 ] (l.108) param_expand.c       -> var_name ptr addr [0x7ffd1ae2ecc0][0m
+[31m[1;33m[ 15:12:01 ] (l. 67) param_expand.c       -> -----------  check_second_exp_var : [-SHLVL}] ------------  [0m
+[31m[1;33m[ 15:12:01 ] (l. 72) param_expand.c       -> var_name = SHLVL[0m
+[31m[ 15:12:01 ] (l.114) param_expand.c       -> var_name ptr addr [0x7ffd1ae2ecc0][0m
+[31m[ 15:12:01 ] (l. 55) param_expand.c       -> quoted str [0x7ffd1ae2f150][0m
+[31m[ 15:12:01 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 15:12:01 ] (l.188) param_expand.c       -> result build_param = [SHLVL][0m
+[31m[1;33m[ 15:12:01 ] (l.195) param_expand.c       -> --------- expand param --------- [SHLVL]  [0m
+[36m[ 15:12:01 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 15:12:01 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 15:12:01 ] (l. 25) expansion_util.c     -> to_insert : [SHLVL][0m
+[31m[1;33m[ 15:12:01 ] (l.241) param_expand.c       -> Word-exp : [SHLVL][0m
+[36m[ 15:17:05 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 15:17:05 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 15:17:05 ] (l.241) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 15:17:05 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 15:17:05 ] (l. 43) ft_wordexp.c         -> Word : [${:-SHLVL}][0m
+[31m[1;33m[ 15:17:05 ] (l.169) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 15:17:05 ] (l.100) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 15:17:05 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [:-SHLVL}][0m
+[31m[1;33m[ 15:17:05 ] (l. 92) param_expand.c       -> get_var_exp == [][0m
+[31m[ 15:17:05 ] (l. 93) param_expand.c       -> ptr addr [0x7ffd1ac03000][0m
+[31m[ 15:17:05 ] (l.108) param_expand.c       -> var_name ptr addr [0x7ffd1ac03000][0m
+[31m[1;33m[ 15:17:05 ] (l. 67) param_expand.c       -> -----------  check_second_exp_var : [-SHLVL}] ------------  [0m
+[31m[1;33m[ 15:17:05 ] (l. 72) param_expand.c       -> var_name = SHLVL[0m
+[31m[ 15:17:05 ] (l.114) param_expand.c       -> var_name ptr addr [0x7ffd1ac03000][0m
+[31m[ 15:17:05 ] (l. 55) param_expand.c       -> quoted str [0x7ffd1ac02ff0][0m
+[31m[ 15:17:05 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 15:17:05 ] (l.188) param_expand.c       -> result build_param = [SHLVL][0m
+[31m[1;33m[ 15:17:05 ] (l.195) param_expand.c       -> --------- expand param --------- [SHLVL]  [0m
+[36m[ 15:17:05 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 15:17:05 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 15:17:05 ] (l. 25) expansion_util.c     -> to_insert : [SHLVL][0m
+[31m[1;33m[ 15:17:05 ] (l.241) param_expand.c       -> Word-exp : [SHLVL][0m
+[36m[ 15:17:08 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 15:17:08 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 15:17:08 ] (l.241) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 15:17:08 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 15:17:08 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL}][0m
+[31m[1;33m[ 15:17:08 ] (l.169) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 15:17:08 ] (l.122) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 15:17:08 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHLVL}][0m
+[31m[1;33m[ 15:17:08 ] (l. 92) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[ 15:17:08 ] (l. 93) param_expand.c       -> ptr addr [0x7ffd1ae2ecc0][0m
+[31m[ 15:17:08 ] (l.135) param_expand.c       -> var_name ptr addr [0x7ffd1ae2ecc0][0m
+[31m[1;33m[ 15:17:08 ] (l.136) param_expand.c       -> classic_sub ret : [3][0m
+[31m[ 15:17:08 ] (l. 55) param_expand.c       -> quoted str [0x7ffd1ae2f0c0][0m
+[31m[ 15:17:08 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 15:17:08 ] (l.188) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 15:17:08 ] (l.195) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 15:17:08 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 15:17:08 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 15:17:08 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 15:17:08 ] (l.241) param_expand.c       -> Word-exp : [3][0m
+[36m[ 15:17:11 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 15:17:11 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 15:17:11 ] (l.241) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 15:17:11 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 15:17:11 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL:-dee}][0m
+[31m[1;33m[ 15:17:11 ] (l.169) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 15:17:11 ] (l.100) param_expand.c       -> ------------------ substitute_word_if_null -------------------[0m
+[31m[1;33m[ 15:17:11 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHLVL:-dee}][0m
+[31m[1;33m[ 15:17:11 ] (l. 92) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[ 15:17:11 ] (l. 93) param_expand.c       -> ptr addr [0x7ffd1ae2f0c0][0m
+[31m[ 15:17:11 ] (l.108) param_expand.c       -> var_name ptr addr [0x7ffd1ae2f0c0][0m
+[31m[ 15:17:11 ] (l.114) param_expand.c       -> var_name ptr addr [0x7ffd1ae2f0c0][0m
+[31m[ 15:17:11 ] (l. 55) param_expand.c       -> quoted str [0x7ffd1ae2f0d0][0m
+[31m[ 15:17:11 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 15:17:11 ] (l.188) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 15:17:11 ] (l.195) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 15:17:11 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 15:17:11 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 15:17:11 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 15:17:11 ] (l.241) param_expand.c       -> Word-exp : [3][0m
+[36m[ 15:17:14 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 15:17:14 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 15:17:14 ] (l.241) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 15:17:14 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 15:17:14 ] (l. 43) ft_wordexp.c         -> Word : [${S}][0m
+[31m[1;33m[ 15:17:14 ] (l.169) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 15:17:14 ] (l.122) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 15:17:14 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [S}][0m
+[31m[1;33m[ 15:17:14 ] (l. 92) param_expand.c       -> get_var_exp == [S][0m
+[31m[ 15:17:14 ] (l. 93) param_expand.c       -> ptr addr [0x7ffd1ad00920][0m
+[31m[ 15:17:14 ] (l.135) param_expand.c       -> var_name ptr addr [0x7ffd1ad00920][0m
+[31m[1;33m[ 15:17:14 ] (l.136) param_expand.c       -> classic_sub ret : [(null)][0m
+[31m[ 15:17:14 ] (l. 55) param_expand.c       -> quoted str [0x10d8f485f][0m
+[31m[1;33m[ 15:17:14 ] (l.188) param_expand.c       -> result build_param = [][0m
+[31m[1;33m[ 15:17:14 ] (l.195) param_expand.c       -> --------- expand param --------- []  [0m
+[36m[ 15:17:14 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 15:17:14 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 15:17:14 ] (l. 25) expansion_util.c     -> to_insert : [][0m
+[31m[1;33m[ 15:17:14 ] (l.241) param_expand.c       -> Word-exp : [][0m
+[36m[ 15:19:42 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 15:19:42 ] (l. 43) ft_wordexp.c         -> Word : [echo][0m
+[31m[1;33m[ 15:19:42 ] (l.241) param_expand.c       -> Word-exp : [echo][0m
+[36m[ 15:19:42 ] (l. 42) ft_wordexp.c         -> ------------  ft_wordexp -------------------------[0m
+[36m[ 15:19:42 ] (l. 43) ft_wordexp.c         -> Word : [${SHLVL}][0m
+[31m[1;33m[ 15:19:42 ] (l.169) param_expand.c       -> ---------------- build_param -------------[0m
+[31m[1;33m[ 15:19:42 ] (l.122) param_expand.c       -> ------------------ classic_sub -------------------[0m
+[31m[1;33m[ 15:19:42 ] (l. 78) param_expand.c       -> get_var_exp  CURSOR == [SHLVL}][0m
+[31m[1;33m[ 15:19:42 ] (l. 92) param_expand.c       -> get_var_exp == [SHLVL][0m
+[31m[ 15:19:42 ] (l. 93) param_expand.c       -> ptr addr [0x7ffd1af00520][0m
+[31m[ 15:19:42 ] (l.135) param_expand.c       -> var_name ptr addr [0x7ffd1af00520][0m
+[31m[1;33m[ 15:19:42 ] (l.136) param_expand.c       -> classic_sub ret : [3][0m
+[31m[ 15:19:42 ] (l. 55) param_expand.c       -> quoted str [0x7ffd1af00020][0m
+[31m[ 15:19:42 ] (l. 58) param_expand.c       -> IS free[0m
+[31m[1;33m[ 15:19:42 ] (l.188) param_expand.c       -> result build_param = [3][0m
+[31m[1;33m[ 15:19:42 ] (l.195) param_expand.c       -> --------- expand param --------- [3]  [0m
+[36m[ 15:19:42 ] (l. 23) expansion_util.c     -> word->data.len : [0][0m
+[36m[ 15:19:42 ] (l. 24) expansion_util.c     -> word->str  : [][0m
+[36m[ 15:19:42 ] (l. 25) expansion_util.c     -> to_insert : [3][0m
+[31m[1;33m[ 15:19:42 ] (l.241) param_expand.c       -> Word-exp : [3][0m
