@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/08 15:06:47 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/05/08 15:40:54 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,7 @@ char			*build_param(char *cursor)
 	if (!(value = quote_str(value)))
 		return (NULL);
 	log_warn("result build_param = [%s]", value);
+	
 	return (value);
 }
 
