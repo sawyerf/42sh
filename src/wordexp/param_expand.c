@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/07 16:13:46 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/05/07 17:38:23 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static size_t	quote_str_len(char *str)
 	return (count);
 }
 
-static char		*quote_str(char *str, bool free_str)
+static char		*quote_str(char *str)
 {
 	size_t	count;
 	int		j;
@@ -93,21 +93,18 @@ char			*get_var_exp(char *cursor)
 char			*substitute_word_if_null(char *cursor, char *zone)
 {
 	log_warn("------------------ substitute_word_if_null -------------------");
-	char	*env_var;
+	char	*var_name;
 	char	*env_value;
 
 	cursor++;
-	env_var = NULL;
+	var_name = NULL;
 	env_value = NULL;
-	env_var = get_var_exp(cursor);
-	env_value = get_env_value(env_var);
+	var_name = get_var_exp(cursor);
+	env_value = ft_strdup(get_env_value(var_name));
 	if (!env_value)
-	{
 		env_value = check_second_exp_var(zone);
-	}
-	if (env_var)
-		ft_strdel(&env_var);
-	log_warn("ENV_VALUE : [%s]", env_value);
+	if (var_name)
+		ft_strdel(&var_name);
 	return (env_value);
 }
 
@@ -123,7 +120,7 @@ char			*classic_sub(char *cursor)
 	env_var = get_var_exp(cursor);
 	if (env_var)
 	{
-		env_value = get_env_value(env_var);
+		env_value = ft_strdup(get_env_value(env_var));
 		log_warn("classic_sub ret : [%s]", env_value);
 		ft_strdel(&env_var);
 		if (env_value)
@@ -134,7 +131,6 @@ char			*classic_sub(char *cursor)
 
 char			*exp_sup(char *cursor, bool *str_free)
 {
-	log_warn("exp SUP");
 	char	previous_char;
 	char	*tmp;
 	char	*result;
@@ -175,7 +171,7 @@ char			*build_param(char *cursor)
 		if (!value)
 			value = empty_str;
 	}
-	if (!(value = quote_str(value, str_free)))
+	if (!(value = quote_str(value)))
 		return (NULL);
 	log_warn("result build_param = [%s]", value);
 	return (value);
@@ -218,12 +214,9 @@ int				handle_exp_param(t_token *word, t_bool is_redir)
 			inside_dquote = -inside_dquote;
 		if ((*cursor == '$') && (*(cursor + 1) != 0))
 		{
-			if (!(value = build_param(cursor)))
+			if ((!(value = build_param(cursor))
+			|| (expand_param(&word, &cursor, value, is_redir) == MEMERR)))
 				return (MEMERR);
-			if (((expand_param(&word, &cursor, value, is_redir) == MEMERR)))
-			{
-				return (MEMERR);
-			}
 			ft_strdel(&value);
 			continue;
 		}

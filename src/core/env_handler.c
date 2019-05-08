@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 22:17:22 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/07 15:06:37 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/05/07 16:38:44 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,9 @@ char	*get_env_value(char *name)
 	char *value;
 
 	if ((value = varchr(g_sh.env, name)))
-	{
-		// return (value);
-		return (ft_strdup(value));
-	}
+		return (value);
 	if ((value = varchr(g_sh.local, name)))
-	{
-		return (ft_strdup(value));
-		// return (value);
-	}
+		return (value);
 	return (NULL);
 }
 
