@@ -1,5 +1,13 @@
 # 42sh
 
+## Features
+- Historique (finis)
+- Autocompletions (finis)
+- Inhibiteurs (finis)
+- Table de hash (finis)
+- Tilde/${para:word} (en cours)
+
+
 ## TODO
 - export builtin, set && unset missing stuff.
 - autocomplete after >& is wrong
