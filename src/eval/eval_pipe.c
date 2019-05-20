@@ -6,11 +6,17 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/12 16:53:24 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/04 19:37:35 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_eval.h"
+
+void	close_p(int pipes[2])
+{
+	close(pipes[0]);
+	close(pipes[1]);
+}
 
 int	pipe_recursion(t_cmd_tab *to, t_cmd_tab *from, t_job *job)
 {
@@ -25,18 +31,18 @@ int	pipe_recursion(t_cmd_tab *to, t_cmd_tab *from, t_job *job)
 		{
 			if (dup2(pipes[1], STDOUT_FILENO) == -1)
 				return (PIPEFAIL);
-			close(pipes[0]);
+			close_p(pipes);
 		}
 		spawn_in_pipe(from);
 	}
-	ft_printf("froked pid %d\n", pid);
 	if (to)
 	{
 		if (dup2(pipes[0], STDIN_FILENO) == -1)
 			return (PIPEFAIL);
-		close(pipes[1]);
+		close_p(pipes);
 		return (pipe_recursion(to->next, to, job));
 	}
+	close(STDIN_FILENO);
 	job->pgid = pid;
 	return (0);
 }

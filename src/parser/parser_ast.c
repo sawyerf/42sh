@@ -6,14 +6,13 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 14:30:55 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/09 21:12:24 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/04 20:13:05 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_eval.h"
 
-
-char		*make_cmdline(t_token *start, t_token *end)
+char		*make_cmdline(t_token *start, t_token *end, int last)
 {
 	char	*ln;
 	size_t	tot_len;
@@ -36,8 +35,10 @@ char		*make_cmdline(t_token *start, t_token *end)
 		ft_strcat(ln, iter->data.str);
 		if (iter == end)
 			break;
-		ft_strcat(ln, " ");
 		iter = iter->next;
+		if ((!last) && (iter == end))
+			break;
+		ft_strcat(ln, " ");
 	}
 	return (ln);
 }
@@ -77,12 +78,14 @@ int		tree_add_and_or(t_parser *parser)
 	return (0);
 }
 
-int		tree_add_pipeline(t_parser *parser)
+int		tree_add_pipeline(t_parser *parser, t_token *start)
 {
 	t_ast_node *node;
 
 	if (!(node = ft_memalloc(sizeof(t_ast_node))))
 		return (MEMERR);
+	node->start = start;
+	node->end = parser->current;
 	node->pipeline = parser->pipeline;
 	node->type = PIPE;
 	add_to_tree(&(parser->tree), node);

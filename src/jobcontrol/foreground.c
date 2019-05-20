@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   foreground.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/04 19:28:02 by ktlili            #+#    #+#             */
+/*   Updated: 2019/05/04 19:28:31 by ktlili           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "jobctl.h"
 
 void	register_job(t_job *job)
@@ -71,7 +83,6 @@ int bg_job(t_job *job, int cont)
 	{
 		if (kill(job->pgid, SIGCONT) < 0)
 			ft_dprintf(STDERR_FILENO, "42sh: Error sending cont to pgid %d", job->pgid);
-
 	}
 	register_job(job);
 	return (0);
