@@ -35,6 +35,57 @@ static int	refresh_jobs(void)
 	}
 	return (0);
 }
+# define INVALIDCONV -1
+
+t_job	*jobs_conversion(char *arg)
+{
+	if ((!arg) || (*arg != '%') || !(*(arg + 1)))
+		return (INVALIDCONV);
+	if (*(arg + 1) == '%')
+		return (conv_percent(arg + 1));
+	else if (*(arg + 1) == '+')
+		return (conv_percent(arg + 1));
+	else if (ft_isalldigit(arg + 1))
+		return (conv_num(arg + 1));
+	else if (*(arg + 1) == '?')
+		return (conv_strstr(arg + 1));
+	else
+		return (conv_strcmp(arg + 1));
+	
+}
+
+int		invalid_opt(void)
+{
+	ft_dprintf(STDERR_FILENO, "42sh: jobs: invalid option");
+	ft_dprintf(STDERR_FILENO, "jobs : usage : jobs [-ln] [jobspec]\n" );
+	return (0);
+}
+
+
+
+
+int		jobs(t_cmd_tab *cmd)
+{
+	t_job 
+	char opt;
+	int	ret;
+
+	opt = 'l';
+	g_optind = 1;
+	while ((ret = ft_getopt(cmd->av, "lp")) != -1)
+	{
+		opt = (char)ret;
+		if (opt == '?')
+			return (invalid_opt());
+	}
+
+}
+
+
+
+
+
+
 
 int		jobs(t_cmd_tab *cmd)
 {
