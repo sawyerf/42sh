@@ -12,11 +12,11 @@
 
 #include "builtins.h"
 
-static int	refresh_jobs(void)
+ int	refresh_jobs(void)
 {
 	t_job *j;
 	pid_t chld;
-
+	ft_printf("---refreshing jobs---\n");
 	j = g_sh.job_lst;
 	while (j)
 	{
@@ -33,24 +33,27 @@ static int	refresh_jobs(void)
 			j->stopped = 0;
 		j = j->next;		
 	}
+	ft_printf("--------------------\n");
 	return (0);
 }
-# define INVALIDCONV -1
-
+/* no malloc, null ret for inexistant job
+*/
 t_job	*jobs_conversion(char *arg)
 {
 	if ((!arg) || (*arg != '%') || !(*(arg + 1)))
-		return (INVALIDCONV);
+		return (NULL);
 	if (*(arg + 1) == '%')
-		return (conv_percent(arg + 1));
+		return (jobs_conv_pct(arg + 1));
 	else if (*(arg + 1) == '+')
-		return (conv_percent(arg + 1));
+		return (jobs_conv_min(arg + 1));
+	else if (*(arg + 1) == '-')
+		return (jobs_conv_min(arg + 1));
 	else if (ft_isalldigit(arg + 1))
-		return (conv_num(arg + 1));
+		return (jobs_conv_num(arg + 1));
 	else if (*(arg + 1) == '?')
-		return (conv_strstr(arg + 1));
+		return (jobs_conv_cmd(arg + 1));
 	else
-		return (conv_strcmp(arg + 1));
+		return (jobs_conv_any(arg + 1));
 	
 }
 
@@ -62,23 +65,60 @@ int		invalid_opt(void)
 }
 
 
+void	jobs_print_l(t_job *j)
+{
 
+	ft_printf("[%d] %d '%s'", j->job_id, j->pgid, j->cmd_ln);
+	if (j->completed)
+		ft_printf("completed %.d\n", (int)WEXITSTATUS(j->status));
+	else if (j->stopped)
+		ft_printf(" stopped\n");
+	else
+		ft_printf(" running\n");
+}
+
+int		jobs_print_all(t_job_print jobs_printer)
+{
+	t_job *j;
+
+	j = g_sh.job_lst;
+	while (j)
+	{
+		jobs_printer(j);
+		j = j->next;
+	}
+	return (0); // will change
+}
 
 int		jobs(t_cmd_tab *cmd)
 {
-	t_job 
+	t_job *arg_job;
+	t_job_print	jobs_printer;
 	char opt;
-	int	ret;
+	int	i;
 
 	opt = 'l';
 	g_optind = 1;
-	while ((ret = ft_getopt(cmd->av, "lp")) != -1)
+	while ((i = ft_getopt(cmd->av, "lp")) != -1)
 	{
-		opt = (char)ret;
+		opt = (char)i;
 		if (opt == '?')
 			return (invalid_opt());
 	}
-
+	refresh_jobs();
+	jobs_printer = jobs_print_l;
+	i = g_optind ; // temp hack
+	if (!(cmd->av[i]))
+		return (jobs_print_all(jobs_printer));
+	while (cmd->av[i])
+	{
+		if (!(arg_job = jobs_conversion(cmd->av[i])))
+			ft_dprintf(STDERR_FILENO, "42sh: jobs: '%s': nah bruh\n", cmd->av[i]);
+		else
+			jobs_printer(arg_job);
+		i++;
+	}
+	return (0); //nope
 }
 
 
@@ -86,7 +126,7 @@ int		jobs(t_cmd_tab *cmd)
 
 
 
-
+/*
 int		jobs(t_cmd_tab *cmd)
 {
 	t_job	*j;
@@ -117,4 +157,4 @@ int		jobs(t_cmd_tab *cmd)
 	}
 	return (0);
 
-}
+}*/

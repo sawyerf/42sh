@@ -49,7 +49,8 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			builtins/unset.c			\
 			builtins/parser_tools.c		\
 			builtins/jobs.c				\
-			builtins/foreground.c		\
+			builtins/jobs_conversions.c	\
+			builtins/fg.c				\
 			core/clean_path.c			\
 			core/env_handler.c			\
 			core/ft_env.c				\
@@ -62,6 +63,7 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			core/env.c					\
 			core/envdel.c				\
 			core/run.c					\
+			core/jobs_util.c			\
 			eval/redir_tools.c			\
 			eval/expansion_wrappers.c	\
 			eval/spawn_tools.c			\

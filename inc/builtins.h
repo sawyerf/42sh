@@ -31,6 +31,8 @@ typedef	struct			s_fc
 	char				*to;
 }						t_fc;
 
+typedef void	(*t_job_print)(t_job*);
+
 int						fg(t_cmd_tab *cmd);
 int						fc(t_cmd_tab *cmd);
 int						fc_l(t_fc fc);
@@ -63,4 +65,10 @@ int						ft_exit(t_cmd_tab *cmd);
 int						ft_env(t_cmd_tab *cmd);
 int						ft_unsetenv(t_cmd_tab *cmd);
 int						jobs(t_cmd_tab *cmd);
+t_job					*jobs_conv_pct(char *s);
+t_job					*jobs_conv_num(char *s);
+t_job					*jobs_conv_min(char *s);
+t_job					*jobs_conv_cmd(char *s);
+t_job					*jobs_conv_any(char *s);
+
 #endif

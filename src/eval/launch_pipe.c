@@ -18,7 +18,10 @@ int	exec_pipeline(t_ast_node *tree, t_job *job)
 	else
 		ret = launch_command(cmd_tab, job);
 	if (WIFEXITED(job->status))
+	{
 		tree->exit_status = (int)WEXITSTATUS(job->status);
+		del_job(job);
+	}
 	g_sh.status = tree->exit_status;
 	free_cmd_tab_lst(cmd_tab);
 	return (ret);

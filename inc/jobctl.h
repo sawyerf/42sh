@@ -16,5 +16,5 @@ int		fg_job(t_job *job, int cont);
 int		bg_job(t_job *job, int cont);
 void	update_job(t_job *job);
 void	register_job(t_job *job);
-
+void	free_job(t_job *j);
 #endif

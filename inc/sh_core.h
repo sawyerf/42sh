@@ -60,6 +60,8 @@ typedef struct			s_sh
 	char				**env;
 	int					fd;
 	t_job				*job_lst;
+	t_job				*current;
+	t_job				*previous;
 	struct termios		term_save;
 }						t_sh;
 
@@ -139,5 +141,6 @@ char					**envaddstr(char **env, char *var, char *value);
 int						sh_readfile(char *prompt, char **str);
 int						missing_quote(char *line);
 char					*make_cmdline(t_token *start, t_token *end, int last);
+void					del_job(t_job *j);
 
 #endif
