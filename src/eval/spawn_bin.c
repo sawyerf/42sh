@@ -55,21 +55,24 @@ int				launch_command(t_cmd_tab *cmd, t_job *job)
 
 	if ((ret = pre_execution(cmd)) == MEMERR)
 		return (MEMERR);
-	else if ((ret == BUILTIN) || (ret == BUILTIN_FAIL))
-		return (0);
-	pid = fork();
-	if (pid == -1)
-		return (MEMERR);
-	if (pid == 0)
+	else if (ret == BUILTIN_FAIL) /* handle exit_status for builtins here ?*/
+		return (1);
+	if (!(ret == BUILTIN))
 	{
-		if ((job) && (g_sh.mode == INTERACTIVE))
+		pid = fork();
+		if (pid == -1)
+			return (MEMERR);
+		if (pid == 0) 
 		{
-			if ((setpgid_wrap(pid, job) == -1))
-				exit_wrap(MEMERR, cmd);
-			if (job->fg)
-				tcsetpgrp(STDIN_FILENO, job->pgid);
+			if ((job) && (g_sh.mode == INTERACTIVE))
+			{
+				if ((setpgid_wrap(pid, job) == -1))
+					exit_wrap(MEMERR, cmd);
+				if (job->fg)
+					tcsetpgrp(STDIN_FILENO, job->pgid);
+			}
+			execve_wrap(cmd);
 		}
-		execve_wrap(cmd);
 	}
 	if ((g_sh.mode == INTERACTIVE) && (!job->pgid) 
 		&& (setpgid_wrap(pid, job) == -1))
@@ -78,11 +81,11 @@ int				launch_command(t_cmd_tab *cmd, t_job *job)
 		wait_job(job);
 	else if ((job) && (job->fg))
 		fg_job( job, 0);
-/*	else{ft_printf("async job\n");
-		wait_wrapper(cmd, pid);} // bg to be changed*/
+	else
+		bg_job(job, 0);
 	return (0);
 }
-
+/*just for env will be deleted*/
 int				spawn_command(t_cmd_tab *cmd, t_job *job)
 {
 	pid_t	pid;

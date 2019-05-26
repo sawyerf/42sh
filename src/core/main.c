@@ -67,6 +67,7 @@ void		sig_exit(int sig)
 	exit_wrap(sig, NULL);
 }
 
+
 int			main(int ac, char **av, char **env)
 {
 	char		*line;
@@ -78,6 +79,7 @@ int			main(int ac, char **av, char **env)
 		return (MEMERR);
 	while (42)
 	{
+		clean_jobs();
 		if ((ret = read_fn("$> ", &line)) == CTRL_D ||
 				ret == MEMERR || ret < 0)
 			break ;

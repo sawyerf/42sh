@@ -142,5 +142,6 @@ int						sh_readfile(char *prompt, char **str);
 int						missing_quote(char *line);
 char					*make_cmdline(t_token *start, t_token *end, int last);
 void					del_job(t_job *j);
+void					clean_jobs(void);
 
 #endif

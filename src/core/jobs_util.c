@@ -8,13 +8,33 @@ void	del_job(t_job *j)
 	ft_strdel(&j->cmd_ln);
 	save = j->next;
 	free(j);
-	if ((!g_sh.job_lst) || (j == g_sh.job_lst))
+	if (j == g_sh.job_lst)
 	{
-		g_sh.job_lst = NULL;
-		return ;
+		if (!save)
+			g_sh.job_lst = NULL;
+		else
+			g_sh.job_lst = save;
+		return;
 	}
 	iter = g_sh.job_lst;
 	while ((iter->next) && (iter->next != j))
 		iter = iter->next;
 	iter->next = save;
 }
+
+void	clean_jobs(void)
+{
+	t_job *ptr;
+	t_job *save;
+
+	ptr = g_sh.job_lst;
+	while (ptr)
+	{
+		save = ptr->next;
+		if ((ptr->notified) && (ptr->completed))
+			del_job(ptr);
+		ptr = save;
+	}
+}
+
+

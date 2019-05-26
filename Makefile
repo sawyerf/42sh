@@ -136,9 +136,10 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			readline/termget.c			\
 			readline/terminit.c			\
 			readline/tools.c			\
-			jobcontrol/init_jobctl.c	\
-			jobcontrol/make_job.c		\
-			jobcontrol/foreground.c
+			jobctl/init_jobctl.c		\
+			jobctl/make_job.c			\
+			jobctl/foreground.c			\
+			jobctl/register_job.c
 
 OBJ_DIR =	.obj
 OBJ_FILE =	$(SRC_FILE:.c=.o)
@@ -151,7 +152,7 @@ CRT_DIR =	core 						\
 		 	readline 					\
 		 	parser 						\
 		 	hashtable					\
-			jobcontrol
+			jobctl
 
 SRC = 		$(addprefix $(SRC_DIR)/,$(SRC_FILE))
 INC = 		$(addprefix $(INC_DIR)/,$(INC_FILE))

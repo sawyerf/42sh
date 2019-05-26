@@ -116,6 +116,7 @@ int		jobs(t_cmd_tab *cmd)
 			ft_dprintf(STDERR_FILENO, "42sh: jobs: '%s': nah bruh\n", cmd->av[i]);
 		else
 			jobs_printer(arg_job);
+		arg_job->notified = 1;
 		i++;
 	}
 	return (0); //nope
