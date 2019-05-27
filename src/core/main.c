@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/15 16:30:22 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/05/27 19:23:12 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static int	init_shell(char **env, t_read_fn *read_fn)
 	if (!(g_sh.env = shlvl(ft_tabdup(env))))
 		return (MEMERR);
 	if (!(g_sh.local = ft_tabnew(0)))
+		return (MEMERR);
+	if (!(g_sh.alias = ft_tabnew(0)))
 		return (MEMERR);
 	if (dup2(STDIN_FILENO, FDSAVEIN) == -1)
 		return (-1);
@@ -54,6 +56,7 @@ void		global_del(void)
 	hstaddfile(g_sh.env);
 	ht_del();
 	ft_tabdel(&g_sh.local);
+	ft_tabdel(&g_sh.alias);
 	ft_tabdel(&g_sh.env);
 }
 

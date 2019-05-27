@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 18:12:42 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/01 18:16:53 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/05/27 18:18:52 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	hstadd(char *str)
 {
 	int		i;
 
+	if (!*str)
+		return ;
 	if (g_hst[0] && !ft_strcmp(g_hst[0]->content, str))
 		return ;
 	if (g_hst[0] && g_hst[0]->next)

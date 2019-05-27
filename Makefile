@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/05/03 18:57:20 by apeyret          ###   ########.fr        #
+#    Updated: 2019/05/27 18:57:56 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,8 @@ INC_FILE =	ft_eval.h					\
 SRC_DIR =	src
 
 SRC_FILE =	builtins/cd_l_p.c			\
+			builtins/alias.c			\
+			builtins/unalias.c			\
 			builtins/cd_tools.c			\
 			builtins/changedir.c		\
 			builtins/echo.c				\
@@ -108,6 +110,7 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			hashtable/ht_spawnbin.c		\
 			readline/acp_multichc.c		\
 			readline/cmdisin.c			\
+			readline/ctrll.c			\
 			readline/env_autoclp.c		\
 			readline/files.c			\
 			readline/files_right.c		\
