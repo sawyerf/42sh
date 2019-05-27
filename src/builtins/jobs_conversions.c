@@ -43,3 +43,21 @@ t_job	*jobs_conv_any(char *s)
 	(void)s;
 	return (NULL);
 }
+
+t_job	*jobs_conversion(char *arg)
+{
+	if ((!arg) || (*arg != '%') || !(*(arg + 1)))
+		return (NULL);
+	if (*(arg + 1) == '%')
+		return (jobs_conv_pct(arg + 1));
+	else if (*(arg + 1) == '+')
+		return (jobs_conv_min(arg + 1));
+	else if (*(arg + 1) == '-')
+		return (jobs_conv_min(arg + 1));
+	else if (ft_isalldigit(arg + 1))
+		return (jobs_conv_num(arg + 1));
+	else if (*(arg + 1) == '?')
+		return (jobs_conv_cmd(arg + 1));
+	else
+		return (jobs_conv_any(arg + 1));	
+}

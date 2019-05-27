@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 13:46:10 by apeyret           #+#    #+#             */
-/*   Updated: 2019/05/03 16:43:31 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/27 16:05:33 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,5 @@ t_job					*jobs_conv_num(char *s);
 t_job					*jobs_conv_min(char *s);
 t_job					*jobs_conv_cmd(char *s);
 t_job					*jobs_conv_any(char *s);
-
+t_job					*jobs_conversion(char *arg);
 #endif

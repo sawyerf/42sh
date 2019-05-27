@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/12 16:44:34 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/27 16:08:40 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int				launch_command(t_cmd_tab *cmd, t_job *job)
 		return (MEMERR);
 	else if (ret == BUILTIN_FAIL) /* handle exit_status for builtins here ?*/
 		return (1);
-	if (!(ret == BUILTIN))
+	if ((ret != BUILTIN))
 	{
 		pid = fork();
 		if (pid == -1)
@@ -73,18 +73,22 @@ int				launch_command(t_cmd_tab *cmd, t_job *job)
 			}
 			execve_wrap(cmd);
 		}
+		if ((g_sh.mode == INTERACTIVE) && (!job->pgid) 
+			&& (setpgid_wrap(pid, job) == -1))
+		return (MEMERR);		
+		/* builtins freeze when there are stopped jobs*/
+		if ((g_sh.mode != INTERACTIVE))
+			wait_job(job);
+		else if ((job) && (job->fg))
+			fg_job( job, 0);
+		else
+			bg_job(job, 0);	
 	}
-	if ((g_sh.mode == INTERACTIVE) && (!job->pgid) 
-		&& (setpgid_wrap(pid, job) == -1))
-		return (MEMERR);
-	if ((g_sh.mode != INTERACTIVE))
-		wait_job(job);
-	else if ((job) && (job->fg))
-		fg_job( job, 0);
 	else
-		bg_job(job, 0);
+		register_job(job); //this is ugly
 	return (0);
 }
+
 /*just for env will be deleted*/
 int				spawn_command(t_cmd_tab *cmd, t_job *job)
 {

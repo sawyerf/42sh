@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 19:28:02 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/04 19:28:31 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/27 16:38:55 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,22 @@ void	wait_job(t_job *job)
 	if (!job->pgid)
 		job->pgid = WAIT_ANY;
 	pid = waitpid(job->pgid, &(job->status), WUNTRACED);
-	ft_printf("waitpid ret %d\n", pid);
+	ft_printf("===DEBUG===waitpid ret %d\n", pid);
+	register_job(job);
 	if (WIFEXITED(job->status))
 	{
 		job->completed = 1;
 		job->notified = 1;
-		ft_printf("job %d exited normally\n", job->pgid);
+		ft_printf("===DEBUG===job %d exited normally\n", job->pgid);
 	}
-	else
+	else if (WIFSIGNALED(job->status))
 	{
-		ft_printf("job %d signaled\n", job->pgid);
+		ft_printf("[%d] %d signal num %d       %s\n", job->job_id, job->pgid, WTERMSIG(job->status), job->cmd_ln);
 	}
-	register_job(job);
+	else if (WIFSTOPPED(job->status))
+	{
+		ft_printf("[%d] %d suspended       %s\n", job->job_id, job->pgid, job->cmd_ln);
+	}
 	return;
 }
 
@@ -50,10 +54,14 @@ int		fg_job(t_job *job, int cont)
 	{
 		tcsetattr(STDIN_FILENO, TCSADRAIN, &(job->save_tio));
 		if (kill(job->pgid, SIGCONT) < 0)
+		{
 			ft_dprintf(STDERR_FILENO, "42sh: Error sending cont to pgid %d", job->pgid);
+			return (0); // maybe not ?
+		}	
 	}
 	wait_job(job);
 	tcgetattr(STDIN_FILENO, &(job->save_tio)); // save job terminal modes
+	tcsetattr(STDIN_FILENO, TCSADRAIN, &(g_sh.term_save)); // reset our termios
 	tcsetpgrp(STDIN_FILENO, getpgrp());
 	return (0);
 }

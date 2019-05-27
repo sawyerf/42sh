@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/04 20:11:16 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/27 16:45:04 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,23 +65,6 @@ typedef struct			s_sh
 	struct termios		term_save;
 }						t_sh;
 
-typedef	struct			s_command
-{
-	char				**args;
-	char				**process_env;
-	struct s_command	*next;
-	struct s_command	*previous;
-}						t_command;
-
-typedef enum			e_quote_state
-{
-	in_dquote,
-	in_squote,
-	backslash,
-	unquoted,
-}						t_quote_state;
-
-
 extern	t_sh			g_sh;
 
 void					global_del(void);
@@ -98,15 +81,10 @@ int						setenv_wrapper(t_cmd_tab *cmd);
 int						ft_set(t_cmd_tab *cmd);
 int						ft_unset(t_cmd_tab *cmd);
 void					print_env_tab(char **machintruc);
-void					print_cmd(t_command command);
-void					print_cmd_lst(t_command *command);
 int						ft_cmptab(char **machintruc, char *str);
 void					free_tab(char **machintruc);
 void					free_tab_bytes(char **machintruc);
 char					**dup_tab(char **machintruc);
-t_command				*new_cmd_node(char **space_split);
-void					add_cmdlst(t_command **head, t_command *to_add);
-void					free_cmdlst(t_command *command_lst);
 void					putstr_stderr(char *str);
 int						write_dbuff(t_list *buffer, char c, int *index);
 int						putstr_dbuff(t_list *buffer, char *str, int *index);
@@ -120,7 +98,6 @@ int						valid_env_name(char *str);
 int						valid_env_char(char c);
 char					*tab_get_value(char *name, char **env);
 char					*get_value(char *env_var);
-int						parser(char *line, t_command **cmd_lst);
 int						expand_tokens(char **arg);
 char					*expand_dollar(char *line);
 void					dispatch_parse_err(int error);
