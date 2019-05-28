@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/05/03 18:57:20 by apeyret          ###   ########.fr        #
+#    Updated: 2019/05/28 17:48:00 by ktlili           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -103,6 +103,7 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			parser/sh_parser.c			\
 			parser/parser_heredoc.c		\
 			parser/light_parser.c		\
+			parser/alias.c				\
 			hashtable/hashtable.c		\
 			hashtable/ht_files.c		\
 			hashtable/ht_spawnbin.c		\
