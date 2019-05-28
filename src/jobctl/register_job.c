@@ -25,6 +25,7 @@ void	register_job(t_job *job)
 		while (iter->next)
 			iter = iter->next;
 		iter->next = job;	
+		job->prev = iter;
 		job->job_id = 1 + count;
 	}
 }

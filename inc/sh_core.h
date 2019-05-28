@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/27 16:45:04 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/28 15:30:34 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ typedef struct			s_sh
 	char				**env;
 	int					fd;
 	t_job				*job_lst;
-	t_job				*current;
-	t_job				*previous;
+	t_job				*current_j;
+	t_job				*previous_j;
 	struct termios		term_save;
 }						t_sh;
 

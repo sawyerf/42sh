@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 16:24:20 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/27 16:48:46 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/28 17:21:58 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,14 @@ int		invalid_opt(void)
 
 void	jobs_print_l(t_job *j)
 {
+	char curr;
 
-	ft_printf("[%d] %d '%s'", j->job_id, j->pgid, j->cmd_ln);
+	curr = 0;
+	if (j == g_sh.current_j)
+		curr = '+';
+	else if (j == g_sh.previous_j)
+		curr = '-';
+	ft_printf("[%d]%c %d '%s'", j->job_id, curr, j->pgid, j->cmd_ln);
 	if (j->completed)
 		ft_printf("completed %.d\n", (int)WEXITSTATUS(j->status));
 	else if (j->stopped)
@@ -96,7 +102,7 @@ int		jobs(t_cmd_tab *cmd)
 	while (cmd->av[i])
 	{
 		if (!(arg_job = jobs_conversion(cmd->av[i])))
-			ft_dprintf(STDERR_FILENO, "42sh: jobs: '%s': nah bruh\n", cmd->av[i]);
+			ft_dprintf(STDERR_FILENO, "42sh: jobs: '%s': no such job\n", cmd->av[i]);
 		else
 		{
 			jobs_printer(arg_job);
