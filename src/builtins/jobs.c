@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 16:24:20 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/28 17:21:58 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/28 17:26:04 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,17 @@ void	jobs_print_l(t_job *j)
 		curr = '+';
 	else if (j == g_sh.previous_j)
 		curr = '-';
-	ft_printf("[%d]%c %d '%s'", j->job_id, curr, j->pgid, j->cmd_ln);
+	ft_printf("[%d]%c %d '%s' ", j->job_id, curr, j->pgid, j->cmd_ln);
 	if (j->completed)
+	{
+		j->notified = 1;
 		ft_printf("completed %.d\n", (int)WEXITSTATUS(j->status));
+	}
 	else if (j->stopped)
-		ft_printf(" stopped\n");
+		ft_printf("stopped\n");
 	else
-		ft_printf(" running\n");
+		ft_printf("running\n");
+	
 }
 
 int		jobs_print_all(t_job_print jobs_printer)
