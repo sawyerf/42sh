@@ -39,4 +39,10 @@ fc -l 14564646464 5564444
 fc -l 1 15
 fc -l -15
 fc -l
+alias lol='lel'
+alias lel='lil'
+alias lil='lol'
+alias ll='ls -l'
+ll
+lol
 exit 155555
