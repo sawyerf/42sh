@@ -24,7 +24,7 @@ int		hstread(char **env)
 
 	i = 1;
 	if (!(home = envchrr(env, "HOME"))
-		|| !(path = ft_zprintf("%s/%s", home, ".21sh_history")))
+		|| !(path = ft_zprintf("%s/%s", home, ".42sh_history")))
 		return (0);
 	fd = open(path, O_RDONLY);
 	ft_strdel(&path);
