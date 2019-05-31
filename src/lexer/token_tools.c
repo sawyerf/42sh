@@ -55,6 +55,8 @@ void	free_token_lst(t_token *token)
 
 void	free_token(t_token *token)
 {
+	if (!token)
+		return ;
 	if (token->data.str)
 		free(token->data.str);
 	free(token);

@@ -49,11 +49,14 @@ static void	overwrite_token(t_token *word, t_token *lxd)
 	t_token *iter;
 
 	save = word->next;
+	free(word->data.str);
 	ft_memcpy(word, lxd, sizeof(t_token));
-	iter = lxd;
+	iter = word;
 	while ((iter->next) && (iter->next->type != EOI))
 		iter = iter->next;
+	free_token(iter->next);
 	iter->next = save;
+	free(lxd);
 }
 
 int handle_alias(t_token *word)
@@ -61,9 +64,11 @@ int handle_alias(t_token *word)
 	char 	*result;
 	char	**tab;
 	t_token *lxd;
+	int		ret;
 
 	if (!(tab = ft_tabnew(1025)))
 		return (MEMERR);
+	ret = 0;
 	while ((result = get_alias(word->data.str, tab)))
 	{
 		if (!(lxd = lex_alias(result)))
@@ -72,7 +77,8 @@ int handle_alias(t_token *word)
 			return (MEMERR);
 		}
 		overwrite_token(word, lxd);
+		ret++;
 	}
 	ft_tabdel(&tab);
-	return (0);
+	return (ret);
 }
