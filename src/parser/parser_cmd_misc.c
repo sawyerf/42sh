@@ -54,10 +54,14 @@ int	expect_cmd_name(t_parser *parser)
 	if ((parser->current->type == WORD)
 			&& (!parser_is_assign(parser->current)))
 	{
-		if (handle_alias(parser->current) == MEMERR)
-			return (MEMERR);
 		if (ret)
 			return (ret);
+		if ((ret = handle_alias(parser->current)))
+		{
+			if ((ret == MEMERR)
+				|| ((ret = expect_cmd_pre(parser)) == MEMERR))
+				return (MEMERR);
+		}
 		if (build_cmd(parser->current, &(parser->cmd)) == MEMERR)
 			return (MEMERR);
 		if ((ret = next_token(parser)))

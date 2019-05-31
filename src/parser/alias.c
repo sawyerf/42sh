@@ -72,6 +72,7 @@ int handle_alias(t_token *word)
 			return (MEMERR);
 		}
 		overwrite_token(word, lxd);
+		return (1);
 	}
 	ft_tabdel(&tab);
 	return (0);
