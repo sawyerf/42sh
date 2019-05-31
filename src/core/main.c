@@ -45,12 +45,6 @@ static int	init_shell(char **env, t_read_fn *read_fn)
 	return (0);
 }
 
-static void	silence_ac_av(char ac, char **av)
-{
-	(void)ac;
-	(void)av;
-}
-
 void		global_del(void)
 {
 	hstaddfile(g_sh.env);
@@ -60,9 +54,16 @@ void		global_del(void)
 	ft_tabdel(&g_sh.env);
 }
 
-void		sig_exit(int sig)
+void		shrc(void)
 {
-	exit_wrap(sig, NULL);
+	char	*path;
+	char	*home;
+
+	if (!(home = envchrr(g_sh.env, "HOME"))
+		|| !(path = ft_zprintf("%s/%s", home, ".42shrc")))
+		return ;
+	run_script(path);
+	ft_strdel(&path);
 }
 
 int			main(int ac, char **av, char **env)
@@ -71,9 +72,10 @@ int			main(int ac, char **av, char **env)
 	int			ret;
 	t_read_fn	read_fn;
 
-	silence_ac_av(ac, av);
+	(void)av[ac];
 	if (init_shell(env, &read_fn))
 		return (MEMERR);
+	shrc();
 	while (42)
 	{
 		if ((ret = read_fn("$> ", &line)) == CTRL_D ||
