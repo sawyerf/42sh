@@ -12,6 +12,24 @@
 
 #include "ft_parser.h"
 
+extern t_sh g_sh;
+
+char	*get_alias(char *s, char **tab)
+{
+	while (*tab)
+	{
+		if (!ft_strcmp(*tab, s))
+			return (NULL);
+		tab++;
+	}
+	if (varchr(g_sh.alias, s))
+	{
+		if (!(*tab = ft_strdup(s)))
+			return (NULL);
+		return (varchr(g_sh.alias, s));
+	}
+	return (NULL);
+}
 
 static t_token *lex_alias(char *line)
 {
@@ -40,16 +58,21 @@ static void	overwrite_token(t_token *word, t_token *lxd)
 
 int handle_alias(t_token *word)
 {
-	char *dummy = "toto";
-	char *result = "ls -l ";
+	char 	*result;
+	char	**tab;
 	t_token *lxd;
 
-	if (ft_strequ(dummy, word->data.str))
+	if (!(tab = ft_tabnew(1025)))
+		return (MEMERR);
+	while ((result = get_alias(word->data.str, tab)))
 	{
 		if (!(lxd = lex_alias(result)))
+		{
+			ft_tabdel(&tab);
 			return (MEMERR);
+		}
 		overwrite_token(word, lxd);
-		return (0);
 	}
+	ft_tabdel(&tab);
 	return (0);
 }

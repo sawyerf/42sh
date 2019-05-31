@@ -39,7 +39,9 @@ int		alias(t_cmd_tab *cmd)
 	{
 		if (ft_cisin(cmd->av[count], '='))
 		{
-			if (valid_alias(cmd->av[count]))
+			if (ft_tablen(g_sh.alias) > 1024)
+				ft_dprintf(2, "alias: too much alias. Please stop!\n");
+			else if (valid_alias(cmd->av[count]))
 				 g_sh.alias = csetenv(g_sh.alias, cmd->av[count]);
 			else 
 				ft_dprintf(2, "alias: `%s': invalid alias name\n", cmd->av[count]);
