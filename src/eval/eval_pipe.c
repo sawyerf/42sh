@@ -62,7 +62,7 @@ int	pipe_subshell(pid_t pid, t_cmd_tab *pipeln, t_job *job)
 	/* update on last child status*/
 	waitpid(job->pgid, &(job->status), WUNTRACED);
 	waitpid(WAIT_ANY, NULL, 0); /*wait for everyone */ 
-	ft_printf("subshell last pid: %d exit %d\n", job->pgid, WEXITSTATUS(job->status));
+//	ft_printf("subshell last pid: %d exit %d\n", job->pgid, WEXITSTATUS(job->status));
 	exit_wrap(WEXITSTATUS(job->status), pipeln);
 	return (42);
 }

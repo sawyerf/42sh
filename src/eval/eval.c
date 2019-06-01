@@ -33,6 +33,7 @@ static int	eval_sep(t_ast_node *tree)
 			eval_tree(tree->left);
 			reset_sig();
 			waitpid(job->pgid, NULL, WUNTRACED);
+			waitpid(WAIT_ANY, NULL, 0); //tmp
 			exit_wrap(0, NULL);
 		}	
 		if (setpgid_wrap(pid, job) == -1)

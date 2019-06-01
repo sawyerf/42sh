@@ -5,6 +5,8 @@
 t_job	*jobs_conv_pct(char *s)
 {
 	(void)s;
+	if (g_sh.current_j)
+		return (g_sh.current_j);
 	return (NULL);
 
 }
@@ -28,19 +30,39 @@ t_job	*jobs_conv_num(char *s)
 t_job 	*jobs_conv_min(char *s)
 {
 	(void)s;
+	if (g_sh.previous_j)
+		return (g_sh.previous_j);
+	else
+		return (jobs_conv_pct(s));
 	return (NULL);
 }
 
 
 t_job 	*jobs_conv_cmd(char *s)
 {
-	(void)s;
+	t_job *j;
+
+	j = g_sh.job_lst;
+	while (j)
+	{
+		if (ft_strstr(s, j->cmd_ln))
+			return (j);
+		j = j->next;
+	}
 	return (NULL);
 }
 
 t_job	*jobs_conv_any(char *s)
 {
-	(void)s;
+	t_job *j;
+
+	j = g_sh.job_lst;
+	while (j)
+	{
+		if (!ft_strcmp(s, j->cmd_ln))
+			return (j);
+		j = j->next;
+	}
 	return (NULL);
 }
 

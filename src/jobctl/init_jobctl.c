@@ -9,7 +9,6 @@
 
 int		sh_pause()
 {
-//	ft_printf("pausing\n");
 	if (kill(0, SIGTTIN) == -1)
 		return (-1); // maybe retry ?
 	return (0);
