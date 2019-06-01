@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/04 20:11:00 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/01 18:52:46 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static int	eval_sep(t_ast_node *tree)
 			if (setpgid_wrap(pid, job) == -1)
 				exit_wrap(MEMERR, NULL);
 			g_sh.mode = NONINTERACTIVE;
-			eval_tree(tree->left);
 			reset_sig();
+			eval_tree(tree->left);
 			waitpid(job->pgid, NULL, WUNTRACED);
 			waitpid(WAIT_ANY, NULL, 0); //tmp
 			exit_wrap(0, NULL);
@@ -39,7 +39,9 @@ static int	eval_sep(t_ast_node *tree)
 		if (setpgid_wrap(pid, job) == -1)
 			return(MEMERR);
 		register_job(job);
-		ft_printf("job started in bg %d, subshell waiting\n", pid);	
+		g_sh.previous_j = g_sh.current_j;
+		g_sh.current_j = job;
+		ft_printf("==DEBUG==job started in bg %d, subshell waiting\n", pid);	
 	}
 	else 
 	{

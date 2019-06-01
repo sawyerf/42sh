@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 19:28:02 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/28 16:19:15 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/01 18:51:11 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,11 @@ void	wait_job(t_job *job)
 	if (!job->pgid)
 		job->pgid = WAIT_ANY;
 	pid = waitpid(job->pgid, &(job->status), WUNTRACED);
-	ft_printf("===DEBUG===waitpid ret %d\n", pid);
 	register_job(job);
 	if (WIFEXITED(job->status))
 	{
 		job->completed = 1;
 		job->notified = 1;
-		ft_printf("===DEBUG===job %d exited normally\n", job->pgid);
 	}
 	else if (WIFSIGNALED(job->status))
 	{
@@ -56,9 +54,9 @@ int		fg_job(t_job *job, int cont)
 	if (cont)
 	{
 		tcsetattr(STDIN_FILENO, TCSADRAIN, &(job->save_tio));
-		if (kill(job->pgid, SIGCONT) < 0)
+		if (killpg(job->pgid, SIGCONT) < 0)
 		{
-			ft_dprintf(STDERR_FILENO, "42sh: Error sending cont to pgid %d", job->pgid);
+			ft_dprintf(STDERR_FILENO, "42sh: Error sending cont to pgid %d as fg\n", job->pgid);
 			return (0); // maybe not ?
 		}	
 	}
@@ -73,8 +71,8 @@ int bg_job(t_job *job, int cont)
 {
 	if (cont)
 	{
-		if (kill(job->pgid, SIGCONT) < 0)
-			ft_dprintf(STDERR_FILENO, "42sh: Error sending cont to pgid %d", job->pgid);
+		if (killpg(job->pgid, SIGCONT) < 0)
+			ft_dprintf(STDERR_FILENO, "42sh: Error sending cont to pgid %d as bg\n", job->pgid);
 	}
 	register_job(job);
 	return (0);

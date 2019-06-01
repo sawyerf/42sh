@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 13:46:10 by apeyret           #+#    #+#             */
-/*   Updated: 2019/05/27 16:05:33 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/01 19:02:22 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef	struct			s_fc
 typedef void	(*t_job_print)(t_job*);
 
 int						fg(t_cmd_tab *cmd);
+int						bg(t_cmd_tab *cmd);
 int						fc(t_cmd_tab *cmd);
 int						fc_l(t_fc fc);
 int						fc_e(t_fc fc);

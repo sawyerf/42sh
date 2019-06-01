@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/05/03 16:44:23 by ktlili           ###   ########.fr        #
+#    Updated: 2019/06/01 18:59:52 by ktlili           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			builtins/jobs.c				\
 			builtins/jobs_conversions.c	\
 			builtins/fg.c				\
+			builtins/bg.c				\
 			core/clean_path.c			\
 			core/env_handler.c			\
 			core/ft_env.c				\
@@ -63,7 +64,6 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			core/env.c					\
 			core/envdel.c				\
 			core/run.c					\
-			core/jobs_util.c			\
 			eval/redir_tools.c			\
 			eval/expansion_wrappers.c	\
 			eval/spawn_tools.c			\
@@ -139,6 +139,7 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			jobctl/init_jobctl.c		\
 			jobctl/make_job.c			\
 			jobctl/foreground.c			\
+			jobctl/jobs_util.c			\
 			jobctl/register_job.c
 
 OBJ_DIR =	.obj

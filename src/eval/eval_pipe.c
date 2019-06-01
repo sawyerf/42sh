@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/04 19:37:35 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/01 18:22:01 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,12 @@ int	pipe_recursion(t_cmd_tab *to, t_cmd_tab *from, t_job *job)
 	return (0);
 }
 
+void	cont_propagator(int signum)
+{
+	if (signum == SIGCONT)
+		kill(0, SIGCONT);
+}
+
 int	pipe_subshell(pid_t pid, t_cmd_tab *pipeln, t_job *job)
 {
 	int ret;
@@ -57,6 +63,7 @@ int	pipe_subshell(pid_t pid, t_cmd_tab *pipeln, t_job *job)
 	if (job->fg)
 		tcsetpgrp(STDIN_FILENO, job->pgid);
 	reset_sig();
+	//signal(SIGCONT, &cont_propagator); //tmp
 	if ((ret = pipe_recursion(pipeln->next, pipeln, job)))
 		exit_wrap(-1, pipeln);
 	/* update on last child status*/
