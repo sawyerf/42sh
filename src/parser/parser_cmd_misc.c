@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 20:42:11 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/09 20:42:57 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/28 17:33:37 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,12 @@ int	expect_cmd_name(t_parser *parser)
 	{
 		if (ret)
 			return (ret);
+		if ((ret = handle_alias(parser->current)))
+		{
+			if ((ret == MEMERR)
+				|| ((ret = expect_cmd_pre(parser)) == MEMERR))
+				return (MEMERR);
+		}
 		if (build_cmd(parser->current, &(parser->cmd)) == MEMERR)
 			return (MEMERR);
 		if ((ret = next_token(parser)))

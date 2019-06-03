@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/16 15:18:36 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/05/24 16:54:17 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct			s_sh
 	int					status;
 	char				**local;
 	char				**env;
+	char				**alias;
 	int					fd;
 }						t_sh;
 
@@ -132,5 +133,6 @@ char					**envdel(char **env, char *var);
 char					**envaddstr(char **env, char *var, char *value);
 int						sh_readfile(char *prompt, char **str);
 int						missing_quote(char *line);
+void					run_script(char *file);
 
 #endif
