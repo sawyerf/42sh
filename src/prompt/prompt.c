@@ -6,12 +6,21 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/03 20:59:59 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/03 22:00:14 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/03 22:28:18 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "readline.h"
+#include "prompt.h"
 #include <unistd.h>
+
+t_prompt	g_prompt[] =\
+{
+	{'u', &pr_gene},
+	{'W', &pr_w},
+	{'w', &pr_w},
+	{'h', &pr_gene},
+	{0, &pr_gene}
+};
 
 char	*getpwd(void)
 {
@@ -45,39 +54,59 @@ char	*getfold(void)
 	return (ret);
 }
 
-void	prpt(char *ps, t_stri *str)
+void	pr_w(t_stri *str, char p)
 {
 	char	*tmp;
+
+	if (p == 'W')
+	{
+		tmp = getfold();
+		str_addstr(str, tmp);
+	}
+	else if (p == 'w')
+	{
+		tmp = getpwd();
+		str_addstr(str, tmp);
+	}
+	ft_strdel(&tmp);
+}
+
+void	pr_gene(t_stri *str, char p)
+{
+	char *tmp;
+
+	if (p == '\\')
+		str_add(str, '\\');
+	else if (p == 'u')
+		str_addstr(str, getlogin());
+	else if (p == 'h')
+	{
+		if (!(tmp = ft_strnew(25)))
+			return ;
+		gethostname(tmp, 25);
+		str_addstr(str, tmp);
+		ft_strdel(&tmp);
+	}
+}
+
+void	prpt(char *ps, t_stri *str)
+{
+	int		i;
 
 	while (*ps)
 	{
 		if (*ps == '\\')
 		{
-			ps++; 
-			if (*ps == '\\')
-				str_add(str, '\\');
-			else if (*ps == 'u')
-				str_addstr(str, getlogin());
-			else if (*ps == 'W')
-			{
-				tmp = getfold();
-				str_addstr(str, tmp);
-			}
-			else if (*ps == 'w')
-			{
-				tmp = getpwd();
-				str_addstr(str, tmp);
-			}
-			else if (*ps == 'h')
-			{
-				if (!(tmp = ft_strnew(25)))
-					return ;
-				gethostname(tmp, 25);
-				str_addstr(str, tmp);
-				ft_strdel(&tmp);
-			}
-			else if (!*ps)
+			if (!*ps)
 				return ;
+			ps++; 
+			i = 0;
+			while (g_prompt[i].p)
+			{
+				if (g_prompt[i].p == *ps)
+					g_prompt[i].f(str, *ps);
+				i++;
+			}
 		}
 		else
 			str_add(str, *ps);

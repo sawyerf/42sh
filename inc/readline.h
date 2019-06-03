@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/03 21:33:43 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/03 22:09:06 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,5 @@ void				hstdellast();
 int					acp_multichc(t_rdl *rdl, t_list *lst);
 
 char				cmdisin(char *cmd);
-char				*prompt(void);
 
 #endif

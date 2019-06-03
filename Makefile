@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/06/03 21:28:58 by apeyret          ###   ########.fr        #
+#    Updated: 2019/06/03 22:08:24 by lol              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ INC_FILE =	ft_eval.h					\
 			generic_typedef.h			\
 			readline.h					\
 			hashtable.h					\
+			prompt.h					\
 			sh_core.h
 
 SRC_DIR =	src
@@ -73,6 +74,9 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			eval/spawn_tools_2.c		\
 			eval/pre_execution.c		\
 			eval/expansion_tools.c		\
+			hashtable/hashtable.c		\
+			hashtable/ht_files.c		\
+			hashtable/ht_spawnbin.c		\
 			wordexp/expansion_util_3.c	\
 			wordexp/expansion_util_2.c	\
 			wordexp/expansion_util.c	\
@@ -106,9 +110,7 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			parser/parser_heredoc.c		\
 			parser/light_parser.c		\
 			parser/alias.c				\
-			hashtable/hashtable.c		\
-			hashtable/ht_files.c		\
-			hashtable/ht_spawnbin.c		\
+			prompt/prompt.c				\
 			readline/acp_multichc.c		\
 			readline/cmdisin.c			\
 			readline/ctrll.c			\
@@ -129,7 +131,6 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			readline/keys.c				\
 			readline/move.c				\
 			readline/print_choice.c		\
-			readline/prompt.c			\
 			readline/readline.c			\
 			readline/signal.c			\
 			readline/struct_rdl.c		\
@@ -148,6 +149,7 @@ CRT_DIR =	core 						\
 		 	eval 						\
 		 	readline 					\
 		 	parser 						\
+		 	prompt 						\
 		 	hashtable 
 
 SRC = 		$(addprefix $(SRC_DIR)/,$(SRC_FILE))

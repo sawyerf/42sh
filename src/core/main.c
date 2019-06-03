@@ -6,12 +6,13 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/03 22:01:22 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/03 22:09:37 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_core.h"
 #include "readline.h"
+#include "prompt.h"
 #include "hashtable.h"
 
 t_sh			g_sh;
