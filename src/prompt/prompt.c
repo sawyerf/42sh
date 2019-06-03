@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/03 20:59:59 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/03 22:28:18 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/03 22:35:12 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,5 +123,10 @@ char	*prompt(void)
 		return (ft_strdup("$> "));
 	str_init(&str);
 	prpt(ps1, &str);
+	if (!str.size)
+	{
+		ft_strdel(&str.str);
+		return (ft_strdup("$> "));
+	}
 	return (str.str);
 }
