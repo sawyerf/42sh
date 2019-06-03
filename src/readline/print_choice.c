@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 16:23:31 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/15 21:45:25 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/03 20:43:45 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,19 @@ void	putlst(char *mtc, t_list *lst, t_rdl *rdl)
 	int		i;
 
 	mtc = after(mtc, '/');
-	max = get_maxlst(lst) + ft_strlen(mtc) + 2 + 2;
 	ft_printf("\n");
-	while (lst)
+	if ((max = get_maxlst(lst) + ft_strlen(mtc) + 2) > rdl->col)
+		ft_printf("Too small\n");
+	while (lst && max < rdl->col)
 	{
 		i = 0;
 		while (lst && i < (rdl->col) / max)
 		{
 			replacefree(&mtc, (char**)&lst->content);
-			ft_printf("[%s%s%-*c", mtc, lst->content, max - ft_strlen(mtc)
-				- ft_strlen(lst->content) - 3, ((lst->content_size % 10 == 3)
+			ft_printf("%s%s%-*c", mtc, lst->content, max - ft_strlen(mtc)
+				- ft_strlen(lst->content) - 1, ((lst->content_size % 10 == 3)
 					? '/' : ' '));
-			ft_printf("] ");
+			ft_printf(" ");
 			lst = lst->next;
 			i++;
 		}

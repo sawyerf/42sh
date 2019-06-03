@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/24 16:54:17 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/03 21:11:40 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 # define CTRL_D 1
 # define CTRL_C 2
 
-# define MEMERR 1234
 # define SYNERR -1
 # define ENVERR 4
 # define ACCERR 5

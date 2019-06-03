@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/05/28 17:48:00 by ktlili           ###   ########.fr        #
+#    Updated: 2019/06/03 21:28:58 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -129,6 +129,7 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			readline/keys.c				\
 			readline/move.c				\
 			readline/print_choice.c		\
+			readline/prompt.c			\
 			readline/readline.c			\
 			readline/signal.c			\
 			readline/struct_rdl.c		\

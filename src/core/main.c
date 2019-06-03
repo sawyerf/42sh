@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/27 19:23:12 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/03 22:01:22 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void		shrc(void)
 int			main(int ac, char **av, char **env)
 {
 	char		*line;
+	char		*prt;
 	int			ret;
 	t_read_fn	read_fn;
 
@@ -78,7 +79,8 @@ int			main(int ac, char **av, char **env)
 	shrc();
 	while (42)
 	{
-		if ((ret = read_fn("$> ", &line)) == CTRL_D ||
+		prt = prompt();
+		if ((ret = read_fn(prt, &line)) == CTRL_D ||
 				ret == MEMERR || ret < 0)
 			break ;
 		if (((ret = run_command(line)) == SYNERR)
@@ -88,9 +90,12 @@ int			main(int ac, char **av, char **env)
 		{
 			ft_dprintf(STDERR_FILENO, "21sh: memory failure\n");
 			global_del();
+			ft_strdel(&prt);
 			return (MEMERR);
 		}
+		ft_strdel(&prt);
 	}
+	ft_strdel(&prt);
 	global_del();
 	return (g_sh.status);
 }
