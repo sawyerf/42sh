@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansion_util_3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 21:42:35 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/09 21:45:20 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/04 14:32:11 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int		get_ifs(char **ifs)
 {
-	static char *default_ifs = "  \t\n";
+	const char *default_ifs = "  \t\n";
 
 	if (!(*ifs = get_env_value("IFS")))
-		*ifs = default_ifs;
+		*ifs = (char *)default_ifs;
 	else
 	{
 		if (!(*ifs = expand_ifs(*ifs)))
@@ -33,17 +33,22 @@ int		get_ifs(char **ifs)
 
 void	delete_varname(char *cursor)
 {
-	int		trunc;
-	int		i;
+	int				trunc;
+	int				i;
+	bool			brackets;
+	const char		*valid = "=:-:";
 
 	i = 1;
 	trunc = 1;
+	brackets = false;
 	if (*(cursor + 1) == '{')
 	{
 		i++;
 		trunc = 3;
+		brackets = true;
 	}
-	while (parser_is_name_c(cursor[i]))
+	while (parser_is_name_c(cursor[i])
+	|| ((brackets) && (ft_cisin((char*)valid, cursor[i]))))
 	{
 		trunc++;
 		i++;
@@ -51,5 +56,4 @@ void	delete_varname(char *cursor)
 	i = ft_strlen(cursor + trunc);
 	ft_memmove(cursor, cursor + trunc, ft_strlen(cursor + trunc));
 	cursor[i] = 0;
-	return ;
 }

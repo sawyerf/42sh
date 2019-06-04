@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/30 12:05:38 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/05/07 17:35:09 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,7 @@ int	handle_param_exp(t_lexer *lx_st)
 			if (*(lx_st->cursor) == '}')
 				break;
 			if (!valid_sup_exp(*(lx_st->cursor)))
-			{
-			// 	log_info("handle_param_exp cursor [%s]\n", ((lx_st->cursor)));
-			// 	log_info("handle_param_exp token [%s]\n", ((lx_st->line)));
 				break ;
-			}
 			if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 				return (MEMERR);
 		}

@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/04/29 15:47:01 by juhallyn         ###   ########.fr        #
+#    Updated: 2019/06/04 12:28:20 by juhallyn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME =		42sh
 
 CC =		clang	
 
-CFLAGS =	-I inc/ -I libft/inc/ -Wall -Werror -Wextra -ggdb
+CFLAGS =	-I inc/ -I libft/inc/ -Wall -Wextra  #-g -fsanitize=address #-Werror -ggdb
 
 INC_DIR =	inc
 

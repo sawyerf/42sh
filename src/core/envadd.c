@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envadd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: apeyret <apeyret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 21:55:42 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/29 21:56:43 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/04 14:32:18 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ char	**envaddint(char **env, char *var, int value)
 
 char	**envaddstr(char **env, char *var, char *value)
 {
+	log_info("ENV__ADD var : [%s] | value : [%s]", var, value);
 	char		*add;
 	static char	*empty = "";
 

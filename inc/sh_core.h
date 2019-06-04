@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_core.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/29 15:51:10 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/05/07 13:34:31 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <limits.h>
+# include <stdbool.h>
 
 # define CTRL_D 1
 # define CTRL_C 2
