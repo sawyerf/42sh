@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 19:33:29 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/12 15:24:03 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/03 17:17:30 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	inside_dquote_qr(t_str *str_w, int *index)
 			break ;
 		}
 		else if ((str_w->str[*index] == '\\')
-			&& (ft_cisin("$\n\"\\", str_w->str[*index + 1])))
+			&& (ft_cisin("$\n\"\\!", str_w->str[*index + 1])))
 			shift_bslash(str_w, index);
 		else
 			*index = *index + 1;

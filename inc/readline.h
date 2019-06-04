@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/15 21:48:22 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/03 22:09:06 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 # define K_CTRC	"\3"
 # define K_CTRD	"\4"
 # define K_ENTR	"\12"
+# define K_CTRL	"\14"
 # define K_ENTD	"\r"
 # define K_CTRR	"\22"
 # define K_CTRP	"\20"
@@ -98,6 +99,8 @@ int					vm_move(t_rdl *rdl, char *buf);
 int					vm_copy(t_rdl *rdl, char *buf);
 int					vm_del(t_rdl *rdl, char *buf);
 int					vm_cut(t_rdl *rdl, char *buf);
+int					vm_begin(t_rdl *rdl, char *buf);
+int					vm_end(t_rdl *rdl, char *buf);
 int					paste(t_rdl *rdl, char *buf);
 int					finish(t_rdl *rdl, char *buf);
 int					end(t_rdl *rdl, char *buf);
@@ -107,6 +110,7 @@ int					normal_key(t_rdl *rdl, char *buf);
 int					ctrlr(t_rdl *rdl, char *buf);
 t_list				*get_cplenv(char *match);
 int					k_hstret(t_rdl *rdl, char *buf);
+int					ctrll(t_rdl *rdl, char *buf);
 
 void				reprint(t_rdl *rdl, int curs);
 int					is_special(char *buf);
@@ -146,5 +150,9 @@ int					hstdelcara(t_rdl *rdl, char	*buf);
 t_list				*hst_getcmp(t_list *lst, char *s);
 t_list				*hst_pgetcmp(t_list *lst, char *s);
 void				hstdellast();
+
+int					acp_multichc(t_rdl *rdl, t_list *lst);
+
+char				cmdisin(char *cmd);
 
 #endif

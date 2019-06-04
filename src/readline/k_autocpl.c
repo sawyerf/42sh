@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 21:17:33 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/15 22:42:14 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/03 19:55:38 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,34 @@ int		acp_gettype(t_rdl *rdl, t_autocomplete *acp)
 	return (0);
 }
 
+void	rdladdword(t_rdl *rdl, char	*s, char c)
+{
+	while (*s)
+	{
+		if (ft_cisin("\n\t\r", *s))
+		{
+			rdladd(rdl, '\\');
+			*s = (*s == '\n') ? 'n' : *s;
+			*s = (*s == '\t') ? 't' : *s;
+			*s = (*s == '\r') ? 'r' : *s;
+		}
+		else if (!c && ft_cisin("&|*$'\";\\`~<>{ ", *s))
+			rdladd(rdl, '\\');
+		else if (c == '"' && ft_cisin("$\"\\", *s))
+			rdladd(rdl, '\\');
+		else if (c == '\'' && *s == '\'')
+			rdladdstr(rdl, "'\\'");
+		rdladd(rdl, *s);
+		s++;
+	}
+}
+
 void	fill_complt(t_rdl *rdl, t_list *lst)
 {
 	char	c;
 
 	c = cmdisincurs(rdl);
-	if (!c)
-	{
-		lst->content = ft_rereplace(lst->content, " ", "\\ ");
-		lst->content = ft_rereplace(lst->content, "\n", "\\n");
-		lst->content = ft_rereplace(lst->content, "\t", "\\t");
-		lst->content = ft_rereplace(lst->content, "\r", "\\r");
-	}
-	rdladdstr(rdl, lst->content);
+	rdladdword(rdl, lst->content, c);
 	if (lst->content_size == 0 || lst->content_size == 1)
 	{
 		if (c == '"' || c == '\'')
@@ -85,7 +100,7 @@ int		autocompl(t_rdl *rdl, char *buf)
 	}
 	if (!lst->next)
 		fill_complt(rdl, lst);
-	else
+	else if (!acp_multichc(rdl, lst))
 		putlst(acp.str, lst, rdl);
 	ft_strdel(&acp.str);
 	ft_lstdel(&lst);

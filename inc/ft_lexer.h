@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/10 18:01:58 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/03 17:26:28 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define BAD_SUB	12
 # define INCOMPLETE_SUB 13
 # define ENDOFINPUT 14
+# define BANG_NF	15
 
 # define INPUTSZ 128
 # define TABLESZ 128
@@ -54,5 +55,6 @@ t_token	*next_tok(char *line, t_parser *parser);
 t_token	*ft_tokenizer(char *line);
 int		ft_tokenizer_2(char *line, t_token **head);
 int		rev_lex(char *line, t_token **head);
+int		handle_bang(t_lexer *lx_st);
 
 #endif

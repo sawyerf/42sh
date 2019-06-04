@@ -6,12 +6,13 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/27 16:46:37 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/04 17:49:00 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_core.h"
 #include "readline.h"
+#include "prompt.h"
 #include "hashtable.h"
 
 t_sh			g_sh;
@@ -25,6 +26,8 @@ static int	init_shell(char **env, t_read_fn *read_fn)
 	if (!(g_sh.env = shlvl(ft_tabdup(env))))
 		return (MEMERR);
 	if (!(g_sh.local = ft_tabnew(0)))
+		return (MEMERR);
+	if (!(g_sh.alias = ft_tabnew(0)))
 		return (MEMERR);
 	if (dup2(STDIN_FILENO, FDSAVEIN) == -1)
 		return (-1);
@@ -48,23 +51,25 @@ static int	init_shell(char **env, t_read_fn *read_fn)
 	return (0);
 }
 
-static void	silence_ac_av(char ac, char **av)
-{
-	(void)ac;
-	(void)av;
-}
-
 void		global_del(void)
 {
 	hstaddfile(g_sh.env);
 	ht_del();
 	ft_tabdel(&g_sh.local);
+	ft_tabdel(&g_sh.alias);
 	ft_tabdel(&g_sh.env);
 }
 
-void		sig_exit(int sig)
+void		shrc(void)
 {
-	exit_wrap(sig, NULL);
+	char	*path;
+	char	*home;
+
+	if (!(home = envchrr(g_sh.env, "HOME"))
+		|| !(path = ft_zprintf("%s/%s", home, ".42shrc")))
+		return ;
+	run_script(path);
+	ft_strdel(&path);
 }
 
 
@@ -74,13 +79,14 @@ int			main(int ac, char **av, char **env)
 	int			ret;
 	t_read_fn	read_fn;
 
-	silence_ac_av(ac, av);
+	(void)av[ac];
 	if (init_shell(env, &read_fn))
 		return (MEMERR);
+	shrc();
 	while (42)
 	{
 		clean_jobs();
-		if ((ret = read_fn("$> ", &line)) == CTRL_D ||
+		if ((ret = read_fn(get_env_value("PS1"), &line)) == CTRL_D ||
 				ret == MEMERR || ret < 0)
 			break ;
 		if (((ret = run_command(line)) == SYNERR)

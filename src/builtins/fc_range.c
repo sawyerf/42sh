@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 13:42:22 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/04 15:23:00 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/26 13:23:13 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,17 @@ void	fc_reverse(t_list **beg, t_list **lst)
 	tmp = *lst;
 	*lst = *beg;
 	*beg = tmp;
+}
+
+t_list	*hst_getcmpl(t_list *lst, int nb)
+{
+	char	*s;
+	t_list	*beg;
+
+	s = ft_itoa(nb);
+	beg = hst_getcmp(lst, s);
+	ft_strdel(&s);
+	return (beg);
 }
 
 int		fc_rangel(t_fc fc, t_list **beg, int *i)
@@ -40,7 +51,7 @@ int		fc_rangel(t_fc fc, t_list **beg, int *i)
 		if ((int)lst->content_size / 10 - 10 < 0)
 			*beg = hst_getcmp(lst, "1");
 		else
-			*beg = hst_getcmp(lst, ft_itoa((int)lst->content_size / 10 - 10));
+			*beg = hst_getcmpl(lst, (int)lst->content_size / 10 - 10);
 	}
 	if (!lst || !*beg)
 		return (ft_rperr(1, "fc: history specification out of range\n"));

@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/06/01 18:59:52 by ktlili           ###   ########.fr        #
+#    Updated: 2019/06/04 16:10:12 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME =		42sh
 
 CC =		clang	
 
-CFLAGS =	-I inc/ -I lib/inc/ -Wall -Werror -Wextra -ggdb
+CFLAGS =	-I inc/ -I libft/inc/ -Wall -Werror -Wextra -ggdb
 
 INC_DIR =	inc
 
@@ -32,14 +32,19 @@ INC_FILE =	ft_eval.h					\
 			sh_core.h					\
 			jobctl.h					\
 			jobctl_typedef.h			\
+			prompt.h					\
+			sh_core.h
 
 SRC_DIR =	src
 
 SRC_FILE =	builtins/cd_l_p.c			\
+			builtins/alias.c			\
+			builtins/unalias.c			\
 			builtins/cd_tools.c			\
 			builtins/changedir.c		\
 			builtins/echo.c				\
 			builtins/exit.c				\
+			builtins/export.c			\
 			builtins/fc.c				\
 			builtins/fc_opt.c			\
 			builtins/fc_range.c			\
@@ -52,6 +57,7 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			builtins/jobs_conversions.c	\
 			builtins/fg.c				\
 			builtins/bg.c				\
+			builtins/type.c				\
 			core/clean_path.c			\
 			core/env_handler.c			\
 			core/ft_env.c				\
@@ -77,6 +83,9 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			eval/pre_execution.c		\
 			eval/expansion_tools.c		\
 			eval/launch_pipe.c			\
+			hashtable/hashtable.c		\
+			hashtable/ht_files.c		\
+			hashtable/ht_spawnbin.c		\
 			wordexp/expansion_util_3.c	\
 			wordexp/expansion_util_2.c	\
 			wordexp/expansion_util.c	\
@@ -92,6 +101,7 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			lexer/lexer_tools.c			\
 			lexer/rev_lex.c				\
 			lexer/memerror.c			\
+			lexer/lex_bang.c			\
 			lexer/lex_quotes.c			\
 			lexer/lex_op.c				\
 			lexer/token_tools.c			\
@@ -108,10 +118,11 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			parser/sh_parser.c			\
 			parser/parser_heredoc.c		\
 			parser/light_parser.c		\
-			hashtable/hashtable.c		\
-			hashtable/ht_files.c		\
-			hashtable/ht_spawnbin.c		\
+			parser/alias.c				\
+			prompt/prompt.c				\
+			readline/acp_multichc.c		\
 			readline/cmdisin.c			\
+			readline/ctrll.c			\
 			readline/env_autoclp.c		\
 			readline/files.c			\
 			readline/files_right.c		\
@@ -153,7 +164,9 @@ CRT_DIR =	core 						\
 		 	readline 					\
 		 	parser 						\
 		 	hashtable					\
-			jobctl
+			jobctl						\
+		 	prompt 						\
+		 	hashtable 
 
 SRC = 		$(addprefix $(SRC_DIR)/,$(SRC_FILE))
 INC = 		$(addprefix $(INC_DIR)/,$(INC_FILE))
@@ -174,18 +187,18 @@ norm:
 
 $(NAME): $(OBJ)
 	@printf "\033[0;32m[42sh] Compilation [OK]\033[0;0m\n"
-	@make -C lib/
-	@$(CC) $(CFLAGS) -ltermcap $(DEBUG) $(OBJ) lib/libft.a -o $(NAME)
+	@make -C libft/
+	@$(CC) $(CFLAGS) -ltermcap $(DEBUG) $(OBJ) libft/libft.a -o $(NAME)
 
 clean:
-	@make clean -C lib/
+	@make clean -C libft/
 	@/bin/rm -f $(OBJ)
 	@/bin/rm -rf $(OBJ_DIR)
 	@printf "\033[0;31m[42sh] Deleted *.o\033[0;0m\n"
 
 fclean: clean
 	@/bin/rm -f $(NAME)
-	@/bin/rm -f lib/libft.a
+	@/bin/rm -f libft/libft.a
 	@printf "\033[0;31D[42sh] Deleted 42sh\033[0;0m\n"
 
 re: fclean all

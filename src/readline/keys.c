@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:47:43 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/12 18:06:52 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/27 17:46:29 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_key	g_key[] =\
 	{K_CTRA, &begin},
 	{K_CTRC, &ctrlc},
 	{K_CTRD, &ctrld},
+	{K_CTRL, &ctrll},
 	{K_CTRP, &paste},
 	{K_CTRV, &visualmode},
 	{K_CTRR, &ctrlr},

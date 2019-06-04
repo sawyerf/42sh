@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 16:26:00 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/10 18:05:47 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/16 16:34:37 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_list	*ht_get(char *path);
 t_list	*ht_getexec(char *path);
 int		ht_spawnbin(char *path, t_cmd_tab *cmd);
 void	ht_del(void);
-int		ht_getfile(char **paths, t_cmd_tab *cmd);
+int		ht_getfile(char **paths, char *cmd, char **fullpath);
 void	ht_refreshall(char *path);
 t_list	**ht_gget(void);
 int		ht_addfile(char	**paths, char *exec);

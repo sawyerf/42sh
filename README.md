@@ -1,5 +1,13 @@
 # 42sh
 
+## Features
+- Historique (finis)
+- Autocompletions (finis)
+- Inhibiteurs (finis)
+- Table de hash (finis)
+- Tilde/${para:word} (en cours)
+
+
 ## TODO
 - export builtin, set && unset missing stuff.
 - autocomplete after >& is wrong
@@ -14,15 +22,16 @@
 ------------------------------------
 ### 42sh
 
-- finir la feature historique
+- ~~finir la feature historique~~
 - sig handling && job control.
 - moar testing on redirections.
 - cd set_shell_env needs malloc checks. <= this
-- replace printf/write(2, etc.. by sprintf or zprintf.
+- replace printf/write(2, etc.. by dprintf
 
 ## Bug
 |check|     `command`     |                result               | info complementaire |
 |:---:|:-----------------:|:-----------------------------------:|:-------------------:|
+|     | `"\t"`            | le token doit contnir \t et non un tab |||
 |     | `ls \ <tab>`      | ca ne comprends le ' '              |||
 |     | `ls "file <tab>`  | ne considere pas le debut des quote |||
 |  ✓  | `ls "<tab>`       | ne referme pas les quotes           |||

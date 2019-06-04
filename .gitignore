@@ -7,7 +7,9 @@ lel*
 *.swp
 *.swo
 *.out
+*.log
 *:w
+*:W
 21sh
 42sh
 test*

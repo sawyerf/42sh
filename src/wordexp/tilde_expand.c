@@ -6,14 +6,17 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/09 21:39:01 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/04/19 16:11:56 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_wordexp.h"
+#include "pwd.h"
 
 int		tilde_valid(char c)
 {
+	if (ft_isalpha(c))
+		return (1);
 	if ((c == 0) || (c == '/') || (c == ':'))
 		return (1);
 	return (0);
@@ -32,6 +35,45 @@ char	*quote_home(char *str)
 	return (new);
 }
 
+char	*get_userhome(char *user)
+{
+	struct passwd *info;
+
+	if (!(info = getpwnam(user)))
+		return (NULL);
+	return (info->pw_dir);
+}
+
+char	*get_home(t_str *word)
+{
+	int		i;
+	char	*user;
+	char	*home;
+
+	if (ft_cisin("/ \t\n\r" , *word->str))
+		return (get_env_value("HOME"));
+	else
+	{
+		i = 0;
+		while (!ft_cisin("/ \t\n\r" , word->str[i]) && word->str[i])
+			i++;
+		if (!(user = ft_strndup(word->str, i)))
+			return (NULL);
+		home = get_userhome(user);
+		ft_strdel(&user);
+		if (!home)
+		{
+			if (!(home = ft_zprintf("~%s", word->str)))
+				return (NULL);
+			ft_strdel(&word->str);
+			word->str = home;
+			return (NULL);
+		}
+		ft_memmove(word->str, word->str + i + 1, i);
+		word->len = word->len - i;
+		return (home);
+	}
+}
 int		expand_tilde(t_str *word, int *index, int add_quote)
 {
 	char *home;
@@ -39,7 +81,7 @@ int		expand_tilde(t_str *word, int *index, int add_quote)
 	ft_memmove(word->str + *index, word->str + *index + 1, word->len - *index);
 	word->len = word->len - 1;
 	word->str[word->len] = '\0';
-	home = get_env_value("HOME");
+	home = get_home(word);
 	if ((!home) || (*home == '\0'))
 		return (0);
 	if ((add_quote) && (!(home = quote_home(home))))
@@ -54,9 +96,7 @@ int		expand_tilde(t_str *word, int *index, int add_quote)
 int		expand_tilde_assign(t_str *word, int index)
 {
 	if ((word->str[index] == '~') && (tilde_valid(word->str[index + 1])))
-	{
 		expand_tilde(word, &index, 1);
-	}
 	while (word->str[index])
 	{
 		if ((word->str[index] == ':') && (word->str[index + 1] == '~'))
@@ -83,9 +123,7 @@ int		handle_tilde(t_token *word)
 
 	index = 0;
 	if ((word->data.str[0] == '~') && (tilde_valid(word->data.str[1])))
-	{
 		return (expand_tilde(&(word->data), &index, 1));
-	}
 	if (word->type == ASSIGN)
 	{
 		while (word->data.str[index])

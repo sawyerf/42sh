@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 16:12:50 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/04 16:35:51 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/16 17:06:01 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_list	*ht_getghash(char *path)
 	return (NULL);
 }
 
-int		ht_getfile(char **paths, t_cmd_tab *cmd)
+int		ht_getfile(char **paths, char *cmd, char **full_path)
 {
 	int		i;
 	int		ret[2];
@@ -33,12 +33,12 @@ int		ht_getfile(char **paths, t_cmd_tab *cmd)
 	ret[1] = br_NOTFOUND;
 	while (paths[i])
 	{
-		ft_strdel(&cmd->full_path);
-		if (!(cmd->full_path = ft_zprintf("%s/%s", paths[i], cmd->av[0])))
+		ft_strdel(full_path);
+		if (!(*full_path = ft_zprintf("%s/%s", paths[i], cmd)))
 			return (MEMERR);
-		if (!(ret[0] = exaccess(cmd->full_path)))
+		if (!(ret[0] = exaccess(*full_path)))
 		{
-			if (ht_addpath(paths[i], cmd->full_path) == MEMERR)
+			if (ht_addpath(paths[i], *full_path) == MEMERR)
 				return (MEMERR);
 			return (0);
 		}
@@ -119,7 +119,7 @@ int		ht_spawnbin(char *path, t_cmd_tab *cmd)
 			return (MEMERR);
 		return (0);
 	}
-	ret = ht_getfile(paths, cmd);
+	ret = ht_getfile(paths, cmd->av[0], &cmd->full_path);
 	free_tab(paths);
 	return (ret);
 }

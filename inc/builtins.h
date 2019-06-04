@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 13:46:10 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/01 19:02:22 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/04 16:47:21 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int						change_dir(t_cmd_tab *cmd);
 
 int						ft_echo(t_cmd_tab *cmd);
 
+int						type(t_cmd_tab *cmd);
+
 int						ft_exit(t_cmd_tab *cmd);
 int						ft_env(t_cmd_tab *cmd);
 int						ft_unsetenv(t_cmd_tab *cmd);
@@ -72,4 +74,9 @@ t_job					*jobs_conv_min(char *s);
 t_job					*jobs_conv_cmd(char *s);
 t_job					*jobs_conv_any(char *s);
 t_job					*jobs_conversion(char *arg);
+int						export(t_cmd_tab *cmd);
+
+int						alias(t_cmd_tab *cmd);
+int						unalias(t_cmd_tab *cmd);
+int		valid_alias(char *s);
 #endif

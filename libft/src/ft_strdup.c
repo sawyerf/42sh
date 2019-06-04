@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 18:40:35 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/12 18:58:26 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/16 18:32:07 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ char			*ft_strdup(const char *s1)
 
 	i = 0;
 	len = ft_strlen(s1);
-	copy = malloc(sizeof(char) * (1 + len));
-	if (copy == NULL)
+	if (!s1)
+		return (NULL);
+	if (!(copy = ft_strnew(len)))
 		return (0);
 	while (s1[i] != '\0')
 	{

@@ -1,39 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_tools.c                                     :+:      :+:    :+:   */
+/*   ft_tabcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/02 19:27:49 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/29 14:43:15 by apeyret          ###   ########.fr       */
+/*   Created: 2019/04/16 15:13:10 by apeyret           #+#    #+#             */
+/*   Updated: 2019/04/16 15:19:16 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "builtins.h"
+#include "libft.h"
 
-int		parser_takeopt(char *opt, char *arg, char *in, char *name)
+int			ft_tabcmp(char **tab, char *str)
 {
-	int		i;
-	char	c;
+	int	i;
 
-	i = 1;
-	c = 0;
-	while (arg[i])
+	i = 0;
+	while (tab[i] != NULL)
 	{
-		c = arg[i];
-		if (!ft_cisin(in, arg[i]))
-		{
-			if (ft_cisin(opt, arg[i]))
-				ft_strncat(in, arg + i, 1);
-			else
-			{
-				ft_dprintf(2, "%s: -%c: invalid option\n", name, arg[i]);
-				ft_dprintf(2, "usage: hash [-r] [name ...]\n");
-				return (0);
-			}
-		}
+		if (!ft_strcmp(tab[i], str))
+			return (i);
 		i++;
 	}
-	return (c);
+	return (-1);
 }

@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:08:18 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/26 15:04:20 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/29 14:20:00 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int		ft_printf(const char *format, ...)
 	s = ret(lst, len);
 	write(1, s, len);
 	free(s);
-	pf_prdel(lst);
+	pf_prdel(&lst);
 	return (len);
 }
 
@@ -84,7 +84,7 @@ int		ft_dprintf(int fd, const char *format, ...)
 	s = ret(lst, len);
 	write(fd, s, len);
 	free(s);
-	pf_prdel(lst);
+	pf_prdel(&lst);
 	return (len);
 }
 
@@ -102,6 +102,6 @@ char	*ft_zprintf(const char *format, ...)
 	pf_router(lst, ap);
 	len = lenall(lst);
 	s = ret(lst, len);
-	pf_prdel(lst);
+	pf_prdel(&lst);
 	return (s);
 }

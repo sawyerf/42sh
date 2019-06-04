@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/28 15:30:34 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/03 21:11:40 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@
 # define CTRL_D 1
 # define CTRL_C 2
 
-# define MEMERR 1234
 # define SYNERR -1
 # define ENVERR 4
 # define ACCERR 5
@@ -58,6 +57,7 @@ typedef struct			s_sh
 	int					status;
 	char				**local;
 	char				**env;
+	char				**alias;
 	int					fd;
 	t_job				*job_lst;
 	t_job				*current_j;
@@ -120,5 +120,6 @@ int						missing_quote(char *line);
 char					*make_cmdline(t_token *start, t_token *end, int last);
 void					del_job(t_job *j);
 void					clean_jobs(void);
+void					run_script(char *file);
 
 #endif

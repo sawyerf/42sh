@@ -1,39 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_tools.c                                     :+:      :+:    :+:   */
+/*   alias.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/04/02 19:27:49 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/29 14:43:15 by apeyret          ###   ########.fr       */
+/*   Created: 2019/05/24 16:57:28 by apeyret           #+#    #+#             */
+/*   Updated: 2019/05/27 19:20:55 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
+#include "sh_core.h"
 
-int		parser_takeopt(char *opt, char *arg, char *in, char *name)
+extern t_sh	g_sh;
+
+int		unalias(t_cmd_tab *cmd)
 {
-	int		i;
-	char	c;
+	int		count;
 
-	i = 1;
-	c = 0;
-	while (arg[i])
+	count = 0;
+	if (!cmd->av[1])
 	{
-		c = arg[i];
-		if (!ft_cisin(in, arg[i]))
-		{
-			if (ft_cisin(opt, arg[i]))
-				ft_strncat(in, arg + i, 1);
-			else
-			{
-				ft_dprintf(2, "%s: -%c: invalid option\n", name, arg[i]);
-				ft_dprintf(2, "usage: hash [-r] [name ...]\n");
-				return (0);
-			}
-		}
-		i++;
+		ft_dprintf(2, "unalias: usage: unalias [name ...]\n");
+		return (0);
 	}
-	return (c);
+	while (cmd->av[count])
+	{
+		if (!(g_sh.alias = envdel(g_sh.alias, cmd->av[count])))
+			return (MEMERR);
+		count++;
+	}
+	return (0);
 }

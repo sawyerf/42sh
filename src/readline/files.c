@@ -6,13 +6,15 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 14:48:16 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/01 18:30:54 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/03 20:33:51 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline.h"
 #include <dirent.h>
 #include <sys/stat.h>
+
+extern char	 *g_builtins[];
 
 t_list	*folderin(DIR *ptr, char *path, char *exec, int (*f)(char *file))
 {
@@ -101,6 +103,23 @@ t_list	*hst_getexec(char *path)
 	return (lst);
 }
 
+t_list	*get_builtins(char *exec, t_list *lst)
+{
+	int		i;
+	int		len;
+
+	len = ft_strlen(exec);
+	i = 0;
+	while (g_builtins[i])
+	{
+		if (!ft_strncmp(exec, g_builtins[i], len)
+			&& !ft_lstisin(lst, g_builtins[i] + len))
+			ft_lstadd(&lst, ft_lstnew(g_builtins[i] + len, 0));
+		i++;
+	}
+	return (lst);
+}
+
 t_list	*get_exec(char *exec, char *path)
 {
 	char	**paths;
@@ -122,5 +141,5 @@ t_list	*get_exec(char *exec, char *path)
 		count++;
 	}
 	ft_tabdel(&paths);
-	return (lst);
+	return (get_builtins(exec, lst));
 }
