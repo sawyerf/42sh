@@ -45,4 +45,11 @@ alias lil='lol'
 alias ll='ls -l'
 ll
 lol
+var=new
+var=lol
+export var
+export -p -p
+export -p --
+export new=var niw=varue
+export 
 exit 155555

@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/03 22:06:10 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/03 22:27:55 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/04 17:50:16 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct		s_prompt
 	void			(*f)(t_stri *str, char p);
 }					t_prompt;
 
-char				*prompt(void);
+char				*prompt(char *ps1);
 void				pr_gene(t_stri *str, char p);
 void				pr_w(t_stri *str, char p);
 

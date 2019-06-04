@@ -6,12 +6,13 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/03 20:59:59 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/03 22:35:12 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/04 17:52:36 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "prompt.h"
 #include <unistd.h>
+#include <pwd.h>
 
 t_prompt	g_prompt[] =\
 {
@@ -78,7 +79,10 @@ void	pr_gene(t_stri *str, char p)
 	if (p == '\\')
 		str_add(str, '\\');
 	else if (p == 'u')
-		str_addstr(str, getlogin());
+	{
+		tmp = getlogin();
+		str_addstr(str, tmp);
+	}
 	else if (p == 'h')
 	{
 		if (!(tmp = ft_strnew(25)))
@@ -114,12 +118,11 @@ void	prpt(char *ps, t_stri *str)
 	}
 }
 
-char	*prompt(void)
+char	*prompt(char *ps1)
 {
-	char	*ps1;
 	t_stri	str;
 	
-	if (!(ps1 = get_env_value("PS1")))
+	if (!ps1)
 		return (ft_strdup("$> "));
 	str_init(&str);
 	prpt(ps1, &str);
