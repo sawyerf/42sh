@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/06/03 22:08:24 by lol              ###   ########.fr        #
+#    Updated: 2019/06/04 16:10:12 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			builtins/changedir.c		\
 			builtins/echo.c				\
 			builtins/exit.c				\
+			builtins/export.c			\
 			builtins/fc.c				\
 			builtins/fc_opt.c			\
 			builtins/fc_range.c			\

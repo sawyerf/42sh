@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 13:46:10 by apeyret           #+#    #+#             */
-/*   Updated: 2019/05/27 18:57:37 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/04 16:47:21 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,9 @@ int						type(t_cmd_tab *cmd);
 int						ft_exit(t_cmd_tab *cmd);
 int						ft_env(t_cmd_tab *cmd);
 int						ft_unsetenv(t_cmd_tab *cmd);
+int						export(t_cmd_tab *cmd);
 
 int						alias(t_cmd_tab *cmd);
 int						unalias(t_cmd_tab *cmd);
+int		valid_alias(char *s);
 #endif
