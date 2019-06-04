@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_eval.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/14 16:05:48 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/04 18:18:47 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ typedef struct			s_ast_node
 
 typedef struct			s_cmd_tab
 {
+	char				*var_name;
+	char				*error_msg;
 	char				*full_path;
 	char				**av;
 	char				**process_env;

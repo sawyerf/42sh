@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/04 14:29:14 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/06/04 18:38:33 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ static char		*quote_str(char *str)
 // ${parameter:-word}
 char			*check_second_exp_var(char *zone)
 {
-	log_warn("-----------  check_second_exp_var : [%s] ------------  ", zone);
 	char	*var_name;
 
 	var_name = NULL;
@@ -98,19 +97,16 @@ char			*get_var_exp(char *cursor)
 
 char			*assign_sub_var(char *var_name, char *zone)
 {
-	log_fatal("var_name = [%s]", var_name);
 	char	*result;
 
 	result = ft_strsub(zone, 1, ft_strlen(zone) - 2);
-	log_fatal("assign data [%s]", result);
-	g_sh.env = envaddstr(g_sh.env, var_name, result);
+	g_sh.local = envaddstr(g_sh.local, var_name, result);
 	return (result);
 }
 
 // ${parameter:-word}
 char			*substitute_word_if_null(char *cursor, char *zone)
 {
-	log_warn("------------------ substitute_word_if_null -------------------");
 	char	*var_name;
 	char	*env_value;
 
@@ -119,7 +115,6 @@ char			*substitute_word_if_null(char *cursor, char *zone)
 	env_value = NULL;
 	var_name = get_var_exp(cursor);
 	env_value = ft_strdup(get_env_value(var_name));
-	log_warn("var_name [%s] | env_value [%s]", var_name, env_value);
 	if (!env_value)
 		env_value = check_second_exp_var(zone);
 	if (var_name)
@@ -130,7 +125,6 @@ char			*substitute_word_if_null(char *cursor, char *zone)
 // ${parameter:=word}
 char			*assign_word_if_null(char *cursor, char *zone)
 {
-	log_warn("------------------ assign_word_if_null -------------------");
 
 	char	*var_name;
 	char	*env_value;
@@ -139,9 +133,6 @@ char			*assign_word_if_null(char *cursor, char *zone)
 	var_name = NULL;
 	var_name = get_var_exp(cursor);
 	env_value = ft_strdup(get_env_value(var_name));
-
-	log_warn("var_name [%s] | env_value [%s]", var_name, env_value);
-
 	if (!env_value)
 	{
 		env_value = assign_sub_var(var_name, zone);
@@ -149,14 +140,11 @@ char			*assign_word_if_null(char *cursor, char *zone)
 	}
 	if (var_name)
 		ft_strdel(&var_name);
-
-	log_fatal("ENV VALUE {%s}", env_value);
 	return (env_value);
 }
 
 char			*classic_sub(char *cursor)
 {
-	log_warn("------------------ classic_sub -------------------");
 	char		*env_var;
 	char		*env_value;
 	const char	*empty_str = "";
@@ -174,6 +162,35 @@ char			*classic_sub(char *cursor)
 			return (env_value);
 	}
 	return ((char*)empty_str);
+}
+
+// ${parameter:?msg_err}
+char			*test_parameter(char *cursor, char *zone)
+{
+	log_warn("----------- test_parameter -------------");
+	char		*var_name;
+	char		*env_value;
+	char		*error_msg;
+	t_cmd_tab	tmp;
+
+	cursor++;
+	error_msg = NULL;
+	var_name = NULL;
+	var_name = get_var_exp(cursor);
+	env_value = ft_strdup(get_env_value(var_name));
+	error_msg = ft_strsub(zone, 1, ft_strlen(zone) - 2);
+	if (!env_value)
+	{
+		tmp.error_msg = error_msg;
+		tmp.var_name = var_name;
+		br_print(5, &tmp);
+		g_sh.status = 1;
+	}
+	if (var_name)
+		ft_strdel(&var_name);
+	if (error_msg)
+		ft_strdel(&error_msg);
+	return (env_value);
 }
 
 char			*exp_sup(char *cursor, bool classic_substitute)
@@ -201,6 +218,11 @@ char			*exp_sup(char *cursor, bool classic_substitute)
 			result = assign_word_if_null(cursor, tmp);
 			return (result);
 		}
+		if (previous_char == ':' && (*tmp) == '?')
+		{
+			result = test_parameter(cursor, tmp);
+			return (result);
+		}
 		tmp++;
 	}
 	return (classic_sub(cursor));
@@ -208,7 +230,6 @@ char			*exp_sup(char *cursor, bool classic_substitute)
 
 char			*build_param(char *cursor)
 {
-	log_warn("---------------- build_param -------------");
 	const char	*empty_str = "";
 	char		*value;
 	bool		classic_substitute;
@@ -223,7 +244,6 @@ char			*build_param(char *cursor)
 	if (!value)
 	{
 		value = exp_sup(cursor, classic_substitute);
-		log_fatal("exp_sup VALUE = [%s]", value);
 		if (!value)
 			value = (char*)empty_str;
 	}
@@ -235,7 +255,6 @@ char			*build_param(char *cursor)
 int				expand_param(t_token **word, char **cursor,
 				char *value, t_bool is_redir)
 {
-	log_warn("--------- expand param --------- [%s]  ", value);
 	char				*ifs;
 	int					i;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   spawn_tools_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 20:20:45 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/14 16:07:37 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/04 18:34:31 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ int		br_print(int err, t_cmd_tab *cmd)
 			ft_dprintf(2, "21sh: %s: Permission denied\n", cmd->full_path);
 		else if (err == br_ISDIR)
 			ft_dprintf(2, "21sh: %s: is a directory\n", cmd->full_path);
+		else if (err == br_PARAMETER)
+			ft_dprintf(2, "21sh: %s: %s", cmd->var_name, cmd->error_msg);
 	}
 	else
 	{
@@ -39,6 +41,8 @@ int		br_print(int err, t_cmd_tab *cmd)
 		return (126);
 	else if (err == br_NOTFOUND)
 		return (127);
+	else if (err == br_PARAMETER)
+		return (1);
 	return (err);
 }
 

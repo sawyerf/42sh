@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hashtable.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: apeyret <apeyret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 16:26:00 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/16 16:34:37 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/04 18:08:37 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef enum	e_binerr
 	br_NOTFOUND = 2,
 	br_ISDIR = 3,
 	br_PATHNOTSET = 4,
+	br_PARAMETER = 5,
 }				t_binerr;
 
 int		exaccess(char *file);
