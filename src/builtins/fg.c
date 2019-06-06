@@ -1,43 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util.c                                             :+:      :+:    :+:   */
+/*   foreground.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/07 16:10:23 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/27 16:45:53 by ktlili           ###   ########.fr       */
+/*   Created: 2019/05/03 16:24:33 by ktlili            #+#    #+#             */
+/*   Updated: 2019/06/01 18:59:11 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh_core.h"
+#include "builtins.h"
 
-int			add_slash(char **path)
+int		fg(t_cmd_tab *cmd)
 {
-	int		len;
-	char	*tmp;
+	t_job *j;
 
-	len = ft_strlen(*path);
-	if ((len != 0) && ((*path)[len - 1] != '/'))
+	if (!g_sh.job_lst)
 	{
-		if (!(tmp = ft_strjoin(*path, "/")))
-			return (MEMERR);
-		ft_strdel(path);
-		*path = tmp;
+		ft_dprintf(STDERR_FILENO, "42sh: fg: no jobs running\n");
+		return (0);
+	}
+	if ((!cmd->av[1]) && (g_sh.current_j))
+		fg_job(g_sh.current_j, 1);
+	else
+	{
+		j = jobs_conversion(cmd->av[1]);
+		if (j)
+			fg_job(j, 1);
+		else
+			ft_dprintf(STDERR_FILENO, "42sh: fg: '%s': no such job\n", cmd->av[1]);
 	}
 	return (0);
-}
-
-int			ft_cmptab(char **tab, char *str)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i] != NULL)
-	{
-		if (!ft_strcmp(tab[i], str))
-			return (i);
-		i++;
-	}
-	return (-1);
 }

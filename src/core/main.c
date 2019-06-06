@@ -43,6 +43,11 @@ static int	init_shell(char **env, t_read_fn *read_fn)
 	*read_fn = sh_readfile;
 	if (g_sh.mode == INTERACTIVE)
 		*read_fn = readline;
+	if ((g_sh.mode == INTERACTIVE) && (init_jobctl() == SH_ABORT))
+	{
+		global_del();
+		return (SH_ABORT);
+	} 
 	return (0);
 }
 
@@ -67,6 +72,7 @@ void		shrc(void)
 	ft_strdel(&path);
 }
 
+
 int			main(int ac, char **av, char **env)
 {
 	char		*line;
@@ -79,6 +85,7 @@ int			main(int ac, char **av, char **env)
 	shrc();
 	while (42)
 	{
+		clean_jobs();
 		if ((ret = read_fn(get_env_value("PS1"), &line)) == CTRL_D ||
 				ret == MEMERR || ret < 0)
 			break ;

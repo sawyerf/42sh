@@ -1,43 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util.c                                             :+:      :+:    :+:   */
+/*   register_job.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/07 16:10:23 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/27 16:45:53 by ktlili           ###   ########.fr       */
+/*   Created: 2019/06/01 18:48:13 by ktlili            #+#    #+#             */
+/*   Updated: 2019/06/01 18:48:14 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh_core.h"
+#include "jobctl.h"
 
-int			add_slash(char **path)
+void	register_job(t_job *job)
 {
-	int		len;
-	char	*tmp;
+	t_job *iter;
+	size_t count;
 
-	len = ft_strlen(*path);
-	if ((len != 0) && ((*path)[len - 1] != '/'))
+	if (!g_sh.job_lst)
 	{
-		if (!(tmp = ft_strjoin(*path, "/")))
-			return (MEMERR);
-		ft_strdel(path);
-		*path = tmp;
+		job->job_id = 1;
+		g_sh.job_lst = job;
 	}
-	return (0);
-}
-
-int			ft_cmptab(char **tab, char *str)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i] != NULL)
+	else
 	{
-		if (!ft_strcmp(tab[i], str))
-			return (i);
-		i++;
+		count = 0;
+		iter = g_sh.job_lst;
+		while (iter)
+		{
+			if (iter == job)
+				return;
+			iter = iter->next;
+			count++;
+		}
+		iter = g_sh.job_lst;
+		while (iter->next)
+			iter = iter->next;
+		iter->next = job;	
+		job->prev = iter;
+		job->job_id = 1 + count;
 	}
-	return (-1);
 }

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/12 16:44:34 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/27 16:08:40 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,11 @@ static int		execve_wrap(t_cmd_tab *cmd)
 	}
 	if ((!cmd->full_path))
 		exit_wrap(CMD_NOT_FOUND, cmd);
+	reset_sig();
 	ret = execve(cmd->full_path, cmd->av, cmd->process_env);
 	ft_dprintf(2, "21sh: bad file format\n");
 	exit_wrap(ret, cmd);
 	return (0);
-}
-
-void			wait_wrapper(t_cmd_tab *cmd, pid_t pid)
-{
-	int	wstatus;
-
-	waitpid(pid, &wstatus, 0);
-	cmd->exit_signal = -1;
-	cmd->exit_status = -1;
-	if (WIFEXITED(wstatus))
-		cmd->exit_status = (int)WEXITSTATUS(wstatus);
-	else if (WIFSIGNALED(wstatus))
-		cmd->exit_signal = WTERMSIG(wstatus);
 }
 
 int				spawn_in_pipe(t_cmd_tab *cmd)
@@ -60,12 +48,53 @@ int				spawn_in_pipe(t_cmd_tab *cmd)
 	return (execve_wrap(cmd));
 }
 
-int				spawn_command(t_cmd_tab *cmd)
+int				launch_command(t_cmd_tab *cmd, t_job *job)
 {
 	pid_t	pid;
 	int		ret;
 
 	if ((ret = pre_execution(cmd)) == MEMERR)
+		return (MEMERR);
+	else if (ret == BUILTIN_FAIL) /* handle exit_status for builtins here ?*/
+		return (1);
+	if ((ret != BUILTIN))
+	{
+		pid = fork();
+		if (pid == -1)
+			return (MEMERR);
+		if (pid == 0) 
+		{
+			if ((job) && (g_sh.mode == INTERACTIVE))
+			{
+				if ((setpgid_wrap(pid, job) == -1))
+					exit_wrap(MEMERR, cmd);
+				if (job->fg)
+					tcsetpgrp(STDIN_FILENO, job->pgid);
+			}
+			execve_wrap(cmd);
+		}
+		if ((g_sh.mode == INTERACTIVE) && (!job->pgid) 
+			&& (setpgid_wrap(pid, job) == -1))
+		return (MEMERR);		
+		/* builtins freeze when there are stopped jobs*/
+		if ((g_sh.mode != INTERACTIVE))
+			wait_job(job);
+		else if ((job) && (job->fg))
+			fg_job( job, 0);
+		else
+			bg_job(job, 0);	
+	}
+	else
+		register_job(job); //this is ugly
+	return (0);
+}
+
+/*just for env will be deleted*/
+int				spawn_command(t_cmd_tab *cmd, t_job *job)
+{
+	pid_t	pid;
+	int		ret;
+	if (((ret = pre_execution(cmd)) == MEMERR))
 		return (MEMERR);
 	else if ((ret == BUILTIN) || (ret == BUILTIN_FAIL))
 		return (0);
@@ -74,6 +103,6 @@ int				spawn_command(t_cmd_tab *cmd)
 		return (MEMERR);
 	if (pid == 0)
 		execve_wrap(cmd);
-	wait_wrapper(cmd, pid);
+	wait_job(job);
 	return (0);
 }

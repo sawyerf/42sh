@@ -29,6 +29,9 @@ INC_FILE =	ft_eval.h					\
 			generic_typedef.h			\
 			readline.h					\
 			hashtable.h					\
+			sh_core.h					\
+			jobctl.h					\
+			jobctl_typedef.h			\
 			prompt.h					\
 			sh_core.h
 
@@ -50,6 +53,10 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			builtins/setenv.c			\
 			builtins/unset.c			\
 			builtins/parser_tools.c		\
+			builtins/jobs.c				\
+			builtins/jobs_conversions.c	\
+			builtins/fg.c				\
+			builtins/bg.c				\
 			builtins/type.c				\
 			core/clean_path.c			\
 			core/env_handler.c			\
@@ -75,6 +82,7 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			eval/spawn_tools_2.c		\
 			eval/pre_execution.c		\
 			eval/expansion_tools.c		\
+			eval/launch_pipe.c			\
 			hashtable/hashtable.c		\
 			hashtable/ht_files.c		\
 			hashtable/ht_spawnbin.c		\
@@ -138,7 +146,12 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			readline/struct_rdladd.c	\
 			readline/termget.c			\
 			readline/terminit.c			\
-			readline/tools.c			
+			readline/tools.c			\
+			jobctl/init_jobctl.c		\
+			jobctl/make_job.c			\
+			jobctl/foreground.c			\
+			jobctl/jobs_util.c			\
+			jobctl/register_job.c
 
 OBJ_DIR =	.obj
 OBJ_FILE =	$(SRC_FILE:.c=.o)
@@ -150,6 +163,8 @@ CRT_DIR =	core 						\
 		 	eval 						\
 		 	readline 					\
 		 	parser 						\
+		 	hashtable					\
+			jobctl						\
 		 	prompt 						\
 		 	hashtable 
 

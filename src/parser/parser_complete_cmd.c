@@ -70,8 +70,8 @@ int	expect_list_suffix(t_parser *parser)
 	{
 		if ((ret = expect_and_or(parser)))
 		{
-			parser->current = backtrack;
 			remove_last_node(parser);
+			parser->current = backtrack;
 			return (ret);
 		}
 		if ((ret = expect_list_suffix(parser)) != SYNERR)

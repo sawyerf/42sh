@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/14 16:05:48 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/04 19:46:34 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FT_EVAL_H
 
 # include "sh_core.h"
+# include "jobctl.h"
 # include <fcntl.h>
 
 # define PIPEFAIL 20
@@ -33,6 +34,8 @@ typedef struct			s_ast_node
 	struct s_simple_cmd	*pipeline;
 	int					async;
 	int					exit_status;
+	t_token				*start;
+	t_token				*end;
 	struct s_ast_node	*head;
 	struct s_ast_node	*left;
 	struct s_ast_node	*right;
@@ -51,6 +54,9 @@ typedef struct			s_cmd_tab
 	struct s_cmd_tab	*previous;
 }						t_cmd_tab;
 
+int						launch_command(t_cmd_tab *cmd, t_job *job);
+
+
 t_cmd_tab				*expand_pipeline(t_simple_cmd *cmd_lst);
 void					restore_fd(t_list *to_close);
 void					close_save(void);
@@ -59,9 +65,10 @@ int						eval_tree(t_ast_node *tree);
 void					add_to_tree(t_ast_node **head, t_ast_node *to_add);
 int						bin_pathfinder(t_cmd_tab *cmd, char *path);
 int						spawn_in_pipe(t_cmd_tab *cmd);
-int						spawn_command(t_cmd_tab *cmd);
-int						exec_pipeline(t_ast_node *tree);
-void					wait_wrapper(t_cmd_tab *cmd, pid_t pid);
+int						spawn_command(t_cmd_tab *cmd, t_job *job);
+int						eval_pipe(t_cmd_tab *pipe, t_job *job);
+int						exec_pipeline(t_ast_node *tree, t_job *job);
+void					wait_job(t_job *job);
 int						is_builtin(t_cmd_tab *cmd);
 void					free_cmd_tab(t_cmd_tab *cmd);
 void					free_cmd_tab_lst(t_cmd_tab *cmd);

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 20:40:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/09 20:53:50 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/05/04 20:02:18 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,21 @@
 int	expect_and_or(t_parser *parser)
 {
 	t_token *backtrack;
+	t_token *start;
 	int		ret;
 
 	backtrack = parser->current;
+	start = parser->current;
 	if (!(ret = expect_pipeline(parser)))
 	{
 		if ((ret = expect_and_or_suffix(parser)) != SYNERR)
+		{
+			parser->start = start;
+			parser->end = parser->current;
 			return (ret);
+		}
+		parser->start = start;
+		parser->end = parser->current;
 		return (0);
 	}
 	parser->current = backtrack;
@@ -69,7 +77,7 @@ int	expect_pipeline(t_parser *parser)
 			return (MEMERR);
 		if (((ret = expect_pipeline_suffix(parser)) != SYNERR) && (ret))
 			return (ret);
-		if (tree_add_pipeline(parser) == MEMERR)
+		if (tree_add_pipeline(parser, backtrack) == MEMERR)
 			return (MEMERR);
 		return (0);
 	}

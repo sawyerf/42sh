@@ -16,15 +16,19 @@
 
 t_builtin	g_array[] =\
 {ft_echo, change_dir, setenv_wrapper, ft_unsetenv, ft_env, ft_exit, ft_set,
-ft_unset, fc, hash, type, alias, unalias, export};
+ft_unset, fc, hash, type, alias, unalias, export, jobs, fg, bg};
 char		*g_builtins[] =\
 {"echo", "cd", "setenv", "unsetenv", "env", "exit", "set", "unset", "fc",
-"hash", "type", "alias", "unalias", "export", NULL};
+"hash", "type", "alias", "unalias", "export", "jobs", "fg", "bg", NULL};
 
 int				is_builtin(t_cmd_tab *cmd)
-{
-	t_list	*save_head;
-	int		i;
+{/*
+//	static t_builtin	array[] = {ft_echo, change_dir, setenv_wrapper,
+				ft_unsetenv, ft_env, ft_exit, ft_set, ft_unset, fc, hash, jobs, fg, bg};
+	static	char		*builtins[] = {"echo", "cd", "setenv", "unsetenv",
+				"env", "exit", "set", "unset", "fc", "hash", "jobs", "fg", "bg", NULL};*/
+	int					i;
+	t_list				*save_head;
 
 	save_head = NULL;
 	if ((i = ft_tabcmp(g_builtins, cmd->av[0])) != -1)

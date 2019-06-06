@@ -1,43 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util.c                                             :+:      :+:    :+:   */
+/*   make_job.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/07 16:10:23 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/27 16:45:53 by ktlili           ###   ########.fr       */
+/*   Created: 2019/06/01 18:48:07 by ktlili            #+#    #+#             */
+/*   Updated: 2019/06/01 18:48:21 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh_core.h"
+#include "jobctl.h"
 
-int			add_slash(char **path)
+int		setpgid_wrap(pid_t pid, t_job *job)
 {
-	int		len;
-	char	*tmp;
+	if (!pid)
+		pid = getpid();
+	if (!job->pgid)
+		job->pgid = pid;
+	if (setpgid(pid, job->pgid) == -1)
+		return (-1);
+	return (0);	
 
-	len = ft_strlen(*path);
-	if ((len != 0) && ((*path)[len - 1] != '/'))
-	{
-		if (!(tmp = ft_strjoin(*path, "/")))
-			return (MEMERR);
-		ft_strdel(path);
-		*path = tmp;
-	}
-	return (0);
 }
 
-int			ft_cmptab(char **tab, char *str)
+t_job	*make_job(int fg)
 {
-	int	i;
-
-	i = 0;
-	while (tab[i] != NULL)
-	{
-		if (!ft_strcmp(tab[i], str))
-			return (i);
-		i++;
-	}
-	return (-1);
+	t_job	*job;
+	
+	if (!(job = ft_memalloc(sizeof(t_job))))
+		return (NULL);
+	ft_bzero(job, sizeof(t_job));
+	if (fg)
+		job->fg = 1;
+	return (job);
 }

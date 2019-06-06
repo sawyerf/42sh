@@ -29,7 +29,7 @@ int		add_redir_lst(t_redir *to_add, t_redir **head);
 int		tree_add_nl(t_parser *parser);
 int		tree_add_sep(t_parser *parser);
 int		tree_add_and_or(t_parser *parser);
-int		tree_add_pipeline(t_parser *parser);
+int		tree_add_pipeline(t_parser *parser, t_token *start);
 void	add_to_tree_sep(t_ast_node **head, t_ast_node *to_add);
 int		dispatch_errors(int errnum, t_parser parser);
 void	print_token(t_token *t);
