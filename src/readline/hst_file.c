@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 18:10:27 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/12 16:13:13 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/06 17:01:45 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	hstaddfile(char **env)
 
 	path = NULL;
 	if (!(home = envchrr(env, "HOME"))
-		|| !(path = ft_zprintf("%s/%s", home, ".21sh_history")))
+		|| !(path = ft_zprintf("%s/%s", home, ".42sh_history")))
 		return ;
 	fd = open(path, O_RDWR | O_APPEND | O_CREAT, 0600);
 	ft_strdel(&path);

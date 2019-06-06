@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 21:17:33 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/03 19:55:38 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/06 23:02:32 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,16 @@ void	rdladdword(t_rdl *rdl, char	*s, char c)
 {
 	while (*s)
 	{
-		if (ft_cisin("\n\t\r", *s))
+		if (c == 0 && *s == '\n')
+		{
+			rdladdstr(rdl, "\\");
+			*s = 'n';
+		}
+		else if (ft_cisin("\t\r", *s))
 		{
 			rdladd(rdl, '\\');
-			*s = (*s == '\n') ? 'n' : *s;
-			*s = (*s == '\t') ? 't' : *s;
 			*s = (*s == '\r') ? 'r' : *s;
+			*s = (*s == '\t') ? 't' : *s;
 		}
 		else if (!c && ft_cisin("&|*$'\";\\`~<>{ ", *s))
 			rdladd(rdl, '\\');

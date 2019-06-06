@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 15:15:46 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/04 17:54:18 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/06 22:53:29 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	rdldel(t_rdl *rdl, int curs)
 		(curs < rdl->curs && rdl->curs <= 0)
 		|| (curs >= rdl->curs && rdl->size == curs))
 		return ;
+	left(rdl, rdl->real);
 	ft_strcpy(rdl->str + curs, rdl->str + curs + 1);
 	rdl->size--;
 	if (curs < rdl->curs)

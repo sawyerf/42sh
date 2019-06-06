@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 18:29:28 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/12 18:07:49 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/06 20:13:34 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int		ctrlr(t_rdl *rdl, char *str)
 	if (stat == 2 || stat == 4)
 		rdladd(rdl, '\n');
 	ft_strdel(&hst.str);
+	ft_strdel(&hst.prompt);
 	g_hst[3] = NULL;
 	return (stat - 1);
 }
