@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/07 15:47:23 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/07 16:34:00 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,4 +157,5 @@ int					acp_multichc(t_rdl *rdl, t_list *lst);
 
 char				cmdisin(char *cmd);
 
+int		lenbefore(t_rdl *rdl, int real);
 #endif

@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 18:17:25 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/07 16:08:14 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/07 16:51:55 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,23 @@ int		lenbefore(t_rdl *rdl, int real)
 
 int		up(t_rdl *rdl, int i)
 {
-	int count;
+	int len;
+	int len2;
 
-	count = 0;
-	while (count < i)
+	while (i)
 	{
-		tgpstr("up");
-		rdl->real -= rdl->col;
-		count++;
+		len = lenbefore(rdl, rdl->real);
+		if (rdl->real - len < 0)
+			return (0);
+		left(rdl, len);
+		len2 = lenbefore(rdl, rdl->real - 1) + 1;
+		if (len2 - len > 0 && rdl->real - len2 - len >= 0)
+			left(rdl, len2 - len);
+		else if (len2 < len)
+			left(rdl, 1);
+		i--;
 	}
-	return (rdl->col * -i);
+	return (0);
 }
 
 int		down(t_rdl *rdl, int i)

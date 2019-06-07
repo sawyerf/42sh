@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 21:15:40 by apeyret           #+#    #+#             */
-/*   Updated: 2019/03/06 18:09:35 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/07 16:51:56 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,12 @@ int		move_curs(t_rdl *rdl, char *buf)
 		left(rdl, 1);
 		rdl->curs--;
 	}
-	else if (!ft_strcmp(K_SDOW, buf) && rdl->curs + rdl->col < rdl->size)
-		rdl->curs += down(rdl, 1);
-	else if (!ft_strcmp(K_SUP, buf) && rdl->curs - rdl->col >= 0)
-		rdl->curs += up(rdl, 1);
+	else if (!ft_strcmp(K_SDOW, buf))
+		;
+	else if (!ft_strcmp(K_SUP, buf))
+	{
+		up(rdl, 1);
+		rdl->curs = rdl->real;
+	}
 	return (0);
 }
