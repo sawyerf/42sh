@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:49:02 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/06 22:53:29 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/07 16:19:09 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	reprint(t_rdl *rdl, int curs)
 	rdl->real = rdl->size;
 	lastcol(rdl);
 	left(rdl, rdl->real - curs);
+	lastcol(rdl);
 }
 
 int		gtbegin(t_rdl *rdl)

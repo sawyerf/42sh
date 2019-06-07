@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 18:28:09 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/01 18:28:33 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/07 15:48:05 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@ int		end(t_rdl *rdl, char *buf)
 	(void)buf;
 	right(rdl, rdl->size - rdl->curs);
 	rdl->curs += rdl->size - rdl->curs;
+	return (0);
+}
+
+int		addn(t_rdl *rdl, char *buf)
+{
+	(void)buf;
+	rdladd(rdl, '\n');
 	return (0);
 }
 

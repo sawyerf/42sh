@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:47:43 by apeyret           #+#    #+#             */
-/*   Updated: 2019/05/27 17:46:29 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/07 15:47:27 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_key	g_key[] =\
 	{K_TAB, &autocompl},
 	{K_ENTR, &enter},
 	{K_ENTD, &enter},
+	{K_CTRN, &addn},
 	{NULL, &enter}
 };
 

@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 18:17:25 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/06 22:49:25 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/07 16:08:14 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int		lenbefore(t_rdl *rdl, int real)
 		return (1);
 	while (i < real && rdl->str[i])
 	{
-		if (nb == i && rdl->col && !((rdl->lpro + i) % (rdl->col)))
+		if (nb == i && (rdl->col - 1) && !((rdl->lpro + i) % (rdl->col - 1)))
 			nb = -1;
-		else if (rdl->col && nb && !(nb % rdl->col))
+		else if ((rdl->col - 1) && nb && !(nb % (rdl->col - 1)))
 			nb = -1;
 		else if (rdl->str[i] == '\n')
 			nb = -1;
@@ -66,10 +66,16 @@ int		down(t_rdl *rdl, int i)
 
 void	lastcol(t_rdl *rdl)
 {
+	int len;
+
 	if (rdl->real - 1>= 0 && rdl->real - 1< rdl->size && rdl->str[rdl->real - 1] == '\n')
 		return ;
-	if (rdl->col && !(lenbefore(rdl, rdl->real) % (rdl->col)))
+	len = lenbefore(rdl, rdl->real);
+	if (rdl->col && !(len % (rdl->col)))
+	{
+		//ft_printf("[%d/%d]\n", len, rdl->col);
 		tgpstr("do");
+	}
 }
 
 

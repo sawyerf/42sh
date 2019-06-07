@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/03 22:09:06 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/07 15:47:23 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 # define K_CTRD	"\4"
 # define K_ENTR	"\12"
 # define K_CTRL	"\14"
+# define K_CTRN	"\16"
 # define K_ENTD	"\r"
 # define K_CTRR	"\22"
 # define K_CTRP	"\20"
@@ -111,6 +112,7 @@ int					ctrlr(t_rdl *rdl, char *buf);
 t_list				*get_cplenv(char *match);
 int					k_hstret(t_rdl *rdl, char *buf);
 int					ctrll(t_rdl *rdl, char *buf);
+int					addn(t_rdl *rdl, char *buf);
 
 void				reprint(t_rdl *rdl, int curs);
 int					is_special(char *buf);
