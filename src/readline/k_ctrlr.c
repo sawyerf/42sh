@@ -18,30 +18,70 @@ extern t_key	g_khst[];
 void	printsearch(t_rdl *hst)
 {
 	char	*s;
+	int		size;
 
-	left(hst, hst->real + hst->lpro);
+	s = hst->str;
+	hst->str = hst->paste;
+	size = hst->size;
+	hst->size = ft_strlen(hst->paste);
+	left(hst, hst->real - 1);
+	hst->size = size;
+	hst->str = s;
 	if (g_hst[3])
 		s = g_hst[3]->content;
 	else
 		s = NULL;
-	tgpstr("cd");
+	ft_strdel(&hst->paste);
 	if (!s)
-		hst->vcurs = ft_printf("%s%s': %s", hst->prompt, hst->str, "");
+		hst->paste = ft_zprintf("%s': %s", hst->str, "");
 	else
-		hst->vcurs = ft_printf("%s%s': %s", hst->prompt, hst->str, s);
-	hst->real = hst->vcurs - hst->lpro;
+		hst->paste = ft_zprintf("%s': %s", hst->str, s);
+	s = hst->str;
+	hst->str = hst->paste;
+	size = hst->size;
+	hst->size = ft_strlen(hst->paste);
+	reprint(hst, hst->size);
+	hst->real = hst->size;
+	hst->size = size;
+	hst->str = s;
 	lastcol(hst);
+}
+
+void	hstaddstr(t_rdl *rdl, char *str)
+{
+	int	count;
+	int len;
+
+	if (!str)
+		return ;
+	len = ft_strlen(str);
+	if (len + rdl->size > rdl->allo)
+	{
+		rdl->allo = rdl->size + len;
+		rdl_realloc(rdl);
+	}
+	ft_memmove(rdl->str + rdl->curs + len, rdl->str + rdl->curs,
+		rdl->size - rdl->curs);
+	count = 0;
+	while (str[count])
+	{
+		rdl->str[rdl->curs + count] = str[count];
+		count++;
+	}
+	rdl->size += len;
+	rdl->curs += len;
 }
 
 int		hstrouter(t_rdl *hst, char *buf)
 {
 	int ret;
 
+	ret = 0;
 	if (is_special(buf))
 		ret = special_key(hst, buf, g_khst);
 	else
 	{
-		ret = normal_key(hst, buf);
+		hstaddstr(hst, buf);
 		hstchc(hst->str);
 	}
 	printsearch(hst);

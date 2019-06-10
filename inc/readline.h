@@ -158,4 +158,5 @@ int					acp_multichc(t_rdl *rdl, t_list *lst);
 char				cmdisin(char *cmd);
 
 int		lenbefore(t_rdl *rdl, int real);
+void	rdl_realloc(t_rdl *rdl);
 #endif

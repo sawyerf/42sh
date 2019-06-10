@@ -31,7 +31,17 @@ t_key	g_khst[] =\
 int		hstdelcara(t_rdl *rdl, char *buf)
 {
 	(void)buf;
-	del_cara(rdl, buf);
+	int	curs;
+
+	curs = rdl->curs - 1;
+	if (curs > rdl->size || rdl->size < 0 ||
+		(curs < rdl->curs && rdl->curs <= 0)
+		|| (curs >= rdl->curs && rdl->size == curs))
+		return (0);
+	ft_strcpy(rdl->str + curs, rdl->str + curs + 1);
+	rdl->size--;
+	if (curs < rdl->curs)
+		rdl->curs--;
 	hstchc(rdl->str);
 	return (0);
 }

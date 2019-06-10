@@ -14,7 +14,6 @@
 
 void	reprint(t_rdl *rdl, int curs)
 {
-	(void)curs;
 	left(rdl, rdl->real + rdl->lpro);
 	tgpstr("cr");
 	tgpstr("cd");
