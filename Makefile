@@ -188,7 +188,7 @@ norm:
 $(NAME): $(OBJ)
 	@printf "\033[0;32m[42sh] Compilation [OK]\033[0;0m\n"
 	@make -C libft/
-	@$(CC) $(CFLAGS) -ltermcap $(DEBUG) $(OBJ) libft/libft.a -o $(NAME)
+	@$(CC) $(CFLAGS) -lncurses $(DEBUG) $(OBJ) libft/libft.a -o $(NAME)
 
 clean:
 	@make clean -C libft/

@@ -77,7 +77,10 @@ int		move_curs(t_rdl *rdl, char *buf)
 		rdl->curs--;
 	}
 	else if (!ft_strcmp(K_SDOW, buf))
-		;
+	{
+		down(rdl, 1);
+		rdl->curs = rdl->real;
+	}
 	else if (!ft_strcmp(K_SUP, buf))
 	{
 		up(rdl, 1);
