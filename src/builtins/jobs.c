@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 16:24:20 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/28 17:26:04 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/10 12:59:42 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@
 	j = g_sh.job_lst;
 	while (j)
 	{
-		chld = waitpid(-(j->pgid), &(j->status), WUNTRACED | WNOHANG | WCONTINUED);
+		chld = waitpid(-(j->pgid), &(j->status), WUNTRACED | WNOHANG);
 		if (WIFSIGNALED(j->status))
 		{
-//			ft_printf("x[%d] '%s' recieved signal %d\n", j->pgid, j->cmd_ln, WTERMSIG(j->status));
+			ft_printf("x[%d] '%s' recieved signal %d\n", j->pgid, j->cmd_ln, WTERMSIG(j->status));
 			j->completed = 1;
 		}
 		if ((chld > 0) && (WIFEXITED(j->status))) /* waitpid return 0 if child hasent changed state*/
@@ -34,7 +34,6 @@
 			j->stopped = 0;
 		j = j->next;		
 	}
-	ft_printf("--------------------\n");
 	return (0);
 }
 /* no malloc, null ret for inexistant job

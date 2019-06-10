@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 16:24:33 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/01 18:59:11 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/10 12:29:15 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		fg(t_cmd_tab *cmd)
 	else
 	{
 		j = jobs_conversion(cmd->av[1]);
-		if (j)
+		if ((j) && (!j->completed))
 			fg_job(j, 1);
 		else
 			ft_dprintf(STDERR_FILENO, "42sh: fg: '%s': no such job\n", cmd->av[1]);

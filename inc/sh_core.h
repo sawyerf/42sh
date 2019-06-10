@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/03 21:11:40 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/10 12:29:09 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,5 +121,6 @@ char					*make_cmdline(t_token *start, t_token *end, int last);
 void					del_job(t_job *j);
 void					clean_jobs(void);
 void					run_script(char *file);
+int						refresh_jobs(void);
 
 #endif

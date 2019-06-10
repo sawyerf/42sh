@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/01 18:48:03 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/01 18:48:04 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/10 13:03:57 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,18 @@ void	clean_jobs(void)
 	t_job *ptr;
 	t_job *save;
 
+	ft_printf("REFRESH\n");
+	refresh_jobs();
 	ptr = g_sh.job_lst;
 	while (ptr)
 	{
 		save = ptr->next;
-		if ((ptr->notified) && (ptr->completed))
+		if (ptr->completed)
+		{
+			if (!ptr->notified)
+				ft_printf("[%d] %d '%s' completed\n", ptr->job_id, ptr->pgid, ptr->cmd_ln);
 			del_job(ptr);
+		}
 		ptr = save;
 	}
 }

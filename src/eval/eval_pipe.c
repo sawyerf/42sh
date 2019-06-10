@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/01 18:22:01 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/10 12:29:12 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,23 +47,18 @@ int	pipe_recursion(t_cmd_tab *to, t_cmd_tab *from, t_job *job)
 	return (0);
 }
 
-void	cont_propagator(int signum)
-{
-	if (signum == SIGCONT)
-		kill(0, SIGCONT);
-}
-
 int	pipe_subshell(pid_t pid, t_cmd_tab *pipeln, t_job *job)
 {
 	int ret;
 
-	if ((g_sh.mode == INTERACTIVE) && (!job->pgid)
-		&& (setpgid_wrap(pid, job) == -1))
-		exit_wrap(MEMERR, pipeln);
-	if (job->fg)
-		tcsetpgrp(STDIN_FILENO, job->pgid);
+	if (g_sh.mode == INTERACTIVE)
+	{
+		if ((!job->pgid) && (setpgid_wrap(pid, job) == -1))
+			exit_wrap(MEMERR, pipeln);
+		if (job->fg) 
+			tcsetpgrp(STDIN_FILENO, job->pgid);
+	}
 	reset_sig();
-	//signal(SIGCONT, &cont_propagator); //tmp
 	if ((ret = pipe_recursion(pipeln->next, pipeln, job)))
 		exit_wrap(-1, pipeln);
 	/* update on last child status*/
