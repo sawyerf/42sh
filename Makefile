@@ -3,18 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: apeyret <apeyret@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/06/04 12:28:20 by juhallyn         ###   ########.fr        #
+#    Updated: 2019/06/11 19:42:53 by juhallyn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME =		42sh 
+NAME =		42sh
 
 CC =		gcc
 
-CFLAGS =	-I inc/ -I libft/inc/ -Wall -Wextra  #-g -fsanitize=address #-Werror -ggdb
+CFLAGS =	-I inc/ -I libft/inc/ -Wall -Wextra # -g3 -fsanitize=address #-Werror -ggdb
 
 INC_DIR =	inc
 
@@ -129,7 +129,7 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			readline/struct_rdladd.c	\
 			readline/termget.c			\
 			readline/terminit.c			\
-			readline/tools.c			
+			readline/tools.c
 
 OBJ_DIR =	.obj
 OBJ_FILE =	$(SRC_FILE:.c=.o)
@@ -141,7 +141,7 @@ CRT_DIR =	core 						\
 		 	eval 						\
 		 	readline 					\
 		 	parser 						\
-		 	hashtable 
+		 	hashtable
 
 SRC = 		$(addprefix $(SRC_DIR)/,$(SRC_FILE))
 INC = 		$(addprefix $(INC_DIR)/,$(INC_FILE))
@@ -164,7 +164,7 @@ $(NAME): $(OBJ)
 	@printf "\033[0;32m[42sh] Compilation [OK]\033[0;0m\n"
 	@make -C libft/
 	#@$(CC) $(CFLAGS) -lncurses $(DEBUG) $(OBJ) libft/libft.a -I logger logger/liblogger.a -o $(NAME)
-	
+
 	@$(CC) $(CFLAGS) $(DEBUG) $(OBJ) libft/libft.a -I logger logger/liblogger.a -lncurses   -o $(NAME)
 
 clean:

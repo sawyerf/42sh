@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/04 18:38:33 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/06/11 19:56:42 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ char			*check_second_exp_var(char *zone)
 	char	*var_name;
 
 	var_name = NULL;
-	var_name = ft_strsub(zone, 1, (ft_strlen(zone) - 2));
+	if (ft_strlen(zone) > 2)
+		var_name = ft_strsub(zone, 1, (ft_strlen(zone) - 2));
 	return (var_name);
 }
 
@@ -125,7 +126,6 @@ char			*substitute_word_if_null(char *cursor, char *zone)
 // ${parameter:=word}
 char			*assign_word_if_null(char *cursor, char *zone)
 {
-
 	char	*var_name;
 	char	*env_value;
 
@@ -167,7 +167,6 @@ char			*classic_sub(char *cursor)
 // ${parameter:?msg_err}
 char			*test_parameter(char *cursor, char *zone)
 {
-	log_warn("----------- test_parameter -------------");
 	char		*var_name;
 	char		*env_value;
 	char		*error_msg;
@@ -178,8 +177,6 @@ char			*test_parameter(char *cursor, char *zone)
 	var_name = get_var_exp(cursor);
 	env_value = ft_strdup(get_env_value(var_name));
 	error_msg = ft_strsub(zone, 1, ft_strlen(zone) - 2);
-	log_debug("error msg : [%s]", error_msg);
-	log_debug("env_value : [%s]", error_msg);
 	if (!env_value)
 	{
 		if (!error_msg || ft_strlen(error_msg) == 0)
@@ -193,6 +190,29 @@ char			*test_parameter(char *cursor, char *zone)
 	if (error_msg)
 		ft_strdel(&error_msg);
 	return (env_value);
+}
+
+// ${parameter:+word}
+char			*sub_word_if_not_null(char *cursor, char *zone)
+{
+	char	*var_name;
+	char	*env_value;
+	char	*word;
+
+	cursor++;
+	word = NULL;
+	word = check_second_exp_var(zone);
+	var_name = get_var_exp(cursor);
+	env_value = ft_strdup(get_env_value(var_name));
+	if (env_value)
+	{
+		ft_strdel(&env_value);
+		ft_strdel(&var_name);
+		return (word);
+	}
+	ft_strdel(&var_name);
+	ft_strdel(&word);
+	return (NULL);
 }
 
 char			*exp_sup(char *cursor, bool classic_substitute)
@@ -211,20 +231,13 @@ char			*exp_sup(char *cursor, bool classic_substitute)
 	{
 		previous_char = *(tmp - 1);
 		if (previous_char == ':' && (*tmp) == '-')
-		{
-			result = substitute_word_if_null(cursor, tmp);
-			return (result);
-		}
+			return (substitute_word_if_null(cursor, tmp));
 		if (previous_char == ':' && (*tmp) == '=')
-		{
-			result = assign_word_if_null(cursor, tmp);
-			return (result);
-		}
+			return (assign_word_if_null(cursor, tmp));
 		if (previous_char == ':' && (*tmp) == '?')
-		{
-			result = test_parameter(cursor, tmp);
-			return (result);
-		}
+			return (test_parameter(cursor, tmp));
+		if (previous_char == ':' && (*tmp) == '+')
+			return (sub_word_if_not_null(cursor, tmp));
 		tmp++;
 	}
 	return (classic_sub(cursor));
