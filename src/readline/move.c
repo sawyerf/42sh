@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 18:17:25 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/07 16:51:55 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/11 13:41:53 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	lastcol(t_rdl *rdl)
 {
 	int len;
 
-	if (rdl->real - 1>= 0 && rdl->real - 1< rdl->size && rdl->str[rdl->real - 1] == '\n')
+	if (rdl->real - 1 >= 0 && rdl->real - 1 < rdl->size && rdl->str[rdl->real - 1] == '\n')
 		return ;
 	len = lenbefore(rdl, rdl->real);
 	if (rdl->col && !(len % (rdl->col)))
