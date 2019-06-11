@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 16:08:26 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/12 17:45:17 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/11 14:53:09 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int			sh_readfile(char *prompt, char **str)
 		return (-1);
 	if (ret == 0)
 		return (1);
-	hstadd(line);
 	if (!(tmp = ft_strjoin(line, "\n")))
 		return (MEMERR);
 	ft_strdel(&line);

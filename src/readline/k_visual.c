@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 12:42:13 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/16 19:37:48 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/11 14:07:21 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ t_key	g_vskey[] =\
 	{K_CTRD, vm_del},
 	{K_HOME, vm_begin},
 	{K_END, vm_end},
+	{K_CTRA, vm_begin},
+	{K_CTRE, vm_end},
 	{NULL, vm_move}
 };
 

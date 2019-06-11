@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/07 16:34:00 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/11 14:01:36 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # define K_CTRA	"\1"
 # define K_CTRC	"\3"
 # define K_CTRD	"\4"
+# define K_CTRE	"\5"
 # define K_ENTR	"\12"
 # define K_CTRL	"\14"
 # define K_CTRN	"\16"

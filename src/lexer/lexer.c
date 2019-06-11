@@ -6,11 +6,12 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/29 18:18:22 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/11 14:42:23 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_lexer.h"
+#include "readline.h"
 
 t_lx_fn	g_lx_fn[] =\
 {
@@ -91,5 +92,7 @@ int			ft_lexer(t_lexer *lexer_state)
 			lexer_state->cursor = lexer_state->cursor + 1;
 	}
 	lex_add_tk(lexer_state, new_token(EOI));
+	if (g_sh.mode == INTERACTIVE)
+		hstadd(lexer_state->line);
 	return (0);
 }

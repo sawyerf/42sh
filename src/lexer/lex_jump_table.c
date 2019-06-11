@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/14 18:58:40 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/11 14:32:53 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	request_new_line(t_lexer *lx_st)
 {
 	t_read_fn	read_fn;
 	char		*new_line;
+	char		*tmp;
 	int			ret;
 
 	read_fn = readline;
@@ -25,11 +26,15 @@ int	request_new_line(t_lexer *lx_st)
 	if (g_sh.mode != INTERACTIVE)
 		read_fn = sh_readfile;
 	ret = read_fn("> ", &new_line);
-	if (ret)
+	if (ret || !new_line)
 		return (ret);
-	free(lx_st->line);
-	lx_st->line = new_line;
-	lx_st->cursor = new_line;
+	tmp = ft_zprintf("%s%s", lx_st->line, new_line);
+	ft_strdel(&new_line);
+	if (!tmp)
+		return (MEMERR);
+	lx_st->cursor = tmp + ft_strlen(lx_st->line);
+	ft_strdel(&lx_st->line);
+	lx_st->line = tmp;
 	return (0);
 }
 

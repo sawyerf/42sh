@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/04 17:49:00 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/11 14:52:15 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,17 @@ void		shrc(void)
 {
 	char	*path;
 	char	*home;
+	int		mode;
 
 	if (!(home = envchrr(g_sh.env, "HOME"))
 		|| !(path = ft_zprintf("%s/%s", home, ".42shrc")))
 		return ;
+	mode = g_sh.mode;
+	g_sh.mode = MODEFILE;
 	run_script(path);
 	ft_strdel(&path);
+	g_sh.mode = mode;
 }
-
 
 int			main(int ac, char **av, char **env)
 {
