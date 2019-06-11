@@ -31,7 +31,6 @@
 ## Bug
 |check|     `command`     |                result               | info complementaire |
 |:---:|:-----------------:|:-----------------------------------:|:-------------------:|
-|     | `"\t"`            | le token doit contnir \t et non un tab |||
 |     | `ls \ <tab>`      | ca ne comprends le ' '              |||
 |     | `ls "file <tab>`  | ne considere pas le debut des quote |||
 |  ✓  | `ls "<tab>`       | ne referme pas les quotes           |||
