@@ -40,8 +40,6 @@ typedef struct			s_ast_node
 
 typedef struct			s_cmd_tab
 {
-	char				*var_name;
-	char				*error_msg;
 	char				*full_path;
 	char				**av;
 	char				**process_env;

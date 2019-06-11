@@ -83,7 +83,7 @@ DIRDEP	=	.deps
 # - Set the default external programs.                                         #
 # ---------------------------------------------------------------------------- #
 
-CC		=	clang
+CC		=	gcc
 AR		=	ar
 ARFLAGS	=	rc
 RM		=	rm -f

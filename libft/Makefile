@@ -12,7 +12,7 @@
 
 NAME = libft.a
 
-CC = clang
+CC = gcc
 
 CFLAGS = -I inc/ -Wall -Werror -Wextra 
 

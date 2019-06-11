@@ -25,8 +25,6 @@ int		br_print(int err, t_cmd_tab *cmd)
 			ft_dprintf(2, "21sh: %s: Permission denied\n", cmd->full_path);
 		else if (err == br_ISDIR)
 			ft_dprintf(2, "21sh: %s: is a directory\n", cmd->full_path);
-		else if (err == br_PARAMETER)
-			ft_dprintf(2, "21sh: %s: %s", cmd->var_name, cmd->error_msg);
 	}
 	else
 	{
@@ -41,8 +39,6 @@ int		br_print(int err, t_cmd_tab *cmd)
 		return (126);
 	else if (err == br_NOTFOUND)
 		return (127);
-	else if (err == br_PARAMETER)
-		return (1);
 	return (err);
 }
 

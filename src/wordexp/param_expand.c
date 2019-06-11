@@ -171,7 +171,6 @@ char			*test_parameter(char *cursor, char *zone)
 	char		*var_name;
 	char		*env_value;
 	char		*error_msg;
-	t_cmd_tab	tmp;
 
 	cursor++;
 	error_msg = NULL;
@@ -179,11 +178,14 @@ char			*test_parameter(char *cursor, char *zone)
 	var_name = get_var_exp(cursor);
 	env_value = ft_strdup(get_env_value(var_name));
 	error_msg = ft_strsub(zone, 1, ft_strlen(zone) - 2);
+	log_debug("error msg : [%s]", error_msg);
+	log_debug("env_value : [%s]", error_msg);
 	if (!env_value)
 	{
-		tmp.error_msg = error_msg;
-		tmp.var_name = var_name;
-		br_print(5, &tmp);
+		if (!error_msg || ft_strlen(error_msg) == 0)
+			ft_dprintf(2, "21sh: %s: paramètre vide ou non défini", var_name);
+		else
+			ft_dprintf(2, "21sh: %s: %s", var_name, error_msg);
 		g_sh.status = 1;
 	}
 	if (var_name)

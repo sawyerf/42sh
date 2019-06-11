@@ -12,7 +12,7 @@
 
 NAME =		42sh 
 
-CC =		clang	
+CC =		gcc
 
 CFLAGS =	-I inc/ -I libft/inc/ -Wall -Wextra  #-g -fsanitize=address #-Werror -ggdb
 
@@ -163,7 +163,9 @@ norm:
 $(NAME): $(OBJ)
 	@printf "\033[0;32m[42sh] Compilation [OK]\033[0;0m\n"
 	@make -C libft/
-	@$(CC) $(CFLAGS) -I logger logger/liblogger.a -ltermcap $(DEBUG) $(OBJ) libft/libft.a -o $(NAME)
+	#@$(CC) $(CFLAGS) -lncurses $(DEBUG) $(OBJ) libft/libft.a -I logger logger/liblogger.a -o $(NAME)
+	
+	@$(CC) $(CFLAGS) $(DEBUG) $(OBJ) libft/libft.a -I logger logger/liblogger.a -lncurses   -o $(NAME)
 
 clean:
 	@make clean -C libft/
