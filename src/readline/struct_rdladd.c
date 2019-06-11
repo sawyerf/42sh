@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 18:19:37 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/07 16:12:39 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/11 18:13:17 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	rdladdstr(t_rdl *rdl, char *str)
 		rdl->allo = rdl->size + len;
 		rdl_realloc(rdl);
 	}
-	left(rdl, rdl->real);
+	left(rdl, rdl->real + rdl->lpro);
 	ft_memmove(rdl->str + rdl->curs + len, rdl->str + rdl->curs,
 		rdl->size - rdl->curs);
 	count = 0;
@@ -57,7 +57,7 @@ void	rdladd(t_rdl *rdl, char c)
 		return ;
 	if (rdl->allo == rdl->size)
 		rdl_realloc(rdl);
-	left(rdl, rdl->real);
+	left(rdl, rdl->real + rdl->lpro);
 	ft_memmove(rdl->str + rdl->curs + 1, rdl->str + rdl->curs,
 		rdl->size - rdl->curs);
 	rdl->str[rdl->curs] = c;

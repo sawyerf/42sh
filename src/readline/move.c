@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 18:17:25 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/11 13:41:53 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/11 19:02:47 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		lenbefore(t_rdl *rdl, int real)
 
 	i = 0;
 	nb = 0;
-	if (real < 0)
+	if (real < 0 || real > rdl->size)
 		return (1);
 	while (i < real && rdl->str[i])
 	{
@@ -46,7 +46,7 @@ int		lenafter(t_rdl *rdl, int real)
 	i = real;
 	nb = lenbefore(rdl, real);
 	aft = 0;
-	if (real < 0)
+	if (real < 0 || rdl->real > rdl->size)
 		return (1);
 	while (rdl->str[i])
 	{
@@ -129,25 +129,28 @@ int		left(t_rdl *rdl, int i)
 	count = 0;
 	while (count < i)
 	{
-		if (rdl->real - 1 >= 0 && rdl->size > rdl->real - 1 && rdl->str[rdl->real - 1] == '\n')
+		if ((rdl->real - 1 >= 0 && rdl->size > rdl->real - 1 && rdl->str[rdl->real - 1] == '\n')
+				|| (rdl->col && !lenbefore(rdl, rdl->real)))
 		{
 			tgpstr("up");
 			cc = lenbefore(rdl, rdl->real - 1);
-			while (cc)
+			if (cc < i - count)
+			{
+				count += cc;
+				rdl->real -= cc;
+				cc = 0;
+			}
+			while (cc > 0)
 			{
 				write(1, K_RGHT, 3);
 				cc--;
 			}
 		}
-		else if (rdl->col && !(lenbefore(rdl, rdl->real) % (rdl->col)))
+		else if ((cc = lenbefore(rdl, rdl->real)) && cc <= i - count)
 		{
-			tgpstr("up");
-			cc = 0;
-			while (rdl->col > cc)
-			{
-				write(1, K_RGHT, 3);
-				cc++;
-			}
+			tgpstr("cr");
+			count += cc - 1;
+			rdl->real -= (cc - 1);
 		}
 		else
 			write(1, K_LEFT, 3);
@@ -160,18 +163,28 @@ int		left(t_rdl *rdl, int i)
 int		right(t_rdl *rdl, int i)
 {
 	int	count;
+	int cc;
+	int lol;
 
+	lol = 0;
 	count = 0;
 	while (count < i)
 	{
-		if (rdl->real >= 0 && rdl->real < rdl->size && rdl->str[rdl->real] == '\n')
+		if ((rdl->real >= 0 && rdl->real < rdl->size && rdl->str[rdl->real] == '\n')
+				|| (rdl->col && !lenbefore(rdl, rdl->real + 1)))
 			tgpstr("do");
-		else if (rdl->col && rdl->real > 0 && !(lenbefore(rdl, rdl->real + 1) % (rdl->col)))
+		else if ((cc = lenafter(rdl, rdl->real) + 1) && cc <= i - count)
+		{
+			count += (cc - 1);
+			rdl->real += (cc - 1);
 			tgpstr("do");
+		}
 		else
 			write(1, K_RGHT, 3);
 		rdl->real++;
 		count++;
+		lol++;
 	}
+	//ft_printf("[%d]\n", lol);
 	return (i);
 }

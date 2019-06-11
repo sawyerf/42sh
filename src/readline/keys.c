@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:47:43 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/11 14:05:03 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/11 18:00:12 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,7 @@ int		special_key(t_rdl *rdl, char *buf, t_key *key)
 
 int		normal_key(t_rdl *rdl, char *buf)
 {
-	int count;
-
-	count = 0;
-	while (buf[count])
-	{
-		rdladd(rdl, buf[count]);
-		count++;
-	}
+	rdladdstr(rdl, buf);
 	return (0);
 }
 
