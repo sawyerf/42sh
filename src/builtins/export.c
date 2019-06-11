@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 15:58:01 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/04 17:17:59 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/11 16:44:33 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,26 @@ void	print_export(char **env)
 	}
 }
 
+int		cexport(char *var)
+{
+	if (!var)
+		return (1);
+	if (ft_cisin(var, '='))
+	{
+		if (valid_alias(var))
+		{
+			g_sh.env = csetenv(g_sh.env, var);
+			if (varchr(g_sh.local, var))
+				g_sh.local = csetenv(g_sh.local, var);
+		}
+		else 
+			return (1);
+	}
+	else if (varchr(g_sh.local, var))
+		g_sh.env = envaddstr(g_sh.env, var, varchr(g_sh.local, var));
+	return (0);
+}
+
 int		export(t_cmd_tab *cmd)
 {
 	char	**av;
@@ -87,19 +107,8 @@ int		export(t_cmd_tab *cmd)
 	}
 	while (*av)
 	{
-		if (ft_cisin(*av, '='))
-		{
-			if (valid_alias(*av))
-			{
-				g_sh.env = csetenv(g_sh.env, *av);
-				if (varchr(g_sh.local, *av))
-					g_sh.local = csetenv(g_sh.local, *av);
-			}
-			else 
-				ft_dprintf(2, "export: `%s': invalid alias name\n", *av);
-		}
-		else if (varchr(g_sh.local, *av))
-			g_sh.env = envaddstr(g_sh.env, *av, varchr(g_sh.local, *av));
+		if (cexport(*av))
+			ft_dprintf(2, "export: `%s': invalid alias name\n", *av);
 		av++;
 	}
 	return (0);

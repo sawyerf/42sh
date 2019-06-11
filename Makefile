@@ -6,7 +6,7 @@
 #    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/06/04 16:10:12 by apeyret          ###   ########.fr        #
+#    Updated: 2019/06/11 17:03:33 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME =		42sh
 
 CC =		clang	
 
-CFLAGS =	-I inc/ -I libft/inc/ -Wall -Werror -Wextra -ggdb
+CFLAGS =	-I inc/ -I libft/inc/ -Wall -Werror -Wextra
 
 INC_DIR =	inc
 
@@ -60,7 +60,6 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			builtins/type.c				\
 			core/clean_path.c			\
 			core/env_handler.c			\
-			core/ft_env.c				\
 			core/ft_env_tools.c			\
 			core/main.c					\
 			core/path_tools.c			\

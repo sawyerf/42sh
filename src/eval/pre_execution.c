@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 20:19:10 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/04 16:12:26 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/11 16:50:36 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 #include "builtins.h"
 
 t_builtin	g_array[] =\
-{ft_echo, change_dir, setenv_wrapper, ft_unsetenv, ft_env, ft_exit, ft_set,
+{ft_echo, change_dir, setenv_wrapper, ft_unsetenv, ft_exit, ft_set,
 ft_unset, fc, hash, type, alias, unalias, export, jobs, fg, bg};
 char		*g_builtins[] =\
-{"echo", "cd", "setenv", "unsetenv", "env", "exit", "set", "unset", "fc",
+{"echo", "cd", "setenv", "unsetenv", "exit", "set", "unset", "fc",
 "hash", "type", "alias", "unalias", "export", "jobs", "fg", "bg", NULL};
 
 int				is_builtin(t_cmd_tab *cmd)

@@ -6,11 +6,12 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:49:43 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/03 16:43:16 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/11 16:46:16 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline.h"
+#include "sh_core.h"
 #include <sys/ioctl.h>
 
 int		termreset(struct termios *save)
@@ -40,15 +41,14 @@ void	printmagicdollar(void)
 
 int		terminit(struct termios *save)
 {
-	char			*tname;
 	char			buf[2048];
+	char			tname[1024];
 	struct termios	term;
 
-	if (!(tname = getenv("TERM")))
-	{
-		ft_dprintf(2, "21sh: TERM not set\n");
-		return (0);
-	}
+	tname[0] = 0;
+	if (!get_env_value("TERM"))
+		cexport("TERM=xterm-256color");
+	ft_strcpy(tname, get_env_value("TERM"));
 	tgetent(buf, tname);
 	if (save)
 		if (tcgetattr(0, save) == -1)
