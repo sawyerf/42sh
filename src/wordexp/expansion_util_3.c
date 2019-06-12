@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 21:42:35 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/11 19:14:09 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/06/12 14:55:15 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	delete_varname(char *cursor)
 	int				trunc;
 	int				i;
 	bool			brackets;
-	const char		*valid = "-:=?+";
+	const char		*valid = "#-:=?+";
 
 	i = 1;
 	trunc = 1;

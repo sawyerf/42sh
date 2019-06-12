@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/11 19:56:42 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/06/12 14:53:28 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,29 @@ char			*assign_sub_var(char *var_name, char *zone)
 	g_sh.local = envaddstr(g_sh.local, var_name, result);
 	return (result);
 }
+
+
+
+// ${#parameter}
+char			*substitute_by_len(char *cursor)
+{
+	log_info("cursor = [%s]", cursor);
+	char	*var_name;
+	char	*env_value;
+	char	*result;
+
+	cursor++;
+	result = NULL;
+	var_name = get_var_exp(cursor);
+	env_value = ft_strdup(get_env_value(var_name));
+	result = ft_itoa(ft_strlen(env_value));
+	if (var_name)
+		ft_strdel(&var_name);
+	if (env_value)
+		ft_strdel(&env_value);
+	return (result);
+}
+
 
 // ${parameter:-word}
 char			*substitute_word_if_null(char *cursor, char *zone)
@@ -227,6 +250,9 @@ char			*exp_sup(char *cursor, bool classic_substitute)
 	previous_char = '\0';
 	tmp = cursor;
 	tmp++;
+	log_fatal("TMP = [%s]", tmp);
+	if (*tmp && *tmp == '#')
+		return (substitute_by_len(tmp));
 	while (*tmp)
 	{
 		previous_char = *(tmp - 1);
