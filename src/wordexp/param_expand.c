@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/12 14:53:28 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/06/12 17:29:22 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ char			*assign_sub_var(char *var_name, char *zone)
 // ${#parameter}
 char			*substitute_by_len(char *cursor)
 {
-	log_info("cursor = [%s]", cursor);
 	char	*var_name;
 	char	*env_value;
 	char	*result;
