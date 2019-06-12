@@ -6,7 +6,7 @@
 #    By: apeyret <apeyret@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/06/11 19:42:53 by juhallyn         ###   ########.fr        #
+#    Updated: 2019/06/12 13:49:04 by juhallyn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -163,8 +163,6 @@ norm:
 $(NAME): $(OBJ)
 	@printf "\033[0;32m[42sh] Compilation [OK]\033[0;0m\n"
 	@make -C libft/
-	#@$(CC) $(CFLAGS) -lncurses $(DEBUG) $(OBJ) libft/libft.a -I logger logger/liblogger.a -o $(NAME)
-
 	@$(CC) $(CFLAGS) $(DEBUG) $(OBJ) libft/libft.a -I logger logger/liblogger.a -lncurses   -o $(NAME)
 
 clean:
