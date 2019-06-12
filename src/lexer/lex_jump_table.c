@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lex_jump_table.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/11 14:32:53 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/12 18:02:15 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,14 @@ int	handle_digit(t_lexer *lx_st)
 	return (0);
 }
 
+int	valid_sup_exp(char c)
+{
+	if ((c == '_') || (ft_isalnum(c)) || c == ':' || c == '-' || c == '='
+	|| c == '?' || c == '+' || c == '#' || c == '%')
+		return (1);
+	return (0);
+}
+
 int	handle_param_exp(t_lexer *lx_st)
 {
 	if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
@@ -71,7 +79,9 @@ int	handle_param_exp(t_lexer *lx_st)
 			return (BAD_SUB);
 		while (*(lx_st->cursor))
 		{
-			if (!parser_is_name_c(*(lx_st->cursor)))
+			if (*(lx_st->cursor) == '}')
+				break;
+			if (!valid_sup_exp(*(lx_st->cursor)))
 				break ;
 			if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 				return (MEMERR);

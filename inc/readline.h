@@ -16,6 +16,7 @@
 # include <curses.h>
 # include <termios.h>
 # include <term.h>
+# include <termcap.h> 
 # include <stdlib.h>
 # include <sys/ioctl.h>
 # include <sys/signal.h>

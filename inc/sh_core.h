@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh_core.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/11 16:13:42 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/12 18:02:18 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <limits.h>
+# include <stdbool.h>
 
 # define CTRL_D 1
 # define CTRL_C 2
@@ -42,6 +43,9 @@
 # define FDSAVEERR 257
 # define BUILTIN 666
 # define BUILTIN_FAIL 667
+
+// DEBUG
+#include "../logger/incs/logger.h"
 
 # define MODEFILE 2
 # define INTERACTIVE 1

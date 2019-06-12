@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: apeyret <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: apeyret <apeyret@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/06/11 17:03:33 by apeyret          ###   ########.fr        #
+#    Updated: 2019/06/12 18:03:42 by juhallyn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME =		42sh 
+NAME =		42sh
 
-CC =		clang	
+CC =		gcc
 
 CFLAGS =	-I inc/ -I libft/inc/ -Wall -Werror -Wextra
 
@@ -165,7 +165,7 @@ CRT_DIR =	core 						\
 		 	hashtable					\
 			jobctl						\
 		 	prompt 						\
-		 	hashtable 
+		 	hashtable
 
 SRC = 		$(addprefix $(SRC_DIR)/,$(SRC_FILE))
 INC = 		$(addprefix $(INC_DIR)/,$(INC_FILE))
@@ -187,7 +187,8 @@ norm:
 $(NAME): $(OBJ)
 	@printf "\033[0;32m[42sh] Compilation [OK]\033[0;0m\n"
 	@make -C libft/
-	@$(CC) $(CFLAGS) -lncurses $(DEBUG) $(OBJ) libft/libft.a -o $(NAME)
+	@make -C logger/
+	@$(CC) $(CFLAGS) $(DEBUG) $(OBJ) libft/libft.a -I logger logger/liblogger.a -lncurses   -o $(NAME)
 
 clean:
 	@make clean -C libft/

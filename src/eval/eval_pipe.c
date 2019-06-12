@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eval_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/01 18:22:01 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/12 18:02:16 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	pipe_subshell(pid_t pid, t_cmd_tab *pipeln, t_job *job)
 		exit_wrap(-1, pipeln);
 	/* update on last child status*/
 	waitpid(job->pgid, &(job->status), WUNTRACED);
-	waitpid(WAIT_ANY, NULL, 0); /*wait for everyone */ 
+	waitpid(WAIT_ANY, NULL, 0); /*wait for everyone */
 //	ft_printf("subshell last pid: %d exit %d\n", job->pgid, WEXITSTATUS(job->status));
 	exit_wrap(WEXITSTATUS(job->status), pipeln);
 	return (42);
