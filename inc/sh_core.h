@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/12 18:02:18 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/06/12 19:01:21 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 # include <limits.h>
 # include <stdbool.h>
 
+# define SH_NAME "42sh"
+# define SH_VERS "2.0.1"
 # define CTRL_D 1
 # define CTRL_C 2
 

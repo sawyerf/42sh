@@ -6,11 +6,12 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/03 20:59:59 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/06 20:51:21 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/12 19:03:23 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "prompt.h"
+#include "sh_core.h"
 #include <unistd.h>
 #include <pwd.h>
 
@@ -20,6 +21,9 @@ t_prompt	g_prompt[] =\
 	{'W', &pr_w},
 	{'w', &pr_w},
 	{'h', &pr_gene},
+	{'n', &pr_gene},
+	{'v', &pr_version},
+	{'s', &pr_version},
 	{0, &pr_gene}
 };
 
@@ -53,6 +57,14 @@ char	*getfold(void)
 	ret = ft_strdup(cpath + i + 1);
 	ft_strdel(&cpath);
 	return (ret);
+}
+
+void	pr_version(t_stri *str, char p)
+{
+	if (p == 'v')
+		str_addstr(str, SH_VERS);
+	else if (p == 's')
+		str_addstr(str, SH_NAME);
 }
 
 void	pr_w(t_stri *str, char p)
@@ -91,6 +103,8 @@ void	pr_gene(t_stri *str, char p)
 		str_addstr(str, tmp);
 		ft_strdel(&tmp);
 	}
+	else if (p == 'n')
+		str_add(str, '\n');
 }
 
 void	prpt(char *ps, t_stri *str)
