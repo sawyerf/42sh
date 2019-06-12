@@ -57,6 +57,7 @@ int		reset_sig(void)
 
 	ft_bzero(&new_act, sizeof(struct sigaction));
 	new_act.sa_handler = SIG_DFL;
+	new_act.sa_flags =  SA_RESTART;
 	if ((sigaction(SIGQUIT, &new_act, NULL) < 0)
 		|| (sigaction(SIGTSTP,&new_act, NULL) < 0)
 		|| (sigaction(SIGTTIN,&new_act, NULL) < 0)

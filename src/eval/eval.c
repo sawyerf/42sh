@@ -12,6 +12,43 @@
 
 #include "ft_eval.h"
 
+int			background_fork(pid_t pid, t_job *job, t_ast_node *t)
+{
+	if (setpgid_wrap(pid, job) == -1)
+		exit_wrap(MEMERR, NULL);
+	g_sh.mode = NONINTERACTIVE;
+	reset_sig();
+	eval_tree(t->left);
+	ft_printf("[]finished eval_tree in subshell");
+	waitpid(job->pgid, NULL, WUNTRACED);
+	waitpid(WAIT_ANY, NULL, 0);
+	ft_printf("[]Exiting handler");
+	exit_wrap(0, NULL);
+	return (0);
+}
+
+int			background_subshell(t_ast_node *tree)
+{
+	t_job	*job;
+	pid_t	pid;
+	
+	if (!(job = make_job(0)) || (!(job->cmd_ln = make_cmdline(tree->start, tree->end, 1))))
+		return (MEMERR);
+	if ((pid = fork()) == -1)
+		return (MEMERR); //should fork error or sthing
+	if (pid == 0)
+	{
+		background_fork(pid, job, tree);
+	}	
+	if (setpgid_wrap(pid, job) == -1)
+		ft_dprintf(STDERR_FILENO, "42sh: setpgid fail for %d\n", pid);
+	register_job(job);
+	tcgetattr(STDIN_FILENO, &(job->save_tio));
+	g_sh.previous_j = g_sh.current_j;
+	g_sh.current_j = job;
+	return (0);
+}
+
 static int	eval_sep(t_ast_node *tree)
 {
 	t_job	*job;
@@ -21,27 +58,8 @@ static int	eval_sep(t_ast_node *tree)
 	pid = 0;
 	if ((tree->type == AMPERS) && (g_sh.mode == INTERACTIVE))
 	{
-		if (!(job = make_job(0)) || (!(job->cmd_ln = make_cmdline(tree->start, tree->end, 1))))
+		if (background_subshell(tree))
 			return (MEMERR);
-		if ((pid = fork()) == -1)
-			return (MEMERR); //should fork error or sthing
-		if (pid == 0)
-		{
-			if (setpgid_wrap(pid, job) == -1)
-				exit_wrap(MEMERR, NULL);
-			g_sh.mode = NONINTERACTIVE;
-			reset_sig();
-			eval_tree(tree->left);
-			waitpid(job->pgid, NULL, WUNTRACED);
-			waitpid(WAIT_ANY, NULL, 0); //tmp
-			exit_wrap(0, NULL);
-		}	
-		if (setpgid_wrap(pid, job) == -1)
-			return(MEMERR);
-		register_job(job);
-		g_sh.previous_j = g_sh.current_j;
-		g_sh.current_j = job;
-		ft_printf("==DEBUG==job started in bg %d, subshell waiting\n", pid);	
 	}
 	else 
 	{

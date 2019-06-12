@@ -19,7 +19,7 @@ void	update_job(t_job *job)
 		job->pgid = WAIT_ANY;
 	waitpid(job->pgid, &(job->status), WNOHANG);
 }
-
+#include <errno.h>
 void	wait_job(t_job *job)
 {
 	pid_t pid;
@@ -27,6 +27,7 @@ void	wait_job(t_job *job)
 	if (!job->pgid)
 		job->pgid = WAIT_ANY;
 	pid = waitpid(job->pgid, &(job->status), WUNTRACED);
+	ft_printf("errno is %d finished waiting job %d\n", errno, job->pgid);
 	register_job(job);
 	if (WIFEXITED(job->status))
 	{
@@ -61,8 +62,8 @@ int		fg_job(t_job *job, int cont)
 		}	
 	}
 	wait_job(job);
-	tcgetattr(STDIN_FILENO, &(job->save_tio)); // save job terminal modes
-	tcsetattr(STDIN_FILENO, TCSADRAIN, &(g_sh.term_save)); // reset our termios
+	tcgetattr(STDIN_FILENO, &(job->save_tio));
+	tcsetattr(STDIN_FILENO, TCSADRAIN, &(g_sh.term_save));
 	tcsetpgrp(STDIN_FILENO, getpgrp());
 	return (0);
 }
