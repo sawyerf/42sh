@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 21:15:40 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/07 16:51:56 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/14 16:04:01 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int		prev_word(t_rdl *rdl, char *buf)
 int		begin(t_rdl *rdl, char *buf)
 {
 	(void)buf;
-	left(rdl, rdl->curs);
+	left(rdl, rdl->real);
 	rdl->curs = 0;
 	return (0);
 }
