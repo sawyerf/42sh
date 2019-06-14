@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 12:42:13 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/11 14:07:21 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/14 13:22:46 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,13 @@ int		vm_copy(t_rdl *rdl, char *buf)
 int		visualmode(t_rdl *rdl, char *key)
 {
 	char	buf[11];
+	char	*tmp;
 	int		ret;
 
 	(void)key;
+	tmp = rdl->prompt;
+	rdl->prompt = ft_zprintf("\33[0;35m%s\33[0;0m", tmp);
+	reprint(rdl, rdl->curs);
 	rdl->vcurs = rdl->curs;
 	while (42)
 	{
@@ -97,6 +101,8 @@ int		visualmode(t_rdl *rdl, char *key)
 			break ;
 		buf[0] = 0;
 	}
+	ft_strdel(&rdl->prompt);
+	rdl->prompt = tmp;
 	reprint(rdl, rdl->curs);
 	if (ret == MEMERR)
 		return (MEMERR + 1);

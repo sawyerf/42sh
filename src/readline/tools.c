@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:49:02 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/11 13:26:53 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/14 13:33:35 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,11 @@ int		gtbegin(t_rdl *rdl)
 
 int		is_special(char *buf)
 {
-	int		count;
-
-	count = 0;
-	while (buf[count])
+	while (*buf)
 	{
-		if (!ft_isprint(buf[count]))
+		if (ft_cisin(SPECIAL, *buf))
 			return (1);
-		count++;
+		buf++;
 	}
 	return (0);
 }

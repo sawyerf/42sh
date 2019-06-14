@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 18:12:42 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/12 18:34:50 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/14 12:13:57 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ void	hstadd(char *str)
 	{
 		if (!(tmp = ft_strndup(str, ft_strlen(str) - 1)))
 			return ;
-		str = tmp;
 	}
 	else if (!(tmp = ft_strdup(str)))
 		return ;
+	str = tmp;
 	ft_lstadd(&g_hst[0], ft_lstnew(str, i * 10));
 	ft_strdel(&str);
 }

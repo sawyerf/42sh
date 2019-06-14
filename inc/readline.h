@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/11 14:01:36 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/14 13:32:27 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@
 # define K_SPC	" "
 # define K_BSPC "\177"
 
+# define SPECIAL "\33\t\1\3\4\5\12\14\16\r\22\20\26\30\31\33\177"
 typedef struct		s_rdl
 {
 	struct termios	save;
