@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:49:43 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/11 16:46:16 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/14 15:27:02 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,14 @@ int		termreset(struct termios *save)
 
 void	printmagicdollar(void)
 {
-	int	n;
-	int	i[2];
+	int	col;
 
-	if (ioctl(0, FIONREAD, &n) < 0)
+	col = getcolumn();
+	if (col - 1 < 0)
 		return ;
-	if (!n)
-	{
-		get_cursor_position(&i[0], &i[1]);
-		if (i[0] > 0)
-			ft_printf("\033[1;7m%%\033[1;0m\n");
-	}
+	ft_printf("\033[1;7m%%\033[1;0m%*c", col - 1, ' ');
+	tgpstr("cr");
+	tgpstr("cd");
 }
 
 int		terminit(struct termios *save)
