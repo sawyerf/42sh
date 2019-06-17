@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/16 13:23:26 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/16 18:55:00 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/17 17:50:07 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,13 @@ void	type_msg(int stat, char *cmd, char *full)
 	else if (stat == 0)
 		ft_printf("type: %s: not found\n", cmd);
 }
+
 int		type(t_cmd_tab *cmd)
 {
 	int		i;
 	char	*full;
 	int		stat;
-	
+
 	i = 1;
 	full = NULL;
 	while (cmd->av[i])

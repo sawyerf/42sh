@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 13:46:10 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/04 16:47:21 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/17 18:18:29 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ typedef	struct			s_fc
 }						t_fc;
 
 typedef void	(*t_job_print)(t_job*);
+
+t_job					*jobs_conv_pct(char *s);
+t_job					*jobs_conv_min(char *s);
+t_job					*jobs_conv_num(char *s);
+t_job					*jobs_conv_cmd(char *s);
+t_job					*jobs_conv_any(char *s);
 
 int						fg(t_cmd_tab *cmd);
 int						bg(t_cmd_tab *cmd);
@@ -68,6 +74,8 @@ int						ft_exit(t_cmd_tab *cmd);
 int						ft_env(t_cmd_tab *cmd);
 int						ft_unsetenv(t_cmd_tab *cmd);
 int						jobs(t_cmd_tab *cmd);
+void					jobs_print_l(t_job *j);
+int						jobs_print_all(t_job_print jobs_printer);
 t_job					*jobs_conv_pct(char *s);
 t_job					*jobs_conv_num(char *s);
 t_job					*jobs_conv_min(char *s);

@@ -6,13 +6,13 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/01 18:54:45 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/01 18:59:17 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/17 17:26:28 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-int bg(t_cmd_tab *cmd)
+int		bg(t_cmd_tab *cmd)
 {
 	t_job *j;
 
@@ -29,7 +29,8 @@ int bg(t_cmd_tab *cmd)
 		if (j)
 			bg_job(j, 1);
 		else
-			ft_dprintf(STDERR_FILENO, "42sh: bg: '%s': no such job\n", cmd->av[1]);
+			ft_dprintf(STDERR_FILENO, "42sh: bg: '%s': no such job\n",
+							cmd->av[1]);
 	}
 	return (0);
 }

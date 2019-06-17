@@ -6,7 +6,7 @@
 #    By: apeyret <apeyret@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/06/17 17:03:10 by tduval           ###   ########.fr        #
+#    Updated: 2019/06/17 18:17:15 by tduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,9 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			builtins/unset.c			\
 			builtins/parser_tools.c		\
 			builtins/jobs.c				\
+			builtins/jobs_print.c		\
 			builtins/jobs_conversions.c	\
+			builtins/jobs_conv.c		\
 			builtins/fg.c				\
 			builtins/bg.c				\
 			builtins/type.c				\

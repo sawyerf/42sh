@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 16:24:33 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/01 18:59:11 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/17 17:32:48 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int		fg(t_cmd_tab *cmd)
 		if (j)
 			fg_job(j, 1);
 		else
-			ft_dprintf(STDERR_FILENO, "42sh: fg: '%s': no such job\n", cmd->av[1]);
+			ft_dprintf(STDERR_FILENO, "42sh: fg: '%s': no such job\n",
+						cmd->av[1]);
 	}
 	return (0);
 }

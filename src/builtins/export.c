@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 15:58:01 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/11 16:44:33 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/17 17:32:23 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "sh_core.h"
 
 extern t_sh	g_sh;
-
 
 int		parser_tkopt(char *opt, char *arg, char *in)
 {
@@ -87,7 +86,7 @@ int		cexport(char *var)
 			if (varchr(g_sh.local, var))
 				g_sh.local = csetenv(g_sh.local, var);
 		}
-		else 
+		else
 			return (1);
 	}
 	else if (varchr(g_sh.local, var))
