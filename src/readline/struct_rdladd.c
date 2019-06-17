@@ -6,29 +6,23 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 18:19:37 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/14 13:49:28 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/17 14:47:58 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline.h"
 
-void	rplisprint(char *buf)
+int		lenisprint(char *buf)
 {
 	int		i;
-	int		y;
 	
 	i = 0;
-	y = 0;
 	while (buf[i])
 	{
-		if (ft_isprint(buf[i]))
-		{
-			buf[y] = buf[i];
-			y++;
-		}
-		i++;
+		if (ft_isprint(buf[i]) || buf[i] == '\n')
+			i++;
 	}
-	buf[y] = 0;
+	return (i);
 }
 
 void	rdl_realloc(t_rdl *rdl)
@@ -50,8 +44,7 @@ void	rdladdstr(t_rdl *rdl, char *str)
 
 	if (!str)
 		return ;
-	rplisprint(str);
-	len = ft_strlen(str);
+	len = lenisprint(str);
 	if (len + rdl->size > rdl->allo)
 	{
 		rdl->allo = rdl->size + len;
@@ -63,7 +56,8 @@ void	rdladdstr(t_rdl *rdl, char *str)
 	count = 0;
 	while (str[count])
 	{
-		rdl->str[rdl->curs + count] = str[count];
+		if (ft_isprint(str[count]) || str[count] == '\n')
+			rdl->str[rdl->curs + count] = str[count];
 		count++;
 	}
 	rdl->size += len;
