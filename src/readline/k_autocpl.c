@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 21:17:33 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/06 23:02:32 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/17 16:04:33 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		acp_gettype(t_rdl *rdl, t_autocomplete *acp)
 	return (0);
 }
 
-void	rdladdword(t_rdl *rdl, char	*s, char c)
+void	rdladdword(t_rdl *rdl, char *s, char c)
 {
 	while (*s)
 	{

@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/07 14:48:16 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/03 20:33:51 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/17 16:15:19 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,7 @@
 #include <dirent.h>
 #include <sys/stat.h>
 
-extern char	 *g_builtins[];
-
-t_list	*folderin(DIR *ptr, char *path, char *exec, int (*f)(char *file))
-{
-	struct dirent	*ret;
-	t_list			*lst;
-	char			*cpath;
-	int				len;
-	int				count;
-
-	count = 0;
-	lst = NULL;
-	len = ft_strlen(exec);
-	while ((ret = readdir(ptr)))
-	{
-		if (!(cpath = ft_zprintf("%s/%s", path, ret->d_name)))
-			continue ;
-		if (!f(cpath) && !ft_strncmp(ret->d_name, exec, ft_strlen(exec))
-				&& ft_strcmp(ret->d_name, "..") && ft_strcmp(ret->d_name, "."))
-		{
-			ft_lstadd(&lst, ft_lstnew(ret->d_name + len, exaccess(cpath)));
-			count++;
-		}
-		ft_strdel(&cpath);
-	}
-	return (lst);
-}
+extern char	*g_builtins[];
 
 t_list	*get_folex(char *token, int (*f)(char *file))
 {

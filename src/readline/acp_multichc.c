@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 18:46:37 by apeyret           #+#    #+#             */
-/*   Updated: 2019/05/03 19:03:22 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/17 15:57:59 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@ int		acp_multichc(t_rdl *rdl, t_list *lst)
 {
 	char	*s;
 	int		i;
-	
+
 	i = 0;
 	s = lst->content;
 	while (*s)
 	{
 		if (!iscolst(lst, *s, i))
-			break;
+			break ;
 		rdladd(rdl, *s);
 		s++;
 		i++;

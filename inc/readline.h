@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/14 13:32:27 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/17 16:55:55 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,9 @@ t_list				*get_cplenv(char *match);
 int					k_hstret(t_rdl *rdl, char *buf);
 int					ctrll(t_rdl *rdl, char *buf);
 int					addn(t_rdl *rdl, char *buf);
+int					lenbefore(t_rdl *rdl, int real);
+int					lenafter(t_rdl *rdl, int real);
+int					up(t_rdl *rdl, int i);
 
 void				reprint(t_rdl *rdl, int curs);
 int					is_special(char *buf);
@@ -125,6 +128,8 @@ int					up(t_rdl *rdl, int i);
 int					down(t_rdl *rdl, int i);
 void				lastcol(t_rdl *rdl);
 
+t_list				*folderin(DIR *ptr, char *path, char *exec,
+								int (*f)(char *file));
 t_list				*get_exec(char *exec, char *path);
 t_list				*get_folex(char *token, int (*f)(char *file));
 int					folexaccess(char *file);
