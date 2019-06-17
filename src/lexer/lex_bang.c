@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 18:18:48 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/17 16:51:59 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/17 16:58:39 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,9 +148,12 @@ int		word_bang(t_lexer *lx_st)
 		return (MEMERR);
 	i = ft_strlen(s);
 	if (!(lst = g_hst[0]) || !(lst = hst_getcmp(lst, s)))
+	{
+		ft_strdel(&s);
 		return (BANG_NF);
-	curs = lx_st->cursor - lx_st->line;
+	}
 	ft_strdel(&s);
+	curs = lx_st->cursor - lx_st->line;
 	if (!(s = bangjoin(lx_st->line, curs, (char*)lst->content, lx_st->cursor + i + 1)))
 		return (MEMERR);
 	ft_strdel(&lx_st->line);
