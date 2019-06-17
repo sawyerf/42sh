@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 18:19:37 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/17 17:09:53 by tduval           ###   ########.fr       */
+/*   Updated: 2019/06/17 17:37:40 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@ int		lenisprint(char *buf)
 	int		i;
 
 	i = 0;
-	while (buf[i])
+	while (*buf)
 	{
-		if (ft_isprint(buf[i]) || buf[i] == '\n')
+		if (ft_isprint(*buf) || *buf == '\n')
 			i++;
+		buf++;
 	}
 	return (i);
 }
