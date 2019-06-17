@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 13:46:10 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/17 18:18:29 by tduval           ###   ########.fr       */
+/*   Updated: 2019/06/17 20:34:31 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int						fg(t_cmd_tab *cmd);
 int						bg(t_cmd_tab *cmd);
 int						fc(t_cmd_tab *cmd);
 int						fc_l(t_fc fc);
-int						fc_e(t_fc fc);
+int						fc_e(t_fc *fc);
 int						fc_s(t_fc fc);
 int						fc_le(t_fc fc);
 char					*fc_filename(t_list *lst, int size);

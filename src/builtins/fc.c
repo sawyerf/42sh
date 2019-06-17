@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/27 15:10:23 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/08 14:52:45 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/17 20:35:20 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,8 @@ int		run_editor(t_fc *fc, char *file)
 		}
 	}
 	g_sh.mode = NONINTERACTIVE;
-	run_command(ft_zprintf("%s %s\n", fc->editor, file));
+	editor = ft_zprintf("%s %s\n", fc->editor, file);
+	run_command(editor);
 	return (g_sh.status);
 }
 
@@ -135,7 +136,7 @@ int		fc(t_cmd_tab *cmd)
 	else if (ft_cisin(fc.opt, 'l'))
 		ret = fc_l(fc);
 	else
-		ret = fc_e(fc);
+		ret = fc_e(&fc);
 	g_sh.mode = mode;
 	fc_del(&fc);
 	return (ret);

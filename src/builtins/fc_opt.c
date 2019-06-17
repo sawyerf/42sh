@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 18:00:46 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/04 20:14:39 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/17 20:34:17 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int		fc_l(t_fc fc)
 	return (0);
 }
 
-int		fc_e(t_fc fc)
+int		fc_e(t_fc *fc)
 {
 	char	*file;
 	t_list	*beg;
@@ -53,18 +53,18 @@ int		fc_e(t_fc fc)
 
 	i = 1;
 	hstdellast();
-	if (fc_rangee(fc, &beg, &i))
+	if (fc_rangee(*fc, &beg, &i))
 		return (0);
 	if (!(file = fc_filename(beg, i)))
 		return (1);
 	fc_writelst(file, beg, i);
-	if (run_editor(&fc, file))
+	if (run_editor(fc, file))
 	{
 		unlink(file);
 		ft_strdel(&file);
 		return (1);
 	}
-	if (ft_cisin(fc.opt, 'e'))
+	if (ft_cisin(fc->opt, 'e'))
 		run_script(file);
 	unlink(file);
 	ft_strdel(&file);

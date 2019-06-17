@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/05 18:07:04 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/08 14:52:46 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/17 20:36:18 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,9 @@ int		fc_parsertr(char ***av, t_fc *fc)
 			(*av)++;
 			if (!**av)
 				return (ft_rperr(-1, "fc: -e: option requires an argument\n"));
-			if (!(fc->editor = ft_strdup(**av)))
+			if (!fc->editor && !(fc->editor = ft_strdup(**av)))
 				return (MEMERR);
+			ft_printf("strdup of fc -e\n");
 			c = 0;
 		}
 		(*av)++;
