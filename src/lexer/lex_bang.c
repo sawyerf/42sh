@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 18:18:48 by apeyret           #+#    #+#             */
-/*   Updated: 2019/05/03 18:34:10 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/17 16:51:59 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int		simple_bang(t_lexer *lx_st)
 	t_list	*lst;
 	
 	lst = g_hst[0];
-	if (!(lst = hst_getcmp(lst, "-1")))
+	if (!lst)
 		return (BANG_NF);
 	curs = lx_st->cursor - lx_st->line;
 	if (!(line = bangjoin(lx_st->line, curs, (char*)lst->content, lx_st->cursor + 2)))
@@ -91,6 +91,25 @@ int		simple_bang(t_lexer *lx_st)
 	return (0);
 }
 
+int		lenint(char *s)
+{
+	int		i;
+	int		min;
+
+	i = 0;
+	min = 0;
+	if (*s == '-')
+		min++;
+	while (s[i + min])
+	{
+		if (!ft_isdigit(s[i + min]))
+			break ;
+		i++;
+	}
+	if (!i)
+		return (0);
+	return (i + min);
+}
 char	*getbang(t_lexer *lx_st)
 {
 	char	*s;
@@ -104,6 +123,8 @@ char	*getbang(t_lexer *lx_st)
 	*lx_st->cursor = c;
 	i = 0;
 	s = lx_st->cursor + 1;
+	if (lenint(s))
+		return (ft_strndup(lx_st->cursor + 1, lenint(s)));
 	while (*s)
 	{
 		if (ft_cisin(" \t\n", *s) || (*s == d && d == '"'))
@@ -126,8 +147,7 @@ int		word_bang(t_lexer *lx_st)
 	if (!(s = getbang(lx_st)))
 		return (MEMERR);
 	i = ft_strlen(s);
-	lst = g_hst[0]->next;
-	if (!(lst = hst_getcmp(lst, s)))
+	if (!(lst = g_hst[0]) || !(lst = hst_getcmp(lst, s)))
 		return (BANG_NF);
 	curs = lx_st->cursor - lx_st->line;
 	ft_strdel(&s);
@@ -144,6 +164,7 @@ int	handle_bang(t_lexer *lx_st)
 	int ret;
 
 	ret = 0;
+	ft_printf("in handl_bang\n");
 	if (*(lx_st->cursor + 1) == '!')
 		ret = simple_bang(lx_st);
 	else if (!ft_cisin("\n \t", *(lx_st->cursor + 1)) && *(lx_st->cursor + 1))
