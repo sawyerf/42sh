@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 18:29:28 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/06 20:13:34 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/17 17:00:05 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,10 @@ void	printsearch(t_rdl *hst)
 	left(hst, hst->real - 1);
 	hst->size = size;
 	hst->str = s;
-	if (g_hst[3])
-		s = g_hst[3]->content;
-	else
-		s = NULL;
+	s = g_hst[3] ? g_hst[3]->content : NULL;
 	ft_strdel(&hst->paste);
-	if (!s)
-		hst->paste = ft_zprintf("%s': %s", hst->str, "");
-	else
-		hst->paste = ft_zprintf("%s': %s", hst->str, s);
+	hst->paste = s ? ft_zprintf("%s': %s", hst->str, s)
+					: ft_zprintf("%s': %s", hst->str, "");
 	s = hst->str;
 	hst->str = hst->paste;
 	size = hst->size;
@@ -98,29 +93,28 @@ char	*hstfinal(char *s)
 int		ctrlr(t_rdl *rdl, char *str)
 {
 	char	buf[11];
-	int		ret;
-	int		stat;
+	int		arr[2];
 	t_rdl	hst;
 
 	(void)str;
-	stat = 0;
+	arr[1] = 0;
 	left(rdl, rdl->real + rdl->lpro);
 	if (rdlinit(&hst, "(search)`") == MEMERR)
 		return (MEMERR + 1);
 	printsearch(&hst);
-	while ((ret = read(0, &buf, 10)) > 0)
+	while ((arr[0] = read(0, &buf, 10)) > 0)
 	{
-		buf[ret] = 0;
-		if ((stat = hstrouter(&hst, buf)) != 0)
+		buf[arr[0]] = 0;
+		if ((arr[1] = hstrouter(&hst, buf)) != 0)
 			break ;
 	}
 	ft_printf("\n%s%s", rdl->prompt, rdl->str);
 	left(rdl, rdl->size - rdl->curs);
 	rdlreplace(rdl, hstfinal(hst.str));
-	if (stat == 2 || stat == 4)
+	if (arr[1] == 2 || arr[1] == 4)
 		rdladd(rdl, '\n');
 	ft_strdel(&hst.str);
 	ft_strdel(&hst.prompt);
 	g_hst[3] = NULL;
-	return (stat - 1);
+	return (arr[1] - 1);
 }

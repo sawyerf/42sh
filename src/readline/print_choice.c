@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 16:23:31 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/03 20:43:45 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/17 16:03:27 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ void	putlst(char *mtc, t_list *lst, t_rdl *rdl)
 		ft_printf("Too small\n");
 	while (lst && max < rdl->col)
 	{
-		i = 0;
-		while (lst && i < (rdl->col) / max)
+		i = -1;
+		while (lst && ++i < (rdl->col) / max)
 		{
 			replacefree(&mtc, (char**)&lst->content);
 			ft_printf("%s%s%-*c", mtc, lst->content, max - ft_strlen(mtc)
@@ -77,7 +77,6 @@ void	putlst(char *mtc, t_list *lst, t_rdl *rdl)
 					? '/' : ' '));
 			ft_printf(" ");
 			lst = lst->next;
-			i++;
 		}
 		ft_printf("\n");
 		(lst) ? lst = lst->next : 0;

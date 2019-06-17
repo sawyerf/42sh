@@ -6,7 +6,7 @@
 #    By: apeyret <apeyret@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/06/12 18:03:42 by juhallyn         ###   ########.fr        #
+#    Updated: 2019/06/17 17:03:10 by tduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -142,9 +142,11 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			readline/readline.c			\
 			readline/signal.c			\
 			readline/struct_rdl.c		\
+			readline/folderin.c			\
 			readline/struct_rdladd.c	\
 			readline/termget.c			\
 			readline/terminit.c			\
+			readline/move_utils.c		\
 			readline/tools.c			\
 			jobctl/init_jobctl.c		\
 			jobctl/make_job.c			\

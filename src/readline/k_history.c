@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 13:41:29 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/12 18:07:32 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/17 16:07:48 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ t_key	g_khst[] =\
 
 int		hstdelcara(t_rdl *rdl, char *buf)
 {
-	(void)buf;
 	int	curs;
 
+	(void)buf;
 	curs = rdl->curs - 1;
 	if (curs > rdl->size || rdl->size < 0 ||
 		(curs < rdl->curs && rdl->curs <= 0)
