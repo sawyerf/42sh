@@ -42,6 +42,8 @@ static int	handle_cdpath(char **curpath)
 {
 	char *cd_path;
 
+	if (!ft_strncmp(*curpath, ".", 1))
+		return (0);
 	cd_path = get_env_value("CDPATH");
 	if ((cd_path == NULL) || (*cd_path == 0))
 		return (0);

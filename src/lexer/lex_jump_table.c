@@ -116,7 +116,7 @@ int	handle_common(t_lexer *lx_st)
 			if ((ret = handle_backslash(lx_st)))
 				return (ret);
 		}
-		else if ((ft_cisin("\n\t& |><;", *(lx_st->cursor)))
+		else if ((ft_cisin("\n\t& |><;!", *(lx_st->cursor)))
 			|| (!*lx_st->cursor))
 			break ;
 		else if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)

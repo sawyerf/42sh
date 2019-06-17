@@ -12,7 +12,7 @@
 
 NAME =		42sh
 
-CC =		gcc
+CC =		clang
 
 CFLAGS =	-I inc/ -I libft/inc/ -Wall -Werror -Wextra
 
