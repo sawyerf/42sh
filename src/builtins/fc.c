@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/27 15:10:23 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/17 20:35:20 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/18 16:54:21 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,17 +118,19 @@ int		run_editor(t_fc *fc, char *file)
 
 int		fc(t_cmd_tab *cmd)
 {
-	t_fc	fc;
-	int		mode;
-	int		ret;
+	t_fc		fc;
+	int			mode;
+	int			ret;
+	static int	i = 0;
 
-	(void)cmd;
 	mode = g_sh.mode;
-	if (fc_parser(cmd->av, &fc) < 0)
+	if (fc_parser(cmd->av, &fc) < 0 || i > 100)
 	{
+		(i > 100) ? ft_dprintf(2, "fc: stop fork loop\n") : 0;
 		fc_del(&fc);
 		return (1);
 	}
+	i++;
 	if (ft_cisin(fc.opt, 's'))
 		ret = fc_s(fc);
 	else if (ft_cisin(fc.opt, 'l') && ft_cisin(fc.opt, 'e'))
@@ -139,5 +141,6 @@ int		fc(t_cmd_tab *cmd)
 		ret = fc_e(&fc);
 	g_sh.mode = mode;
 	fc_del(&fc);
+	i--;
 	return (ret);
 }
