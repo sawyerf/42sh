@@ -4,3 +4,9 @@ cat valid/* | valgrind --tool=memcheck --leak-check=full ./21sh >& valgrind.outp
 echo testing invalid..
 cat invalid/* | valgrind --tool=memcheck --leak-check=full ./21sh >> valgrind.output 2>&1
 cat valgrind.output | grep 'definitely lost'
+mkdir -p lol/lel; cd lol/lel; rm -rf ../../lol
+cd ..
+cd -
+cd lel
+cd ..
+

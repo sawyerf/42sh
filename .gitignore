@@ -7,6 +7,7 @@ lel*
 *.swp
 *.swo
 *.out
+*.output
 *.log
 *:w
 *:W

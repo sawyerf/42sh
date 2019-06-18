@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/03 20:59:59 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/12 19:03:23 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/18 16:08:35 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ t_prompt	g_prompt[] =\
 
 char	*getpwd(void)
 {
-	char *cpath;
-	char *home;
+	char	*cpath;
+	char	*home;
 
 	if (!(cpath = ft_strnew(4095)))
 		return (NULL);
-	cpath = getcwd(cpath, 4096);
+	getcwd(cpath, 4094);
 	home = get_env_value("HOME");
 	if (!ft_strcmp(home, cpath))
 		ft_strcpy(cpath, "~");
