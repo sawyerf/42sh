@@ -31,9 +31,10 @@
 ## Bug
 |check|     `command`     |                result               | info complementaire |
 |:---:|:-----------------:|:-----------------------------------:|:-------------------:|
-|     | `ls \ <tab>`      | ca ne comprends le ' '              |||
-|     | `ls "file <tab>`  | ne considere pas le debut des quote |||
-|  ✓  | `ls "<tab>`       | ne referme pas les quotes           |||
+|     | `ls<ctrl+n>ls`    | erreur dans le parser               |faut considerer les `\n` comme des separateur de commande|
+|     | `ls \ <tab>`      | ca ne comprends le ' '              ||
+|     | `ls "file <tab>`  | ne considere pas le debut des quote ||
+|  ✓  | `ls "<tab>`       | ne referme pas les quotes           ||
 |  ✓  | `ls '<tab><ctrl+c/d`| segfault |la fonction est surement readline appele dans light_parser||
 |  ✓  | ` `               | 21sh: syntax error near : '' + exit ||
 |  ✓  | `env - i ./21sh ` | double free						    ||
