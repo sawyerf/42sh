@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 16:29:08 by tduval            #+#    #+#             */
-/*   Updated: 2019/06/18 22:02:55 by tduval           ###   ########.fr       */
+/*   Updated: 2019/06/18 22:32:25 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,21 @@
 #include "ft_patmatch.h"
 #include "libft.h"
 
-static char	*perform_it(char *s1, char *s2, char *arr, int i)
+static char	*perform_it(char *s1, char *s2, char *arr, int *i)
 {
-	if (i && s2[i] == '-' && s2[i + 1] != ']')
-		arr = get_chars(arr, s2[i - 1], s2[i + 1]);
+	if (*i && s2[*i] == '-'
+			&& s2[*i + 1] != ']'
+			&& s2[*i - 1] != '['
+			&& s2[*i - 1] != '!')
+	{
+		arr = get_chars(arr, s2[*i - 1], s2[*i + 1]);
+		*i += 2;
+	}
 	else
 	{
-		if (s2[i - 1] != '-' && s2[i + 1] != '-')
-		{
-			if (!(arr = ft_strapp(arr, s2[i])))
-				return (NULL);
-		}
+		if (!(arr = ft_strapp(arr, s2[*i])))
+			return (NULL);
+		(*i)++;
 	}
 	return (arr);
 }
@@ -46,10 +50,7 @@ static char	*range(char *s1, char *s2)
 	if (!(arr = ft_strnew(0)))
 		return (0);
 	while (s2[i] && after_bracket(s2) != s2 + i)
-	{
-		arr = perform_it(s1, s2, arr, i);
-		i++;
-	}
+		arr = perform_it(s1, s2, arr, &i);
 	if ((is_in_str(arr, *s1) && n == 0) || (!is_in_str(arr, *s1) && n))
 	{
 		ft_strdel(&arr);
