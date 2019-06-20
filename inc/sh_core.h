@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/12 19:01:21 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/20 15:50:33 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,12 @@ typedef struct			s_sh
 {
 	int					mode;
 	int					status;
+	int					lastback;
 	char				**local;
 	char				**env;
 	char				**alias;
+	char				**av;
+	char				*lastpara;
 	int					fd;
 	t_job				*job_lst;
 	t_job				*current_j;

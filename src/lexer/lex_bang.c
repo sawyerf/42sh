@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 18:18:48 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/17 16:59:48 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/20 16:34:30 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,13 +167,12 @@ int	handle_bang(t_lexer *lx_st)
 	int ret;
 
 	ret = 0;
-	ft_printf("in handl_bang\n");
 	if (*(lx_st->cursor + 1) == '!')
 		ret = simple_bang(lx_st);
 	else if (!ft_cisin("\n \t", *(lx_st->cursor + 1)) && *(lx_st->cursor + 1))
 		ret = word_bang(lx_st);
 	else
-		lx_st->cursor++;
+		return (str_putc(&(lx_st->cursor), &(lx_st->token->data)));
 	if (!ret)
 		ft_printf("%s", lx_st->line);
 	return (ret);

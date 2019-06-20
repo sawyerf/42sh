@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/12 17:29:22 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/06/20 16:57:33 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -276,6 +276,7 @@ char			*build_param(char *cursor)
 
 	value = NULL;
 	classic_substitute = true;
+	//ft_printf("build_param: %s\n", cursor);
 	if (*(cursor + 1) == '{')
 	{
 		cursor++;
@@ -298,6 +299,7 @@ int				expand_param(t_token **word, char **cursor,
 	char				*ifs;
 	int					i;
 
+	//ft_printf("expand_param: %s value: %s\n", *cursor, value);
 	is_redir = FT_TRUE;
 	if (get_ifs(&ifs) == MEMERR)
 		return (MEMERR);
@@ -322,12 +324,14 @@ int				handle_exp_param(t_token *word, t_bool is_redir)
 	cursor = NULL;
 	cursor = word->data.str;
 	inside_dquote = 1;
+	//ft_printf("in handle_exp_para: %s\n", cursor);
 	while (*cursor)
 	{
 		if (*cursor == '"')
 			inside_dquote = -inside_dquote;
 		if ((*cursor == '$') && (*(cursor + 1) != 0))
 		{
+			//ft_printf("in $: %s\n", cursor);
 			if ((!(value = build_param(cursor))
 			|| (expand_param(&word, &cursor, value, is_redir) == MEMERR)))
 				return (MEMERR);

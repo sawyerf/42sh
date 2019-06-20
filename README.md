@@ -6,11 +6,17 @@
 - Inhibiteurs (finis)
 - Table de hash (finis)
 - Tilde/${para:word} (en cours)
+- globing (en cours)
 
 
 ## TODO
+- ajouter les variables $!, $\_ et $- et passer l'IFS sur les variables $\* et $@
 - export builtin, set && unset missing stuff.
 - autocomplete after >& is wrong
+- sig handling && job control.
+- moar testing on redirections.
+- cd set_shell_env needs malloc checks. <= this
+- replace printf/write(2, etc.. by dprintf
 - ~~IFS in ft_wordexp is broken on IFS != ` \n\t` and quote removal~~
 - ~~backslash and single quotes bugged: `var='\'\'\'\''' ; echo $var`~~
 - ~~field splitting has to be handled in handle_exp_param/build_param~~
@@ -19,14 +25,7 @@
 - ~~del la hashtable quand on modifie le PATH~~
 - ~~move full path bin checking out of fork~~
 - ~~Parameter expansions has invalid read/write on multiline command with ' or "~~
-------------------------------------
-### 42sh
-
 - ~~finir la feature historique~~
-- sig handling && job control.
-- moar testing on redirections.
-- cd set_shell_env needs malloc checks. <= this
-- replace printf/write(2, etc.. by dprintf
 
 ## Bug
 |check|     `command`     |                result               | info complementaire |
