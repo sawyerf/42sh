@@ -11,12 +11,14 @@
 
 ## TODO
 - ajouter les variables $!, $\_ et $- et passer l'IFS sur les variables $\* et $@
-- export builtin, set && unset missing stuff.
 - autocomplete after >& is wrong
 - sig handling && job control.
 - moar testing on redirections.
 - cd set_shell_env needs malloc checks. <= this
-- replace printf/write(2, etc.. by dprintf
+
+## DO
+- ~~export builtin, set && unset missing stuff.~~
+- ~~replace printf/write(2, etc.. by dprintf~~
 - ~~IFS in ft_wordexp is broken on IFS != ` \n\t` and quote removal~~
 - ~~backslash and single quotes bugged: `var='\'\'\'\''' ; echo $var`~~
 - ~~field splitting has to be handled in handle_exp_param/build_param~~
