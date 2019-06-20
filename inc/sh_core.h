@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/20 15:50:33 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/20 17:36:05 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ char					*make_cmdline(t_token *start, t_token *end, int last);
 void					del_job(t_job *j);
 void					clean_jobs(void);
 void					run_script(char *file);
+char					*dget_env_value(char *name);
 
 int		cexport(char *var);
 #endif

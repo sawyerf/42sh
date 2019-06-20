@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/20 16:57:33 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/20 17:35:39 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,7 +178,7 @@ char			*classic_sub(char *cursor)
 	env_var = get_var_exp(cursor);
 	if (env_var)
 	{
-		env_value = ft_strdup(get_env_value(env_var));
+		env_value = dget_env_value(env_var);
 		ft_strdel(&env_var);
 		if (env_value && *env_value)
 			return (env_value);

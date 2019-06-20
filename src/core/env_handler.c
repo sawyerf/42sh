@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 22:17:22 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/20 17:15:35 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/20 17:36:57 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,8 @@ int		valid_env_name(char *str)
 	return (1);
 }
 
-char	*get_env_value(char *name)
+char	*dget_env_value(char *name)
 {
-	char *value;
-
 	if (!ft_strcmp("?", name))
 		return (ft_itoa(g_sh.status));
 	if (!ft_strcmp("#", name))
@@ -55,7 +53,14 @@ char	*get_env_value(char *name)
 	if (!ft_strcmp("$", name))
 		return (ft_itoa(getpid()));
 	if (ft_strisdigit(name) && ft_tablen(g_sh.av) > ft_atoi(name))
-		return (g_sh.av[ft_atoi(name)]);
+		return (ft_strdup(g_sh.av[ft_atoi(name)]));
+	return (ft_strdup(get_env_value(name)));
+}
+
+char	*get_env_value(char *name)
+{
+	char *value;
+
 	if ((value = varchr(g_sh.env, name)))
 		return (value);
 	if ((value = varchr(g_sh.local, name)))
