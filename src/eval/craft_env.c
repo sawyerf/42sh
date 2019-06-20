@@ -38,7 +38,7 @@ int			env_is_set(char *key, char **env)
 		len++;
 	while (env[i])
 	{
-		if (!ft_strncmp(key, env[i], len))
+		if (!ft_strncmp(key, env[i], len) && env[i][len] == '=')
 			return (i);
 		i++;
 	}
