@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 19:02:05 by tduval            #+#    #+#             */
-/*   Updated: 2019/06/18 22:35:05 by tduval           ###   ########.fr       */
+/*   Updated: 2019/06/21 15:28:47 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,15 @@ static char		**final_step(t_lfiles *lst, int layer, char *pattern)
 	return (res);
 }
 
+void	print_list(t_lfiles *lst)
+{
+	while (lst)
+	{
+		ft_printf("layer : %d | %s\n", lst->layer, lst->path);
+		lst = lst->next;
+	}
+}
+
 char			**ret_matches(char *pattern)
 {
 	struct dirent	*files;
@@ -149,7 +158,7 @@ char			**ret_matches(char *pattern)
 	{
 		curpat = get_curpat(pattern);
 		par = list;
-		while (par && par->next && par->layer != i)
+		while (par && par->next && par->layer != i - 1)
 			par = par->next;
 		while (par && par->layer == i - 1)
 		{
@@ -160,7 +169,9 @@ char			**ret_matches(char *pattern)
 					par2 = par2->next;
 				while ((files = readdir(dir)) != NULL)
 				{
-					if (matches(files->d_name, curpat))
+					if (matches(files->d_name, curpat)
+							&& ft_strcmp(files->d_name, "..")
+							&& ft_strcmp(files->d_name, "."))
 					{
 						if (!(par2->next = init_list(get_beginning(par->path, files->d_name), i)))
 							return (NULL);
