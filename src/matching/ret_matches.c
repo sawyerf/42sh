@@ -6,13 +6,46 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 19:02:05 by tduval            #+#    #+#             */
-/*   Updated: 2019/06/21 15:28:47 by tduval           ###   ########.fr       */
+/*   Updated: 2019/06/21 16:54:06 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <dirent.h>
 #include "libft.h"
 #include "ft_patmatch.h"
+
+static char		*go_after(char *str)
+{
+	while (str && *str && *str != '/')
+		str++;
+	return (str && *str ? str + 1 : NULL);
+}
+
+static char		*get_current_pattern(char *pattern)
+{
+	int		i;
+
+	i = 0;
+	while (pattern[i] && pattern[i] != '/')
+		i++;
+	return (ft_strsub(pattern, 0, i));
+}
+
+static char		*ft_strremoveat(char *str, int i)
+{
+	int		j;
+
+	j = 0;
+	while (str[j])
+	{
+		if (j >= i)
+			str[j] = str[j + 1];
+		else
+			str[j] = str[j];
+		j++;
+	}
+	return (str);
+}
 
 static int		get_layer(char *pattern)
 {
@@ -28,16 +61,6 @@ static int		get_layer(char *pattern)
 		i++;
 	}
 	return (r);
-}
-
-static char		*get_curpat(char *pattern)
-{
-	int		i;
-
-	i = 0;
-	while (pattern[i] && pattern[i] != '/')
-		i++;
-	return (ft_strsub(pattern, 0, i));
 }
 
 static t_lfiles	*init_list(char *path, int layer)
@@ -60,11 +83,24 @@ static t_lfiles	*init_list(char *path, int layer)
 	return (res);
 }
 
-static char		*go_after(char *str)
+static char		*format_pattern(char *pattern)
 {
-	while (*str && *str != '/')
-		str++;
-	return (str ? str + 1 : NULL);
+	int		i;
+
+	i = 0;
+	while (pattern[i])
+	{
+		if (pattern[i] == '.'
+				&& pattern[i + 1] == '/'
+				&& (i == 0 || pattern[i - 1] == '/'))
+		{
+			pattern = ft_strremoveat(pattern, i);
+			pattern = ft_strremoveat(pattern, i);
+		}
+		else
+			i++;
+	}
+	return (pattern);
 }
 
 static char		*get_beginning(char *lpath, char *dname)
@@ -100,8 +136,9 @@ static char		**final_step(t_lfiles *lst, int layer, char *pattern)
 	par = lst;
 	while (par)
 	{
+		if (go_last(par->path)[0] != '.')
+			i++;
 		par = par->next;
-		i++;
 	}
 	if (!(res = (char **)ft_memalloc(sizeof(char *) * (i + 2))))
 		return (NULL);
@@ -133,59 +170,64 @@ void	print_list(t_lfiles *lst)
 	}
 }
 
+static t_lfiles	*get_files(t_lfiles *lst, char *pattern, int i)
+{
+	struct dirent	*files;
+	char			*current_pattern;
+	DIR				*dir;
+	t_lfiles		*tmp_lst;
+	t_lfiles		*subtmp_lst;
+
+	current_pattern = get_current_pattern(pattern);
+	tmp_lst = lst;
+	while (tmp_lst && tmp_lst->next && tmp_lst->layer != i - 1)
+		tmp_lst = tmp_lst->next;
+	while (tmp_lst && tmp_lst->layer == i - 1)
+	{
+		if ((dir = opendir(tmp_lst->path)) != NULL)
+		{
+			subtmp_lst = tmp_lst;
+			while (subtmp_lst && subtmp_lst->next)
+				subtmp_lst = subtmp_lst->next;
+			while ((files = readdir(dir)) != NULL)
+			{
+				if (matches(files->d_name, current_pattern))
+				{
+					if (!(subtmp_lst->next = init_list(get_beginning(tmp_lst->path, files->d_name), i)))
+						return (NULL);
+					subtmp_lst = subtmp_lst->next;
+				}
+			}
+			closedir(dir);
+		}
+		tmp_lst = tmp_lst->next;
+	}
+	return (lst);
+}
+
 char			**ret_matches(char *pattern)
 {
 	struct dirent	*files;
-	t_lfiles		*list;
-	t_lfiles		*par;
-	t_lfiles		*par2;
-	DIR				*dir;
-	char			**res;
-	char			*curpath;
-	char			*ori;
-	char			*curpat;
+	t_lfiles		*lst;
+	char			*origin;
 	int				layer;
 	int				i;
 
 	i = 0;
-	res = NULL;
-	list = init_list(pattern, -1);
-	ori = pattern;
+	origin = ft_strdup(pattern);
+	pattern = format_pattern(pattern);
+	lst = init_list(pattern, -1);
 	if (pattern[0] == '/')
 		pattern++;
 	layer = get_layer(pattern);
-	while (i <= layer && list)
+	while (i <= layer && lst)
 	{
-		curpat = get_curpat(pattern);
-		par = list;
-		while (par && par->next && par->layer != i - 1)
-			par = par->next;
-		while (par && par->layer == i - 1)
-		{
-			if ((dir = opendir(par->path)) != NULL)
-			{
-				par2 = par;
-				while (par2 && par2->next)
-					par2 = par2->next;
-				while ((files = readdir(dir)) != NULL)
-				{
-					if (matches(files->d_name, curpat)
-							&& ft_strcmp(files->d_name, "..")
-							&& ft_strcmp(files->d_name, "."))
-					{
-						if (!(par2->next = init_list(get_beginning(par->path, files->d_name), i)))
-							return (NULL);
-						par2 = par2->next;
-					}
-				}
-				closedir(dir);
-			}
-			par = par->next;
-		}
+		if (!(lst = get_files(lst, pattern, i)))
+			return (NULL);
 		pattern = go_after(pattern);
 		i++;
 	}
-	return (final_step(list, layer, ori));
+	return (final_step(lst, layer, origin));
 }
 int		main(int ac, char **av)
 {
