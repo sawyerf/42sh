@@ -14,7 +14,7 @@ NAME =		42sh
 
 CC =		clang
 
-CFLAGS =	-I inc/ -I libft/inc/ -Wall -Werror -Wextra
+CFLAGS =	-I inc/ -I libft/inc/ -Wall -Werror -Wextra -ggdb
 
 INC_DIR =	inc
 

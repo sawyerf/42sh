@@ -1,6 +1,23 @@
 #include "ft_eval.h"
 
-int	exec_pipeline(t_ast_node *tree, t_job *job)
+
+int	extract_last_tok(t_cmd_tab *pipeln)
+{
+	int i;
+
+	i = 0;
+	while (pipeln->next)
+		pipeln = pipeln->next;
+	if (!pipeln->av[0])
+		return (0);
+	while (pipeln->av[i + 1])
+		i++;
+	if (!(g_sh.lastpara = ft_strdup(pipeln->av[i])))
+		return (MEMERR);
+	return (0);
+}
+
+int	launch_pipe(t_ast_node *tree, t_job *job)
 {
 	t_cmd_tab	*cmd_tab;
 	int			ret;
@@ -12,6 +29,8 @@ int	exec_pipeline(t_ast_node *tree, t_job *job)
 			&& (!(job->cmd_ln = make_cmdline(tree->start, tree->end, 0))))
 		return (MEMERR);
 	if (!(cmd_tab = expand_pipeline(tree->pipeline)))
+		return (MEMERR);
+	if (extract_last_tok(cmd_tab))
 		return (MEMERR);
 	if (cmd_tab->next)
 		ret = eval_pipe(cmd_tab, job);

@@ -36,8 +36,7 @@ void	delete_varname(char *cursor)
 	int				trunc;
 	int				i;
 	bool			brackets;
-	const char		*valid = "#-:=?+";
-
+	const char		*valid = "#-:=?+!";
 	i = 1;
 	trunc = 1;
 	brackets = false;
@@ -47,10 +46,12 @@ void	delete_varname(char *cursor)
 		trunc = 3;
 		brackets = true;
 	}
-	while (parser_is_name_c(cursor[i])
-	|| ((brackets) && (ft_cisin((char*)valid, cursor[i]))))
+	while (parser_is_name_c(cursor[i]) || (ft_cisin((char*)valid, cursor[i]))
+	|| ((brackets) && (cursor[i])))
 	{
 		trunc++;
+		if ((cursor[i] == '}') || ((!brackets) && (ft_cisin((char*)valid, cursor[i]))))
+			break;
 		i++;
 	}
 	i = ft_strlen(cursor + trunc);

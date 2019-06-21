@@ -300,7 +300,7 @@ int				expand_param(t_token **word, char **cursor,
 	int					i;
 
 	//ft_printf("expand_param: %s value: %s\n", *cursor, value);
-	is_redir = FT_TRUE;
+//	is_redir = FT_TRUE;
 	if (get_ifs(&ifs) == MEMERR)
 		return (MEMERR);
 	delete_varname(*cursor);

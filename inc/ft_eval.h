@@ -67,7 +67,7 @@ int						bin_pathfinder(t_cmd_tab *cmd, char *path);
 int						spawn_in_pipe(t_cmd_tab *cmd);
 int						spawn_command(t_cmd_tab *cmd, t_job *job);
 int						eval_pipe(t_cmd_tab *pipe, t_job *job);
-int						exec_pipeline(t_ast_node *tree, t_job *job);
+int						launch_pipe(t_ast_node *tree, t_job *job);
 void					wait_job(t_job *job);
 int						is_builtin(t_cmd_tab *cmd);
 void					free_cmd_tab(t_cmd_tab *cmd);

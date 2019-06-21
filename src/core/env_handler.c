@@ -38,19 +38,21 @@ int		valid_env_name(char *str)
 
 char	*dget_env_value(char *name)
 {
-	if (!ft_strcmp("?", name))
+	if (!ft_strncmp("_", name, 1))
+		return (g_sh.lastpara);	
+	if (!ft_strncmp("?", name, 1))
 		return (ft_itoa(g_sh.status));
-	if (!ft_strcmp("#", name))
+	if (!ft_strncmp("#", name, 1))
 		return (ft_itoa(ft_tablen(g_sh.av)));
-	if (!ft_strcmp("*", name))
+	if (!ft_strncmp("*", name, 1))
 		return (ft_ttos(g_sh.av, " "));
-	if (!ft_strcmp("@", name))
+	if (!ft_strncmp("@", name, 1))
 		return (ft_ttos(g_sh.av, " "));
 	if (!ft_strcmp("-", name))
 		return (NULL);
-	if (!ft_strcmp("!", name))
+	if (!ft_strncmp("!", name, 1))
 		return (ft_itoa(g_sh.lastback));
-	if (!ft_strcmp("$", name))
+	if (!ft_strncmp("$", name, 1))
 		return (ft_itoa(getpid()));
 	if (ft_strisdigit(name) && ft_tablen(g_sh.av) > ft_atoi(name))
 		return (ft_strdup(g_sh.av[ft_atoi(name)]));
