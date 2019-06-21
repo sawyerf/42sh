@@ -1,5 +1,6 @@
 #include "ft_eval.h"
 
+extern t_sh g_sh;
 
 int	extract_last_tok(t_cmd_tab *pipeln)
 {
@@ -12,8 +13,7 @@ int	extract_last_tok(t_cmd_tab *pipeln)
 		return (0);
 	while (pipeln->av[i + 1])
 		i++;	
-	if (!(g_sh.lastpara = ft_strdup(pipeln->av[i])))
-		return (MEMERR);
+	g_sh.env = envaddstr(g_sh.env, "_", pipeln->av[i]);
 	return (0);
 }
 

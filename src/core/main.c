@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/20 15:51:43 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/21 12:50:15 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ static int	init_shell(char **env, t_read_fn *read_fn, char **av)
 	g_sh.fd = 0;
 	g_sh.status = 0;
 	g_sh.av = av + 1;
-	g_sh.lastpara = NULL;
 	g_sh.lastback = 0;
 	ht_init();
 	ht_refreshall(get_env_value("PATH"));

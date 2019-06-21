@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 22:17:22 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/20 17:36:57 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/21 12:50:40 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ int		valid_env_name(char *str)
 
 char	*dget_env_value(char *name)
 {
-	if (!ft_strncmp("_", name, 1))
-		return (g_sh.lastpara);	
 	if (!ft_strncmp("?", name, 1))
 		return (ft_itoa(g_sh.status));
 	if (!ft_strncmp("#", name, 1))
