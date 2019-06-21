@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 19:02:05 by tduval            #+#    #+#             */
-/*   Updated: 2019/06/21 19:08:23 by tduval           ###   ########.fr       */
+/*   Updated: 2019/06/21 19:23:46 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,14 @@ static void		*free_lst(t_lfiles *lst)
 
 static char		*go_after(char *str)
 {
-	while (str && *str && *str != '/')
-		str++;
-	return (str && *str ? str + 1 : NULL);
+	int		i;
+
+	i = 0;
+	while (str && str[i] && str[i] != '/')
+		i++;
+	while (str && str[i] && str[i + 1] && str[i + 1] == '/')
+		i++;
+	return (str && str[i] ? str + i + 1 : NULL);
 }
 
 static char		*get_current_pattern(char *pattern)
@@ -38,7 +43,7 @@ static char		*get_current_pattern(char *pattern)
 	int		i;
 
 	i = 0;
-	while (pattern[i] && pattern[i] != '/')
+	while (pattern && pattern[i] && pattern[i] != '/')
 		i++;
 	return (ft_strsub(pattern, 0, i));
 }
@@ -68,7 +73,7 @@ static int		get_layer(char *pattern)
 	r = 0;
 	while (pattern[i])
 	{
-		if (pattern[i] == '/' && pattern[i + 1])
+		if (pattern[i] == '/' && pattern[i + 1] && pattern[i + 1] != '/')
 			r++;
 		i++;
 	}
@@ -252,7 +257,10 @@ char			**ret_matches(char *pattern)
 	pattern = format_pattern(pattern);
 	lst = init_list(pattern, -1);
 	if (pattern[0] == '/')
-		pattern++;
+	{
+		while (pattern && *pattern && *pattern == '/')
+			pattern++;
+	}
 	layer = get_layer(pattern);
 	//ft_printf("LAYERS : %d\n", layer);
 	while (i <= layer && lst)
