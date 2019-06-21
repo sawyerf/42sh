@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 19:02:05 by tduval            #+#    #+#             */
-/*   Updated: 2019/06/21 19:23:46 by tduval           ###   ########.fr       */
+/*   Updated: 2019/06/21 19:35:04 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void		*free_lst(t_lfiles *lst)
 		ft_strdel(&(lst->path));
 		ft_memdel((void **)&lst);
 	}
+	return (NULL);
 }
 
 static char		*go_after(char *str)
@@ -147,8 +148,10 @@ static char		**final_step(t_lfiles *lst, int layer, char *pattern)
 	char		**res;
 	struct stat	buf;
 	int			i;
+	int			f;
 
 	i = 0;
+	f = pattern[ft_strlen(pattern) - 1] == '/' ? 1 : 0;
 	while (lst && lst->layer != layer)
 		lst = lst->next;
 	par = lst;
@@ -162,16 +165,18 @@ static char		**final_step(t_lfiles *lst, int layer, char *pattern)
 		return (NULL);
 	if (i == 0)
 	{
-		res[i] = ft_strdup(pattern);
+		res[i] = pattern;
 		return (res);
 	}
+	else
+		ft_strdel(&pattern);
 	par = lst;
 	i = 0;
 	while (lst)
 	{
 		if (go_last(lst->path)[0] != '.')
 		{
-			if (pattern[ft_strlen(pattern) -1] == '/')
+			if (f)
 				res[i] = ft_strjoin(lst->path, "/");
 			else
 				res[i] = ft_strdup(lst->path);
@@ -241,6 +246,7 @@ static t_lfiles	*get_files(t_lfiles *lst, char *pattern, int i)
 		}
 		tmp_lst = tmp_lst->next;
 	}
+	ft_strdel(&current_pattern);
 	return (lst);
 }
 
@@ -289,11 +295,13 @@ int		main(int ac, char **av)
 			while (test && test[i])
 			{
 				ft_putstr(test[i]);
+				ft_strdel(&test[i]);
 				ft_putchar('\n');
 				i++;
 			}
 			j++;
 		}
 	}
+	ft_memdel((void **)&test);
 	return (0);
 }
