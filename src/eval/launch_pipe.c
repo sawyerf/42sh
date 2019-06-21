@@ -11,7 +11,7 @@ int	extract_last_tok(t_cmd_tab *pipeln)
 	if (!pipeln->av[0])
 		return (0);
 	while (pipeln->av[i + 1])
-		i++;
+		i++;	
 	if (!(g_sh.lastpara = ft_strdup(pipeln->av[i])))
 		return (MEMERR);
 	return (0);
@@ -30,7 +30,7 @@ int	launch_pipe(t_ast_node *tree, t_job *job)
 		return (MEMERR);
 	if (!(cmd_tab = expand_pipeline(tree->pipeline)))
 		return (MEMERR);
-	if (extract_last_tok(cmd_tab))
+	if ((job->fg) && (extract_last_tok(cmd_tab)))
 		return (MEMERR);
 	if (cmd_tab->next)
 		ret = eval_pipe(cmd_tab, job);
