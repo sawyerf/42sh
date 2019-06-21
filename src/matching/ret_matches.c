@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 19:02:05 by tduval            #+#    #+#             */
-/*   Updated: 2019/06/21 19:35:04 by tduval           ###   ########.fr       */
+/*   Updated: 2019/06/21 19:52:24 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 #include "libft.h"
 #include "ft_patmatch.h"
 
-static void		*free_lst(t_lfiles *lst)
+static void	*free_lst(t_lfiles *lst)
 {
 	if (lst && lst->next)
 		free_lst(lst->next);
 	if (lst)
 	{
-		ft_strdel(&(lst->path));
+		ft_strdel(&lst->path);
 		ft_memdel((void **)&lst);
 	}
 	return (NULL);
@@ -145,6 +145,7 @@ static char		*go_last(char *str)
 static char		**final_step(t_lfiles *lst, int layer, char *pattern)
 {
 	t_lfiles	*par;
+	t_lfiles	*origin;
 	char		**res;
 	struct stat	buf;
 	int			i;
@@ -152,6 +153,7 @@ static char		**final_step(t_lfiles *lst, int layer, char *pattern)
 
 	i = 0;
 	f = pattern[ft_strlen(pattern) - 1] == '/' ? 1 : 0;
+	origin = lst;
 	while (lst && lst->layer != layer)
 		lst = lst->next;
 	par = lst;
@@ -172,19 +174,19 @@ static char		**final_step(t_lfiles *lst, int layer, char *pattern)
 		ft_strdel(&pattern);
 	par = lst;
 	i = 0;
-	while (lst)
+	while (par)
 	{
-		if (go_last(lst->path)[0] != '.')
+		if (go_last(par->path)[0] != '.')
 		{
 			if (f)
-				res[i] = ft_strjoin(lst->path, "/");
+				res[i] = ft_strjoin(par->path, "/");
 			else
-				res[i] = ft_strdup(lst->path);
+				res[i] = ft_strdup(par->path);
 			i++;
 		}
-		lst = lst->next;
+		par = par->next;
 	}
-	free_lst(lst);
+	free_lst(origin);
 	return (res);
 }
 
@@ -202,10 +204,14 @@ static t_lfiles	*get_files(t_lfiles *lst, char *pattern, int i)
 	struct dirent	*files;
 	struct stat		buf;
 	char			*current_pattern;
+	char			*tmp1;
+	char			*tmp2;
 	DIR				*dir;
 	t_lfiles		*tmp_lst;
 	t_lfiles		*subtmp_lst;
 
+	tmp1 = NULL;
+	tmp2 = NULL;
 	current_pattern = get_current_pattern(pattern);
 	tmp_lst = lst;
 	while (tmp_lst && tmp_lst->next && tmp_lst->layer != i - 1)
@@ -227,12 +233,20 @@ static t_lfiles	*get_files(t_lfiles *lst, char *pattern, int i)
 				{
 					if (pattern[ft_strlen(pattern) - 1] == '/')
 					{
-						if (stat(ft_strjoin(ft_strjoin(tmp_lst->path, "/"), files->d_name), &buf) != -1 && S_ISDIR(buf.st_mode))
+						if ((!(tmp1 = ft_strjoin(tmp_lst->path, "/")))
+							|| !(tmp2 = ft_strjoin(tmp1, files->d_name)))
+							{
+								ft_strdel(&tmp1);
+								return (NULL);
+							}
+						if (stat(tmp2, &buf) != -1 && S_ISDIR(buf.st_mode))
 						{
 							if (!(subtmp_lst->next = init_list(get_beginning(tmp_lst->path, files->d_name), i)))
 								return (NULL);
 							subtmp_lst = subtmp_lst->next;
 						}
+						ft_strdel(&tmp1);
+						ft_strdel(&tmp2);
 					}
 					else
 					{
