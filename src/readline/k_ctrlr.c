@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 18:29:28 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/17 17:00:05 by tduval           ###   ########.fr       */
+/*   Updated: 2019/06/21 14:59:49 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ int		ctrlr(t_rdl *rdl, char *str)
 		rdladd(rdl, '\n');
 	ft_strdel(&hst.str);
 	ft_strdel(&hst.prompt);
+	ft_strdel(&hst.paste);
 	g_hst[3] = NULL;
 	return (arr[1] - 1);
 }
