@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 18:37:40 by tduval            #+#    #+#             */
-/*   Updated: 2019/06/18 20:51:18 by tduval           ###   ########.fr       */
+/*   Updated: 2019/06/21 17:50:21 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef	struct	s_lfiles
 	struct s_lfiles	*next;
 }				t_lfiles;
 
+char	**sort_files(char **lst);
 char	**ret_matches(char *pattern);
 char	*after_bracket(char *str);
 char	*get_chars(char *str, char c1, char c2);
