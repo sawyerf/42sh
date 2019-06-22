@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 19:02:05 by tduval            #+#    #+#             */
-/*   Updated: 2019/06/22 03:22:05 by tduval           ###   ########.fr       */
+/*   Updated: 2019/06/22 03:28:11 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ static char		*get_beginning(char *lpath, char *dname)
 
 static char		*go_last(char *str)
 {
-	while (strchr(str, '/'))
+	while (ft_strchr(str, '/'))
 		str++;
 	return(str);
 }
@@ -159,7 +159,8 @@ static char		**final_step(t_lfiles *lst, int layer, char *pattern)
 	tmp = lst;
 	while (tmp)
 	{
-		if (go_last(tmp->path)[0] != '.')
+		if (go_last(tmp->path)[0] != '.'
+			|| go_last(pattern)[0] == '.')
 			i++;
 		tmp= tmp->next;
 	}
@@ -177,7 +178,8 @@ static char		**final_step(t_lfiles *lst, int layer, char *pattern)
 	i = 0;
 	while (tmp)
 	{
-		if (go_last(tmp->path)[0] != '.')
+		if (go_last(tmp->path)[0] != '.'
+			|| go_last(pattern)[0] == '.')
 		{
 			if (f && !(res[i] = ft_strjoin(tmp->path, "/")))
 				return (free_lst(origin));
