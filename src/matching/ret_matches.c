@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 19:02:05 by tduval            #+#    #+#             */
-/*   Updated: 2019/06/22 03:28:11 by tduval           ###   ########.fr       */
+/*   Updated: 2019/06/22 03:31:00 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,8 +172,6 @@ static char		**final_step(t_lfiles *lst, int layer, char *pattern)
 		free_lst(lst);
 		return (res);
 	}
-	else
-		ft_strdel(&pattern);
 	tmp = lst;
 	i = 0;
 	while (tmp)
