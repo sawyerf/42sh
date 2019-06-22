@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 19:02:05 by tduval            #+#    #+#             */
-/*   Updated: 2019/06/21 19:52:24 by tduval           ###   ########.fr       */
+/*   Updated: 2019/06/22 03:22:05 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,8 +144,8 @@ static char		*go_last(char *str)
 
 static char		**final_step(t_lfiles *lst, int layer, char *pattern)
 {
-	t_lfiles	*par;
 	t_lfiles	*origin;
+	t_lfiles	*tmp;
 	char		**res;
 	struct stat	buf;
 	int			i;
@@ -156,35 +156,39 @@ static char		**final_step(t_lfiles *lst, int layer, char *pattern)
 	origin = lst;
 	while (lst && lst->layer != layer)
 		lst = lst->next;
-	par = lst;
-	while (par)
+	tmp = lst;
+	while (tmp)
 	{
-		if (go_last(par->path)[0] != '.')
+		if (go_last(tmp->path)[0] != '.')
 			i++;
-		par = par->next;
+		tmp= tmp->next;
 	}
 	if (!(res = (char **)ft_memalloc(sizeof(char *) * (i + 2))))
-		return (NULL);
+		return (free_lst(lst));
 	if (i == 0)
 	{
 		res[i] = pattern;
+		free_lst(lst);
 		return (res);
 	}
 	else
 		ft_strdel(&pattern);
-	par = lst;
+	tmp = lst;
 	i = 0;
-	while (par)
+	while (tmp)
 	{
-		if (go_last(par->path)[0] != '.')
+		if (go_last(tmp->path)[0] != '.')
 		{
-			if (f)
-				res[i] = ft_strjoin(par->path, "/");
+			if (f && !(res[i] = ft_strjoin(tmp->path, "/")))
+				return (free_lst(origin));
 			else
-				res[i] = ft_strdup(par->path);
+			{
+				if (!(res[i] = ft_strdup(tmp->path)))
+					return (free_lst(origin));
+			}
 			i++;
 		}
-		par = par->next;
+		tmp = tmp->next;
 	}
 	free_lst(origin);
 	return (res);
@@ -199,68 +203,72 @@ void	print_list(t_lfiles *lst)
 	}
 }
 
+static int	append_file(t_lfiles *lists[2], char *str[4], struct dirent *files, int i)
+{
+	struct stat	buf;
+
+	if (str[PATTERN][ft_strlen(str[PATTERN]) - 1] == '/')
+	{
+		if ((!(str[TMP1] = ft_strjoin(lists[TMP_LST]->path, "/")))
+				|| !(str[TMP2] = ft_strjoin(str[TMP1], files->d_name)))
+		{
+				ft_strdel(&str[TMP1]);
+				return (0);
+		}
+		if (stat(str[TMP2], &buf) != -1 && S_ISDIR(buf.st_mode))
+		{
+			if (!(lists[SUBTMP_LST]->next = init_list(get_beginning(lists[TMP_LST]->path, files->d_name), i)))
+					return (0);
+			lists[SUBTMP_LST] = lists[SUBTMP_LST]->next;
+		}
+		ft_strdel(&str[TMP1]);
+		ft_strdel(&str[TMP2]);
+	}
+	else
+	{
+		if (!(lists[SUBTMP_LST]->next = init_list(get_beginning(lists[TMP_LST]->path, files->d_name), i)))
+			return (0);
+		lists[SUBTMP_LST] = lists[SUBTMP_LST]->next;
+	}
+	return (1);
+}
+
 static t_lfiles	*get_files(t_lfiles *lst, char *pattern, int i)
 {
+	t_lfiles		*lists[2];
+	char			*str[4];
 	struct dirent	*files;
 	struct stat		buf;
-	char			*current_pattern;
-	char			*tmp1;
-	char			*tmp2;
 	DIR				*dir;
-	t_lfiles		*tmp_lst;
-	t_lfiles		*subtmp_lst;
 
-	tmp1 = NULL;
-	tmp2 = NULL;
-	current_pattern = get_current_pattern(pattern);
-	tmp_lst = lst;
-	while (tmp_lst && tmp_lst->next && tmp_lst->layer != i - 1)
-		tmp_lst = tmp_lst->next;
-	//ft_printf("pattern au tour %d : %s\n", i, pattern);
-	//print_list(lst);
-	while (tmp_lst && tmp_lst->layer == i - 1)
+	str[TMP1] = NULL;
+	str[TMP2] = NULL;
+	str[PATTERN] = pattern;
+	str[CURPATTERN] = get_current_pattern(str[PATTERN]);
+	lists[TMP_LST] = lst;
+	while (lists[TMP_LST]&& lists[TMP_LST]->next && lists[TMP_LST]->layer != i - 1)
+		lists[TMP_LST]= lists[TMP_LST]->next;
+	while (lists[TMP_LST] && lists[TMP_LST]->layer == i - 1)
 	{
-		if ((dir = opendir(tmp_lst->path)) != NULL)
+		if ((dir = opendir(lists[TMP_LST]->path)) != NULL)
 		{
-			//ft_printf("folder : %s | pattern : %s\n", tmp_lst->path, current_pattern);
-			subtmp_lst = tmp_lst;
-			while (subtmp_lst && subtmp_lst->next)
-				subtmp_lst = subtmp_lst->next;
+			lists[SUBTMP_LST] = lists[TMP_LST];
+			while (lists[SUBTMP_LST] && lists[SUBTMP_LST]->next)
+				lists[SUBTMP_LST] = lists[SUBTMP_LST]->next;
 			while ((files = readdir(dir)) != NULL)
 			{
-				if (matches(files->d_name, current_pattern)
-					&& (ft_strcmp(files->d_name, "..") || ft_strequ(current_pattern, "..") && (ft_strcmp(files->d_name, ".")) || ft_strequ(current_pattern, "..")))
+				if (matches(files->d_name, str[CURPATTERN])
+						&& (ft_strcmp(files->d_name, "..") || ft_strequ(str[CURPATTERN], "..")
+						&& (ft_strcmp(files->d_name, ".")) || ft_strequ(str[CURPATTERN], ".")))
 				{
-					if (pattern[ft_strlen(pattern) - 1] == '/')
-					{
-						if ((!(tmp1 = ft_strjoin(tmp_lst->path, "/")))
-							|| !(tmp2 = ft_strjoin(tmp1, files->d_name)))
-							{
-								ft_strdel(&tmp1);
-								return (NULL);
-							}
-						if (stat(tmp2, &buf) != -1 && S_ISDIR(buf.st_mode))
-						{
-							if (!(subtmp_lst->next = init_list(get_beginning(tmp_lst->path, files->d_name), i)))
-								return (NULL);
-							subtmp_lst = subtmp_lst->next;
-						}
-						ft_strdel(&tmp1);
-						ft_strdel(&tmp2);
-					}
-					else
-					{
-						if (!(subtmp_lst->next = init_list(get_beginning(tmp_lst->path, files->d_name), i)))
-							return (NULL);
-						subtmp_lst = subtmp_lst->next;
-					}
+					if (!(append_file(lists, str, files, i)))
+						return (NULL);
 				}
 			}
 			closedir(dir);
 		}
-		tmp_lst = tmp_lst->next;
+		lists[TMP_LST] = lists[TMP_LST]->next;
 	}
-	ft_strdel(&current_pattern);
 	return (lst);
 }
 
@@ -282,7 +290,6 @@ char			**ret_matches(char *pattern)
 			pattern++;
 	}
 	layer = get_layer(pattern);
-	//ft_printf("LAYERS : %d\n", layer);
 	while (i <= layer && lst)
 	{
 		if (!(lst = get_files(lst, pattern, i)))
