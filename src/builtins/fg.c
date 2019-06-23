@@ -22,12 +22,18 @@ int		fg(t_cmd_tab *cmd)
 		return (0);
 	}
 	if ((!cmd->av[1]) && (g_sh.current_j))
+	{
+		ft_dprintf(STDERR_FILENO, "%s\n", g_sh.current_j->cmd_ln);
 		fg_job(g_sh.current_j, 1);
+	}
 	else
 	{
 		j = jobs_conversion(cmd->av[1]);
 		if ((j) && (!j->completed))
+		{
+			ft_dprintf(STDERR_FILENO, "%s\n", j->cmd_ln);
 			fg_job(j, 1);
+		}
 		else
 			ft_dprintf(STDERR_FILENO, "42sh: fg: '%s': no such job\n", cmd->av[1]);
 	}

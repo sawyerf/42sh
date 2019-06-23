@@ -20,10 +20,10 @@
 	j = g_sh.job_lst;
 	while (j)
 	{
-		chld = waitpid(-(j->pgid), &(j->status), WUNTRACED | WNOHANG);
+		chld = waitpid((j->pgid), &(j->status), WUNTRACED | WNOHANG);
 		if (WIFSIGNALED(j->status))
 		{
-			ft_printf("x[%d] '%s' recieved signal %d\n", j->pgid, j->cmd_ln, WTERMSIG(j->status));
+//			ft_printf("x[%d] '%s' recieved signal %d\n", j->pgid, j->cmd_ln, WTERMSIG(j->status));
 			j->completed = 1;
 		}
 		if ((chld > 0) && (WIFEXITED(j->status))) /* waitpid return 0 if child hasent changed state*/

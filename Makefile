@@ -70,6 +70,7 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			core/env.c					\
 			core/envdel.c				\
 			core/run.c					\
+			core/sigcode.c				\
 			eval/redir_tools.c			\
 			eval/expansion_wrappers.c	\
 			eval/spawn_tools.c			\

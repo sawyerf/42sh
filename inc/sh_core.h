@@ -65,6 +65,12 @@ typedef struct			s_sh
 	struct termios		term_save;
 }						t_sh;
 
+typedef	struct			s_sig
+{
+	int					signum;
+	char				*sigstr;
+}						t_sig;
+
 extern	t_sh			g_sh;
 
 void					global_del(void);
@@ -122,5 +128,5 @@ void					del_job(t_job *j);
 void					clean_jobs(void);
 void					run_script(char *file);
 int						refresh_jobs(void);
-
+char					*get_termsig(int signum);
 #endif

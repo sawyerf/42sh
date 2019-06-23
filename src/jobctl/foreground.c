@@ -19,7 +19,7 @@ void	update_job(t_job *job)
 		job->pgid = WAIT_ANY;
 	waitpid(job->pgid, &(job->status), WNOHANG);
 }
-#include <errno.h>
+
 void	wait_job(t_job *job)
 {
 	pid_t pid;
@@ -27,7 +27,6 @@ void	wait_job(t_job *job)
 	if (!job->pgid)
 		job->pgid = WAIT_ANY;
 	pid = waitpid(job->pgid, &(job->status), WUNTRACED);
-	ft_printf("errno is %d finished waiting job %d\n", errno, job->pgid);
 	register_job(job);
 	if (WIFEXITED(job->status))
 	{
@@ -36,7 +35,8 @@ void	wait_job(t_job *job)
 	}
 	else if (WIFSIGNALED(job->status))
 	{
-		ft_printf("[%d] %d signal num %d       %s\n", job->job_id, job->pgid, WTERMSIG(job->status), job->cmd_ln);
+		ft_printf("%s\n", get_termsig(WTERMSIG(job->status)));
+//		ft_printf("[%d] %d signal num %d       %s\n", job->job_id, job->pgid, WTERMSIG(job->status), job->cmd_ln);
 	}
 	else if (WIFSTOPPED(job->status))
 	{
