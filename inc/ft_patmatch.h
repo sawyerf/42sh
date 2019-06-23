@@ -6,12 +6,20 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 18:37:40 by tduval            #+#    #+#             */
-/*   Updated: 2019/06/21 17:50:21 by tduval           ###   ########.fr       */
+/*   Updated: 2019/06/22 03:15:16 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PATMATCH_H
 # define FT_PATMATCH_H
+
+# define TMP1 0
+# define TMP2 1
+# define PATTERN 2
+# define CURPATTERN 3
+
+# define TMP_LST 0
+# define SUBTMP_LST 1
 
 typedef	struct	s_lfiles
 {
