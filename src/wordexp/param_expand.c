@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/24 16:55:01 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/24 17:51:53 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ char			*assign_sub_var(char *var_name, char *zone)
 	char	*result;
 
 	result = ft_strsub(zone, 1, ft_strlen(zone) - 2);
-	g_sh.local = envaddstr(g_sh.local, var_name, result);
+	envaddstr(&g_sh.local, var_name, result);
 	return (result);
 }
 

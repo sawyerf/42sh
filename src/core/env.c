@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 21:53:59 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/04 20:23:03 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/24 17:49:19 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,15 @@ char	*envchrr(char **env, char *var)
 	return (NULL);
 }
 
-char	**shlvl(char **env)
+int		shlvl(char ***env)
 {
 	char	*var;
 	int		lvl;
 
 	var = NULL;
-	if (!(var = varchr(env, "SHLVL=")))
+	if (!(var = varchr(*env, "SHLVL=")))
 		lvl = 1;
 	else
 		lvl = ft_atoi(var) + 1;
-	env = envaddint(env, "SHLVL", lvl);
-	return (env);
+	return (envaddint(env, "SHLVL", lvl));
 }

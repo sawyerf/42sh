@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/04 15:58:01 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/17 17:32:23 by tduval           ###   ########.fr       */
+/*   Updated: 2019/06/24 17:45:36 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,15 @@ int		cexport(char *var)
 	{
 		if (valid_alias(var))
 		{
-			g_sh.env = csetenv(g_sh.env, var);
+			csetenv(&g_sh.env, var);
 			if (varchr(g_sh.local, var))
-				g_sh.local = csetenv(g_sh.local, var);
+				csetenv(&g_sh.local, var);
 		}
 		else
 			return (1);
 	}
 	else if (varchr(g_sh.local, var))
-		g_sh.env = envaddstr(g_sh.env, var, varchr(g_sh.local, var));
+		envaddstr(&g_sh.env, var, varchr(g_sh.local, var));
 	return (0);
 }
 

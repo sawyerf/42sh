@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 18:34:05 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/04 14:00:14 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/24 17:46:16 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	setenv_wrapper(t_cmd_tab *cmd)
 			return (-1);
 		}
 	}
-	if (!(g_sh.env = envaddstr(g_sh.env, cmd->av[1], cmd->av[2])))
+	if ((envaddstr(&g_sh.env, cmd->av[1], cmd->av[2])))
 		return (MEMERR);
 	return (0);
 }

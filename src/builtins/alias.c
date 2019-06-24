@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 16:57:28 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/17 17:31:56 by tduval           ###   ########.fr       */
+/*   Updated: 2019/06/24 17:27:07 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ int		alias(t_cmd_tab *cmd)
 			if (ft_tablen(g_sh.alias) > 1024)
 				ft_dprintf(2, "alias: too much alias. Please stop!\n");
 			else if (valid_alias(cmd->av[count]))
-				g_sh.alias = csetenv(g_sh.alias, cmd->av[count]);
+			{
+				if (csetenv(&g_sh.alias, cmd->av[count]))
+					return (MEMERR);
+			}
 			else
 				ft_dprintf(2, "alias: `%s': invalid alias name\n",
 						cmd->av[count]);

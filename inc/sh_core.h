@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/21 12:50:01 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/24 17:49:39 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,10 @@ void					global_del(void);
 int						br_print(int err, t_cmd_tab *cmd);
 int						request_new_line(t_lexer *lx);
 int						run_command(char *line);
-char					**shlvl(char **env);
+int						shlvl(char ***env);
 char					*varchr(char **env, char *toto);
 char					*envchrr(char **env, char *var);
-char					**envaddint(char **caca, char *toto, int fifi);
+int						envaddint(char ***env, char *var, int value);
 char					*envchrr(char **env, char *var);
 t_ast_node				*get_tree(t_ast_node *tree);
 int						setenv_wrapper(t_cmd_tab *cmd);
@@ -120,9 +120,9 @@ int						valid_env_var(char *str);
 int						append_tab(char **new_env, char **to_add, int count);
 void					update_env_pwd(char *pwd, char *curpath);
 char					*getoldpwd(void);
-char					**csetenv(char **env, char *var);
+int						csetenv(char ***env, char *var);
 char					**envdel(char **env, char *var);
-char					**envaddstr(char **env, char *var, char *value);
+int						envaddstr(char ***env, char *var, char *value);
 int						sh_readfile(char *prompt, char **str);
 int						missing_quote(char *line);
 char					*make_cmdline(t_token *start, t_token *end, int last);

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 20:19:10 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/11 16:50:36 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/24 17:51:08 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,12 @@ static int		assign_to_shell(t_cmd_tab *cmd)
 		if (varchr(g_sh.env, cmd->assign_lst[i]))
 		{
 			cmd->assign_lst[i][len] = c;
-			g_sh.env = csetenv(g_sh.env, cmd->assign_lst[i]);
+			csetenv(&g_sh.env, cmd->assign_lst[i]);
 		}
 		else
 		{
 			cmd->assign_lst[i][len] = c;
-			g_sh.local = csetenv(g_sh.local, cmd->assign_lst[i]);
+			csetenv(&g_sh.local, cmd->assign_lst[i]);
 		}
 		if ((!g_sh.local) || (!g_sh.env))
 			return (MEMERR);

@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 18:10:27 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/17 17:12:11 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/24 17:52:34 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		hstread(char **env)
 	if (!(home = envchrr(env, "HOME"))
 		|| !(path = ft_zprintf("%s/%s", home, ".42sh_history")))
 		return (0);
-	g_sh.env = envaddstr(g_sh.env, "PATH_HISTORY", path);
+	envaddstr(&g_sh.env, "PATH_HISTORY", path);
 	fd = open(path, O_RDONLY);
 	ft_strdel(&path);
 	if (fd < 0)

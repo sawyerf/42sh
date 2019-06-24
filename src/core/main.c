@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/21 12:50:15 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/24 17:53:30 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,22 @@
 
 t_sh			g_sh;
 extern t_list	*g_thash[];
+/*
+void		*malloc(size_t i)
+{
+	if (!(i % 3))
+		return (NULL);
+	return (valloc(i));
+}*/
 
 static int	init_shell(char **env, t_read_fn *read_fn, char **av)
 {
 	g_sh.mode = MODEFILE;
 	if (isatty(STDIN_FILENO))
 		g_sh.mode = INTERACTIVE;
-	if (!(g_sh.env = shlvl(ft_tabdup(env))))
+	if (!(g_sh.env = ft_tabdup(env)))
+		return (MEMERR);
+	if (shlvl(&g_sh.env))
 		return (MEMERR);
 	if (!(g_sh.local = ft_tabnew(0)))
 		return (MEMERR);
@@ -86,7 +95,11 @@ int			main(int ac, char **av, char **env)
 
 	(void)av[ac];
 	if (init_shell(env, &read_fn, av))
+	{
+		ft_dprintf(STDERR_FILENO, "21sh: init_shell: memory failure\n");
+		global_del();
 		return (MEMERR);
+	}
 	shrc();
 	while (42)
 	{

@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 22:17:22 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/21 12:50:40 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/24 17:46:35 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char	*get_env_value(char *name)
 int		set_shell_env(char *name, char *newvalue, int to_export)
 {
 	(void)to_export;
-	if (!(g_sh.env = envaddstr(g_sh.env, name, newvalue)))
+	if (envaddstr(&g_sh.env, name, newvalue))
 		return (MEMERR);
 	return (0);
 }
