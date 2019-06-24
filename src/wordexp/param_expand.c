@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/20 17:35:39 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/24 16:55:01 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,6 @@ static char		*quote_str(char *str)
 		i++;
 		j++;
 	}
-	if (str && str[0])
-		free(str);
 	return (quoted);
 }
 // ${parameter:-word}
@@ -169,10 +167,8 @@ char			*classic_sub(char *cursor)
 {
 	char		*env_var;
 	char		*env_value;
-	const char	*empty_str = "";
 
 	cursor++;
-	empty_str = NULL;
 	env_var = NULL;
 	env_value = NULL;
 	env_var = get_var_exp(cursor);
@@ -180,10 +176,10 @@ char			*classic_sub(char *cursor)
 	{
 		env_value = dget_env_value(env_var);
 		ft_strdel(&env_var);
-		if (env_value && *env_value)
+		if (env_value)
 			return (env_value);
 	}
-	return ((char*)empty_str);
+	return (ft_strdup(""));;
 }
 
 // ${parameter:?msg_err}
@@ -270,8 +266,8 @@ char			*exp_sup(char *cursor, bool classic_substitute)
 
 char			*build_param(char *cursor)
 {
-	const char	*empty_str = "";
 	char		*value;
+	char		*ret;
 	bool		classic_substitute;
 
 	value = NULL;
@@ -286,11 +282,11 @@ char			*build_param(char *cursor)
 	{
 		value = exp_sup(cursor, classic_substitute);
 		if (!value)
-			value = (char*)empty_str;
+			value = ft_strdup("");
 	}
-	if (!(value = quote_str(value)))
-		return (NULL);
-	return (value);
+	ret = quote_str(value);
+	ft_strdel(&value);
+	return (ret);
 }
 
 int				expand_param(t_token **word, char **cursor,
