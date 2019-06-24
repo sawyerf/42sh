@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/24 19:18:48 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/24 21:46:25 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 t_sh			g_sh;
 extern t_list	*g_thash[];
 
-
+/*
 void		*malloc(size_t i)
 {
 	unsigned int r = rand();
@@ -30,6 +30,7 @@ void		*malloc(size_t i)
 	}
 	return (valloc(i));
 }
+*/
 
 static int	init_shell(char **env, t_read_fn *read_fn, char **av)
 {
