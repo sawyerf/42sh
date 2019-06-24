@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 14:09:25 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/04 16:28:47 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/24 19:17:44 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_list	*ht_getexec(char *path)
 		if (!ft_strcmp(ret->d_name, "..") || !ft_strcmp(ret->d_name, "."))
 			continue;
 		if (!(cpath = ft_zprintf("%s/%s", path, ret->d_name)))
-			return (NULL);
+			continue;
 		if (!exaccess(cpath))
 			ft_lstadd(&lst, ft_lstnew(cpath, ft_strlen(path) + 1));
 		ft_strdel(&cpath);

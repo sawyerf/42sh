@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/14 12:42:13 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/14 13:22:46 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/24 21:04:19 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,8 @@ int		vm_cut(t_rdl *rdl, char *buf)
 
 int		vm_del(t_rdl *rdl, char *buf)
 {
-	int len;
-
 	(void)buf;
-	len = rdl->curs - rdl->vcurs;
-	if (len < 0)
-	{
-		len *= -1;
-		right(rdl, len);
-		rdl->curs += len;
-	}
-	while (len)
-	{
-		rdldel(rdl, rdl->curs - 1);
-		len--;
-	}
+	rdlreplace(rdl, "");
 	return (1);
 }
 

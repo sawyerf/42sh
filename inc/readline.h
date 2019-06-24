@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/17 16:55:55 by tduval           ###   ########.fr       */
+/*   Updated: 2019/06/24 20:42:09 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@
 # define K_BSPC "\177"
 
 # define SPECIAL "\33\t\1\3\4\5\12\14\16\r\22\20\26\30\31\33\177"
+
 typedef struct		s_rdl
 {
 	struct termios	save;
@@ -137,9 +138,9 @@ int					exaccess(char *file);
 int					filexist(char *file);
 
 int					rdlinit(t_rdl *rdl, char *prompt);
-void				rdladd(t_rdl *rdl, char c);
+int					rdladd(t_rdl *rdl, char c);
 void				rdldel(t_rdl *rdl, int curs);
-void				rdladdstr(t_rdl *rdl, char *str);
+int					rdladdstr(t_rdl *rdl, char *str);
 void				rdlreplace(t_rdl *rdl, char *s);
 
 void				setsig(void);
@@ -165,6 +166,6 @@ int					acp_multichc(t_rdl *rdl, t_list *lst);
 
 char				cmdisin(char *cmd);
 
-int		lenbefore(t_rdl *rdl, int real);
-void	rdl_realloc(t_rdl *rdl);
+int					lenbefore(t_rdl *rdl, int real);
+int					rdl_realloc(t_rdl *rdl);
 #endif

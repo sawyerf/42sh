@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 18:19:37 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/17 17:37:40 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/24 21:07:26 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,30 +26,37 @@ int		lenisprint(char *buf)
 	return (i);
 }
 
-void	rdl_realloc(t_rdl *rdl)
+int		rdl_realloc(t_rdl *rdl)
 {
 	char	*tmp;
 
 	tmp = rdl->str;
 	if (!(rdl->str = ft_strnew(rdl->allo + 128)))
-		return ;
+	{
+		rdl->str = tmp;
+		return (MEMERR);
+	}
 	rdl->allo += 128;
 	ft_strcpy(rdl->str, tmp);
 	ft_strdel(&tmp);
+	return (0);
 }
 
-void	rdladdstr(t_rdl *rdl, char *str)
+int		rdladdstr(t_rdl *rdl, char *str)
 {
 	int	count;
 	int len;
 
-	if (!str)
-		return ;
-	len = lenisprint(str);
+	if (!str || !(len = lenisprint(str)))
+		return (0);
 	if (len + rdl->size > rdl->allo)
 	{
 		rdl->allo = rdl->size + len;
-		rdl_realloc(rdl);
+		if (rdl_realloc(rdl))
+		{
+			rdl->allo -= len;
+			return (MEMERR + 1);
+		}
 	}
 	left(rdl, rdl->real + rdl->lpro);
 	ft_memmove(rdl->str + rdl->curs + len, rdl->str + rdl->curs,
@@ -64,14 +71,18 @@ void	rdladdstr(t_rdl *rdl, char *str)
 	rdl->size += len;
 	rdl->curs += len;
 	reprint(rdl, rdl->curs);
+	return (0);
 }
 
-void	rdladd(t_rdl *rdl, char c)
+int		rdladd(t_rdl *rdl, char c)
 {
 	if (!rdl->str)
-		return ;
+		return (0);
 	if (rdl->allo == rdl->size)
-		rdl_realloc(rdl);
+	{
+		if (rdl_realloc(rdl))
+			return (MEMERR + 1);
+	}
 	left(rdl, rdl->real + rdl->lpro);
 	ft_memmove(rdl->str + rdl->curs + 1, rdl->str + rdl->curs,
 			rdl->size - rdl->curs);
@@ -79,4 +90,5 @@ void	rdladd(t_rdl *rdl, char c)
 	rdl->size++;
 	rdl->curs++;
 	reprint(rdl, rdl->curs);
+	return (0);
 }

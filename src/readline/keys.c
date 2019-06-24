@@ -6,7 +6,7 @@
 /*   By: apeyret <apeyret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:47:43 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/12 18:02:12 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/06/24 20:41:24 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,10 @@ int		special_key(t_rdl *rdl, char *buf, t_key *key)
 	return (0);
 }
 
-int		normal_key(t_rdl *rdl, char *buf)
-{
-	rdladdstr(rdl, buf);
-	return (0);
-}
-
 int		key_router(t_rdl *rdl, char *buf)
 {
 	if (is_special(buf))
 		return (special_key(rdl, buf, g_key));
 	else
-		return (normal_key(rdl, buf));
+		return (rdladdstr(rdl, buf));
 }

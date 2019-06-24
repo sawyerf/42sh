@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/24 18:32:27 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/24 19:18:48 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void		*malloc(size_t i)
 {
 	unsigned int r = rand();
 
-	if (!(r % 20))
+	if (!(r % 200))
 	{
 		ft_putstr("malloc fail\n");
 		return (NULL);
