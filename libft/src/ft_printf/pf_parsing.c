@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:09:01 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/07 16:36:20 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/24 18:39:26 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,18 @@ t_printf	*pf_parser(const char *str)
 		if (str[count] == '%')
 		{
 			if (!str[count + 1])
+			{
+				pf_prdel(&lst);
 				return (NULL);
+			}
 			if (count)
 				lst = ft_pushback(lst, pf_prnew(ft_strndup(str, count), 0));
 			pf_set(&str, &count, 0);
 			if (!(tmp = analyze(str, &count)))
+			{
+				pf_prdel(&lst);
 				return (NULL);
+			}
 			lst = ft_pushback(lst, tmp);
 			pf_set(&str, &count, -1);
 		}

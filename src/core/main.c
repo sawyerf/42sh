@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/24 17:53:30 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/24 18:32:27 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,31 @@
 
 t_sh			g_sh;
 extern t_list	*g_thash[];
-/*
+
+
 void		*malloc(size_t i)
 {
-	if (!(i % 3))
+	unsigned int r = rand();
+
+	if (!(r % 20))
+	{
+		ft_putstr("malloc fail\n");
 		return (NULL);
+	}
 	return (valloc(i));
-}*/
+}
 
 static int	init_shell(char **env, t_read_fn *read_fn, char **av)
 {
-	g_sh.mode = MODEFILE;
+	g_sh.mode = 0;
+	g_sh.env = 0;
+	g_sh.local = 0;
+	g_sh.alias = 0;
+	g_sh.alias = 0;
+	g_sh.fd = 0;
+	g_sh.status = 0;
+	g_sh.av = av + 1;
+	g_sh.lastback = 0;
 	if (isatty(STDIN_FILENO))
 		g_sh.mode = INTERACTIVE;
 	if (!(g_sh.env = ft_tabdup(env)))
@@ -44,10 +58,6 @@ static int	init_shell(char **env, t_read_fn *read_fn, char **av)
 		return (-1);
 	if (dup2(STDERR_FILENO, FDSAVEERR) == -1)
 		return (-1);
-	g_sh.fd = 0;
-	g_sh.status = 0;
-	g_sh.av = av + 1;
-	g_sh.lastback = 0;
 	ht_init();
 	ht_refreshall(get_env_value("PATH"));
 	hstread(g_sh.env);
