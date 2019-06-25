@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/01 19:55:35 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/19 19:13:39 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/25 16:18:48 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,37 +43,30 @@ static int		ft_wordlen(char const *s, char c)
 	return (i);
 }
 
-static	void	init_index(int *i, int *j)
-{
-	*i = 0;
-	*j = 0;
-}
-
 char			**ft_strsplit(char const *s, char c)
 {
-	int		i;
 	int		j;
-	int		wordlen;
 	char	**tab;
 
-	init_index(&i, &j);
-	if (!s || !(tab = malloc(sizeof(char*) * (ft_wordcount(s, c) + 1))))
+	j = 0;
+	if (!s)
+		return (ft_tabnew(0));
+	if (!(tab = ft_tabnew(ft_wordcount(s, c))))
 		return (NULL);
-	while (s[i] != '\0')
+	while (*s)
 	{
-		if (s[i] == c)
-			i++;
+		if (*s == c)
+			s++;
 		else
 		{
-			wordlen = ft_wordlen(&s[i], c);
-			if ((tab[j] = (char *)malloc(1 + (sizeof(char) * wordlen))) == NULL)
+			if (!(tab[j] = ft_strndup(s, ft_wordlen(s, c))))
+			{
+				ft_tabdel(&tab);
 				return (NULL);
-			tab[j][wordlen] = 0;
-			ft_strncpy(tab[j], &s[i], wordlen);
+			}
 			j++;
-			i = i + wordlen;
+			s += ft_wordlen(s, c);
 		}
 	}
-	tab[j] = 0;
 	return (tab);
 }

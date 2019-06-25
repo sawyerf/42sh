@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/24 21:46:25 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/25 17:03:20 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,13 @@ extern t_list	*g_thash[];
 void		*malloc(size_t i)
 {
 	unsigned int r = rand();
+	unsigned int y = rand();
+	static int t = 0;
 
-	if (!(r % 200))
+	t++;
+	ft_putnbr(t);
+	ft_putchar('\n');
+	if (!(r % y))
 	{
 		ft_putstr("malloc fail\n");
 		return (NULL);
@@ -38,31 +43,22 @@ static int	init_shell(char **env, t_read_fn *read_fn, char **av)
 	g_sh.av = av + 1;
 	if (isatty(STDIN_FILENO))
 		g_sh.mode = INTERACTIVE;
-	if (!(g_sh.env = ft_tabdup(env)))
-		return (MEMERR);
-	if (shlvl(&g_sh.env))
-		return (MEMERR);
-	if (!(g_sh.local = ft_tabnew(0)))
-		return (MEMERR);
-	if (!(g_sh.alias = ft_tabnew(0)))
-		return (MEMERR);
-	if (dup2(STDIN_FILENO, FDSAVEIN) == -1)
+	if (!(g_sh.env = ft_tabdup(env))
+		|| shlvl(&g_sh.env)
+		|| !(g_sh.local = ft_tabnew(0))
+		|| !(g_sh.alias = ft_tabnew(0))
+		|| dup2(STDIN_FILENO, FDSAVEIN) == -1
+		|| dup2(STDOUT_FILENO, FDSAVEOUT) == -1
+		|| dup2(STDERR_FILENO, FDSAVEERR) == -1
+		|| ht_init()
+	 	|| ht_refreshall(get_env_value("PATH")) == MEMERR)
 		return (-1);
-	if (dup2(STDOUT_FILENO, FDSAVEOUT) == -1)
-		return (-1);
-	if (dup2(STDERR_FILENO, FDSAVEERR) == -1)
-		return (-1);
-	ht_init();
-	ht_refreshall(get_env_value("PATH"));
 	hstread(g_sh.env);
 	*read_fn = sh_readfile;
 	if (g_sh.mode == INTERACTIVE)
 		*read_fn = readline;
 	if ((g_sh.mode == INTERACTIVE) && (init_jobctl() == SH_ABORT))
-	{
-		global_del();
 		return (SH_ABORT);
-	}
 	return (0);
 }
 
@@ -100,7 +96,7 @@ int			main(int ac, char **av, char **env)
 	(void)av[ac];
 	if (init_shell(env, &read_fn, av))
 	{
-		ft_dprintf(STDERR_FILENO, "21sh: init_shell: memory failure\n");
+		ft_dprintf(STDERR_FILENO, "42sh: init_shell: memory failure\n");
 		global_del();
 		return (MEMERR);
 	}

@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 14:09:25 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/24 19:17:44 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/25 16:34:56 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,32 +15,38 @@
 
 extern t_list *g_thash[HT_SIZE];
 
-void	ht_refresh(char *path)
+int		ht_refresh(char *path)
 {
 	int hash;
 
 	if ((hash = ht_hash(path)) < 0)
-		return ;
+		return (0);
 	ft_lstdel(&g_thash[hash]);
-	g_thash[hash] = ht_getexec(path);
+	if (ht_getexec(path, &g_thash[hash]) == MEMERR)
+		return (MEMERR);
+	return (0);
 }
 
-void	ht_refreshall(char *path)
+int		ht_refreshall(char *path)
 {
 	char	**paths;
 	int		i;
+	int		ret;
 
+	ret = 0;
 	i = 0;
 	paths = NULL;
 	ht_del();
 	if (!(paths = ft_strsplit(path, ':')))
-		return ;
-	while (paths[i])
+		return (MEMERR);
+	while (paths[i] && !ret)
 	{
-		ht_refresh(paths[i]);
+		if (ht_refresh(paths[i]) == MEMERR)
+			ret = MEMERR;
 		i++;
 	}
 	ft_tabdel(&paths);
+	return (ret);
 }
 
 int		ht_addfile(char **paths, char *exec)
@@ -67,26 +73,30 @@ int		ht_addfile(char **paths, char *exec)
 	return (0);
 }
 
-t_list	*ht_getexec(char *path)
+int		ht_getexec(char *path, t_list **lst)
 {
-	t_list			*lst;
 	DIR				*ptr;
 	struct dirent	*ret;
 	char			*cpath;
+	t_list			*tmp;
 
-	lst = NULL;
+	*lst = NULL;
 	if (!(ptr = opendir(path)))
-		return (NULL);
+		return (0);
 	while ((ret = readdir(ptr)))
 	{
 		if (!ft_strcmp(ret->d_name, "..") || !ft_strcmp(ret->d_name, "."))
 			continue;
-		if (!(cpath = ft_zprintf("%s/%s", path, ret->d_name)))
-			continue;
+		if (!(cpath = ft_zprintf("%s/%s", path, ret->d_name)) && (closedir(ptr) || 1))
+			return (MEMERR);
 		if (!exaccess(cpath))
-			ft_lstadd(&lst, ft_lstnew(cpath, ft_strlen(path) + 1));
+		{
+			if (!(tmp = ft_lstnew(cpath, ft_strlen(path) + 1)) && ft_strdel(&cpath))
+				return (MEMERR);
+			ft_lstadd(lst, tmp);
+		}
 		ft_strdel(&cpath);
 	}
 	closedir(ptr);
-	return (lst);
+	return (0);
 }

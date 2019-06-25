@@ -6,7 +6,7 @@
 /*   By: apeyret <apeyret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/22 16:26:00 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/04 18:08:37 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/06/25 16:41:46 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ typedef enum	e_binerr
 }				t_binerr;
 
 int		exaccess(char *file);
-void	ht_init(void);
+int		ht_init(void);
 int		ht_hash(char *path);
 t_list	*ht_get(char *path);
-t_list	*ht_getexec(char *path);
+int		ht_getexec(char *path, t_list **lst);
 int		ht_spawnbin(char *path, t_cmd_tab *cmd);
 void	ht_del(void);
 int		ht_getfile(char **paths, char *cmd, char **fullpath);
-void	ht_refreshall(char *path);
+int		ht_refreshall(char *path);
 t_list	**ht_gget(void);
 int		ht_addfile(char	**paths, char *exec);
 char	*ht_getpath(char **path, char *exec);

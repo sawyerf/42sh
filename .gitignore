@@ -16,6 +16,7 @@ lel*
 test*
 .vscode
 .DS_Store
+logger/.deps
 
 ### C ###
 # Prerequisites

@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/11 14:40:53 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/04 16:34:54 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/25 16:41:37 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	ht_del(void)
 	}
 }
 
-void	ht_init(void)
+int		ht_init(void)
 {
 	int	i;
 
@@ -55,6 +55,7 @@ void	ht_init(void)
 		g_thash[i] = NULL;
 		i++;
 	}
+	return (0);
 }
 
 int		ht_hash(char *path)
