@@ -21,7 +21,7 @@ int			background_fork(pid_t pid, t_job *job, t_ast_node *t)
 	eval_tree(t->left);
 	waitpid(job->pgid, NULL, WUNTRACED);
 	waitpid(WAIT_ANY, NULL, 0);
-	ft_printf("[%d]Background Job finished\n", job->pgid);
+	//ft_printf("[%d]Background Job finished\n", job->pgid);
 	exit_wrap(0, NULL);
 	return (0);
 }
@@ -42,6 +42,7 @@ int			background_subshell(t_ast_node *tree)
 	if (setpgid_wrap(pid, job) == -1)
 		ft_dprintf(STDERR_FILENO, "42sh: setpgid fail for %d\n", pid);
 	register_job(job);
+	ft_dprintf(STDERR_FILENO, "[%d] %d\n", job->job_id, job->pgid);
 	tcgetattr(STDIN_FILENO, &(job->save_tio));
 	g_sh.previous_j = g_sh.current_j;
 	g_sh.current_j = job;

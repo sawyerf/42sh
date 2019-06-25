@@ -34,15 +34,8 @@ void		*malloc(size_t i)
 
 static int	init_shell(char **env, t_read_fn *read_fn, char **av)
 {
-	g_sh.mode = 0;
-	g_sh.env = 0;
-	g_sh.local = 0;
-	g_sh.alias = 0;
-	g_sh.alias = 0;
-	g_sh.fd = 0;
-	g_sh.status = 0;
+	ft_bzero(&g_sh, sizeof(t_sh));
 	g_sh.av = av + 1;
-	g_sh.lastback = 0;
 	if (isatty(STDIN_FILENO))
 		g_sh.mode = INTERACTIVE;
 	if (!(g_sh.env = ft_tabdup(env)))
