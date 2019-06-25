@@ -19,10 +19,9 @@ int			background_fork(pid_t pid, t_job *job, t_ast_node *t)
 	g_sh.mode = NONINTERACTIVE;
 	reset_sig();
 	eval_tree(t->left);
-	ft_printf("[]finished eval_tree in subshell");
 	waitpid(job->pgid, NULL, WUNTRACED);
 	waitpid(WAIT_ANY, NULL, 0);
-	ft_printf("[]Exiting handler");
+	ft_printf("[%d]Background Job finished\n", job->pgid);
 	exit_wrap(0, NULL);
 	return (0);
 }

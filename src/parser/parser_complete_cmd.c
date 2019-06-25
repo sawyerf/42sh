@@ -29,9 +29,9 @@ int	expect_complete_cmd(t_parser *parser)
 
 	if (!(ret = expect_list(parser)))
 	{
-		if (((ret = expect_separator_op(parser)) != SYNERR)
-			&& (ret))
-			return (ret);
+	//	if (((ret = expect_separator_op(parser)) != SYNERR)
+	//		&& (ret))
+	//		return (ret);
 		if (((ret = expect_newline_lst(parser)) != SYNERR)
 			&& (ret))
 			return (ret);
@@ -70,13 +70,16 @@ int	expect_list_suffix(t_parser *parser)
 	{
 		if ((ret = expect_and_or(parser)))
 		{
-			remove_last_node(parser);
-			parser->current = backtrack;
-			return (ret);
+//			remove_last_node(parser);
+			if (ret && ret != SYNERR)
+				return (ret);
+			return (0);
 		}
 		if ((ret = expect_list_suffix(parser)) != SYNERR)
 			return (ret);
 		return (0);
 	}
-	return (ret);
+	if (ret && ret != SYNERR)
+		return (ret);
+	return (0);
 }
