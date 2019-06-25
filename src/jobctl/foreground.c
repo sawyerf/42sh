@@ -35,7 +35,8 @@ void	wait_job(t_job *job)
 	}
 	else if (WIFSIGNALED(job->status))
 	{
-		ft_printf("[%d] %d signal num %d       %s\n", job->job_id, job->pgid, WTERMSIG(job->status), job->cmd_ln);
+		ft_printf("%s\n", get_termsig(WTERMSIG(job->status)));
+//		ft_printf("[%d] %d signal num %d       %s\n", job->job_id, job->pgid, WTERMSIG(job->status), job->cmd_ln);
 	}
 	else if (WIFSTOPPED(job->status))
 	{
@@ -61,8 +62,8 @@ int		fg_job(t_job *job, int cont)
 		}	
 	}
 	wait_job(job);
-	tcgetattr(STDIN_FILENO, &(job->save_tio)); // save job terminal modes
-	tcsetattr(STDIN_FILENO, TCSADRAIN, &(g_sh.term_save)); // reset our termios
+	tcgetattr(STDIN_FILENO, &(job->save_tio));
+	tcsetattr(STDIN_FILENO, TCSADRAIN, &(g_sh.term_save));
 	tcsetpgrp(STDIN_FILENO, getpgrp());
 	return (0);
 }

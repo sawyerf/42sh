@@ -53,7 +53,7 @@ int		terminit(struct termios *save)
 	if (tcgetattr(0, &term) == -1)
 		return (0);
 	term.c_lflag &= ~(ICANON | ISIG | IEXTEN);
-	term.c_lflag &= ~(ECHO);
+	term.c_lflag &= ~(ECHO | TOSTOP);
 	term.c_cc[VMIN] = 1;
 	term.c_cc[VTIME] = 0;
 	if (tcsetattr(0, TCSADRAIN, &term) == -1)

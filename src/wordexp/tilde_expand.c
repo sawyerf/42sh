@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/19 16:11:56 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/10 10:49:40 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*get_home(t_str *word)
 	char	*user;
 	char	*home;
 
-	if (ft_cisin("/ \t\n\r" , *word->str))
+	if ((ft_cisin("/ \t\n\r" , *word->str)) || !(*word->str))
 		return (get_env_value("HOME"));
 	else
 	{

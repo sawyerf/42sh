@@ -32,7 +32,6 @@ int		refresh_jobs(void)
 			j->stopped = 0;
 		j = j->next;
 	}
-	ft_printf("--------------------\n");
 	return (0);
 }
 

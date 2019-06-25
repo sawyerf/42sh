@@ -15,7 +15,6 @@
 int		bg(t_cmd_tab *cmd)
 {
 	t_job *j;
-
 	if (!g_sh.job_lst)
 	{
 		ft_dprintf(STDERR_FILENO, "42sh: bg: no jobs running\n");

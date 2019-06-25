@@ -58,14 +58,17 @@ void	clean_jobs(void)
 	t_job *ptr;
 	t_job *save;
 
+	refresh_jobs();
 	ptr = g_sh.job_lst;
 	while (ptr)
 	{
 		save = ptr->next;
-		if ((ptr->notified) && (ptr->completed))
+		if (ptr->completed)
+		{
+			if ((!ptr->notified) && (!ptr->fg))
+				ft_printf("[%d] %d '%s' completed\n", ptr->job_id, ptr->pgid, ptr->cmd_ln);
 			del_job(ptr);
+		}
 		ptr = save;
 	}
 }
-
-
