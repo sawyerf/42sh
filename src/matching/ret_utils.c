@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 19:12:51 by tduval            #+#    #+#             */
-/*   Updated: 2019/06/24 22:17:42 by tduval           ###   ########.fr       */
+/*   Updated: 2019/06/25 23:52:15 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,15 @@ char		*get_beginning(char *lpath, char *dname)
 	char	*tmp;
 
 	if (lpath[ft_strlen(lpath) - 1] != '/')
-		tmp = ft_strjoin(lpath, "/");
+	{
+		if (!(tmp = ft_strjoin(lpath, "/")))
+			return (NULL);
+	}
 	else
-		tmp = ft_strdup(lpath);
+	{
+		if (!(tmp = ft_strdup(lpath)))
+			return (NULL);
+	}
 	ret = ft_strjoin(tmp, dname);
 	ft_strdel(&tmp);
 	return (ret);
@@ -29,7 +35,7 @@ char		*get_beginning(char *lpath, char *dname)
 
 char		*go_last(char *str)
 {
-	while (ft_strchr(str, '/'))
+	while (str && *str && ft_strchr(str, '/'))
 		str++;
 	return(str);
 }
@@ -40,7 +46,7 @@ void		*free_lst(t_lfiles *lst)
 		free_lst(lst->next);
 	if (lst)
 	{
-		ft_strdel(&lst->path);
+		ft_strdel(&(lst->path));
 		ft_memdel((void **)&lst);
 	}
 	return (NULL);

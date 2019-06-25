@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 19:02:05 by tduval            #+#    #+#             */
-/*   Updated: 2019/06/24 22:38:27 by tduval           ###   ########.fr       */
+/*   Updated: 2019/06/26 00:00:18 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void	print_list(t_lfiles *lst)
 static int	append_file(t_lfiles *lists[2], char *str[4], struct dirent *files, int i)
 {
 	struct stat	buf;
+	char		*tmp;
 
 	if (str[PATTERN][ft_strlen(str[PATTERN]) - 1] == '/')
 	{
@@ -117,8 +118,11 @@ static int	append_file(t_lfiles *lists[2], char *str[4], struct dirent *files, i
 				return ((int)free_all(str[TMP1], NULL, NULL, NULL));
 		if (stat(str[TMP2], &buf) != -1 && S_ISDIR(buf.st_mode))
 		{
-			if (!(lists[SUBTMP_LST]->next = init_list(ft_strjoin(get_beginning(lists[TMP_LST]->path, files->d_name), "/"), i)))
-					return ((int)free_all(str[0], str[1], str[2], NULL));
+			if (!(tmp =get_beginning(lists[TMP_LST]->path, files->d_name)))
+				return ((int)free_all(str[0], str[1], str[2], NULL));
+			if (!(lists[SUBTMP_LST]->next = init_list(ft_strjoin(tmp, "/"), i)))
+					return ((int)free_all(str[0], str[1], tmp, NULL));
+			ft_strdel(&tmp);
 			lists[SUBTMP_LST] = lists[SUBTMP_LST]->next;
 		}
 		free_all(str[TMP1], str[TMP2], NULL, NULL);
@@ -126,7 +130,7 @@ static int	append_file(t_lfiles *lists[2], char *str[4], struct dirent *files, i
 	else
 	{
 		if (!(lists[SUBTMP_LST]->next = init_list(
-						get_beginning(lists[TMP_LST]->path, files->d_name), i)))
+				get_beginning(lists[TMP_LST]->path, files->d_name), i)))
 			return ((int)free_all(str[0], str[1], str[2], NULL));
 		lists[SUBTMP_LST] = lists[SUBTMP_LST]->next;
 	}

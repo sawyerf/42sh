@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 19:01:48 by tduval            #+#    #+#             */
-/*   Updated: 2019/06/24 22:41:24 by tduval           ###   ########.fr       */
+/*   Updated: 2019/06/25 23:57:22 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static int	count_width(t_lfiles *lst, char *pattern)
 char		**final_step(t_lfiles *lst, int layer, char *pattern)
 {
 	t_lfiles	*lists[2];
+	t_lfiles	*test;
 	char		**res;
 	struct stat	buf;
 	int			i;
@@ -39,6 +40,7 @@ char		**final_step(t_lfiles *lst, int layer, char *pattern)
 
 	f = pattern[ft_strlen(pattern) - 1] == '/' ? 1 : 0;
 	lists[ORIGIN] = lst;
+	test = lst;
 	while (lst && lst->layer != layer)
 		lst = lst->next;
 	i = count_width(lst, pattern);
@@ -58,13 +60,8 @@ char		**final_step(t_lfiles *lst, int layer, char *pattern)
 		if (go_last(lists[TMP]->path)[0] != '.'
 				|| go_last(pattern)[0] == '.')
 		{
-			if (f && !(res[i] = ft_strjoin(lists[TMP]->path, "/")))
+			if (!(res[i] = ft_strdup(lists[TMP]->path)))
 				return ((char **)free_all(pattern, NULL, NULL, lists[ORIGIN]));
-			else
-			{
-				if (!(res[i] = ft_strdup(lists[TMP]->path)))
-					return ((char **)free_all(pattern, NULL, NULL, lists[ORIGIN]));
-			}
 			i++;
 		}
 		lists[TMP] = lists[TMP]->next;
