@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 21:17:33 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/17 16:04:33 by tduval           ###   ########.fr       */
+/*   Updated: 2019/06/25 18:48:55 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ t_list	*get_choice(t_rdl *rdl, t_autocomplete acp)
 		return (ft_lstnew("\\", 4));
 	else if (acp.type == cmd_name)
 	{
-		if (!(path = get_env_value("PATH")))
-			return (NULL);
+		path = get_env_value("PATH");
 		return (get_exec(acp.str, path));
 	}
 	else if (acp.type == arg)
