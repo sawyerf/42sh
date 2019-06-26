@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 19:01:48 by tduval            #+#    #+#             */
-/*   Updated: 2019/06/25 23:57:22 by tduval           ###   ########.fr       */
+/*   Updated: 2019/06/26 03:55:31 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,24 @@ static int	count_width(t_lfiles *lst, char *pattern)
 	return (i);
 }
 
+char		*remove_bs(char *pattern)
+{
+	int		i;
+
+	i = 0;
+	while (pattern[i])
+	{
+		if (pattern[i] == '\\')
+		{
+			ft_strremoveat(pattern, i);
+			i++;
+		}
+		else
+			i++;
+	}
+	return (pattern);
+}
+
 char		**final_step(t_lfiles *lst, int layer, char *pattern)
 {
 	t_lfiles	*lists[2];
@@ -49,7 +67,7 @@ char		**final_step(t_lfiles *lst, int layer, char *pattern)
 		return (free_lst(lst));
 	if (i == 0)
 	{
-		res[i] = pattern;
+		res[i] = remove_bs(pattern);
 		free_lst(lists[ORIGIN]);
 		return (res);
 	}

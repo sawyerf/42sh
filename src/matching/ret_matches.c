@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 19:02:05 by tduval            #+#    #+#             */
-/*   Updated: 2019/06/26 00:00:18 by tduval           ###   ########.fr       */
+/*   Updated: 2019/06/26 03:56:03 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char		*get_current_pattern(char *pattern)
 	return (ft_strsub(pattern, 0, i));
 }
 
-static char		*ft_strremoveat(char *str, int i)
+char		*ft_strremoveat(char *str, int i)
 {
 	int		j;
 
@@ -162,7 +162,7 @@ static t_lfiles	*get_files(t_lfiles *lst, char *pattern, int i, int layer)
 				lists[SUBTMP_LST] = lists[SUBTMP_LST]->next;
 			while ((files = readdir(dir)) != NULL)
 			{
-				if (matches(files->d_name, str[CURPATTERN])
+				if (matches(files->d_name, str[CURPATTERN], 0)
 						&& ((ft_strcmp(files->d_name, "..") || str[CURPATTERN][0] == '.')
 						&& ((ft_strcmp(files->d_name, ".")) || str[CURPATTERN][0] == '.')
 						&& ((files->d_name[0] != '.' || str[CURPATTERN][0] == '.'))

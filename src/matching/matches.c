@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 16:29:08 by tduval            #+#    #+#             */
-/*   Updated: 2019/06/18 22:32:25 by tduval           ###   ########.fr       */
+/*   Updated: 2019/06/26 03:51:25 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ static char	*perform_it(char *s1, char *s2, char *arr, int *i)
 	if (*i && s2[*i] == '-'
 			&& s2[*i + 1] != ']'
 			&& s2[*i - 1] != '['
-			&& s2[*i - 1] != '!')
+			&& s2[*i - 1] != '!'
+			&& (s2[*i - 1] != '\\'
+				|| (*i > 1 && s2[*i - 2] == '\\')))
 	{
 		arr = get_chars(arr, s2[*i - 1], s2[*i + 1]);
 		*i += 2;
@@ -60,21 +62,22 @@ static char	*range(char *s1, char *s2)
 	return (NULL);
 }
 
-int			matches(char *s1, char *s2)
+int			matches(char *s1, char *s2, int flag)
 {
 	if (!s1 || !s2)
 		return (0);
-	if (*s2 == '[' && ft_strchr(s2, ']') && *s1 != '\0')
-		return (matches(s1 + 1, range(s1, s2 + 1)));
-	if (*s2 == '?' && *s1 != '\0')
-		return (matches(s1 + 1, s2 + 1));
-	if (*s2 == '*' && *s1 != '\0')
-		return (matches(s1 + 1, s2) || matches(s1, s2 + 1));
+	if (!flag && *s2 == '\\')
+		return (matches(s1, s2 + 1, 1));
+	if (!flag && (*s2 == '[' && ft_strchr(s2, ']') && *s1 != '\0'))
+		return (matches(s1 + 1, range(s1, s2 + 1), 0));
+	if (!flag && (*s2 == '?' && *s1 != '\0'))
+		return (matches(s1 + 1, s2 + 1, 0));
+	if (!flag && (*s2 == '*' && *s1 != '\0'))
+		return (matches(s1 + 1, s2, 0) || matches(s1, s2 + 1, 0));
 	if (*s1 == *s2 && *s1 != '\0' && *s2 != '\0')
-		return (matches(s1 + 1, s2 + 1));
-	if (*s1 == *s2 && *s1 == '\0' && *s2 == '\0')
-		return (1);
-	if (*s2 == '*' && *s1 == '\0' && *(s2 + 1) == '\0')
+		return (matches(s1 + 1, s2 + 1, 0));
+	if ((*s1 == *s2 && *s1 == '\0' && *s2 == '\0')
+		|| (*s2 == '*' && *s1 == '\0' && *(s2 + 1) == '\0'))
 		return (1);
 	return (0);
 }
