@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 19:01:48 by tduval            #+#    #+#             */
-/*   Updated: 2019/06/26 04:26:16 by tduval           ###   ########.fr       */
+/*   Updated: 2019/06/26 05:44:35 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ char		**final_step(t_lfiles *lst, int layer, char *pattern)
 		if (go_last(lists[TMP]->path)[0] != '.'
 				|| go_last(pattern)[0] == '.')
 		{
-			if (pattern[0] == '.' && pattern[1] == '/')
+			if ((pattern[0] == '.' && pattern[1] == '/')
+					|| pattern[0] == '/')
 			{
 				if (!(res[i] = ft_strdup(lists[TMP]->path)))
 					return ((char **)free_all(pattern, NULL, NULL, lists[ORIGIN]));
