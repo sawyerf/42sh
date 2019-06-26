@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 18:34:23 by tduval            #+#    #+#             */
-/*   Updated: 2019/06/18 22:08:10 by tduval           ###   ########.fr       */
+/*   Updated: 2019/06/26 04:31:16 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ int	is_last(char *str)
 	while (str[i])
 	{
 		if (str[i] == ']')
-			j++;
+			return (0);
 		if (str[i] == '[')
-			j--;
+			return (1);
 		i++;
 	}
-	return (j ? 0 : 1);
+	return (1);
 }
 
 char	*after_bracket(char *str)
