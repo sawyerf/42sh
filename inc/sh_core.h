@@ -62,6 +62,7 @@ typedef struct			s_sh
 	int					mode;
 	int					status;
 	int					lastback;
+	int					exit_jobs;
 	char				**local;
 	char				**env;
 	char				**alias;
@@ -140,4 +141,6 @@ char					*dget_env_value(char *name);
 int		cexport(char *var);
 int						refresh_jobs(void);
 char					*get_termsig(int signum);
+int						exit_jobs(void);
+
 #endif

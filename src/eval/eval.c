@@ -44,6 +44,7 @@ int			background_subshell(t_ast_node *tree)
 	register_job(job);
 	ft_dprintf(STDERR_FILENO, "[%d] %d\n", job->job_id, job->pgid);
 	tcgetattr(STDIN_FILENO, &(job->save_tio));
+	g_sh.lastback = job->pgid;
 	g_sh.previous_j = g_sh.current_j;
 	g_sh.current_j = job;
 	return (0);

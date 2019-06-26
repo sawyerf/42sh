@@ -71,6 +71,17 @@ void		global_del(void)
 	ft_tabdel(&g_sh.env);
 }
 
+int	exit_jobs(void)
+{
+	if ((g_sh.job_lst) && (!g_sh.exit_jobs))
+	{
+		ft_dprintf(STDERR_FILENO, "42sh: jobs still running\n");
+		g_sh.exit_jobs = 2;
+		return (0);
+	}
+	return (1);
+}
+
 void		shrc(void)
 {
 	char	*path;
@@ -106,7 +117,10 @@ int			main(int ac, char **av, char **env)
 		clean_jobs();
 		if ((ret = read_fn(get_env_value("PS1"), &line)) == CTRL_D ||
 				ret == MEMERR || ret < 0)
-			break ;
+		{
+			if ((ret == CTRL_D) && (exit_jobs()))
+				break ;
+		}
 		if (((ret = run_command(line)) == SYNERR)
 				&& (g_sh.mode == MODEFILE))
 			break ;
@@ -116,6 +130,8 @@ int			main(int ac, char **av, char **env)
 			global_del();
 			return (MEMERR);
 		}
+		if (g_sh.exit_jobs > 0)
+			g_sh.exit_jobs = g_sh.exit_jobs - 1;
 	}
 	global_del();
 	return (g_sh.status);

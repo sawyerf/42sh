@@ -19,6 +19,8 @@ int		ft_exit(t_cmd_tab *cmd)
 	int i;
 
 	exit_val = 0;
+	if (!exit_jobs())
+		return (1);
 	i = 0;
 	if (cmd->av[1] != NULL)
 	{

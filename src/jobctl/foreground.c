@@ -76,5 +76,6 @@ int bg_job(t_job *job, int cont)
 			ft_dprintf(STDERR_FILENO, "42sh: Error sending cont to pgid %d as bg\n", job->pgid);
 	}
 	register_job(job);
+	g_sh.lastback = job->pgid;
 	return (0);
 }
