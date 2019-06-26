@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 19:02:05 by tduval            #+#    #+#             */
-/*   Updated: 2019/06/26 03:56:03 by tduval           ###   ########.fr       */
+/*   Updated: 2019/06/26 04:26:46 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int		get_layer(char *pattern)
 	return (r);
 }
 
-static char		*format_pattern(char *pattern)
+char		*format_pattern(char *pattern)
 {
 	int		i;
 
