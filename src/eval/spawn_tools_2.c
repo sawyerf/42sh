@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 20:20:45 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/04 18:34:31 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/06/27 16:20:44 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,20 @@ int		br_print(int err, t_cmd_tab *cmd)
 	if (cmd->full_path)
 	{
 		if (err == br_NOTFOUND)
-			ft_dprintf(2, "21sh: %s: command not found\n", cmd->av[0]);
+			ft_dprintf(2, "42sh: %s: command not found\n", cmd->av[0]);
 		else if (err == br_PERMDENIED)
-			ft_dprintf(2, "21sh: %s: Permission denied\n", cmd->full_path);
+			ft_dprintf(2, "42sh: %s: Permission denied\n", cmd->full_path);
 		else if (err == br_ISDIR)
-			ft_dprintf(2, "21sh: %s: is a directory\n", cmd->full_path);
+			ft_dprintf(2, "42sh: %s: is a directory\n", cmd->full_path);
 	}
 	else
 	{
 		if (err == br_NOTFOUND)
-			ft_dprintf(2, "21sh: %s: command not found\n", cmd->av[0]);
+			ft_dprintf(2, "42sh: %s: command not found\n", cmd->av[0]);
 		else if (err == br_PERMDENIED)
-			ft_dprintf(2, "21sh: %s: Permission denied\n", cmd->av[0]);
+			ft_dprintf(2, "42sh: %s: Permission denied\n", cmd->av[0]);
 		else if (err == br_ISDIR)
-			ft_dprintf(2, "21sh: %s: is a directory\n", cmd->av[0]);
+			ft_dprintf(2, "42sh: %s: is a directory\n", cmd->av[0]);
 	}
 	if (err == br_PERMDENIED || err == br_ISDIR)
 		return (126);

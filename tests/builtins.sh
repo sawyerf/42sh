@@ -1,4 +1,4 @@
-rm ~/.21sh_history
+rm ~/.42sh_history
 type ls
 type pwd
 type hash

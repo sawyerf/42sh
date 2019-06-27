@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 21:10:15 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/12 18:02:14 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/06/27 16:20:47 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,17 @@ int		dispatch_errors(int errnum, t_parser parser)
 	if (errnum == SYNERR || errnum != HEREDOC_ERR)
 		g_sh.status = 258;
 	if ((errnum == SYNERR) && (parser.current->type != EOI))
-		ft_dprintf(STDERR_FILENO, "21sh: syntax error near : '%s'\n",
+		ft_dprintf(STDERR_FILENO, "42sh: syntax error near : '%s'\n",
 			parser.current->data.str);
 	else if (errnum == HEREDOC_ERR)
-		ft_dprintf(STDERR_FILENO, "21sh: premature EOF on heredoc\n",
+		ft_dprintf(STDERR_FILENO, "42sh: premature EOF on heredoc\n",
 			parser.current->data.str);
 	else if (errnum == CTRL_D)
-		ft_dprintf(STDERR_FILENO, "21sh: premature EOF\n");
+		ft_dprintf(STDERR_FILENO, "42sh: premature EOF\n");
 	else if (errnum == BAD_SUB)
-		ft_dprintf(STDERR_FILENO, "21sh: bad substitution\n");
+		ft_dprintf(STDERR_FILENO, "42sh: bad substitution\n");
 	else if (errnum == BANG_NF)
-		ft_dprintf(STDERR_FILENO, "21sh: event not found\n");
+		ft_dprintf(STDERR_FILENO, "42sh: event not found\n");
 	return (errnum);
 }
 

@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:49:43 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/14 15:27:02 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/27 16:20:50 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int		termreset(struct termios *save)
 {
 	if (tcsetattr(0, TCSADRAIN, save) == -1)
 	{
-		ft_dprintf(2, "21sh: tcsetattr fail to set the old param\n");
+		ft_dprintf(2, "42sh: tcsetattr fail to set the old param\n");
 		return (0);
 	}
 	return (1);

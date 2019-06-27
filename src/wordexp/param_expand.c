@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/27 13:55:14 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/27 16:20:53 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,9 +198,9 @@ char			*test_parameter(char *cursor, char *zone)
 	if (!env_value)
 	{
 		if (!error_msg || ft_strlen(error_msg) == 0)
-			ft_dprintf(2, "21sh: %s: paramètre vide ou non défini", var_name);
+			ft_dprintf(2, "42sh: %s: paramètre vide ou non défini", var_name);
 		else
-			ft_dprintf(2, "21sh: %s: %s", var_name, error_msg);
+			ft_dprintf(2, "42sh: %s: %s", var_name, error_msg);
 		g_sh.status = 1;
 	}
 	if (var_name)

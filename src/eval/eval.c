@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/01 18:52:46 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/27 16:20:40 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,6 @@ int			eval_tree(t_ast_node *tree)
 			return (MEMERR);
 		return (0);
 	}
-	ft_dprintf(STDERR_FILENO, "21sh: fatal error in eval: unknown node type\n");
+	ft_dprintf(STDERR_FILENO, "42sh: fatal error in eval: unknown node type\n");
 	return (-1);
 }

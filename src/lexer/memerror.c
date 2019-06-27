@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 13:49:01 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/01 13:49:49 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/27 16:20:45 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ void	free_parser(t_parser *parser)
 
 void	mem_err_exit(t_parser *parser)
 {
-	ft_putstr_fd("21sh: parser: memory error\n", 2);
+	ft_putstr_fd("42sh: parser: memory error\n", 2);
 	free_parser(parser);
 }

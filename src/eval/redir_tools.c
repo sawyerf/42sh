@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 16:01:57 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/14 16:07:39 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/27 16:20:43 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int		redir_fd_range(int fd)
 {
 	if ((fd >= 0) && (fd < 256))
 		return (0);
-	ft_dprintf(STDERR_FILENO, "21sh: File descriptor %d is out of range\n", fd);
+	ft_dprintf(STDERR_FILENO, "42sh: File descriptor %d is out of range\n", fd);
 	return (-1);
 }
 
@@ -45,6 +45,6 @@ t_bool	check_fd(int fd)
 
 	if (!fstat(fd, &buf))
 		return (FT_TRUE);
-	ft_dprintf(STDERR_FILENO, "21sh: bad file descriptor: %d\n", fd);
+	ft_dprintf(STDERR_FILENO, "42sh: bad file descriptor: %d\n", fd);
 	return (FT_FALSE);
 }

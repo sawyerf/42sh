@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 15:16:45 by apeyret           #+#    #+#             */
-/*   Updated: 2019/05/27 18:55:57 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/27 16:19:42 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	error_handle(t_cmd_tab *cmd)
 	if (cmd->av[1][0] == 0)
 	{
 		ft_dprintf(STDERR_FILENO,
-			"21sh: setenv : variable name cannot be empty\n");
+			"42sh: setenv : variable name cannot be empty\n");
 		return (-1);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 17:46:08 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/14 16:00:18 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/27 16:20:42 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int	make_here_doc(int *right_fd, t_redir *redir)
 {
 	int			tmpfile;
-	static char	*tmpname = "/tmp/21sh_heredoc";
+	static char	*tmpname = "/tmp/42sh_heredoc";
 
 	tmpfile = open(tmpname, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (tmpfile == -1)
@@ -42,7 +42,7 @@ static int	get_open_flags(t_token_type op)
 
 static int	ambiguous_redir(char *file)
 {
-	ft_dprintf(STDERR_FILENO, "21sh: %s : ambiguous redirection\n"
+	ft_dprintf(STDERR_FILENO, "42sh: %s : ambiguous redirection\n"
 		, file);
 	return (-1);
 }

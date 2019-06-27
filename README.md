@@ -37,10 +37,10 @@
 |     | `ls "file <tab>`  | ne considere pas le debut des quote ||
 |  ✓  | `ls "<tab>`       | ne referme pas les quotes           ||
 |  ✓  | `ls '<tab><ctrl+c/d`| segfault |la fonction est surement readline appele dans light_parser||
-|  ✓  | ` `               | 21sh: syntax error near : '' + exit ||
-|  ✓  | `env - i ./21sh ` | double free						    ||
-|  ✓  | `ls \\n` + Ctrl+c | 21sh: premature EOF + exit          ||
-|  ✓  | `ls "\n` + Ctrl+c | 21sh: premature EOF + exit          ||
+|  ✓  | ` `               | 42sh: syntax error near : '' + exit ||
+|  ✓  | `env - i ./42sh ` | double free						    ||
+|  ✓  | `ls \\n` + Ctrl+c | 42sh: premature EOF + exit          ||
+|  ✓  | `ls "\n` + Ctrl+c | 42sh: premature EOF + exit          ||
 |  ✓  | `fc -s` apres celle d'avant | boucle infini | UPDATE: added MODE_FC in sh_core.h and in request_new_line--le terminale est en NONINTERACTIVE quand la commande est lancer 2. s'arrete avec Ctrl+d |
 
 ## READLINE

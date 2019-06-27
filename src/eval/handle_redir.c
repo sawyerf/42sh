@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 14:16:02 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/14 16:06:12 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/27 16:20:41 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int				apply_redir(t_redir *redir, t_list **head)
 		return (-1);
 	if (dup2(right_fd, left_fd) == -1)
 	{
-		ft_dprintf(STDERR_FILENO, "21sh: fatal error dup2 fail\n");
+		ft_dprintf(STDERR_FILENO, "42sh: fatal error dup2 fail\n");
 		return (-1);
 	}
 	if ((redir->op->type != GREATAND) && (redir->op->type != LESSAND))
@@ -104,7 +104,7 @@ int				handle_redir(t_redir *redir_lst, t_list **head)
 		else
 		{
 			ft_dprintf(STDERR_FILENO,
-				"21sh: ambiguous redir: filename expands to empty string\n");
+				"42sh: ambiguous redir: filename expands to empty string\n");
 			return (-1);
 		}
 		iter = iter->next;

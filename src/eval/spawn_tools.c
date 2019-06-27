@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 19:20:53 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/14 16:01:37 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/27 16:20:44 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,17 @@ void	free_cmd_tab_lst(t_cmd_tab *start)
 void	exec_error(int errnum, char *str)
 {
 	if (errnum == BIN_NO_PATH)
-		putstr_stderr("21sh: PATH not set: ");
+		putstr_stderr("42sh: PATH not set: ");
 	else if (errnum == CMD_NOT_FOUND)
-		putstr_stderr("21sh: command not found: ");
+		putstr_stderr("42sh: command not found: ");
 	else if (errnum == BIN_PERM_DENY)
-		putstr_stderr("21sh: permission denied: ");
+		putstr_stderr("42sh: permission denied: ");
 	else if (errnum == BIN_NOT_FOUND)
-		putstr_stderr("21sh: no such file or directory: ");
+		putstr_stderr("42sh: no such file or directory: ");
 	else if (errnum == BIN_EXEC_ERR)
-		putstr_stderr("21sh: exec error: ");
+		putstr_stderr("42sh: exec error: ");
 	else if (errnum == BIN_IS_DIR)
-		putstr_stderr("21sh: is a directory: ");
+		putstr_stderr("42sh: is a directory: ");
 	if (str != NULL)
 		putstr_stderr(str);
 	putstr_stderr("\n");
