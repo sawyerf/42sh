@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 19:28:02 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/26 12:34:05 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/27 16:40:51 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	wait_job(t_job *job)
 	else if (WIFSTOPPED(job->status))
 	{
 		ft_printf("[%d] %d suspended       %s\n", job->job_id, job->pgid, job->cmd_ln);
-		g_sh.previous_j = g_sh.current_j;
+		if (g_sh.current_j != job)
+			g_sh.previous_j = g_sh.current_j;
 		g_sh.current_j = job;
 	
 	}

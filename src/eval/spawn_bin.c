@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/27 16:20:44 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/27 16:42:02 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,20 +94,3 @@ int				launch_command(t_cmd_tab *cmd, t_job *job)
 	return (0);
 }
 
-/*just for env will be deleted*/
-int				spawn_command(t_cmd_tab *cmd, t_job *job)
-{
-	pid_t	pid;
-	int		ret;
-	if (((ret = pre_execution(cmd)) == MEMERR))
-		return (MEMERR);
-	else if ((ret == BUILTIN) || (ret == BUILTIN_FAIL))
-		return (0);
-	pid = fork();
-	if (pid == -1)
-		return (MEMERR);
-	if (pid == 0)
-		execve_wrap(cmd);
-	wait_job(job);
-	return (0);
-}
