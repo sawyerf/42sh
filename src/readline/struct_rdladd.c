@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 18:19:37 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/24 21:07:26 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/27 19:08:25 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,21 @@ int		rdl_realloc(t_rdl *rdl)
 	return (0);
 }
 
-int		rdladdstr(t_rdl *rdl, char *str)
+void	ft_rdlcpy(t_rdl *rdl, char *str)
 {
 	int	count;
+
+	count = 0;
+	while (str[count])
+	{
+		if (ft_isprint(str[count]) || str[count] == '\n')
+			rdl->str[rdl->curs + count] = str[count];
+		count++;
+	}
+}
+
+int		rdladdstr(t_rdl *rdl, char *str)
+{
 	int len;
 
 	if (!str || !(len = lenisprint(str)))
@@ -61,13 +73,7 @@ int		rdladdstr(t_rdl *rdl, char *str)
 	left(rdl, rdl->real + rdl->lpro);
 	ft_memmove(rdl->str + rdl->curs + len, rdl->str + rdl->curs,
 			rdl->size - rdl->curs);
-	count = 0;
-	while (str[count])
-	{
-		if (ft_isprint(str[count]) || str[count] == '\n')
-			rdl->str[rdl->curs + count] = str[count];
-		count++;
-	}
+	ft_rdlcpy(rdl, str);
 	rdl->size += len;
 	rdl->curs += len;
 	reprint(rdl, rdl->curs);

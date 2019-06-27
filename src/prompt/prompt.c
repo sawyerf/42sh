@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/03 20:59:59 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/18 16:08:35 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/27 19:58:44 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,86 +27,6 @@ t_prompt	g_prompt[] =\
 	{0, &pr_gene}
 };
 
-char	*getpwd(void)
-{
-	char	*cpath;
-	char	*home;
-
-	if (!(cpath = ft_strnew(4095)))
-		return (NULL);
-	getcwd(cpath, 4094);
-	home = get_env_value("HOME");
-	if (!ft_strcmp(home, cpath))
-		ft_strcpy(cpath, "~");
-	return (cpath);
-}
-
-char	*getfold(void)
-{
-	char	*cpath;
-	char	*ret;
-	int		i;
-
-	if (!(cpath = getpwd()))
-		return (NULL);
-	i = ft_strlen(cpath);
-	if (!ft_strcmp(cpath, "/"))
-		return (cpath);
-	while (i >= 0 && cpath[i] != '/')
-		i--;
-	ret = ft_strdup(cpath + i + 1);
-	ft_strdel(&cpath);
-	return (ret);
-}
-
-void	pr_version(t_stri *str, char p)
-{
-	if (p == 'v')
-		str_addstr(str, SH_VERS);
-	else if (p == 's')
-		str_addstr(str, SH_NAME);
-}
-
-void	pr_w(t_stri *str, char p)
-{
-	char	*tmp;
-
-	if (p == 'W')
-	{
-		tmp = getfold();
-		str_addstr(str, tmp);
-	}
-	else if (p == 'w')
-	{
-		tmp = getpwd();
-		str_addstr(str, tmp);
-	}
-	ft_strdel(&tmp);
-}
-
-void	pr_gene(t_stri *str, char p)
-{
-	char *tmp;
-
-	if (p == '\\')
-		str_add(str, '\\');
-	else if (p == 'u')
-	{
-		tmp = getlogin();
-		str_addstr(str, tmp);
-	}
-	else if (p == 'h')
-	{
-		if (!(tmp = ft_strnew(25)))
-			return ;
-		gethostname(tmp, 25);
-		str_addstr(str, tmp);
-		ft_strdel(&tmp);
-	}
-	else if (p == 'n')
-		str_add(str, '\n');
-}
-
 void	prpt(char *ps, t_stri *str)
 {
 	int		i;
@@ -117,7 +37,7 @@ void	prpt(char *ps, t_stri *str)
 		{
 			if (!*ps)
 				return ;
-			ps++; 
+			ps++;
 			i = 0;
 			while (g_prompt[i].p)
 			{
@@ -135,7 +55,7 @@ void	prpt(char *ps, t_stri *str)
 char	*prompt(char *ps1)
 {
 	t_stri	str;
-	
+
 	if (!ps1)
 		return (ft_strdup("$> "));
 	str_init(&str);

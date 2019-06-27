@@ -6,11 +6,13 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 17:49:02 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/14 13:33:35 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/27 19:16:38 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "readline.h"
+
+extern t_list *g_hst[];
 
 void	reprint(t_rdl *rdl, int curs)
 {
@@ -38,4 +40,12 @@ int		is_special(char *buf)
 		buf++;
 	}
 	return (0);
+}
+
+void	ctrlr_del(t_rdl *hst)
+{
+	ft_strdel(&hst->str);
+	ft_strdel(&hst->prompt);
+	ft_strdel(&hst->paste);
+	g_hst[3] = NULL;
 }

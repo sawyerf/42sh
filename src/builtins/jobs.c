@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 16:24:20 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/26 13:40:48 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/27 19:45:09 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int		jobs(t_cmd_tab *cmd)
 			return (invalid_opt());
 	}
 	refresh_jobs();
-	jobs_printer = jobs_print_p ;
+	jobs_printer = jobs_print_p;
 	if (opt == 'l')
 		jobs_printer = jobs_print_l;
 	i = g_optind;

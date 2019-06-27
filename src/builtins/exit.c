@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/18 15:17:24 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/12 16:49:12 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/27 19:23:30 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,22 @@
 
 int		ft_exit(t_cmd_tab *cmd)
 {
-	int exit_val;
 	int i;
 
-	exit_val = 0;
 	if (!exit_jobs())
 		return (1);
 	i = 0;
-	if (cmd->av[1] != NULL)
+	if (cmd->av[1])
 	{
-		if (cmd->av[2] != NULL)
+		if (cmd->av[2] || !ft_strisdigit(cmd->av[1]))
 		{
-			putstr_stderr("exit: too many arguments\n");
+			if (cmd->av[2])
+				putstr_stderr("exit: too many arguments\n");
+			else
+				putstr_stderr("exit: numeric argument required\n");
 			return (0);
 		}
-		while (cmd->av[1][i] != 0)
-		{
-			if (!ft_isdigit(cmd->av[1][i]))
-			{
-				putstr_stderr("exit: numeric argument required\n");
-				return (0);
-			}
-			i++;
-		}
-		exit_val = ft_atoi(cmd->av[1]);
 	}
 	global_del();
-	exit(exit_val);
+	exit(ft_atoi(cmd->av[1]));
 }

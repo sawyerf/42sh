@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/26 14:09:25 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/25 16:34:56 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/27 19:55:07 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,14 @@ int		ht_getexec(char *path, t_list **lst)
 	{
 		if (!ft_strcmp(ret->d_name, "..") || !ft_strcmp(ret->d_name, "."))
 			continue;
-		if (!(cpath = ft_zprintf("%s/%s", path, ret->d_name)) && (closedir(ptr) || 1))
+		if (!(cpath = ft_zprintf("%s/%s", path, ret->d_name))
+				&& (closedir(ptr) || 1))
 			return (MEMERR);
 		if (!exaccess(cpath))
 		{
-			if (!(tmp = ft_lstnew(cpath, ft_strlen(path) + 1)) && ft_strdel(&cpath))
+			if ((!(tmp = ft_lstnew(cpath, ft_strlen(path) + 1))
+					&& ft_strdel(&cpath)) || ft_lstadd(lst, tmp))
 				return (MEMERR);
-			ft_lstadd(lst, tmp);
 		}
 		ft_strdel(&cpath);
 	}

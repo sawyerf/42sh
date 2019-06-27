@@ -6,7 +6,7 @@
 #    By: apeyret <apeyret@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/06/27 11:28:55 by ktlili           ###   ########.fr        #
+#    Updated: 2019/06/27 19:57:24 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -123,6 +123,7 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			parser/alias.c				\
 			parser/parser_separator.c	\
 			prompt/prompt.c				\
+			prompt/prompt_opt.c			\
 			readline/acp_multichc.c		\
 			readline/cmdisin.c			\
 			readline/ctrll.c			\

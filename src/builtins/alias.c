@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/24 16:57:28 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/24 17:27:07 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/27 19:49:41 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,9 @@ int		alias(t_cmd_tab *cmd)
 				ft_dprintf(2, "alias: `%s': invalid alias name\n",
 						cmd->av[count]);
 		}
-		else
-		{
-			if (varchr(g_sh.alias, cmd->av[count]))
-				ft_printf("%s='%s'\n", cmd->av[count],
-							varchr(g_sh.alias, cmd->av[count]));
-		}
+		else if (varchr(g_sh.alias, cmd->av[count]))
+			ft_printf("%s='%s'\n", cmd->av[count],
+					varchr(g_sh.alias, cmd->av[count]));
 	}
 	return (0);
 }
