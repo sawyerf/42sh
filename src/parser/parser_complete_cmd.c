@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 20:39:19 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/09 20:40:21 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/27 11:34:49 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,11 @@ int	expect_complete_cmd(t_parser *parser)
 
 	if (!(ret = expect_list(parser)))
 	{
-	//	if (((ret = expect_separator_op(parser)) != SYNERR)
-	//		&& (ret))
-	//		return (ret);
 		if (((ret = expect_newline_lst(parser)) != SYNERR)
 			&& (ret))
 			return (ret);
-		if (parser->current->type == EOI)
-		{
+		if (parser->current->type == EOI) 
 			return (execute_cmdline(parser));
-		}
 		return (SYNERR);
 	}
 	return (ret);
@@ -70,7 +65,6 @@ int	expect_list_suffix(t_parser *parser)
 	{
 		if ((ret = expect_and_or(parser)))
 		{
-//			remove_last_node(parser);
 			if (ret && ret != SYNERR)
 				return (ret);
 			return (0);

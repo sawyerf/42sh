@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/17 15:29:58 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/27 11:20:42 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int			ft_lexer(t_lexer *lexer_state)
 		lex_add_tk(lexer_state, lexer_state->token);
 		if ((lexer_state->err = dispatch_fn(lexer_state)))
 			return (lexer_state->err);
-		if (lexer_state->token->type == NEWLINE)
+		if (lexer_state->token->type == EOI)
 			return (0);
 		lexer_state->token = NULL;
 		while (ft_cisin(" \t", *(lexer_state->cursor)))
