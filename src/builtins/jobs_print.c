@@ -6,11 +6,16 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 18:16:06 by tduval            #+#    #+#             */
-/*   Updated: 2019/06/17 18:16:19 by tduval           ###   ########.fr       */
+/*   Updated: 2019/06/26 13:42:07 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
+
+void	jobs_print_p(t_job *j)
+{
+	ft_printf("%d\n", j->pgid);
+}
 
 void	jobs_print_l(t_job *j)
 {

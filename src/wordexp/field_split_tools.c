@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/08 16:46:34 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/12 15:26:42 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/27 11:02:35 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void	replace_token(t_token **word, t_token *word_2, t_token *last,
 	last->next = word_2->next;
 	free_token(word_2);
 	*cursor = last->data.str + ft_strlen(last->data.str);
-	*word = last->next;
+	if (last->next)
+		*word = last->next;
 }
 
 char	*expand_ifs(char *ifs)

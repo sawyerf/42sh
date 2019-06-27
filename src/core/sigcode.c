@@ -18,6 +18,10 @@ t_sig	g_sig[] =\
 	{SIGTTIN, "SIGTTIN"},
 	{SIGTTOU, "SIGTTOU"},
 	{SIGBUS, "SIGBUS"},
+	{SIGXCPU, "SIGXCPU"},
+	{SIGXFSZ, "SIGXFSZ"},
+	{SIGVTALRM, "SIGVTALRM"},
+	{SIGPROF, "SIGPROF"},
 	{0, NULL},
 };
 

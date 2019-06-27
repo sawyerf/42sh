@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 13:46:10 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/17 20:34:31 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/26 13:41:08 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int						ft_env(t_cmd_tab *cmd);
 int						ft_unsetenv(t_cmd_tab *cmd);
 int						jobs(t_cmd_tab *cmd);
 void					jobs_print_l(t_job *j);
+void					jobs_print_p(t_job *j);
 int						jobs_print_all(t_job_print jobs_printer);
 t_job					*jobs_conv_pct(char *s);
 t_job					*jobs_conv_num(char *s);

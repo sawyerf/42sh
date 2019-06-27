@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/29 19:32:42 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/06/27 11:01:54 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,20 @@ int			ft_wordexp_heredoc(t_token *word)
 
 int			ft_wordexp(t_token *word, t_bool is_redir)
 {
+	t_token *save;
+
 	log_info("------------  ft_wordexp -------------------------");
 	log_info("Word : [%s]", word->data.str);
 	if (handle_tilde(word) == MEMERR)
 		return (MEMERR);
+	save = word->next;
 	if (handle_exp_param(word, is_redir) == MEMERR)
 		return (MEMERR);
-	if (quote_removal(word) == MEMERR)
-		return (MEMERR);
+	while (word != save) //to remove quotes from newly generated token by IFS
+	{
+		if (quote_removal(word) == MEMERR)
+			return (MEMERR);
+		word = word->next;
+	}
 	return (0);
 }

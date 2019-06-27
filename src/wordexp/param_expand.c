@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/24 17:51:53 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/27 11:00:51 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -296,7 +296,7 @@ int				expand_param(t_token **word, char **cursor,
 	int					i;
 
 	//ft_printf("expand_param: %s value: %s\n", *cursor, value);
-//	is_redir = FT_TRUE;
+	//is_redir = FT_TRUE;
 	if (get_ifs(&ifs) == MEMERR)
 		return (MEMERR);
 	delete_varname(*cursor);

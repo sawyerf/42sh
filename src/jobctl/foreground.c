@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 19:28:02 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/01 18:51:11 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/26 12:34:05 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ void	wait_job(t_job *job)
 	}
 	else if (WIFSIGNALED(job->status))
 	{
-		ft_printf("%s\n", get_termsig(WTERMSIG(job->status)));
-//		ft_printf("[%d] %d signal num %d       %s\n", job->job_id, job->pgid, WTERMSIG(job->status), job->cmd_ln);
+		ft_printf("42sh: %d terminated by signal %s\n", job->pgid, get_termsig(WTERMSIG(job->status)));
 	}
 	else if (WIFSTOPPED(job->status))
 	{

@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/17 17:55:48 by tduval            #+#    #+#             */
-/*   Updated: 2019/06/17 17:58:38 by tduval           ###   ########.fr       */
+/*   Updated: 2019/06/26 13:56:11 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_job	*jobs_conv_any(char *s)
 	j = g_sh.job_lst;
 	while (j)
 	{
-		if (!ft_strcmp(s, j->cmd_ln))
+		if (!ft_strncmp(s, j->cmd_ln, ft_strlen(s)))
 			return (j);
 		j = j->next;
 	}

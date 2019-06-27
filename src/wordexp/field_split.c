@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 12:46:44 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/12 15:26:42 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/27 10:16:17 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,12 @@ int			ifs_first_field(t_token **word, char *value, char *ifs)
 	return (0);
 }
 
-t_token		*ifs_next_fields(t_token **word, t_token *word_2,
-				char *value, char *ifs)
+t_token		*ifs_next_fields(t_token **word, char *value, char *ifs)
 {
 	t_token *tmp;
 	t_token *iter;
 	char	*new_field;
 
-	word_2 = word_2 + 5;
 	iter = ((*word)->next != NULL) ? (*word)->next : (*word);
 	while (*value)
 	{
@@ -115,7 +113,7 @@ int			handle_ifs(t_token **word, char **cursor, char *value, char *ifs)
 	(*word)->next = NULL;
 	if (ifs_first_field(word, value, ifs) == MEMERR)
 		return (MEMERR);
-	if (!(last = ifs_next_fields(word, word_2, value, ifs)))
+	if (!(last = ifs_next_fields(word, value, ifs)))
 		return (MEMERR);
 	if (!split_candidate(value, ifs))
 	{
