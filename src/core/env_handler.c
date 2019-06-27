@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 22:17:22 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/24 17:46:35 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/06/27 13:55:12 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,15 @@ int		valid_env_name(char *str)
 	return (1);
 }
 
+char	*bang_expansion(void)
+{
+	
+	if (g_sh.lastback)
+		return (ft_itoa(g_sh.lastback));
+	return (NULL);
+}
+/* we mix up malloc errors with variable that are undefined
+ */
 char	*dget_env_value(char *name)
 {
 	if (!ft_strncmp("?", name, 1))
@@ -49,7 +58,7 @@ char	*dget_env_value(char *name)
 	if (!ft_strcmp("-", name))
 		return (NULL);
 	if (!ft_strncmp("!", name, 1))
-		return (ft_itoa(g_sh.lastback));
+		return (bang_expansion());
 	if (!ft_strncmp("$", name, 1))
 		return (ft_itoa(getpid()));
 	if (ft_strisdigit(name) && ft_tablen(g_sh.av) > ft_atoi(name))

@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 21:42:35 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/26 16:40:21 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/27 14:45:57 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	delete_varname(char *cursor)
 	int				i;
 	bool			brackets;
 	const char		*valid = "#-:=?+!";
+
 	i = 1;
 	trunc = 1;
 	brackets = false;
@@ -46,6 +47,8 @@ void	delete_varname(char *cursor)
 		trunc = 3;
 		brackets = true;
 	}
+	if (ft_cisin("@*$", cursor[i]))
+		trunc++;
 	while (parser_is_name_c(cursor[i]) || (ft_cisin((char*)valid, cursor[i]))
 	|| ((brackets) && (cursor[i])))
 	{

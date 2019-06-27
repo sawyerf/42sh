@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/26 14:06:05 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/27 14:30:53 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,12 @@ int				spawn_in_pipe(t_cmd_tab *cmd)
 		return (0);
 	return (execve_wrap(cmd));
 }
-
+/*
+int				exec_candidate(t_cmd_tab *cmd)
+{
+	if !(cmd->full_path) && ()
+}
+*/
 int				launch_command(t_cmd_tab *cmd, t_job *job)
 {
 	pid_t	pid;
@@ -57,7 +62,7 @@ int				launch_command(t_cmd_tab *cmd, t_job *job)
 		return (MEMERR);
 	else if (ret == BUILTIN_FAIL) /* handle exit_status for builtins here ?*/
 		return (1);
-	if ((ret != BUILTIN))
+	if (ret != BUILTIN)// && exec_candidate(cmd))
 	{
 		pid = fork();
 		if (pid == -1)
