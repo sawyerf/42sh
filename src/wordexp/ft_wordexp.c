@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/29 18:10:30 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/06/29 18:27:39 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static int extract_fields(t_token *word, char **fields)
 	{
 		if (!(tmp = new_token(0)))
 			return (MEMERR);
+		free(tmp->data.str);
 		tmp->data.str = *fields;
 		tmp->data.len = ft_strlen(*fields);
 		tmp->data.size = tmp->data.len + 1;
@@ -71,11 +72,12 @@ int			filename_expansion(t_token *word, t_bool is_redir)
 		return (MEMERR);
 	free(word->data.str);
 	word->data.str = *fields;
-	if (!(*(fields + 1)))
-		return (0);
-	fields++;
-	if (extract_fields(word, fields) == MEMERR)
-		return (MEMERR);
+	if ((*(fields + 1)))
+	{
+		if (extract_fields(word, fields + 1) == MEMERR)
+			return (MEMERR);
+	}
+	free(fields);
 	return (0);
 }
 
