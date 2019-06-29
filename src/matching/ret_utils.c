@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 19:12:51 by tduval            #+#    #+#             */
-/*   Updated: 2019/06/25 23:52:15 by tduval           ###   ########.fr       */
+/*   Updated: 2019/06/29 05:47:48 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char		*go_last(char *str)
 {
 	while (str && *str && ft_strchr(str, '/'))
 		str++;
-	return(str);
+	return (str);
 }
 
 void		*free_lst(t_lfiles *lst)
