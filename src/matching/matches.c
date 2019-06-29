@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 16:29:08 by tduval            #+#    #+#             */
-/*   Updated: 2019/06/26 03:51:25 by tduval           ###   ########.fr       */
+/*   Updated: 2019/06/29 04:08:18 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,28 @@ static char	*range(char *s1, char *s2)
 	return (NULL);
 }
 
+static int	is_filled(char *str)
+{
+	if (str[1] && str[1] != ']')
+	{
+		if (str[1] != '!')
+		{
+			if (str[1] != '\\' || str[2] != ']')
+				return (1);
+			else
+				return (0);
+		}
+		else
+		{
+			if (str[2] && str[2] != ']')
+				return (1);
+			else
+				return (0);
+		}
+	}
+	return (0);
+}
+
 int			matches(char *s1, char *s2, int flag)
 {
 	if (!s1 || !s2)
@@ -69,7 +91,12 @@ int			matches(char *s1, char *s2, int flag)
 	if (!flag && *s2 == '\\')
 		return (matches(s1, s2 + 1, 1));
 	if (!flag && (*s2 == '[' && ft_strchr(s2, ']') && *s1 != '\0'))
-		return (matches(s1 + 1, range(s1, s2 + 1), 0));
+	{
+		if (is_filled(s2))
+			return (matches(s1 + 1, range(s1, s2 + 1), 0));
+		else
+			return (matches(s1, range(s1, s2 + 1), 0));
+	}
 	if (!flag && (*s2 == '?' && *s1 != '\0'))
 		return (matches(s1 + 1, s2 + 1, 0));
 	if (!flag && (*s2 == '*' && *s1 != '\0'))
