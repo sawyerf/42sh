@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 18:34:23 by tduval            #+#    #+#             */
-/*   Updated: 2019/06/29 03:59:51 by tduval           ###   ########.fr       */
+/*   Updated: 2019/06/29 05:48:19 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*ft_strapp(char *str, char c)
 	return (res);
 }
 
-int	is_in_str(char *str, char c)
+int		is_in_str(char *str, char c)
 {
 	while (*str)
 	{
@@ -42,7 +42,7 @@ int	is_in_str(char *str, char c)
 	return (0);
 }
 
-int	is_last(char *str)
+int		is_last(char *str)
 {
 	int		i;
 	int		j;
