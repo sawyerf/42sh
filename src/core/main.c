@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/12 18:00:53 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/06/29 17:39:40 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,14 @@ static int	init_shell(char **env, t_read_fn *read_fn)
 	*read_fn = sh_readfile;
 	if (g_sh.mode == INTERACTIVE)
 		*read_fn = readline;
-	if ((g_sh.mode == INTERACTIVE) && (init_jobctl() == SH_ABORT))
-	{
+	if ((g_sh.mode == INTERACTIVE) && (init_jobctl() == SH_ABORT)) /* tmp for testing with lldb*/ 
+/*	{
 		global_del();
 		return (SH_ABORT);
-	}
+	}*/
+		return (0);
 	return (0);
+
 }
 
 void		global_del(void)

@@ -6,15 +6,15 @@
 #    By: apeyret <apeyret@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/06/12 18:03:42 by juhallyn         ###   ########.fr        #
+#    Updated: 2019/06/29 17:40:37 by ktlili           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =		42sh
 
-CC =		gcc
+CC =		clang	
 
-CFLAGS =	-I inc/ -I libft/inc/ -Wall -Werror -Wextra
+CFLAGS =	-I inc/ -I libft/inc/ -ggdb # -Wall -Werror -Wextra
 
 INC_DIR =	inc
 
@@ -150,7 +150,14 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			jobctl/make_job.c			\
 			jobctl/foreground.c			\
 			jobctl/jobs_util.c			\
-			jobctl/register_job.c
+			jobctl/register_job.c 		\
+			matching/final_step.c		\
+			matching/layer_format.c		\
+			matching/matches.c			\
+			matching/matches_utils.c	\
+			matching/read_curdir.c		\
+			matching/ret_matches.c		\
+			matching/ret_utils.c		
 
 OBJ_DIR =	.obj
 OBJ_FILE =	$(SRC_FILE:.c=.o)
@@ -165,7 +172,8 @@ CRT_DIR =	core 						\
 		 	hashtable					\
 			jobctl						\
 		 	prompt 						\
-		 	hashtable
+		 	hashtable					\
+			matching
 
 SRC = 		$(addprefix $(SRC_DIR)/,$(SRC_FILE))
 INC = 		$(addprefix $(INC_DIR)/,$(INC_FILE))

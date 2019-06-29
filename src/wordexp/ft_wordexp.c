@@ -6,11 +6,12 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/29 19:32:42 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/06/29 18:10:30 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_wordexp.h"
+#include "ft_patmatch.h"
 
 static void	heredoc_quote_rm(t_token *word)
 {
@@ -37,6 +38,47 @@ int			ft_wordexp_heredoc(t_token *word)
 	return (0);
 }
 
+static int extract_fields(t_token *word, char **fields)
+{
+	t_token *tmp;
+	t_token *head;
+
+	head = NULL;
+	while (*fields)
+	{
+		if (!(tmp = new_token(0)))
+			return (MEMERR);
+		tmp->data.str = *fields;
+		tmp->data.len = ft_strlen(*fields);
+		tmp->data.size = tmp->data.len + 1;
+		add_token(&head, tmp);
+		fields++;
+	}
+	tmp->next = word->next;
+	word->next = head;
+	return (0);
+}
+
+int			filename_expansion(t_token *word, t_bool is_redir)
+{
+	char **fields;
+	t_token *tmp;
+	t_token *head;
+
+	if (is_redir)
+		return (0);
+	if (!(fields = ret_matches(word->data.str)))
+		return (MEMERR);
+	free(word->data.str);
+	word->data.str = *fields;
+	if (!(*(fields + 1)))
+		return (0);
+	fields++;
+	if (extract_fields(word, fields) == MEMERR)
+		return (MEMERR);
+	return (0);
+}
+
 int			ft_wordexp(t_token *word, t_bool is_redir)
 {
 	log_info("------------  ft_wordexp -------------------------");
@@ -44,6 +86,8 @@ int			ft_wordexp(t_token *word, t_bool is_redir)
 	if (handle_tilde(word) == MEMERR)
 		return (MEMERR);
 	if (handle_exp_param(word, is_redir) == MEMERR)
+		return (MEMERR);
+	if (filename_expansion(word, is_redir) == MEMERR)
 		return (MEMERR);
 	if (quote_removal(word) == MEMERR)
 		return (MEMERR);
