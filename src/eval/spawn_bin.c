@@ -50,7 +50,8 @@ int				spawn_in_pipe(t_cmd_tab *cmd)
 
 int				exec_candidate(t_cmd_tab *cmd)
 {
-	if (!(cmd->full_path) && (!cmd->redir_lst))
+	if ((!(cmd->full_path) && (!cmd->redir_lst)) 
+		&& !((cmd->av[0]) && (ft_cisin(cmd->av[0], '/'))))
 		return (0);
 	return (1);
 }

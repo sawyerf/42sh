@@ -17,6 +17,7 @@
 t_builtin	g_array[] =\
 {ft_echo, change_dir, setenv_wrapper, ft_unsetenv, ft_exit, ft_set,
 ft_unset, fc, hash, type, alias, unalias, export, jobs, fg, bg};
+
 char		*g_builtins[] =\
 {"echo", "cd", "setenv", "unsetenv", "exit", "set", "unset", "fc",
 "hash", "type", "alias", "unalias", "export", "jobs", "fg", "bg", NULL};
