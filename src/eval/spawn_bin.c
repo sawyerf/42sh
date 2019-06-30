@@ -47,12 +47,14 @@ int				spawn_in_pipe(t_cmd_tab *cmd)
 		exit_wrap(cmd->exit_status, cmd);
 	return (execve_wrap(cmd));
 }
-/*
+
 int				exec_candidate(t_cmd_tab *cmd)
 {
-	if !(cmd->full_path) && ()
+	if (!(cmd->full_path) && (!cmd->redir_lst))
+		return (0);
+	return (1);
 }
-*/
+
 int				launch_command(t_cmd_tab *cmd, t_job *job)
 {
 	pid_t	pid;
@@ -62,7 +64,7 @@ int				launch_command(t_cmd_tab *cmd, t_job *job)
 		return (MEMERR);
 	else if (ret == BUILTIN_FAIL)
 		return (0);
-	if (ret != BUILTIN)// && exec_candidate(cmd))
+	if ((ret != BUILTIN) && exec_candidate(cmd))
 	{
 		pid = fork();
 		if (pid == -1)
