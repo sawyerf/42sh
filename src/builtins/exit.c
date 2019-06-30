@@ -29,5 +29,7 @@ int		ft_exit(t_cmd_tab *cmd)
 		}
 	}
 	global_del();
-	exit(ft_atoi(cmd->av[1]));
+	if (cmd->av[1])
+		exit(ft_atoi(cmd->av[1]));
+	exit(g_sh.status);
 }
