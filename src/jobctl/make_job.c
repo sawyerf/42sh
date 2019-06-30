@@ -31,6 +31,7 @@ t_job	*make_job(int fg)
 	if (!(job = ft_memalloc(sizeof(t_job))))
 		return (NULL);
 	ft_bzero(job, sizeof(t_job));
+	job->builtin_exit = -1;
 	if (fg)
 		job->fg = 1;
 	return (job);

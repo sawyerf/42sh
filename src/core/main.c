@@ -58,7 +58,7 @@ static int	init_shell(char **env, t_read_fn *read_fn, char **av)
 	if (g_sh.mode == INTERACTIVE)
 		*read_fn = readline;
 	if ((g_sh.mode == INTERACTIVE) && (init_jobctl() == SH_ABORT))
-//		return (SH_ABORT);
+//		return (SH_ABORT); temporary for lldb
 		return (0);
 	return (0);
 }

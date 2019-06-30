@@ -166,7 +166,6 @@ int	handle_bang(t_lexer *lx_st)
 {
 	int ret;
 
-	ret = 0;
 	if (*(lx_st->cursor + 1) == '!')
 		ret = simple_bang(lx_st);
 	else if (!ft_cisin("\n \t", *(lx_st->cursor + 1)) && *(lx_st->cursor + 1))

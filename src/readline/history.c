@@ -98,7 +98,7 @@ t_list	*hst_getcmp(t_list *lst, char *s)
 	int		len;
 
 	tmp = lst;
-	len = (ft_strisdigit(s)) ? ft_atoi(s) : ft_strlen(s);
+	len = (ft_strisdigit(s)) ? ft_atoi(s) : (int)ft_strlen(s);
 	if (ft_strisdigit(s))
 	{
 		if (len <= 0)

@@ -22,7 +22,6 @@ int	launch_pipe(t_ast_node *tree, t_job *job)
 	t_cmd_tab	*cmd_tab;
 	int			ret;
 
-	ret = 0;
 	if ((!job) && (!(job = make_job(1))))
 		return (MEMERR);
 	if ((!(job->cmd_ln))
@@ -36,9 +35,12 @@ int	launch_pipe(t_ast_node *tree, t_job *job)
 		ret = eval_pipe(cmd_tab, job);
 	else
 		ret = launch_command(cmd_tab, job);
-	if (WIFEXITED(job->status))
+	if (WIFEXITED(job->status) || (job->builtin_exit != -1)) 
 	{
-		tree->exit_status = (int)WEXITSTATUS(job->status);
+		if (job->builtin_exit != -1)
+			tree->exit_status = job->builtin_exit;
+		else
+			tree->exit_status = (int)WEXITSTATUS(job->status);
 		del_job(job);
 	}
 	g_sh.status = tree->exit_status;

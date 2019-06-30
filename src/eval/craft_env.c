@@ -49,7 +49,6 @@ char		*get_process_env(char *key, char **env)
 {
 	int i;
 
-	i = 0;
 	if ((i = env_is_set(key, env)) == -1)
 		return (NULL);
 	return (get_value(env[i]));

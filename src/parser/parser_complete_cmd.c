@@ -57,10 +57,8 @@ int	expect_list(t_parser *parser)
 
 int	expect_list_suffix(t_parser *parser)
 {
-	t_token *backtrack;
 	int		ret;
 
-	backtrack = parser->current;
 	if (!(ret = expect_separator_op(parser)))
 	{
 		if ((ret = expect_and_or(parser)))

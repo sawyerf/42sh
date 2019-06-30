@@ -16,11 +16,9 @@ int			expand_token_lst(t_simple_cmd *sim_cmd)
 {
 	t_token	*iter;
 	t_token	*save;
-	t_token *prev;
 	int		quoted;
 
 	iter = sim_cmd->word_lst;
-	prev = NULL;
 	while (iter)
 	{
 		quoted = is_quoted(iter->data.str);
@@ -29,7 +27,6 @@ int			expand_token_lst(t_simple_cmd *sim_cmd)
 			return (MEMERR);
 		if ((!quoted) && (iter->data.str[0] == 0) && (iter->next == save))
 			remove_token(sim_cmd, iter);
-		prev = iter;
 		iter = save;
 	}
 	return (0);

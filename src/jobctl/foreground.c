@@ -26,7 +26,8 @@ void	wait_job(t_job *job)
 
 	if (!job->pgid)
 		job->pgid = WAIT_ANY;
-	pid = waitpid(job->pgid, &(job->status), WUNTRACED);
+	if ((pid = waitpid(job->pgid, &(job->status), WUNTRACED)) == -1)
+		return((void)ft_dprintf(STDERR_FILENO, "42sh: wait failed for %s\n", job->cmd_ln));
 	register_job(job);
 	if (WIFEXITED(job->status))
 	{

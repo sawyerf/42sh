@@ -1,4 +1,4 @@
-	/* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   spawn_bin.c                                        :+:      :+:    :+:   */
@@ -42,9 +42,9 @@ int				spawn_in_pipe(t_cmd_tab *cmd)
 	int ret;
 
 	if ((ret = pre_execution(cmd)) == MEMERR)
-		return (MEMERR);
+		exit_wrap(MEMERR, cmd);
 	else if ((ret == BUILTIN) || (ret == BUILTIN_FAIL))
-		return (0);
+		exit_wrap(cmd->exit_status, cmd);
 	return (execve_wrap(cmd));
 }
 /*
@@ -60,8 +60,8 @@ int				launch_command(t_cmd_tab *cmd, t_job *job)
 
 	if ((ret = pre_execution(cmd)) == MEMERR)
 		return (MEMERR);
-	else if (ret == BUILTIN_FAIL) /* handle exit_status for builtins here ?*/
-		return (1);
+	else if (ret == BUILTIN_FAIL)
+		return (0);
 	if (ret != BUILTIN)// && exec_candidate(cmd))
 	{
 		pid = fork();
@@ -78,7 +78,7 @@ int				launch_command(t_cmd_tab *cmd, t_job *job)
 			}
 			execve_wrap(cmd);
 		}
-		if ((g_sh.mode == INTERACTIVE) && (!job->pgid) 
+		if ((g_sh.mode == INTERACTIVE) && (job) && (!job->pgid) 
 			&& (setpgid_wrap(pid, job) == -1))
 		return (MEMERR);		
 		/* builtins freeze when there are stopped jobs*/
@@ -90,7 +90,10 @@ int				launch_command(t_cmd_tab *cmd, t_job *job)
 			bg_job(job, 0);	
 	}
 	else
+	{
+		job->builtin_exit = cmd->exit_status;
 		register_job(job); //this is ugly
+	}
 	return (0);
 }
 

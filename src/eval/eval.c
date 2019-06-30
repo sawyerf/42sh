@@ -52,11 +52,6 @@ int			background_subshell(t_ast_node *tree)
 
 static int	eval_sep(t_ast_node *tree)
 {
-	t_job	*job;
-	pid_t	pid;
-
-	job = NULL;
-	pid = 0;
 	if ((tree->type == AMPERS) && (g_sh.mode == INTERACTIVE))
 	{
 		if (background_subshell(tree))

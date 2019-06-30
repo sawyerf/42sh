@@ -237,11 +237,9 @@ char			*exp_sup(char *cursor, bool classic_substitute)
 {
 	char	previous_char;
 	char	*tmp;
-	char	*result;
 
 	if (classic_substitute)
 		return (classic_sub(cursor));
-	result = NULL;
 	previous_char = '\0';
 	tmp = cursor;
 	tmp++;

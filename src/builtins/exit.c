@@ -15,11 +15,8 @@
 
 int		ft_exit(t_cmd_tab *cmd)
 {
-	int i;
-
 	if (!exit_jobs())
 		return (1);
-	i = 0;
 	if (cmd->av[1])
 	{
 		if (cmd->av[2] || !ft_strisdigit(cmd->av[1]))

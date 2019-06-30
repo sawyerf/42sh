@@ -27,7 +27,7 @@ int		cd_error(int errnum, char *str)
 	if (str != NULL)
 		putstr_stderr(str);
 	putstr_stderr("\n");
-	return (0);
+	return (errnum);
 }
 
 int		cd_dispatch_err(char *arg, char *curpath)

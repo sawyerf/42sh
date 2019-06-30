@@ -29,13 +29,11 @@ static void job_handle_curr(t_job *j)
 void	del_job(t_job *j)
 {
 	t_job *save_n;
-	t_job *save_p;
 	t_job *iter;
 
 	job_handle_curr(j);
 	ft_strdel(&j->cmd_ln);
 	save_n = j->next;
-	save_p = j->prev;
 	free(j);
 	if (j == g_sh.job_lst)
 	{

@@ -13,6 +13,7 @@ typedef struct			s_job
 	int					completed;
 	int					stopped;
 	int					status; 
+	int					builtin_exit;
 	struct termios		save_tio;
 	struct s_job		*next;
 	struct s_job		*prev;

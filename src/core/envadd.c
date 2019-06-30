@@ -64,13 +64,15 @@ int		csetenv(char ***env, char *var)
 int		envaddint(char ***env, char *var, int value)
 {
 	char	*add;
-	int		ret;
+	int		ret; // why?
 
 	add = NULL;
 	if (!(add = ft_zprintf("%s=%d", var, value)))
 		return (MEMERR);
 	ret = csetenv(env, add);
 	ft_strdel(&add);
+	if (ret)
+		return (ret);
 	return (0);
 }
 

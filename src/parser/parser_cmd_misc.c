@@ -26,7 +26,6 @@ int	expect_simple_cmd(t_parser *parser)
 
 	ft_bzero(&(parser->cmd), sizeof(t_simple_cmd));
 	backtrack = parser->current;
-	ret = 0;
 	if (!(ret = expect_cmd_pre(parser)))
 	{
 		if (!(ret = expect_cmd_name(parser)))
