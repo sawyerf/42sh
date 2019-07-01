@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:22:06 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/24 19:21:09 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/01 19:57:02 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,8 @@ char		**craft_env(char **base_env, char **to_add)
 	if (!base_env)
 		return (NULL);
 	tot_len = ft_tablen(base_env) + ft_tablen(to_add) + 1;
-	if (!(fresh = ft_tabnew(tot_len)))
-		return (NULL);
-	if (!(cpy_array(fresh, base_env)))
+	if ((!(fresh = ft_tabnew(tot_len)))
+		|| (!(cpy_array(fresh, base_env))))
 	{
 		ft_tabdel(&fresh);
 		return (NULL);

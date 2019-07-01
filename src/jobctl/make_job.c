@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/01 18:48:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/01 18:48:21 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/01 19:48:15 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,13 @@ int		setpgid_wrap(pid_t pid, t_job *job)
 		job->pgid = pid;
 	if (setpgid(pid, job->pgid) == -1)
 		return (-1);
-	return (0);	
-
+	return (0);
 }
 
 t_job	*make_job(int fg)
 {
 	t_job	*job;
-	
+
 	if (!(job = ft_memalloc(sizeof(t_job))))
 		return (NULL);
 	ft_bzero(job, sizeof(t_job));

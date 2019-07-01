@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/27 16:20:40 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/01 20:24:39 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int			background_fork(pid_t pid, t_job *job, t_ast_node *t)
 	eval_tree(t->left);
 	waitpid(job->pgid, NULL, WUNTRACED);
 	waitpid(WAIT_ANY, NULL, 0);
-	//ft_printf("[%d]Background Job finished\n", job->pgid);
 	exit_wrap(0, NULL);
 	return (0);
 }
@@ -30,15 +29,14 @@ int			background_subshell(t_ast_node *tree)
 {
 	t_job	*job;
 	pid_t	pid;
-	
-	if (!(job = make_job(0)) || (!(job->cmd_ln = make_cmdline(tree->start, tree->end, 1))))
+
+	if (!(job = make_job(0))
+			|| (!(job->cmd_ln = make_cmdline(tree->start, tree->end, 1))))
 		return (MEMERR);
 	if ((pid = fork()) == -1)
-		return (MEMERR); //should fork error or sthing
+		return (MEMERR);
 	if (pid == 0)
-	{
 		background_fork(pid, job, tree);
-	}	
 	if (setpgid_wrap(pid, job) == -1)
 		ft_dprintf(STDERR_FILENO, "42sh: setpgid fail for %d\n", pid);
 	register_job(job);
@@ -57,7 +55,7 @@ static int	eval_sep(t_ast_node *tree)
 		if (background_subshell(tree))
 			return (MEMERR);
 	}
-	else 
+	else
 	{
 		if ((tree->left) && (eval_tree(tree->left) == MEMERR))
 			return (MEMERR);

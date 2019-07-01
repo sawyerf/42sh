@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/01 17:29:30 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/01 20:38:50 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int				spawn_in_pipe(t_cmd_tab *cmd)
 
 int				exec_candidate(t_cmd_tab *cmd)
 {
-	if ((!(cmd->full_path) && (!cmd->redir_lst)) 
+	if ((!(cmd->full_path) && (!cmd->redir_lst))
 		&& !((cmd->av[0]) && (ft_cisin(cmd->av[0], '/'))))
 		return (0);
 	return (1);
@@ -70,7 +70,7 @@ int				launch_command(t_cmd_tab *cmd, t_job *job)
 		pid = fork();
 		if (pid == -1)
 			return (MEMERR);
-		if (pid == 0) 
+		if (pid == 0)
 		{
 			if ((job) && (g_sh.mode == INTERACTIVE))
 			{
@@ -81,22 +81,21 @@ int				launch_command(t_cmd_tab *cmd, t_job *job)
 			}
 			execve_wrap(cmd);
 		}
-		if ((g_sh.mode == INTERACTIVE) && (job) && (!job->pgid) 
+		if ((g_sh.mode == INTERACTIVE) && (job) && (!job->pgid)
 			&& (setpgid_wrap(pid, job) == -1))
-		return (MEMERR);		
+			return (MEMERR);
 		/* builtins freeze when there are stopped jobs*/
 		if ((g_sh.mode != INTERACTIVE))
 			wait_job(job);
 		else if ((job) && (job->fg))
-			fg_job( job, 0);
+			fg_job(job, 0);
 		else
-			bg_job(job, 0);	
+			bg_job(job, 0);
 	}
 	else
 	{
 		job->builtin_exit = cmd->exit_status;
-		register_job(job); //this is ugly
+		register_job(job);
 	}
 	return (0);
 }
-

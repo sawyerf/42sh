@@ -6,13 +6,13 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/01 18:48:03 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/27 14:34:41 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/01 19:51:33 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_core.h"
 
-static void job_handle_curr(t_job *j)
+static void	job_handle_curr(t_job *j)
 {
 	if (j == g_sh.current_j)
 	{
@@ -26,7 +26,7 @@ static void job_handle_curr(t_job *j)
 	}
 }
 
-void	del_job(t_job *j)
+void		del_job(t_job *j)
 {
 	t_job *save_n;
 	t_job *iter;
@@ -51,7 +51,7 @@ void	del_job(t_job *j)
 		save_n->prev = iter;
 }
 
-void	clean_jobs(void)
+void		clean_jobs(void)
 {
 	t_job *ptr;
 	t_job *save;
@@ -64,7 +64,8 @@ void	clean_jobs(void)
 		if (ptr->completed)
 		{
 			if ((!ptr->notified) && (!ptr->fg))
-				ft_printf("[%d] %d '%s' completed\n", ptr->job_id, ptr->pgid, ptr->cmd_ln);
+				ft_printf("[%d] %d '%s' completed\n",
+					ptr->job_id, ptr->pgid, ptr->cmd_ln);
 			del_job(ptr);
 		}
 		ptr = save;

@@ -6,18 +6,23 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 19:28:02 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/27 16:40:51 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/01 19:47:19 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "jobctl.h"
-
 
 void	update_job(t_job *job)
 {
 	if (!job->pgid)
 		job->pgid = WAIT_ANY;
 	waitpid(job->pgid, &(job->status), WNOHANG);
+}
+
+void	finish_job(t_job *job)
+{
+	job->completed = 1;
+	job->notified = 1;
 }
 
 void	wait_job(t_job *job)
@@ -27,28 +32,25 @@ void	wait_job(t_job *job)
 	if (!job->pgid)
 		job->pgid = WAIT_ANY;
 	if ((pid = waitpid(job->pgid, &(job->status), WUNTRACED)) == -1)
-		return((void)ft_dprintf(STDERR_FILENO, "42sh: wait failed for %s\n", job->cmd_ln));
+	{
+		ft_dprintf(STDERR_FILENO, "42sh: wait failed for %s\n", job->cmd_ln);
+		return ;
+	}
 	register_job(job);
 	if (WIFEXITED(job->status))
-	{
-		job->completed = 1;
-		job->notified = 1;
-	}
+		finish_job(job);
 	else if (WIFSIGNALED(job->status))
-	{
-		ft_printf("42sh: %d terminated by signal %s\n", job->pgid, get_termsig(WTERMSIG(job->status)));
-	}
+		ft_printf("42sh: %d terminated by signal %s\n",
+				job->pgid, get_termsig(WTERMSIG(job->status)));
 	else if (WIFSTOPPED(job->status))
 	{
-		ft_printf("[%d] %d suspended       %s\n", job->job_id, job->pgid, job->cmd_ln);
+		ft_printf("[%d] %d suspended       %s\n",
+				job->job_id, job->pgid, job->cmd_ln);
 		if (g_sh.current_j != job)
 			g_sh.previous_j = g_sh.current_j;
 		g_sh.current_j = job;
-	
 	}
-	return;
 }
-
 
 int		fg_job(t_job *job, int cont)
 {
@@ -58,9 +60,10 @@ int		fg_job(t_job *job, int cont)
 		tcsetattr(STDIN_FILENO, TCSADRAIN, &(job->save_tio));
 		if (killpg(job->pgid, SIGCONT) < 0)
 		{
-			ft_dprintf(STDERR_FILENO, "42sh: Error sending cont to pgid %d as fg\n", job->pgid);
-			return (0); // maybe not ?
-		}	
+			ft_dprintf(STDERR_FILENO,
+				"42sh: Error sending cont to pgid %d as fg\n", job->pgid);
+			return (0);
+		}
 	}
 	wait_job(job);
 	tcgetattr(STDIN_FILENO, &(job->save_tio));
@@ -69,12 +72,13 @@ int		fg_job(t_job *job, int cont)
 	return (0);
 }
 
-int bg_job(t_job *job, int cont)
+int		bg_job(t_job *job, int cont)
 {
 	if (cont)
 	{
 		if (killpg(job->pgid, SIGCONT) < 0)
-			ft_dprintf(STDERR_FILENO, "42sh: Error sending cont to pgid %d as bg\n", job->pgid);
+			ft_dprintf(STDERR_FILENO,
+				"42sh: Error sending cont to pgid %d as bg\n", job->pgid);
 	}
 	register_job(job);
 	g_sh.lastback = job->pgid;

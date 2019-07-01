@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/12 18:02:16 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/07/01 19:59:01 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	close_p(int pipes[2])
 	close(pipes[1]);
 }
 
-int	pipe_recursion(t_cmd_tab *to, t_cmd_tab *from, t_job *job)
+int		pipe_recursion(t_cmd_tab *to, t_cmd_tab *from, t_job *job)
 {
 	int pipes[2];
 	int pid;
@@ -47,7 +47,7 @@ int	pipe_recursion(t_cmd_tab *to, t_cmd_tab *from, t_job *job)
 	return (0);
 }
 
-int	pipe_subshell(pid_t pid, t_cmd_tab *pipeln, t_job *job)
+int		pipe_subshell(pid_t pid, t_cmd_tab *pipeln, t_job *job)
 {
 	int ret;
 
@@ -55,21 +55,19 @@ int	pipe_subshell(pid_t pid, t_cmd_tab *pipeln, t_job *job)
 	{
 		if ((!job->pgid) && (setpgid_wrap(pid, job) == -1))
 			exit_wrap(MEMERR, pipeln);
-		if (job->fg) 
+		if (job->fg)
 			tcsetpgrp(STDIN_FILENO, job->pgid);
 	}
 	reset_sig();
 	if ((ret = pipe_recursion(pipeln->next, pipeln, job)))
 		exit_wrap(-1, pipeln);
-	/* update on last child status*/
 	waitpid(job->pgid, &(job->status), WUNTRACED);
-	waitpid(WAIT_ANY, NULL, 0); /*wait for everyone */
-//	ft_printf("subshell last pid: %d exit %d\n", job->pgid, WEXITSTATUS(job->status));
+	waitpid(WAIT_ANY, NULL, 0);
 	exit_wrap(WEXITSTATUS(job->status), pipeln);
 	return (42);
 }
 
-int	eval_pipe(t_cmd_tab *pipeln, t_job *job)
+int		eval_pipe(t_cmd_tab *pipeln, t_job *job)
 {
 	pid_t	pid;
 

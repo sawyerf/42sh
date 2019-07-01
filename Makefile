@@ -6,7 +6,7 @@
 #    By: apeyret <apeyret@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/06/27 19:57:24 by apeyret          ###   ########.fr        #
+#    Updated: 2019/07/01 17:44:26 by ktlili           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME =		42sh
 
 CC =		clang
 
-CFLAGS =	-I inc/ -I libft/inc/ -Wall -Werror -Wextra -ggdb
+CFLAGS =	-I inc/ -I libft/inc/ -Wall -Werror -Wextra
 
 INC_DIR =	inc
 
