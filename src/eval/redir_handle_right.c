@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 17:46:08 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/27 16:20:42 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/01 17:40:36 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,17 @@ static int	fd_aggregator(int *left_fd, int *right_fd, t_redir *redir)
 	return (0);
 }
 
+int			is_fifo(char *path)
+{
+	struct stat buf;
+
+	if (lstat(path, &buf) != 0)
+		return (0);
+	if (S_ISFIFO(buf.st_mode))
+		return (1);
+	return (0);
+}
+
 int			handle_right(int *left_fd, int *right_fd, t_redir *redir)
 {
 	int oflag;
@@ -91,9 +102,10 @@ int			handle_right(int *left_fd, int *right_fd, t_redir *redir)
 		return (make_here_doc(right_fd, redir));
 	oflag = get_open_flags(redir->op->type);
 	*right_fd = open(redir->right->data.str, oflag, 0644);
-	if (*right_fd == -1)
+	if (*right_fd == -1) 
 	{
-		exec_error(bin_perm(redir->right->data.str), redir->right->data.str);
+	   	if (!(is_fifo(redir->right->data.str)))
+			exec_error(bin_perm(redir->right->data.str), redir->right->data.str);
 		return (-1);
 	}
 	return (0);
