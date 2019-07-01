@@ -88,6 +88,7 @@ int			main(int ac, char **av, char **env)
 	if (init_shell(env, &read_fn))
 		return (MEMERR);
 	shrc();
+	logger_init(D_TRACE, "out.log");
 	while (42)
 	{
 		clean_jobs();
@@ -107,5 +108,5 @@ int			main(int ac, char **av, char **env)
 	global_del();
 	return (g_sh.status);
 // // LOGGER   ---------------------------------------------------------------
-// 	logger_close();
+	logger_close();
 }

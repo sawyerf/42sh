@@ -36,7 +36,7 @@ void	delete_varname(char *cursor)
 	int				trunc;
 	int				i;
 	bool			brackets;
-	const char		*valid = "#-:=?+";
+	const char		*valid = "#-:=?+*";
 
 	i = 1;
 	trunc = 1;
