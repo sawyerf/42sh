@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/02 11:33:10 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/07/02 11:41:51 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -373,7 +373,6 @@ int				expand_param(t_token **word, char **cursor,
 
 int				handle_exp_param(t_token *word, t_bool is_redir)
 {
-	log_warn("---------  handle_exp_param  -------------");
 	char	*cursor;
 	char	*value;
 	int		inside_dquote;
