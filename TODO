@@ -9,3 +9,17 @@ amanue
 ${var%%word} - cut longest match from end
 echo ${var%%n*}
 ama
+
+
+
+
+
+
+
+
+
+
+
+--------------
+
+accept : .

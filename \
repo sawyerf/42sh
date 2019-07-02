@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/02 19:11:15 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/07/02 19:09:28 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,8 +269,6 @@ bool			bsearch_str(char *str, char *search, int *nb_del)
 	char	c;
 
 	log_info("str [%s] search [%s]", str, search);
-	if (!str)
-		return (false);
 	i = ft_strlen(str);
 	while (i >= 0)
 	{
