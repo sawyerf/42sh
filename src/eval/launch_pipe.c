@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 19:59:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/01 20:17:57 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/02 15:37:57 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ static void	job_exit_code(t_ast_node *tree, t_job *job)
 		tree->exit_status = job->builtin_exit;
 	else
 		tree->exit_status = (int)WEXITSTATUS(job->status);
-	del_job(job);
+	//SEGFAULT
+	//del_job(job);
 }
 
 int			launch_pipe(t_ast_node *tree, t_job *job)
