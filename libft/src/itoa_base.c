@@ -6,13 +6,13 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/15 17:42:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/02/12 18:58:26 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/02 15:49:46 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_strrev(char *str)
+char	*ft_strrev(char *str)
 {
 	int start;
 	int end;
@@ -20,13 +20,14 @@ void	ft_strrev(char *str)
 	start = 0;
 	end = ft_strlen(str) - 1;
 	if (end < 0)
-		return ;
+		return (str);
 	while (start < end)
 	{
 		ft_swap_char((str + start), (str + end));
 		start++;
 		end--;
 	}
+	return (str);
 }
 
 int		ft_utoa_base(uintmax_t nbr, int base, char *str, int rev)

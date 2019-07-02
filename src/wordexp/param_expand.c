@@ -6,11 +6,12 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/02 11:41:51 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/07/02 16:06:34 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_wordexp.h"
+#include "ft_patmatch.h"
 
 void		print_array(char **array)
 {
@@ -234,30 +235,88 @@ char			*sub_word_if_not_null(char *cursor, char *zone)
 	return (NULL);
 }
 
-bool			search_rev_str(char *str, char *search, int *nb_del)
+
+bool			lsearch_str(char *str, char *search, int *nb_del)
 {
 	int		i;
-	int		len;
-	bool	flag;
-	int		str_len;
+	char	c;
 
-	flag = false;
-	i = ft_strlen(str);
-	len = ft_strlen(search);
-	str_len = i;
-	while (len > 0)
+	i = 0;
+	while (str[i])
 	{
-		if (search[len] == str[i])
-			flag = true;
-		else
-			return (NULL);
-		len--;
-		i--;
+		c = str[i];
+		str[i] = 0;
+		if (matches(str + i, search, 0))
+		{
+			str[i] = c;
+			*nb_del = ft_strlen(str) - i;
+			return (true);
+		}
+		str[i] = c;
+		i++;
 	}
-	*nb_del = (str_len - i);
-	return (flag);
+	*nb_del = 0;
+	return (false);
 }
 
+bool			bsearch_str(char *str, char *search, int *nb_del)
+{
+	int		i;
+	char	c;
+
+	i = ft_strlen(str);
+	while (str[i])
+	{
+		c = str[i];
+		str[i] = 0;
+		if (matches(str + i, search, 0))
+		{
+			str[i] = c;
+			*nb_del = ft_strlen(str) - i;
+			return (true);
+		}
+		str[i] = c;
+		i--;
+	}
+	*nb_del = 0;
+	return (false);
+}
+
+bool			bsearch_rev_str(char *str, char *search, int *nb_del)
+{
+	int		i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (matches(str + i, search, 0))
+		{
+			*nb_del = ft_strlen(str) - i;
+			return (true);
+		}
+		i++;
+	}
+	*nb_del = 0;
+	return (false);
+}
+
+bool			lsearch_rev_str(char *str, char *search, int *nb_del)
+{
+	int		i;
+
+	i = ft_strlen(str);
+	while (i >= 0)
+	{
+		if (matches(str + i, search, 0))
+		{
+			*nb_del = ft_strlen(str) - i;
+			return (true);
+		}
+		i--;
+	}
+	*nb_del = 0;
+	return (false);
+}
 char 			*pattern_matching(char *cursor, char *zone)
 {
 	log_warn("------------ pattern_matching ---------------------\n");
@@ -272,7 +331,7 @@ char 			*pattern_matching(char *cursor, char *zone)
 	var_name = get_var_exp(cursor);
 	cmp = check_second_exp_var(zone);
 	env_value = ft_strdup(get_env_value(var_name));
-	status = search_rev_str(env_value, cmp, &nb_del);
+	status = lsearch_rev_str(env_value, cmp, &nb_del);
 	log_warn("cmp : [%s] | env_value [%s] | status [%d]", cmp,env_value, status);
 	if (status)
 		env_value[ft_strlen(env_value) - nb_del] = '\0';
