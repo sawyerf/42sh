@@ -46,8 +46,9 @@ static int		save_fd(int left_fd, t_list **head)
 {
 	t_list	*new;
 
-	if (!(new = ft_lstnew(NULL, 0)))
+	if (!(new = ft_lstnew("", 0)))
 		return (MEMERR);
+	free(new->content);
 	if (!(new->content = (int*)ft_memalloc(sizeof(int))))
 		return (MEMERR);
 	new->content_size = sizeof(int);

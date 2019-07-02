@@ -35,8 +35,7 @@ static void	job_exit_code(t_ast_node *tree, t_job *job)
 		tree->exit_status = job->builtin_exit;
 	else
 		tree->exit_status = (int)WEXITSTATUS(job->status);
-	//SEGFAULT
-	//del_job(job);
+	del_job(job);
 }
 
 int			launch_pipe(t_ast_node *tree, t_job *job)
