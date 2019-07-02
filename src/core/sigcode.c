@@ -25,12 +25,10 @@ t_sig	g_sig[] =\
 	{0, NULL},
 };
 
-char *get_termsig(int signum)
+char	*get_termsig(int signum)
 {
 	int i;
 
-	if (signum == SIGINT)
-		return ("");
 	i = 0;
 	while (g_sig[i].sigstr)
 	{
@@ -39,4 +37,15 @@ char *get_termsig(int signum)
 		i++;
 	}
 	return("Unknown termination signal");
+}
+
+void	print_sigexit(t_job *job)
+{
+	int signum;
+
+	signum = WTERMSIG(job->status);
+	if (signum == SIGINT)
+		return ;
+	ft_printf("42h: %d terminated by signal %s\n", job->pgid,
+			get_termsig(signum));
 }

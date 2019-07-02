@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/24 17:49:39 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/02 19:05:47 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,7 @@ char					*dget_env_value(char *name);
 int		cexport(char *var);
 int						refresh_jobs(void);
 char					*get_termsig(int signum);
+void					print_sigexit(t_job *job);
 int						exit_jobs(void);
 
 #endif

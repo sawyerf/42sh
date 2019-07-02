@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 19:28:02 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/01 19:47:19 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/02 19:09:33 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,19 @@ void	wait_job(t_job *job)
 {
 	pid_t pid;
 
-	if (!job->pgid)
-		job->pgid = WAIT_ANY;
-	if ((pid = waitpid(job->pgid, &(job->status), WUNTRACED)) == -1)
+	pid = job->pgid;
+	if ((!job->pgid) || (g_sh.mode != INTERACTIVE))
+		pid = WAIT_ANY;
+	if ((pid = waitpid(pid, &(job->status), WUNTRACED)) == -1)
 	{
-		ft_dprintf(STDERR_FILENO, "42sh: wait failed for %s\n", job->cmd_ln);
+		ft_dprintf(STDERR_FILENO, "42sh: wait failed for '%s'\n", job->cmd_ln);
 		return ;
 	}
 	register_job(job);
 	if (WIFEXITED(job->status))
 		finish_job(job);
 	else if (WIFSIGNALED(job->status))
-		ft_printf("42sh: %d terminated by signal %s\n",
-				job->pgid, get_termsig(WTERMSIG(job->status)));
+		print_sigexit(job);
 	else if (WIFSTOPPED(job->status))
 	{
 		ft_printf("[%d] %d suspended       %s\n",

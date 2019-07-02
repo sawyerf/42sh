@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/02 17:07:36 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/02 19:21:14 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,41 +58,45 @@ int				exec_candidate(t_cmd_tab *cmd, int prexec_ret)
 	return (1);
 }
 
-int				launch_command(t_cmd_tab *cmd, t_job *job)
+int				spawn_bin(t_cmd_tab *cmd, t_job *job)
 {
 	pid_t	pid;
+
+	if ((pid = fork()) == -1)
+		return (MEMERR);
+	if (pid == 0)
+	{
+		if ((job) && (g_sh.mode == INTERACTIVE))
+		{
+			if ((setpgid_wrap(pid, job) == -1))
+				exit_wrap(MEMERR, cmd);
+			if (job->fg)
+				tcsetpgrp(STDIN_FILENO, job->pgid);
+		}
+		execve_wrap(cmd);
+	}
+	if ((g_sh.mode == INTERACTIVE) && (job) && (!job->pgid)
+		&& (setpgid_wrap(pid, job) == -1))
+		return (MEMERR);
+	if ((g_sh.mode != INTERACTIVE))
+		wait_job(job);
+	else if ((job) && (job->fg))
+		fg_job(job, 0);
+	else
+		bg_job(job, 0);
+	return (0);
+}
+
+int				launch_command(t_cmd_tab *cmd, t_job *job)
+{
 	int		ret;
 
 	if ((ret = pre_execution(cmd)) == MEMERR)
 		return (MEMERR);
-/*	else if (ret == BUILTIN_FAIL)
-		return (0);*/
 	if (exec_candidate(cmd, ret))
 	{
-		pid = fork();
-		if (pid == -1)
-			return (MEMERR);
-		if (pid == 0)
-		{
-			if ((job) && (g_sh.mode == INTERACTIVE))
-			{
-				if ((setpgid_wrap(pid, job) == -1))
-					exit_wrap(MEMERR, cmd);
-				if (job->fg)
-					tcsetpgrp(STDIN_FILENO, job->pgid);
-			}
-			execve_wrap(cmd);
-		}
-		if ((g_sh.mode == INTERACTIVE) && (job) && (!job->pgid)
-			&& (setpgid_wrap(pid, job) == -1))
-			return (MEMERR);
-		/* builtins freeze when there are stopped jobs*/
-		if ((g_sh.mode != INTERACTIVE))
-			wait_job(job);
-		else if ((job) && (job->fg))
-			fg_job(job, 0);
-		else
-			bg_job(job, 0);
+		if ((ret = spawn_bin(cmd, job)))
+			return (ret);
 	}
 	else
 	{

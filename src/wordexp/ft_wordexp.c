@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/02 10:59:54 by tduval           ###   ########.fr       */
+/*   Updated: 2019/07/02 20:00:58 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ int			ft_wordexp(t_token *word, t_bool is_redir)
 	save = word->next;
 	if (handle_exp_param(word, is_redir) == MEMERR)
 		return (MEMERR);
+/*	this is broken because the function final_step removes backslashes, wich is quote_removal's job.
+ */
 	if (filename_expansion(word, is_redir) == MEMERR)
 		return (MEMERR);
 	if (quote_removal(word) == MEMERR)

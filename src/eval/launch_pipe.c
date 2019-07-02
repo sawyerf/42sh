@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 19:59:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/02 15:37:57 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/07/02 19:10:58 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int			launch_pipe(t_ast_node *tree, t_job *job)
 
 	if ((!job) && (!(job = make_job(1))))
 		return (MEMERR);
+	if (g_sh.mode == NONINTERACTIVE)
+		job->pgid = getpgrp();
 	if ((!(job->cmd_ln))
 			&& (!(job->cmd_ln = make_cmdline(tree->start, tree->end, 0))))
 		return (MEMERR);
