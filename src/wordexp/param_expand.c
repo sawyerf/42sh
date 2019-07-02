@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/02 11:14:52 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/07/02 11:33:10 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -297,7 +297,12 @@ char			*select_exp(char *cursor, char *tmp)
 			return (test_parameter(cursor, tmp));
 		if (previous_char == ':' && (*tmp) == '+')
 			return (sub_word_if_not_null(cursor, tmp));
-		if ((*tmp) == '%')
+		if (ft_strncmp(tmp, "%%", 2) == 0)
+		{
+			log_fatal("ft_strncmp(tmp, \"%%\", 2)");
+			return (NULL);
+		}
+		else if ((*tmp) == '%')
 			return (pattern_matching(cursor, tmp));
 		tmp++;
 	}
@@ -368,6 +373,7 @@ int				expand_param(t_token **word, char **cursor,
 
 int				handle_exp_param(t_token *word, t_bool is_redir)
 {
+	log_warn("---------  handle_exp_param  -------------");
 	char	*cursor;
 	char	*value;
 	int		inside_dquote;
