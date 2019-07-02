@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/27 16:20:38 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/02 10:58:45 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ static int	init_shell(char **env, t_read_fn *read_fn, char **av)
 //		return (SH_ABORT); temporary for lldb
 		return (0);
 	return (0);
+
 }
 
 void		global_del(void)
@@ -113,6 +114,7 @@ int			main(int ac, char **av, char **env)
 		return (MEMERR);
 	}
 	shrc();
+	logger_init(D_TRACE, "out.log");
 	while (42)
 	{
 		clean_jobs();
@@ -137,5 +139,5 @@ int			main(int ac, char **av, char **env)
 	global_del();
 	return (g_sh.status);
 // // LOGGER   ---------------------------------------------------------------
-// 	logger_close();
+	logger_close();
 }
