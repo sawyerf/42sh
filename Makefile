@@ -6,13 +6,13 @@
 #    By: apeyret <apeyret@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/06/29 17:40:37 by ktlili           ###   ########.fr        #
+#    Updated: 2019/07/02 10:22:57 by juhallyn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =		42sh
 
-CC =		clang	
+CC =		clang
 
 CFLAGS =	-I inc/ -I libft/inc/ -ggdb # -Wall -Werror -Wextra
 
@@ -157,7 +157,7 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			matching/matches_utils.c	\
 			matching/read_curdir.c		\
 			matching/ret_matches.c		\
-			matching/ret_utils.c		
+			matching/ret_utils.c
 
 OBJ_DIR =	.obj
 OBJ_FILE =	$(SRC_FILE:.c=.o)
@@ -196,7 +196,8 @@ $(NAME): $(OBJ)
 	@printf "\033[0;32m[42sh] Compilation [OK]\033[0;0m\n"
 	@make -C libft/
 	@make -C logger/
-	@$(CC) $(CFLAGS) $(DEBUG) $(OBJ) libft/libft.a -I logger logger/liblogger.a -lncurses   -o $(NAME)
+	@$(CC) $(CFLAGS) $(DEBUG) $(OBJ) libft/libft.a -I logger \
+	logger/liblogger.a -lncurses -o $(NAME)
 
 clean:
 	@make clean -C libft/

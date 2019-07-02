@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/29 17:39:40 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/02 10:16:33 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	init_shell(char **env, t_read_fn *read_fn)
 	*read_fn = sh_readfile;
 	if (g_sh.mode == INTERACTIVE)
 		*read_fn = readline;
-	if ((g_sh.mode == INTERACTIVE) && (init_jobctl() == SH_ABORT)) /* tmp for testing with lldb*/ 
+	if ((g_sh.mode == INTERACTIVE) && (init_jobctl() == SH_ABORT)) /* tmp for testing with lldb*/
 /*	{
 		global_del();
 		return (SH_ABORT);
@@ -80,6 +80,9 @@ void		shrc(void)
 
 int			main(int ac, char **av, char **env)
 {
+// // LOGGER   ---------------------------------------------------------------
+	logger_init(D_TRACE, "out.log");
+// // LOGGER   ---------------------------------------------------------------
 	char		*line;
 	int			ret;
 	t_read_fn	read_fn;
@@ -88,7 +91,7 @@ int			main(int ac, char **av, char **env)
 	if (init_shell(env, &read_fn))
 		return (MEMERR);
 	shrc();
-	logger_init(D_TRACE, "out.log");
+
 	while (42)
 	{
 		clean_jobs();
@@ -109,4 +112,5 @@ int			main(int ac, char **av, char **env)
 	return (g_sh.status);
 // // LOGGER   ---------------------------------------------------------------
 	logger_close();
+// // LOGGER   ---------------------------------------------------------------
 }

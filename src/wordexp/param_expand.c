@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/19 14:47:52 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/07/02 11:14:52 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,6 +260,7 @@ bool			search_rev_str(char *str, char *search, int *nb_del)
 
 char 			*pattern_matching(char *cursor, char *zone)
 {
+	log_warn("------------ pattern_matching ---------------------\n");
 	char	*var_name;
 	char	*env_value;
 	char	*cmp;
@@ -272,6 +273,7 @@ char 			*pattern_matching(char *cursor, char *zone)
 	cmp = check_second_exp_var(zone);
 	env_value = ft_strdup(get_env_value(var_name));
 	status = search_rev_str(env_value, cmp, &nb_del);
+	log_warn("cmp : [%s] | env_value [%s] | status [%d]", cmp,env_value, status);
 	if (status)
 		env_value[ft_strlen(env_value) - nb_del] = '\0';
 	ft_strdel(&cmp);
