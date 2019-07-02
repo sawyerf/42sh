@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 19:02:05 by tduval            #+#    #+#             */
-/*   Updated: 2019/07/02 12:16:33 by tduval           ###   ########.fr       */
+/*   Updated: 2019/07/02 12:17:17 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,32 +93,4 @@ char			**ret_matches(char *pattern)
 		i++;
 	}
 	return (final_step(lst, layer, origin));
-}
-
-int				main(int ac, char **av)
-{
-	char	**test;
-	int		i;
-	int		j;
-
-	i = 0;
-	j = 1;
-	if (ac > 1)
-	{
-		while (j < ac)
-		{
-			i = 0;
-			test = ret_matches(av[j]);
-			while (test && test[i])
-			{
-				ft_putstr(test[i]);
-				ft_strdel(&test[i]);
-				ft_putchar('\n');
-				i++;
-			}
-			j++;
-		}
-	}
-	ft_memdel((void **)&test);
-	return (0);
 }
