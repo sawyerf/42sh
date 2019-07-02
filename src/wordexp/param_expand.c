@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/02 16:06:34 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/02 18:51:42 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,6 +238,7 @@ char			*sub_word_if_not_null(char *cursor, char *zone)
 
 bool			lsearch_str(char *str, char *search, int *nb_del)
 {
+	// log_info("str [%s] | search [%s] | nb_del [%d]", str, search, nb_del);
 	int		i;
 	char	c;
 
@@ -246,16 +247,18 @@ bool			lsearch_str(char *str, char *search, int *nb_del)
 	{
 		c = str[i];
 		str[i] = 0;
-		if (matches(str + i, search, 0))
+		if (matches(str, search, 0))
 		{
 			str[i] = c;
-			*nb_del = ft_strlen(str) - i;
+			*nb_del = i;
+			log_info("str [%s] | search [%s] | nb_del [%d]", str, search, *nb_del);
 			return (true);
 		}
 		str[i] = c;
 		i++;
 	}
 	*nb_del = 0;
+	log_info("str [%s] | search [%s] | nb_del [%d]", str, search, *nb_del);
 	return (false);
 }
 
@@ -265,14 +268,14 @@ bool			bsearch_str(char *str, char *search, int *nb_del)
 	char	c;
 
 	i = ft_strlen(str);
-	while (str[i])
+	while (i >= 0)
 	{
 		c = str[i];
 		str[i] = 0;
-		if (matches(str + i, search, 0))
+		if (matches(str, search, 0))
 		{
 			str[i] = c;
-			*nb_del = ft_strlen(str) - i;
+			*nb_del = i;
 			return (true);
 		}
 		str[i] = c;
@@ -286,6 +289,8 @@ bool			bsearch_rev_str(char *str, char *search, int *nb_del)
 {
 	int		i;
 
+	if (!str)
+		return (false);
 	i = 0;
 	while (str[i])
 	{
@@ -304,6 +309,8 @@ bool			lsearch_rev_str(char *str, char *search, int *nb_del)
 {
 	int		i;
 
+	if (!str)
+		return (false);
 	i = ft_strlen(str);
 	while (i >= 0)
 	{
@@ -317,7 +324,8 @@ bool			lsearch_rev_str(char *str, char *search, int *nb_del)
 	*nb_del = 0;
 	return (false);
 }
-char 			*pattern_matching(char *cursor, char *zone)
+
+char 			*rev_pattern_matching(char *cursor, char *zone, int mode)
 {
 	log_warn("------------ pattern_matching ---------------------\n");
 	char	*var_name;
@@ -331,14 +339,44 @@ char 			*pattern_matching(char *cursor, char *zone)
 	var_name = get_var_exp(cursor);
 	cmp = check_second_exp_var(zone);
 	env_value = ft_strdup(get_env_value(var_name));
-	status = lsearch_rev_str(env_value, cmp, &nb_del);
-	log_warn("cmp : [%s] | env_value [%s] | status [%d]", cmp,env_value, status);
+	if (mode)
+		status = lsearch_rev_str(env_value, cmp, &nb_del);
+	else
+		status = bsearch_rev_str(env_value, (cmp + 1), &nb_del);
 	if (status)
 		env_value[ft_strlen(env_value) - nb_del] = '\0';
+	log_warn("cmp : [%s] | env_value [%s] | status [%d]", cmp,env_value, status);
 	ft_strdel(&cmp);
 	ft_strdel(&var_name);
 	return (env_value);
 }
+
+char 			*pattern_matching(char *cursor, char *zone, int mode)
+{
+	log_warn("------------ pattern_matching ---------------------\n");
+	char	*var_name;
+	char	*env_value;
+	char	*cmp;
+	int		nb_del;
+	bool	status;
+
+	cursor++;
+	status = false;
+	var_name = get_var_exp(cursor);
+	cmp = check_second_exp_var(zone);
+	env_value = ft_strdup(get_env_value(var_name));
+	if (mode)
+		status = lsearch_str(env_value, cmp, &nb_del);
+	else
+		status = bsearch_str(env_value, (cmp + 1), &nb_del);
+	if (status)
+		ft_strcpy(env_value, env_value + nb_del);
+	log_warn("cmp : [%s] | env_value [%s] | status [%d]", cmp,env_value, status);
+	ft_strdel(&cmp);
+	ft_strdel(&var_name);
+	return (env_value);
+}
+
 
 char			*select_exp(char *cursor, char *tmp)
 {
@@ -357,12 +395,13 @@ char			*select_exp(char *cursor, char *tmp)
 		if (previous_char == ':' && (*tmp) == '+')
 			return (sub_word_if_not_null(cursor, tmp));
 		if (ft_strncmp(tmp, "%%", 2) == 0)
-		{
-			log_fatal("ft_strncmp(tmp, \"%%\", 2)");
-			return (NULL);
-		}
+			return (rev_pattern_matching(cursor, tmp, 0));
 		else if ((*tmp) == '%')
-			return (pattern_matching(cursor, tmp));
+			return (rev_pattern_matching(cursor, tmp, 1));
+		if (ft_strncmp(tmp, "##", 2) == 0)
+			return (pattern_matching(cursor, tmp, 0));
+		else if ((*tmp) == '#')
+			return (pattern_matching(cursor, tmp, 1));
 		tmp++;
 	}
 	return (classic_sub(cursor));

@@ -1,1 +1,11 @@
 change test_parameter() -->  br_print
+
+var="amanuensis"
+
+${var%word} - cut shortest match from end
+echo ${var%n*}
+amanue
+
+${var%%word} - cut longest match from end
+echo ${var%%n*}
+ama
