@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/20 15:11:09 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/01 20:38:50 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/02 17:07:36 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,12 @@ int				spawn_in_pipe(t_cmd_tab *cmd)
 	return (execve_wrap(cmd));
 }
 
-int				exec_candidate(t_cmd_tab *cmd)
+int				exec_candidate(t_cmd_tab *cmd, int prexec_ret)
 {
 	if ((!(cmd->full_path) && (!cmd->redir_lst))
 		&& !((cmd->av[0]) && (ft_cisin(cmd->av[0], '/'))))
+		return (0);
+	if ((prexec_ret == BUILTIN) || (prexec_ret == BUILTIN_FAIL))
 		return (0);
 	return (1);
 }
@@ -63,9 +65,9 @@ int				launch_command(t_cmd_tab *cmd, t_job *job)
 
 	if ((ret = pre_execution(cmd)) == MEMERR)
 		return (MEMERR);
-	else if (ret == BUILTIN_FAIL)
-		return (0);
-	if ((ret != BUILTIN) && exec_candidate(cmd))
+/*	else if (ret == BUILTIN_FAIL)
+		return (0);*/
+	if (exec_candidate(cmd, ret))
 	{
 		pid = fork();
 		if (pid == -1)
