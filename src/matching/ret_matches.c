@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 19:02:05 by tduval            #+#    #+#             */
-/*   Updated: 2019/06/29 17:37:21 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/02 12:04:26 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ char			**ret_matches(char *pattern)
 	}
 	return (final_step(lst, layer, origin));
 }
-/*
+
 int				main(int ac, char **av)
 {
 	char	**test;
