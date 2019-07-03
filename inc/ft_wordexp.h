@@ -46,5 +46,5 @@ char	*ft_next_field(char *value, char *ifs);
 int		get_ifs(char **ifs);
 void	delete_varname(char *cursor);
 void	replace_token(t_token **wd, t_token *wd_2, t_token *ir, char **cursor);
-
+char	*quote_str(char *str);
 #endif

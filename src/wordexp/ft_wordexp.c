@@ -60,6 +60,23 @@ static int extract_fields(t_token *word, char **fields)
 	return (0);
 }
 
+int			quote_fields(char **fields)
+{
+	int i;
+	char *tmp;
+
+	i = 0;
+	while (fields[i])
+	{
+		if (!(tmp = quote_str(fields[i])))
+			return (MEMERR);
+		free(fields[i]);
+		fields[i] = tmp;
+		i++;
+	}
+	return (0);
+}
+
 int			filename_expansion(t_token *word, t_bool is_redir)
 {
 	char **fields;
@@ -70,8 +87,16 @@ int			filename_expansion(t_token *word, t_bool is_redir)
 		return (0);
 	if (!(fields = ret_matches(word->data.str)))
 		return (MEMERR);
+	if (ft_strequ(word->data.str, *fields))
+	{
+		free_tab(fields);
+		return (0);
+	}
+	if (quote_fields(fields) == MEMERR)
+		return (MEMERR);
 	free(word->data.str);
 	word->data.str = *fields;
+	word->data.len = ft_strlen(*fields);
 	if ((*(fields + 1)))
 	{
 		if (extract_fields(word, fields + 1) == MEMERR)

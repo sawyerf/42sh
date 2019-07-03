@@ -39,7 +39,7 @@ static size_t	quote_str_len(char *str)
 	return (count);
 }
 
-static char		*quote_str(char *str)
+char		*quote_str(char *str)
 {
 	size_t	count;
 	int		j;

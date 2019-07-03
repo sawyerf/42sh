@@ -36,9 +36,9 @@ char		*remove_bs(char *pattern)
 	i = 0;
 	while (pattern[i])
 	{
-		if (pattern[i] == '\\')
-			ft_strremoveat(pattern, i);
-		if (pattern[i])
+//		if (pattern[i] == '\\')
+//			ft_strremoveat(pattern, i);
+//		if (pattern[i])
 			i++;
 	}
 	return (pattern);
