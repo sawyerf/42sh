@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/02 19:11:15 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/07/03 13:40:15 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char			*check_second_exp_var(char *zone)
 
 	var_name = NULL;
 	if (ft_strlen(zone) > 2)
-		var_name = ft_strsub(zone, 1, (ft_strlen(zone) - 2));
+		var_name = ft_strsub(zone, 1, ft_strchr(zone, '}') - zone - 1);
 	return (var_name);
 }
 
