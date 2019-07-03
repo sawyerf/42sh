@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/03 13:40:15 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/07/03 15:01:13 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ char			*assign_sub_var(char *var_name, char *zone)
 // ${#parameter}
 char			*substitute_by_len(char *cursor)
 {
+	log_info("--------------> substitute_by_len");
 	char	*var_name;
 	char	*env_value;
 	char	*result;
@@ -117,7 +118,10 @@ char			*substitute_by_len(char *cursor)
 	result = NULL;
 	var_name = get_var_exp(cursor);
 	env_value = ft_strdup(get_env_value(var_name));
-	result = ft_itoa(ft_strlen(env_value));
+	if (ft_strequ(var_name, "#"))
+		result = ft_itoa(1);
+	else
+		result = ft_itoa(ft_strlen(env_value));
 	if (var_name)
 		ft_strdel(&var_name);
 	if (env_value)
@@ -165,6 +169,7 @@ char			*assign_word_if_null(char *cursor, char *zone)
 
 char			*classic_sub(char *cursor)
 {
+	log_warn("-------------------- classic_sub -------------------");
 	char		*env_var;
 	char		*env_value;
 	const char	*empty_str = "";
@@ -181,6 +186,7 @@ char			*classic_sub(char *cursor)
 		if (env_value && *env_value)
 			return (env_value);
 	}
+	log_warn("cursor [%s]", cursor);
 	return ((char*)empty_str);
 }
 
@@ -234,7 +240,6 @@ char			*sub_word_if_not_null(char *cursor, char *zone)
 	ft_strdel(&word);
 	return (NULL);
 }
-
 
 bool			lsearch_str(char *str, char *search, int *nb_del)
 {
@@ -413,6 +418,7 @@ char			*select_exp(char *cursor, char *tmp)
 
 char			*exp_sup(char *cursor, bool classic_substitute)
 {
+	log_info("-------------->  exp_sup");
 	char	previous_char;
 	char	*tmp;
 	char	*result;
@@ -430,6 +436,7 @@ char			*exp_sup(char *cursor, bool classic_substitute)
 
 char			*build_param(char *cursor)
 {
+	log_info("---------------> build_param");
 	const char	*empty_str = "";
 	char		*value;
 	bool		classic_substitute;

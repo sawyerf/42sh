@@ -1,1 +1,1 @@
-echo ${var%%n}
+echo ${var%n}

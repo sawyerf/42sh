@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/03 13:09:18 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/07/03 14:56:27 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int	valid_sup_exp(char c)
 
 int	handle_param_exp(t_lexer *lx_st)
 {
+	log_info("---------------> handle_param_exp");
 	if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 		return (MEMERR);
 	if (*(lx_st->cursor) == '{')
@@ -99,6 +100,7 @@ int	handle_param_exp(t_lexer *lx_st)
 
 int	handle_common(t_lexer *lx_st)
 {
+	log_info("------------------- > handle_common");
 	int ret;
 
 	while (*(lx_st->cursor))
