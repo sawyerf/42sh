@@ -117,8 +117,6 @@ int			ft_wordexp(t_token *word, t_bool is_redir)
 	save = word->next;
 	if (handle_exp_param(word, is_redir) == MEMERR)
 		return (MEMERR);
-/*	this is broken because the function final_step removes backslashes, wich is quote_removal's job.
- */
 	if (filename_expansion(word, is_redir) == MEMERR)
 		return (MEMERR);
 	if (quote_removal(word) == MEMERR)

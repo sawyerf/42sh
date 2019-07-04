@@ -111,6 +111,31 @@ int	handle_param_exp(t_lexer *lx_st)
 	return (0);
 }
 
+int	handle_common_inner(t_lexer *lx_st)
+{
+	int ret;
+
+	if (*(lx_st->cursor) == '$')
+	{
+		if ((ret = handle_param_exp(lx_st)))
+			return (ret);
+	}
+	else if (*(lx_st->cursor) == '\\')
+	{
+		if ((ret = handle_backslash(lx_st)))
+			return (ret);
+	}
+	else if (*(lx_st->cursor) == '!')
+	{
+		if ((ret = handle_bang(lx_st)))
+			return (ret);
+	}
+	else
+		return (0);
+	return (-1);
+}
+
+
 int	handle_common(t_lexer *lx_st)
 {
 	int ret;
@@ -121,17 +146,13 @@ int	handle_common(t_lexer *lx_st)
 			return (ret);
 		else if ((*(lx_st->cursor) == '\'') && ((ret = handle_squote(lx_st))))
 			return (ret);
-		else if (*(lx_st->cursor) == '$')
+		else if ((ret = handle_common_inner(lx_st)))
 		{
-			if ((ret = handle_param_exp(lx_st)))
-				return (ret);
+			if (ret == -1)
+				continue;
+			return (ret);
 		}
-		else if (*(lx_st->cursor) == '\\')
-		{
-			if ((ret = handle_backslash(lx_st)))
-				return (ret);
-		}
-		else if ((ft_cisin("\n\t& |><;!", *(lx_st->cursor)))
+		else if ((ft_cisin("\n\t& |><;", *(lx_st->cursor)))
 			|| (!*lx_st->cursor))
 			break ;
 		else if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
