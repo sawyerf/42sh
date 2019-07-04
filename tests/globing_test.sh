@@ -13,26 +13,26 @@
 #echo [*; echo *[x; echo [x/*
 #rm -rf *
 #touch 'a[a-z][x' 'ab[x'
-#~/scriptest.sh a[a-z][*; echo a[a-z]*; echo a[a\-z]*
+#~/globing_script.sh a[a-z][*; echo a[a-z]*; echo a[a\-z]*
 #rm -f *
 #touch ".bc" "abc" "bbc" "cbc" "-bc" '!bc' "+bc" ",bc" "0bc" "1bc"
-#~/scriptest.sh '[ab-]*'
-#~/scriptest.sh '[-ab]*'
-#~/scriptest.sh '[!-ab]*'
-#~/scriptest.sh '[!ab]*'
-#~/scriptest.sh '[]ab]*'
-#~/scriptest.sh '[+--]*'
-#~/scriptest.sh '[--1]*'
-#~/scriptest.sh '[z-a]*'
-#~/scriptest.sh '[a-a]bc'
+#~/globing_script.sh '[ab-]*'
+#~/globing_script.sh '[-ab]*'
+#~/globing_script.sh '[!-ab]*'
+#~/globing_script.sh '[!ab]*'
+#~/globing_script.sh '[]ab]*'
+#~/globing_script.sh '[+--]*'
+#~/globing_script.sh '[--1]*'
+#~/globing_script.sh '[z-a]*'
+#~/globing_script.sh '[a-a]bc'
 #rm -f * .*; ls -A
 #touch aa bb cc 11 22 33
-~/scriptest.sh '**'
-~/scriptest.sh '[!a-z]'
-~/scriptest.sh '[4-z][A-b]'
-~/scriptest.sh '/*/*'
-~/scriptest.sh '/.*/'
-~/scriptest.sh '/*/*[a]*'
-~/scriptest.sh '/[!A-Z]*/*'
-~/scriptest.sh '/??*'
-~/scriptest.sh '../../../*/*[A-z]*/'
+~/globing_script.sh '**'
+~/globing_script.sh '[!a-z]'
+~/globing_script.sh '[4-z][A-b]'
+~/globing_script.sh '/*/*'
+~/globing_script.sh '/.*/'
+~/globing_script.sh '/*/*[a]*'
+~/globing_script.sh '/[!A-Z]*/*'
+~/globing_script.sh '/??*'
+~/globing_script.sh '../../../*/*[A-z]*/'
