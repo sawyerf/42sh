@@ -56,5 +56,6 @@ t_token	*ft_tokenizer(char *line);
 int		ft_tokenizer_2(char *line, t_token **head);
 int		rev_lex(char *line, t_token **head);
 int		handle_bang(t_lexer *lx_st);
+int		handle_common_inner(t_lexer *lx_st);
 
 #endif

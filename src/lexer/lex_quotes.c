@@ -58,6 +58,37 @@ int	handle_dquote(t_lexer *lx_st)
 		if (*(lx_st->cursor) == '"')
 			return (str_putc(&(lx_st->cursor), &(lx_st->token->data))
 				== MEMERR) ? MEMERR : handle_common(lx_st);
+		else if ((ret = handle_common_inner(lx_st)))
+		{
+			if (ret == -1)
+				continue ;
+			return (ret);
+		}
+		else if (*(lx_st->cursor) == '\0')
+		{
+			if ((ret = request_new_line(lx_st)))
+				return (ret);
+		}
+		else if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
+			return (MEMERR);
+	}
+	return (ENDOFINPUT);
+}
+
+
+
+/*
+int	handle_dquote(t_lexer *lx_st)
+{
+	int ret;
+
+	if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
+		return (MEMERR);
+	while (42)
+	{
+		if (*(lx_st->cursor) == '"')
+			return (str_putc(&(lx_st->cursor), &(lx_st->token->data))
+				== MEMERR) ? MEMERR : handle_common(lx_st);
 		else if ((*(lx_st->cursor) == '\\') && (*((lx_st->cursor) + 1)))
 		{
 			if ((ret = handle_backslash(lx_st)))
@@ -78,7 +109,7 @@ int	handle_dquote(t_lexer *lx_st)
 	}
 	return (ENDOFINPUT);
 }
-
+*/
 int	handle_squote(t_lexer *lx_st)
 {
 	int ret;
