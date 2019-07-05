@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/12 18:02:15 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/07/05 15:38:34 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,15 @@ int	handle_digit(t_lexer *lx_st)
 int	valid_sup_exp(char c)
 {
 	if ((c == '_') || (ft_isalnum(c)) || c == ':' || c == '-' || c == '='
-	|| c == '?' || c == '+' || c == '#' || c == '%' || c == '/' || c == '['
-	|| c == ']' || c == '*' || c == '!'  || c == '.')
+		|| c == '?' || c == '+' || c == '#' || c == '%' || c == '/' || c == '['
+		|| c == ']' || c == '*' || c == '!' || c == '.')
 		return (1);
 	return (0);
 }
 
-
 int	special_params(char c)
 {
-	if ((c == '?') || (c == '$') || (c == '#')  || (c == '!') || (c == '-')
+	if ((c == '?') || (c == '$') || (c == '#') || (c == '!') || (c == '-')
 		|| (c == '@'))
 		return (1);
 	return (0);
@@ -80,9 +79,11 @@ int	special_params(char c)
 int	brackets_param(t_lexer *lx_st)
 {
 	if ((*(lx_st->cursor) == 0) || (*(lx_st->cursor) == '}')
-		|| ((!special_params(*(lx_st->cursor))) && (!valid_env_char(*(lx_st->cursor)))))
+		|| ((!special_params(*(lx_st->cursor)))
+		&& (!valid_env_char(*(lx_st->cursor)))))
 		return (BAD_SUB);
-	while ((valid_sup_exp(*(lx_st->cursor))) || (special_params(*(lx_st->cursor))))
+	while ((valid_sup_exp(*(lx_st->cursor)))
+		|| (special_params(*(lx_st->cursor))))
 	{
 		if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 			return (MEMERR);
@@ -90,7 +91,7 @@ int	brackets_param(t_lexer *lx_st)
 	if (*(lx_st->cursor) != '}')
 		return (BAD_SUB);
 	if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
-		return (MEMERR);	
+		return (MEMERR);
 	return (0);
 }
 
@@ -116,21 +117,13 @@ int	handle_common_inner(t_lexer *lx_st)
 {
 	int ret;
 
+	ret = -1;
 	if (*(lx_st->cursor) == '$')
-	{
-		if ((ret = handle_param_exp(lx_st)))
-			return (ret);
-	}
+		ret = handle_param_exp(lx_st);
 	else if (*(lx_st->cursor) == '\\')
-	{
-		if ((ret = handle_backslash(lx_st)))
-			return (ret);
-	}
+		ret = handle_backslash(lx_st);
 	else if (*(lx_st->cursor) == '!')
-	{
-		if ((ret = handle_bang(lx_st)))
-			return (ret);
-	}
+		ret = handle_bang(lx_st);
 	else if (!ft_strncmp(lx_st->cursor, "[!", 2))
 	{
 		if ((str_putc(&(lx_st->cursor), &(lx_st->token->data)))
@@ -139,9 +132,10 @@ int	handle_common_inner(t_lexer *lx_st)
 	}
 	else
 		return (0);
-	return (-1);
+	if (!ret)
+		return (-1);
+	return (ret);
 }
-
 
 int	handle_common(t_lexer *lx_st)
 {

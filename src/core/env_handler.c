@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 22:17:22 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/27 19:50:42 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/05 13:10:20 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,15 @@ int		valid_env_name(char *str)
 
 char	*bang_expansion(void)
 {
-	
 	if (g_sh.lastback)
 		return (ft_itoa(g_sh.lastback));
 	return (NULL);
 }
-/* we mix up malloc errors with variable that are undefined
- */
+
+/*
+** we mix up malloc errors with variable that are undefined
+*/
+
 char	*dget_env_value(char *name)
 {
 	if (!ft_strncmp("?", name, 1))

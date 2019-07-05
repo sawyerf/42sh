@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 21:23:31 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/20 16:23:21 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/05 15:30:36 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,18 @@
 
 int	handle_backslash(t_lexer *lx_st)
 {
-	int ret;
+	int		ret;
+	char	c[1];
 
 	if (*(lx_st->cursor + 1) == 0)
 		return (str_putc(&(lx_st->cursor), &(lx_st->token->data)));
-	if (*(lx_st->cursor + 1) == 'n')
+	if (ft_cisin("nrt", *(lx_st->cursor + 1)))
 	{
+		*c = (*(lx_st->cursor + 1) == 'n') ? '\n' : 0;
+		*c = (*(lx_st->cursor + 1) == 't') ? '\t' : *c;
+		*c = (*(lx_st->cursor + 1) == 'r') ? '\r' : *c;
 		lx_st->cursor += 2;
-		return (str_putnstr("\n", &lx_st->token->data, 1));
-	}
-	if (*(lx_st->cursor + 1) == 'r')
-	{
-		lx_st->cursor += 2;
-		return (str_putnstr("\r", &lx_st->token->data, 1));
-	}
-	if (*(lx_st->cursor + 1) == 't')
-	{
-		lx_st->cursor += 2;
-		return (str_putnstr("\t", &lx_st->token->data, 1));
+		return (str_putnstr(c, &lx_st->token->data, 1));
 	}
 	if (*(lx_st->cursor + 1) == '\n')
 		lx_st->cursor = lx_st->cursor + 2;
@@ -49,7 +43,7 @@ int	handle_backslash(t_lexer *lx_st)
 
 int	handle_dquote(t_lexer *lx_st)
 {
-	int ret;
+	int	ret;
 
 	if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 		return (MEMERR);
@@ -75,41 +69,6 @@ int	handle_dquote(t_lexer *lx_st)
 	return (ENDOFINPUT);
 }
 
-
-
-/*
-int	handle_dquote(t_lexer *lx_st)
-{
-	int ret;
-
-	if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
-		return (MEMERR);
-	while (42)
-	{
-		if (*(lx_st->cursor) == '"')
-			return (str_putc(&(lx_st->cursor), &(lx_st->token->data))
-				== MEMERR) ? MEMERR : handle_common(lx_st);
-		else if ((*(lx_st->cursor) == '\\') && (*((lx_st->cursor) + 1)))
-		{
-			if ((ret = handle_backslash(lx_st)))
-				return (ret);
-		}
-		else if (*(lx_st->cursor) == '!')
-		{
-			if ((ret = handle_bang(lx_st)))
-				return (ret);
-		}
-		else if (*(lx_st->cursor) == '\0')
-		{
-			if ((ret = request_new_line(lx_st)))
-				return (ret);
-		}
-		else if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
-			return (MEMERR);
-	}
-	return (ENDOFINPUT);
-}
-*/
 int	handle_squote(t_lexer *lx_st)
 {
 	int ret;

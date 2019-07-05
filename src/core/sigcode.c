@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sigcode.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/05 15:21:16 by apeyret           #+#    #+#             */
+/*   Updated: 2019/07/05 15:21:42 by apeyret          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "sh_core.h"
 
 t_sig	g_sig[] =\
@@ -36,7 +48,7 @@ char	*get_termsig(int signum)
 			return (g_sig[i].sigstr);
 		i++;
 	}
-	return("Unknown termination signal");
+	return ("Unknown termination signal");
 }
 
 void	print_sigexit(t_job *job)

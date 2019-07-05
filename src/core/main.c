@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/05 12:56:30 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/05 15:20:58 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,6 @@
 
 t_sh			g_sh;
 extern t_list	*g_thash[];
-
-/*
-void		*malloc(size_t i)
-{
-	unsigned int r = rand();
-	unsigned int y = rand();
-	static int t = 0;
-
-	t++;
-	ft_putnbr(t);
-	ft_putchar('\n');
-	if (!(r % y))
-	{
-		ft_putstr("malloc fail\n");
-		return (NULL);
-	}
-	return (valloc(i));
-}
-*/
 
 static int	init_shell(char **env, t_read_fn *read_fn, char **av)
 {
@@ -51,15 +32,14 @@ static int	init_shell(char **env, t_read_fn *read_fn, char **av)
 		|| dup2(STDOUT_FILENO, FDSAVEOUT) == -1
 		|| dup2(STDERR_FILENO, FDSAVEERR) == -1
 		|| ht_init()
-	 	|| ht_refreshall(get_env_value("PATH")) == MEMERR)
+		|| ht_refreshall(get_env_value("PATH")) == MEMERR)
 		return (-1);
 	hstread(g_sh.env);
 	*read_fn = sh_readfile;
 	if (g_sh.mode == INTERACTIVE)
 		*read_fn = readline;
 	if ((g_sh.mode == INTERACTIVE) && (init_jobctl() == SH_ABORT))
-		;
-//		return (SH_ABORT); temporary for lldb
+		return (SH_ABORT);
 	return (0);
 }
 
@@ -72,7 +52,7 @@ void		global_del(void)
 	ft_tabdel(&g_sh.env);
 }
 
-int	exit_jobs(void)
+int			exit_jobs(void)
 {
 	if ((g_sh.job_lst) && (!g_sh.exit_jobs))
 	{
@@ -101,9 +81,6 @@ void		shrc(void)
 
 int			main(int ac, char **av, char **env)
 {
-// // LOGGER   ---------------------------------------------------------------
-	logger_init(D_TRACE, "out.log");
-// // LOGGER   ---------------------------------------------------------------
 	char		*line;
 	int			ret;
 	t_read_fn	read_fn;
@@ -116,7 +93,6 @@ int			main(int ac, char **av, char **env)
 		return (MEMERR);
 	}
 	shrc();
-
 	while (42)
 	{
 		clean_jobs();
@@ -132,15 +108,12 @@ int			main(int ac, char **av, char **env)
 		if (ret == MEMERR)
 		{
 			ft_dprintf(STDERR_FILENO, "42sh: memory failure\n");
-			global_del();
-			return (MEMERR);
+			g_sh.status = MEMERR;
+			break ;
 		}
 		if (g_sh.exit_jobs > 0)
 			g_sh.exit_jobs = g_sh.exit_jobs - 1;
 	}
 	global_del();
 	return (g_sh.status);
-// // LOGGER   ---------------------------------------------------------------
-	logger_close();
-// // LOGGER   ---------------------------------------------------------------
 }

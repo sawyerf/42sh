@@ -6,7 +6,7 @@
 /*   By: apeyret <apeyret@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/29 21:55:42 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/24 17:57:53 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/05 13:11:20 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int		csetenv(char ***env, char *var)
 int		envaddint(char ***env, char *var, int value)
 {
 	char	*add;
-	int		ret; // why?
+	int		ret;
 
 	add = NULL;
 	if (!(add = ft_zprintf("%s=%d", var, value)))
@@ -78,7 +78,6 @@ int		envaddint(char ***env, char *var, int value)
 
 int		envaddstr(char ***env, char *var, char *value)
 {
-	log_info("ENV__ADD var : [%s] | value : [%s]", var, value);
 	char		*add;
 
 	if (!value)

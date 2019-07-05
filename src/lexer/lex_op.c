@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 21:25:01 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/29 17:02:28 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/05 15:39:08 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	handle_ampersand(t_lexer *lx_st)
 		lx_st->token->type = AMPERS;
 	return (0);
 }
+
 int	handle_great(t_lexer *lx_st)
 {
 	if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)

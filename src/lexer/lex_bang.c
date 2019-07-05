@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 18:18:48 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/20 16:34:30 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/05 15:41:28 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*desactivate_bang(char *s)
 				{
 					str_putc(&s, &str);
 					s++;
-					break;
+					break ;
 				}
 			}
 		}
@@ -78,12 +78,13 @@ int		simple_bang(t_lexer *lx_st)
 	char	*line;
 	int		curs;
 	t_list	*lst;
-	
+
 	lst = g_hst[0];
 	if (!lst)
 		return (BANG_NF);
 	curs = lx_st->cursor - lx_st->line;
-	if (!(line = bangjoin(lx_st->line, curs, (char*)lst->content, lx_st->cursor + 2)))
+	if (!(line = bangjoin(lx_st->line, curs,
+		(char*)lst->content, lx_st->cursor + 2)))
 		return (MEMERR);
 	ft_strdel(&lx_st->line);
 	lx_st->line = line;
@@ -110,6 +111,7 @@ int		lenint(char *s)
 		return (0);
 	return (i + min);
 }
+
 char	*getbang(t_lexer *lx_st)
 {
 	char	*s;
@@ -128,7 +130,7 @@ char	*getbang(t_lexer *lx_st)
 	while (*s)
 	{
 		if (ft_cisin(" \t\n", *s) || (*s == d && d == '"'))
-			break;
+			break ;
 		i++;
 		s++;
 	}
@@ -147,14 +149,16 @@ int		word_bang(t_lexer *lx_st)
 	if (!(s = getbang(lx_st)))
 		return (MEMERR);
 	i = ft_strlen(s);
-	if (!(lst = g_hst[0]) || !(lst = hst_getcmp(lst, s)))
+	if (!(lst = g_hst[0])
+		|| !(lst = hst_getcmp(lst, s)))
 	{
 		ft_strdel(&s);
 		return (BANG_NF);
 	}
 	ft_strdel(&s);
 	curs = lx_st->cursor - lx_st->line;
-	if (!(s = bangjoin(lx_st->line, curs, (char*)lst->content, lx_st->cursor + i + 1)))
+	if (!(s = bangjoin(lx_st->line, curs,
+		(char*)lst->content, lx_st->cursor + i + 1)))
 		return (MEMERR);
 	ft_strdel(&lx_st->line);
 	lx_st->line = s;
@@ -162,7 +166,7 @@ int		word_bang(t_lexer *lx_st)
 	return (0);
 }
 
-int	handle_bang(t_lexer *lx_st)
+int		handle_bang(t_lexer *lx_st)
 {
 	int ret;
 
