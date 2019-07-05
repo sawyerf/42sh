@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 22:23:00 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/27 19:52:37 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/05 12:49:08 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ char				**ft_splitblanks(char const *s);
 int					ft_isblank(char c);
 char				*ft_strlower(char *s);
 char				*ft_strndup(const char *s, int len);
-void				ft_strrev(char *str);
+char				*ft_strrev(char *str);
 int					ft_utoa_base(uintmax_t nbr, int base, char *str, int rev);
 int					ft_inner_itoa(intmax_t nbr, int base, char *str);
 int					ft_itoa_base(intmax_t nbr, int base, char *str, int rev);

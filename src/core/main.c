@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/02 10:58:45 by tduval           ###   ########.fr       */
+/*   Updated: 2019/07/05 12:49:48 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ static int	init_shell(char **env, t_read_fn *read_fn, char **av)
 		*read_fn = readline;
 	if ((g_sh.mode == INTERACTIVE) && (init_jobctl() == SH_ABORT))
 //		return (SH_ABORT); temporary for lldb
-		return (0);
 	return (0);
 
 }
@@ -102,6 +101,9 @@ void		shrc(void)
 
 int			main(int ac, char **av, char **env)
 {
+// // LOGGER   ---------------------------------------------------------------
+	logger_init(D_TRACE, "out.log");
+// // LOGGER   ---------------------------------------------------------------
 	char		*line;
 	int			ret;
 	t_read_fn	read_fn;
@@ -114,7 +116,7 @@ int			main(int ac, char **av, char **env)
 		return (MEMERR);
 	}
 	shrc();
-	logger_init(D_TRACE, "out.log");
+
 	while (42)
 	{
 		clean_jobs();
@@ -140,4 +142,5 @@ int			main(int ac, char **av, char **env)
 	return (g_sh.status);
 // // LOGGER   ---------------------------------------------------------------
 	logger_close();
+// // LOGGER   ---------------------------------------------------------------
 }

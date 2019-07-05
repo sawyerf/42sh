@@ -6,11 +6,12 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/02 19:27:20 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/05 12:52:12 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_wordexp.h"
+#include "ft_patmatch.h"
 
 void		print_array(char **array)
 {
@@ -72,7 +73,7 @@ char			*check_second_exp_var(char *zone)
 
 	var_name = NULL;
 	if (ft_strlen(zone) > 2)
-		var_name = ft_strsub(zone, 1, (ft_strlen(zone) - 2));
+		var_name = ft_strsub(zone, 1, ft_strchr(zone, '}') - zone - 1);
 	return (var_name);
 }
 
@@ -106,6 +107,7 @@ char			*assign_sub_var(char *var_name, char *zone)
 // ${#parameter}
 char			*substitute_by_len(char *cursor)
 {
+	log_info("--------------> substitute_by_len");
 	char	*var_name;
 	char	*env_value;
 	char	*result;
@@ -114,7 +116,10 @@ char			*substitute_by_len(char *cursor)
 	result = NULL;
 	var_name = get_var_exp(cursor);
 	env_value = ft_strdup(get_env_value(var_name));
-	result = ft_itoa(ft_strlen(env_value));
+	if (ft_strequ(var_name, "#"))
+		result = ft_itoa(1);
+	else
+		result = ft_itoa(ft_strlen(env_value));
 	if (var_name)
 		ft_strdel(&var_name);
 	if (env_value)
@@ -162,6 +167,7 @@ char			*assign_word_if_null(char *cursor, char *zone)
 
 char			*classic_sub(char *cursor)
 {
+	log_warn("-------------------- classic_sub -------------------");
 	char		*env_var;
 	char		*env_value;
 
@@ -230,32 +236,102 @@ char			*sub_word_if_not_null(char *cursor, char *zone)
 	return (NULL);
 }
 
-bool			search_rev_str(char *str, char *search, int *nb_del)
+bool			lsearch_str(char *str, char *search, int *nb_del)
 {
 	int		i;
-	int		len;
-	bool	flag;
-	int		str_len;
+	char	c;
 
-	flag = false;
-	i = ft_strlen(str);
-	len = ft_strlen(search);
-	str_len = i;
-	while (len > 0)
+	i = 0;
+	if (!str)
+		return (false);
+	while (str[i])
 	{
-		if (search[len] == str[i])
-			flag = true;
-		else
-			return (NULL);
-		len--;
-		i--;
+		c = str[i];
+		str[i] = 0;
+		if (matches(str, search, 0))
+		{
+			str[i] = c;
+			*nb_del = i;
+			log_info("str [%s] | search [%s] | nb_del [%d]", str, search, *nb_del);
+			return (true);
+		}
+		str[i] = c;
+		i++;
 	}
-	*nb_del = (str_len - i);
-	return (flag);
+	*nb_del = 0;
+	log_info("str [%s] | search [%s] | nb_del [%d]", str, search, *nb_del);
+	return (false);
 }
 
-char 			*pattern_matching(char *cursor, char *zone)
+bool			bsearch_str(char *str, char *search, int *nb_del)
 {
+	int		i;
+	char	c;
+
+	log_info("str [%s] search [%s]", str, search);
+	if (!str)
+		return (false);
+	i = ft_strlen(str);
+	while (i >= 0)
+	{
+		c = str[i];
+		str[i] = 0;
+		if (matches(str, search, 0))
+		{
+			str[i] = c;
+			*nb_del = i;
+			return (true);
+		}
+		str[i] = c;
+		i--;
+	}
+	*nb_del = 0;
+	return (false);
+}
+
+bool			bsearch_rev_str(char *str, char *search, int *nb_del)
+{
+	int		i;
+
+	if (!str)
+		return (false);
+	i = 0;
+	while (str[i])
+	{
+		if (matches(str + i, search, 0))
+		{
+			*nb_del = ft_strlen(str) - i;
+			return (true);
+		}
+		i++;
+	}
+	*nb_del = 0;
+	return (false);
+}
+
+bool			lsearch_rev_str(char *str, char *search, int *nb_del)
+{
+	int		i;
+
+	if (!str)
+		return (false);
+	i = ft_strlen(str);
+	while (i >= 0)
+	{
+		if (matches(str + i, search, 0))
+		{
+			*nb_del = ft_strlen(str) - i;
+			return (true);
+		}
+		i--;
+	}
+	*nb_del = 0;
+	return (false);
+}
+
+char 			*rev_pattern_matching(char *cursor, char *zone, int mode)
+{
+	log_warn("------------ pattern_matching ---------------------\n");
 	char	*var_name;
 	char	*env_value;
 	char	*cmp;
@@ -267,13 +343,44 @@ char 			*pattern_matching(char *cursor, char *zone)
 	var_name = get_var_exp(cursor);
 	cmp = check_second_exp_var(zone);
 	env_value = ft_strdup(get_env_value(var_name));
-	status = search_rev_str(env_value, cmp, &nb_del);
+	if (mode)
+		status = lsearch_rev_str(env_value, cmp, &nb_del);
+	else
+		status = bsearch_rev_str(env_value, (cmp + 1), &nb_del);
 	if (status)
 		env_value[ft_strlen(env_value) - nb_del] = '\0';
+	log_warn("cmp : [%s] | env_value [%s] | status [%d]", cmp,env_value, status);
 	ft_strdel(&cmp);
 	ft_strdel(&var_name);
 	return (env_value);
 }
+
+char 			*pattern_matching(char *cursor, char *zone, int mode)
+{
+	log_warn("------------ pattern_matching ---------------------\n");
+	char	*var_name;
+	char	*env_value;
+	char	*cmp;
+	int		nb_del;
+	bool	status;
+
+	cursor++;
+	status = false;
+	var_name = get_var_exp(cursor);
+	cmp = check_second_exp_var(zone);
+	env_value = ft_strdup(get_env_value(var_name));
+	if (mode)
+		status = lsearch_str(env_value, cmp, &nb_del);
+	else
+		status = bsearch_str(env_value, (cmp + 1), &nb_del);
+	if (status)
+		ft_strcpy(env_value, env_value + nb_del);
+	log_warn("cmp : [%s] | env_value [%s] | status [%d]", cmp,env_value, status);
+	ft_strdel(&cmp);
+	ft_strdel(&var_name);
+	return (env_value);
+}
+
 
 char			*select_exp(char *cursor, char *tmp)
 {
@@ -290,8 +397,14 @@ char			*select_exp(char *cursor, char *tmp)
 			return (test_parameter(cursor, tmp));
 		if (previous_char == ':' && (*tmp) == '+')
 			return (sub_word_if_not_null(cursor, tmp));
-		if ((*tmp) == '%')
-			return (pattern_matching(cursor, tmp));
+		if (ft_strncmp(tmp, "%%", 2) == 0)
+			return (rev_pattern_matching(cursor, tmp, 0));
+		else if ((*tmp) == '%')
+			return (rev_pattern_matching(cursor, tmp, 1));
+		if (ft_strncmp(tmp, "##", 2) == 0)
+			return (pattern_matching(cursor, tmp, 0));
+		else if ((*tmp) == '#')
+			return (pattern_matching(cursor, tmp, 1));
 		tmp++;
 	}
 	return (classic_sub(cursor));
@@ -299,6 +412,7 @@ char			*select_exp(char *cursor, char *tmp)
 
 char			*exp_sup(char *cursor, bool classic_substitute)
 {
+	log_info("-------------->  exp_sup");
 	char	previous_char;
 	char	*tmp;
 	char	*result;
@@ -316,6 +430,11 @@ char			*exp_sup(char *cursor, bool classic_substitute)
 
 char			*build_param(char *cursor)
 {
+<<<<<<< HEAD
+=======
+	log_info("---------------> build_param");
+	const char	*empty_str = "";
+>>>>>>> origin/merge_glob
 	char		*value;
 	char		*ret;
 	bool		classic_substitute;

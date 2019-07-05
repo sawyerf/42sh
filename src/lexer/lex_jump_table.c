@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/12 18:02:15 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/07/05 12:50:25 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ int	handle_digit(t_lexer *lx_st)
 int	valid_sup_exp(char c)
 {
 	if ((c == '_') || (ft_isalnum(c)) || c == ':' || c == '-' || c == '='
-	|| c == '?' || c == '+' || c == '#' || c == '%')
+	|| c == '?' || c == '+' || c == '#' || c == '%' || c == '/' || c == '['
+	|| c == ']'	|| c == '*' || c == '!' || c == '.')
 		return (1);
 	return (0);
 }
@@ -97,6 +98,7 @@ int	handle_param_exp(t_lexer *lx_st)
 {
 	int ret;
 
+	log_info("---------------> handle_param_exp");
 	if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 		return (MEMERR);
 	if (special_params(*(lx_st->cursor)))
@@ -138,6 +140,7 @@ int	handle_common_inner(t_lexer *lx_st)
 
 int	handle_common(t_lexer *lx_st)
 {
+	log_info("------------------- > handle_common");
 	int ret;
 
 	while (*(lx_st->cursor))
