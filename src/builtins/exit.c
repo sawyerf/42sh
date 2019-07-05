@@ -25,7 +25,7 @@ int		ft_exit(t_cmd_tab *cmd)
 				putstr_stderr("exit: too many arguments\n");
 			else
 				putstr_stderr("exit: numeric argument required\n");
-			return (0);
+			return (1);
 		}
 	}
 	global_del();
