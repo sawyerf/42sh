@@ -89,7 +89,7 @@ int				pathfinder(t_cmd_tab *cmd)
 	{
 		if (cmd->full_path)
 			ft_strdel(&(cmd->full_path));
-		br_print(ret, cmd);
+		cmd->exit_status = br_print(ret, cmd);
 		if (!cmd->redir_lst)
 			return (ret);
 	}
