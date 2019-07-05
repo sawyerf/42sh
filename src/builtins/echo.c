@@ -23,7 +23,12 @@ int	ft_echo(t_cmd_tab *cmd)
 			i = 2;
 		while (cmd->av[i] != NULL)
 		{
-			ft_printf("%s", cmd->av[i]);
+			if (write(STDOUT_FILENO, cmd->av[1],
+				ft_strlen(cmd->av[1])) == -1)
+			{
+				ft_dprintf(STDERR_FILENO, "42sh: echo: fd error\n");
+				return (1);
+			}
 			i++;
 			if (cmd->av[i] != NULL)
 				ft_printf(" ");
