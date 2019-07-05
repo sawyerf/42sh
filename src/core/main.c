@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/05 12:49:48 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/05 12:56:30 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ static int	init_shell(char **env, t_read_fn *read_fn, char **av)
 	if (g_sh.mode == INTERACTIVE)
 		*read_fn = readline;
 	if ((g_sh.mode == INTERACTIVE) && (init_jobctl() == SH_ABORT))
+		;
 //		return (SH_ABORT); temporary for lldb
 	return (0);
-
 }
 
 void		global_del(void)

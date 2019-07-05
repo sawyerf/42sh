@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/05 12:52:12 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/05 12:54:16 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -430,11 +430,6 @@ char			*exp_sup(char *cursor, bool classic_substitute)
 
 char			*build_param(char *cursor)
 {
-<<<<<<< HEAD
-=======
-	log_info("---------------> build_param");
-	const char	*empty_str = "";
->>>>>>> origin/merge_glob
 	char		*value;
 	char		*ret;
 	bool		classic_substitute;
