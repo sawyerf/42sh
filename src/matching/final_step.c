@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 19:01:48 by tduval            #+#    #+#             */
-/*   Updated: 2019/07/02 20:00:34 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/06 14:57:19 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,10 @@ char		**final_step(t_lfiles *lst, int layer, char *pattern)
 	int			i;
 	int			f;
 
-	f = pattern[ft_strlen(pattern) - 1] == '/' ? 1 : 0;
+	if (ft_strlen(pattern) > 1)
+		f = pattern[ft_strlen(pattern) - 1] == '/' ? 1 : 0;
+	else
+		f = pattern[0] == '/' ? 1 : 0;
 	lists[ORIGIN] = lst;
 	while (lst && lst->layer != layer)
 		lst = lst->next;
