@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 21:31:04 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/09 21:31:23 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/06 21:08:34 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_token	*new_token(int type)
 	if (!(new->data.str = ft_memalloc(INPUTSZ * sizeof(char))))
 		return (NULL);
 	new->data.size = INPUTSZ;
+	new->alias = NULL;
 	new->type = type;
 	return (new);
 }
@@ -59,6 +60,7 @@ void	free_token(t_token *token)
 		return ;
 	if (token->data.str)
 		free(token->data.str);
+	ft_tabdel(&(token->alias));
 	free(token);
 }
 

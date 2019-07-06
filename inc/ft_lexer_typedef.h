@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 15:48:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/29 18:52:47 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/07/06 21:03:56 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef	struct		s_token
 {
 	t_token_type	type;
 	t_str			data;
+	char			**alias;
 	struct s_token	*next;
 }					t_token;
 

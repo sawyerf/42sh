@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 17:31:28 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/06 17:35:01 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/06 21:06:02 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,26 @@ char	*get_alias(char *s, char **tab)
 	return (NULL);
 }
 
-static t_token *lex_alias(char *line)
+static t_token *lex_alias(char *line, char **tab)
 {
 	t_lexer lexer;
+	t_token	*tk;
 	int		save;
 
 	save = g_sh.mode;
 	g_sh.mode = NONINTERACTIVE;
 	ft_bzero(&lexer, sizeof(t_lexer));
 	init_lexer(line, &lexer);
-	/* activate non interactive mode ?*/
 	if (ft_lexer(&lexer))
 	{
 		g_sh.mode = save;
 		return (NULL);
+	}
+	tk = lexer.head;
+	while (tk)
+	{
+		tk->alias = ft_tabdup(tab);
+		tk = tk->next;
 	}
 	g_sh.mode = save;
 	return (lexer.head);
@@ -56,7 +62,8 @@ static void	overwrite_token(t_token *word, t_token *lxd)
 	t_token *iter;
 
 	save = word->next;
-	free(word->data.str);
+	ft_strdel(&word->data.str);
+	ft_tabdel(&word->alias);
 	ft_memcpy(word, lxd, sizeof(t_token));
 	iter = word;
 	while ((iter->next) && (iter->next->type != EOI))
@@ -64,6 +71,7 @@ static void	overwrite_token(t_token *word, t_token *lxd)
 	free_token(iter->next);
 	iter->next = save;
 	free(lxd);
+	lxd = NULL;
 }
 
 int handle_alias(t_token *word)
@@ -75,10 +83,12 @@ int handle_alias(t_token *word)
 
 	if (!(tab = ft_tabnew(1025)))
 		return (MEMERR);
+	if (word->alias)
+		ft_tabstrdup(tab, word->alias);
 	ret = 0;
 	while ((result = get_alias(word->data.str, tab)))
 	{
-		if (!(lxd = lex_alias(result)))
+		if (!(lxd = lex_alias(result, tab)))
 		{
 			ft_tabdel(&tab);
 			return (MEMERR);
