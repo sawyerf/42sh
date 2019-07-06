@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/02 19:27:49 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/18 14:01:19 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/06 17:08:24 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int		parser_takeopt(char *opt, char *arg, char *in, char *name)
 
 	i = 1;
 	c = 0;
+	if (!ft_strcmp(arg, "--"))
+		return ('-');
 	while (arg[i])
 	{
 		c = arg[i];

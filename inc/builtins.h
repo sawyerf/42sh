@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 13:46:10 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/26 13:41:08 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/06 16:28:10 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ typedef	struct			s_fc
 	char				*by;
 	char				*to;
 }						t_fc;
+
+typedef struct			s_pars
+{
+	char				opt[100];
+	char				**av;
+}						t_pars;
 
 typedef void	(*t_job_print)(t_job*);
 
@@ -87,5 +93,5 @@ int						export(t_cmd_tab *cmd);
 
 int						alias(t_cmd_tab *cmd);
 int						unalias(t_cmd_tab *cmd);
-int		valid_alias(char *s);
+int						valid_alias(char *s);
 #endif
