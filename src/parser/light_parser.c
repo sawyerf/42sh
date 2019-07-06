@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 14:58:34 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/09 21:07:10 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/06 20:24:55 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int			exp_tilde(t_autocomplete *acp)
 	acp->str = tmp.str;
 	return (0);
 }
-
+/*
 int			ft_light_parser(char *lin, t_autocomplete *autocomplete)
 {
 	t_token	*tokens;
@@ -112,3 +112,31 @@ int			ft_light_parser(char *lin, t_autocomplete *autocomplete)
 	ft_strdel(&line);
 	return (0);
 }
+*/
+
+void	extract_autoc(t_token *start, t_autocomplete *autoc)
+{
+
+}
+
+int		ft_light_parser(char *line, t_autocomplete *autoc)
+{
+	t_lexer lex;
+	int		ret;
+	int		mode;
+
+	ft_bzero(&lex, sizeof(t_lexer));
+	lex.line = line;
+	lex.cursor = line;
+	mode = g_sh.mode;
+	g_sh.mode = NONINTERACTIVE;
+	if ((ret = ft_lexer(&lex)))
+	{
+		g_sh.mode = mode;
+		return (ret);
+	}
+	g_sh.mode = mode;
+	extract_autoc(lex.head);
+	return (0);
+}
+
