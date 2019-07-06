@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 21:42:35 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/05 12:51:47 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/06 19:17:52 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,16 @@ int		get_ifs(char **ifs)
 	return (0);
 }
 
+void	init_vars(char *cursor, int *i, int *trunc, bool *brackets)
+{
+	if (*(cursor + 1) == '{')
+	{
+		(*i)++;
+		*trunc = 3;
+		*brackets = true;
+	}
+}
+
 void	delete_varname(char *cursor)
 {
 	int				trunc;
@@ -41,20 +51,16 @@ void	delete_varname(char *cursor)
 	i = 1;
 	trunc = 1;
 	brackets = false;
-	if (*(cursor + 1) == '{')
-	{
-		i++;
-		trunc = 3;
-		brackets = true;
-	}
+	init_vars(cursor, &i, &trunc, &brackets);
 	if (ft_cisin("@*$", cursor[i]))
 		trunc++;
 	while (parser_is_name_c(cursor[i]) || (ft_cisin((char*)valid, cursor[i]))
-	|| ((brackets) && (cursor[i])))
+			|| ((brackets) && (cursor[i])))
 	{
 		trunc++;
-		if ((cursor[i] == '}') || ((!brackets) && (ft_cisin((char*)valid, cursor[i]))))
-			break;
+		if ((cursor[i] == '}')
+				|| ((!brackets) && (ft_cisin((char*)valid, cursor[i]))))
+			break ;
 		i++;
 	}
 	i = ft_strlen(cursor + trunc);

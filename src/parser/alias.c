@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 17:31:28 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/06 21:06:02 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/06 21:10:27 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,19 @@ static void	overwrite_token(t_token *word, t_token *lxd)
 	t_token *iter;
 
 	save = word->next;
-	ft_strdel(&word->data.str);
 	ft_tabdel(&word->alias);
-	ft_memcpy(word, lxd, sizeof(t_token));
-	iter = word;
-	while ((iter->next) && (iter->next->type != EOI))
-		iter = iter->next;
-	free_token(iter->next);
-	iter->next = save;
+	free(word->data.str);
+	if (lxd->type == EOI)
+		word->data.str = lxd->data.str;
+	else
+	{
+		ft_memcpy(word, lxd, sizeof(t_token));
+		iter = word;
+		while ((iter->next) && (iter->next->type != EOI))
+			iter = iter->next;
+		free_token(iter->next);
+		iter->next = save;
+	}
 	free(lxd);
 	lxd = NULL;
 }

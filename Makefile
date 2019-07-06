@@ -6,7 +6,7 @@
 #    By: tduval <tduval@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/07/05 12:48:49 by apeyret          ###   ########.fr        #
+#    Updated: 2019/07/06 19:30:29 by ktlili           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,13 +90,19 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			hashtable/ht_spawnbin.c		\
 			wordexp/expansion_util_3.c	\
 			wordexp/expansion_util_2.c	\
+			wordexp/filename_expansion.c\
+			wordexp/substitute_if_null.c\
 			wordexp/expansion_util.c	\
 			wordexp/field_split.c		\
 			wordexp/ft_wordexp.c		\
+			wordexp/pattern_matching.c	\
+			wordexp/lsearch_str.c		\
 			wordexp/param_expand.c		\
 			wordexp/quote_removal.c		\
 			wordexp/tilde_expand.c		\
 			wordexp/field_split_tools.c \
+			wordexp/handle_exp_param.c	\
+			wordexp/handle_tilde.c		\
 			lexer/ft_realloc.c			\
 			lexer/lex_jump_table.c		\
 			lexer/lexer.c				\
@@ -107,6 +113,7 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			lexer/lex_quotes.c			\
 			lexer/lex_op.c				\
 			lexer/token_tools.c			\
+			lexer/lex_param_quotes.c	\
 			parser/parser_tools_2.c		\
 			parser/parser_free_fn.c		\
 			parser/parser_ast.c			\
