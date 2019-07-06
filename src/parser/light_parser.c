@@ -6,11 +6,12 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 14:58:34 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/06 20:24:55 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/06 21:23:54 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_light_parser.h"
+#include "ft_wordexp.h"
 
 static int	fill_autocomp(t_autocomplete *autocomp, t_expecting type, char *str)
 {
@@ -114,9 +115,33 @@ int			ft_light_parser(char *lin, t_autocomplete *autocomplete)
 }
 */
 
-void	extract_autoc(t_token *start, t_autocomplete *autoc)
+void	extract_autoc(t_lexer lex, t_autocomplete *autoc, char *line)
 {
+	bool	is_delim;
+	t_token	*iter;
 
+	if ((ft_strlen(line)) && (ft_cisin(" \n\t\r", lex.line[ft_strlen(line) - 1])))
+		is_delim = true;
+	autoc->type = cmd_name;
+	iter = lex.head;
+	while (42)
+	{
+		if ((!iter->next) || (iter->next->type == EOI))
+			break;
+		if (((iter->type >= PIPE) && (iter->type < LESSAND))
+				|| (iter->type == NEWLINE))
+			autoc->type = cmd_name;
+		else
+			autoc->type = arg;	
+		iter = iter->next;
+	}
+	if (is_delim) 
+	{
+		autoc->type = arg;
+		autoc->str = ft_strdup("");
+	}
+	else
+		autoc->str = ft_strdup(iter->data.str);
 }
 
 int		ft_light_parser(char *line, t_autocomplete *autoc)
@@ -136,7 +161,7 @@ int		ft_light_parser(char *line, t_autocomplete *autoc)
 		return (ret);
 	}
 	g_sh.mode = mode;
-	extract_autoc(lex.head);
+	extract_autoc(lex, autoc, line);
 	return (0);
 }
 
