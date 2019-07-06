@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 18:04:30 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/12 14:47:33 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/06 19:03:11 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FT_WORDEXP_H
 
 # include "sh_core.h"
+# include <stdbool.h>
 
 # define IFS_WSPACE 1
 # define IFS_REG 2
@@ -21,8 +22,34 @@
 typedef struct s_str	t_str;
 typedef	struct s_token	t_token;
 
+int		quote_fields(char **fields);
+char	*select_exp(char *cursor, char *tmp);
+int		handle_exp_param(t_token *word, t_bool is_redir);
+int		expand_param(t_token **word, char **cursor,
+				char *value, t_bool is_redir);
+int		filename_expansion(t_token *word, t_bool is_redir);
+char	*exp_sup(char *cursor, bool classic_substitute);
+char	*get_var_exp(char *cursor);
+char	*substitute_word_if_null(char *cursor, char *zone);
+bool	lsearch_rev_str(char *str, char *search, int *nb_del);
+bool	bsearch_rev_str(char *str, char *search, int *nb_del);
+char	*check_second_exp_var(char *zone);
+void	print_array(char **array);
+char	*substitute_by_len(char *cursor);
+char	*quote_str(char *str);
+bool	bsearch_str(char *str, char *search, int *nb_del);
+bool	lsearch_str(char *str, char *search, int *nb_del);
+char	*classic_sub(char *cursor);
+char	*assign_sub_var(char *var_name, char *zone);
+char	*assign_word_if_null(char *cursor, char *zone);
+char	*pattern_matching(char *cursor, char *zone, int mode);
+char	*sub_word_if_not_null(char *cursor, char *zone);
+char	*test_parameter(char *cursor, char *zone);
+bool	lsearch_rev_str(char *str, char *search, int *nb_del);
+char	*build_param(char *cursor);
 int		handle_ifs(t_token **word, char **cursor, char *value, char *ifs);
 int		c_insert_str(t_token *word, char *cursor, char *to_insert);
+char	*rev_pattern_matching(char *cursor, char *zone, int mode);
 char	*c_next_bslash(char *cursor);
 char	*c_next_dquote(char *cursor);
 char	*c_next_squote(char *cursor);

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/10 10:49:40 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/06 18:53:17 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,30 +50,28 @@ char	*get_home(t_str *word)
 	char	*user;
 	char	*home;
 
-	if ((ft_cisin("/ \t\n\r" , *word->str)) || !(*word->str))
+	if ((ft_cisin("/ \t\n\r", *word->str)) || !(*word->str))
 		return (get_env_value("HOME"));
-	else
+	i = 0;
+	while (!ft_cisin("/ \t\n\r", word->str[i]) && word->str[i])
+		i++;
+	if (!(user = ft_strndup(word->str, i)))
+		return (NULL);
+	home = get_userhome(user);
+	ft_strdel(&user);
+	if (!home)
 	{
-		i = 0;
-		while (!ft_cisin("/ \t\n\r" , word->str[i]) && word->str[i])
-			i++;
-		if (!(user = ft_strndup(word->str, i)))
+		if (!(home = ft_zprintf("~%s", word->str)))
 			return (NULL);
-		home = get_userhome(user);
-		ft_strdel(&user);
-		if (!home)
-		{
-			if (!(home = ft_zprintf("~%s", word->str)))
-				return (NULL);
-			ft_strdel(&word->str);
-			word->str = home;
-			return (NULL);
-		}
-		ft_memmove(word->str, word->str + i + 1, i);
-		word->len = word->len - i;
-		return (home);
+		ft_strdel(&word->str);
+		word->str = home;
+		return (NULL);
 	}
+	ft_memmove(word->str, word->str + i + 1, i);
+	word->len = word->len - i;
+	return (home);
 }
+
 int		expand_tilde(t_str *word, int *index, int add_quote)
 {
 	char *home;
@@ -90,49 +88,5 @@ int		expand_tilde(t_str *word, int *index, int add_quote)
 		return (MEMERR);
 	if (add_quote)
 		free(home);
-	return (0);
-}
-
-int		expand_tilde_assign(t_str *word, int index)
-{
-	if ((word->str[index] == '~') && (tilde_valid(word->str[index + 1])))
-		expand_tilde(word, &index, 1);
-	while (word->str[index])
-	{
-		if ((word->str[index] == ':') && (word->str[index + 1] == '~'))
-		{
-			index++;
-			if (expand_tilde(word, &index, 1) == MEMERR)
-				return (MEMERR);
-			continue;
-		}
-		if (word->str[index] == '\'')
-			index = next_squote(word->str, index);
-		else if ((word->str[index] == '\\') && (word->str[index + 1] != 0))
-			index = index + 1;
-		else if (word->str[index] == '\'')
-			index = next_dquote(word->str, index);
-		index++;
-	}
-	return (0);
-}
-
-int		handle_tilde(t_token *word)
-{
-	int index;
-
-	index = 0;
-	if ((word->data.str[0] == '~') && (tilde_valid(word->data.str[1])))
-		return (expand_tilde(&(word->data), &index, 1));
-	if (word->type == ASSIGN)
-	{
-		while (word->data.str[index])
-		{
-			if (word->data.str[index] == '=')
-				break ;
-			index++;
-		}
-		return (expand_tilde_assign(&(word->data), index + 1));
-	}
 	return (0);
 }
