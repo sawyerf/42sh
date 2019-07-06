@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/05 15:38:34 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/06 19:32:11 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	valid_sup_exp(char c)
 {
 	if ((c == '_') || (ft_isalnum(c)) || c == ':' || c == '-' || c == '='
 		|| c == '?' || c == '+' || c == '#' || c == '%' || c == '/' || c == '['
-		|| c == ']' || c == '*' || c == '!' || c == '.')
+		|| c == ']' || c == '*' || c == '!' || c == '.' || c == '"' || c == '\'')
 		return (1);
 	return (0);
 }
@@ -78,14 +78,26 @@ int	special_params(char c)
 
 int	brackets_param(t_lexer *lx_st)
 {
-	if ((*(lx_st->cursor) == 0) || (*(lx_st->cursor) == '}')
-		|| ((!special_params(*(lx_st->cursor)))
-		&& (!valid_env_char(*(lx_st->cursor)))))
+	int ret;
+
+	if (((*(lx_st->cursor) == 0) || (*(lx_st->cursor) == '}'))
+		&& (!special_params(*(lx_st->cursor))))
+		//&& (!valid_env_char(*(lx_st->cursor)))))
 		return (BAD_SUB);
 	while ((valid_sup_exp(*(lx_st->cursor)))
 		|| (special_params(*(lx_st->cursor))))
 	{
-		if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
+		if (*(lx_st->cursor) == '"')
+		{
+		  	if ((ret = handle_dquote_param(lx_st)))
+				return (ret);
+		}
+		else if (*(lx_st->cursor) == '\'')
+		{
+			if ((ret = handle_squote_param(lx_st)))
+				return (ret);
+		}
+		else if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 			return (MEMERR);
 	}
 	if (*(lx_st->cursor) != '}')

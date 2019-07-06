@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/03 17:26:28 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/06 19:32:41 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@
 typedef int	(*t_func)(t_lexer*);
 
 void	init_lexer(char *input, t_lexer *lexer_state);
+
+int		handle_dquote_param(t_lexer *lexer_state);
+int		handle_squote_param(t_lexer *lexer_state);
 
 int		handle_newline(t_lexer *lexer_state);
 int		handle_dquote(t_lexer *lexer_state);

@@ -6,7 +6,7 @@
 #    By: tduval <tduval@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/07/06 19:02:30 by tduval           ###   ########.fr        #
+#    Updated: 2019/07/06 19:30:29 by ktlili           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -113,6 +113,7 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			lexer/lex_quotes.c			\
 			lexer/lex_op.c				\
 			lexer/token_tools.c			\
+			lexer/lex_param_quotes.c	\
 			parser/parser_tools_2.c		\
 			parser/parser_free_fn.c		\
 			parser/parser_ast.c			\
