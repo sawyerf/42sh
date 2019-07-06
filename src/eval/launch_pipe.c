@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 19:59:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/02 19:10:58 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/06 15:54:23 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ int			extract_last_tok(t_cmd_tab *pipeln)
 	int i;
 
 	i = 0;
-	while (pipeln->next)
-		pipeln = pipeln->next;
-	if (!pipeln->av[0])
+	if ((pipeln->next) || (!pipeln->av[0]))
 		return (0);
 	while (pipeln->av[i + 1])
 		i++;

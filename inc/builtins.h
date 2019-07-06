@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 13:46:10 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/26 13:41:08 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/06 16:07:07 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int						parser_takeopt(char *opt, char *arg, char *in,
 							char *name);
 int						cd_l(char *curpath, char *arg);
 int						cd_p(char *curpath, char *arg);
-int						cd_dispatch_err(char *arg, char *curpath);
+int						cd_dispatch_err(char *arg, char *curpath, int free);
 int						cd_error(int errnum, char *str);
 int						change_dir(t_cmd_tab *cmd);
 
@@ -87,5 +87,7 @@ int						export(t_cmd_tab *cmd);
 
 int						alias(t_cmd_tab *cmd);
 int						unalias(t_cmd_tab *cmd);
-int		valid_alias(char *s);
+int						valid_alias(char *s);
+char					*handle_abs_path(char *pwd, char *curpath);
+
 #endif

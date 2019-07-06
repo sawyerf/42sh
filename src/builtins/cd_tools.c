@@ -6,31 +6,28 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:08:33 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/04 13:59:17 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/05/20 14:15:33 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-int		cd_error(int errnum, char *str)
+int		cd_error(int errnum, char *arg)
 {
 	if (errnum == 1)
-		putstr_stderr("cd: Pathname too long");
+		ft_dprintf(STDERR_FILENO, "cd: Pathname too long : %s\n", arg);
 	else if (errnum == 2)
-		putstr_stderr("cd : no such file or directory: ");
+		ft_dprintf(STDERR_FILENO, "cd : no such file or directory: %s\n", arg);
 	else if (errnum == 3)
-		putstr_stderr("cd: permission denied: ");
+		ft_dprintf(STDERR_FILENO, "cd: permission denied: %s\n", arg);
 	else if (errnum == 4)
-		putstr_stderr("cd: HOME not set");
+		ft_dprintf(STDERR_FILENO, "cd: HOME not set\n");
 	else if (errnum == 5)
-		putstr_stderr("cd: Not a directory: ");
-	if (str != NULL)
-		putstr_stderr(str);
-	putstr_stderr("\n");
-	return (errnum);
+		ft_dprintf(STDERR_FILENO, "cd: Not a directory: %s\n", arg);
+	return (0);
 }
 
-int		cd_dispatch_err(char *arg, char *curpath)
+int		cd_dispatch_err(char *arg, char *curpath, int freep)
 {
 	int ret;
 
@@ -38,6 +35,8 @@ int		cd_dispatch_err(char *arg, char *curpath)
 		arg = curpath;
 	if ((ret = path_access(curpath)) != 0)
 		cd_error(ret, arg);
+	if ((freep) && (curpath))
+		free(curpath);
 	return (ret);
 }
 
@@ -68,4 +67,16 @@ char	*getoldpwd(void)
 		return ("\0");
 	ft_printf("%s\n", oldpwd);
 	return (oldpwd);
+}
+
+char	*handle_abs_path(char *pwd, char *curpath)
+{
+	char *tmp;
+
+	tmp = curpath;
+	curpath = ft_strjoin(pwd, curpath);
+	ft_strdel(&tmp);
+	if (!curpath)
+		return (NULL);
+	return (curpath);
 }
