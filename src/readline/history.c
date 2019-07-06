@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/18 20:13:04 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/08 17:09:28 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/06 17:59:15 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_list	*hst_pgetcmp(t_list *lst, char *s)
 	{
 		len = ft_atoi(s);
 		if (len < 0)
-			len += tmp->content_size / 10;
+			len += tmp->content_size / 10 + 1;
 		while (tmp)
 		{
 			if ((int)tmp->content_size / 10 == len)
@@ -102,7 +102,7 @@ t_list	*hst_getcmp(t_list *lst, char *s)
 	if (ft_strisdigit(s))
 	{
 		if (len <= 0)
-			len += tmp->content_size / 10;
+			len += tmp->content_size / 10 + 1;
 		while (tmp)
 		{
 			if ((int)tmp->content_size / 10 == len)
