@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 17:31:28 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/28 17:54:36 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/06 16:40:03 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,19 @@ char	*get_alias(char *s, char **tab)
 static t_token *lex_alias(char *line)
 {
 	t_lexer lexer;
+	int		save;
 
+	save = g_sh.mode;
+	g_sh.mode = NONINTERACTIVE;
 	ft_bzero(&lexer, sizeof(t_lexer));
 	init_lexer(line, &lexer);
 	/* activate non interactive mode ?*/
 	if (ft_lexer(&lexer))
+	{
+		g_sh.mode = save;
 		return (NULL);
+	}
+	g_sh.mode = save;
 	return (lexer.head);
 }
 
