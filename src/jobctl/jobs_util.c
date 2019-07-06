@@ -6,11 +6,34 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/01 18:48:03 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/01 19:51:33 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/06 15:49:07 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_core.h"
+
+int		refresh_jobs(void)
+{
+	t_job *j;
+	pid_t chld;
+
+	j = g_sh.job_lst;
+	while (j)
+	{
+		chld = waitpid(-(j->pgid), &(j->status),
+				WUNTRACED | WNOHANG | WCONTINUED);
+		if (WIFSIGNALED(j->status))
+			j->completed = 1;
+		if ((chld > 0) && (WIFEXITED(j->status)))
+			j->completed = 1;
+		if (WIFSTOPPED(j->status))
+			j->stopped = 1;
+		else
+			j->stopped = 0;
+		j = j->next;
+	}
+	return (0);
+}
 
 static void	job_handle_curr(t_job *j)
 {
@@ -63,7 +86,7 @@ void		clean_jobs(void)
 		save = ptr->next;
 		if (ptr->completed)
 		{
-			if ((!ptr->notified) && (!ptr->fg))
+			if ((!ptr->notified))
 				ft_printf("[%d] %d '%s' completed\n",
 					ptr->job_id, ptr->pgid, ptr->cmd_ln);
 			del_job(ptr);

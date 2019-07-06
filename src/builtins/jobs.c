@@ -6,34 +6,12 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 16:24:20 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/27 19:45:09 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/06 15:45:39 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-int		refresh_jobs(void)
-{
-	t_job *j;
-	pid_t chld;
-
-	j = g_sh.job_lst;
-	while (j)
-	{
-		chld = waitpid(-(j->pgid), &(j->status),
-				WUNTRACED | WNOHANG | WCONTINUED);
-		if (WIFSIGNALED(j->status))
-			j->completed = 1;
-		if ((chld > 0) && (WIFEXITED(j->status)))
-			j->completed = 1;
-		if (WIFSTOPPED(j->status))
-			j->stopped = 1;
-		else
-			j->stopped = 0;
-		j = j->next;
-	}
-	return (0);
-}
 
 /*
 ** no malloc, null ret for inexistant job

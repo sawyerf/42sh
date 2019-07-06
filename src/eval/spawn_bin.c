@@ -25,7 +25,7 @@ static int		execve_wrap(t_cmd_tab *cmd)
 	if ((cmd->av[0]) && (ft_cisin(cmd->av[0], '/')))
 	{
 		if (handle_perm(cmd->av[0]) != 0)
-			exit_wrap(ACCERR, cmd);
+			exit_wrap(CMD_NOT_FOUND, cmd);
 		if ((cmd->full_path = ft_strdup(cmd->av[0])) == NULL)
 			exit_wrap(MEMERR, cmd);
 	}

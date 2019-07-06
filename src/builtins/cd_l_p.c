@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:24:29 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/04 15:32:46 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/05/20 14:15:49 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void		canon_form(char *curpath)
 {
-	cleanpath(curpath);
 	cleandotdot(curpath);
+	cleanpath(curpath);
 }
 
 static	void	free_buffers(char *pwd, char *curpath)
@@ -25,51 +25,51 @@ static	void	free_buffers(char *pwd, char *curpath)
 	free(curpath);
 }
 
-char			*handle_pwd_l(void)
+int				handle_pwd_l(char **pwd)
 {
 	char *env_pwd;
 	char *p_pwd;
 	char *ret;
 
 	env_pwd = get_env_value("PWD");
-	p_pwd = getcwd(NULL, 0);
+	if (!(p_pwd = getcwd(NULL, 0)))
+		ft_dprintf(STDERR_FILENO, "21sh : cd : error getting current dir \n");
 	if ((p_pwd == NULL) && (env_pwd == NULL))
-		return (NULL);
+	{
+		*pwd = NULL;
+		return (0);
+	}
+	*pwd = p_pwd;
 	if (env_pwd && (!path_access(env_pwd)))
 	{
-		ret = ft_strdup(env_pwd);
-		if (ret == NULL)
-			return (p_pwd);
-		if (p_pwd)
-			free(p_pwd);
-		return (ret);
+		if (!(ret = ft_strdup(env_pwd)))
+			return (MEMERR);
+		ft_strdel(&p_pwd);
+		*pwd = ret;
 	}
-	return (p_pwd);
+	return (0);
 }
 
 int				cd_l(char *curpath, char *arg)
 {
 	char	*pwd;
-	char	*tmp;
 	int		ret;
 
-	pwd = handle_pwd_l();
+	if (handle_pwd_l(&pwd))
+		return (MEMERR);
 	if ((curpath[0] != '/') && pwd)
 	{
-		if (add_slash(&pwd))
-			return (MEMERR);
-		tmp = curpath;
-		curpath = ft_strjoin(pwd, curpath);
-		ft_strdel(&tmp);
-		if (!curpath)
+		if ((add_slash(&pwd))
+			|| (!(curpath = handle_abs_path(pwd, curpath))))
+		{
 			free(pwd);
-		if (!curpath)
 			return (MEMERR);
+		}
 	}
 	canon_form(curpath);
 	ret = 0;
 	if (chdir(curpath))
-		ret = cd_dispatch_err(arg, curpath);
+		ret = cd_dispatch_err(arg, curpath, 0);
 	else
 		update_env_pwd(pwd, curpath);
 	free_buffers(pwd, curpath);
@@ -82,9 +82,9 @@ int				cd_p(char *curpath, char *arg)
 	char	*old_pwd;
 
 	tmp_pwd = get_env_value("PWD");
-	if (chdir(curpath) != 0)
+	if (chdir(curpath))
 	{
-		cd_dispatch_err(arg, curpath);
+		cd_dispatch_err(arg, curpath, 1);
 		return (0);
 	}
 	old_pwd = getcwd(NULL, 0);

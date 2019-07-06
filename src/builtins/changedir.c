@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/12 00:00:01 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/04 14:32:09 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/04/25 18:31:50 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ static int	check_cdpath(char **curpath, char *cd_path)
 	int		ret;
 	int		i;
 
-	cd_path_tab = ft_strsplit(cd_path, ':');
-	if (cd_path_tab == NULL)
+	if (!(cd_path_tab = ft_strsplit(cd_path, ':')))
 		return (MEMERR);
 	i = 0;
 	while (cd_path_tab[i] != NULL)
@@ -38,13 +37,11 @@ static int	check_cdpath(char **curpath, char *cd_path)
 	return (0);
 }
 
-static int	handle_cdpath(char **curpath)
+static int	handle_cdpath(t_cmd_tab *cmd, char **curpath)
 {
 	char *cd_path;
 
-	if (!ft_strncmp(*curpath, ".", 1))
-		return (0);
-	cd_path = get_env_value("CDPATH");
+	cd_path = varchr(cmd->process_env, "CDPATH");
 	if ((cd_path == NULL) || (*cd_path == 0))
 		return (0);
 	if ((ft_strncmp(*curpath, "/", 1))
@@ -88,7 +85,7 @@ int			change_dir(t_cmd_tab *cmd)
 		return (0);
 	if ((cmd->av[g_optind] == NULL) || (cmd->av[g_optind][0] == 0))
 	{
-		curpath = get_env_value("HOME");
+		curpath = varchr(cmd->process_env, "HOME");
 		if ((curpath == NULL) || (*curpath == 0))
 			return (cd_error(4, NULL));
 		curpath = ft_strdup(curpath);
@@ -97,10 +94,10 @@ int			change_dir(t_cmd_tab *cmd)
 		curpath = ft_strdup(getoldpwd());
 	else
 		curpath = ft_strdup(cmd->av[g_optind]);
-	if ((curpath == NULL) || (handle_cdpath(&curpath) == MEMERR))
+	if (!(curpath) || (handle_cdpath(cmd, &curpath) == MEMERR))
 		return (MEMERR);
 	if (ft_strlen(curpath) > PATH_MAX)
-		return (cd_error(1, NULL));
+		return (cd_dispatch_err(NULL, curpath, 1));
 	if (opt == 'P')
 		return (cd_p(curpath, cmd->av[g_optind]));
 	else if (opt == 'L')

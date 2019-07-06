@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 20:19:10 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/02 19:10:23 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/06 16:30:59 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int				pathfinder(t_cmd_tab *cmd)
 	{
 		if (cmd->full_path)
 			ft_strdel(&(cmd->full_path));
-		br_print(ret, cmd);
+		cmd->exit_status = br_print(ret, cmd);
 		if (!cmd->redir_lst)
 			return (ret);
 	}

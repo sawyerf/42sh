@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/02 19:05:47 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/06 16:06:20 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int						write_dbuff(t_list *buffer, char c, int *index);
 int						putstr_dbuff(t_list *buffer, char *str, int *index);
 int						path_access(char *path);
 int						ft_ispath(char *str);
-char					*handle_pwd_l(void);
+int						handle_pwd_l(char **pwd);
 void					init_iterator(int *read, int *write);
 char					*get_env_value(char *name);
 int						set_shell_env(char *name, char *value, int to_export);
