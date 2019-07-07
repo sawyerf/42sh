@@ -20,7 +20,9 @@ int		parser_takeopt(char *opt, char *arg, char *in, char *name)
 	i = 1;
 	c = 0;
 	if (!ft_strcmp(arg, "--"))
-		return ('-');
+		return ('-' * -1);
+	if (*arg != '-')
+		return (-1);
 	while (arg[i])
 	{
 		c = arg[i];

@@ -21,11 +21,13 @@ int		pars_unalias(char **tab, t_pars *pars)
 
 	if (!*tab)
 	{
-		ft_dprintf(2, "unalias: usage: unalias [name ...]\n");
+		ft_dprintf(2, "unalias: usage: unalias [-a] [name ...]\n");
 		return (-1);
 	}
 	pars->opt[0] = 0;
-	while (*tab && (c = parser_takeopt("a", *tab, pars->opt, "alias")) && c != '-')
+	while (*tab && (c = parser_takeopt("a", *tab, pars->opt, "alias")) > 0)
+		tab++;
+	if (c == '-')
 		tab++;
 	pars->av = tab;
 	if (c == 0)
