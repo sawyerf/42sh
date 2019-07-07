@@ -37,7 +37,7 @@ t_token *get_last_tk(t_token *t, bool *first_word)
 	p = NULL;
 	*first_word = true;
 	words = 0;
-	while ((t->next) && (t->type != EOI))
+	while ((t) && (t->type != EOI))
 	{
 		if (t->type == WORD)
 		{
@@ -57,11 +57,37 @@ t_token *get_last_tk(t_token *t, bool *first_word)
 	return (!p ? t : p);
 }
 
+void	extract_last_param(t_autocomplete *autoc)
+{
+	bool is_param;
+	char *s;
+
+	s = autoc->str;
+	ft_strrev(s);
+	is_param = false;
+	while (*s)
+	{
+		if (*s == '$')
+		{
+			is_param = true;
+			break;
+		}
+		s++;
+	}
+	if (is_param)
+		*(s + 1) = 0;
+	ft_strrev(autoc->str);
+	if (!is_param)
+		return ;
+	autoc->type = param;
+}
+
 int	dispatch_autoc(t_token *last, t_autocomplete *autoc,
 	bool is_delim, bool first_word)
 {
 	char *str;
 
+	autoc->type = cmd_name;
 	str = "";
 	if (last->type >= PIPE) 
 	{
@@ -81,8 +107,8 @@ int	dispatch_autoc(t_token *last, t_autocomplete *autoc,
 	}
 	if (!(autoc->str = ft_strdup(str)))
 		return (MEMERR);
-	if (autoc->str[0] == '$')
-		autoc->type = param;
+	if (autoc->str[0])
+		extract_last_param(autoc);
 	return (0);
 }
 
@@ -94,9 +120,9 @@ int	extract_autoc(t_lexer lex, t_autocomplete *autoc, char *line)
 
 	is_delim = false;
 	if ((ft_strlen(line))
-		&& (ft_cisin(" \n\t\r", lex.line[ft_strlen(line) - 1])))
+		&& (ft_cisin(" \n\t\r", lex.line[ft_strlen(line) - 1]))
+			&& (lex.err != CTRL_D))
 		is_delim = true;
-	autoc->type = cmd_name;
 	last = get_last_tk(lex.head, &first_word);
 	if (quote_removal(last) == MEMERR)
 		return (MEMERR);
