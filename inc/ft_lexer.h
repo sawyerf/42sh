@@ -18,7 +18,6 @@
 
 # define DQUOTE_ERR 10
 # define SQUOTE_ERR 11
-# define QUOTE_ERR 10
 # define BAD_SUB	12
 # define INCOMPLETE_SUB 13
 # define ENDOFINPUT 14
@@ -57,7 +56,6 @@ int		test_lexer(char *line);
 t_token	*next_tok(char *line, t_parser *parser);
 t_token	*ft_tokenizer(char *line);
 int		ft_tokenizer_2(char *line, t_token **head);
-int		rev_lex(char *line, t_token **head);
 int		handle_bang(t_lexer *lx_st);
 int		handle_common_inner(t_lexer *lx_st);
 

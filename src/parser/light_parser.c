@@ -107,8 +107,6 @@ int	dispatch_autoc(t_token *last, t_autocomplete *autoc,
 	}
 	if (!(autoc->str = ft_strdup(str)))
 		return (MEMERR);
-	if (autoc->str[0])
-		extract_last_param(autoc);
 	return (0);
 }
 
@@ -119,9 +117,8 @@ int	extract_autoc(t_lexer lex, t_autocomplete *autoc, char *line)
 	t_token	*last;
 
 	is_delim = false;
-	if ((ft_strlen(line))
-		&& (ft_cisin(" \n\t\r", lex.line[ft_strlen(line) - 1]))
-			&& (lex.err != CTRL_D))
+	if ((!lex.err) && (ft_strlen(line))
+		&& (ft_cisin(" \n\t\r", lex.line[ft_strlen(line) - 1])))
 		is_delim = true;
 	last = get_last_tk(lex.head, &first_word);
 	if (quote_removal(last) == MEMERR)
@@ -131,6 +128,8 @@ int	extract_autoc(t_lexer lex, t_autocomplete *autoc, char *line)
 		free_token_lst(lex.head);
 		return (MEMERR);
 	}
+	if ((lex.err != SQUOTE_ERR) && (autoc->str[0]))
+		extract_last_param(autoc);
 	free_token_lst(lex.head);
 	return (0);
 }

@@ -61,7 +61,7 @@ int	handle_dquote(t_lexer *lx_st)
 		else if (*(lx_st->cursor) == '\0')
 		{
 			if ((ret = request_new_line(lx_st)))
-				return (ret);
+				return (ret == CTRL_D ? DQUOTE_ERR : ret);
 		}
 		else if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 			return (MEMERR);
@@ -86,7 +86,7 @@ int	handle_squote(t_lexer *lx_st)
 		else if (*(lx_st->cursor) == '\0')
 		{
 			if ((ret = request_new_line(lx_st)))
-				return (ret);
+				return (ret == CTRL_D ? SQUOTE_ERR : ret);
 		}
 		else if (str_putc(&(lx_st->cursor), &(lx_st->token->data)) == MEMERR)
 			return (MEMERR);
