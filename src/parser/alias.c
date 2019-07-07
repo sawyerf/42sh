@@ -49,7 +49,8 @@ static t_token *lex_alias(char *line, char **tab)
 	tk = lexer.head;
 	while (tk)
 	{
-		tk->alias = ft_tabdup(tab);
+		if (tk->type == WORD)
+			tk->alias = ft_tabdup(tab);
 		tk = tk->next;
 	}
 	g_sh.mode = save;
