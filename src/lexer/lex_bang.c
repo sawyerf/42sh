@@ -168,14 +168,23 @@ int		word_bang(t_lexer *lx_st)
 
 int		handle_bang(t_lexer *lx_st)
 {
-	int ret;
+	int		ret;
+	char	c;
+	char	d;
 
+	c = lx_st->cursor[1];
+	lx_st->cursor[1] = 0;
+	d = cmdisin(lx_st->line);
+	lx_st->cursor[1] = c;
 	if (*(lx_st->cursor + 1) == '!')
 		ret = simple_bang(lx_st);
-	else if (!ft_cisin("\n \t", *(lx_st->cursor + 1)) && *(lx_st->cursor + 1))
-		ret = word_bang(lx_st);
+	else if (ft_cisin("\n \t", *(lx_st->cursor + 1)) || !*(lx_st->cursor + 1) || (d == '"' && lx_st->cursor[1] == '"'))
+	{
+		str_putc(&(lx_st->cursor), &(lx_st->token->data));
+		return (0);
+	}
 	else
-		return (str_putc(&(lx_st->cursor), &(lx_st->token->data)));
+		ret = word_bang(lx_st);
 	if (!ret)
 		ft_printf("%s", lx_st->line);
 	return (ret);
