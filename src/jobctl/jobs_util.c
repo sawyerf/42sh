@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/01 18:48:03 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/08 15:32:34 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/08 15:48:57 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ int			ignore_notif(t_job *job)
 {
 	int signum;
 
+	if (job->fg)
+		return (0);
 	if (WIFSIGNALED(job->status))
 	{
 		signum = WTERMSIG(job->status);
