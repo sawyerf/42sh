@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/14 19:02:38 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/08 15:47:18 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void		add_to_tree(t_ast_node **head, t_ast_node *to_add)
 		while (insert->right)
 			insert = insert->right;
 		insert->right = to_add;
-		return;
+		return ;
 	}
 	return (add_to_tree_sep(head, to_add));
 }

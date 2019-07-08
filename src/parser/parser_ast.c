@@ -6,25 +6,25 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 14:30:55 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/04 20:13:05 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/08 15:43:16 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_eval.h"
 
-char		*make_cmdline(t_token *start, t_token *end, int last)
+char	*make_cmdline(t_token *start, t_token *end, int last)
 {
 	char	*ln;
 	size_t	tot_len;
-	t_token *iter;
+	t_token	*iter;
 
 	tot_len = 0;
 	iter = start;
 	while (iter)
 	{
-		tot_len += ft_strlen(iter->data.str) + 1; // + 1 for whitespace
+		tot_len += ft_strlen(iter->data.str) + 1;
 		if (iter == end)
-			break;
+			break ;
 		iter = iter->next;
 	}
 	if (!(ln = ft_strnew(tot_len)))
@@ -33,11 +33,8 @@ char		*make_cmdline(t_token *start, t_token *end, int last)
 	while (iter)
 	{
 		ft_strcat(ln, iter->data.str);
-		if (iter == end)
-			break;
-		iter = iter->next;
-		if ((!last) && (iter == end))
-			break;
+		if ((iter == end) || (!last && (iter = iter->next) == end))
+			break ;
 		ft_strcat(ln, " ");
 	}
 	return (ln);
@@ -129,7 +126,7 @@ void	add_to_tree_sep(t_ast_node **head, t_ast_node *to_add)
 	{
 		while ((insert->right) && (is_sep(insert->right)))
 			insert = insert->right;
-		if (!is_sep(insert))	
+		if (!is_sep(insert))
 			replace_higher(head, to_add);
 		else
 			replace_right(insert, to_add);

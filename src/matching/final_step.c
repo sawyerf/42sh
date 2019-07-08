@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 19:01:48 by tduval            #+#    #+#             */
-/*   Updated: 2019/07/08 13:26:31 by tduval           ###   ########.fr       */
+/*   Updated: 2019/07/08 15:36:17 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char		*remove_bs(char *pattern)
 //		if (pattern[i] == '\\')
 //			ft_strremoveat(pattern, i);
 //		if (pattern[i])
-			i++;
+		i++;
 	}
 	return (pattern);
 }

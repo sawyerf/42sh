@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:39:07 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/06 16:06:20 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/08 15:22:08 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,10 +138,12 @@ void					clean_jobs(void);
 void					run_script(char *file);
 char					*dget_env_value(char *name);
 
-int		cexport(char *var);
+int						cexport(char *var);
 int						refresh_jobs(void);
 char					*get_termsig(int signum);
 void					print_sigexit(t_job *job);
 int						exit_jobs(void);
+void					shrc(void);
+int						readnrun(t_read_fn	read_fn);
 
 #endif

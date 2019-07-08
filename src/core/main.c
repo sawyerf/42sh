@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/08 15:19:00 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/08 15:27:04 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,47 +63,6 @@ int			exit_jobs(void)
 	return (1);
 }
 
-void		shrc(void)
-{
-	char	*path;
-	char	*home;
-	int		mode;
-
-	if (!(home = envchrr(g_sh.env, "HOME"))
-		|| !(path = ft_zprintf("%s/%s", home, ".42shrc")))
-		return ;
-	mode = g_sh.mode;
-	g_sh.mode = MODEFILE;
-	run_script(path);
-	ft_strdel(&path);
-	g_sh.mode = mode;
-}
-
-int		readnrun(t_read_fn	read_fn)
-{
-	int			ret;
-	char		*line;
-
-	if ((ret = read_fn(get_env_value("PS1"), &line)) == CTRL_D ||
-		ret == MEMERR || ret < 0)
-	{
-		if (ret == MEMERR || ret < 0)
-			return (ret);
-		if ((ret == CTRL_D) && (exit_jobs()))
-			return (1);
-	}
-	if (((ret = run_command(line)) == SYNERR)
-			&& (g_sh.mode == MODEFILE))
-		return (ret);
-	if (ret == MEMERR)
-	{
-		ft_dprintf(STDERR_FILENO, "42sh: memory failure\n");
-		g_sh.status = MEMERR;
-		return (MEMERR);
-	}
-	return (0);
-}
-
 int			main(int ac, char **av, char **env)
 {
 	t_read_fn	read_fn;
@@ -120,7 +79,7 @@ int			main(int ac, char **av, char **env)
 	{
 		clean_jobs();
 		if (readnrun(read_fn))
-			break;
+			break ;
 		if (g_sh.exit_jobs > 0)
 			g_sh.exit_jobs = g_sh.exit_jobs - 1;
 	}

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/28 17:31:28 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/06 21:10:27 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/08 15:44:25 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern t_sh g_sh;
 
-char	*get_alias(char *s, char **tab)
+char			*get_alias(char *s, char **tab)
 {
 	while (*tab)
 	{
@@ -31,7 +31,7 @@ char	*get_alias(char *s, char **tab)
 	return (NULL);
 }
 
-static t_token *lex_alias(char *line, char **tab)
+static t_token	*lex_alias(char *line, char **tab)
 {
 	t_lexer lexer;
 	t_token	*tk;
@@ -57,7 +57,7 @@ static t_token *lex_alias(char *line, char **tab)
 	return (lexer.head);
 }
 
-static void	overwrite_token(t_token *word, t_token *lxd)
+static void		overwrite_token(t_token *word, t_token *lxd)
 {
 	t_token *save;
 	t_token *iter;
@@ -80,11 +80,11 @@ static void	overwrite_token(t_token *word, t_token *lxd)
 	lxd = NULL;
 }
 
-int handle_alias(t_token *word)
+int				handle_alias(t_token *word)
 {
-	char 	*result;
+	char	*result;
 	char	**tab;
-	t_token *lxd;
+	t_token	*lxd;
 	int		ret;
 
 	if (!(tab = ft_tabnew(1025)))

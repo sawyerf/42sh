@@ -6,13 +6,12 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 14:58:34 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/06 21:23:54 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/08 15:40:11 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_light_parser.h"
 #include "ft_wordexp.h"
-
 
 static bool	is_redir(t_token *t)
 {
@@ -21,7 +20,7 @@ static bool	is_redir(t_token *t)
 	return (false);
 }
 
-static bool is_sep(t_token *t)
+static bool	is_sep(t_token *t)
 {
 	if ((t) && (((t->type >= PIPE) && (t->type < LESSAND))
 		|| (t->type == NEWLINE)))
@@ -29,7 +28,7 @@ static bool is_sep(t_token *t)
 	return (false);
 }
 
-t_token *get_last_tk(t_token *t, bool *first_word)
+t_token		*get_last_tk(t_token *t, bool *first_word)
 {
 	t_token *p;
 	int		words;
@@ -41,7 +40,7 @@ t_token *get_last_tk(t_token *t, bool *first_word)
 	{
 		if (t->type == WORD)
 		{
-			*first_word = (words ?  false : true) ;
+			*first_word = (words ? false : true);
 			if ((p) && (is_redir(p)))
 				*first_word = false;
 			words++;
@@ -52,12 +51,12 @@ t_token *get_last_tk(t_token *t, bool *first_word)
 			*first_word = true;
 		}
 		p = t;
-		t = t->next;	
+		t = t->next;
 	}
 	return (!p ? t : p);
 }
 
-void	extract_last_param(t_autocomplete *autoc)
+void		extract_last_param(t_autocomplete *autoc)
 {
 	bool is_param;
 	char *s;
@@ -70,7 +69,7 @@ void	extract_last_param(t_autocomplete *autoc)
 		if (*s == '$')
 		{
 			is_param = true;
-			break;
+			break ;
 		}
 		s++;
 	}
@@ -82,14 +81,14 @@ void	extract_last_param(t_autocomplete *autoc)
 	autoc->type = param;
 }
 
-int	dispatch_autoc(t_token *last, t_autocomplete *autoc,
+int			dispatch_autoc(t_token *last, t_autocomplete *autoc,
 	bool is_delim, bool first_word)
 {
 	char *str;
 
 	autoc->type = cmd_name;
 	str = "";
-	if (last->type >= PIPE) 
+	if (last->type >= PIPE)
 	{
 		autoc->type = cmd_name;
 		if ((last->type >= LESSAND) && (last->type < EOI))
@@ -110,7 +109,7 @@ int	dispatch_autoc(t_token *last, t_autocomplete *autoc,
 	return (0);
 }
 
-int	extract_autoc(t_lexer lex, t_autocomplete *autoc, char *line)
+int			extract_autoc(t_lexer lex, t_autocomplete *autoc, char *line)
 {
 	bool	is_delim;
 	bool	first_word;
@@ -134,7 +133,7 @@ int	extract_autoc(t_lexer lex, t_autocomplete *autoc, char *line)
 	return (0);
 }
 
-int		ft_light_parser(char *line, t_autocomplete *autoc)
+int			ft_light_parser(char *line, t_autocomplete *autoc)
 {
 	t_lexer lex;
 	int		ret;
@@ -155,4 +154,3 @@ int		ft_light_parser(char *line, t_autocomplete *autoc)
 		return (MEMERR);
 	return (0);
 }
-

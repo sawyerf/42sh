@@ -6,13 +6,13 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/01 18:48:03 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/08 14:59:15 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/08 15:32:34 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_core.h"
 
-int		refresh_jobs(void)
+int			refresh_jobs(void)
 {
 	t_job *j;
 	pid_t chld;

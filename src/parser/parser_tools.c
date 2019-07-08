@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/06 17:47:20 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/08 15:47:44 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		build_cmd(t_token *to_add, t_simple_cmd *cmd)
 	if (!(tmp = dup_token(to_add)))
 		return (MEMERR);
 //	if ((to_add->type == WORD) || (to_add->type == ASSIGN))
-		add_to_lst(tmp, &(cmd->word_lst));
+	add_to_lst(tmp, &(cmd->word_lst));
 	return (0);
 }
 

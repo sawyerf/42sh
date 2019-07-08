@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 16:08:26 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/11 14:53:09 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/08 15:25:41 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "readline.h"
 #include "hashtable.h"
 
-int			run_command(char *line)
+int		run_command(char *line)
 {
 	int ret;
 
@@ -30,7 +30,7 @@ int			run_command(char *line)
 	return (0);
 }
 
-int			sh_readfile(char *prompt, char **str)
+int		sh_readfile(char *prompt, char **str)
 {
 	char	*line;
 	char	*tmp;
@@ -50,7 +50,7 @@ int			sh_readfile(char *prompt, char **str)
 	return (0);
 }
 
-void		run_script(char *file)
+void	run_script(char *file)
 {
 	int		fd;
 	char	*line;
@@ -70,4 +70,45 @@ void		run_script(char *file)
 	}
 	close(g_sh.fd);
 	g_sh.fd = fd;
+}
+
+void	shrc(void)
+{
+	char	*path;
+	char	*home;
+	int		mode;
+
+	if (!(home = envchrr(g_sh.env, "HOME"))
+		|| !(path = ft_zprintf("%s/%s", home, ".42shrc")))
+		return ;
+	mode = g_sh.mode;
+	g_sh.mode = MODEFILE;
+	run_script(path);
+	ft_strdel(&path);
+	g_sh.mode = mode;
+}
+
+int		readnrun(t_read_fn read_fn)
+{
+	int			ret;
+	char		*line;
+
+	if ((ret = read_fn(get_env_value("PS1"), &line)) == CTRL_D ||
+		ret == MEMERR || ret < 0)
+	{
+		if (ret == MEMERR || ret < 0)
+			return (ret);
+		if ((ret == CTRL_D) && (exit_jobs()))
+			return (1);
+	}
+	if (((ret = run_command(line)) == SYNERR)
+			&& (g_sh.mode == MODEFILE))
+		return (ret);
+	if (ret == MEMERR)
+	{
+		ft_dprintf(STDERR_FILENO, "42sh: memory failure\n");
+		g_sh.status = MEMERR;
+		return (MEMERR);
+	}
+	return (0);
 }

@@ -6,13 +6,12 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/27 11:28:03 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/27 13:30:15 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/08 15:46:49 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_parser.h"
 #include "ft_eval.h"
-
 
 int	expect_separator_op(t_parser *parser)
 {
