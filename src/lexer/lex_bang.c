@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/29 18:18:48 by apeyret           #+#    #+#             */
-/*   Updated: 2019/07/05 15:41:28 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/08 14:56:50 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,13 +176,12 @@ int		handle_bang(t_lexer *lx_st)
 	lx_st->cursor[1] = 0;
 	d = cmdisin(lx_st->line);
 	lx_st->cursor[1] = c;
-	if (*(lx_st->cursor + 1) == '!')
+	if (g_sh.mode == NONINTERACTIVE
+			|| ft_cisin("\n \t", *(lx_st->cursor + 1))
+			|| !*(lx_st->cursor + 1) || (d == '"' && lx_st->cursor[1] == '"'))
+		return (str_putc(&(lx_st->cursor), &(lx_st->token->data)));
+	else if (*(lx_st->cursor + 1) == '!')
 		ret = simple_bang(lx_st);
-	else if (ft_cisin("\n \t", *(lx_st->cursor + 1)) || !*(lx_st->cursor + 1) || (d == '"' && lx_st->cursor[1] == '"'))
-	{
-		str_putc(&(lx_st->cursor), &(lx_st->token->data));
-		return (0);
-	}
 	else
 		ret = word_bang(lx_st);
 	if (!ret)
