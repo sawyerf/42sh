@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 16:24:33 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/26 13:21:11 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/08 17:11:23 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int		fg(t_cmd_tab *cmd)
 {
 	t_job *j;
 
+	refresh_jobs();
 	if (!g_sh.job_lst)
 	{
 		ft_dprintf(STDERR_FILENO, "42sh: fg: no jobs running\n");
