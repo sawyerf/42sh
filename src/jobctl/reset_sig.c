@@ -28,3 +28,29 @@ int		reset_sig(void)
 		return (SH_ABORT);
 	return (0);
 }
+
+void	sighandle_interrupt(int signum)
+{
+	(void)signum;
+	g_sh.interrupt = 1;
+//	ft_printf("SIGCALLED %d\n", g_sh.interrupt);
+}
+
+int	set_interrupt(int set)
+{
+	struct sigaction new_act;
+
+	ft_bzero(&new_act, sizeof(struct sigaction));
+	new_act.sa_handler = SIG_IGN;
+	if (set)
+		new_act.sa_handler = sighandle_interrupt;
+	else
+	{
+		g_sh.interrupt = 0;
+//		ft_printf("setting g_sh to zero\n");
+	}
+	new_act.sa_flags = SA_RESTART;
+	if (sigaction(SIGINT, &new_act, NULL) < 0)
+		return (-1);	
+	return (0);
+}

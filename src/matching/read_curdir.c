@@ -14,6 +14,7 @@
 #include <dirent.h>
 #include "ft_patmatch.h"
 #include "libft.h"
+#include "sh_core.h"
 
 static int		slash_case(t_lfiles *lists[2], char *str[4],
 		struct dirent *files, int i)
@@ -79,9 +80,10 @@ int				read_curdir(char *str[4], t_lfiles *lists[2], int i)
 	if ((dir = opendir(lists[TMP_LST]->path)) != NULL)
 	{
 		lists[SUBTMP_LST] = lists[TMP_LST];
-		while (lists[SUBTMP_LST] && lists[SUBTMP_LST]->next)
+		while ((!g_sh.interrupt)
+			&& (lists[SUBTMP_LST] && lists[SUBTMP_LST]->next))
 			lists[SUBTMP_LST] = lists[SUBTMP_LST]->next;
-		while ((files = readdir(dir)) != NULL)
+		while ((!g_sh.interrupt) && ((files = readdir(dir)) != NULL))
 		{
 			if (check_all(files, str, lists, i) == 0)
 			{

@@ -41,8 +41,13 @@ int			filename_expansion(t_token *word, t_bool is_redir)
 
 	if (is_redir)
 		return (0);
+	set_interrupt(1);
 	if (!(fields = ret_matches(word->data.str)))
-		return (MEMERR);
+	{
+		set_interrupt(0);
+		return (0);
+	}
+	set_interrupt(0);
 	if (ft_strequ(word->data.str, *fields))
 	{
 		free_tab(fields);
