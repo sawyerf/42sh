@@ -13,6 +13,19 @@
 #include "ft_parser.h"
 #include "readline.h"
 
+char	*quote_err(int errnum)
+{
+	static char *dq = " seeking enclosing '\"'";
+	static char *sq = " seeking enclosing \"'\"";
+	static char *e = "";
+
+	if (errnum == DQUOTE_ERR)
+		return (dq);
+	else if (errnum == SQUOTE_ERR)
+		return (sq);
+	return (e);
+}
+
 int		dispatch_errors(int errnum, t_parser parser)
 {
 	if (errnum == MEMERR)
@@ -26,10 +39,11 @@ int		dispatch_errors(int errnum, t_parser parser)
 		ft_dprintf(STDERR_FILENO, "42sh: syntax error near : '%s'\n",
 			parser.current->data.str);
 	else if (errnum == HEREDOC_ERR)
-		ft_dprintf(STDERR_FILENO, "42sh: premature EOF on heredoc\n",
+		ft_dprintf(STDERR_FILENO, "42sh: heredoci fail\n",
 			parser.current->data.str);
-	else if (errnum == CTRL_D)
-		ft_dprintf(STDERR_FILENO, "42sh: premature EOF\n");
+	else if ((errnum == CTRL_D) || (errnum == SQUOTE_ERR)
+		|| (errnum == DQUOTE_ERR))
+		ft_dprintf(STDERR_FILENO, "42sh: premature EOF%s\n", quote_err(errnum));
 	else if (errnum == BAD_SUB)
 		ft_dprintf(STDERR_FILENO, "42sh: bad substitution\n");
 	else if (errnum == BANG_NF)
@@ -75,27 +89,4 @@ void	remove_last_node(t_parser *parser)
 	tmp = parser->tree;
 	parser->tree = parser->tree->left;
 	free(tmp);
-}
-
-void	clear_autocom(t_autocomplete *autoc)
-{
-	int i;
-
-	i = 0;
-	ft_strrev(autoc->str);
-	while (autoc->str[i])
-	{
-		if ((autoc->str[i] == '"') || (autoc->str[i] == '\'')
-			|| (autoc->str[i] == '\\'))
-		{
-			if (autoc->str[i + 1])
-				autoc->type = arg;
-			autoc->str[i] = 0;
-			ft_strrev(autoc->str);
-			return ;
-		}
-		i++;
-	}
-	ft_strrev(autoc->str);
-	return ;
 }

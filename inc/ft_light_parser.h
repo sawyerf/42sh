@@ -18,5 +18,4 @@
 # include "ft_eval.h"
 
 int		ft_light_parser(char *line, t_autocomplete *autocomplete);
-void	clear_autocom(t_autocomplete *autoc);
 #endif

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/01 18:48:03 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/06 15:49:07 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/08 14:59:15 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,19 @@ void		del_job(t_job *j)
 		save_n->prev = iter;
 }
 
+int			ignore_notif(t_job *job)
+{
+	int signum;
+
+	if (WIFSIGNALED(job->status))
+	{
+		signum = WTERMSIG(job->status);
+		if ((signum == SIGINT) || (signum == SIGPIPE))
+			return (0);
+	}
+	return (1);
+}
+
 void		clean_jobs(void)
 {
 	t_job *ptr;
@@ -86,7 +99,7 @@ void		clean_jobs(void)
 		save = ptr->next;
 		if (ptr->completed)
 		{
-			if ((!ptr->notified))
+			if ((!ptr->notified) && (ignore_notif(ptr)))
 				ft_printf("[%d] %d '%s' completed\n",
 					ptr->job_id, ptr->pgid, ptr->cmd_ln);
 			del_job(ptr);

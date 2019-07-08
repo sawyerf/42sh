@@ -6,109 +6,153 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/12 14:58:34 by ktlili            #+#    #+#             */
-/*   Updated: 2019/04/09 21:07:10 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/06 21:23:54 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_light_parser.h"
+#include "ft_wordexp.h"
 
-static int	fill_autocomp(t_autocomplete *autocomp, t_expecting type, char *str)
+
+static bool	is_redir(t_token *t)
 {
-	int i;
-
-	i = 0;
-	autocomp->type = type;
-	while (parser_is_name_c(str[i]))
-		i++;
-	if ((str[i] == '$') || (!ft_strcmp(str + i, "{$")))
-		autocomp->type = param;
-	ft_strrev(str);
-	if (!(autocomp->str = ft_strdup(str)))
-		return (MEMERR);
-	return (0);
+	if ((t) && (t->type >= LESSAND) && (t->type < EOI))
+		return (true);
+	return (false);
 }
 
-static int	is_first_word(char *line, t_token *start, t_autocomplete *autocomp)
+static bool is_sep(t_token *t)
 {
-	int		first_word;
-	t_token	*save;
+	if ((t) && (((t->type >= PIPE) && (t->type < LESSAND))
+		|| (t->type == NEWLINE)))
+		return (true);
+	return (false);
+}
 
-	first_word = 1;
-	save = start;
-	start = start->next;
-	while (start && start->type != NEWLINE)
+t_token *get_last_tk(t_token *t, bool *first_word)
+{
+	t_token *p;
+	int		words;
+
+	p = NULL;
+	*first_word = true;
+	words = 0;
+	while ((t) && (t->type != EOI))
 	{
-		if (((start->type == WORD) && (!parser_is_assign(start)))
-				|| ((start->type >= LESSAND) && (start->type <= GREAT)))
+		if (t->type == WORD)
 		{
-			first_word = 0;
-			break ;
+			*first_word = (words ?  false : true) ;
+			if ((p) && (is_redir(p)))
+				*first_word = false;
+			words++;
 		}
-		start = start->next;
+		else if (is_sep(t))
+		{
+			words = 0;
+			*first_word = true;
+		}
+		p = t;
+		t = t->next;	
 	}
-	if (save->type == WORD)
-	{
-		if (!ft_is_whitespace(*line) && first_word)
-			return (fill_autocomp(autocomp, cmd_name, save->data.str));
-		else if ((!ft_is_whitespace(*line)) && (!first_word))
-			return (fill_autocomp(autocomp, arg, save->data.str));
-	}
-	return (fill_autocomp(autocomp, arg, ""));
+	return (!p ? t : p);
 }
 
-static int	dispatch_types(char *line, t_token *start, t_autocomplete *autocomp)
+void	extract_last_param(t_autocomplete *autoc)
 {
-	if (((start->type >= PIPE) && (start->type <= GREAT))
-			|| (start->type == NEWLINE))
+	bool is_param;
+	char *s;
+
+	s = autoc->str;
+	ft_strrev(s);
+	is_param = false;
+	while (*s)
 	{
-		if ((start->type >= LESSAND) && (start->type <= GREAT))
-			return (fill_autocomp(autocomp, arg, ""));
-		return (fill_autocomp(autocomp, cmd_name, ""));
+		if (*s == '$')
+		{
+			is_param = true;
+			break;
+		}
+		s++;
 	}
-	return (is_first_word(line, start, autocomp));
+	if (is_param)
+		*(s + 1) = 0;
+	ft_strrev(autoc->str);
+	if (!is_param)
+		return ;
+	autoc->type = param;
 }
 
-int			exp_tilde(t_autocomplete *acp)
+int	dispatch_autoc(t_token *last, t_autocomplete *autoc,
+	bool is_delim, bool first_word)
 {
-	t_str	tmp;
-	int		dummy;
+	char *str;
 
-	if (!(acp->str[0] == '~') || !(tilde_valid(acp->str[1])))
-		return (0);
-	ft_bzero(&tmp, sizeof(t_str));
-	dummy = 0;
-	tmp.str = acp->str;
-	tmp.size = ft_strlen(acp->str);
-	tmp.len = tmp.size;
-	if (expand_tilde(&tmp, &dummy, 0) == MEMERR)
+	autoc->type = cmd_name;
+	str = "";
+	if (last->type >= PIPE) 
+	{
+		autoc->type = cmd_name;
+		if ((last->type >= LESSAND) && (last->type < EOI))
+			autoc->type = arg;
+		str = "";
+	}
+	else if (last->type == WORD)
+	{
+		autoc->type = arg;
+		if ((first_word) && (!is_delim))
+			autoc->type = cmd_name;
+		str = last->data.str;
+		if (is_delim)
+			str = "";
+	}
+	if (!(autoc->str = ft_strdup(str)))
 		return (MEMERR);
-	acp->str = tmp.str;
 	return (0);
 }
 
-int			ft_light_parser(char *lin, t_autocomplete *autocomplete)
+int	extract_autoc(t_lexer lex, t_autocomplete *autoc, char *line)
 {
-	t_token	*tokens;
-	char	*line;
+	bool	is_delim;
+	bool	first_word;
+	t_token	*last;
+
+	is_delim = false;
+	if ((!lex.err) && (ft_strlen(line))
+		&& (ft_cisin(" \n\t\r", lex.line[ft_strlen(line) - 1])))
+		is_delim = true;
+	last = get_last_tk(lex.head, &first_word);
+	if (quote_removal(last) == MEMERR)
+		return (MEMERR);
+	if (dispatch_autoc(last, autoc, is_delim, first_word) == MEMERR)
+	{
+		free_token_lst(lex.head);
+		return (MEMERR);
+	}
+	if ((lex.err != SQUOTE_ERR) && (autoc->str[0]))
+		extract_last_param(autoc);
+	free_token_lst(lex.head);
+	return (0);
+}
+
+int		ft_light_parser(char *line, t_autocomplete *autoc)
+{
+	t_lexer lex;
+	int		ret;
 	int		mode;
 
+	ft_bzero(&lex, sizeof(t_lexer));
+	lex.line = line;
+	lex.cursor = line;
 	mode = g_sh.mode;
 	g_sh.mode = NONINTERACTIVE;
-	if (!(line = ft_strdup(lin)))
-		return (MEMERR);
-	ft_strrev(line);
-	if (*line == '\n')
-		ft_memmove(line, line + 1, ft_strlen(line));
-	if (rev_lex(line, &tokens) == MEMERR
-			|| dispatch_types(line, tokens, autocomplete) == MEMERR
-				|| (exp_tilde(autocomplete) == MEMERR))
+	if ((ret = ft_lexer(&lex)) == MEMERR)
 	{
-		ft_strdel(&line);
-		return (MEMERR);
+		g_sh.mode = mode;
+		return (ret);
 	}
-	clear_autocom(autocomplete);
 	g_sh.mode = mode;
-	free_token_lst(tokens);
-	ft_strdel(&line);
+	if (extract_autoc(lex, autoc, line) == MEMERR)
+		return (MEMERR);
 	return (0);
 }
+

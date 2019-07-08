@@ -107,7 +107,6 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			lexer/lex_jump_table.c		\
 			lexer/lexer.c				\
 			lexer/lexer_tools.c			\
-			lexer/rev_lex.c				\
 			lexer/memerror.c			\
 			lexer/lex_bang.c			\
 			lexer/lex_quotes.c			\
