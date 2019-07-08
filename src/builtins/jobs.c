@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 16:24:20 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/08 15:27:58 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/08 19:34:12 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,7 @@ int		jobs(t_cmd_tab *cmd)
 	g_optind = 1;
 	while ((i = ft_getopt(cmd->av, "lp")) != -1)
 	{
-		opt = (char)i;
-		if (opt == '?')
+		if ((opt = (char)i) == '?')
 			return (invalid_opt());
 	}
 	refresh_jobs();

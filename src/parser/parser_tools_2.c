@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 21:10:15 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/27 16:20:47 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/08 19:13:29 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		dispatch_errors(int errnum, t_parser parser)
 		ft_dprintf(STDERR_FILENO, "42sh: syntax error near : '%s'\n",
 			parser.current->data.str);
 	else if (errnum == HEREDOC_ERR)
-		ft_dprintf(STDERR_FILENO, "42sh: heredoci fail\n",
+		ft_dprintf(STDERR_FILENO, "42sh: heredoc fail\n",
 			parser.current->data.str);
 	else if ((errnum == CTRL_D) || (errnum == SQUOTE_ERR)
 		|| (errnum == DQUOTE_ERR))

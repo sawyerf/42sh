@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/08 17:31:26 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/08 19:33:24 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void		global_del(void)
 
 int			exit_jobs(void)
 {
-	if ((g_sh.job_lst) && (!g_sh.exit_jobs))
+	if ((g_sh.mode == INTERACTIVE) && (g_sh.job_lst) && (!g_sh.exit_jobs))
 	{
 		ft_dprintf(STDERR_FILENO, "42sh: jobs still running\n");
 		g_sh.exit_jobs = 2;

@@ -6,7 +6,7 @@
 #    By: tduval <tduval@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/07/08 16:31:14 by ktlili           ###   ########.fr        #
+#    Updated: 2019/07/08 20:04:28 by ktlili           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -105,9 +105,11 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			wordexp/handle_exp_param.c	\
 			wordexp/handle_tilde.c		\
 			lexer/ft_realloc.c			\
-			lexer/lex_jump_table.c		\
+			lexer/lex_common.c			\
+			lexer/request_new_line.c	\
 			lexer/lexer.c				\
 			lexer/lexer_tools.c			\
+			lexer/lex_newline.c			\
 			lexer/memerror.c			\
 			lexer/lex_bang.c			\
 			lexer/lex_quotes.c			\
@@ -127,6 +129,9 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			parser/sh_parser.c			\
 			parser/parser_heredoc.c		\
 			parser/light_parser.c		\
+			parser/light_parser_util.c	\
+			parser/parser_ast_sep.c		\
+			parser/make_cmdline.c		\
 			parser/alias.c				\
 			parser/parser_separator.c	\
 			prompt/prompt.c				\

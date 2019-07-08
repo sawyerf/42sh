@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/01 18:54:45 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/27 19:50:16 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/08 19:30:50 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,8 @@ int		bg(t_cmd_tab *cmd)
 {
 	t_job *j;
 
-	if (!g_sh.job_lst)
-	{
-		ft_dprintf(STDERR_FILENO, "42sh: bg: no jobs running\n");
+	if (jobs_err("bg"))
 		return (0);
-	}
 	if ((!cmd->av[1]) && (g_sh.current_j))
 		bg_job(g_sh.current_j, 1);
 	else

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/30 11:48:18 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/08 16:08:59 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/08 19:34:27 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	eval_sep(t_ast_node *tree)
 {
-	if ((tree->type == AMPERS) && (g_sh.mode == INTERACTIVE))
+	if (tree->type == AMPERS)
 	{
 		if (background_subshell(tree))
 			return (MEMERR);

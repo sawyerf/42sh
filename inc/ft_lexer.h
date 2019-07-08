@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/06 19:32:41 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/08 20:05:12 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ t_token	*ft_tokenizer(char *line);
 int		ft_tokenizer_2(char *line, t_token **head);
 int		handle_bang(t_lexer *lx_st);
 int		handle_common_inner(t_lexer *lx_st);
-
+int		valid_sup_exp(char c);
+int		special_params(char c);
 #endif

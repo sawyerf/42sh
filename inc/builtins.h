@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/04 13:46:10 by apeyret           #+#    #+#             */
-/*   Updated: 2019/07/06 17:35:47 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/08 19:20:42 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,5 @@ int						alias(t_cmd_tab *cmd);
 int						unalias(t_cmd_tab *cmd);
 int						valid_alias(char *s);
 char					*handle_abs_path(char *pwd, char *curpath);
-
+int						jobs_err(char *builtin);
 #endif
