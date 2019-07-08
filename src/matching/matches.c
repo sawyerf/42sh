@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 16:29:08 by tduval            #+#    #+#             */
-/*   Updated: 2019/07/02 15:35:55 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/08 13:27:13 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "ft_patmatch.h"
 #include "libft.h"
 
-static char	*perform_it(char *s1, char *s2, char *arr, int *i)
+static char	*perform_it(char *s2, char *arr, int *i)
 {
 	if (*i && s2[*i] == '-'
 			&& s2[*i + 1] != ']'
@@ -52,7 +52,7 @@ static char	*range(char *s1, char *s2)
 	if (!(arr = ft_strnew(0)))
 		return (0);
 	while (s2[i] && after_bracket(s2) != s2 + i)
-		arr = perform_it(s1, s2, arr, &i);
+		arr = perform_it(s2, arr, &i);
 	if ((is_in_str(arr, *s1) && n == 0) || (!is_in_str(arr, *s1) && n))
 	{
 		ft_strdel(&arr);

@@ -6,7 +6,7 @@
 #    By: tduval <tduval@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/07/06 19:30:29 by ktlili           ###   ########.fr        #
+#    Updated: 2019/07/08 13:23:46 by tduval           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME =		42sh
 
 CC =		clang
 
-CFLAGS =	-I inc/ -I libft/inc/ -ggdb # -Wall -Werror -Wextra
+CFLAGS =	-I inc/ -I libft/inc/ -ggdb -Wall -Werror -Wextra
 
 INC_DIR =	inc
 

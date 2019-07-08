@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 19:01:06 by tduval            #+#    #+#             */
-/*   Updated: 2019/07/06 19:18:35 by tduval           ###   ########.fr       */
+/*   Updated: 2019/07/08 13:24:40 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ static int	extract_fields(t_token *word, char **fields)
 int			filename_expansion(t_token *word, t_bool is_redir)
 {
 	char	**fields;
-	t_token *tmp;
-	t_token *head;
 
 	if (is_redir)
 		return (0);

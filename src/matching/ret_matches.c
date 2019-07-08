@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/18 19:02:05 by tduval            #+#    #+#             */
-/*   Updated: 2019/07/05 12:51:31 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/08 13:29:07 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_lfiles		*init_list(char *path, int layer)
 	return (res);
 }
 
-static t_lfiles	*get_files(t_lfiles *lst, char *pattern, int i, int layer)
+static t_lfiles	*get_files(t_lfiles *lst, char *pattern, int i)
 {
 	t_lfiles		*lists[2];
 	char			*str[4];
@@ -69,7 +69,6 @@ static t_lfiles	*get_files(t_lfiles *lst, char *pattern, int i, int layer)
 
 char			**ret_matches(char *pattern)
 {
-	struct dirent	*files;
 	t_lfiles		*lst;
 	char			*origin;
 	int				layer;
@@ -87,7 +86,7 @@ char			**ret_matches(char *pattern)
 	layer = get_layer(pattern);
 	while (i <= layer && lst)
 	{
-		if (!(lst = get_files(lst, pattern, i, layer)))
+		if (!(lst = get_files(lst, pattern, i)))
 			return (NULL);
 		pattern = go_after(pattern);
 		i++;

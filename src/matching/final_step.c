@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 19:01:48 by tduval            #+#    #+#             */
-/*   Updated: 2019/07/06 14:57:19 by tduval           ###   ########.fr       */
+/*   Updated: 2019/07/08 13:26:31 by tduval           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char		*remove_bs(char *pattern)
 	return (pattern);
 }
 
-char		*fill_tab(t_lfiles *lists[2], char *pattern, int i)
+char		*fill_tab(t_lfiles *lists[2], char *pattern)
 {
 	char	*res;
 
@@ -81,7 +81,7 @@ char		**end_game(char **res, t_lfiles *lists[2], char *pattern, int i)
 		if (go_last(lists[TMP]->path)[0] != '.'
 				|| go_last(pattern)[0] == '.')
 		{
-			if (!(res[i] = fill_tab(lists, pattern, i)))
+			if (!(res[i] = fill_tab(lists, pattern)))
 				return (NULL);
 			i++;
 		}
@@ -96,7 +96,6 @@ char		**final_step(t_lfiles *lst, int layer, char *pattern)
 {
 	t_lfiles	*lists[2];
 	char		**res;
-	struct stat	buf;
 	int			i;
 	int			f;
 
