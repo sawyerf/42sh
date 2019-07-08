@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/05 15:21:16 by apeyret           #+#    #+#             */
-/*   Updated: 2019/07/05 15:21:42 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/08 14:29:03 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ void	print_sigexit(t_job *job)
 	int signum;
 
 	signum = WTERMSIG(job->status);
-	if (signum == SIGINT)
+	if ((signum == SIGINT)
+		|| (signum == SIGPIPE))
 		return ;
 	ft_printf("42h: %d terminated by signal %s\n", job->pgid,
 			get_termsig(signum));

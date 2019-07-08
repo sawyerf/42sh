@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/09 21:42:35 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/06 19:17:52 by tduval           ###   ########.fr       */
+/*   Updated: 2019/07/08 15:04:47 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ void	delete_varname(char *cursor)
 	while (parser_is_name_c(cursor[i]) || (ft_cisin((char*)valid, cursor[i]))
 			|| ((brackets) && (cursor[i])))
 	{
-		trunc++;
 		if ((cursor[i] == '}')
 				|| ((!brackets) && (ft_cisin((char*)valid, cursor[i]))))
 			break ;
+		trunc++;
 		i++;
 	}
 	i = ft_strlen(cursor + trunc);
