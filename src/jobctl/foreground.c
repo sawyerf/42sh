@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/04 19:28:02 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/02 19:09:33 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/08 17:05:16 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	wait_job(t_job *job)
 	if ((pid = waitpid(pid, &(job->status), WUNTRACED)) == -1)
 	{
 		ft_dprintf(STDERR_FILENO, "42sh: wait failed for '%s'\n", job->cmd_ln);
-		return ;
 	}
 	register_job(job);
 	if (WIFEXITED(job->status))

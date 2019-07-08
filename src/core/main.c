@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/08 16:21:05 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/08 17:06:10 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	init_shell(char **env, t_read_fn *read_fn, char **av)
 	if (g_sh.mode == INTERACTIVE)
 		*read_fn = readline;
 	if ((g_sh.mode == INTERACTIVE) && (init_jobctl() == SH_ABORT))
-		return (0); // to mod
+		return (SH_ABORT)
 	return (0);
 }
 

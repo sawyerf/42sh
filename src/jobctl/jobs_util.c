@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/01 18:48:03 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/08 15:48:57 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/08 16:51:41 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void		del_job(t_job *j)
 		return ;
 	}
 	iter = g_sh.job_lst;
-	while ((iter->next) && (iter->next != j))
+	while ((iter) && (iter->next) && (iter->next != j))
 		iter = iter->next;
 	iter->next = save_n;
 	if (save_n)

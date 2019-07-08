@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/01 18:47:50 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/08 16:30:38 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/08 17:04:17 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ int		ignore_sigs(void)
 	if ((sigaction(SIGQUIT, &new_act, NULL) < 0)
 		|| (sigaction(SIGTSTP, &new_act, NULL) < 0)
 		|| (sigaction(SIGTTIN, &new_act, NULL) < 0)
-		|| (sigaction(SIGTTOU, &new_act, NULL) < 0)
-		|| (sigaction(SIGCHLD, &new_act, NULL) < 0))
+		|| (sigaction(SIGTTOU, &new_act, NULL) < 0))
 		return (SH_ABORT);
 	ft_printf("sig_ign set\n");
 	return (0);
