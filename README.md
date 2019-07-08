@@ -10,12 +10,12 @@
 
 
 ## TODO
-- autocomplete after >& is wrong
 - sig handling && job control.
-- moar testing on redirections.
 - cd set_shell_env needs malloc checks. <= this
 
 ## DONE
+- ~~moar testing on redirections.~~
+- ~~autocomplete after >& is wrong~~
 - ~~ajouter les variables $!, $\_ et $- et passer l'IFS sur les variables $\* et $@~~
 - ~~export builtin, set && unset missing stuff.~~
 - ~~replace printf/write(2, etc.. by dprintf~~
