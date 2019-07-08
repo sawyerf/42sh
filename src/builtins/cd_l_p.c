@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 19:24:29 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/20 14:15:49 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/08 14:23:03 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void		canon_form(char *curpath)
 {
-	cleandotdot(curpath);
 	cleanpath(curpath);
+	cleandotdot(curpath);
 }
 
 static	void	free_buffers(char *pwd, char *curpath)
