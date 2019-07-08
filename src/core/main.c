@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/08 14:55:36 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/08 15:19:00 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	init_shell(char **env, t_read_fn *read_fn, char **av)
 	if (g_sh.mode == INTERACTIVE)
 		*read_fn = readline;
 	if ((g_sh.mode == INTERACTIVE) && (init_jobctl() == SH_ABORT))
-		return (0);
+		return (0); // modif
 	return (0);
 }
 
@@ -79,10 +79,33 @@ void		shrc(void)
 	g_sh.mode = mode;
 }
 
+int		readnrun(t_read_fn	read_fn)
+{
+	int			ret;
+	char		*line;
+
+	if ((ret = read_fn(get_env_value("PS1"), &line)) == CTRL_D ||
+		ret == MEMERR || ret < 0)
+	{
+		if (ret == MEMERR || ret < 0)
+			return (ret);
+		if ((ret == CTRL_D) && (exit_jobs()))
+			return (1);
+	}
+	if (((ret = run_command(line)) == SYNERR)
+			&& (g_sh.mode == MODEFILE))
+		return (ret);
+	if (ret == MEMERR)
+	{
+		ft_dprintf(STDERR_FILENO, "42sh: memory failure\n");
+		g_sh.status = MEMERR;
+		return (MEMERR);
+	}
+	return (0);
+}
+
 int			main(int ac, char **av, char **env)
 {
-	char		*line;
-	int			ret;
 	t_read_fn	read_fn;
 
 	(void)av[ac];
@@ -96,21 +119,8 @@ int			main(int ac, char **av, char **env)
 	while (42)
 	{
 		clean_jobs();
-		if ((ret = read_fn(get_env_value("PS1"), &line)) == CTRL_D ||
-				ret == MEMERR || ret < 0)
-		{
-			if ((ret == CTRL_D) && (exit_jobs()))
-				break ;
-		}
-		if (((ret = run_command(line)) == SYNERR)
-				&& (g_sh.mode == MODEFILE))
-			break ;
-		if (ret == MEMERR)
-		{
-			ft_dprintf(STDERR_FILENO, "42sh: memory failure\n");
-			g_sh.status = MEMERR;
-			break ;
-		}
+		if (readnrun(read_fn))
+			break;
 		if (g_sh.exit_jobs > 0)
 			g_sh.exit_jobs = g_sh.exit_jobs - 1;
 	}
