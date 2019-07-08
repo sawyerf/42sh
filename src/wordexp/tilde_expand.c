@@ -22,17 +22,43 @@ int		tilde_valid(char c)
 	return (0);
 }
 
+size_t	count_dollars(char *str)
+{
+	size_t	count;
+
+	count = 0;
+	while (*str)
+	{
+		if (*str == '$')
+			count++;
+		str++;
+	}
+	return (count);
+}
+
 char	*quote_home(char *str)
 {
-	char *new;
+	size_t	count;
+	char	*save;
+	char	*new;
 
-	new = ft_strnew(ft_strlen(str) + 2);
-	if (!new)
+	count = count_dollars(str);
+	count += ft_strlen(str);
+	if (!(new = ft_strnew(count)))
 		return (NULL);
-	new[0] = '\'';
-	ft_strcpy(new + 1, str);
-	new[ft_strlen(new)] = '\'';
-	return (new);
+	save = new;
+	while (*str)
+	{
+		if (*str == '$')
+		{
+			*new = '\\';
+			new++;
+		}
+		*new = *str;
+		new++;
+		str++;
+	}	
+	return (save);
 }
 
 char	*get_userhome(char *user)
@@ -50,7 +76,7 @@ char	*get_home(t_str *word, int i)
 	char	*home;
 
 	if ((ft_cisin("/ \t\n\r", word->str[i])) || !(word->str[i]))
-		return (get_env_value("HOME"));
+		return (ft_strdup(get_env_value("HOME")));
 	while (!ft_cisin("/ \t\n\r", word->str[i]) && word->str[i])
 		i++;
 	if (!(user = ft_strndup(word->str, i)))
@@ -73,6 +99,7 @@ char	*get_home(t_str *word, int i)
 int		expand_tilde(t_str *word, int *index, int add_quote)
 {
 	char *home;
+	char *save;
 
 	ft_memmove(word->str + *index, word->str + *index + 1, word->len - *index);
 	word->len = word->len - 1;
@@ -80,11 +107,13 @@ int		expand_tilde(t_str *word, int *index, int add_quote)
 	home = get_home(word, *index);
 	if ((!home) || (*home == '\0'))
 		return (0);
+	save = home;
 	if ((add_quote) && (!(home = quote_home(home))))
 		return (MEMERR);
 	if (insert_str(word, index, home) == MEMERR)
 		return (MEMERR);
 	if (add_quote)
 		free(home);
+	free(save);
 	return (0);
 }

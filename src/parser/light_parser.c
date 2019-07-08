@@ -77,7 +77,7 @@ int			extract_autoc(t_lexer lex, t_autocomplete *autoc, char *line)
 		&& (ft_cisin(" \n\t\r", lex.line[ft_strlen(line) - 1])))
 		is_delim = true;
 	last = get_last_tk(lex.head, &first_word);
-	if (quote_removal(last) == MEMERR)
+	if ((handle_tilde(last) == MEMERR) || (quote_removal(last) == MEMERR))
 		return (MEMERR);
 	if (dispatch_autoc(last, autoc, is_delim, first_word) == MEMERR)
 	{

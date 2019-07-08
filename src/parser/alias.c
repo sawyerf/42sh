@@ -41,7 +41,7 @@ static t_token	*lex_alias(char *line, char **tab)
 	g_sh.mode = NONINTERACTIVE;
 	ft_bzero(&lexer, sizeof(t_lexer));
 	init_lexer(line, &lexer);
-	if (ft_lexer(&lexer))
+	if (ft_lexer(&lexer) == MEMERR)
 	{
 		g_sh.mode = save;
 		return (NULL);

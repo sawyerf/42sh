@@ -22,6 +22,7 @@ static int	init_shell(char **env, t_read_fn *read_fn, char **av)
 {
 	ft_bzero(&g_sh, sizeof(t_sh));
 	g_sh.av = av + 1;
+	g_sh.mode = MODEFILE;
 	if (isatty(STDIN_FILENO))
 		g_sh.mode = INTERACTIVE;
 	if (!(g_sh.env = ft_tabdup(env))

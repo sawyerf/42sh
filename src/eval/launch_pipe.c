@@ -43,7 +43,7 @@ int			launch_pipe(t_ast_node *tree, t_job *job)
 
 	if ((!job) && (!(job = make_job(1))))
 		return (MEMERR);
-	if (g_sh.mode == NONINTERACTIVE)
+	if (g_sh.mode != INTERACTIVE)
 		job->pgid = getpgrp();
 	if ((!(job->cmd_ln))
 			&& (!(job->cmd_ln = make_cmdline(tree->start, tree->end, 0))))

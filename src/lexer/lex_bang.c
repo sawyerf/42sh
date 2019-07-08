@@ -88,7 +88,7 @@ int		handle_bang(t_lexer *lx_st)
 	lx_st->cursor[1] = 0;
 	d = cmdisin(lx_st->line);
 	lx_st->cursor[1] = c;
-	if (g_sh.mode == NONINTERACTIVE
+	if (g_sh.mode != INTERACTIVE
 			|| ft_cisin("\n \t", *(lx_st->cursor + 1))
 			|| !*(lx_st->cursor + 1) || (d == '"' && lx_st->cursor[1] == '"'))
 		return (str_putc(&(lx_st->cursor), &(lx_st->token->data)));
