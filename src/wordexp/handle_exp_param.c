@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 17:57:13 by tduval            #+#    #+#             */
-/*   Updated: 2019/07/06 19:18:40 by tduval           ###   ########.fr       */
+/*   Updated: 2019/07/08 15:44:45 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ int				expand_param(t_token **word, char **cursor,
 	if (get_ifs(&ifs) == MEMERR)
 		return (MEMERR);
 	delete_varname(*cursor);
-	if ((!ifs) || (is_redir == FT_TRUE) || (!split_candidate(value, ifs)))
+	if ((!ifs) || ((*word)->type == ASSIGN)
+			|| (is_redir == FT_TRUE) || (!split_candidate(value, ifs)))
 	{
 		i = *cursor - (*word)->data.str;
 		if (c_insert_str(*word, *cursor, value) == MEMERR)
