@@ -6,7 +6,7 @@
 #    By: tduval <tduval@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/07/08 20:04:28 by ktlili           ###   ########.fr        #
+#    Updated: 2019/07/08 20:14:44 by apeyret          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -112,6 +112,7 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			lexer/lex_newline.c			\
 			lexer/memerror.c			\
 			lexer/lex_bang.c			\
+			lexer/get_bang.c			\
 			lexer/lex_quotes.c			\
 			lexer/lex_op.c				\
 			lexer/token_tools.c			\

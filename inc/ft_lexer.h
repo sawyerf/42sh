@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/08 20:05:12 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/08 20:17:14 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,8 @@ int		handle_bang(t_lexer *lx_st);
 int		handle_common_inner(t_lexer *lx_st);
 int		valid_sup_exp(char c);
 int		special_params(char c);
+int		simple_bang(t_lexer *lx_st);
+int		word_bang(t_lexer *lx_st);
+int		lenint(char *s);
+char	*desactivate_bang(char *s);
 #endif
