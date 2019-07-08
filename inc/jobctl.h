@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   jobctl.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/08 20:25:12 by ktlili            #+#    #+#             */
+/*   Updated: 2019/07/08 20:25:46 by ktlili           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef JOBCTL_H
 # define JOBCTL_H
 
 # include "sh_core.h"
-# include <termios.h> 
+# include <termios.h>
 # include <signal.h>
 # define SH_ABORT -1
 
-typedef struct s_cmd_tab t_cmd_tab;
+typedef struct s_cmd_tab	t_cmd_tab;
 
 t_job	*make_job(int fg);
 int		init_jobctl(void);

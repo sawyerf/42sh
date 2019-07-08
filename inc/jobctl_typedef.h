@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   jobctl_typedef.h                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/08 20:24:41 by ktlili            #+#    #+#             */
+/*   Updated: 2019/07/08 20:25:07 by ktlili           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef JOBCTL_TYPEDEF_H
 # define JOBCTL_TYPEDEF_H
 
@@ -12,12 +24,11 @@ typedef struct			s_job
 	int					notified;
 	int					completed;
 	int					stopped;
-	int					status; 
+	int					status;
 	int					builtin_exit;
 	struct termios		save_tio;
 	struct s_job		*next;
 	struct s_job		*prev;
 }						t_job;
-
 
 #endif

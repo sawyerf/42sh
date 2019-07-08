@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 17:57:13 by tduval            #+#    #+#             */
-/*   Updated: 2019/07/08 15:44:45 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/08 20:21:35 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,5 @@ int				handle_exp_param(t_token *word, t_bool is_redir)
 			cursor = c_next_bslash(cursor);
 		cursor++;
 	}
-	log_warn("Word-exp : [%s]\n", word->data.str);
 	return (0);
 }

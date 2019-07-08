@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/08 16:25:50 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/08 20:24:13 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ typedef struct			s_cmd_tab
 
 int						launch_command(t_cmd_tab *cmd, t_job *job);
 
-
 t_cmd_tab				*expand_pipeline(t_simple_cmd *cmd_lst);
 void					restore_fd(t_list *to_close);
 void					close_save(void);
@@ -78,7 +77,7 @@ char					**expand_word_lst(t_token *word);
 int						handle_redir(t_redir *redir_lst, t_list **head);
 int						apply_redir(t_redir *redir, t_list **head);
 int						handle_right(int *left_fd, int *right_fd,
-							t_redir *redir);
+					t_redir *redir);
 int						handle_perm(char *cmd_name);
 void					exit_wrap(int code, t_cmd_tab *cmd);
 int						pathfinder(t_cmd_tab *cmd);

@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:51:15 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/28 17:47:06 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/08 20:24:33 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,5 @@ int		next_squote(char *str, int index);
 int		next_dquote(char *str, int index);
 int		next_bslash(char *str, int index);
 int		handle_alias(t_token *word);
-
 
 #endif

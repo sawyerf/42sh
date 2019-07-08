@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/27 19:15:05 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/08 20:25:54 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <curses.h>
 # include <termios.h>
 # include <term.h>
-# include <termcap.h> 
+# include <termcap.h>
 # include <stdlib.h>
 # include <sys/ioctl.h>
 # include <sys/signal.h>
