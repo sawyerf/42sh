@@ -6,11 +6,22 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/14 16:01:57 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/27 16:20:43 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/08 16:26:36 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_eval.h"
+
+int		is_fifo(char *path)
+{
+	struct stat buf;
+
+	if (lstat(path, &buf) != 0)
+		return (0);
+	if (S_ISFIFO(buf.st_mode))
+		return (1);
+	return (0);
+}
 
 int		redir_fd_range(int fd)
 {

@@ -6,7 +6,7 @@
 #    By: tduval <tduval@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/07/08 13:23:46 by tduval           ###   ########.fr        #
+#    Updated: 2019/07/08 16:31:14 by ktlili           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,6 +85,7 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			eval/pre_execution.c		\
 			eval/expansion_tools.c		\
 			eval/launch_pipe.c			\
+			eval/background_subshell.c  \
 			hashtable/hashtable.c		\
 			hashtable/ht_files.c		\
 			hashtable/ht_spawnbin.c		\
@@ -164,6 +165,7 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			jobctl/foreground.c			\
 			jobctl/jobs_util.c			\
 			jobctl/register_job.c 		\
+			jobctl/reset_sig.c	 		\
 			matching/final_step.c		\
 			matching/layer_format.c		\
 			matching/matches.c			\

@@ -10,10 +10,10 @@
 
 
 ## TODO
-- sig handling && job control.
-- cd set_shell_env needs malloc checks. <= this
 
 ## DONE
+- ~~sig handling && job control.~~
+- ~~cd set_shell_env needs malloc checks. <= this~~
 - ~~moar testing on redirections.~~
 - ~~autocomplete after >& is wrong~~
 - ~~ajouter les variables $!, $\_ et $- et passer l'IFS sur les variables $\* et $@~~

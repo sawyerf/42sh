@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 17:46:08 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/01 20:34:12 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/08 16:26:17 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,6 @@ static int	fd_aggregator(int *left_fd, int *right_fd, t_redir *redir)
 		}
 	}
 	*right_fd = ft_atoi(redir->right->data.str);
-	return (0);
-}
-
-int			is_fifo(char *path)
-{
-	struct stat buf;
-
-	if (lstat(path, &buf) != 0)
-		return (0);
-	if (S_ISFIFO(buf.st_mode))
-		return (1);
 	return (0);
 }
 

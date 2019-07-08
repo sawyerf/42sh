@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/29 14:30:55 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/08 15:43:16 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/08 16:23:32 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*make_cmdline(t_token *start, t_token *end, int last)
 	while (iter)
 	{
 		ft_strcat(ln, iter->data.str);
-		if ((iter == end) || (!last && (iter = iter->next) == end))
+		if ((iter == end) || (((iter = iter->next) == end) && !last))
 			break ;
 		ft_strcat(ln, " ");
 	}

@@ -6,19 +6,12 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 22:17:22 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/05 13:10:20 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/08 16:05:58 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_core.h"
 #include "readline.h"
-
-int		valid_env_char(char c)
-{
-	if ((ft_isalnum(c)) || (c == '_'))
-		return (1);
-	return (0);
-}
 
 int		valid_env_name(char *str)
 {

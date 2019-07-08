@@ -6,11 +6,18 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 16:10:23 by ktlili            #+#    #+#             */
-/*   Updated: 2019/05/27 16:45:53 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/08 16:06:24 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh_core.h"
+
+int			valid_env_char(char c)
+{
+	if ((ft_isalnum(c)) || (c == '_'))
+		return (1);
+	return (0);
+}
 
 int			add_slash(char **path)
 {

@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/07 14:53:12 by ktlili            #+#    #+#             */
-/*   Updated: 2019/06/12 18:02:19 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/07/08 16:25:50 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,6 @@ void					remove_token(t_simple_cmd *cmd, t_token *todel);
 int						is_quoted(char *str);
 t_bool					check_fd(int fd);
 int						redir_fd_range(int left_fd);
+int						background_subshell(t_ast_node *tree);
+int						is_fifo(char *path);
 #endif

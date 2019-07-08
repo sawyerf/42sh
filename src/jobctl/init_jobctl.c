@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/01 18:47:50 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/01 19:55:26 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/08 16:30:38 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,27 +35,10 @@ int		ignore_sigs(void)
 	if ((sigaction(SIGQUIT, &new_act, NULL) < 0)
 		|| (sigaction(SIGTSTP, &new_act, NULL) < 0)
 		|| (sigaction(SIGTTIN, &new_act, NULL) < 0)
-		|| (sigaction(SIGTTOU, &new_act, NULL) < 0))
-	/*	|| (sigaction(SIGCHLD, &new_act, NULL) < 0)*/
-		return (SH_ABORT);
-	ft_printf("sig_ign set\n");
-	return (0);
-}
-
-int		reset_sig(void)
-{
-	struct sigaction new_act;
-
-	ft_bzero(&new_act, sizeof(struct sigaction));
-	new_act.sa_handler = SIG_DFL;
-	new_act.sa_flags = SA_RESTART;
-	if ((sigaction(SIGQUIT, &new_act, NULL) < 0)
-		|| (sigaction(SIGTSTP, &new_act, NULL) < 0)
-		|| (sigaction(SIGTTIN, &new_act, NULL) < 0)
 		|| (sigaction(SIGTTOU, &new_act, NULL) < 0)
-		|| (sigaction(SIGTERM, &new_act, NULL) < 0)
 		|| (sigaction(SIGCHLD, &new_act, NULL) < 0))
 		return (SH_ABORT);
+	ft_printf("sig_ign set\n");
 	return (0);
 }
 
