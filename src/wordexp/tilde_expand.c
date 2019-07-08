@@ -6,7 +6,7 @@
 /*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/06 18:53:17 by tduval           ###   ########.fr       */
+/*   Updated: 2019/07/08 17:30:23 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,13 @@ char	*get_userhome(char *user)
 	return (info->pw_dir);
 }
 
-char	*get_home(t_str *word)
+char	*get_home(t_str *word, int i)
 {
-	int		i;
 	char	*user;
 	char	*home;
 
-	if ((ft_cisin("/ \t\n\r", *word->str)) || !(*word->str))
+	if ((ft_cisin("/ \t\n\r", word->str[i])) || !(word->str[i]))
 		return (get_env_value("HOME"));
-	i = 0;
 	while (!ft_cisin("/ \t\n\r", word->str[i]) && word->str[i])
 		i++;
 	if (!(user = ft_strndup(word->str, i)))
@@ -79,7 +77,7 @@ int		expand_tilde(t_str *word, int *index, int add_quote)
 	ft_memmove(word->str + *index, word->str + *index + 1, word->len - *index);
 	word->len = word->len - 1;
 	word->str[word->len] = '\0';
-	home = get_home(word);
+	home = get_home(word, *index);
 	if ((!home) || (*home == '\0'))
 		return (0);
 	if ((add_quote) && (!(home = quote_home(home))))
