@@ -75,5 +75,5 @@ void	delete_varname(char *cursor);
 void	replace_token(t_token **wd, t_token *wd_2, t_token *ir, char **cursor);
 char	*quote_str(char *str);
 char	*expand_str(char *cursor);
-
+int		is_expandable(char *cursor, int in_dquote);
 #endif

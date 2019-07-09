@@ -1,12 +1,5 @@
 #include "ft_wordexp.h"
 
-
-/*
-int	is_expandable(char *cursor)
-{
-
-}
-*/
 int	expand_classic(t_str *s, char **cursor,
 		char *value)
 {
@@ -45,6 +38,14 @@ void	quote_removal_tk(t_str *s)
 	quote_removal(&t);
 }
 
+int		is_expandable(char *cursor, int in_dquote)
+{
+	if ((*cursor == '$') && (*(cursor + 1) != 0)
+		&& !((in_dquote == -1) && (*(cursor + 1) == '"')))
+		return (1);
+	return (0);
+}
+
 char	*expand_str(char *cursor)
 {
 	char	*value;
@@ -59,8 +60,7 @@ char	*expand_str(char *cursor)
 	{
 		if (*cursor == '"')
 			inside_dquote = -inside_dquote;
-			//should be is expandable
-		if ((*cursor == '$') && (*(cursor + 1) != 0))
+		if (is_expandable(cursor, inside_dquote))
 		{
 			value = classic_sub(cursor);	
 			if (expand_classic(&result, &cursor, value) == MEMERR)
