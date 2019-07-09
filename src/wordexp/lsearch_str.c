@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lsearch_str.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 18:42:18 by tduval            #+#    #+#             */
-/*   Updated: 2019/07/06 18:58:03 by tduval           ###   ########.fr       */
+/*   Updated: 2019/07/09 11:59:19 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char		*assign_word_if_null(char *cursor, char *zone)
 
 	cursor++;
 	var_name = NULL;
+	if (*cursor == ':')
+		sub_error(cursor, BAD_SUB);
 	var_name = get_var_exp(cursor);
 	env_value = ft_strdup(get_env_value(var_name));
 	if (!env_value)
@@ -42,6 +44,9 @@ char		*classic_sub(char *cursor)
 	env_value = NULL;
 	env_var = get_var_exp(cursor);
 	log_warn("-------------------- classic_sub -------------------");
+	log_warn("cursor : [%s] | env_var [%s]", cursor, env_var);
+	if (*cursor == ':')
+		sub_error(cursor, BAD_SUB);
 	if (env_var)
 	{
 		env_value = dget_env_value(env_var);

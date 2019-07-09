@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pattern_matching.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 18:35:56 by tduval            #+#    #+#             */
-/*   Updated: 2019/07/06 18:37:09 by tduval           ###   ########.fr       */
+/*   Updated: 2019/07/09 12:02:16 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ bool			lsearch_rev_str(char *str, char *search, int *nb_del)
 
 char			*rev_pattern_matching(char *cursor, char *zone, int mode)
 {
+	log_warn("------------ rev_pattern_matching ---------------------\n");
 	char	*var_name;
 	char	*env_value;
 	char	*cmp;
@@ -92,7 +93,8 @@ char			*rev_pattern_matching(char *cursor, char *zone, int mode)
 	var_name = get_var_exp(cursor);
 	cmp = check_second_exp_var(zone);
 	env_value = ft_strdup(get_env_value(var_name));
-	log_warn("------------ pattern_matching ---------------------\n");
+	if (*cursor == '%')
+		sub_error(cursor, BAD_SUB);
 	if (mode)
 		status = lsearch_rev_str(env_value, cmp, &nb_del);
 	else

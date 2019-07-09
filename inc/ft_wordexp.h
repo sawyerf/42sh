@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_wordexp.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 18:04:30 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/06 19:03:11 by tduval           ###   ########.fr       */
+/*   Updated: 2019/07/09 11:52:03 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int		filename_expansion(t_token *word, t_bool is_redir);
 char	*exp_sup(char *cursor, bool classic_substitute);
 char	*get_var_exp(char *cursor);
 char	*substitute_word_if_null(char *cursor, char *zone);
+void	sub_error(char *cursor, int err);
 bool	lsearch_rev_str(char *str, char *search, int *nb_del);
 bool	bsearch_rev_str(char *str, char *search, int *nb_del);
 char	*check_second_exp_var(char *zone);

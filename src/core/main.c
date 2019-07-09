@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/08 19:33:24 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/09 11:35:28 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,9 @@ int			exit_jobs(void)
 int			main(int ac, char **av, char **env)
 {
 	t_read_fn	read_fn;
-
+// // LOGGER   ---------------------------------------------------------------
+        logger_init(D_TRACE, "out.log");
+// // LOGGER   ---------------------------------------------------------------
 	(void)av[ac];
 	if (init_shell(env, &read_fn, av))
 	{

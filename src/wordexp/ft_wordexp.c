@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_wordexp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/06 19:05:45 by tduval           ###   ########.fr       */
+/*   Updated: 2019/07/09 11:59:05 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,13 @@ int			quote_fields(char **fields)
 		i++;
 	}
 	return (0);
+}
+
+void		sub_error(char *cursor, int err)
+{
+	if (err == BAD_SUB)
+		ft_dprintf(2, "{%s : bad substitution", cursor);
+	g_sh.status = 1;
 }
 
 int			ft_wordexp(t_token *word, t_bool is_redir)

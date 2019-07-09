@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   substitute_if_null.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 18:50:51 by tduval            #+#    #+#             */
-/*   Updated: 2019/07/06 18:50:52 by tduval           ###   ########.fr       */
+/*   Updated: 2019/07/09 11:55:02 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,11 @@ char			*substitute_word_if_null(char *cursor, char *zone)
 	char	*env_value;
 
 	cursor++;
+	log_info("substitute_if_null : cursor [%s] | zone [%s]", cursor, zone);
 	var_name = NULL;
 	env_value = NULL;
+	if (*cursor == ':')
+		sub_error(cursor, BAD_SUB);
 	var_name = get_var_exp(cursor);
 	env_value = ft_strdup(get_env_value(var_name));
 	if (!env_value)
