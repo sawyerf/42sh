@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_jobctl.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/01 18:47:50 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/08 17:04:17 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/09 12:57:44 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int		ignore_sigs(void)
 		|| (sigaction(SIGTTIN, &new_act, NULL) < 0)
 		|| (sigaction(SIGTTOU, &new_act, NULL) < 0))
 		return (SH_ABORT);
-	ft_printf("sig_ign set\n");
 	return (0);
 }
 
@@ -61,7 +60,6 @@ int		init_jobctl(void)
 	pid_t	pgid;
 	pid_t	fg_p;
 
-	ft_printf("initjobctl\n");
 	while (42)
 	{
 		if ((pgid = getpgrp()) == -1)

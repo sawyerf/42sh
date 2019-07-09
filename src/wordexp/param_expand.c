@@ -3,28 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   param_expand.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/08 20:21:21 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/09 12:04:35 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_wordexp.h"
 #include "ft_patmatch.h"
-
-void			print_array(char **array)
-{
-	int i;
-
-	i = 0;
-	log_info("print array");
-	while (array[i])
-	{
-		log_info("%s", array[i]);
-		i++;
-	}
-}
 
 static size_t	quote_str_len(char *str)
 {
@@ -72,10 +59,17 @@ char			*quote_str(char *str)
 char			*check_second_exp_var(char *zone)
 {
 	char	*var_name;
+	char	*exp;
 
 	var_name = NULL;
 	if (ft_strlen(zone) > 2)
+	{
 		var_name = ft_strsub(zone, 1, ft_strchr(zone, '}') - zone - 1);
+		if (!(exp = expand_str(var_name)))
+			return (NULL);
+		ft_strdel(&var_name);
+		var_name = exp;
+	}
 	return (var_name);
 }
 

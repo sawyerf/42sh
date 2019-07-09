@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_wordexp.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 18:04:30 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/06 19:03:11 by tduval           ###   ########.fr       */
+/*   Updated: 2019/07/09 12:58:14 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int		filename_expansion(t_token *word, t_bool is_redir);
 char	*exp_sup(char *cursor, bool classic_substitute);
 char	*get_var_exp(char *cursor);
 char	*substitute_word_if_null(char *cursor, char *zone);
+void	sub_error(char *cursor, int err);
 bool	lsearch_rev_str(char *str, char *search, int *nb_del);
 bool	bsearch_rev_str(char *str, char *search, int *nb_del);
 char	*check_second_exp_var(char *zone);
@@ -69,9 +70,13 @@ int		quote_removal(t_token *word);
 int		insert_str(t_str *word, int *index, char *to_insert);
 int		tilde_valid(char c);
 int		expand_tilde(t_str *word, int *index, int add_quote);
+size_t	count_dollars(char *str);
 char	*ft_next_field(char *value, char *ifs);
 int		get_ifs(char **ifs);
 void	delete_varname(char *cursor);
 void	replace_token(t_token **wd, t_token *wd_2, t_token *ir, char **cursor);
 char	*quote_str(char *str);
+char	*expand_str(char *cursor);
+int		is_expandable(char *cursor, int in_dquote);
+
 #endif

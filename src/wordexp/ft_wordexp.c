@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_wordexp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
 /*   Updated: 2019/07/09 12:16:24 by ktlili           ###   ########.fr       */
@@ -55,12 +55,17 @@ int			quote_fields(char **fields)
 	return (0);
 }
 
+void		sub_error(char *cursor, int err)
+{
+	if (err == BAD_SUB)
+		ft_dprintf(2, "{%s : bad substitution", cursor);
+	g_sh.status = 1;
+}
+
 int			ft_wordexp(t_token *word, t_bool is_redir)
 {
 	t_token *save;
 
-	log_info("------------  ft_wordexp -------------------------");
-	log_info("Word : [%s]", word->data.str);
 	if (handle_tilde(word) == MEMERR)
 		return (MEMERR);
 	save = word->next;

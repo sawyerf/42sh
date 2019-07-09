@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tduval <tduval@student.42.fr>              +#+  +:+       +#+         #
+#    By: apeyret <apeyret@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
 #    Updated: 2019/07/09 13:28:26 by ktlili           ###   ########.fr        #
@@ -104,6 +104,8 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			wordexp/field_split_tools.c \
 			wordexp/handle_exp_param.c	\
 			wordexp/handle_tilde.c		\
+			wordexp/expand_str.c		\
+			wordexp/tools.c				\
 			lexer/ft_realloc.c			\
 			lexer/lex_common.c			\
 			lexer/request_new_line.c	\
@@ -216,9 +218,7 @@ norm:
 $(NAME): $(OBJ)
 	@printf "\033[0;32m[42sh] Compilation [OK]\033[0;0m\n"
 	@make -C libft/
-	@make -C logger/
-	@$(CC) $(CFLAGS) $(DEBUG) $(OBJ) libft/libft.a -I logger \
-	logger/liblogger.a -lncurses -o $(NAME)
+	@$(CC) $(CFLAGS) $(DEBUG) $(OBJ) libft/libft.a -lncurses -o $(NAME)
 
 clean:
 	@make clean -C libft/
