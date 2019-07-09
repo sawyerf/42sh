@@ -6,7 +6,7 @@
 /*   By: glavigno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 18:44:50 by glavigno          #+#    #+#             */
-/*   Updated: 2019/04/29 14:19:17 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/09 14:56:30 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char				*pf_putchar(t_printf *lst, char c);
 char				*pf_addsp(char *s, int n);
 char				*pf_ftoa(t_printf *lst, double n);
 char				*pf_ftoa_exep(t_printf *lst, double n);
-void				pf_prdel(t_printf **lst);
+void				*pf_prdel(t_printf **lst);
 void				pf_replace(char *s, char c1, char c2, int len);
 void				pf_router(t_printf *lst, va_list ap);
 
