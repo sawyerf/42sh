@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 18:19:37 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/27 19:08:25 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/09 14:42:25 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,18 @@ int		rdl_realloc(t_rdl *rdl)
 void	ft_rdlcpy(t_rdl *rdl, char *str)
 {
 	int	count;
+	int	i;
 
+	i = 0;
 	count = 0;
 	while (str[count])
 	{
+		//ft_printf("size=%d malloc=%d rdl->curs+count=%d\n", rdl->size, rdl->allo, rdl->curs + count);
 		if (ft_isprint(str[count]) || str[count] == '\n')
-			rdl->str[rdl->curs + count] = str[count];
+		{
+			rdl->str[rdl->curs + i] = str[count];
+			i++;
+		}
 		count++;
 	}
 }
