@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 18:04:30 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/09 12:58:14 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/07/09 13:55:16 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,9 @@ void	delete_varname(char *cursor);
 void	replace_token(t_token **wd, t_token *wd_2, t_token *ir, char **cursor);
 char	*quote_str(char *str);
 char	*expand_str(char *cursor);
+char	*expand_str_routine(char *cursor, int inside_dquote, t_str result,\
+		char *value);
+int		expand_classic(t_str *s, char **cursor, char *value);
 int		is_expandable(char *cursor, int in_dquote);
 
 #endif

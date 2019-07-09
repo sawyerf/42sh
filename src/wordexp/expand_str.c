@@ -6,17 +6,16 @@
 /*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 12:52:36 by juhallyn          #+#    #+#             */
-/*   Updated: 2019/07/09 12:52:38 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/07/09 14:02:03 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_wordexp.h"
 
-int	expand_classic(t_str *s, char **cursor,
-		char *value)
+int		expand_classic(t_str *s, char **cursor, char *value)
 {
 	int		i;
-	int	dummy;
+	int		dummy;
 
 	delete_varname(*cursor);
 	i = *cursor - s->str;
@@ -41,15 +40,6 @@ int		init_t_str(t_str *s, char *tocpy)
 	return (0);
 }
 
-void	quote_removal_tk(t_str *s)
-{
-	t_token t;
-
-	ft_bzero(&t, sizeof(t_token));
-	ft_memcpy(&t.data, s, sizeof(t_str));
-	quote_removal(&t);
-}
-
 int		is_expandable(char *cursor, int in_dquote)
 {
 	if ((*cursor == '$') && (*(cursor + 1) != 0)
@@ -66,26 +56,8 @@ char	*expand_str(char *cursor)
 
 	if (init_t_str(&result, cursor))
 		return (NULL);
+	value = NULL;
 	cursor = result.str;
 	inside_dquote = 1;
-	while (*cursor)
-	{
-		if (*cursor == '"')
-			inside_dquote = -inside_dquote;
-		if (is_expandable(cursor, inside_dquote))
-		{
-			value = classic_sub(cursor);
-			if (expand_classic(&result, &cursor, value) == MEMERR)
-				return (NULL);
-			ft_strdel(&value);
-			continue;
-		}
-		else if ((*cursor == '\'') && (inside_dquote == 1))
-			cursor = c_next_squote(cursor);
-		else if (*cursor == '\\')
-			cursor = c_next_bslash(cursor);
-		cursor++;
-	}
-	quote_removal_tk(&result);
-	return (result.str);
+	return (expand_str_routine(cursor, inside_dquote, result, value));
 }

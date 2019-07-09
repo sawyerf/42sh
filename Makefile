@@ -6,7 +6,7 @@
 #    By: apeyret <apeyret@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/07/09 13:28:26 by ktlili           ###   ########.fr        #
+#    Updated: 2019/07/09 13:53:10 by juhallyn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -105,6 +105,7 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			wordexp/handle_exp_param.c	\
 			wordexp/handle_tilde.c		\
 			wordexp/expand_str.c		\
+			wordexp/expand_routine.c	\
 			wordexp/tools.c				\
 			lexer/ft_realloc.c			\
 			lexer/lex_common.c			\

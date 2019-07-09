@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/05 23:07:32 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/09 12:52:18 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/07/09 13:44:05 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int			exit_jobs(void)
 int			main(int ac, char **av, char **env)
 {
 	t_read_fn	read_fn;
-	
+
 	(void)av[ac];
 	if (init_shell(env, &read_fn, av))
 	{
