@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/06 19:05:45 by tduval           ###   ########.fr       */
+/*   Updated: 2019/07/09 12:16:24 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,13 @@ int			ft_wordexp(t_token *word, t_bool is_redir)
 	save = word->next;
 	if (handle_exp_param(word, is_redir) == MEMERR)
 		return (MEMERR);
+	set_interrupt(1);
 	if (filename_expansion(word, is_redir) == MEMERR)
+	{
+		set_interrupt(0);
 		return (MEMERR);
+	}
+	set_interrupt(0);
 	if (quote_removal(word) == MEMERR)
 		return (MEMERR);
 	return (0);
