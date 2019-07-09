@@ -3,28 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   param_expand.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/08 20:21:21 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/09 12:04:35 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_wordexp.h"
 #include "ft_patmatch.h"
-
-void			print_array(char **array)
-{
-	int i;
-
-	i = 0;
-	log_info("print array");
-	while (array[i])
-	{
-		log_info("%s", array[i]);
-		i++;
-	}
-}
 
 static size_t	quote_str_len(char *str)
 {

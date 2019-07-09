@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 18:42:18 by tduval            #+#    #+#             */
-/*   Updated: 2019/07/09 11:59:19 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/07/09 12:04:25 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ char		*classic_sub(char *cursor)
 	env_var = NULL;
 	env_value = NULL;
 	env_var = get_var_exp(cursor);
-	log_warn("-------------------- classic_sub -------------------");
-	log_warn("cursor : [%s] | env_var [%s]", cursor, env_var);
 	if (*cursor == ':')
 		sub_error(cursor, BAD_SUB);
 	if (env_var)
@@ -122,14 +120,11 @@ bool		lsearch_str(char *str, char *search, int *nb_del)
 		{
 			str[i] = c;
 			*nb_del = i;
-			log_info("str [%s] | search [%s] | nb_del [%d]",
-					str, search, *nb_del);
 			return (true);
 		}
 		str[i] = c;
 		i++;
 	}
 	*nb_del = 0;
-	log_info("str [%s] | search [%s] | nb_del [%d]", str, search, *nb_del);
 	return (false);
 }

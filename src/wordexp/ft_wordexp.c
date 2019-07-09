@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/09 11:59:05 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/07/09 12:04:01 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ int			ft_wordexp(t_token *word, t_bool is_redir)
 {
 	t_token *save;
 
-	log_info("------------  ft_wordexp -------------------------");
-	log_info("Word : [%s]", word->data.str);
 	if (handle_tilde(word) == MEMERR)
 		return (MEMERR);
 	save = word->next;

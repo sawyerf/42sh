@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_exp_param.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 17:57:13 by tduval            #+#    #+#             */
-/*   Updated: 2019/07/08 20:21:35 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/09 12:04:08 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ char			*exp_sup(char *cursor, bool classic_substitute)
 	char	*tmp;
 	char	*result;
 
-	log_info("-------------->  exp_sup");
 	if (classic_substitute)
 		return (classic_sub(cursor));
 	result = NULL;

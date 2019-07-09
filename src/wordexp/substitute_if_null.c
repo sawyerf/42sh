@@ -6,7 +6,7 @@
 /*   By: tduval <tduval@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 18:50:51 by tduval            #+#    #+#             */
-/*   Updated: 2019/07/09 11:55:02 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/07/09 12:04:53 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ char			*substitute_by_len(char *cursor)
 	result = NULL;
 	var_name = get_var_exp(cursor);
 	env_value = ft_strdup(get_env_value(var_name));
-	log_info("--------------> substitute_by_len");
 	if (ft_strequ(var_name, "#"))
 		result = ft_itoa(1);
 	else
@@ -49,7 +48,6 @@ char			*substitute_word_if_null(char *cursor, char *zone)
 	char	*env_value;
 
 	cursor++;
-	log_info("substitute_if_null : cursor [%s] | zone [%s]", cursor, zone);
 	var_name = NULL;
 	env_value = NULL;
 	if (*cursor == ':')
