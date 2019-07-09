@@ -6,7 +6,7 @@
 #    By: tduval <tduval@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/07/08 20:14:44 by apeyret          ###   ########.fr        #
+#    Updated: 2019/07/09 12:08:35 by juhallyn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -217,9 +217,7 @@ norm:
 $(NAME): $(OBJ)
 	@printf "\033[0;32m[42sh] Compilation [OK]\033[0;0m\n"
 	@make -C libft/
-	@make -C logger/
-	@$(CC) $(CFLAGS) $(DEBUG) $(OBJ) libft/libft.a -I logger \
-	logger/liblogger.a -lncurses -o $(NAME)
+	@$(CC) $(CFLAGS) $(DEBUG) $(OBJ) libft/libft.a -lncurses -o $(NAME)
 
 clean:
 	@make clean -C libft/
