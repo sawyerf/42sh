@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:50:56 by apeyret           #+#    #+#             */
-/*   Updated: 2019/07/08 20:25:54 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/09 11:11:26 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,4 +169,5 @@ char				cmdisin(char *cmd);
 int					lenbefore(t_rdl *rdl, int real);
 int					rdl_realloc(t_rdl *rdl);
 void				ctrlr_del(t_rdl *hst);
+void				unsetsig(void);
 #endif

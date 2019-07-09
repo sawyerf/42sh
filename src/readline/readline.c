@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:48:42 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/25 15:43:40 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/09 11:11:29 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ int		readline(char *prompt, char **str)
 	if (!termreset(&(g_rdl.save)) || stet > 1)
 		ft_strdel(&g_rdl.str);
 	*str = g_rdl.str;
+	unsetsig();
 	return (stet - 1);
 }

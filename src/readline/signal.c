@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 14:37:16 by apeyret           #+#    #+#             */
-/*   Updated: 2019/02/26 14:07:01 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/09 11:11:16 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,10 @@ void	setsig(void)
 {
 	signal(SIGWINCH, &resize);
 	signal(SIGINT, &nothing);
+}
+
+void	unsetsig(void)
+{
+	signal(SIGWINCH, SIG_DFL);
+	signal(SIGINT, SIG_DFL);
 }
