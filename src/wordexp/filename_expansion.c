@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 19:01:06 by tduval            #+#    #+#             */
-/*   Updated: 2019/07/08 13:24:40 by tduval           ###   ########.fr       */
+/*   Updated: 2019/07/09 12:14:47 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,9 @@ int			filename_expansion(t_token *word, t_bool is_redir)
 	if (is_redir)
 		return (0);
 	if (!(fields = ret_matches(word->data.str)))
-		return (MEMERR);
+	{
+		return (0);
+	}
 	if (ft_strequ(word->data.str, *fields))
 	{
 		free_tab(fields);

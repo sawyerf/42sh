@@ -14,6 +14,7 @@
 #include <dirent.h>
 #include "libft.h"
 #include "ft_patmatch.h"
+#include "sh_core.h"
 
 static char		*get_current_pattern(char *pattern)
 {
@@ -54,8 +55,8 @@ static t_lfiles	*get_files(t_lfiles *lst, char *pattern, int i)
 	lists[TMP_LST] = lst;
 	if (!(str[CURPATTERN] = get_current_pattern(str[PATTERN])))
 		return (NULL);
-	while (lists[TMP_LST] && lists[TMP_LST]->next
-			&& lists[TMP_LST]->layer != i - 1)
+	while ((!g_sh.interrupt) && (lists[TMP_LST] && lists[TMP_LST]->next
+			&& lists[TMP_LST]->layer != i - 1))
 		lists[TMP_LST] = lists[TMP_LST]->next;
 	while (lists[TMP_LST] && lists[TMP_LST]->layer == i - 1)
 	{

@@ -72,6 +72,7 @@ typedef struct			s_sh
 	t_job				*current_j;
 	t_job				*previous_j;
 	struct termios		term_save;
+	int					interrupt;
 }						t_sh;
 
 typedef	struct			s_sig
@@ -145,5 +146,5 @@ void					print_sigexit(t_job *job);
 int						exit_jobs(void);
 void					shrc(void);
 int						readnrun(t_read_fn	read_fn);
-
+int						set_interrupt(int set);
 #endif
