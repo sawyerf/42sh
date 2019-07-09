@@ -6,7 +6,7 @@
 /*   By: tduval <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/24 19:12:51 by tduval            #+#    #+#             */
-/*   Updated: 2019/06/29 05:47:48 by tduval           ###   ########.fr       */
+/*   Updated: 2019/07/09 13:16:01 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,14 @@ char		*go_last(char *str)
 
 void		*free_lst(t_lfiles *lst)
 {
-	if (lst && lst->next)
-		free_lst(lst->next);
-	if (lst)
+	t_lfiles *save;
+
+	while (lst)
 	{
+		save = lst->next;
 		ft_strdel(&(lst->path));
 		ft_memdel((void **)&lst);
+		lst = save;
 	}
 	return (NULL);
 }
