@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/09 16:14:21 by apeyret           #+#    #+#             */
-/*   Updated: 2019/04/29 14:21:45 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/09 14:01:25 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_opt			pf_optnew(void)
 	return (opt);
 }
 
-void			pf_prdel(t_printf **lst)
+void			*pf_prdel(t_printf **lst)
 {
 	t_printf	*tmp;
 	t_printf	*lstmp;
@@ -57,6 +57,7 @@ void			pf_prdel(t_printf **lst)
 		lstmp = tmp;
 	}
 	*lst = NULL;
+	return (NULL);
 }
 
 t_printf		*ft_pushback(t_printf *lst, t_printf *add)
