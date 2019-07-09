@@ -6,7 +6,7 @@
 /*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/10 18:04:30 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/09 11:52:03 by juhallyn         ###   ########.fr       */
+/*   Updated: 2019/07/09 12:58:14 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int		quote_removal(t_token *word);
 int		insert_str(t_str *word, int *index, char *to_insert);
 int		tilde_valid(char c);
 int		expand_tilde(t_str *word, int *index, int add_quote);
+size_t	count_dollars(char *str);
 char	*ft_next_field(char *value, char *ifs);
 int		get_ifs(char **ifs);
 void	delete_varname(char *cursor);
@@ -77,4 +78,5 @@ void	replace_token(t_token **wd, t_token *wd_2, t_token *ir, char **cursor);
 char	*quote_str(char *str);
 char	*expand_str(char *cursor);
 int		is_expandable(char *cursor, int in_dquote);
+
 #endif

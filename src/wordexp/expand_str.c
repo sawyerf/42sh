@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expand_str.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: juhallyn <juhallyn@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/09 12:52:36 by juhallyn          #+#    #+#             */
+/*   Updated: 2019/07/09 12:52:38 by juhallyn         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_wordexp.h"
 
 int	expand_classic(t_str *s, char **cursor,
@@ -5,7 +17,7 @@ int	expand_classic(t_str *s, char **cursor,
 {
 	int		i;
 	int	dummy;
-	
+
 	delete_varname(*cursor);
 	i = *cursor - s->str;
 	dummy = i;
@@ -62,7 +74,7 @@ char	*expand_str(char *cursor)
 			inside_dquote = -inside_dquote;
 		if (is_expandable(cursor, inside_dquote))
 		{
-			value = classic_sub(cursor);	
+			value = classic_sub(cursor);
 			if (expand_classic(&result, &cursor, value) == MEMERR)
 				return (NULL);
 			ft_strdel(&value);

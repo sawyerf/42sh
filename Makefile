@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tduval <tduval@student.42.fr>              +#+  +:+       +#+         #
+#    By: apeyret <apeyret@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/10 18:24:48 by apeyret           #+#    #+#              #
-#    Updated: 2019/07/09 12:08:35 by juhallyn         ###   ########.fr        #
+#    Updated: 2019/07/09 12:54:35 by juhallyn         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -105,6 +105,7 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			wordexp/handle_exp_param.c	\
 			wordexp/handle_tilde.c		\
 			wordexp/expand_str.c		\
+			wordexp/tools.c				\
 			lexer/ft_realloc.c			\
 			lexer/lex_common.c			\
 			lexer/request_new_line.c	\

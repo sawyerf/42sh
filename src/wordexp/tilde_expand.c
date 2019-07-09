@@ -3,38 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   tilde_expand.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ktlili <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: ktlili <ktlili@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/12 20:19:43 by ktlili            #+#    #+#             */
-/*   Updated: 2019/07/08 17:30:23 by ktlili           ###   ########.fr       */
+/*   Updated: 2019/07/09 12:53:48 by juhallyn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_wordexp.h"
 #include "pwd.h"
-
-int		tilde_valid(char c)
-{
-	if (ft_isalpha(c))
-		return (1);
-	if ((c == 0) || (c == '/') || (c == ':'))
-		return (1);
-	return (0);
-}
-
-size_t	count_dollars(char *str)
-{
-	size_t	count;
-
-	count = 0;
-	while (*str)
-	{
-		if (*str == '$')
-			count++;
-		str++;
-	}
-	return (count);
-}
 
 char	*quote_home(char *str)
 {
@@ -57,7 +34,7 @@ char	*quote_home(char *str)
 		*new = *str;
 		new++;
 		str++;
-	}	
+	}
 	return (save);
 }
 
