@@ -104,6 +104,7 @@ SRC_FILE =	builtins/cd_l_p.c			\
 			wordexp/field_split_tools.c \
 			wordexp/handle_exp_param.c	\
 			wordexp/handle_tilde.c		\
+			wordexp/expand_str.c		\
 			lexer/ft_realloc.c			\
 			lexer/lex_common.c			\
 			lexer/request_new_line.c	\

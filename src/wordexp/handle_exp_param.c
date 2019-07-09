@@ -117,6 +117,7 @@ int				handle_exp_param(t_token *word, t_bool is_redir)
 	{
 		if (*cursor == '"')
 			inside_dquote = -inside_dquote;
+			//should be is expandable
 		if ((*cursor == '$') && (*(cursor + 1) != 0))
 		{
 			if ((!(value = build_param(cursor))

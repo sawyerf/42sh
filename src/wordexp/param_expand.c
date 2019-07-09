@@ -72,10 +72,17 @@ char			*quote_str(char *str)
 char			*check_second_exp_var(char *zone)
 {
 	char	*var_name;
+	char	*exp;
 
 	var_name = NULL;
 	if (ft_strlen(zone) > 2)
+	{
 		var_name = ft_strsub(zone, 1, ft_strchr(zone, '}') - zone - 1);
+		if (!(exp = expand_str(var_name)))
+			return (NULL);
+		ft_strdel(&var_name);
+		var_name = exp;
+	}
 	return (var_name);
 }
 
