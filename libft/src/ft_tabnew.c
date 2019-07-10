@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/21 19:17:08 by apeyret           #+#    #+#             */
-/*   Updated: 2018/12/21 19:39:24 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/10 12:26:14 by ktlili           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	**ft_tabnew(size_t size)
 	size_t	count;
 
 	count = 0;
-	if (!(tab = (char**)malloc(sizeof(char**) * (size + 1))))
+	if (!(tab = (char**)malloc(sizeof(char*) * (size + 1))))
 		return (NULL);
 	while (count < size + 1)
 	{
