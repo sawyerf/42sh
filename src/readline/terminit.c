@@ -6,7 +6,7 @@
 /*   By: apeyret <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 14:49:43 by apeyret           #+#    #+#             */
-/*   Updated: 2019/06/27 16:20:50 by apeyret          ###   ########.fr       */
+/*   Updated: 2019/07/10 12:41:59 by apeyret          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	printmagicdollar(void)
 
 int		terminit(struct termios *save)
 {
-	char			buf[2048];
 	char			tname[1024];
 	struct termios	term;
 
@@ -46,7 +45,7 @@ int		terminit(struct termios *save)
 	if (!get_env_value("TERM"))
 		cexport("TERM=xterm-256color");
 	ft_strcpy(tname, get_env_value("TERM"));
-	tgetent(buf, tname);
+	tgetent(NULL, tname);
 	if (save)
 		if (tcgetattr(0, save) == -1)
 			return (0);
