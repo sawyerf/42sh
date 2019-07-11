@@ -1,47 +1,33 @@
 # 42sh
 
-## Features
-- Historique (finis)
-- Autocompletions (finis)
-- Inhibiteurs (finis)
-- Table de hash (finis)
-- Tilde/${para:word} (en cours)
-- globing (en cours)
+## Description
+42sh, is the compilation of projects minishell, 21sh and 42sh. That consist to make a reproduction of bash in C during 5 months with 4 team members. This project make us learn all background of a shell (lexer, parser, execution, job control, readline, variable, etc) and make us perfect our knowledge in bash language. With the main part we made some ![features and bonus](#Features-and-Bonus).
 
+## Features and Bonus
+- History
+  - fc builtins
+  - ! expansions
+  - History File
+  - Ctrl+R
+- Autocompletions
+  - Contextual and dynamic
+- Inhibiteurs
+  `"`, `'`, `\`
+- Tilde and additional parameter
+  - ${var:para}
+- Globing
+  - `*`, `!`, `[]`, `?`
+- Alias
+- Personnalisation of the prompt
 
-## TODO
-
-## DONE
-- ~~sig handling && job control.~~
-- ~~cd set_shell_env needs malloc checks. <= this~~
-- ~~moar testing on redirections.~~
-- ~~autocomplete after >& is wrong~~
-- ~~ajouter les variables $!, $\_ et $- et passer l'IFS sur les variables $\* et $@~~
-- ~~export builtin, set && unset missing stuff.~~
-- ~~replace printf/write(2, etc.. by dprintf~~
-- ~~IFS in ft_wordexp is broken on IFS != ` \n\t` and quote removal~~
-- ~~backslash and single quotes bugged: `var='\'\'\'\''' ; echo $var`~~
-- ~~field splitting has to be handled in handle_exp_param/build_param~~
-- ~~empty cmdname with redir should apply redir~~
-- ~~subtle difference between '$notexistant;' and '"";' needs to be fixed ft_wordexp~~
-- ~~del la hashtable quand on modifie le PATH~~
-- ~~move full path bin checking out of fork~~
-- ~~Parameter expansions has invalid read/write on multiline command with ' or "~~
-- ~~finir la feature historique~~
-
-## Bug
-|check|     `command`     |                result               | info complementaire |
-|:---:|:-----------------:|:-----------------------------------:|:-------------------:|
-|     | `ls<ctrl+n>ls`    | erreur dans le parser               |faut considerer les `\n` comme des separateur de commande|
-|     | `ls \ <tab>`      | ca ne comprends le ' '              ||
-|     | `ls "file <tab>`  | ne considere pas le debut des quote ||
-|  ✓  | `ls "<tab>`       | ne referme pas les quotes           ||
-|  ✓  | `ls '<tab><ctrl+c/d`| segfault |la fonction est surement readline appele dans light_parser||
-|  ✓  | ` `               | 42sh: syntax error near : '' + exit ||
-|  ✓  | `env - i ./42sh ` | double free						    ||
-|  ✓  | `ls \\n` + Ctrl+c | 42sh: premature EOF + exit          ||
-|  ✓  | `ls "\n` + Ctrl+c | 42sh: premature EOF + exit          ||
-|  ✓  | `fc -s` apres celle d'avant | boucle infini | UPDATE: added MODE_FC in sh_core.h and in request_new_line--le terminale est en NONINTERACTIVE quand la commande est lancer 2. s'arrete avec Ctrl+d |
+## Builtins
+- set/unset
+- export
+- exit
+- fc 
+- type
+- alias
+- fg/bg
 
 ## READLINE
 ### Return
