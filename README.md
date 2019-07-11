@@ -1,7 +1,7 @@
 # 42sh
 
 ## Description
-42sh, is the compilation of projects minishell, 21sh and 42sh. That consist to make a reproduction of bash in C during 5 months with 4 team members. This project make us learn all background of a shell (lexer, parser, execution, job control, readline, variable, etc) and make us perfect our knowledge in bash language. With the main part we made some ![features and bonus](#Features-and-Bonus).
+42sh, is the compilation of projects minishell, 21sh and 42sh. That consist to make a reproduction of bash in C during 5 months with 4 team members. This project make us learn all background of a shell (lexer, parser, execution, job control, readline, variable, etc) and perfect our knowledge in bash language. With the main part we made some ![features and bonus](#Features-and-Bonus).
 
 ## Features and Bonus
 - History
