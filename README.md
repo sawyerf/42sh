@@ -18,7 +18,7 @@
 - Globing
   - `*`, `!`, `[]`, `?`
 - Alias
-- Personnalisation of the prompt
+- Customization of the prompt
 
 ## Builtins
 - set/unset
