@@ -49,13 +49,13 @@ The execution pipline of the shell starts with the readline module wich handles 
 
 |  keys                                | description        |
 |:------------------------------------:|--------------------|
-| <kbd>^</kbd><br><kbd>^</kbd>                         | Browse the history |
+| <kbd>^</kbd><br><kbd>v</kbd>                         | Browse the history |
 | <kbd>Shift</kbd>+<kbd><</kbd><br><kbd>Shift</kbd>+<kbd>></kbd><br>    | Move one word      |
-| <kbd>end</kbd>/<kbd>ctrl</kbd>+<kbd>e</kbd>         | line Forward       |
-| <kbd>end</kbd>/<kbd>ctrl</kbd>+<kbd>a</kbd>         | line backward      |
-| <kbd>tab</kbd>                       | autocompletion     |
-| <kbd>ctrl</kbd>+<kbd>y</kbd>         | Clear the terminal |
-| <kbd>ctrl</kbd>+<kbd>d</kbd>         | exit the shell     |
+| <kbd>end</kbd>/<kbd>ctrl</kbd>+<kbd>e</kbd>         | Line forward       |
+| <kbd>end</kbd>/<kbd>ctrl</kbd>+<kbd>a</kbd>         | Line backward      |
+| <kbd>tab</kbd>                       | Autocompletion     |
+| <kbd>ctrl</kbd>+<kbd>l</kbd>         | Clear the terminal |
+| <kbd>ctrl</kbd>+<kbd>d</kbd>         | Exit the shell     |
 | <kbd>ctrl</kbd>+<kbd>r</kbd>         | Search a command   |
 | <kbd>ctrl</kbd>+<kbd>v</kbd>         | Visual mode        |
 | <kbd>ctrl</kbd>+<kbd>p</kbd>         | Paste              |
