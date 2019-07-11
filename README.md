@@ -12,7 +12,7 @@
 - Autocompletions
   - Contextual and dynamic
 - Inhibiteurs
-  `"`, `'`, `\`
+  - `"`, `'`, `\`
 - Tilde and additional parameter
   - ${var:para}
 - Globing
