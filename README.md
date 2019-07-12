@@ -6,7 +6,7 @@
 42sh, is the compilation of projects minishell, 21sh and 42sh. It consists of reproducing the behaviour of bash in C during 5 months with 4 team members. This project gave us the opportunity to learn all the moving parts of a shell (lexer, parser, execution, job control, readline, variables, etc) and perfect our knowledge in the bash scripting language. Along with the main part we made some ![features and bonus](#Features-and-Bonus).
 
 ## How it works ?
-The execution pipline of the shell starts with the readline module wich handles line editing, all of terminal interactions and signal handling, it then passes the user input to the lexer that scans the command line yielding a list of tokens that are then passed to the parser for syntatic analysis. After input validation by the parser, an abstract syntax tree is generated and passed to the interpretation module that evaluates the newly created tree, when a tree node is not bypassed by a logical operator ('&&' or '||'), the corresponding command pipeline is passed to the expansion module for variable substitution, parameters expansion, filename expansion and pattern matching. The execution submodule then sets the appropriate environment variables, redirections, pipes and job control (if required) before launching each command in the pipeline. The shell optionally waits for the executed pipeline to be finished before navigating further in the tree.
+The execution pipline of the shell starts with the readline module wich handles line editing, all terminal interactions and signal handling while the user is entering input, it then passes the user input to the lexer that scans the command line yielding a list of tokens that are then passed to the parser for syntatic analysis. After input validation by the parser, an abstract syntax tree is generated and passed to the interpretation module that evaluates the newly created tree, when a tree node is not bypassed by a logical operator ('&&' or '||'), the corresponding command pipeline is passed to the expansion module for variable substitution, parameters expansion, filename expansion and pattern matching. The execution submodule then sets the appropriate environment variables, redirections, pipes and job control (if required) before launching each command in the pipeline. The shell optionally waits for the executed pipeline to be finished before navigating further in the tree.
 
 ## Features and Bonus
 - History
@@ -16,14 +16,16 @@ The execution pipline of the shell starts with the readline module wich handles 
   - Ctrl+R
 - Autocompletions
   - Contextual and dynamic
-- Inhibiteurs
+- Quoting
   - `"`, `'`, `\`
 - Tilde and additional parameter
   - ${var:para}
-- Globing
+- Globbing
   - `*`, `!`, `[]`, `?`
 - Alias
 - Customization of the prompt
+- Hash table for retrieving binaries in $PATH
+- Builtins are POSIX compliant
 
 ## Builtins
 - set/unset
@@ -33,6 +35,8 @@ The execution pipline of the shell starts with the readline module wich handles 
 - type
 - alias
 - fg/bg
+- hash
+- cd
 
 ## READLINE
 ### Return
